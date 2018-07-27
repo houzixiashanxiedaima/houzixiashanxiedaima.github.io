@@ -4,9 +4,9 @@ node_js:
    --lts
 
 # 缓存依赖
-cache:
-  directories:
-    - $HOME/.npm
+#cache:
+#  directories:
+#    - $HOME/.npm
 
 before_install:
   - export TZ='Asia/Shanghai' # 更改时区
@@ -20,7 +20,8 @@ script:
   # 先清除
   - hexo clean
     # 生成静态站点文件 使用主题自定义配置（高优先级） + 站点配置
-  - hexo generate --config _config.yml,source/_data/next.yml
+  - hexo generate 
+  # --config _config.yml,source/_data/next.yml
 
 # 分支白名单
 branches:
