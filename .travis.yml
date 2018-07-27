@@ -14,13 +14,11 @@ before_install:
 # 依赖安装
 install:
   - npm install
-  # 安装 NexT 主题
-  - git clone https://github.com/theme-next/hexo-theme-next themes/next
-  # 安装主题需要的插件
-  - git clone https://github.com/theme-next/theme-next-fancybox3 themes/next/source/lib/fancybox
 
 # 构建脚本
 script:
+  # 先清除
+  - hexo clean
     # 生成静态站点文件 使用主题自定义配置（高优先级） + 站点配置
   - hexo generate --config _config.yml,source/_data/next.yml
 
