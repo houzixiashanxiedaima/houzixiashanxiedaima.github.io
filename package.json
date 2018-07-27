@@ -6,7 +6,7 @@
     "version": "3.7.1"
   },
   "dependencies": {
-    "hexo": "^3.2.0",
+    "hexo": "^3.7.1",
     "hexo-asset-image": "0.0.3",
     "hexo-deployer-git": "^0.3.1",
     "hexo-generator-archive": "^0.1.4",
@@ -19,4 +19,11 @@
     "hexo-server": "^0.2.0",
     "hexo-wordcount": "^3.0.2"
   }
+  "scripts":{
+    "config": "_config.yml,source/_data/next.yml",
+    "server": "hexo server --config config",
+    "clean": "hexo clean --config config",
+    "theme": "git clone https://github.com/theme-next/hexo-theme-next themes/next && git clone https://github.com/theme-next/theme-next-fancybox3 themes/next/source/lib/fancybox"
+  }
+}
 }
