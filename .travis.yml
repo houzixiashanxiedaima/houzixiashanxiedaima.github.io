@@ -6,23 +6,24 @@ script:
   - hexo clean 
   - hexo g
   - gulp
-after_success:
-  - cd ./public
-  - git init 
-  - git config user.name "houzixiashanxiedaima"
-  - git config user.email "houzixiashanxiedaima@foxmail.com"
-  - git add .
-  - git commit -m "Travis CI Successfully"
-  # github push 
-  - git push --force --quiet "https://${Hexo_TOKEN}@${GH_REF}" master:master
-  # coding push 
-  - git push --force --quiet "https://houzixiashanxiedaima:${Coding_TOKEN}@${CODING_REF}" master:master
-  # tag
-  - git tag v0.0.$TRAVIS_BUILD_NUMBER -a -m "Auto Taged By TravisCI With Build $TRAVIS_BUILD_NUMBER"
-  # Github Pages tag
-  - git push --quiet "https://${Hexo_TOKEN}@${GH_REF}" master:master --tags
-  # Coding Pages tag
-  - git push --quiet "https://houzixiashanxiedaima:${Coding_TOKEN}@${CODING_REF}" master:master --tags
+  - hexo d
+# after_success:
+#   - cd ./public
+#   - git init 
+#   - git config user.name "houzixiashanxiedaima"
+#   - git config user.email "houzixiashanxiedaima@foxmail.com"
+#   - git add .
+#   - git commit -m "Travis CI Successfully"
+#   # github push 
+#   - git push --force --quiet "https://${Hexo_TOKEN}@${GH_REF}" master:master
+#   # coding push 
+#   - git push --force --quiet "https://houzixiashanxiedaima:${Coding_TOKEN}@${CODING_REF}" master:master
+#   # tag
+#   - git tag v0.0.$TRAVIS_BUILD_NUMBER -a -m "Auto Taged By TravisCI With Build $TRAVIS_BUILD_NUMBER"
+#   # Github Pages tag
+#   - git push --quiet "https://${Hexo_TOKEN}@${GH_REF}" master:master --tags
+#   # Coding Pages tag
+#   - git push --quiet "https://houzixiashanxiedaima:${Coding_TOKEN}@${CODING_REF}" master:master --tags
 branches:
   only:
     - hexo
