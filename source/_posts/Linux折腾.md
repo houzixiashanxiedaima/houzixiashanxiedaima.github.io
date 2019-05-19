@@ -12,3 +12,5 @@ categories:
 Deepin是一款基于Debian的国产Linux系统，界面好看，软件好用，而且对于Linux和Windows的用户习惯兼容都挺不错的。对于一个普通用户，日常使用是完全没问题的。
 
 # manjaro
+
+测试
