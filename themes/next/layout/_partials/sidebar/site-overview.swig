@@ -9,11 +9,12 @@
 </div>
 
 {%- if theme.site_state %}
-  <nav class="site-state motion-element">
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
     {%- if config.archive_dir != '/' and site.posts.length > 0 %}
       <div class="site-state-item site-state-posts">
         {%- if theme.menu.archives %}
-          <a href="{{ url_for(theme.menu.archives).split('||')[0] | trim }}">
+          <a href="{{ url_for(theme.menu.archives.split('||')[0] | trim) }}">
         {% else %}
           <a href="{{ url_for(config.archive_dir) }}">
         {%- endif %}
@@ -29,7 +30,7 @@
       <div class="site-state-item site-state-categories">
         {%- if hasCategoriesPage %}
           {%- if theme.menu.categories %}
-            <a href="{{ url_for(theme.menu.categories).split('||')[0] | trim }}">
+            <a href="{{ url_for(theme.menu.categories.split('||')[0] | trim) }}">
           {% else %}
             <a href="{{ url_for(config.category_dir) + '/' }}">
           {%- endif %}
@@ -46,7 +47,7 @@
       <div class="site-state-item site-state-tags">
         {%- if hasTagsPage %}
           {%- if theme.menu.tags %}
-            <a href="{{ url_for(theme.menu.tags).split('||')[0] | trim }}">
+            <a href="{{ url_for(theme.menu.tags.split('||')[0] | trim) }}">
           {% else %}
             <a href="{{ url_for(config.tag_dir) + '/' }}">
           {%- endif %}
@@ -57,6 +58,7 @@
       </div>
     {%- endif %}
   </nav>
+</div>
 {%- endif %}
 
 {%- if theme.rss %}
