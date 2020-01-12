@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Linux折腾</title>
+    <url>/2018/08/02/Linux%E6%8A%98%E8%85%BE/</url>
+    <content><![CDATA[<h1 id="Linux-折腾"><a href="#Linux-折腾" class="headerlink" title="Linux 折腾"></a>Linux 折腾</h1><blockquote>
+<p>用Windows时间长了，总会想着去折腾一下Linux系统。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="Linux-选择"><a href="#Linux-选择" class="headerlink" title="Linux 选择"></a>Linux 选择</h2><h3 id="Deepin"><a href="#Deepin" class="headerlink" title="Deepin"></a>Deepin</h3><p>Deepin是一款基于Debian的国产Linux系统，界面好看，软件好用，而且对于Linux和Windows的用户习惯兼容都挺不错的。对于一个普通用户，日常使用是完全没问题的。</p>
+<h1 id="manjaro"><a href="#manjaro" class="headerlink" title="manjaro"></a>manjaro</h1><p>测试</p>
+]]></content>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo集成测试文档</title>
+    <url>/2018/07/27/Hexo%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<h1 id="这是一篇关于Hexo集成测试的文档"><a href="#这是一篇关于Hexo集成测试的文档" class="headerlink" title="这是一篇关于Hexo集成测试的文档"></a>这是一篇关于Hexo集成测试的文档</h1><h2 id="如果能够正常显示，那么就表示我的集成测试成功了。"><a href="#如果能够正常显示，那么就表示我的集成测试成功了。" class="headerlink" title="如果能够正常显示，那么就表示我的集成测试成功了。"></a>如果能够正常显示，那么就表示我的集成测试成功了。</h2>]]></content>
+  </entry>
+  <entry>
+    <title>测试文档</title>
+    <url>/2018/07/25/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<a id="more"></a>
+
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Git配置彩色Log</title>
+    <url>/2016/07/28/Git-%E8%BE%93%E5%87%BA%E5%BD%A9%E8%89%B2log/</url>
+    <content><![CDATA[<h1 id="Git-彩色Log配置"><a href="#Git-彩色Log配置" class="headerlink" title="Git 彩色Log配置"></a>Git 彩色Log配置</h1><p>git 在打印log的时候，默认是黑底白字，这样我们很多的关键信息都不能够非常突出的显示出来，看起来也是比较费劲。我们可以通过如下的语句让git打印出来的log出现彩色的字体，这样的话可以让我们更直接的看到我们的提交信息的关键字。</p>
+<a id="more"></a>
+
+<p><strong>关键语句如下：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">log</span> --graph --pretty=format:<span class="string">'%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)&lt;%cr&gt;%Creset'</span> --abbrev-commit --date=relative</span><br></pre></td></tr></table></figure>
+<p>大家可以看到这个关键语句比较长，我们不可能每次想要打印log的时候，都输入这么长的语句。 这样并不符合我们”能懒就懒”的原则。所以我们可以将这条语句配置到config配置文件里面</p>
+<p><strong>关键配置语句如下：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 为了更简单,将log的别名设置为lg,以后就可以直接git lg输出日志了</span></span><br><span class="line">git config --global alias.lg <span class="string">"log --graph --pretty=format:'%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)&lt;%cr&gt;%Creset' --abbrev-commit --date=relative"</span></span><br></pre></td></tr></table></figure>
+<p>执行了上面的配置语句之后，我们以后每次输出log就可以直接输入下面的语句：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git lg</span><br></pre></td></tr></table></figure>
+<p>这样我们每次就只需要输入上面的一条语句，就可以看到我们的彩色log信息，关键字都已经变色，而且不同的信息用-分隔开，一目了然，在也不用面对黑底白字的命令行窗口了。<br>最后再给大家提供另一种log的格式，大家根据自己的喜好自行选择：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global alias.lg <span class="string">"log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global alias.his <span class="string">"log --graph --decorate --oneline --pretty=format:'%Creset %s %C(magenta)in %Cred%h %C(magenta)commited by %Cgreen%cn %C(magenta)on %C(yellow) %cd %C(magenta)from %Creset %C(yellow)%d' --abbrev-commit --date=format:'%Y-%m-%d %H:%M:%S'"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global alias.hist <span class="string">"log --graph --decorate --oneline --pretty=format:'%Cred%h - %C(bold white) %s %Creset %C(yellow)%d  %C(cyan) &lt;%cd&gt; %Creset %Cgreen(%cn)' --abbrev-commit --date=format:'%Y-%m-%d %H:%M:%S'"</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+</search>
