@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="在Android 5.0之后，Google推出了Material Design兼容库，在Material Design的兼容库中，有个用的比较多的控件就是NavigationView。在我们平时使用过程中，对于NavigationView的一些小细节可能也并没有过多的关注，所以就导致我们在遇到特殊需求的时候无从下手，那么在这里我就简单记录一下使用NavigationView的一些小坑，暂时可能也并">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NavigationView-子菜单问题">
+<meta property="og:url" content="https://houzixiashanxiedaima.github.io/2020/01/12/NavigationView-%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="雅俗共赏">
+<meta property="og:description" content="在Android 5.0之后，Google推出了Material Design兼容库，在Material Design的兼容库中，有个用的比较多的控件就是NavigationView。在我们平时使用过程中，对于NavigationView的一些小细节可能也并没有过多的关注，所以就导致我们在遇到特殊需求的时候无从下手，那么在这里我就简单记录一下使用NavigationView的一些小坑，暂时可能也并">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2524102-ed42f064db473404.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2524102-ba08509342d568c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2524102-d4299d3d8b622021.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2524102-14bcb6aaaca2a190.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2524102-e5c2c8f0c2f049d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-01-12T17:14:16.403Z">
+<meta property="article:modified_time" content="2020-01-12T17:14:16.403Z">
+<meta property="article:author" content="GenJi Wang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2524102-ed42f064db473404.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  <link rel="canonical" href="https://houzixiashanxiedaima.github.io/2020/01/12/NavigationView-%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>NavigationView-子菜单问题 | 雅俗共赏</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">雅俗共赏</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+        
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      
+    
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://houzixiashanxiedaima.github.io/2020/01/12/NavigationView-%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="GenJi Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://static.simpledesktops.com/uploads/desktops/2016/12/05/Untitled-1-03-01.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雅俗共赏">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            NavigationView-子菜单问题
+            
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-12 17:14:16" itemprop="dateCreated datePublished" datetime="2020-01-12T17:14:16+00:00">2020-01-12</time>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在Android 5.0之后，Google推出了Material Design兼容库，在Material Design的兼容库中，有个用的比较多的控件就是<code>NavigationView</code>。在我们平时使用过程中，对于<code>NavigationView</code>的一些小细节可能也并没有过多的关注，所以就导致我们在遇到特殊需求的时候无从下手，那么在这里我就简单记录一下使用<code>NavigationView</code>的一些小坑，暂时可能也并没有遇到很多的坑，如果以后遇到的话会不定时更新。</p>
+<h2 id="NavigationView基本使用"><a href="#NavigationView基本使用" class="headerlink" title="NavigationView基本使用"></a>NavigationView基本使用</h2><p>有很多人对于<code>NavigationView</code>的基本使用还是比较了解的， 那么我这里推荐一种非常偷懒的方法，就是我们在<code>Android Studio</code>中新建<code>Activity</code>时可以直接进行如下操作：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2524102-ed42f064db473404.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="New Navigation Activity.png"></p>
+<p>在选择了<code>Navigation Drawer Activity</code>之后会出现如下界面：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2524102-ba08509342d568c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Navigation Drawer Activity.png"></p>
+<p>然后点击<code>Finish</code>就可以完成一个最基础的带有<code>NavigationView</code>的<code>Activity</code>创建，创建之后就可以在原有的基础上进行修改了，这样也是非常的方便。</p>
+<h2 id="NavigationView-Menu的设置"><a href="#NavigationView-Menu的设置" class="headerlink" title="NavigationView Menu的设置"></a>NavigationView Menu的设置</h2><h3 id="Menu的第一种布局设置"><a href="#Menu的第一种布局设置" class="headerlink" title="Menu的第一种布局设置"></a>Menu的第一种布局设置</h3><p>最基本的<code>Menu</code>的设置就是每行一个项目。在<code>menu</code>中的代码是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;menu xmlns:android&#x3D;&quot;http:&#x2F;&#x2F;schemas.android.com&#x2F;apk&#x2F;res&#x2F;android&quot;&gt;</span><br><span class="line">    &lt;item</span><br><span class="line">        android:id&#x3D;&quot;@+id&#x2F;nav_camera&quot;</span><br><span class="line">        android:icon&#x3D;&quot;@drawable&#x2F;ic_menu_camera&quot;</span><br><span class="line">        android:title&#x3D;&quot;Import&quot;&#x2F;&gt;</span><br><span class="line">    &lt;item</span><br><span class="line">        android:id&#x3D;&quot;@+id&#x2F;nav_gallery&quot;</span><br><span class="line">        android:icon&#x3D;&quot;@drawable&#x2F;ic_menu_gallery&quot;</span><br><span class="line">        android:title&#x3D;&quot;Gallery&quot;&#x2F;&gt;</span><br><span class="line">    &lt;item</span><br><span class="line">        android:id&#x3D;&quot;@+id&#x2F;nav_slideshow&quot;</span><br><span class="line">        android:icon&#x3D;&quot;@drawable&#x2F;ic_menu_slideshow&quot;</span><br><span class="line">        android:title&#x3D;&quot;Slideshow&quot;&#x2F;&gt;</span><br><span class="line">    &lt;item</span><br><span class="line">        android:id&#x3D;&quot;@+id&#x2F;nav_manage&quot;</span><br><span class="line">        android:icon&#x3D;&quot;@drawable&#x2F;ic_menu_manage&quot;</span><br><span class="line">        android:title&#x3D;&quot;Tools&quot;&#x2F;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;item</span><br><span class="line">        android:id&#x3D;&quot;@+id&#x2F;nav_share&quot;</span><br><span class="line">        android:icon&#x3D;&quot;@drawable&#x2F;ic_menu_share&quot;</span><br><span class="line">        android:title&#x3D;&quot;Share&quot;&#x2F;&gt;</span><br><span class="line">    &lt;item</span><br><span class="line">        android:id&#x3D;&quot;@+id&#x2F;nav_send&quot;</span><br><span class="line">        android:icon&#x3D;&quot;@drawable&#x2F;ic_menu_send&quot;</span><br><span class="line">        android:title&#x3D;&quot;Send&quot;&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;menu&gt;</span><br></pre></td></tr></table></figure>
+<p>实际效果是这样的：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2524102-d4299d3d8b622021.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="normal menu.png"></p>
+<p>通过上面的图片我们可以看到，这样设置之后，每个<code>item</code>都是独立的，各占一行，每一行代表着一个操作。</p>
+<h3 id="Menu的第二种布局设置"><a href="#Menu的第二种布局设置" class="headerlink" title="Menu的第二种布局设置"></a>Menu的第二种布局设置</h3><p>子菜单的设置是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;menu xmlns:android&#x3D;&quot;http:&#x2F;&#x2F;schemas.android.com&#x2F;apk&#x2F;res&#x2F;android&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;group android:checkableBehavior&#x3D;&quot;single&quot;&gt;</span><br><span class="line">        &lt;item</span><br><span class="line">            android:id&#x3D;&quot;@+id&#x2F;nav_camera&quot;</span><br><span class="line">            android:icon&#x3D;&quot;@drawable&#x2F;ic_menu_camera&quot;</span><br><span class="line">            android:title&#x3D;&quot;Import&quot;&#x2F;&gt;</span><br><span class="line">        &lt;item</span><br><span class="line">            android:id&#x3D;&quot;@+id&#x2F;nav_gallery&quot;</span><br><span class="line">            android:icon&#x3D;&quot;@drawable&#x2F;ic_menu_gallery&quot;</span><br><span class="line">            android:title&#x3D;&quot;Gallery&quot;&#x2F;&gt;</span><br><span class="line">        &lt;item</span><br><span class="line">            android:id&#x3D;&quot;@+id&#x2F;nav_slideshow&quot;</span><br><span class="line">            android:icon&#x3D;&quot;@drawable&#x2F;ic_menu_slideshow&quot;</span><br><span class="line">            android:title&#x3D;&quot;Slideshow&quot;&#x2F;&gt;</span><br><span class="line">        &lt;item</span><br><span class="line">            android:id&#x3D;&quot;@+id&#x2F;nav_manage&quot;</span><br><span class="line">            android:icon&#x3D;&quot;@drawable&#x2F;ic_menu_manage&quot;</span><br><span class="line">            android:title&#x3D;&quot;Tools&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;group&gt;</span><br><span class="line">    &lt;item android:title&#x3D;&quot;Communicate&quot;&gt;</span><br><span class="line">        &lt;menu&gt;</span><br><span class="line">            &lt;item</span><br><span class="line">                android:id&#x3D;&quot;@+id&#x2F;nav_share&quot;</span><br><span class="line">                android:icon&#x3D;&quot;@drawable&#x2F;ic_menu_share&quot;</span><br><span class="line">                android:title&#x3D;&quot;Share&quot;&#x2F;&gt;</span><br><span class="line">            &lt;item</span><br><span class="line">                android:id&#x3D;&quot;@+id&#x2F;nav_send&quot;</span><br><span class="line">                android:icon&#x3D;&quot;@drawable&#x2F;ic_menu_send&quot;</span><br><span class="line">                android:title&#x3D;&quot;Send&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;menu&gt;</span><br><span class="line">    &lt;&#x2F;item&gt;</span><br><span class="line">    &lt;item</span><br><span class="line">        android:title&#x3D;&quot;about&quot;&gt;</span><br><span class="line">        &lt;menu&gt;</span><br><span class="line">            &lt;item</span><br><span class="line">                android:id&#x3D;&quot;@+id&#x2F;nav_about&quot;</span><br><span class="line">                android:icon&#x3D;&quot;@drawable&#x2F;ic_history&quot;</span><br><span class="line">                android:title&#x3D;&quot;about&quot;&#x2F;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;&#x2F;menu&gt;</span><br><span class="line">    &lt;&#x2F;item&gt;</span><br><span class="line">&lt;&#x2F;menu&gt;</span><br></pre></td></tr></table></figure>
+<p>设置之后的效果是这样的：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2524102-14bcb6aaaca2a190.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="group menu.png"></p>
+<p>通过这种设置分组之后，我们可以发现，每个组是一起的，是通过<code>group</code>将同一个组的<code>item</code>包裹起来，组内的<code>item</code>可能会相互影响，这取决于你设置属性<code>android:checkableBehavior</code>的值。而且在上面的图片中我们也可以发现一个小的细节，就是我们组和组之间有一条小横线隔开了，有点类似于我们在<code>ListView</code>中设置的<code>divider</code>属性。</p>
+<h3 id="Menu的第三种布局设置"><a href="#Menu的第三种布局设置" class="headerlink" title="Menu的第三种布局设置"></a>Menu的第三种布局设置</h3><p>那么在我们实际的开发过程中，有时候我们需要把第一种和第二种结合起来，也就是说呈现出下图中的效果：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2524102-e5c2c8f0c2f049d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="group menu special.png"></p>
+<p>细心的朋友可能已经看出来第三种和第二种的区别。<br>第二种的布局结果是每个<code>group</code>下有一个<code>title</code>，然后在<code>title</code>下面才是我们的子<code>item</code><br>第三种是直接每个<code>group</code>下就是子<code>item</code>并没有第二种中出现的<code>title</code><br>很显然在某些情况下，我们的开发需求需要像第三种这样简约但是不简单的<code>Navigation Menu</code>还是先来看看我们第三种布局的<code>menu</code>文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;menu xmlns:android&#x3D;&quot;http:&#x2F;&#x2F;schemas.android.com&#x2F;apk&#x2F;res&#x2F;android&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;group</span><br><span class="line">        android:id&#x3D;&quot;@+id&#x2F;nav_group_normal&quot;</span><br><span class="line">        android:checkableBehavior&#x3D;&quot;single&quot;&gt;</span><br><span class="line">        &lt;item</span><br><span class="line">            android:id&#x3D;&quot;@+id&#x2F;nav_camera&quot;</span><br><span class="line">            android:icon&#x3D;&quot;@drawable&#x2F;ic_menu_camera&quot;</span><br><span class="line">            android:title&#x3D;&quot;Import&quot;&#x2F;&gt;</span><br><span class="line">        &lt;item</span><br><span class="line">            android:id&#x3D;&quot;@+id&#x2F;nav_gallery&quot;</span><br><span class="line">            android:icon&#x3D;&quot;@drawable&#x2F;ic_menu_gallery&quot;</span><br><span class="line">            android:title&#x3D;&quot;Gallery&quot;&#x2F;&gt;</span><br><span class="line">        &lt;item</span><br><span class="line">            android:id&#x3D;&quot;@+id&#x2F;nav_slideshow&quot;</span><br><span class="line">            android:icon&#x3D;&quot;@drawable&#x2F;ic_menu_slideshow&quot;</span><br><span class="line">            android:title&#x3D;&quot;Slideshow&quot;&#x2F;&gt;</span><br><span class="line">        &lt;item</span><br><span class="line">            android:id&#x3D;&quot;@+id&#x2F;nav_manage&quot;</span><br><span class="line">            android:icon&#x3D;&quot;@drawable&#x2F;ic_menu_manage&quot;</span><br><span class="line">            android:title&#x3D;&quot;Tools&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;group&gt;</span><br><span class="line">    &lt;group</span><br><span class="line">        android:id&#x3D;&quot;@+id&#x2F;nav_commnunicate&quot;</span><br><span class="line">        android:title&#x3D;&quot;Communicate&quot;&gt;</span><br><span class="line">        &lt;item</span><br><span class="line">            android:id&#x3D;&quot;@+id&#x2F;nav_share&quot;</span><br><span class="line">            android:icon&#x3D;&quot;@drawable&#x2F;ic_menu_share&quot;</span><br><span class="line">            android:title&#x3D;&quot;Share&quot;&#x2F;&gt;</span><br><span class="line">        &lt;item</span><br><span class="line">            android:id&#x3D;&quot;@+id&#x2F;nav_send&quot;</span><br><span class="line">            android:icon&#x3D;&quot;@drawable&#x2F;ic_menu_send&quot;</span><br><span class="line">            android:title&#x3D;&quot;Send&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;group&gt;</span><br><span class="line">    &lt;group</span><br><span class="line">        android:id&#x3D;&quot;@+id&#x2F;nav_about_group&quot;&gt;</span><br><span class="line">        &lt;item</span><br><span class="line">            android:title&#x3D;&quot;about&quot;&gt;</span><br><span class="line">            &lt;item</span><br><span class="line">                android:id&#x3D;&quot;@+id&#x2F;nav_about&quot;</span><br><span class="line">                android:icon&#x3D;&quot;@drawable&#x2F;ic_history&quot;</span><br><span class="line">                android:title&#x3D;&quot;about&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;item&gt;</span><br><span class="line">    &lt;&#x2F;group&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;menu&gt;</span><br></pre></td></tr></table></figure>
+<p>这个布局文件就是用<code>group</code>包裹起每个组的<code>item</code>，有点类似第二种布局，但是<strong>最关键</strong>的地方就是要为每一个<code>group</code>设置一个<code>id</code>，设置完成之后就可以得到第三种布局的效果。</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GenJi Wang
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://houzixiashanxiedaima.github.io/2020/01/12/NavigationView-%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/" title="NavigationView-子菜单问题">https://houzixiashanxiedaima.github.io/2020/01/12/NavigationView-%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/01/12/Virtualbox%E4%B8%8EMactype%E5%85%B1%E5%AD%98/" rel="next" title="Virtualbox与Mactype共存">
+                  <i class="fa fa-chevron-left"></i> Virtualbox与Mactype共存
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/01/12/Material-Design-%E4%B9%8BTabLayout%E4%B8%8EToolbar/" rel="prev" title="Material-Design-之TabLayout与Toolbar">
+                  Material-Design-之TabLayout与Toolbar <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NavigationView基本使用"><span class="nav-number">1.</span> <span class="nav-text">NavigationView基本使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NavigationView-Menu的设置"><span class="nav-number">2.</span> <span class="nav-text">NavigationView Menu的设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Menu的第一种布局设置"><span class="nav-number">2.1.</span> <span class="nav-text">Menu的第一种布局设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Menu的第二种布局设置"><span class="nav-number">2.2.</span> <span class="nav-text">Menu的第二种布局设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Menu的第三种布局设置"><span class="nav-number">2.3.</span> <span class="nav-text">Menu的第三种布局设置</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="http://static.simpledesktops.com/uploads/desktops/2016/12/05/Untitled-1-03-01.png"
+      alt="GenJi Wang">
+  <p class="site-author-name" itemprop="name">GenJi Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  &copy; 1970 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GenJi Wang</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.4.1.js"></script>
+
+<script src="/js/motion.js?v=7.4.1.js"></script>
+
+
+<script src="/js/schemes/pisces.js?v=7.4.1.js"></script>
+
+
+<script src="/js/next-boot.js?v=7.4.1.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+<script src="/js/local-search.js?v=7.4.1.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
