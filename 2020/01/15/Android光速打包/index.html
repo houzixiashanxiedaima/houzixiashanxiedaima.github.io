@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="快速打包插件 packer-ng-plugin 使用心得首先放出这个工具的Github地址：https:&#x2F;&#x2F;github.com&#x2F;mcxiaoke&#x2F;packer-ng-plugin 在这个工具里面，作者已经非常详细的介绍了该如何使用这个打包工具，在此我主要记录一下我使用这个打包工具的过程。 导入依赖库文件这个工具导入依赖库文件有两个地方  在项目的根目录中的build.gradle添加依赖  12">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android光速打包">
+<meta property="og:url" content="https://houzixiashanxiedaima.github.io/2020/01/15/Android%E5%85%89%E9%80%9F%E6%89%93%E5%8C%85/index.html">
+<meta property="og:site_name" content="雅俗共赏">
+<meta property="og:description" content="快速打包插件 packer-ng-plugin 使用心得首先放出这个工具的Github地址：https:&#x2F;&#x2F;github.com&#x2F;mcxiaoke&#x2F;packer-ng-plugin 在这个工具里面，作者已经非常详细的介绍了该如何使用这个打包工具，在此我主要记录一下我使用这个打包工具的过程。 导入依赖库文件这个工具导入依赖库文件有两个地方  在项目的根目录中的build.gradle添加依赖  12">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-15T16:31:27.423Z">
+<meta property="article:modified_time" content="2020-01-15T16:31:27.423Z">
+<meta property="article:author" content="GenJi Wang">
+<meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://houzixiashanxiedaima.github.io/2020/01/15/Android%E5%85%89%E9%80%9F%E6%89%93%E5%8C%85/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Android光速打包 | 雅俗共赏</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">雅俗共赏</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+        
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      
+    
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://houzixiashanxiedaima.github.io/2020/01/15/Android%E5%85%89%E9%80%9F%E6%89%93%E5%8C%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="GenJi Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://static.simpledesktops.com/uploads/desktops/2016/12/05/Untitled-1-03-01.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雅俗共赏">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            Android光速打包
+            
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-16 00:31:27" itemprop="dateCreated datePublished" datetime="2020-01-16T00:31:27+08:00">2020-01-16</time>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="快速打包插件-packer-ng-plugin-使用心得"><a href="#快速打包插件-packer-ng-plugin-使用心得" class="headerlink" title="快速打包插件 packer-ng-plugin 使用心得"></a>快速打包插件 packer-ng-plugin 使用心得</h1><p>首先放出这个工具的Github地址：<a href="https://github.com/mcxiaoke/packer-ng-plugin" target="_blank" rel="noopener">https://github.com/mcxiaoke/packer-ng-plugin</a> 在这个工具里面，作者已经非常详细的介绍了该如何使用这个打包工具，在此我主要记录一下我使用这个打包工具的过程。</p>
+<h2 id="导入依赖库文件"><a href="#导入依赖库文件" class="headerlink" title="导入依赖库文件"></a>导入依赖库文件</h2><p>这个工具导入依赖库文件有两个地方</p>
+<ul>
+<li>在项目的根目录中的<code>build.gradle</code>添加依赖</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line">    ......</span><br><span class="line">    dependencies&#123;</span><br><span class="line">    &#x2F;&#x2F; add packer-ng</span><br><span class="line">        classpath &#39;com.mcxiaoke.gradle:packer-ng:1.0.7&#39;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在APP中的<code>build.gradle</code>添加依赖</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: &#39;packer&#39;</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    compile &#39;com.mcxiaoke.gradle:packer-helper:1.0.7&#39;</span><br><span class="line">&#125;</span><br><span class="line">android &#123;</span><br><span class="line">    &#x2F;&#x2F;...</span><br><span class="line">    signingConfigs &#123;</span><br><span class="line">      release &#123;</span><br><span class="line">        &#x2F;&#x2F; 同时满足下面两个条件才需要此配置</span><br><span class="line">        &#x2F;&#x2F; 1. Gradle版本 &gt;&#x3D; 2.14.1</span><br><span class="line">        &#x2F;&#x2F; 2. Android Gradle Plugin 版本 &gt;&#x3D; 2.2.0</span><br><span class="line">        &#x2F;&#x2F; 作用是只使用旧版签名，禁用V2版签名模式</span><br><span class="line">        &#x2F;&#x2F; 兼容7.0版本的Android系统才需要,否则不需要</span><br><span class="line">        v2SigningEnabled false</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>##这里有个非常重要的信息大家要注意一下，就是<code>packer-helper:1.0.7</code>和<code>packer-ng:1.0.7</code>这两个地方的版本号一定要保持一致##</p>
+<ul>
+<li>在APP的<code>build.gradle</code>中配置签名信息</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">signingConfigs &#123;</span><br><span class="line">       release &#123;</span><br><span class="line">           storeFile file(&quot;D:&#x2F;keystore&#x2F;release.keystore&quot;)</span><br><span class="line">           storePassword &quot;release&quot;</span><br><span class="line">           keyAlias &quot;release123&quot;</span><br><span class="line">           keyPassword &quot;release123&quot;</span><br><span class="line">       &#125;</span><br><span class="line">       debug &#123;</span><br><span class="line">          &#x2F;&#x2F;debug 的签名信息</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在APP的<code>build.gradle</code>中添加<code>buildTypes</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">buildTypes &#123;</span><br><span class="line">       release &#123;</span><br><span class="line">          ......</span><br><span class="line">           &#x2F;&#x2F;这里是配置签名的关键信息</span><br><span class="line">           signingConfig signingConfigs.release</span><br><span class="line">       &#125;</span><br><span class="line">       debug &#123;</span><br><span class="line">          ......</span><br><span class="line">          &#x2F;&#x2F;这里是配置签名的关键信息</span><br><span class="line">           signingConfig signingConfigs.debug</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上的工作完成之后,我们的配置基本上就完成了,但是这个工具的作者在文档的最后说了</p>
+<blockquote>
+<ul>
+<li>注意事项<br>不支持productFlavors中定义的条件编译变量，不支持修改AndroidManifest<br>如果你的项目有多个productFlavors，默认只会用第一个flavor生成的APK文件作为打包工具的输入参数，忽略其它flavor生成的apk，代码里用的是 theVariant.outputs[0].outputFile。如果你想指定使用某个flavor来生成渠道包，可以用 apkFlavor1Release，apkFlavor2Beta这样的名字，示例（假设flavor名字是Intel）：./gradlew -Pmarket=markets.txt clean apkIntelRelease</li>
+</ul>
+</blockquote>
+<p>注意事项中给我们说明了两件事情:</p>
+<ol>
+<li>不支持<code>productFlavors</code>中定义的条件编译</li>
+<li>不支持修改<code>AndroidManifest</code>文件</li>
+</ol>
+<p>那么这个时候就会有个问题,如果我们需要多渠道打包怎么办?</p>
+<h2 id="多渠道打包"><a href="#多渠道打包" class="headerlink" title="多渠道打包"></a>多渠道打包</h2><p>首先在项目的根目录中添加一个<code>markets.txt</code> 文件,文件中每一行表示一个渠道,这个工具会自动识别空行和不符合规定的行,每一行的<code>渠道</code>和<code>注释</code>之间用<strong>#</strong>隔开,但是也可以没有注释,比如我可以在<code>markets.txt</code> 中进行如下定义:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Google#google channel</span><br><span class="line">Baidu#baidu channel</span><br><span class="line">Test</span><br></pre></td></tr></table></figure>
+<p>在进行了如上的定义之后,我们就可以进行多渠道打包,多渠道打包时我个人还是比较喜欢用<code>Gradle</code>来进行打包，在项目的根目录中执行<code>Gradle</code>命令行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradlew -Pmarket&#x3D;markets.txt clean apkRelease</span><br></pre></td></tr></table></figure>
+<p>但是这个时候如果我们有对友盟的配置,就不能使用友盟官方SDK文档中推荐的方法,友盟官方推荐的方法是在AndroidManifest中设置各种配置信息,但是因为这个工具的限制,我们需要在代码中进行配置.</p>
+<h2 id="配置友盟的多渠道信息"><a href="#配置友盟的多渠道信息" class="headerlink" title="配置友盟的多渠道信息"></a>配置友盟的多渠道信息</h2><p>首先我们在程序的入口处,一般都是<code>ApplicationMain</code>中的<code>onCreate()</code>中进行如下的配置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">private static final String APP_KEY &#x3D; &quot;YOUR_APP_KEY&quot;;</span><br><span class="line">private MobclickAgent.UMAnalyticsConfig mUMAnalyticsConfig;</span><br><span class="line"></span><br><span class="line"> @Override</span><br><span class="line">    public void onCreate() &#123;</span><br><span class="line">        super.onCreate();</span><br><span class="line">        setChannelID();</span><br><span class="line">    &#125;</span><br><span class="line">    private void setChannelID() &#123;</span><br><span class="line">          final String channelID &#x3D; PackerNg.getMarket(this);</span><br><span class="line">          mUMAnalyticsConfig &#x3D; new MobclickAgent.UMAnalyticsConfig(this, APP_KEY, channelID);</span><br><span class="line">          MobclickAgent.startWithConfigure(mUMAnalyticsConfig);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+<p>当然最后别忘记在<code>AndroidManifest.xml</code>的<code>application</code>结点中加上<code>android:name=&quot;.Application.ApplicationMain&quot;</code></p>
+<p>进行了以上的所有设置之后,我们就可以享受光速打包了,根据我亲测,打50个包的速度是1分钟左右,这一分钟包括检查插件和编译信息等等.其实开始打第0个包到第49个包大概是10多秒钟吧。</p>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GenJi Wang
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://houzixiashanxiedaima.github.io/2020/01/15/Android%E5%85%89%E9%80%9F%E6%89%93%E5%8C%85/" title="Android光速打包">https://houzixiashanxiedaima.github.io/2020/01/15/Android%E5%85%89%E9%80%9F%E6%89%93%E5%8C%85/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/01/15/Android%E5%BC%80%E5%8F%91%E4%B9%8BView%E5%9D%90%E6%A0%87%E9%97%AE%E9%A2%98/" rel="next" title="Android开发之View坐标问题">
+                  <i class="fa fa-chevron-left"></i> Android开发之View坐标问题
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/01/15/Android%E4%B8%AD%E8%BE%93%E5%87%BAHTML%E6%A0%BC%E5%BC%8F%E4%B8%8B%E7%9A%84%E6%96%87%E5%AD%97/" rel="prev" title="Android中输出HTML格式下的文字">
+                  Android中输出HTML格式下的文字 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#快速打包插件-packer-ng-plugin-使用心得"><span class="nav-number">1.</span> <span class="nav-text">快速打包插件 packer-ng-plugin 使用心得</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#导入依赖库文件"><span class="nav-number">1.1.</span> <span class="nav-text">导入依赖库文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多渠道打包"><span class="nav-number">1.2.</span> <span class="nav-text">多渠道打包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置友盟的多渠道信息"><span class="nav-number">1.3.</span> <span class="nav-text">配置友盟的多渠道信息</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="http://static.simpledesktops.com/uploads/desktops/2016/12/05/Untitled-1-03-01.png"
+      alt="GenJi Wang">
+  <p class="site-author-name" itemprop="name">GenJi Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  &copy; 1970 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GenJi Wang</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.4.1.js"></script>
+
+<script src="/js/motion.js?v=7.4.1.js"></script>
+
+
+<script src="/js/schemes/pisces.js?v=7.4.1.js"></script>
+
+
+<script src="/js/next-boot.js?v=7.4.1.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+<script src="/js/local-search.js?v=7.4.1.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
