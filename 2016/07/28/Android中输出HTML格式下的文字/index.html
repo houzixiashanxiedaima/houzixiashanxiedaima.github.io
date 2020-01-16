@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Android中输出HTML格式下的文字在Android中，我们经常会用到TextView这个控件，在使用的过程中，我们用到最多的方法就是setText()，单纯的使用基本上能够满足我们日常的需求，但是有时候我们需要对文字进行一些处理，比如说加粗、斜体、下划线等等，这些也都是可以通过Android提供的原生方法完成。但是如果我们需要实现下面的效果呢：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android中输出HTML格式下的文字">
+<meta property="og:url" content="https://houzixiashanxiedaima.github.io/2016/07/28/Android%E4%B8%AD%E8%BE%93%E5%87%BAHTML%E6%A0%BC%E5%BC%8F%E4%B8%8B%E7%9A%84%E6%96%87%E5%AD%97/index.html">
+<meta property="og:site_name" content="雅俗共赏">
+<meta property="og:description" content="Android中输出HTML格式下的文字在Android中，我们经常会用到TextView这个控件，在使用的过程中，我们用到最多的方法就是setText()，单纯的使用基本上能够满足我们日常的需求，但是有时候我们需要对文字进行一些处理，比如说加粗、斜体、下划线等等，这些也都是可以通过Android提供的原生方法完成。但是如果我们需要实现下面的效果呢：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2524102-92f803de79292a20.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2524102-d8922d1d6ea9bc47.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2016-07-28T07:19:45.000Z">
+<meta property="article:modified_time" content="2020-01-16T10:58:34.685Z">
+<meta property="article:author" content="GenJi Wang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2524102-92f803de79292a20.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  <link rel="canonical" href="https://houzixiashanxiedaima.github.io/2016/07/28/Android%E4%B8%AD%E8%BE%93%E5%87%BAHTML%E6%A0%BC%E5%BC%8F%E4%B8%8B%E7%9A%84%E6%96%87%E5%AD%97/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Android中输出HTML格式下的文字 | 雅俗共赏</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">雅俗共赏</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+        
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      
+    
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://houzixiashanxiedaima.github.io/2016/07/28/Android%E4%B8%AD%E8%BE%93%E5%87%BAHTML%E6%A0%BC%E5%BC%8F%E4%B8%8B%E7%9A%84%E6%96%87%E5%AD%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="GenJi Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://static.simpledesktops.com/uploads/desktops/2016/12/05/Untitled-1-03-01.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雅俗共赏">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            Android中输出HTML格式下的文字
+            
+
+          
+        </h1>
+
+        <div class="post-meta">
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-16 18:58:34" itemprop="dateModified" datetime="2020-01-16T18:58:34+08:00">2020-01-16</time>
+              </span>
+            
+          
+
+          
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>3.2k</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Android中输出HTML格式下的文字"><a href="#Android中输出HTML格式下的文字" class="headerlink" title="Android中输出HTML格式下的文字"></a>Android中输出HTML格式下的文字</h1><p>在Android中，我们经常会用到TextView这个控件，在使用的过程中，我们用到最多的方法就是setText()，单纯的使用基本上能够满足我们日常的需求，但是有时候我们需要对文字进行一些处理，比如说加粗、斜体、下划线等等，这些也都是可以通过Android提供的原生方法完成。但是如果我们需要实现下面的效果呢：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2524102-92f803de79292a20.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图1"></p>
+<a id="more"></a>
+
+<h2 id="HTML下的文字解析-快速版"><a href="#HTML下的文字解析-快速版" class="headerlink" title="HTML下的文字解析(快速版)"></a>HTML下的文字解析(快速版)</h2><p>从图片上我们可以看到，这段文字分别有<code>两种大小，三种颜色</code>。我们当然可以定义多个TextView来实现这样的效果，但是如果我们的文字变化较多，那么定义多个TextView也非常的麻烦。那么接下来我们就来介绍一个比较简单的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">"恭喜您！您的手机跑分为&lt;font color='#F50057'&gt;&lt;big&gt;&lt;big&gt;&lt;big&gt;888888分&lt;/big&gt;&lt;/big&gt;&lt;/big&gt;&lt;/font&gt;，已经超过全国&lt;font color='#00E676'&gt;&lt;big&gt;&lt;big&gt;&lt;big&gt;99%&lt;/big&gt;&lt;/big&gt;&lt;/big&gt;&lt;/font&gt;的Android手机。"</span>;</span><br><span class="line">tv.setText(Html.fromHtml(str));</span><br></pre></td></tr></table></figure>
+<p>上面的代码中，我们用到了一个方法<code>Html.fromHtml()</code>，这个方法是Android中专门用来解析HTML格式的一个方法，我们可以将任意的HTML格式下的代码通过此方法解析，最后得到我们需要的结果。<br>通过上面的方法，我们就可以实现在<code>setText()</code>中使用各种带HTML效果的文字了。这样应该能够实现我们开发中98%的需求了，那么还有1-2%的需求是什么呢？</p>
+<h2 id="HTML下的文字解析-多语言支持"><a href="#HTML下的文字解析-多语言支持" class="headerlink" title="HTML下的文字解析(多语言支持)"></a>HTML下的文字解析(多语言支持)</h2><p>比如说我们现在的APP需要兼容多种语言，包括中文、法语、英语、日语等等。在平时的开发过程中，我们都知道多语言的实现可以通过不同<code>values</code>文件夹下的<code>string.xml</code>文件来实现。我们这里就以中文来举例，看看我们如何在<code>string.xml</code>文件中定义HTML格式的文字。<br>首先我们来尝试将我们上面定义的<code>str</code>中的字符串直接放到<code>string.xml</code>中。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">"test_string"</span>&gt;</span></span><br><span class="line">      恭喜您！您的手机跑分为<span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">'#F50057'</span>&gt;</span><span class="tag">&lt;<span class="name">big</span>&gt;</span><span class="tag">&lt;<span class="name">big</span>&gt;</span><span class="tag">&lt;<span class="name">big</span>&gt;</span>888888分<span class="tag">&lt;/<span class="name">big</span>&gt;</span><span class="tag">&lt;/<span class="name">big</span>&gt;</span><span class="tag">&lt;/<span class="name">big</span>&gt;</span><span class="tag">&lt;/<span class="name">font</span>&gt;</span></span><br><span class="line">      ，已经超过全国<span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">'#00E676'</span>&gt;</span><span class="tag">&lt;<span class="name">big</span>&gt;</span><span class="tag">&lt;<span class="name">big</span>&gt;</span><span class="tag">&lt;<span class="name">big</span>&gt;</span>99%<span class="tag">&lt;/<span class="name">big</span>&gt;</span><span class="tag">&lt;/<span class="name">big</span>&gt;</span><span class="tag">&lt;/<span class="name">big</span>&gt;</span><span class="tag">&lt;/<span class="name">font</span>&gt;</span>的Android手机。</span><br><span class="line">   <span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tv.setText(Html.fromHtml(getString(R.string.test_string)));</span><br></pre></td></tr></table></figure>
+
+
+<p>运行程序，结果如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2524102-d8922d1d6ea9bc47.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图2"></p>
+<p>并没有出现我们预期的效果，HTML格式并没有被解析出来。这是什么原因呢？原因就在于我们使用的<code>getString()</code>方法，官方对于这个方法的解释如下：</p>
+<blockquote>
+<p>Return the string value associated with a particular resource ID. It will be stripped of any styled text information.<br>返回与特定资源ID相关联的字符串值，它将删除任何样式的文本信息。</p>
+</blockquote>
+<p>那么也就是说我们的HTML格式被<code>getString()</code>方法给删除了，所以我们的文字才会变成普通的字符串。要解决这个问题，我们需要将我们的<code>string.xml</code>中的字符串使用<code>&lt;![CDATA[...your html...]]&gt;</code>包裹起来，被<code>CDATA</code>包裹起来的字符都会被解析器忽略，也就是说<code>CDATA</code>中的HTML格式将会被原封不动的保留下来，最终交给我们的<code>Html.fromHtml()</code>进行解析。那么我们来尝试以下，将我们<code>string.xml</code>中的字符串改为如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">"test_string"</span>&gt;</span></span><br><span class="line">        &lt;![CDATA[</span><br><span class="line">            恭喜您！您的手机跑分为&lt;font color='#F50057'&gt;&lt;big&gt;&lt;big&gt;&lt;big&gt;888888分&lt;/big&gt;&lt;/big&gt;&lt;/big&gt;&lt;/font&gt;</span><br><span class="line">            ，已经超过全国&lt;font color='#00E676'&gt;&lt;big&gt;&lt;big&gt;&lt;big&gt;99%&lt;/big&gt;&lt;/big&gt;&lt;/big&gt;&lt;/font&gt;的Android手机。</span><br><span class="line">        ]]&gt;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>编译运行，结果编译时报错：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error:(17, 5) Apostrophe not preceded by \ (in  鎭枩鎮紒鎮ㄧ殑鎵嬫満璺戝垎涓?<span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">'#F50057'</span>&gt;</span><span class="tag">&lt;<span class="name">big</span>&gt;</span><span class="tag">&lt;<span class="name">big</span>&gt;</span><span class="tag">&lt;<span class="name">big</span>&gt;</span>888888鍒?<span class="tag">&lt;/<span class="name">big</span>&gt;</span><span class="tag">&lt;/<span class="name">big</span>&gt;</span><span class="tag">&lt;/<span class="name">big</span>&gt;</span><span class="tag">&lt;/<span class="name">font</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>报错的关键词为：</p>
+<blockquote>
+<p>Apostrophe not preceded by <br>撇号前面没有\</p>
+</blockquote>
+<p>通过上面的这个报错信息我们可以知道，这是因为<code>&#39;</code>没有进行转义，那么我根据报错信息将所有的单引号进行转义。最后的结果如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">"test_string"</span>&gt;</span></span><br><span class="line">       &lt;![CDATA[</span><br><span class="line">           恭喜您！您的手机跑分为&lt;font color=\'#F50057\'&gt;&lt;big&gt;&lt;big&gt;&lt;big&gt;888888分&lt;/big&gt;&lt;/big&gt;&lt;/big&gt;&lt;/font&gt;</span><br><span class="line">           ，已经超过全国&lt;font color=\'#00E676\'&gt;&lt;big&gt;&lt;big&gt;&lt;big&gt;99%&lt;/big&gt;&lt;/big&gt;&lt;/big&gt;&lt;/font&gt;的Android手机。</span><br><span class="line">       ]]&gt;</span><br><span class="line">   <span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>最后我们再次运行，得到的就是和我们文章开头一样的结果。<br>关于Android中HTML格式下的文字解析大概就是这样了，如果大家还有其他的方法，欢迎交流。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>最后附上一个在尝试过程中遇到的错误，本来想情景重现的，结果怎么样都无法再遇到那个错误了。如果有遇到这个错误的朋友，可以尝试下面的解决办法。<br>错误：</p>
+<blockquote>
+<p>Multiple annotations found at this line:  </p>
+</blockquote>
+<ul>
+<li>error: Multiple substitutions specified in non-positional format; did you mean to add<br>the formatted=”false” attribute?  </li>
+<li>error: Unexpected end tag string  </li>
+</ul>
+<p>导致错误的可能原因及解决方法：</p>
+<ol>
+<li>string.xml中的字符串中有<code>%</code>，对<code>%</code>进行转义，即改为<code>\%</code>；或者使用两个百分号表示一个，即改为<code>%%</code>。</li>
+<li>string.xml中的字符串被格式化了，导致解析器解析出错，解决办法为<code>&lt;string name=&quot;test_string&quot; formatted=&quot;false&quot;&gt;</code>，将formatted设置为false即可。</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GenJi Wang
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://houzixiashanxiedaima.github.io/2016/07/28/Android%E4%B8%AD%E8%BE%93%E5%87%BAHTML%E6%A0%BC%E5%BC%8F%E4%B8%8B%E7%9A%84%E6%96%87%E5%AD%97/" title="Android中输出HTML格式下的文字">https://houzixiashanxiedaima.github.io/2016/07/28/Android%E4%B8%AD%E8%BE%93%E5%87%BAHTML%E6%A0%BC%E5%BC%8F%E4%B8%8B%E7%9A%84%E6%96%87%E5%AD%97/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2016/07/28/Android%E5%85%89%E9%80%9F%E6%89%93%E5%8C%85/" rel="next" title="Android光速打包">
+                  <i class="fa fa-chevron-left"></i> Android光速打包
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2016/07/28/Android%205.0%E9%80%8F%E6%98%8E%E7%8A%B6%E6%80%81%E6%A0%8F%E8%AE%BE%E7%BD%AE/" rel="prev" title="Android 5.0透明状态栏设置">
+                  Android 5.0透明状态栏设置 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android中输出HTML格式下的文字"><span class="nav-number">1.</span> <span class="nav-text">Android中输出HTML格式下的文字</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML下的文字解析-快速版"><span class="nav-number">1.1.</span> <span class="nav-text">HTML下的文字解析(快速版)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML下的文字解析-多语言支持"><span class="nav-number">1.2.</span> <span class="nav-text">HTML下的文字解析(多语言支持)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">1.3.</span> <span class="nav-text">后记</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="http://static.simpledesktops.com/uploads/desktops/2016/12/05/Untitled-1-03-01.png"
+      alt="GenJi Wang">
+  <p class="site-author-name" itemprop="name">GenJi Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  &copy; 1970 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GenJi Wang</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">41k</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.4.1.js"></script>
+
+<script src="/js/motion.js?v=7.4.1.js"></script>
+
+
+<script src="/js/schemes/pisces.js?v=7.4.1.js"></script>
+
+
+<script src="/js/next-boot.js?v=7.4.1.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+<script src="/js/local-search.js?v=7.4.1.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
