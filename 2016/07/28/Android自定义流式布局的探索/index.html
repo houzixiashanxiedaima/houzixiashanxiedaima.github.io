@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="最近在学习Android中自定义View的一些知识，为了检验成果，先来自定义一个流式布局。 什么是流式布局？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android自定义流式布局的探索">
+<meta property="og:url" content="https://houzixiashanxiedaima.github.io/2016/07/28/Android%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80%E7%9A%84%E6%8E%A2%E7%B4%A2/index.html">
+<meta property="og:site_name" content="雅俗共赏">
+<meta property="og:description" content="最近在学习Android中自定义View的一些知识，为了检验成果，先来自定义一个流式布局。 什么是流式布局？">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2524102-a4edfa75da430455.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2524102-9b3989321f3e5db6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2524102-ba18794a67eec0ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2524102-da6b6c9312731b6c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2524102-33b1287cfc34db14.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2016-07-28T07:19:45.000Z">
+<meta property="article:modified_time" content="2020-04-15T10:57:11.773Z">
+<meta property="article:author" content="GenJi Wang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2524102-a4edfa75da430455.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  <link rel="canonical" href="https://houzixiashanxiedaima.github.io/2016/07/28/Android%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80%E7%9A%84%E6%8E%A2%E7%B4%A2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Android自定义流式布局的探索 | 雅俗共赏</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">雅俗共赏</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+        
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      
+    
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://houzixiashanxiedaima.github.io/2016/07/28/Android%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80%E7%9A%84%E6%8E%A2%E7%B4%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="GenJi Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://static.simpledesktops.com/uploads/desktops/2016/12/05/Untitled-1-03-01.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雅俗共赏">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            Android自定义流式布局的探索
+            
+
+          
+        </h1>
+
+        <div class="post-meta">
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-15 18:57:11" itemprop="dateModified" datetime="2020-04-15T18:57:11+08:00">2020-04-15</time>
+              </span>
+            
+          
+
+          
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>9.6k</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>最近在学习Android中自定义View的一些知识，为了检验成果，先来自定义一个流式布局。</p>
+<h3 id="什么是流式布局？"><a href="#什么是流式布局？" class="headerlink" title="什么是流式布局？"></a>什么是流式布局？</h3><p><img src="http://upload-images.jianshu.io/upload_images/2524102-a4edfa75da430455.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="流式布局示例1"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2524102-9b3989321f3e5db6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="流式布局示例2.png"></p>
+<a id="more"></a>
+
+<p>上面就是流式布局的示例，简单来说就是一些不同宽度的控件显示的时候根据自己的宽度和当前行剩余的宽度来决定是显示在当前行还是换行显示。</p>
+<h3 id="如何实现流式布局"><a href="#如何实现流式布局" class="headerlink" title="如何实现流式布局"></a>如何实现流式布局</h3><p>实现流式布局毫无疑问是需要自定义布局的，虽然Android官方给我们提供了Recyclerview中的瀑布流布局，但是这种效果却并不好，因为瀑布流的布局需要给定一个spanCount，也就是瀑布的列数。但是我们的流式布局是不清楚有多少列多少行的，因为这完全取决于我们的控件的宽度和整个流式布局的宽度。<br>自定义流式布局和自定义其他的一些ViewGroup的步骤基本是一致的：</p>
+<ol>
+<li>先onMeasure</li>
+<li>后onLayout</li>
+</ol>
+<p>我们先从第一步开始</p>
+<p>首先直接放出onMeasure的代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> widthMeasureSpec, <span class="keyword">final</span> <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</span><br><span class="line">      <span class="comment">//获取该ViewGroup的父布局为该ViewGroup推荐的宽高以及计算模式</span></span><br><span class="line">      <span class="keyword">int</span> sizeWidth = MeasureSpec.getSize(widthMeasureSpec);</span><br><span class="line">      <span class="keyword">int</span> sizeHeight = MeasureSpec.getSize(heightMeasureSpec);</span><br><span class="line">      <span class="keyword">int</span> modeWidth = MeasureSpec.getMode(widthMeasureSpec);</span><br><span class="line">      <span class="keyword">int</span> modeHeight = MeasureSpec.getMode(heightMeasureSpec);</span><br><span class="line">      <span class="comment">//当该ViewGroup是wrap_content的时候，记录宽高</span></span><br><span class="line">      <span class="keyword">int</span> layoutWidth = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">int</span> layoutHeight = <span class="number">0</span>;</span><br><span class="line">      <span class="comment">//每行的宽高，宽度永远都取最大值，高度则直接相加</span></span><br><span class="line">      <span class="keyword">int</span> lineWidth = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">int</span> lineHeight = <span class="number">0</span>;</span><br><span class="line">      <span class="comment">//遍历childView计并算childView的宽高与margin值，然后通过计算结果来确定当</span></span><br><span class="line">      <span class="comment">//我们的ViewGroup设置为wrap_content时ViewGroup的宽高</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, childCount = getChildCount(); i &lt; childCount; i++) &#123;</span><br><span class="line">          View childView = getChildAt(i);</span><br><span class="line">          <span class="comment">//通过ViewGroup的measureChild方法设置childView的宽高，执行完毕之后，</span></span><br><span class="line">          <span class="comment">//所有的childView的宽高都已经确定了。</span></span><br><span class="line">          measureChild(childView, widthMeasureSpec, heightMeasureSpec);</span><br><span class="line">          <span class="comment">//获取上一步中ViewGroup设置的childView的宽高</span></span><br><span class="line">          <span class="keyword">int</span> childWidth = childView.getMeasuredWidth();</span><br><span class="line">          <span class="keyword">int</span> childHeight = childView.getMeasuredHeight();</span><br><span class="line"></span><br><span class="line">          <span class="comment">//获取childView的LayoutParams</span></span><br><span class="line">          <span class="comment">// 每个布局都有一种特殊的LayoutParams，</span></span><br><span class="line">          <span class="comment">//比如LinearLayout.LayoutParams,RelativeLayout.LayoutParams等等</span></span><br><span class="line">          MarginLayoutParams mlp = (MarginLayoutParams) childView.getLayoutParams();</span><br><span class="line">          <span class="comment">//计算实际上childView的宽高(childView本身的宽高加上它的Margin值)</span></span><br><span class="line">          <span class="keyword">int</span> realChildWidth = childWidth + mlp.leftMargin + mlp.rightMargin;</span><br><span class="line">          <span class="keyword">int</span> realChildHeight = childHeight + mlp.topMargin + mlp.bottomMargin;</span><br><span class="line"></span><br><span class="line">          <span class="comment">//该行当前的宽度加上childView实际的宽度大于布局宽度，则换行</span></span><br><span class="line">          <span class="keyword">if</span> (lineWidth + realChildWidth &gt; sizeWidth) &#123;</span><br><span class="line">              <span class="comment">//执行换行操作</span></span><br><span class="line">              <span class="comment">//这里layoutWidth取lineWidth和realChildWidth的最大值是因为可能会</span></span><br><span class="line">              <span class="comment">//出现如下的情况：</span></span><br><span class="line">              <span class="comment">//上一行：= = = ==(宽度为8)</span></span><br><span class="line">              <span class="comment">//该childView：==========(宽度&gt;8)</span></span><br><span class="line">              layoutWidth = Math.max(lineWidth, realChildWidth);</span><br><span class="line">              <span class="comment">//当前计算的总高度累加一个realChildHeight即可</span></span><br><span class="line">              layoutHeight = layoutHeight + realChildHeight;</span><br><span class="line">              <span class="comment">//换行之后，新行的宽度和高度需要重新计算，此处是设置为在该行的唯一一个childView的实际宽高</span></span><br><span class="line">              lineWidth = realChildWidth;</span><br><span class="line">              lineHeight = realChildHeight;</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              <span class="comment">//宽度未超出，可以直接相加宽度</span></span><br><span class="line">              lineWidth = lineWidth + realChildWidth;</span><br><span class="line">              <span class="comment">//获取最终的行高，取之前的行高和当前子View的高度</span></span><br><span class="line">              lineHeight = Math.max(lineHeight, realChildHeight);</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          <span class="comment">// 如果是最后一个，需要做一些处理。</span></span><br><span class="line">          <span class="keyword">if</span> (i == childCount - <span class="number">1</span>) &#123;</span><br><span class="line">              <span class="comment">//将当前布局的宽度和最后一行的宽度相比，取最大值</span></span><br><span class="line">              layoutWidth = Math.max(lineWidth, layoutWidth);</span><br><span class="line">              <span class="comment">//当前布局的行高还是简单的叠加即可</span></span><br><span class="line">              layoutHeight = layoutHeight + lineHeight;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="comment">/**</span></span><br><span class="line"><span class="comment">           *  Mode 一般有三种模式：</span></span><br><span class="line"><span class="comment">           *  MeasureSpec.EXACTLY: 一般是在childView设置match_parent时或者是设置了具体的宽高时使用。</span></span><br><span class="line"><span class="comment">           *  MeasureSPec.AT_MOST: 一般是在childView设置wrap_content时使用</span></span><br><span class="line"><span class="comment">           *  MeasureSpec.UNSPECIFIC: childView想要多大都行，用的比较少，可能会在ScrollView的heightMode中见到。</span></span><br><span class="line"><span class="comment">           */</span></span><br><span class="line"></span><br><span class="line">          <span class="comment">// 下面就是判断childView的宽高时是如何设置的，如果是设置了具体的宽高</span></span><br><span class="line">          <span class="comment">//或者是match_parent，那就直接使用父布局给出的大小</span></span><br><span class="line">          <span class="comment">// 否则就使用我们自己测量出来的宽高</span></span><br><span class="line">          setMeasuredDimension(modeWidth == MeasureSpec.EXACTLY ? sizeWidth : layoutWidth,</span><br><span class="line">                  modeHeight == MeasureSpec.EXACTLY ? sizeHeight : layoutHeight);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码注释已经非常的清楚，在onMeasure中的步骤也非常的清晰：</p>
+<ol>
+<li>获取父布局对流式布局的测量宽高和测量模式。</li>
+<li>遍历流式布局中的childView。<ul>
+<li>测量并设置childView的宽高，执行这一步之后childView的宽高就已经确定</li>
+<li>获取测量的childView的宽高和Layoutparams</li>
+<li>计算实际上的childView宽高（包括margin）</li>
+<li>判断childView的实际宽高+当前行的宽度是否超出流式布局的宽度<ul>
+<li>若超过，则换行[注1]</li>
+<li>若未超过，则宽度累加，行高取当前行高与childView高度的最大值</li>
+</ul>
+</li>
+<li>最后一行的时候进行一些处理，获取最终的流式布局的宽和高</li>
+</ul>
+</li>
+</ol>
+<p>onMeasure基本上就是这些了，接下来就是onLayout，先放代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onLayout</span><span class="params">(<span class="keyword">final</span> <span class="keyword">boolean</span> changed, <span class="keyword">final</span> <span class="keyword">int</span> l, <span class="keyword">final</span> <span class="keyword">int</span> t, <span class="keyword">final</span> <span class="keyword">int</span> r, <span class="keyword">final</span> <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="comment">//获取该布局在onMeasure函数中测量的宽度</span></span><br><span class="line">       <span class="keyword">int</span> flowWidth = getWidth();</span><br><span class="line">       <span class="comment">//通过lineWidth和lineHeight来确定childView的位置</span></span><br><span class="line">       <span class="keyword">int</span> lineWidth = <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">int</span> lineHeight = <span class="number">0</span>;</span><br><span class="line">       <span class="comment">//记录childView的left和top来确定位置</span></span><br><span class="line">       <span class="keyword">int</span> childLeft = <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">int</span> childTop = <span class="number">0</span>;</span><br><span class="line">       <span class="comment">//遍历子控件，记录每个子view的位置</span></span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, childCount = getChildCount(); i &lt; childCount; i++) &#123;</span><br><span class="line">           View childView = getChildAt(i);</span><br><span class="line">           <span class="comment">//获取到测量的宽和高</span></span><br><span class="line">           <span class="keyword">int</span> childWidth = childView.getMeasuredWidth();</span><br><span class="line">           <span class="keyword">int</span> childHeight = childView.getMeasuredHeight();</span><br><span class="line">           <span class="comment">//因为childView可能设置margin，这里要加上margin的距离</span></span><br><span class="line">           MarginLayoutParams mlp = (MarginLayoutParams) childView.getLayoutParams();</span><br><span class="line">           <span class="comment">//判断整个childView所占的空间宽度+当前行的宽度是否大于父布局也就是我们ViewGroup的宽度</span></span><br><span class="line">           <span class="comment">//若大于就进行换行处理</span></span><br><span class="line">           <span class="keyword">if</span> (lineWidth + mlp.leftMargin + childWidth + mlp.rightMargin &gt; flowWidth) &#123;</span><br><span class="line">               <span class="comment">//换行之后，left为最左边的值</span></span><br><span class="line">               childLeft = <span class="number">0</span>;</span><br><span class="line">               <span class="comment">//换行之后，top为top+当前的行高</span></span><br><span class="line">               childTop = childTop + lineHeight;</span><br><span class="line">               <span class="comment">//换行之后，当前行高为换行前的行高+childView的TopMargin+childView+BottomMargin</span></span><br><span class="line">               lineHeight = (mlp.topMargin + childHeight + mlp.bottomMargin);</span><br><span class="line">               <span class="comment">//换行之后，当前行宽度为0</span></span><br><span class="line">               lineWidth = <span class="number">0</span>;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="comment">//设置childView的上下左右坐标，统一处理margin</span></span><br><span class="line">           <span class="keyword">int</span> left = childLeft + mlp.leftMargin;</span><br><span class="line">           <span class="keyword">int</span> top = childTop + mlp.topMargin;</span><br><span class="line">           <span class="keyword">int</span> right = left + childWidth;</span><br><span class="line">           <span class="keyword">int</span> bottom = top + childHeight;</span><br><span class="line">           childView.layout(left, top, right, bottom);</span><br><span class="line">           <span class="comment">//记录当前行的宽度</span></span><br><span class="line">           lineWidth = lineWidth + (mlp.leftMargin + childWidth + mlp.rightMargin);</span><br><span class="line">           childLeft = lineWidth;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>onLayoutd的代码也非常的清晰：</p>
+<ol>
+<li>遍历childView</li>
+<li>获取childView的宽高，并判断是否换行<ul>
+<li>若换行，则下一个childView的Left和下一行的width重置，行高为当前childView的实际高度，childTop则累加行高。</li>
+<li>若不换行，宽度累加，行高不变。</li>
+</ul>
+</li>
+</ol>
+<p>通过上面的onMeasure和onLayout之后，整个流式布局就已经基本完成，接下来我们设置布局文件：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">&lt;!--  布局文件--&gt;</span></span><br><span class="line"> <span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">RelativeLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/content_flow"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_behavior</span>=<span class="string">"@string/appbar_scrolling_view_behavior"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">tools:showIn</span>=<span class="string">"@layout/activity_flow"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">tools:context</span>=<span class="string">"stephen.com.bugstest.FlowActivity"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">stephen.com.bugstest.customwidgets.FlowLayout</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">"@+id/flow_layout"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"Welcome"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"IT工程师"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"学习ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"恋爱ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"挣钱ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"努力ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"I thick i can"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"Welcome"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"IT工程师"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"学习ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"恋爱ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"挣钱ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"努力ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"I thick i can"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"Welcome"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"IT工程师"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"学习ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"恋爱ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"挣钱ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"努力ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"I thick i can"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"Welcome"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"学习ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"恋爱ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"挣钱ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"努力ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"I thick i can"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"Welcome"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"IT工程师"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"学习ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"恋爱ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"挣钱ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"努力ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"I thick i can"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"Welcome"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"IT工程师"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"学习ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"恋爱ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"挣钱ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"努力ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"I thick i can"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"Welcome"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"IT工程师"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"学习ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"恋爱ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"挣钱ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"努力ing"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">style</span>=<span class="string">"@style/text_flag_01"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">"I thick i can"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">stephen.com.bugstest.customwidgets.FlowLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>最终效果：<br><img src="http://upload-images.jianshu.io/upload_images/2524102-ba18794a67eec0ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="最终效果图.png"></p>
+<p>从上面的图中我们可以看到，每一行都是根据宽度自动换行，最终形成了流式布局。</p>
+<p>在上面的说明中，我标注了一个注[1]，这里具体来说一下：<br>在实际的编码和测试过程中，我发现如果我们的childView宽度大于本身整个流式布局的宽度，那么整个流式布局就被破坏了。直接上图看看吧：<br><img src="http://upload-images.jianshu.io/upload_images/2524102-da6b6c9312731b6c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="情况1.png"></p>
+<p>这种情况是只有这个childView的这一行的行距出现了问题。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2524102-33b1287cfc34db14.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="情况2.png"></p>
+<p>这种情况看起来好像是正常的，但是实际上是从这个childView之后的所有行高都变大了。</p>
+<p>上面这两种情况的出现对应着代码中有一些微小的改动，在这里就不放出来了。针对上面的这两种情况，都尝试过解决办法，但是都失败了，可能是因为我们在onLayout中使用了行高来确定上下两行的间隔距离，而这个childView的行高要特殊一些，所以就导致出现这个问题。但是这个小问题也不用太在意，因为我们的流式布局基本上是不会碰到一个childView的宽度比整个布局的宽度还宽的。</p>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GenJi Wang
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://houzixiashanxiedaima.github.io/2016/07/28/Android%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80%E7%9A%84%E6%8E%A2%E7%B4%A2/" title="Android自定义流式布局的探索">https://houzixiashanxiedaima.github.io/2016/07/28/Android%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80%E7%9A%84%E6%8E%A2%E7%B4%A2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2016/07/28/DrawerLayout%EF%BC%9AWrite-Once%EF%BC%8CRun-EveryWhere/" rel="next" title="DrawerLayout：Write-Once，Run-EveryWhere">
+                  <i class="fa fa-chevron-left"></i> DrawerLayout：Write-Once，Run-EveryWhere
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2016/07/28/Android%E6%B8%B8%E6%88%8F%E6%89%8B%E6%9F%84%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95%EF%BC%88%E4%B8%80%EF%BC%89/" rel="prev" title="Android游戏手柄开发记录（一）">
+                  Android游戏手柄开发记录（一） <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是流式布局？"><span class="nav-number">1.</span> <span class="nav-text">什么是流式布局？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何实现流式布局"><span class="nav-number">2.</span> <span class="nav-text">如何实现流式布局</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="http://static.simpledesktops.com/uploads/desktops/2016/12/05/Untitled-1-03-01.png"
+      alt="GenJi Wang">
+  <p class="site-author-name" itemprop="name">GenJi Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  &copy; 1970 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GenJi Wang</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">43k</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.4.1.js"></script>
+
+<script src="/js/motion.js?v=7.4.1.js"></script>
+
+
+<script src="/js/schemes/pisces.js?v=7.4.1.js"></script>
+
+
+<script src="/js/next-boot.js?v=7.4.1.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+<script src="/js/local-search.js?v=7.4.1.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
