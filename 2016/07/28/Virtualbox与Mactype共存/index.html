@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/houzixiashanxiedaima/CloudImg/master/gofore-brands.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/houzixiashanxiedaima/CloudImg/master/gofore-brands.svg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Sans CJK SC:300,300italic,400,400italic,700,700italic|Fira Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"houzixiashanxiedaima.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Virtualbox与Mactype共存最近心血来潮，准备重启吃灰好久的ubuntu虚拟机玩玩，于是开开心心准备打开机器，顺利进入，准备更新下软件，发现网速好慢，虽然主机能够高速访问“外网”，但是虚拟机并没有享受到这种福利，那么能不能让虚拟机也享受呢？这么一说，就是一段折腾史……">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Virtualbox与Mactype共存">
+<meta property="og:url" content="https://houzixiashanxiedaima.github.io/2016/07/28/Virtualbox%E4%B8%8EMactype%E5%85%B1%E5%AD%98/index.html">
+<meta property="og:site_name" content="雅俗共赏">
+<meta property="og:description" content="Virtualbox与Mactype共存最近心血来潮，准备重启吃灰好久的ubuntu虚拟机玩玩，于是开开心心准备打开机器，顺利进入，准备更新下软件，发现网速好慢，虽然主机能够高速访问“外网”，但是虚拟机并没有享受到这种福利，那么能不能让虚拟机也享受呢？这么一说，就是一段折腾史……">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2524102-7d2b077d6ffba4d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2524102-c9fc08a01d6f881c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2524102-4cb56fa29e06e494.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2524102-81efa0e0b9c7c6b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2016-07-28T07:19:45.000Z">
+<meta property="article:modified_time" content="2021-10-17T09:56:55.792Z">
+<meta property="article:author" content="aGiao">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2524102-7d2b077d6ffba4d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="https://houzixiashanxiedaima.github.io/2016/07/28/Virtualbox%E4%B8%8EMactype%E5%85%B1%E5%AD%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Virtualbox与Mactype共存 | 雅俗共赏</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">雅俗共赏</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://houzixiashanxiedaima.github.io/2016/07/28/Virtualbox%E4%B8%8EMactype%E5%85%B1%E5%AD%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://static.simpledesktops.com/uploads/desktops/2016/12/05/Untitled-1-03-01.png">
+      <meta itemprop="name" content="aGiao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雅俗共赏">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Virtualbox与Mactype共存
+        </h1>
+
+        <div class="post-meta">
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-17 17:56:55" itemprop="dateModified" datetime="2021-10-17T17:56:55+08:00">2021-10-17</time>
+              </span>
+
+          
+            <span id="/2016/07/28/Virtualbox%E4%B8%8EMactype%E5%85%B1%E5%AD%98/" class="post-meta-item leancloud_visitors" data-flag-title="Virtualbox与Mactype共存" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2016/07/28/Virtualbox%E4%B8%8EMactype%E5%85%B1%E5%AD%98/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2016/07/28/Virtualbox%E4%B8%8EMactype%E5%85%B1%E5%AD%98/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Virtualbox与Mactype共存"><a href="#Virtualbox与Mactype共存" class="headerlink" title="Virtualbox与Mactype共存"></a>Virtualbox与Mactype共存</h1><p>最近心血来潮，准备重启吃灰好久的ubuntu虚拟机玩玩，于是开开心心准备打开机器，顺利进入，准备更新下软件，发现网速好慢，虽然主机能够高速访问“外网”，但是虚拟机并没有享受到这种福利，那么能不能让虚拟机也享受呢？这么一说，就是一段折腾史……</p>
+<span id="more"></span>
+
+<h2 id="虚拟机“外网”访问"><a href="#虚拟机“外网”访问" class="headerlink" title="虚拟机“外网”访问"></a>虚拟机“外网”访问</h2><p>虚拟机访问“外网”，可以通过设置虚拟机的网络为桥接模式，然后在虚拟机中设置主机的ip和端口即可。具体设置我们后面再说，先来打开桥接模式。<br>首先我们打开virtualbox的设置-&gt;网络-&gt;网卡1-&gt;连接方式-&gt;桥接网卡。到这一步的时候，被无情的提示“未指定”。原因是下图中红色箭头标记的那个东西没有<br><img src="http://upload-images.jianshu.io/upload_images/2524102-7d2b077d6ffba4d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="未指定.png"><br>根据网上的<a target="_blank" rel="noopener external nofollow noreferrer" href="http://www.dabu.info/the-virtual-box-bridging-error-not-specified-network-interface-to-be-bridged.html">提示</a>安装桥接网卡驱动，但是安装完毕之后，依然没有显示出来。经过多方查证，发现是虚拟机版本太低，于是选择将4.3.12升级到5.1.18（最新版），升级完毕之后选择桥接网卡，一切顺利。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2524102-c9fc08a01d6f881c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="桥接网卡.png"></p>
+<p>准备开机起飞……还没飞起来就被无情打脸，虚拟机不能启动，报错信息如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2524102-4cb56fa29e06e494.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="虚拟机报错.png"><br>这个报错信息就是我们今天的关键信息，这个报错信息一般都是出现在<code>virtualbox 5.0+</code>和<code>windows 8+</code>上面，那么具体是什么原因呢，是因为virtualbox5.0之后对于系统的要求更严格了，说白了就是系统中如果安装了一些杀毒软件、主题修改的东西，那么虚拟机基本上就是会报这个错误。但是由于我的电脑一直是裸奔状态，于是我就将目标转向了mactype，这是我装的唯一一个主题修改类软件，于是经过多方查证找到了<a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.zhihu.com/question/27159349">解决办法</a><br>按照上面的步骤操作之后，然后准备再次起飞……依然没飞起来被打脸，打脸的还是那个报错信息。于是再次排查，找了半天，发现virtualbox5.0之后安装完虚拟机还要安装一个驱动，具体操作<a target="_blank" rel="noopener external nofollow noreferrer" href="https://jingyan.baidu.com/article/4d58d541186ad89dd4e9c018.html">在这里</a><br>这次安装完毕之后，再次信心满满的准备起飞……最后还是被打脸，我在想这飞机是不是有问题，准备换回4.3.12了，但是内心有个声音告诉我，一定要征服这个虚拟机，我就不信了。然后又到处找资料，找来找去还是找回到之前的杀毒软件和主题修改软件方向上，于是我仔细检查了一下我的电脑，搞了一下午，结果发现电脑右下角有一个净网大师，于是怒卸载之。<br>卸载完毕，再次小心翼翼的准备起飞，这一次飞机平稳的起飞，心中的大石头也落地了，这一下午算是值了。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2524102-81efa0e0b9c7c6b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="飞机平稳起飞咯"><br>最后说一下关于ubuntu虚拟机桥接主机高速访问“外网”的方法：<br>在宿主机windows上运行shadowsocks.exe并勾选“允许局域网连接”<br>使用桥接方式运行虚拟机（这时虚拟机与宿主处于同一个局域网）<br>进入ubuntu系统，System Settings – Network – Network proxy勾选Manual（手动）,地址全部填宿主机IP（局域网网段），设置好代理端口（可在windows下的shadowsocks查看，一般为默认1080）<br>ubuntu用浏览器访问<a target="_blank" rel="noopener external nofollow noreferrer" href="http://www.google.com,成功./">www.google.com，成功。</a></p>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>aGiao
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://houzixiashanxiedaima.github.io/2016/07/28/Virtualbox%E4%B8%8EMactype%E5%85%B1%E5%AD%98/" title="Virtualbox与Mactype共存">https://houzixiashanxiedaima.github.io/2016/07/28/Virtualbox与Mactype共存/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/07/28/%E2%80%9C%E6%B2%89%E6%B5%B8%E5%BC%8F%E2%80%9D%E7%8A%B6%E6%80%81%E6%A0%8F%E6%8E%A2%E7%B4%A2/" rel="prev" title="沉浸式状态栏">
+      <i class="fa fa-chevron-left"></i> 沉浸式状态栏
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/07/28/NavigationView-%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/" rel="next" title="NavigationView-子菜单问题">
+      NavigationView-子菜单问题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Virtualbox%E4%B8%8EMactype%E5%85%B1%E5%AD%98"><span class="nav-number">1.</span> <span class="nav-text">Virtualbox与Mactype共存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E2%80%9C%E5%A4%96%E7%BD%91%E2%80%9D%E8%AE%BF%E9%97%AE"><span class="nav-number">1.1.</span> <span class="nav-text">虚拟机“外网”访问</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="aGiao"
+      src="http://static.simpledesktops.com/uploads/desktops/2016/12/05/Untitled-1-03-01.png">
+  <p class="site-author-name" itemprop="name">aGiao</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 1970 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">aGiao</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">55k</span>
+</div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"Ve0rwAcn0GRin9m1krmOfrD5-MdYXbMMI","app_key":"3q7VuiLUFtdmqIwgaFHK3Ulj","server_url":null,"security":true,"betterPerformance":true};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://houzixiashanxiedaima.github.io/2016/07/28/Virtualbox%E4%B8%8EMactype%E5%85%B1%E5%AD%98/',]
+      });
+      });
+  </script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'Ve0rwAcn0GRin9m1krmOfrD5-MdYXbMMI',
+      appKey     : '3q7VuiLUFtdmqIwgaFHK3Ulj',
+      placeholder: "Feel free to comment",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/houzixiashanxiedaima/CloudImg/master/gofore-brands.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/houzixiashanxiedaima/CloudImg/master/gofore-brands.svg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Sans CJK SC:300,300italic,400,400italic,700,700italic|Fira Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"houzixiashanxiedaima.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="在Android开发过程中，经常需要管理Gradle的依赖，但是传统的Gradle管理方式有几个不好的地方  对于多个module支持不太好，无法共用 build.gradle文件中无法使用自动补全 如果某个库在多module中引用，需要改动多个地方 ……  虽然Google官方推荐使用ext的形式统一管理，但是对于现在大家使用Kotlin越来越多的情况下，是否能够使用Kotlin一门语言统一An">
+<meta property="og:type" content="article">
+<meta property="og:title" content="build.gradle.kts + buildSrc管理Gradle依赖">
+<meta property="og:url" content="https://houzixiashanxiedaima.github.io/2020/08/09/build-gradle-kts-buildSrc/index.html">
+<meta property="og:site_name" content="雅俗共赏">
+<meta property="og:description" content="在Android开发过程中，经常需要管理Gradle的依赖，但是传统的Gradle管理方式有几个不好的地方  对于多个module支持不太好，无法共用 build.gradle文件中无法使用自动补全 如果某个库在多module中引用，需要改动多个地方 ……  虽然Google官方推荐使用ext的形式统一管理，但是对于现在大家使用Kotlin越来越多的情况下，是否能够使用Kotlin一门语言统一An">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-09T03:31:28.000Z">
+<meta property="article:modified_time" content="2021-10-17T09:56:55.792Z">
+<meta property="article:author" content="aGiao">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="Gradle">
+<meta property="article:tag" content="Kotlin">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://houzixiashanxiedaima.github.io/2020/08/09/build-gradle-kts-buildSrc/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>build.gradle.kts + buildSrc管理Gradle依赖 | 雅俗共赏</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">雅俗共赏</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://houzixiashanxiedaima.github.io/2020/08/09/build-gradle-kts-buildSrc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://static.simpledesktops.com/uploads/desktops/2016/12/05/Untitled-1-03-01.png">
+      <meta itemprop="name" content="aGiao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雅俗共赏">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          build.gradle.kts + buildSrc管理Gradle依赖
+        </h1>
+
+        <div class="post-meta">
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-17 17:56:55" itemprop="dateModified" datetime="2021-10-17T17:56:55+08:00">2021-10-17</time>
+              </span>
+
+          
+            <span id="/2020/08/09/build-gradle-kts-buildSrc/" class="post-meta-item leancloud_visitors" data-flag-title="build.gradle.kts + buildSrc管理Gradle依赖" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/08/09/build-gradle-kts-buildSrc/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/09/build-gradle-kts-buildSrc/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.6k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在Android开发过程中，经常需要管理Gradle的依赖，但是传统的Gradle管理方式有几个不好的地方</p>
+<ul>
+<li>对于多个module支持不太好，无法共用</li>
+<li>build.gradle文件中无法使用自动补全</li>
+<li>如果某个库在多module中引用，需要改动多个地方</li>
+<li>……</li>
+</ul>
+<p>虽然Google官方推荐使用ext的形式统一管理，但是对于现在大家使用Kotlin越来越多的情况下，是否能够使用Kotlin一门语言统一Android开发。</p>
+<span id="more"></span>
+
+<p>今天就给大家介绍build.gradle.kts + buildSrc的方式来管理Gradle依赖，这种方式管理Gradle依赖，能够利用Kotlin语言的自动补全，让我们更方便地书写代码。接下来我们就一步步的将<code>build.gradle</code>转化为<code>build.gradle.kts</code></p>
+<h3 id="build-gradle-gt-build-gradle-kts"><a href="#build-gradle-gt-build-gradle-kts" class="headerlink" title="build.gradle -&gt; build.gradle.kts"></a>build.gradle -&gt; build.gradle.kts</h3><p>修改文件名为<code>build.gradle.kts</code></p>
+<p><strong>替换单引号为双引号</strong></p>
+<p>在gradle语法中，可以用单引号<code>&#39;</code>和双引号<code>&quot;</code>来表示字符串，但是在<code>build.gradle.kts</code>中只能使用双引号表示字符串，所以我们要做的第一步就是将<code>build.gradle</code>文件中所有的单引号转换为双引号，这一步使用Android Studio自带的替换功能即可。</p>
+<p>在文件中按下快捷键<code>Ctrl+R</code>，然后输入要查找的单引号，再输入要替换的双引号，点击<code>Replace all</code>，替换完成。</p>
+<p><strong>修改gradle语法为kts语法</strong></p>
+<ul>
+<li><p>setting.gradle</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//修改前</span></span><br><span class="line">include <span class="string">&#x27;:app&#x27;</span></span><br><span class="line">rootProject.name = <span class="string">&quot;BlogTmp&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//修改后</span></span><br><span class="line">include(<span class="string">&quot;:app&quot;</span>)</span><br><span class="line">rootProject.name = <span class="string">&quot;BlogTmp&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>build.gradle(project)</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//修改前</span></span><br><span class="line"><span class="comment">// Top-level build file where you can add configuration options common to all sub-projects/modules.</span></span><br><span class="line">buildscript &#123;</span><br><span class="line">    ext.kotlin_version = <span class="string">&quot;1.3.72&quot;</span></span><br><span class="line">    repositories &#123;</span><br><span class="line">        google()</span><br><span class="line">        jcenter()</span><br><span class="line">    &#125;</span><br><span class="line">    dependencies &#123;</span><br><span class="line">        classpath <span class="string">&quot;com.android.tools.build:gradle:4.0.1&quot;</span></span><br><span class="line">        classpath <span class="string">&quot;org.jetbrains.kotlin:kotlin-gradle-plugin:<span class="variable">$kotlin_version</span>&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// <span class="doctag">NOTE:</span> Do not place your application dependencies here; they belong</span></span><br><span class="line">        <span class="comment">// in the individual module build.gradle files</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        google()</span><br><span class="line">        jcenter()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">task clean(type: Delete) &#123;</span><br><span class="line">    delete rootProject.buildDir</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//修改后</span></span><br><span class="line"><span class="comment">// Top-level build file where you can add configuration options common to all sub-projects/modules.</span></span><br><span class="line">buildscript &#123;</span><br><span class="line">    <span class="keyword">val</span> kotlin_version = <span class="string">&quot;1.3.72&quot;</span></span><br><span class="line">    repositories &#123;</span><br><span class="line">        google()</span><br><span class="line">        jcenter()</span><br><span class="line">    &#125;</span><br><span class="line">    dependencies &#123;</span><br><span class="line">        classpath (<span class="string">&quot;com.android.tools.build:gradle:4.0.1&quot;</span>)</span><br><span class="line">        classpath (<span class="string">&quot;org.jetbrains.kotlin:kotlin-gradle-plugin:<span class="variable">$kotlin_version</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment">// <span class="doctag">NOTE:</span> Do not place your application dependencies here; they belong</span></span><br><span class="line">        <span class="comment">// in the individual module build.gradle files</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        google()</span><br><span class="line">        jcenter()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">tasks.register(<span class="string">&quot;clean&quot;</span>, Delete::<span class="class"><span class="keyword">class</span>) </span>&#123;</span><br><span class="line">    delete(rootProject.buildDir)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>build.gradle(app)</p>
+<p>修改前</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: <span class="string">&#x27;com.android.application&#x27;</span></span><br><span class="line">apply plugin: <span class="string">&#x27;kotlin-android&#x27;</span></span><br><span class="line">apply plugin: <span class="string">&#x27;kotlin-android-extensions&#x27;</span></span><br><span class="line"></span><br><span class="line">android &#123;</span><br><span class="line">    compileSdkVersion <span class="number">29</span></span><br><span class="line">    buildToolsVersion <span class="string">&quot;29.0.3&quot;</span></span><br><span class="line"></span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        applicationId <span class="string">&quot;com.agiao.blogtmp&quot;</span></span><br><span class="line">        minSdkVersion <span class="number">16</span></span><br><span class="line">        targetSdkVersion <span class="number">29</span></span><br><span class="line">        versionCode <span class="number">1</span></span><br><span class="line">        versionName <span class="string">&quot;1.0&quot;</span></span><br><span class="line"></span><br><span class="line">        testInstrumentationRunner <span class="string">&quot;androidx.test.runner.AndroidJUnitRunner&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        release &#123;</span><br><span class="line">            minifyEnabled <span class="literal">false</span></span><br><span class="line">            proguardFiles getDefaultProguardFile(<span class="string">&#x27;proguard-android-optimize.txt&#x27;</span>), <span class="string">&#x27;proguard-rules.pro&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    implementation fileTree(dir: <span class="string">&quot;libs&quot;</span>, include: [<span class="string">&quot;*.jar&quot;</span>])</span><br><span class="line">    implementation <span class="string">&quot;org.jetbrains.kotlin:kotlin-stdlib:<span class="variable">$kotlin_version</span>&quot;</span></span><br><span class="line">    implementation <span class="string">&#x27;androidx.core:core-ktx:1.3.1&#x27;</span></span><br><span class="line">    implementation <span class="string">&#x27;androidx.appcompat:appcompat:1.1.0&#x27;</span></span><br><span class="line">    implementation <span class="string">&#x27;androidx.constraintlayout:constraintlayout:1.1.3&#x27;</span></span><br><span class="line">    testImplementation <span class="string">&#x27;junit:junit:4.12&#x27;</span></span><br><span class="line">    androidTestImplementation <span class="string">&#x27;androidx.test.ext:junit:1.1.1&#x27;</span></span><br><span class="line">    androidTestImplementation <span class="string">&#x27;androidx.test.espresso:espresso-core:3.2.0&#x27;</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>修改后</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">plugins &#123;</span><br><span class="line">    id(<span class="string">&quot;com.android.application&quot;</span>)</span><br><span class="line">    id(<span class="string">&quot;kotlin-android&quot;</span>)</span><br><span class="line">    id(<span class="string">&quot;kotlin-android-extensions&quot;</span>)</span><br><span class="line">    id(<span class="string">&quot;kotlin-kapt&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">android &#123;</span><br><span class="line"></span><br><span class="line">    compileSdkVersion(Versions.compileSdkVersion)</span><br><span class="line">    buildToolsVersion(Versions.buildToolsVersion)</span><br><span class="line"></span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        applicationId = Versions.applicationId</span><br><span class="line">        minSdkVersion(Versions.minSdkVersion)</span><br><span class="line">        targetSdkVersion(Versions.targetSdkVersion)</span><br><span class="line">        versionCode = Versions.versionCode</span><br><span class="line">        versionName = Versions.versionName</span><br><span class="line"></span><br><span class="line">        testInstrumentationRunner = <span class="string">&quot;androidx.test.runner.AndroidJUnitRunner&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        getByName(BuildType.release) &#123;</span><br><span class="line">            isMinifyEnabled = <span class="literal">true</span></span><br><span class="line">            proguardFiles(getDefaultProguardFile(<span class="string">&quot;proguard-android.txt&quot;</span>), <span class="string">&quot;proguard-rules.pro&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    compileOptions &#123;</span><br><span class="line">        sourceCompatibility = JavaVersion.VERSION_1_8</span><br><span class="line">        targetCompatibility = JavaVersion.VERSION_1_8</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    implementation(fileTree(mapOf(<span class="string">&quot;dir&quot;</span> to <span class="string">&quot;libs&quot;</span>, <span class="string">&quot;include&quot;</span> to listOf(<span class="string">&quot;*.jar&quot;</span>))))</span><br><span class="line">    implementation(Dependencies.kotlinStd)</span><br><span class="line">    implementation(Dependencies.coreKTX)</span><br><span class="line">    implementation(Dependencies.constraintLayout)</span><br><span class="line">    implementation(Dependencies.appCompat)</span><br><span class="line"></span><br><span class="line">    testImplementation(Test.junit)</span><br><span class="line">    androidTestImplementation(Test.junitTest)</span><br><span class="line">    androidTestImplementation(Test.espresso)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>修改的几个注意点：</p>
+<ul>
+<li><code>kts</code>文件中大多都是函数调用，所以需要加上括号，字符串是作为参数传进去的</li>
+<li><code>project-build.gradle</code>中的<code>task</code>需要修改为新的写法</li>
+<li><code>app-build.gradle</code>中的<code>fileTree</code>需要修改为新的写法</li>
+</ul>
+<p>在上述的修改中，使用到了<code>Dependencies.appCompat</code>这种调用方式，<code>Dependencies</code>就是我们在buildSrc中定义的统一管理文件。</p>
+<h3 id="新建buildSrc模块"><a href="#新建buildSrc模块" class="headerlink" title="新建buildSrc模块"></a>新建buildSrc模块</h3><p>在Android Studio中，将目录切换为<code>Project</code>，然后新建<code>buildSrc</code>文件夹，在<code>buildSrc</code>文件夹下新建<code>build.gradle.kts</code>文件，然后填入下面的代码，点击<code>sync now</code>进行同步。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">plugins &#123;</span><br><span class="line">    `kotlin-dsl`</span><br><span class="line">&#125;</span><br><span class="line">repositories&#123;</span><br><span class="line">    jcenter()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同步完成之后，<code>buildSrc</code>就变成了和<code>app</code>一样的一个<code>module</code>。然后在<code>buildSrc</code>文件夹上右键-新建文件夹-选择<code>src/main/java</code>，接下来就可以将我们的依赖写在该文件下的文件中了。</p>
+<h3 id="新建统一依赖管理文件"><a href="#新建统一依赖管理文件" class="headerlink" title="新建统一依赖管理文件"></a>新建统一依赖管理文件</h3><p>在上述的<code>src/main/java</code>文件夹中新建Dependencies.kt文件（文件名可以任意取）</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">object</span> Dependencies &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> kotlinStd = <span class="string">&quot;org.jetbrains.kotlin:kotlin-stdlib:<span class="subst">$&#123;Versions.kotlinVersion&#125;</span>&quot;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> coreKTX = <span class="string">&quot;androidx.core:core-ktx:<span class="subst">$&#123;Versions.coreKTX&#125;</span>&quot;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> appCompat = <span class="string">&quot;androidx.appcompat:appcompat:<span class="subst">$&#123;Versions.appCompact&#125;</span>&quot;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> constraintLayout =</span><br><span class="line">        <span class="string">&quot;androidx.constraintlayout:constraintlayout:<span class="subst">$&#123;Versions.constraintLayout&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> roomRuntime = <span class="string">&quot;androidx.room:room-runtime:<span class="subst">$&#123;Versions.roomVersion&#125;</span>&quot;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> roomCompiler = <span class="string">&quot;androidx.room:room-compiler:<span class="subst">$&#123;Versions.roomVersion&#125;</span>&quot;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> roomCoroutines = <span class="string">&quot;androidx.room:room-ktx:<span class="subst">$&#123;Versions.roomVersion&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> liveData = <span class="string">&quot;androidx.lifecycle:lifecycle-viewmodel-ktx:<span class="subst">$&#123;Versions.lifeCycleVersion&#125;</span>&quot;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> viewModel = <span class="string">&quot;androidx.lifecycle:lifecycle-livedata-ktx:<span class="subst">$&#123;Versions.lifeCycleVersion&#125;</span>&quot;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> lifeCycleCompiler =</span><br><span class="line">        <span class="string">&quot;androidx.lifecycle:lifecycle-compiler:<span class="subst">$&#123;Versions.lifeCycleVersion&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> material = <span class="string">&quot;com.google.android.material:material:<span class="subst">$&#123;Versions.materialVersion&#125;</span>&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">object</span> Versions &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> compileSdkVersion = <span class="number">29</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> buildToolsVersion = <span class="string">&quot;29.0.3&quot;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> applicationId = <span class="string">&quot;com.agiao.blogtmp&quot;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> minSdkVersion = <span class="number">16</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> targetSdkVersion = <span class="number">29</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> versionCode = <span class="number">1</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> versionName = <span class="string">&quot;1.0&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> kotlinVersion = <span class="string">&quot;1.3.72&quot;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> coreKTX = <span class="string">&quot;1.3.0&quot;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> appCompact = <span class="string">&quot;1.1.0&quot;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> constraintLayout = <span class="string">&quot;2.0.0-rc1&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> roomVersion = <span class="string">&quot;2.2.5&quot;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> lifeCycleVersion = <span class="string">&quot;2.2.0&quot;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> materialVersion = <span class="string">&quot;1.1.0&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> junit = <span class="string">&quot;4.12&quot;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> junitTest = <span class="string">&quot;1.1.1&quot;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> espresso = <span class="string">&quot;3.2.0&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">object</span> Test &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> testRoom = <span class="string">&quot;androidx.room:room-testing:<span class="subst">$&#123;Versions.roomVersion&#125;</span>&quot;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> junit = <span class="string">&quot;junit:junit:<span class="subst">$&#123;Versions.junit&#125;</span>&quot;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> junitTest = <span class="string">&quot;androidx.test.ext:junit:<span class="subst">$&#123;Versions.junitTest&#125;</span>&quot;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> espresso = <span class="string">&quot;androidx.test.espresso:espresso-core:<span class="subst">$&#123;Versions.espresso&#125;</span>&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">object</span> BuildType &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> release = <span class="string">&quot;release&quot;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">val</span> debug = <span class="string">&quot;debug&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述的依赖库可以根据自己的需要调整，也可以把每个<code>object</code>都提取为单独的文件，这部分就是根据个人喜好自己调整。</p>
+<p>至此，我们的<code>build.gradle</code>就完全改造完成了。现在就可以在<code>build.gradle.kts</code>中使用Kotlin的语法进行依赖导入了，同时还能使用Kotlin的自动补全功能，更方便的管理和导入依赖了。</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">推荐文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2021/10/17/开发环境配置/" rel="bookmark">开发环境配置</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>aGiao
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://houzixiashanxiedaima.github.io/2020/08/09/build-gradle-kts-buildSrc/" title="build.gradle.kts + buildSrc管理Gradle依赖">https://houzixiashanxiedaima.github.io/2020/08/09/build-gradle-kts-buildSrc/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Android/" rel="tag"># Android</a>
+              <a href="/tags/Gradle/" rel="tag"># Gradle</a>
+              <a href="/tags/Kotlin/" rel="tag"># Kotlin</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/28/Hexo%E4%BD%BF%E7%94%A8%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/" rel="prev" title="Hexo使用本地图片">
+      <i class="fa fa-chevron-left"></i> Hexo使用本地图片
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/10/17/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="next" title="开发环境配置">
+      开发环境配置 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#build-gradle-gt-build-gradle-kts"><span class="nav-number">1.</span> <span class="nav-text">build.gradle -&gt; build.gradle.kts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%BB%BAbuildSrc%E6%A8%A1%E5%9D%97"><span class="nav-number">2.</span> <span class="nav-text">新建buildSrc模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E7%BB%9F%E4%B8%80%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">新建统一依赖管理文件</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="aGiao"
+      src="http://static.simpledesktops.com/uploads/desktops/2016/12/05/Untitled-1-03-01.png">
+  <p class="site-author-name" itemprop="name">aGiao</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 1970 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">aGiao</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">55k</span>
+</div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"Ve0rwAcn0GRin9m1krmOfrD5-MdYXbMMI","app_key":"3q7VuiLUFtdmqIwgaFHK3Ulj","server_url":null,"security":true,"betterPerformance":true};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://houzixiashanxiedaima.github.io/2020/08/09/build-gradle-kts-buildSrc/',]
+      });
+      });
+  </script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'Ve0rwAcn0GRin9m1krmOfrD5-MdYXbMMI',
+      appKey     : '3q7VuiLUFtdmqIwgaFHK3Ulj',
+      placeholder: "Feel free to comment",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
