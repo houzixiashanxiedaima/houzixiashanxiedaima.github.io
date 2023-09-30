@@ -1,0 +1,356 @@
+<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Android自定义流式布局的探索 | BLOG</title><meta name=keywords content><meta name=description content="最近在学习Android中自定义View的一些知识，为了检验成果，先来自定义一个流式布局。
+什么是流式布局？
+
+
+
+"><meta name=author content><link rel=canonical href=https://example.org/posts/android%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80%E7%9A%84%E6%8E%A2%E7%B4%A2/><link crossorigin=anonymous href=/assets/css/stylesheet.5cfc680b1eeaeef9efbced92d46c2a9e876b72ee14fba85846afc4cff9e6e6f8.css integrity="sha256-XPxoCx7q7vnvvO2S1Gwqnodrcu4U+6hYRq/Ez/nm5vg=" rel="preload stylesheet" as=style><script defer crossorigin=anonymous src=/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG+9vmJ0cTS+ovo0FeA=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=https://example.org/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://example.org/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://example.org/favicon-32x32.png><link rel=apple-touch-icon href=https://example.org/apple-touch-icon.png><link rel=mask-icon href=https://example.org/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><meta property="og:title" content="Android自定义流式布局的探索"><meta property="og:description" content="最近在学习Android中自定义View的一些知识，为了检验成果，先来自定义一个流式布局。
+什么是流式布局？
+
+
+
+"><meta property="og:type" content="article"><meta property="og:url" content="https://example.org/posts/android%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80%E7%9A%84%E6%8E%A2%E7%B4%A2/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2016-07-28T15:19:45+00:00"><meta property="article:modified_time" content="2016-07-28T15:19:45+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Android自定义流式布局的探索"><meta name=twitter:description content="最近在学习Android中自定义View的一些知识，为了检验成果，先来自定义一个流式布局。
+什么是流式布局？
+
+
+
+"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://example.org/posts/"},{"@type":"ListItem","position":2,"name":"Android自定义流式布局的探索","item":"https://example.org/posts/android%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80%E7%9A%84%E6%8E%A2%E7%B4%A2/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Android自定义流式布局的探索","name":"Android自定义流式布局的探索","description":"最近在学习Android中自定义View的一些知识，为了检验成果，先来自定义一个流式布局。\n什么是流式布局？ ","keywords":[],"articleBody":"最近在学习Android中自定义View的一些知识，为了检验成果，先来自定义一个流式布局。\n什么是流式布局？ 上面就是流式布局的示例，简单来说就是一些不同宽度的控件显示的时候根据自己的宽度和当前行剩余的宽度来决定是显示在当前行还是换行显示。\n如何实现流式布局 实现流式布局毫无疑问是需要自定义布局的，虽然Android官方给我们提供了Recyclerview中的瀑布流布局，但是这种效果却并不好，因为瀑布流的布局需要给定一个spanCount，也就是瀑布的列数。但是我们的流式布局是不清楚有多少列多少行的，因为这完全取决于我们的控件的宽度和整个流式布局的宽度。 自定义流式布局和自定义其他的一些ViewGroup的步骤基本是一致的：\n先onMeasure 后onLayout 我们先从第一步开始\n首先直接放出onMeasure的代码\nprotected void onMeasure(final int widthMeasureSpec, final int heightMeasureSpec) { //获取该ViewGroup的父布局为该ViewGroup推荐的宽高以及计算模式 int sizeWidth = MeasureSpec.getSize(widthMeasureSpec); int sizeHeight = MeasureSpec.getSize(heightMeasureSpec); int modeWidth = MeasureSpec.getMode(widthMeasureSpec); int modeHeight = MeasureSpec.getMode(heightMeasureSpec); //当该ViewGroup是wrap_content的时候，记录宽高 int layoutWidth = 0; int layoutHeight = 0; //每行的宽高，宽度永远都取最大值，高度则直接相加 int lineWidth = 0; int lineHeight = 0; //遍历childView计并算childView的宽高与margin值，然后通过计算结果来确定当 //我们的ViewGroup设置为wrap_content时ViewGroup的宽高 for (int i = 0, childCount = getChildCount(); i \u003c childCount; i++) { View childView = getChildAt(i); //通过ViewGroup的measureChild方法设置childView的宽高，执行完毕之后， //所有的childView的宽高都已经确定了。 measureChild(childView, widthMeasureSpec, heightMeasureSpec); //获取上一步中ViewGroup设置的childView的宽高 int childWidth = childView.getMeasuredWidth(); int childHeight = childView.getMeasuredHeight(); //获取childView的LayoutParams // 每个布局都有一种特殊的LayoutParams， //比如LinearLayout.LayoutParams,RelativeLayout.LayoutParams等等 MarginLayoutParams mlp = (MarginLayoutParams) childView.getLayoutParams(); //计算实际上childView的宽高(childView本身的宽高加上它的Margin值) int realChildWidth = childWidth + mlp.leftMargin + mlp.rightMargin; int realChildHeight = childHeight + mlp.topMargin + mlp.bottomMargin; //该行当前的宽度加上childView实际的宽度大于布局宽度，则换行 if (lineWidth + realChildWidth \u003e sizeWidth) { //执行换行操作 //这里layoutWidth取lineWidth和realChildWidth的最大值是因为可能会 //出现如下的情况： //上一行：= = = ==(宽度为8) //该childView：==========(宽度\u003e8) layoutWidth = Math.max(lineWidth, realChildWidth); //当前计算的总高度累加一个realChildHeight即可 layoutHeight = layoutHeight + realChildHeight; //换行之后，新行的宽度和高度需要重新计算，此处是设置为在该行的唯一一个childView的实际宽高 lineWidth = realChildWidth; lineHeight = realChildHeight; } else { //宽度未超出，可以直接相加宽度 lineWidth = lineWidth + realChildWidth; //获取最终的行高，取之前的行高和当前子View的高度 lineHeight = Math.max(lineHeight, realChildHeight); } // 如果是最后一个，需要做一些处理。 if (i == childCount - 1) { //将当前布局的宽度和最后一行的宽度相比，取最大值 layoutWidth = Math.max(lineWidth, layoutWidth); //当前布局的行高还是简单的叠加即可 layoutHeight = layoutHeight + lineHeight; } /** * Mode 一般有三种模式： * MeasureSpec.EXACTLY: 一般是在childView设置match_parent时或者是设置了具体的宽高时使用。 * MeasureSPec.AT_MOST: 一般是在childView设置wrap_content时使用 * MeasureSpec.UNSPECIFIC: childView想要多大都行，用的比较少，可能会在ScrollView的heightMode中见到。 */ // 下面就是判断childView的宽高时是如何设置的，如果是设置了具体的宽高 //或者是match_parent，那就直接使用父布局给出的大小 // 否则就使用我们自己测量出来的宽高 setMeasuredDimension(modeWidth == MeasureSpec.EXACTLY ? sizeWidth : layoutWidth, modeHeight == MeasureSpec.EXACTLY ? sizeHeight : layoutHeight); } } 上面的代码注释已经非常的清楚，在onMeasure中的步骤也非常的清晰：\n获取父布局对流式布局的测量宽高和测量模式。 遍历流式布局中的childView。 测量并设置childView的宽高，执行这一步之后childView的宽高就已经确定 获取测量的childView的宽高和Layoutparams 计算实际上的childView宽高（包括margin） 判断childView的实际宽高+当前行的宽度是否超出流式布局的宽度 若超过，则换行[注1] 若未超过，则宽度累加，行高取当前行高与childView高度的最大值 最后一行的时候进行一些处理，获取最终的流式布局的宽和高 onMeasure基本上就是这些了，接下来就是onLayout，先放代码：\nprotected void onLayout(final boolean changed, final int l, final int t, final int r, final int b) { //获取该布局在onMeasure函数中测量的宽度 int flowWidth = getWidth(); //通过lineWidth和lineHeight来确定childView的位置 int lineWidth = 0; int lineHeight = 0; //记录childView的left和top来确定位置 int childLeft = 0; int childTop = 0; //遍历子控件，记录每个子view的位置 for (int i = 0, childCount = getChildCount(); i \u003c childCount; i++) { View childView = getChildAt(i); //获取到测量的宽和高 int childWidth = childView.getMeasuredWidth(); int childHeight = childView.getMeasuredHeight(); //因为childView可能设置margin，这里要加上margin的距离 MarginLayoutParams mlp = (MarginLayoutParams) childView.getLayoutParams(); //判断整个childView所占的空间宽度+当前行的宽度是否大于父布局也就是我们ViewGroup的宽度 //若大于就进行换行处理 if (lineWidth + mlp.leftMargin + childWidth + mlp.rightMargin \u003e flowWidth) { //换行之后，left为最左边的值 childLeft = 0; //换行之后，top为top+当前的行高 childTop = childTop + lineHeight; //换行之后，当前行高为换行前的行高+childView的TopMargin+childView+BottomMargin lineHeight = (mlp.topMargin + childHeight + mlp.bottomMargin); //换行之后，当前行宽度为0 lineWidth = 0; } //设置childView的上下左右坐标，统一处理margin int left = childLeft + mlp.leftMargin; int top = childTop + mlp.topMargin; int right = left + childWidth; int bottom = top + childHeight; childView.layout(left, top, right, bottom); //记录当前行的宽度 lineWidth = lineWidth + (mlp.leftMargin + childWidth + mlp.rightMargin); childLeft = lineWidth; } } onLayoutd的代码也非常的清晰：\n遍历childView 获取childView的宽高，并判断是否换行 若换行，则下一个childView的Left和下一行的width重置，行高为当前childView的实际高度，childTop则累加行高。 若不换行，宽度累加，行高不变。 通过上面的onMeasure和onLayout之后，整个流式布局就已经基本完成，接下来我们设置布局文件：\n\u003c?xml version=\"1.0\" encoding=\"utf-8\"?\u003e ","wordCount":"584","inLanguage":"en","datePublished":"2016-07-28T15:19:45Z","dateModified":"2016-07-28T15:19:45Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://example.org/posts/android%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80%E7%9A%84%E6%8E%A2%E7%B4%A2/"},"publisher":{"@type":"Organization","name":"BLOG","logo":{"@type":"ImageObject","url":"https://example.org/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><a href=https://example.org/ accesskey=h title="BLOG (Alt + H)">BLOG</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://example.org/ title=BLOG><span>HOME</span></a></li><li><a href=https://example.org/archives/ title=Archive><span>ARCHIVE</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://example.org/>Home</a>&nbsp;»&nbsp;<a href=https://example.org/posts/>Posts</a></div><h1 class=post-title>Android自定义流式布局的探索</h1><div class=post-meta><span title='2016-07-28 15:19:45 +0000 UTC'>July 28, 2016</span>&nbsp;·&nbsp;3 min</div></header><div class=toc><details open><summary accesskey=c title="(Alt + C)"><span class=details>Table of Contents</span></summary><div class=inner><ul><li><a href=#%e4%bb%80%e4%b9%88%e6%98%af%e6%b5%81%e5%bc%8f%e5%b8%83%e5%b1%80 aria-label=什么是流式布局？>什么是流式布局？</a></li><li><a href=#%e5%a6%82%e4%bd%95%e5%ae%9e%e7%8e%b0%e6%b5%81%e5%bc%8f%e5%b8%83%e5%b1%80 aria-label=如何实现流式布局>如何实现流式布局</a></li></ul></div></details></div><div class=post-content><p>最近在学习Android中自定义View的一些知识，为了检验成果，先来自定义一个流式布局。</p><h3 id=什么是流式布局>什么是流式布局？<a hidden class=anchor aria-hidden=true href=#什么是流式布局>#</a></h3><p><img loading=lazy src=http://upload-images.jianshu.io/upload_images/2524102-a4edfa75da430455.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt=流式布局示例1></p><p><img loading=lazy src=http://upload-images.jianshu.io/upload_images/2524102-9b3989321f3e5db6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt=流式布局示例2.png></p><p>上面就是流式布局的示例，简单来说就是一些不同宽度的控件显示的时候根据自己的宽度和当前行剩余的宽度来决定是显示在当前行还是换行显示。</p><h3 id=如何实现流式布局>如何实现流式布局<a hidden class=anchor aria-hidden=true href=#如何实现流式布局>#</a></h3><p>实现流式布局毫无疑问是需要自定义布局的，虽然Android官方给我们提供了Recyclerview中的瀑布流布局，但是这种效果却并不好，因为瀑布流的布局需要给定一个spanCount，也就是瀑布的列数。但是我们的流式布局是不清楚有多少列多少行的，因为这完全取决于我们的控件的宽度和整个流式布局的宽度。
+自定义流式布局和自定义其他的一些ViewGroup的步骤基本是一致的：</p><ol><li>先onMeasure</li><li>后onLayout</li></ol><p>我们先从第一步开始</p><p>首先直接放出onMeasure的代码</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Java data-lang=Java><span style=display:flex><span><span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>onMeasure</span><span style=color:#f92672>(</span><span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> widthMeasureSpec<span style=color:#f92672>,</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> heightMeasureSpec<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>      <span style=color:#75715e>//获取该ViewGroup的父布局为该ViewGroup推荐的宽高以及计算模式
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>      <span style=color:#66d9ef>int</span> sizeWidth <span style=color:#f92672>=</span> MeasureSpec<span style=color:#f92672>.</span><span style=color:#a6e22e>getSize</span><span style=color:#f92672>(</span>widthMeasureSpec<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>int</span> sizeHeight <span style=color:#f92672>=</span> MeasureSpec<span style=color:#f92672>.</span><span style=color:#a6e22e>getSize</span><span style=color:#f92672>(</span>heightMeasureSpec<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>int</span> modeWidth <span style=color:#f92672>=</span> MeasureSpec<span style=color:#f92672>.</span><span style=color:#a6e22e>getMode</span><span style=color:#f92672>(</span>widthMeasureSpec<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>int</span> modeHeight <span style=color:#f92672>=</span> MeasureSpec<span style=color:#f92672>.</span><span style=color:#a6e22e>getMode</span><span style=color:#f92672>(</span>heightMeasureSpec<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>      <span style=color:#75715e>//当该ViewGroup是wrap_content的时候，记录宽高
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>      <span style=color:#66d9ef>int</span> layoutWidth <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>int</span> layoutHeight <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>      <span style=color:#75715e>//每行的宽高，宽度永远都取最大值，高度则直接相加
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>      <span style=color:#66d9ef>int</span> lineWidth <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>int</span> lineHeight <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>      <span style=color:#75715e>//遍历childView计并算childView的宽高与margin值，然后通过计算结果来确定当
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>      <span style=color:#75715e>//我们的ViewGroup设置为wrap_content时ViewGroup的宽高
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span><span style=color:#f92672>,</span> childCount <span style=color:#f92672>=</span> getChildCount<span style=color:#f92672>();</span> i <span style=color:#f92672>&lt;</span> childCount<span style=color:#f92672>;</span> i<span style=color:#f92672>++)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>          View childView <span style=color:#f92672>=</span> getChildAt<span style=color:#f92672>(</span>i<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>          <span style=color:#75715e>//通过ViewGroup的measureChild方法设置childView的宽高，执行完毕之后，
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>          <span style=color:#75715e>//所有的childView的宽高都已经确定了。
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>          measureChild<span style=color:#f92672>(</span>childView<span style=color:#f92672>,</span> widthMeasureSpec<span style=color:#f92672>,</span> heightMeasureSpec<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>          <span style=color:#75715e>//获取上一步中ViewGroup设置的childView的宽高
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>          <span style=color:#66d9ef>int</span> childWidth <span style=color:#f92672>=</span> childView<span style=color:#f92672>.</span><span style=color:#a6e22e>getMeasuredWidth</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>          <span style=color:#66d9ef>int</span> childHeight <span style=color:#f92672>=</span> childView<span style=color:#f92672>.</span><span style=color:#a6e22e>getMeasuredHeight</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>          <span style=color:#75715e>//获取childView的LayoutParams
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>          <span style=color:#75715e>// 每个布局都有一种特殊的LayoutParams，
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>          <span style=color:#75715e>//比如LinearLayout.LayoutParams,RelativeLayout.LayoutParams等等
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>          MarginLayoutParams mlp <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>MarginLayoutParams<span style=color:#f92672>)</span> childView<span style=color:#f92672>.</span><span style=color:#a6e22e>getLayoutParams</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>          <span style=color:#75715e>//计算实际上childView的宽高(childView本身的宽高加上它的Margin值)
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>          <span style=color:#66d9ef>int</span> realChildWidth <span style=color:#f92672>=</span> childWidth <span style=color:#f92672>+</span> mlp<span style=color:#f92672>.</span><span style=color:#a6e22e>leftMargin</span> <span style=color:#f92672>+</span> mlp<span style=color:#f92672>.</span><span style=color:#a6e22e>rightMargin</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>          <span style=color:#66d9ef>int</span> realChildHeight <span style=color:#f92672>=</span> childHeight <span style=color:#f92672>+</span> mlp<span style=color:#f92672>.</span><span style=color:#a6e22e>topMargin</span> <span style=color:#f92672>+</span> mlp<span style=color:#f92672>.</span><span style=color:#a6e22e>bottomMargin</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>          <span style=color:#75715e>//该行当前的宽度加上childView实际的宽度大于布局宽度，则换行
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>          <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>lineWidth <span style=color:#f92672>+</span> realChildWidth <span style=color:#f92672>&gt;</span> sizeWidth<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>              <span style=color:#75715e>//执行换行操作
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>              <span style=color:#75715e>//这里layoutWidth取lineWidth和realChildWidth的最大值是因为可能会
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>              <span style=color:#75715e>//出现如下的情况：
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>              <span style=color:#75715e>//上一行：= = = ==(宽度为8)
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>              <span style=color:#75715e>//该childView：==========(宽度&gt;8)
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>              layoutWidth <span style=color:#f92672>=</span> Math<span style=color:#f92672>.</span><span style=color:#a6e22e>max</span><span style=color:#f92672>(</span>lineWidth<span style=color:#f92672>,</span> realChildWidth<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>              <span style=color:#75715e>//当前计算的总高度累加一个realChildHeight即可
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>              layoutHeight <span style=color:#f92672>=</span> layoutHeight <span style=color:#f92672>+</span> realChildHeight<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>              <span style=color:#75715e>//换行之后，新行的宽度和高度需要重新计算，此处是设置为在该行的唯一一个childView的实际宽高
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>              lineWidth <span style=color:#f92672>=</span> realChildWidth<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>              lineHeight <span style=color:#f92672>=</span> realChildHeight<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>              <span style=color:#75715e>//宽度未超出，可以直接相加宽度
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>              lineWidth <span style=color:#f92672>=</span> lineWidth <span style=color:#f92672>+</span> realChildWidth<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>              <span style=color:#75715e>//获取最终的行高，取之前的行高和当前子View的高度
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>              lineHeight <span style=color:#f92672>=</span> Math<span style=color:#f92672>.</span><span style=color:#a6e22e>max</span><span style=color:#f92672>(</span>lineHeight<span style=color:#f92672>,</span> realChildHeight<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>          <span style=color:#75715e>// 如果是最后一个，需要做一些处理。
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>          <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>i <span style=color:#f92672>==</span> childCount <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>              <span style=color:#75715e>//将当前布局的宽度和最后一行的宽度相比，取最大值
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>              layoutWidth <span style=color:#f92672>=</span> Math<span style=color:#f92672>.</span><span style=color:#a6e22e>max</span><span style=color:#f92672>(</span>lineWidth<span style=color:#f92672>,</span> layoutWidth<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>              <span style=color:#75715e>//当前布局的行高还是简单的叠加即可
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>              layoutHeight <span style=color:#f92672>=</span> layoutHeight <span style=color:#f92672>+</span> lineHeight<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>          <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>           *  Mode 一般有三种模式：
+</span></span></span><span style=display:flex><span><span style=color:#75715e>           *  MeasureSpec.EXACTLY: 一般是在childView设置match_parent时或者是设置了具体的宽高时使用。
+</span></span></span><span style=display:flex><span><span style=color:#75715e>           *  MeasureSPec.AT_MOST: 一般是在childView设置wrap_content时使用
+</span></span></span><span style=display:flex><span><span style=color:#75715e>           *  MeasureSpec.UNSPECIFIC: childView想要多大都行，用的比较少，可能会在ScrollView的heightMode中见到。
+</span></span></span><span style=display:flex><span><span style=color:#75715e>           */</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>          <span style=color:#75715e>// 下面就是判断childView的宽高时是如何设置的，如果是设置了具体的宽高
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>          <span style=color:#75715e>//或者是match_parent，那就直接使用父布局给出的大小
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>          <span style=color:#75715e>// 否则就使用我们自己测量出来的宽高
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>          setMeasuredDimension<span style=color:#f92672>(</span>modeWidth <span style=color:#f92672>==</span> MeasureSpec<span style=color:#f92672>.</span><span style=color:#a6e22e>EXACTLY</span> <span style=color:#f92672>?</span> sizeWidth <span style=color:#f92672>:</span> layoutWidth<span style=color:#f92672>,</span>
+</span></span><span style=display:flex><span>                  modeHeight <span style=color:#f92672>==</span> MeasureSpec<span style=color:#f92672>.</span><span style=color:#a6e22e>EXACTLY</span> <span style=color:#f92672>?</span> sizeHeight <span style=color:#f92672>:</span> layoutHeight<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>上面的代码注释已经非常的清楚，在onMeasure中的步骤也非常的清晰：</p><ol><li>获取父布局对流式布局的测量宽高和测量模式。</li><li>遍历流式布局中的childView。<ul><li>测量并设置childView的宽高，执行这一步之后childView的宽高就已经确定</li><li>获取测量的childView的宽高和Layoutparams</li><li>计算实际上的childView宽高（包括margin）</li><li>判断childView的实际宽高+当前行的宽度是否超出流式布局的宽度<ul><li>若超过，则换行[注1]</li><li>若未超过，则宽度累加，行高取当前行高与childView高度的最大值</li></ul></li></ul></li></ol><ul><li>最后一行的时候进行一些处理，获取最终的流式布局的宽和高</li></ul><p>onMeasure基本上就是这些了，接下来就是onLayout，先放代码：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Java data-lang=Java><span style=display:flex><span><span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>onLayout</span><span style=color:#f92672>(</span><span style=color:#66d9ef>final</span> <span style=color:#66d9ef>boolean</span> changed<span style=color:#f92672>,</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> l<span style=color:#f92672>,</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> t<span style=color:#f92672>,</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> r<span style=color:#f92672>,</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> b<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>       <span style=color:#75715e>//获取该布局在onMeasure函数中测量的宽度
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>       <span style=color:#66d9ef>int</span> flowWidth <span style=color:#f92672>=</span> getWidth<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>       <span style=color:#75715e>//通过lineWidth和lineHeight来确定childView的位置
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>       <span style=color:#66d9ef>int</span> lineWidth <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>       <span style=color:#66d9ef>int</span> lineHeight <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>       <span style=color:#75715e>//记录childView的left和top来确定位置
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>       <span style=color:#66d9ef>int</span> childLeft <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>       <span style=color:#66d9ef>int</span> childTop <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>       <span style=color:#75715e>//遍历子控件，记录每个子view的位置
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>       <span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span><span style=color:#f92672>,</span> childCount <span style=color:#f92672>=</span> getChildCount<span style=color:#f92672>();</span> i <span style=color:#f92672>&lt;</span> childCount<span style=color:#f92672>;</span> i<span style=color:#f92672>++)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>           View childView <span style=color:#f92672>=</span> getChildAt<span style=color:#f92672>(</span>i<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>           <span style=color:#75715e>//获取到测量的宽和高
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>           <span style=color:#66d9ef>int</span> childWidth <span style=color:#f92672>=</span> childView<span style=color:#f92672>.</span><span style=color:#a6e22e>getMeasuredWidth</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>           <span style=color:#66d9ef>int</span> childHeight <span style=color:#f92672>=</span> childView<span style=color:#f92672>.</span><span style=color:#a6e22e>getMeasuredHeight</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>           <span style=color:#75715e>//因为childView可能设置margin，这里要加上margin的距离
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>           MarginLayoutParams mlp <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>MarginLayoutParams<span style=color:#f92672>)</span> childView<span style=color:#f92672>.</span><span style=color:#a6e22e>getLayoutParams</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>           <span style=color:#75715e>//判断整个childView所占的空间宽度+当前行的宽度是否大于父布局也就是我们ViewGroup的宽度
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>           <span style=color:#75715e>//若大于就进行换行处理
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>           <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>lineWidth <span style=color:#f92672>+</span> mlp<span style=color:#f92672>.</span><span style=color:#a6e22e>leftMargin</span> <span style=color:#f92672>+</span> childWidth <span style=color:#f92672>+</span> mlp<span style=color:#f92672>.</span><span style=color:#a6e22e>rightMargin</span> <span style=color:#f92672>&gt;</span> flowWidth<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>               <span style=color:#75715e>//换行之后，left为最左边的值
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>               childLeft <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>               <span style=color:#75715e>//换行之后，top为top+当前的行高
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>               childTop <span style=color:#f92672>=</span> childTop <span style=color:#f92672>+</span> lineHeight<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>               <span style=color:#75715e>//换行之后，当前行高为换行前的行高+childView的TopMargin+childView+BottomMargin
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>               lineHeight <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>mlp<span style=color:#f92672>.</span><span style=color:#a6e22e>topMargin</span> <span style=color:#f92672>+</span> childHeight <span style=color:#f92672>+</span> mlp<span style=color:#f92672>.</span><span style=color:#a6e22e>bottomMargin</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>               <span style=color:#75715e>//换行之后，当前行宽度为0
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>               lineWidth <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>           <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>           <span style=color:#75715e>//设置childView的上下左右坐标，统一处理margin
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>           <span style=color:#66d9ef>int</span> left <span style=color:#f92672>=</span> childLeft <span style=color:#f92672>+</span> mlp<span style=color:#f92672>.</span><span style=color:#a6e22e>leftMargin</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>           <span style=color:#66d9ef>int</span> top <span style=color:#f92672>=</span> childTop <span style=color:#f92672>+</span> mlp<span style=color:#f92672>.</span><span style=color:#a6e22e>topMargin</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>           <span style=color:#66d9ef>int</span> right <span style=color:#f92672>=</span> left <span style=color:#f92672>+</span> childWidth<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>           <span style=color:#66d9ef>int</span> bottom <span style=color:#f92672>=</span> top <span style=color:#f92672>+</span> childHeight<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>           childView<span style=color:#f92672>.</span><span style=color:#a6e22e>layout</span><span style=color:#f92672>(</span>left<span style=color:#f92672>,</span> top<span style=color:#f92672>,</span> right<span style=color:#f92672>,</span> bottom<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>           <span style=color:#75715e>//记录当前行的宽度
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>           lineWidth <span style=color:#f92672>=</span> lineWidth <span style=color:#f92672>+</span> <span style=color:#f92672>(</span>mlp<span style=color:#f92672>.</span><span style=color:#a6e22e>leftMargin</span> <span style=color:#f92672>+</span> childWidth <span style=color:#f92672>+</span> mlp<span style=color:#f92672>.</span><span style=color:#a6e22e>rightMargin</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>           childLeft <span style=color:#f92672>=</span> lineWidth<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>       <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>   <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>onLayoutd的代码也非常的清晰：</p><ol><li>遍历childView</li><li>获取childView的宽高，并判断是否换行</li></ol><ul><li>若换行，则下一个childView的Left和下一行的width重置，行高为当前childView的实际高度，childTop则累加行高。</li><li>若不换行，宽度累加，行高不变。</li></ul><p>通过上面的onMeasure和onLayout之后，整个流式布局就已经基本完成，接下来我们设置布局文件：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=display:flex><span> <span style=color:#75715e>&lt;!--  布局文件--&gt;</span>
+</span></span><span style=display:flex><span> <span style=color:#75715e>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>&lt;RelativeLayout</span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>xmlns:android=</span><span style=color:#e6db74>&#34;http://schemas.android.com/apk/res/android&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>xmlns:tools=</span><span style=color:#e6db74>&#34;http://schemas.android.com/tools&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>xmlns:app=</span><span style=color:#e6db74>&#34;http://schemas.android.com/apk/res-auto&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/content_flow&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:layout_width=</span><span style=color:#e6db74>&#34;match_parent&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:layout_height=</span><span style=color:#e6db74>&#34;match_parent&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>app:layout_behavior=</span><span style=color:#e6db74>&#34;@string/appbar_scrolling_view_behavior&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>tools:showIn=</span><span style=color:#e6db74>&#34;@layout/activity_flow&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>tools:context=</span><span style=color:#e6db74>&#34;stephen.com.bugstest.FlowActivity&#34;</span><span style=color:#f92672>&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;stephen.com.bugstest.customwidgets.FlowLayout</span>
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/flow_layout&#34;</span>
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:layout_width=</span><span style=color:#e6db74>&#34;match_parent&#34;</span>
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:layout_height=</span><span style=color:#e6db74>&#34;match_parent&#34;</span><span style=color:#f92672>&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;Welcome&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;IT工程师&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;学习ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;恋爱ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;挣钱ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;努力ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;I thick i can&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;Welcome&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;IT工程师&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;学习ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;恋爱ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;挣钱ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;努力ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;I thick i can&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;Welcome&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;IT工程师&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;学习ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;恋爱ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;挣钱ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;努力ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;I thick i can&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;Welcome&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;学习ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;恋爱ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;挣钱ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;努力ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;I thick i can&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;Welcome&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;IT工程师&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;学习ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;恋爱ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;挣钱ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;努力ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;I thick i can&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;Welcome&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;IT工程师&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;学习ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;恋爱ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;挣钱ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;努力ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;I thick i can&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;Welcome&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;IT工程师&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;学习ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;恋爱ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;挣钱ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;努力ing&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>style=</span><span style=color:#e6db74>&#34;@style/text_flag_01&#34;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:text=</span><span style=color:#e6db74>&#34;I thick i can&#34;</span><span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;/stephen.com.bugstest.customwidgets.FlowLayout&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>&lt;/RelativeLayout&gt;</span>
+</span></span></code></pre></div><p>最终效果：
+<img loading=lazy src=http://upload-images.jianshu.io/upload_images/2524102-ba18794a67eec0ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt=最终效果图.png></p><p>从上面的图中我们可以看到，每一行都是根据宽度自动换行，最终形成了流式布局。</p><p>在上面的说明中，我标注了一个注[1]，这里具体来说一下：
+在实际的编码和测试过程中，我发现如果我们的childView宽度大于本身整个流式布局的宽度，那么整个流式布局就被破坏了。直接上图看看吧：
+<img loading=lazy src=http://upload-images.jianshu.io/upload_images/2524102-da6b6c9312731b6c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt=情况1.png></p><p>这种情况是只有这个childView的这一行的行距出现了问题。</p><p><img loading=lazy src=http://upload-images.jianshu.io/upload_images/2524102-33b1287cfc34db14.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt=情况2.png></p><p>这种情况看起来好像是正常的，但是实际上是从这个childView之后的所有行高都变大了。</p><p>上面这两种情况的出现对应着代码中有一些微小的改动，在这里就不放出来了。针对上面的这两种情况，都尝试过解决办法，但是都失败了，可能是因为我们在onLayout中使用了行高来确定上下两行的间隔距离，而这个childView的行高要特殊一些，所以就导致出现这个问题。但是这个小问题也不用太在意，因为我们的流式布局基本上是不会碰到一个childView的宽度比整个布局的宽度还宽的。</p></div><footer class=post-footer><ul class=post-tags></ul><nav class=paginav><a class=prev href=https://example.org/posts/android%E6%B8%B8%E6%88%8F%E6%89%8B%E6%9F%84%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95%E4%B8%80/><span class=title>« Prev</span><br><span>Android游戏手柄开发记录（一）</span></a>
+<a class=next href=https://example.org/posts/drawerlayoutwrite-oncerun-everywhere/><span class=title>Next »</span><br><span>DrawerLayout：Write-Once，Run-EveryWhere</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2023 <a href=https://example.org/>BLOG</a></span>
+<span>Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></a><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="copy";function s(){t.innerHTML="copied!",setTimeout(()=>{t.innerHTML="copy"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>
