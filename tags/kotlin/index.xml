@@ -1,14 +1,30 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Kotlin on BLOG</title><link>https://example.org/tags/kotlin/</link><description>Recent content in Kotlin on BLOG</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 09 Aug 2020 11:31:28 +0000</lastBuildDate><atom:link href="https://example.org/tags/kotlin/index.xml" rel="self" type="application/rss+xml"/><item><title>build.gradle.kts + buildSrc管理Gradle依赖</title><link>https://example.org/posts/build-gradle-kts-buildsrc/</link><pubDate>Sun, 09 Aug 2020 11:31:28 +0000</pubDate><guid>https://example.org/posts/build-gradle-kts-buildsrc/</guid><description>在Android开发过程中，经常需要管理Gradle的依赖，但是传统的Gradle管理方式有几个不好的地方
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Kotlin on BLOG</title>
+    <link>https://houzixiashanxiedaima.github.io/tags/kotlin/</link>
+    <description>Recent content in Kotlin on BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 09 Aug 2020 11:31:28 +0000</lastBuildDate><atom:link href="https://houzixiashanxiedaima.github.io/tags/kotlin/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>build.gradle.kts &#43; buildSrc管理Gradle依赖</title>
+      <link>https://houzixiashanxiedaima.github.io/posts/build-gradle-kts-buildsrc/</link>
+      <pubDate>Sun, 09 Aug 2020 11:31:28 +0000</pubDate>
+      
+      <guid>https://houzixiashanxiedaima.github.io/posts/build-gradle-kts-buildsrc/</guid>
+      <description>在Android开发过程中，经常需要管理Gradle的依赖，但是传统的Gradle管理方式有几个不好的地方
 对于多个module支持不太好，无法共用 build.gradle文件中无法使用自动补全 如果某个库在多module中引用，需要改动多个地方 …… 虽然Google官方推荐使用ext的形式统一管理，但是对于现在大家使用Kotlin越来越多的情况下，是否能够使用Kotlin一门语言统一Android开发。
 今天就给大家介绍build.gradle.kts + buildSrc的方式来管理Gradle依赖，这种方式管理Gradle依赖，能够利用Kotlin语言的自动补全，让我们更方便地书写代码。接下来我们就一步步的将build.gradle转化为build.gradle.kts
 build.gradle -&amp;gt; build.gradle.kts 修改文件名为build.gradle.kts
 替换单引号为双引号
-在gradle语法中，可以用单引号'和双引号&amp;quot;来表示字符串，但是在build.gradle.kts中只能使用双引号表示字符串，所以我们要做的第一步就是将build.gradle文件中所有的单引号转换为双引号，这一步使用Android Studio自带的替换功能即可。
+在gradle语法中，可以用单引号&#39;和双引号&amp;quot;来表示字符串，但是在build.gradle.kts中只能使用双引号表示字符串，所以我们要做的第一步就是将build.gradle文件中所有的单引号转换为双引号，这一步使用Android Studio自带的替换功能即可。
 在文件中按下快捷键Ctrl+R，然后输入要查找的单引号，再输入要替换的双引号，点击Replace all，替换完成。
 修改gradle语法为kts语法
 setting.gradle
 //修改前 include &amp;#39;:app&amp;#39; rootProject.name = &amp;#34;BlogTmp&amp;#34; //修改后 include(&amp;#34;:app&amp;#34;) rootProject.name = &amp;#34;BlogTmp&amp;#34; build.gradle(project)
-//修改前 // Top-level build file where you can add configuration options common to all sub-projects/modules. buildscript { ext.kotlin_version = &amp;#34;1.3.72&amp;#34; repositories { google() jcenter() } dependencies { classpath &amp;#34;com.android.tools.build:gradle:4.0.1&amp;#34; classpath &amp;#34;org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version&amp;#34; // NOTE: Do not place your application dependencies here; they belong // in the individual module build.</description><content:encoded><![CDATA[<p>在Android开发过程中，经常需要管理Gradle的依赖，但是传统的Gradle管理方式有几个不好的地方</p>
+//修改前 // Top-level build file where you can add configuration options common to all sub-projects/modules. buildscript { ext.kotlin_version = &amp;#34;1.3.72&amp;#34; repositories { google() jcenter() } dependencies { classpath &amp;#34;com.android.tools.build:gradle:4.0.1&amp;#34; classpath &amp;#34;org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version&amp;#34; // NOTE: Do not place your application dependencies here; they belong // in the individual module build.</description>
+      <content:encoded><![CDATA[<p>在Android开发过程中，经常需要管理Gradle的依赖，但是传统的Gradle管理方式有几个不好的地方</p>
 <ul>
 <li>对于多个module支持不太好，无法共用</li>
 <li>build.gradle文件中无法使用自动补全</li>
@@ -257,4 +273,8 @@ setting.gradle
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>上述的依赖库可以根据自己的需要调整，也可以把每个<code>object</code>都提取为单独的文件，这部分就是根据个人喜好自己调整。</p>
 <p>至此，我们的<code>build.gradle</code>就完全改造完成了。现在就可以在<code>build.gradle.kts</code>中使用Kotlin的语法进行依赖导入了，同时还能使用Kotlin的自动补全功能，更方便的管理和导入依赖了。</p>
-]]></content:encoded></item></channel></rss>
+]]></content:encoded>
+    </item>
+    
+  </channel>
+</rss>

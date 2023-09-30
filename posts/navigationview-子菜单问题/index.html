@@ -1,128 +1,502 @@
-<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>NavigationView-子菜单问题 | BLOG</title><meta name=keywords content><meta name=description content="在Android 5.0之后，Google推出了Material Design兼容库，在Material Design的兼容库中，有个用的比较多的控件就是NavigationView。在我们平时使用过程中，对于NavigationView的一些小细节可能也并没有过多的关注，所以就导致我们在遇到特殊需求的时候无从下手，那么在这里我就简单记录一下使用NavigationView的一些小坑，暂时可能也并没有遇到很多的坑，如果以后遇到的话会不定时更新。"><meta name=author content><link rel=canonical href=https://example.org/posts/navigationview-%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/><link crossorigin=anonymous href=/assets/css/stylesheet.5cfc680b1eeaeef9efbced92d46c2a9e876b72ee14fba85846afc4cff9e6e6f8.css integrity="sha256-XPxoCx7q7vnvvO2S1Gwqnodrcu4U+6hYRq/Ez/nm5vg=" rel="preload stylesheet" as=style><script defer crossorigin=anonymous src=/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG+9vmJ0cTS+ovo0FeA=" onload=hljs.initHighlightingOnLoad()></script>
-<link rel=icon href=https://example.org/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://example.org/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://example.org/favicon-32x32.png><link rel=apple-touch-icon href=https://example.org/apple-touch-icon.png><link rel=mask-icon href=https://example.org/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><meta property="og:title" content="NavigationView-子菜单问题"><meta property="og:description" content="在Android 5.0之后，Google推出了Material Design兼容库，在Material Design的兼容库中，有个用的比较多的控件就是NavigationView。在我们平时使用过程中，对于NavigationView的一些小细节可能也并没有过多的关注，所以就导致我们在遇到特殊需求的时候无从下手，那么在这里我就简单记录一下使用NavigationView的一些小坑，暂时可能也并没有遇到很多的坑，如果以后遇到的话会不定时更新。"><meta property="og:type" content="article"><meta property="og:url" content="https://example.org/posts/navigationview-%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2016-07-28T15:19:45+00:00"><meta property="article:modified_time" content="2016-07-28T15:19:45+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="NavigationView-子菜单问题"><meta name=twitter:description content="在Android 5.0之后，Google推出了Material Design兼容库，在Material Design的兼容库中，有个用的比较多的控件就是NavigationView。在我们平时使用过程中，对于NavigationView的一些小细节可能也并没有过多的关注，所以就导致我们在遇到特殊需求的时候无从下手，那么在这里我就简单记录一下使用NavigationView的一些小坑，暂时可能也并没有遇到很多的坑，如果以后遇到的话会不定时更新。"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://example.org/posts/"},{"@type":"ListItem","position":2,"name":"NavigationView-子菜单问题","item":"https://example.org/posts/navigationview-%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"NavigationView-子菜单问题","name":"NavigationView-子菜单问题","description":"在Android 5.0之后，Google推出了Material Design兼容库，在Material Design的兼容库中，有个用的比较多的控件就是NavigationView。在我们平时使用过程中，对于NavigationView的一些小细节可能也并没有过多的关注，所以就导致我们在遇到特殊需求的时候无从下手，那么在这里我就简单记录一下使用NavigationView的一些小坑，暂时可能也并没有遇到很多的坑，如果以后遇到的话会不定时更新。\n","keywords":[],"articleBody":"在Android 5.0之后，Google推出了Material Design兼容库，在Material Design的兼容库中，有个用的比较多的控件就是NavigationView。在我们平时使用过程中，对于NavigationView的一些小细节可能也并没有过多的关注，所以就导致我们在遇到特殊需求的时候无从下手，那么在这里我就简单记录一下使用NavigationView的一些小坑，暂时可能也并没有遇到很多的坑，如果以后遇到的话会不定时更新。\nNavigationView基本使用 有很多人对于NavigationView的基本使用还是比较了解的， 那么我这里推荐一种非常偷懒的方法，就是我们在Android Studio中新建Activity时可以直接进行如下操作：\n在选择了Navigation Drawer Activity之后会出现如下界面：\n然后点击Finish就可以完成一个最基础的带有NavigationView的Activity创建，创建之后就可以在原有的基础上进行修改了，这样也是非常的方便。\nNavigationView Menu的设置 Menu的第一种布局设置 最基本的Menu的设置就是每行一个项目。在menu中的代码是这样的：\n\u003c?xml version=\"1.0\" encoding=\"utf-8\"?\u003e ","wordCount":"155","inLanguage":"en","datePublished":"2016-07-28T15:19:45Z","dateModified":"2016-07-28T15:19:45Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://example.org/posts/navigationview-%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/"},"publisher":{"@type":"Organization","name":"BLOG","logo":{"@type":"ImageObject","url":"https://example.org/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><a href=https://example.org/ accesskey=h title="BLOG (Alt + H)">BLOG</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://example.org/ title=BLOG><span>HOME</span></a></li><li><a href=https://example.org/archives/ title=Archive><span>ARCHIVE</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://example.org/>Home</a>&nbsp;»&nbsp;<a href=https://example.org/posts/>Posts</a></div><h1 class=post-title>NavigationView-子菜单问题</h1><div class=post-meta><span title='2016-07-28 15:19:45 +0000 UTC'>July 28, 2016</span>&nbsp;·&nbsp;1 min</div></header><div class=toc><details open><summary accesskey=c title="(Alt + C)"><span class=details>Table of Contents</span></summary><div class=inner><ul><li><a href=#navigationview%e5%9f%ba%e6%9c%ac%e4%bd%bf%e7%94%a8 aria-label=NavigationView基本使用>NavigationView基本使用</a></li><li><a href=#navigationview-menu%e7%9a%84%e8%ae%be%e7%bd%ae aria-label="NavigationView Menu的设置">NavigationView Menu的设置</a><ul><li><a href=#menu%e7%9a%84%e7%ac%ac%e4%b8%80%e7%a7%8d%e5%b8%83%e5%b1%80%e8%ae%be%e7%bd%ae aria-label=Menu的第一种布局设置>Menu的第一种布局设置</a></li><li><a href=#menu%e7%9a%84%e7%ac%ac%e4%ba%8c%e7%a7%8d%e5%b8%83%e5%b1%80%e8%ae%be%e7%bd%ae aria-label=Menu的第二种布局设置>Menu的第二种布局设置</a></li><li><a href=#menu%e7%9a%84%e7%ac%ac%e4%b8%89%e7%a7%8d%e5%b8%83%e5%b1%80%e8%ae%be%e7%bd%ae aria-label=Menu的第三种布局设置>Menu的第三种布局设置</a></li></ul></li></ul></div></details></div><div class=post-content><p>在Android 5.0之后，Google推出了Material Design兼容库，在Material Design的兼容库中，有个用的比较多的控件就是<code>NavigationView</code>。在我们平时使用过程中，对于<code>NavigationView</code>的一些小细节可能也并没有过多的关注，所以就导致我们在遇到特殊需求的时候无从下手，那么在这里我就简单记录一下使用<code>NavigationView</code>的一些小坑，暂时可能也并没有遇到很多的坑，如果以后遇到的话会不定时更新。</p><h2 id=navigationview基本使用>NavigationView基本使用<a hidden class=anchor aria-hidden=true href=#navigationview基本使用>#</a></h2><p>有很多人对于<code>NavigationView</code>的基本使用还是比较了解的， 那么我这里推荐一种非常偷懒的方法，就是我们在<code>Android Studio</code>中新建<code>Activity</code>时可以直接进行如下操作：</p><p><img loading=lazy src=http://upload-images.jianshu.io/upload_images/2524102-ed42f064db473404.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt="New Navigation Activity.png"></p><p>在选择了<code>Navigation Drawer Activity</code>之后会出现如下界面：</p><p><img loading=lazy src=http://upload-images.jianshu.io/upload_images/2524102-ba08509342d568c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt="Navigation Drawer Activity.png"></p><p>然后点击<code>Finish</code>就可以完成一个最基础的带有<code>NavigationView</code>的<code>Activity</code>创建，创建之后就可以在原有的基础上进行修改了，这样也是非常的方便。</p><h2 id=navigationview-menu的设置>NavigationView Menu的设置<a hidden class=anchor aria-hidden=true href=#navigationview-menu的设置>#</a></h2><h3 id=menu的第一种布局设置>Menu的第一种布局设置<a hidden class=anchor aria-hidden=true href=#menu的第一种布局设置>#</a></h3><p>最基本的<code>Menu</code>的设置就是每行一个项目。在<code>menu</code>中的代码是这样的：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=display:flex><span><span style=color:#75715e>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>&lt;menu</span> <span style=color:#a6e22e>xmlns:android=</span><span style=color:#e6db74>&#34;http://schemas.android.com/apk/res/android&#34;</span><span style=color:#f92672>&gt;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;item</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/nav_camera&#34;</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:icon=</span><span style=color:#e6db74>&#34;@drawable/ic_menu_camera&#34;</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:title=</span><span style=color:#e6db74>&#34;Import&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;item</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/nav_gallery&#34;</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:icon=</span><span style=color:#e6db74>&#34;@drawable/ic_menu_gallery&#34;</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:title=</span><span style=color:#e6db74>&#34;Gallery&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;item</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/nav_slideshow&#34;</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:icon=</span><span style=color:#e6db74>&#34;@drawable/ic_menu_slideshow&#34;</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:title=</span><span style=color:#e6db74>&#34;Slideshow&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;item</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/nav_manage&#34;</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:icon=</span><span style=color:#e6db74>&#34;@drawable/ic_menu_manage&#34;</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:title=</span><span style=color:#e6db74>&#34;Tools&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;item</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/nav_share&#34;</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:icon=</span><span style=color:#e6db74>&#34;@drawable/ic_menu_share&#34;</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:title=</span><span style=color:#e6db74>&#34;Share&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;item</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/nav_send&#34;</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:icon=</span><span style=color:#e6db74>&#34;@drawable/ic_menu_send&#34;</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:title=</span><span style=color:#e6db74>&#34;Send&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>&lt;/menu&gt;</span>
-</span></span></code></pre></div><p>实际效果是这样的：</p><p><img loading=lazy src=http://upload-images.jianshu.io/upload_images/2524102-d4299d3d8b622021.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt="normal menu.png"></p><p>通过上面的图片我们可以看到，这样设置之后，每个<code>item</code>都是独立的，各占一行，每一行代表着一个操作。</p><h3 id=menu的第二种布局设置>Menu的第二种布局设置<a hidden class=anchor aria-hidden=true href=#menu的第二种布局设置>#</a></h3><p>子菜单的设置是这样的：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=display:flex><span><span style=color:#75715e>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>&lt;menu</span> <span style=color:#a6e22e>xmlns:android=</span><span style=color:#e6db74>&#34;http://schemas.android.com/apk/res/android&#34;</span><span style=color:#f92672>&gt;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;group</span> <span style=color:#a6e22e>android:checkableBehavior=</span><span style=color:#e6db74>&#34;single&#34;</span><span style=color:#f92672>&gt;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;item</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/nav_camera&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:icon=</span><span style=color:#e6db74>&#34;@drawable/ic_menu_camera&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:title=</span><span style=color:#e6db74>&#34;Import&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;item</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/nav_gallery&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:icon=</span><span style=color:#e6db74>&#34;@drawable/ic_menu_gallery&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:title=</span><span style=color:#e6db74>&#34;Gallery&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;item</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/nav_slideshow&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:icon=</span><span style=color:#e6db74>&#34;@drawable/ic_menu_slideshow&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:title=</span><span style=color:#e6db74>&#34;Slideshow&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;item</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/nav_manage&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:icon=</span><span style=color:#e6db74>&#34;@drawable/ic_menu_manage&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:title=</span><span style=color:#e6db74>&#34;Tools&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;/group&gt;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;item</span> <span style=color:#a6e22e>android:title=</span><span style=color:#e6db74>&#34;Communicate&#34;</span><span style=color:#f92672>&gt;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;menu&gt;</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>&lt;item</span>
-</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/nav_share&#34;</span>
-</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:icon=</span><span style=color:#e6db74>&#34;@drawable/ic_menu_share&#34;</span>
-</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:title=</span><span style=color:#e6db74>&#34;Share&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>&lt;item</span>
-</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/nav_send&#34;</span>
-</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:icon=</span><span style=color:#e6db74>&#34;@drawable/ic_menu_send&#34;</span>
-</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:title=</span><span style=color:#e6db74>&#34;Send&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;/menu&gt;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;/item&gt;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;item</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:title=</span><span style=color:#e6db74>&#34;about&#34;</span><span style=color:#f92672>&gt;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;menu&gt;</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>&lt;item</span>
-</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/nav_about&#34;</span>
-</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:icon=</span><span style=color:#e6db74>&#34;@drawable/ic_history&#34;</span>
-</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:title=</span><span style=color:#e6db74>&#34;about&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;/menu&gt;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;/item&gt;</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>&lt;/menu&gt;</span>
-</span></span></code></pre></div><p>设置之后的效果是这样的：</p><p><img loading=lazy src=http://upload-images.jianshu.io/upload_images/2524102-14bcb6aaaca2a190.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt="group menu.png"></p><p>通过这种设置分组之后，我们可以发现，每个组是一起的，是通过<code>group</code>将同一个组的<code>item</code>包裹起来，组内的<code>item</code>可能会相互影响，这取决于你设置属性<code>android:checkableBehavior</code>的值。而且在上面的图片中我们也可以发现一个小的细节，就是我们组和组之间有一条小横线隔开了，有点类似于我们在<code>ListView</code>中设置的<code>divider</code>属性。</p><h3 id=menu的第三种布局设置>Menu的第三种布局设置<a hidden class=anchor aria-hidden=true href=#menu的第三种布局设置>#</a></h3><p>那么在我们实际的开发过程中，有时候我们需要把第一种和第二种结合起来，也就是说呈现出下图中的效果：</p><p><img loading=lazy src=http://upload-images.jianshu.io/upload_images/2524102-e5c2c8f0c2f049d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt="group menu special.png"></p><p>细心的朋友可能已经看出来第三种和第二种的区别。
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>NavigationView-子菜单问题 | BLOG</title>
+<meta name="keywords" content="">
+<meta name="description" content="在Android 5.0之后，Google推出了Material Design兼容库，在Material Design的兼容库中，有个用的比较多的控件就是NavigationView。在我们平时使用过程中，对于NavigationView的一些小细节可能也并没有过多的关注，所以就导致我们在遇到特殊需求的时候无从下手，那么在这里我就简单记录一下使用NavigationView的一些小坑，暂时可能也并没有遇到很多的坑，如果以后遇到的话会不定时更新。">
+<meta name="author" content="">
+<link rel="canonical" href="https://houzixiashanxiedaima.github.io/posts/navigationview-%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.5cfc680b1eeaeef9efbced92d46c2a9e876b72ee14fba85846afc4cff9e6e6f8.css" integrity="sha256-XPxoCx7q7vnvvO2S1Gwqnodrcu4U&#43;6hYRq/Ez/nm5vg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://houzixiashanxiedaima.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://houzixiashanxiedaima.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://houzixiashanxiedaima.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://houzixiashanxiedaima.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://houzixiashanxiedaima.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="NavigationView-子菜单问题" />
+<meta property="og:description" content="在Android 5.0之后，Google推出了Material Design兼容库，在Material Design的兼容库中，有个用的比较多的控件就是NavigationView。在我们平时使用过程中，对于NavigationView的一些小细节可能也并没有过多的关注，所以就导致我们在遇到特殊需求的时候无从下手，那么在这里我就简单记录一下使用NavigationView的一些小坑，暂时可能也并没有遇到很多的坑，如果以后遇到的话会不定时更新。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://houzixiashanxiedaima.github.io/posts/navigationview-%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2016-07-28T15:19:45+00:00" />
+<meta property="article:modified_time" content="2016-07-28T15:19:45+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="NavigationView-子菜单问题"/>
+<meta name="twitter:description" content="在Android 5.0之后，Google推出了Material Design兼容库，在Material Design的兼容库中，有个用的比较多的控件就是NavigationView。在我们平时使用过程中，对于NavigationView的一些小细节可能也并没有过多的关注，所以就导致我们在遇到特殊需求的时候无从下手，那么在这里我就简单记录一下使用NavigationView的一些小坑，暂时可能也并没有遇到很多的坑，如果以后遇到的话会不定时更新。"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://houzixiashanxiedaima.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "NavigationView-子菜单问题",
+      "item": "https://houzixiashanxiedaima.github.io/posts/navigationview-%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "NavigationView-子菜单问题",
+  "name": "NavigationView-子菜单问题",
+  "description": "在Android 5.0之后，Google推出了Material Design兼容库，在Material Design的兼容库中，有个用的比较多的控件就是NavigationView。在我们平时使用过程中，对于NavigationView的一些小细节可能也并没有过多的关注，所以就导致我们在遇到特殊需求的时候无从下手，那么在这里我就简单记录一下使用NavigationView的一些小坑，暂时可能也并没有遇到很多的坑，如果以后遇到的话会不定时更新。\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "在Android 5.0之后，Google推出了Material Design兼容库，在Material Design的兼容库中，有个用的比较多的控件就是NavigationView。在我们平时使用过程中，对于NavigationView的一些小细节可能也并没有过多的关注，所以就导致我们在遇到特殊需求的时候无从下手，那么在这里我就简单记录一下使用NavigationView的一些小坑，暂时可能也并没有遇到很多的坑，如果以后遇到的话会不定时更新。\nNavigationView基本使用 有很多人对于NavigationView的基本使用还是比较了解的， 那么我这里推荐一种非常偷懒的方法，就是我们在Android Studio中新建Activity时可以直接进行如下操作：\n在选择了Navigation Drawer Activity之后会出现如下界面：\n然后点击Finish就可以完成一个最基础的带有NavigationView的Activity创建，创建之后就可以在原有的基础上进行修改了，这样也是非常的方便。\nNavigationView Menu的设置 Menu的第一种布局设置 最基本的Menu的设置就是每行一个项目。在menu中的代码是这样的：\n\u003c?xml version=\"1.0\" encoding=\"utf-8\"?\u003e ",
+  "wordCount" : "155",
+  "inLanguage": "en",
+  "datePublished": "2016-07-28T15:19:45Z",
+  "dateModified": "2016-07-28T15:19:45Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://houzixiashanxiedaima.github.io/posts/navigationview-%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BLOG",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://houzixiashanxiedaima.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://houzixiashanxiedaima.github.io/" accesskey="h" title="BLOG (Alt + H)">BLOG</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://houzixiashanxiedaima.github.io/" title="BLOG">
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://houzixiashanxiedaima.github.io/archives/" title="Archive">
+                    <span>ARCHIVE</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://houzixiashanxiedaima.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://houzixiashanxiedaima.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      NavigationView-子菜单问题
+    </h1>
+    <div class="post-meta"><span title='2016-07-28 15:19:45 +0000 UTC'>July 28, 2016</span>&nbsp;·&nbsp;1 min
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#navigationview%e5%9f%ba%e6%9c%ac%e4%bd%bf%e7%94%a8" aria-label="NavigationView基本使用">NavigationView基本使用</a></li>
+                <li>
+                    <a href="#navigationview-menu%e7%9a%84%e8%ae%be%e7%bd%ae" aria-label="NavigationView Menu的设置">NavigationView Menu的设置</a><ul>
+                        
+                <li>
+                    <a href="#menu%e7%9a%84%e7%ac%ac%e4%b8%80%e7%a7%8d%e5%b8%83%e5%b1%80%e8%ae%be%e7%bd%ae" aria-label="Menu的第一种布局设置">Menu的第一种布局设置</a></li>
+                <li>
+                    <a href="#menu%e7%9a%84%e7%ac%ac%e4%ba%8c%e7%a7%8d%e5%b8%83%e5%b1%80%e8%ae%be%e7%bd%ae" aria-label="Menu的第二种布局设置">Menu的第二种布局设置</a></li>
+                <li>
+                    <a href="#menu%e7%9a%84%e7%ac%ac%e4%b8%89%e7%a7%8d%e5%b8%83%e5%b1%80%e8%ae%be%e7%bd%ae" aria-label="Menu的第三种布局设置">Menu的第三种布局设置</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>在Android 5.0之后，Google推出了Material Design兼容库，在Material Design的兼容库中，有个用的比较多的控件就是<code>NavigationView</code>。在我们平时使用过程中，对于<code>NavigationView</code>的一些小细节可能也并没有过多的关注，所以就导致我们在遇到特殊需求的时候无从下手，那么在这里我就简单记录一下使用<code>NavigationView</code>的一些小坑，暂时可能也并没有遇到很多的坑，如果以后遇到的话会不定时更新。</p>
+<h2 id="navigationview基本使用">NavigationView基本使用<a hidden class="anchor" aria-hidden="true" href="#navigationview基本使用">#</a></h2>
+<p>有很多人对于<code>NavigationView</code>的基本使用还是比较了解的， 那么我这里推荐一种非常偷懒的方法，就是我们在<code>Android Studio</code>中新建<code>Activity</code>时可以直接进行如下操作：</p>
+<p><img loading="lazy" src="http://upload-images.jianshu.io/upload_images/2524102-ed42f064db473404.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="New Navigation Activity.png"  />
+</p>
+<p>在选择了<code>Navigation Drawer Activity</code>之后会出现如下界面：</p>
+<p><img loading="lazy" src="http://upload-images.jianshu.io/upload_images/2524102-ba08509342d568c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Navigation Drawer Activity.png"  />
+</p>
+<p>然后点击<code>Finish</code>就可以完成一个最基础的带有<code>NavigationView</code>的<code>Activity</code>创建，创建之后就可以在原有的基础上进行修改了，这样也是非常的方便。</p>
+<h2 id="navigationview-menu的设置">NavigationView Menu的设置<a hidden class="anchor" aria-hidden="true" href="#navigationview-menu的设置">#</a></h2>
+<h3 id="menu的第一种布局设置">Menu的第一种布局设置<a hidden class="anchor" aria-hidden="true" href="#menu的第一种布局设置">#</a></h3>
+<p>最基本的<code>Menu</code>的设置就是每行一个项目。在<code>menu</code>中的代码是这样的：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;menu</span> <span style="color:#a6e22e">xmlns:android=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res/android&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;item</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/nav_camera&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:icon=</span><span style="color:#e6db74">&#34;@drawable/ic_menu_camera&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:title=</span><span style="color:#e6db74">&#34;Import&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;item</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/nav_gallery&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:icon=</span><span style="color:#e6db74">&#34;@drawable/ic_menu_gallery&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:title=</span><span style="color:#e6db74">&#34;Gallery&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;item</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/nav_slideshow&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:icon=</span><span style="color:#e6db74">&#34;@drawable/ic_menu_slideshow&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:title=</span><span style="color:#e6db74">&#34;Slideshow&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;item</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/nav_manage&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:icon=</span><span style="color:#e6db74">&#34;@drawable/ic_menu_manage&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:title=</span><span style="color:#e6db74">&#34;Tools&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;item</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/nav_share&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:icon=</span><span style="color:#e6db74">&#34;@drawable/ic_menu_share&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:title=</span><span style="color:#e6db74">&#34;Share&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;item</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/nav_send&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:icon=</span><span style="color:#e6db74">&#34;@drawable/ic_menu_send&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:title=</span><span style="color:#e6db74">&#34;Send&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/menu&gt;</span>
+</span></span></code></pre></div><p>实际效果是这样的：</p>
+<p><img loading="lazy" src="http://upload-images.jianshu.io/upload_images/2524102-d4299d3d8b622021.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="normal menu.png"  />
+</p>
+<p>通过上面的图片我们可以看到，这样设置之后，每个<code>item</code>都是独立的，各占一行，每一行代表着一个操作。</p>
+<h3 id="menu的第二种布局设置">Menu的第二种布局设置<a hidden class="anchor" aria-hidden="true" href="#menu的第二种布局设置">#</a></h3>
+<p>子菜单的设置是这样的：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;menu</span> <span style="color:#a6e22e">xmlns:android=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res/android&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;group</span> <span style="color:#a6e22e">android:checkableBehavior=</span><span style="color:#e6db74">&#34;single&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;item</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/nav_camera&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:icon=</span><span style="color:#e6db74">&#34;@drawable/ic_menu_camera&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:title=</span><span style="color:#e6db74">&#34;Import&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;item</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/nav_gallery&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:icon=</span><span style="color:#e6db74">&#34;@drawable/ic_menu_gallery&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:title=</span><span style="color:#e6db74">&#34;Gallery&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;item</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/nav_slideshow&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:icon=</span><span style="color:#e6db74">&#34;@drawable/ic_menu_slideshow&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:title=</span><span style="color:#e6db74">&#34;Slideshow&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;item</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/nav_manage&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:icon=</span><span style="color:#e6db74">&#34;@drawable/ic_menu_manage&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:title=</span><span style="color:#e6db74">&#34;Tools&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/group&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">android:title=</span><span style="color:#e6db74">&#34;Communicate&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;menu&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;item</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/nav_share&#34;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">android:icon=</span><span style="color:#e6db74">&#34;@drawable/ic_menu_share&#34;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">android:title=</span><span style="color:#e6db74">&#34;Share&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;item</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/nav_send&#34;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">android:icon=</span><span style="color:#e6db74">&#34;@drawable/ic_menu_send&#34;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">android:title=</span><span style="color:#e6db74">&#34;Send&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/menu&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/item&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;item</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:title=</span><span style="color:#e6db74">&#34;about&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;menu&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;item</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/nav_about&#34;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">android:icon=</span><span style="color:#e6db74">&#34;@drawable/ic_history&#34;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">android:title=</span><span style="color:#e6db74">&#34;about&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/menu&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/item&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/menu&gt;</span>
+</span></span></code></pre></div><p>设置之后的效果是这样的：</p>
+<p><img loading="lazy" src="http://upload-images.jianshu.io/upload_images/2524102-14bcb6aaaca2a190.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="group menu.png"  />
+</p>
+<p>通过这种设置分组之后，我们可以发现，每个组是一起的，是通过<code>group</code>将同一个组的<code>item</code>包裹起来，组内的<code>item</code>可能会相互影响，这取决于你设置属性<code>android:checkableBehavior</code>的值。而且在上面的图片中我们也可以发现一个小的细节，就是我们组和组之间有一条小横线隔开了，有点类似于我们在<code>ListView</code>中设置的<code>divider</code>属性。</p>
+<h3 id="menu的第三种布局设置">Menu的第三种布局设置<a hidden class="anchor" aria-hidden="true" href="#menu的第三种布局设置">#</a></h3>
+<p>那么在我们实际的开发过程中，有时候我们需要把第一种和第二种结合起来，也就是说呈现出下图中的效果：</p>
+<p><img loading="lazy" src="http://upload-images.jianshu.io/upload_images/2524102-e5c2c8f0c2f049d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="group menu special.png"  />
+</p>
+<p>细心的朋友可能已经看出来第三种和第二种的区别。
 第二种的布局结果是每个<code>group</code>下有一个<code>title</code>，然后在<code>title</code>下面才是我们的子<code>item</code>
 第三种是直接每个<code>group</code>下就是子<code>item</code>并没有第二种中出现的<code>title</code>
-很显然在某些情况下，我们的开发需求需要像第三种这样简约但是不简单的<code>Navigation Menu</code>还是先来看看我们第三种布局的<code>menu</code>文件：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=display:flex><span><span style=color:#75715e>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>&lt;menu</span> <span style=color:#a6e22e>xmlns:android=</span><span style=color:#e6db74>&#34;http://schemas.android.com/apk/res/android&#34;</span><span style=color:#f92672>&gt;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;group</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/nav_group_normal&#34;</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:checkableBehavior=</span><span style=color:#e6db74>&#34;single&#34;</span><span style=color:#f92672>&gt;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;item</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/nav_camera&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:icon=</span><span style=color:#e6db74>&#34;@drawable/ic_menu_camera&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:title=</span><span style=color:#e6db74>&#34;Import&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;item</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/nav_gallery&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:icon=</span><span style=color:#e6db74>&#34;@drawable/ic_menu_gallery&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:title=</span><span style=color:#e6db74>&#34;Gallery&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;item</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/nav_slideshow&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:icon=</span><span style=color:#e6db74>&#34;@drawable/ic_menu_slideshow&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:title=</span><span style=color:#e6db74>&#34;Slideshow&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;item</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/nav_manage&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:icon=</span><span style=color:#e6db74>&#34;@drawable/ic_menu_manage&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:title=</span><span style=color:#e6db74>&#34;Tools&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;/group&gt;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;group</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/nav_commnunicate&#34;</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:title=</span><span style=color:#e6db74>&#34;Communicate&#34;</span><span style=color:#f92672>&gt;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;item</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/nav_share&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:icon=</span><span style=color:#e6db74>&#34;@drawable/ic_menu_share&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:title=</span><span style=color:#e6db74>&#34;Share&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;item</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/nav_send&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:icon=</span><span style=color:#e6db74>&#34;@drawable/ic_menu_send&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:title=</span><span style=color:#e6db74>&#34;Send&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;/group&gt;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;group</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/nav_about_group&#34;</span><span style=color:#f92672>&gt;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;item</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:title=</span><span style=color:#e6db74>&#34;about&#34;</span><span style=color:#f92672>&gt;</span>
-</span></span><span style=display:flex><span>            <span style=color:#f92672>&lt;item</span>
-</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/nav_about&#34;</span>
-</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:icon=</span><span style=color:#e6db74>&#34;@drawable/ic_history&#34;</span>
-</span></span><span style=display:flex><span>                <span style=color:#a6e22e>android:title=</span><span style=color:#e6db74>&#34;about&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;/item&gt;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;/group&gt;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#f92672>&lt;/menu&gt;</span>
-</span></span></code></pre></div><p>这个布局文件就是用<code>group</code>包裹起每个组的<code>item</code>，有点类似第二种布局，但是<strong>最关键</strong>的地方就是要为每一个<code>group</code>设置一个<code>id</code>，设置完成之后就可以得到第三种布局的效果。</p></div><footer class=post-footer><ul class=post-tags></ul><nav class=paginav><a class=prev href=https://example.org/posts/material-design-%E4%B9%8Btablayout%E4%B8%8Etoolbar/><span class=title>« Prev</span><br><span>Material-Design-之TabLayout与Toolbar</span></a>
-<a class=next href=https://example.org/posts/virtualbox%E4%B8%8Emactype%E5%85%B1%E5%AD%98/><span class=title>Next »</span><br><span>Virtualbox与Mactype共存</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2023 <a href=https://example.org/>BLOG</a></span>
-<span>Powered by
-<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
-        <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></a><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="copy";function s(){t.innerHTML="copied!",setTimeout(()=>{t.innerHTML="copy"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>
+很显然在某些情况下，我们的开发需求需要像第三种这样简约但是不简单的<code>Navigation Menu</code>还是先来看看我们第三种布局的<code>menu</code>文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;menu</span> <span style="color:#a6e22e">xmlns:android=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res/android&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;group</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/nav_group_normal&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:checkableBehavior=</span><span style="color:#e6db74">&#34;single&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;item</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/nav_camera&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:icon=</span><span style="color:#e6db74">&#34;@drawable/ic_menu_camera&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:title=</span><span style="color:#e6db74">&#34;Import&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;item</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/nav_gallery&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:icon=</span><span style="color:#e6db74">&#34;@drawable/ic_menu_gallery&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:title=</span><span style="color:#e6db74">&#34;Gallery&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;item</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/nav_slideshow&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:icon=</span><span style="color:#e6db74">&#34;@drawable/ic_menu_slideshow&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:title=</span><span style="color:#e6db74">&#34;Slideshow&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;item</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/nav_manage&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:icon=</span><span style="color:#e6db74">&#34;@drawable/ic_menu_manage&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:title=</span><span style="color:#e6db74">&#34;Tools&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/group&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;group</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/nav_commnunicate&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:title=</span><span style="color:#e6db74">&#34;Communicate&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;item</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/nav_share&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:icon=</span><span style="color:#e6db74">&#34;@drawable/ic_menu_share&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:title=</span><span style="color:#e6db74">&#34;Share&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;item</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/nav_send&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:icon=</span><span style="color:#e6db74">&#34;@drawable/ic_menu_send&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:title=</span><span style="color:#e6db74">&#34;Send&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/group&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;group</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/nav_about_group&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;item</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:title=</span><span style="color:#e6db74">&#34;about&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;item</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/nav_about&#34;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">android:icon=</span><span style="color:#e6db74">&#34;@drawable/ic_history&#34;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">android:title=</span><span style="color:#e6db74">&#34;about&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/item&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/group&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/menu&gt;</span>
+</span></span></code></pre></div><p>这个布局文件就是用<code>group</code>包裹起每个组的<code>item</code>，有点类似第二种布局，但是<strong>最关键</strong>的地方就是要为每一个<code>group</code>设置一个<code>id</code>，设置完成之后就可以得到第三种布局的效果。</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://houzixiashanxiedaima.github.io/posts/material-design-%E4%B9%8Btablayout%E4%B8%8Etoolbar/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Material-Design-之TabLayout与Toolbar</span>
+  </a>
+  <a class="next" href="https://houzixiashanxiedaima.github.io/posts/virtualbox%E4%B8%8Emactype%E5%85%B1%E5%AD%98/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Virtualbox与Mactype共存</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://houzixiashanxiedaima.github.io/">BLOG</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

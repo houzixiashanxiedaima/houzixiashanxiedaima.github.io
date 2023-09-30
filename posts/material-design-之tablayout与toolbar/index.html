@@ -1,90 +1,444 @@
-<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Material-Design-之TabLayout与Toolbar | BLOG</title><meta name=keywords content><meta name=description content="今天在学习Material Design的过程中，遇到了一个比较坑的问题，在这里记录一下，以后如果有人遇到的话，可以做个参考吧。首先来看看我们的需求，今天我们需要实现下面这个效果：
+<!DOCTYPE html>
+<html lang="en" dir="auto">
 
-"><meta name=author content><link rel=canonical href=https://example.org/posts/material-design-%E4%B9%8Btablayout%E4%B8%8Etoolbar/><link crossorigin=anonymous href=/assets/css/stylesheet.5cfc680b1eeaeef9efbced92d46c2a9e876b72ee14fba85846afc4cff9e6e6f8.css integrity="sha256-XPxoCx7q7vnvvO2S1Gwqnodrcu4U+6hYRq/Ez/nm5vg=" rel="preload stylesheet" as=style><script defer crossorigin=anonymous src=/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG+9vmJ0cTS+ovo0FeA=" onload=hljs.initHighlightingOnLoad()></script>
-<link rel=icon href=https://example.org/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://example.org/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://example.org/favicon-32x32.png><link rel=apple-touch-icon href=https://example.org/apple-touch-icon.png><link rel=mask-icon href=https://example.org/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><meta property="og:title" content="Material-Design-之TabLayout与Toolbar"><meta property="og:description" content="今天在学习Material Design的过程中，遇到了一个比较坑的问题，在这里记录一下，以后如果有人遇到的话，可以做个参考吧。首先来看看我们的需求，今天我们需要实现下面这个效果：
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Material-Design-之TabLayout与Toolbar | BLOG</title>
+<meta name="keywords" content="">
+<meta name="description" content="今天在学习Material Design的过程中，遇到了一个比较坑的问题，在这里记录一下，以后如果有人遇到的话，可以做个参考吧。首先来看看我们的需求，今天我们需要实现下面这个效果：
 
-"><meta property="og:type" content="article"><meta property="og:url" content="https://example.org/posts/material-design-%E4%B9%8Btablayout%E4%B8%8Etoolbar/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2016-07-28T15:19:45+00:00"><meta property="article:modified_time" content="2016-07-28T15:19:45+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Material-Design-之TabLayout与Toolbar"><meta name=twitter:description content="今天在学习Material Design的过程中，遇到了一个比较坑的问题，在这里记录一下，以后如果有人遇到的话，可以做个参考吧。首先来看看我们的需求，今天我们需要实现下面这个效果：
+">
+<meta name="author" content="">
+<link rel="canonical" href="https://houzixiashanxiedaima.github.io/posts/material-design-%E4%B9%8Btablayout%E4%B8%8Etoolbar/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.5cfc680b1eeaeef9efbced92d46c2a9e876b72ee14fba85846afc4cff9e6e6f8.css" integrity="sha256-XPxoCx7q7vnvvO2S1Gwqnodrcu4U&#43;6hYRq/Ez/nm5vg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://houzixiashanxiedaima.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://houzixiashanxiedaima.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://houzixiashanxiedaima.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://houzixiashanxiedaima.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://houzixiashanxiedaima.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
-"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://example.org/posts/"},{"@type":"ListItem","position":2,"name":"Material-Design-之TabLayout与Toolbar","item":"https://example.org/posts/material-design-%E4%B9%8Btablayout%E4%B8%8Etoolbar/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Material-Design-之TabLayout与Toolbar","name":"Material-Design-之TabLayout与Toolbar","description":"今天在学习Material Design的过程中，遇到了一个比较坑的问题，在这里记录一下，以后如果有人遇到的话，可以做个参考吧。首先来看看我们的需求，今天我们需要实现下面这个效果：\n","keywords":[],"articleBody":"今天在学习Material Design的过程中，遇到了一个比较坑的问题，在这里记录一下，以后如果有人遇到的话，可以做个参考吧。首先来看看我们的需求，今天我们需要实现下面这个效果：\n图片来自blog：http://blog.csdn.net/eclipsexys/article/details/46349721\n大家可以看到这个需求其实是非常简单的，就是有个Toolbar和一个TabLayout，然后在TabLayout中有个列表，根据列表的上下滑动，Toolbar也相应的隐藏和显示。我们都知道这个是Material Design中的动画效果，那么我们就直接开始动手编码来实现这个效果。首先贴出布局部分的代码吧：\n\u003c?xml version=\"1.0\" encoding=\"utf-8\"?\u003e ","wordCount":"96","inLanguage":"en","datePublished":"2016-07-28T15:19:45Z","dateModified":"2016-07-28T15:19:45Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://example.org/posts/material-design-%E4%B9%8Btablayout%E4%B8%8Etoolbar/"},"publisher":{"@type":"Organization","name":"BLOG","logo":{"@type":"ImageObject","url":"https://example.org/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><a href=https://example.org/ accesskey=h title="BLOG (Alt + H)">BLOG</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://example.org/ title=BLOG><span>HOME</span></a></li><li><a href=https://example.org/archives/ title=Archive><span>ARCHIVE</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://example.org/>Home</a>&nbsp;»&nbsp;<a href=https://example.org/posts/>Posts</a></div><h1 class=post-title>Material-Design-之TabLayout与Toolbar</h1><div class=post-meta><span title='2016-07-28 15:19:45 +0000 UTC'>July 28, 2016</span>&nbsp;·&nbsp;1 min</div></header><div class=post-content><p>今天在学习Material Design的过程中，遇到了一个比较坑的问题，在这里记录一下，以后如果有人遇到的话，可以做个参考吧。首先来看看我们的需求，今天我们需要实现下面这个效果：</p><p><img loading=lazy src=http://upload-images.jianshu.io/upload_images/2524102-d8903fa389d460a8.gif?imageMogr2/auto-orient/strip alt=需求.gif></p><blockquote><p>图片来自blog：http://blog.csdn.net/eclipsexys/article/details/46349721</p></blockquote><p>大家可以看到这个需求其实是非常简单的，就是有个Toolbar和一个TabLayout，然后在TabLayout中有个列表，根据列表的上下滑动，Toolbar也相应的隐藏和显示。我们都知道这个是Material Design中的动画效果，那么我们就直接开始动手编码来实现这个效果。首先贴出布局部分的代码吧：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=display:flex><span><span style=color:#75715e>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>&lt;android.support.design.widget.CoordinatorLayout</span>
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>xmlns:android=</span><span style=color:#e6db74>&#34;http://schemas.android.com/apk/res/android&#34;</span>
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>xmlns:app=</span><span style=color:#e6db74>&#34;http://schemas.android.com/apk/res-auto&#34;</span>
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>xmlns:tools=</span><span style=color:#e6db74>&#34;http://schemas.android.com/tools&#34;</span>
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/activity_base&#34;</span>
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>android:layout_width=</span><span style=color:#e6db74>&#34;match_parent&#34;</span>
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>android:layout_height=</span><span style=color:#e6db74>&#34;match_parent&#34;</span>
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>android:fitsSystemWindows=</span><span style=color:#e6db74>&#34;true&#34;</span><span style=color:#f92672>&gt;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;android.support.design.widget.AppBarLayout</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/appbar&#34;</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:layout_width=</span><span style=color:#e6db74>&#34;match_parent&#34;</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:layout_height=</span><span style=color:#e6db74>&#34;wrap_content&#34;</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>app:theme=</span><span style=color:#e6db74>&#34;@style/AppTheme.AppBarOverlay&#34;</span><span style=color:#f92672>&gt;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;android.support.v7.widget.Toolbar</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/toolbar&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:layout_width=</span><span style=color:#e6db74>&#34;match_parent&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:layout_height=</span><span style=color:#e6db74>&#34;?attr/actionBarSize&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>app:layout_scrollFlags=</span><span style=color:#e6db74>&#34;scroll|enterAlways&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>app:popupTheme=</span><span style=color:#e6db74>&#34;@style/AppTheme.PopupOverlay&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;android.support.design.widget.TabLayout</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/tabs&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:layout_width=</span><span style=color:#e6db74>&#34;match_parent&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:layout_height=</span><span style=color:#e6db74>&#34;wrap_content&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;/android.support.design.widget.AppBarLayout&gt;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;android.support.v4.view.ViewPager</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/viewpager&#34;</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:layout_width=</span><span style=color:#e6db74>&#34;match_parent&#34;</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:layout_height=</span><span style=color:#e6db74>&#34;wrap_content&#34;</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>app:layout_behavior=</span><span style=color:#e6db74>&#34;@string/appbar_scrolling_view_behavior&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#f92672>&lt;/android.support.design.widget.CoordinatorLayout&gt;</span>
-</span></span></code></pre></div><p>上面就是我们主布局的代码，然后我们看看ViewPager对应的布局的代码：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=display:flex><span><span style=color:#f92672>&lt;android.support.v4.widget.NestedScrollView</span>
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>xmlns:android=</span><span style=color:#e6db74>&#34;http://schemas.android.com/apk/res/android&#34;</span>
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>xmlns:app=</span><span style=color:#e6db74>&#34;http://schemas.android.com/apk/res-auto&#34;</span>
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>android:layout_width=</span><span style=color:#e6db74>&#34;match_parent&#34;</span>
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>android:layout_height=</span><span style=color:#e6db74>&#34;match_parent&#34;</span>
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>app:layout_behavior=</span><span style=color:#e6db74>&#34;@string/appbar_scrolling_view_behavior&#34;</span><span style=color:#f92672>&gt;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;RelativeLayout</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:layout_width=</span><span style=color:#e6db74>&#34;match_parent&#34;</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>android:layout_height=</span><span style=color:#e6db74>&#34;match_parent&#34;</span><span style=color:#f92672>&gt;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/section_label&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:layout_width=</span><span style=color:#e6db74>&#34;wrap_content&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:layout_height=</span><span style=color:#e6db74>&#34;wrap_content&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;ListView</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/listview&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:layout_width=</span><span style=color:#e6db74>&#34;match_parent&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:layout_height=</span><span style=color:#e6db74>&#34;match_parent&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>android:layout_below=</span><span style=color:#e6db74>&#34;@id/section_label&#34;</span><span style=color:#f92672>/&gt;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;/RelativeLayout&gt;</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>&lt;/android.support.v4.widget.NestedScrollView&gt;</span>
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Material-Design-之TabLayout与Toolbar" />
+<meta property="og:description" content="今天在学习Material Design的过程中，遇到了一个比较坑的问题，在这里记录一下，以后如果有人遇到的话，可以做个参考吧。首先来看看我们的需求，今天我们需要实现下面这个效果：
+
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://houzixiashanxiedaima.github.io/posts/material-design-%E4%B9%8Btablayout%E4%B8%8Etoolbar/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2016-07-28T15:19:45+00:00" />
+<meta property="article:modified_time" content="2016-07-28T15:19:45+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Material-Design-之TabLayout与Toolbar"/>
+<meta name="twitter:description" content="今天在学习Material Design的过程中，遇到了一个比较坑的问题，在这里记录一下，以后如果有人遇到的话，可以做个参考吧。首先来看看我们的需求，今天我们需要实现下面这个效果：
+
+"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://houzixiashanxiedaima.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Material-Design-之TabLayout与Toolbar",
+      "item": "https://houzixiashanxiedaima.github.io/posts/material-design-%E4%B9%8Btablayout%E4%B8%8Etoolbar/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Material-Design-之TabLayout与Toolbar",
+  "name": "Material-Design-之TabLayout与Toolbar",
+  "description": "今天在学习Material Design的过程中，遇到了一个比较坑的问题，在这里记录一下，以后如果有人遇到的话，可以做个参考吧。首先来看看我们的需求，今天我们需要实现下面这个效果：\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "今天在学习Material Design的过程中，遇到了一个比较坑的问题，在这里记录一下，以后如果有人遇到的话，可以做个参考吧。首先来看看我们的需求，今天我们需要实现下面这个效果：\n图片来自blog：http://blog.csdn.net/eclipsexys/article/details/46349721\n大家可以看到这个需求其实是非常简单的，就是有个Toolbar和一个TabLayout，然后在TabLayout中有个列表，根据列表的上下滑动，Toolbar也相应的隐藏和显示。我们都知道这个是Material Design中的动画效果，那么我们就直接开始动手编码来实现这个效果。首先贴出布局部分的代码吧：\n\u003c?xml version=\"1.0\" encoding=\"utf-8\"?\u003e ",
+  "wordCount" : "96",
+  "inLanguage": "en",
+  "datePublished": "2016-07-28T15:19:45Z",
+  "dateModified": "2016-07-28T15:19:45Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://houzixiashanxiedaima.github.io/posts/material-design-%E4%B9%8Btablayout%E4%B8%8Etoolbar/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BLOG",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://houzixiashanxiedaima.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://houzixiashanxiedaima.github.io/" accesskey="h" title="BLOG (Alt + H)">BLOG</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://houzixiashanxiedaima.github.io/" title="BLOG">
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://houzixiashanxiedaima.github.io/archives/" title="Archive">
+                    <span>ARCHIVE</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://houzixiashanxiedaima.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://houzixiashanxiedaima.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Material-Design-之TabLayout与Toolbar
+    </h1>
+    <div class="post-meta"><span title='2016-07-28 15:19:45 +0000 UTC'>July 28, 2016</span>&nbsp;·&nbsp;1 min
+
+</div>
+  </header> 
+
+  <div class="post-content"><p>今天在学习Material Design的过程中，遇到了一个比较坑的问题，在这里记录一下，以后如果有人遇到的话，可以做个参考吧。首先来看看我们的需求，今天我们需要实现下面这个效果：</p>
+<p><img loading="lazy" src="http://upload-images.jianshu.io/upload_images/2524102-d8903fa389d460a8.gif?imageMogr2/auto-orient/strip" alt="需求.gif"  />
+</p>
+<blockquote>
+<p>图片来自blog：http://blog.csdn.net/eclipsexys/article/details/46349721</p>
+</blockquote>
+<p>大家可以看到这个需求其实是非常简单的，就是有个Toolbar和一个TabLayout，然后在TabLayout中有个列表，根据列表的上下滑动，Toolbar也相应的隐藏和显示。我们都知道这个是Material Design中的动画效果，那么我们就直接开始动手编码来实现这个效果。首先贴出布局部分的代码吧：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;android.support.design.widget.CoordinatorLayout</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">xmlns:android=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">xmlns:app=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">xmlns:tools=</span><span style="color:#e6db74">&#34;http://schemas.android.com/tools&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/activity_base&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">android:layout_width=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">android:layout_height=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">android:fitsSystemWindows=</span><span style="color:#e6db74">&#34;true&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;android.support.design.widget.AppBarLayout</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/appbar&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:layout_width=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:layout_height=</span><span style="color:#e6db74">&#34;wrap_content&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">app:theme=</span><span style="color:#e6db74">&#34;@style/AppTheme.AppBarOverlay&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;android.support.v7.widget.Toolbar</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/toolbar&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:layout_width=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:layout_height=</span><span style="color:#e6db74">&#34;?attr/actionBarSize&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">app:layout_scrollFlags=</span><span style="color:#e6db74">&#34;scroll|enterAlways&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">app:popupTheme=</span><span style="color:#e6db74">&#34;@style/AppTheme.PopupOverlay&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;android.support.design.widget.TabLayout</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/tabs&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:layout_width=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:layout_height=</span><span style="color:#e6db74">&#34;wrap_content&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/android.support.design.widget.AppBarLayout&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;android.support.v4.view.ViewPager</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/viewpager&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:layout_width=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:layout_height=</span><span style="color:#e6db74">&#34;wrap_content&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">app:layout_behavior=</span><span style="color:#e6db74">&#34;@string/appbar_scrolling_view_behavior&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/android.support.design.widget.CoordinatorLayout&gt;</span>
+</span></span></code></pre></div><p>上面就是我们主布局的代码，然后我们看看ViewPager对应的布局的代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;android.support.v4.widget.NestedScrollView</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">xmlns:android=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">xmlns:app=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">android:layout_width=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">android:layout_height=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">app:layout_behavior=</span><span style="color:#e6db74">&#34;@string/appbar_scrolling_view_behavior&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;RelativeLayout</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:layout_width=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:layout_height=</span><span style="color:#e6db74">&#34;match_parent&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;TextView</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/section_label&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:layout_width=</span><span style="color:#e6db74">&#34;wrap_content&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:layout_height=</span><span style="color:#e6db74">&#34;wrap_content&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;ListView</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/listview&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:layout_width=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:layout_height=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:layout_below=</span><span style="color:#e6db74">&#34;@id/section_label&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/RelativeLayout&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/android.support.v4.widget.NestedScrollView&gt;</span>
 </span></span></code></pre></div><p>这个里面的代码也很简单，就是一个ListView，主要的作用就是上下滑动，然后触发Toolbar的动画。
-剩下的就是一些简单的Fragment和一些控件初始化之类的，就不贴代码了，然后我们直接运行。运行之后截图如下：</p><p><img loading=lazy src=http://upload-images.jianshu.io/upload_images/2524102-82aeab75e5c07db8.gif?imageMogr2/auto-orient/strip alt=运行结果.gif></p><p>运行结果如上图，请大家忽视这个画质的问题，视频转GIF真是心累。</p><blockquote><p>如果大家有什么好的视频转GIF的工具，可以给我推荐一下。</p></blockquote><p>有细心的朋友可能已经发现问题了，当我们将列表往上滑动时，Toolbar确实隐藏了起来，但是在最后，屏幕的左上角还留有一些没有隐藏起来。这是第一个问题，还有一个比较细节的问题是我们通过对比我们的<code>需求图片</code>和<code>运行结果</code>图片，可以发现：
+剩下的就是一些简单的Fragment和一些控件初始化之类的，就不贴代码了，然后我们直接运行。运行之后截图如下：</p>
+<p><img loading="lazy" src="http://upload-images.jianshu.io/upload_images/2524102-82aeab75e5c07db8.gif?imageMogr2/auto-orient/strip" alt="运行结果.gif"  />
+</p>
+<p>运行结果如上图，请大家忽视这个画质的问题，视频转GIF真是心累。</p>
+<blockquote>
+<p>如果大家有什么好的视频转GIF的工具，可以给我推荐一下。</p>
+</blockquote>
+<p>有细心的朋友可能已经发现问题了，当我们将列表往上滑动时，Toolbar确实隐藏了起来，但是在最后，屏幕的左上角还留有一些没有隐藏起来。这是第一个问题，还有一个比较细节的问题是我们通过对比我们的<code>需求图片</code>和<code>运行结果</code>图片，可以发现：
 需求图片中向上滑动时，状态栏是保持不动的，Toolbar和TabLayout向上滑动，给人一种状态栏是在Toolbar和Tablayout上方的感觉。
-运行结果向上滑动时，状态栏也会向上滑，给人的感觉就像是被Toolbar和TabLayout挤上去的样子。</p><p>基于以上的两个不同之处，我们大致可以推断出Toolbar没有完全隐藏可能是因为状态栏的原因，那么我们就开始着手解决这个问题。</p><ul><li>从布局开始
-首先我们进行了将主布局的<code>android:fitsSystemWindows="true"</code>放到不同的地方，看看是否是这行代码出了问题，我分别将这行代码放到了CoordinatorLayout、AppBarLayout、Toolbar、TabLayout等多个地方，最后发现并没有解决问题。但是在这个过程中，却有一个小的变化是比较奇怪的，那就是当我<code>android:fitsSystemWindows="true"</code>这行代码移出CoordinatorLayout中时，我们运行程序之后会出现如下结果：
-<img loading=lazy src=http://upload-images.jianshu.io/upload_images/2524102-cdda1190eb30c4a7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt=将上述代码移动到AppBarLayout中的结果></li></ul><p>从上图中我们可以看到，上面的状态栏变白了。这个发现就更加印证了我们之前的推测：这件事情肯定和状态栏有关系。既然已经知道这个，那么我们就可以从第二个方面来解决。</p><ul><li><p>从代码入手
-我们尝试着在<strong>进行了第一步尝试的基础上</strong>在代码中将状态栏的颜色修改一下<code>getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));</code>修改完之后，发现是可以得到和需求一样的结果。问题得到了完美的解决&mldr;&mldr;吗？我们都知道上面这修改状态栏颜色的代码是在api>=21才可以用的，那如果api&lt;21怎么办？可能有人会说用开源库来修改啊。这个确实是一种非常好的解决办法，但是我并不想“撞大运”式的将这个问题解决。所以我们还得继续的深入查找问题，那么这个时候就想到了，和状态栏有关的属性，除了布局文件中和代码中，还有一个地方，就是<code>style.xml</code>中。</p></li><li><p>从<code>style.xml</code>入手
-先贴出代码：</p></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=display:flex><span><span style=color:#f92672>&lt;resources&gt;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;style</span> <span style=color:#a6e22e>name=</span><span style=color:#e6db74>&#34;AppTheme.NoActionBar&#34;</span><span style=color:#f92672>&gt;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;item</span> <span style=color:#a6e22e>name=</span><span style=color:#e6db74>&#34;windowActionBar&#34;</span><span style=color:#f92672>&gt;</span>false<span style=color:#f92672>&lt;/item&gt;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;item</span> <span style=color:#a6e22e>name=</span><span style=color:#e6db74>&#34;windowNoTitle&#34;</span><span style=color:#f92672>&gt;</span>true<span style=color:#f92672>&lt;/item&gt;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;item</span> <span style=color:#a6e22e>name=</span><span style=color:#e6db74>&#34;android:windowDrawsSystemBarBackgrounds&#34;</span><span style=color:#f92672>&gt;</span>true<span style=color:#f92672>&lt;/item&gt;</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;item</span> <span style=color:#a6e22e>name=</span><span style=color:#e6db74>&#34;android:statusBarColor&#34;</span><span style=color:#f92672>&gt;</span>@android:color/transparent<span style=color:#f92672>&lt;/item&gt;</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;/style&gt;</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>&lt;/resources&gt;</span>
-</span></span></code></pre></div><p>上面这个是<code>style.xml</code>(v21)的代码，从这段代码中我们就可以找到这次这个bug的罪魁祸首了。就是这一行<code>&lt;item name="android:statusBarColor">@android:color/transparent&lt;/item></code>
-就是这行代码将我们的状态栏给弄成了透明了，结果就导致我们看到的状态栏和布局文件是在同一个z轴上，也就是会被挤上去，从而导致我们的Toolbar不能完全的隐藏起来。</p><p>最后，为什么这个小bug费了这么大劲才找出来，我上面这一整套代码，基本上都是在android studio 中新建一个TabActivity 自动生成的。也就说原本自动生成的代码就有这个Bug，谁能想到android studio 这个浓眉大眼的家伙也"叛变革命"了呢。</p></div><footer class=post-footer><ul class=post-tags></ul><nav class=paginav><a class=prev href=https://example.org/posts/drawerlayoutwrite-oncerun-everywhere/><span class=title>« Prev</span><br><span>DrawerLayout：Write-Once，Run-EveryWhere</span></a>
-<a class=next href=https://example.org/posts/navigationview-%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/><span class=title>Next »</span><br><span>NavigationView-子菜单问题</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2023 <a href=https://example.org/>BLOG</a></span>
-<span>Powered by
-<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
-        <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></a><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="copy";function s(){t.innerHTML="copied!",setTimeout(()=>{t.innerHTML="copy"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>
+运行结果向上滑动时，状态栏也会向上滑，给人的感觉就像是被Toolbar和TabLayout挤上去的样子。</p>
+<p>基于以上的两个不同之处，我们大致可以推断出Toolbar没有完全隐藏可能是因为状态栏的原因，那么我们就开始着手解决这个问题。</p>
+<ul>
+<li>从布局开始
+首先我们进行了将主布局的<code>android:fitsSystemWindows=&quot;true&quot;</code>放到不同的地方，看看是否是这行代码出了问题，我分别将这行代码放到了CoordinatorLayout、AppBarLayout、Toolbar、TabLayout等多个地方，最后发现并没有解决问题。但是在这个过程中，却有一个小的变化是比较奇怪的，那就是当我<code>android:fitsSystemWindows=&quot;true&quot;</code>这行代码移出CoordinatorLayout中时，我们运行程序之后会出现如下结果：
+<img loading="lazy" src="http://upload-images.jianshu.io/upload_images/2524102-cdda1190eb30c4a7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="将上述代码移动到AppBarLayout中的结果"  />
+</li>
+</ul>
+<p>从上图中我们可以看到，上面的状态栏变白了。这个发现就更加印证了我们之前的推测：这件事情肯定和状态栏有关系。既然已经知道这个，那么我们就可以从第二个方面来解决。</p>
+<ul>
+<li>
+<p>从代码入手
+我们尝试着在<strong>进行了第一步尝试的基础上</strong>在代码中将状态栏的颜色修改一下<code>getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));</code>修改完之后，发现是可以得到和需求一样的结果。问题得到了完美的解决&hellip;&hellip;吗？我们都知道上面这修改状态栏颜色的代码是在api&gt;=21才可以用的，那如果api&lt;21怎么办？可能有人会说用开源库来修改啊。这个确实是一种非常好的解决办法，但是我并不想“撞大运”式的将这个问题解决。所以我们还得继续的深入查找问题，那么这个时候就想到了，和状态栏有关的属性，除了布局文件中和代码中，还有一个地方，就是<code>style.xml</code>中。</p>
+</li>
+<li>
+<p>从<code>style.xml</code>入手
+先贴出代码：</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;resources&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;style</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;AppTheme.NoActionBar&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;windowActionBar&#34;</span><span style="color:#f92672">&gt;</span>false<span style="color:#f92672">&lt;/item&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;windowNoTitle&#34;</span><span style="color:#f92672">&gt;</span>true<span style="color:#f92672">&lt;/item&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;android:windowDrawsSystemBarBackgrounds&#34;</span><span style="color:#f92672">&gt;</span>true<span style="color:#f92672">&lt;/item&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;android:statusBarColor&#34;</span><span style="color:#f92672">&gt;</span>@android:color/transparent<span style="color:#f92672">&lt;/item&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/style&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/resources&gt;</span>
+</span></span></code></pre></div><p>上面这个是<code>style.xml</code>(v21)的代码，从这段代码中我们就可以找到这次这个bug的罪魁祸首了。就是这一行<code>&lt;item name=&quot;android:statusBarColor&quot;&gt;@android:color/transparent&lt;/item&gt;</code>
+就是这行代码将我们的状态栏给弄成了透明了，结果就导致我们看到的状态栏和布局文件是在同一个z轴上，也就是会被挤上去，从而导致我们的Toolbar不能完全的隐藏起来。</p>
+<p>最后，为什么这个小bug费了这么大劲才找出来，我上面这一整套代码，基本上都是在android studio 中新建一个TabActivity 自动生成的。也就说原本自动生成的代码就有这个Bug，谁能想到android studio 这个浓眉大眼的家伙也&quot;叛变革命&quot;了呢。</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://houzixiashanxiedaima.github.io/posts/drawerlayoutwrite-oncerun-everywhere/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>DrawerLayout：Write-Once，Run-EveryWhere</span>
+  </a>
+  <a class="next" href="https://houzixiashanxiedaima.github.io/posts/navigationview-%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/">
+    <span class="title">Next »</span>
+    <br>
+    <span>NavigationView-子菜单问题</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://houzixiashanxiedaima.github.io/">BLOG</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

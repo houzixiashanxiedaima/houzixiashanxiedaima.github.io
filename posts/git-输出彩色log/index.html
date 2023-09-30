@@ -1,32 +1,376 @@
-<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Git配置彩色Log | BLOG</title><meta name=keywords content><meta name=description content="Git 彩色Log配置 git 在打印log的时候，默认是黑底白字，这样我们很多的关键信息都不能够非常突出的显示出来，看起来也是比较费劲。我们可以通过如下的语句让git打印出来的log出现彩色的字体，这样的话可以让我们更直接的看到我们的提交信息的关键字。
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Git配置彩色Log | BLOG</title>
+<meta name="keywords" content="">
+<meta name="description" content="Git 彩色Log配置 git 在打印log的时候，默认是黑底白字，这样我们很多的关键信息都不能够非常突出的显示出来，看起来也是比较费劲。我们可以通过如下的语句让git打印出来的log出现彩色的字体，这样的话可以让我们更直接的看到我们的提交信息的关键字。
 关键语句如下：
-git log --graph --pretty=format:'%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)<%cr>%Creset' --abbrev-commit --date=relative 大家可以看到这个关键语句比较长，我们不可能每次想要打印log的时候，都输入这么长的语句。 这样并不符合我们&#34;能懒就懒&#34;的原则。所以我们可以将这条语句配置到config配置文件里面
+git log --graph --pretty=format:&#39;%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)&lt;%cr&gt;%Creset&#39; --abbrev-commit --date=relative 大家可以看到这个关键语句比较长，我们不可能每次想要打印log的时候，都输入这么长的语句。 这样并不符合我们&quot;能懒就懒&quot;的原则。所以我们可以将这条语句配置到config配置文件里面
 关键配置语句如下：
-# 为了更简单,将log的别名设置为lg,以后就可以直接git lg输出日志了 git config --global alias.lg &#34;log --graph --pretty=format:'%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)<%cr>%Creset' --abbrev-commit --date=relative&#34; 执行了上面的配置语句之后，我们以后每次输出log就可以直接输入下面的语句：
+# 为了更简单,将log的别名设置为lg,以后就可以直接git lg输出日志了 git config --global alias.lg &#34;log --graph --pretty=format:&#39;%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)&lt;%cr&gt;%Creset&#39; --abbrev-commit --date=relative&#34; 执行了上面的配置语句之后，我们以后每次输出log就可以直接输入下面的语句：
 git lg 这样我们每次就只需要输入上面的一条语句，就可以看到我们的彩色log信息，关键字都已经变色，而且不同的信息用-分隔开，一目了然，在也不用面对黑底白字的命令行窗口了。 最后再给大家提供另一种log的格式，大家根据自己的喜好自行选择：
-git config --global alias.lg &#34;log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit&#34; git config --global alias.his &#34;log --graph --decorate --oneline --pretty=format:'%Creset %s %C(magenta)in %Cred%h %C(magenta)commited by %Cgreen%cn %C(magenta)on %C(yellow) %cd %C(magenta)from %Creset %C(yellow)%d' --abbrev-commit --date=format:'%Y-%m-%d %H:%M:%S'&#34; git config --global alias."><meta name=author content><link rel=canonical href=https://example.org/posts/git-%E8%BE%93%E5%87%BA%E5%BD%A9%E8%89%B2log/><link crossorigin=anonymous href=/assets/css/stylesheet.5cfc680b1eeaeef9efbced92d46c2a9e876b72ee14fba85846afc4cff9e6e6f8.css integrity="sha256-XPxoCx7q7vnvvO2S1Gwqnodrcu4U+6hYRq/Ez/nm5vg=" rel="preload stylesheet" as=style><script defer crossorigin=anonymous src=/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG+9vmJ0cTS+ovo0FeA=" onload=hljs.initHighlightingOnLoad()></script>
-<link rel=icon href=https://example.org/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://example.org/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://example.org/favicon-32x32.png><link rel=apple-touch-icon href=https://example.org/apple-touch-icon.png><link rel=mask-icon href=https://example.org/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><meta property="og:title" content="Git配置彩色Log"><meta property="og:description" content="Git 彩色Log配置 git 在打印log的时候，默认是黑底白字，这样我们很多的关键信息都不能够非常突出的显示出来，看起来也是比较费劲。我们可以通过如下的语句让git打印出来的log出现彩色的字体，这样的话可以让我们更直接的看到我们的提交信息的关键字。
+git config --global alias.lg &#34;log --color --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit&#34; git config --global alias.his &#34;log --graph --decorate --oneline --pretty=format:&#39;%Creset %s %C(magenta)in %Cred%h %C(magenta)commited by %Cgreen%cn %C(magenta)on %C(yellow) %cd %C(magenta)from %Creset %C(yellow)%d&#39; --abbrev-commit --date=format:&#39;%Y-%m-%d %H:%M:%S&#39;&#34; git config --global alias.">
+<meta name="author" content="">
+<link rel="canonical" href="https://houzixiashanxiedaima.github.io/posts/git-%E8%BE%93%E5%87%BA%E5%BD%A9%E8%89%B2log/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.5cfc680b1eeaeef9efbced92d46c2a9e876b72ee14fba85846afc4cff9e6e6f8.css" integrity="sha256-XPxoCx7q7vnvvO2S1Gwqnodrcu4U&#43;6hYRq/Ez/nm5vg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://houzixiashanxiedaima.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://houzixiashanxiedaima.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://houzixiashanxiedaima.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://houzixiashanxiedaima.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://houzixiashanxiedaima.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Git配置彩色Log" />
+<meta property="og:description" content="Git 彩色Log配置 git 在打印log的时候，默认是黑底白字，这样我们很多的关键信息都不能够非常突出的显示出来，看起来也是比较费劲。我们可以通过如下的语句让git打印出来的log出现彩色的字体，这样的话可以让我们更直接的看到我们的提交信息的关键字。
 关键语句如下：
-git log --graph --pretty=format:'%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)<%cr>%Creset' --abbrev-commit --date=relative 大家可以看到这个关键语句比较长，我们不可能每次想要打印log的时候，都输入这么长的语句。 这样并不符合我们&#34;能懒就懒&#34;的原则。所以我们可以将这条语句配置到config配置文件里面
+git log --graph --pretty=format:&#39;%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)&lt;%cr&gt;%Creset&#39; --abbrev-commit --date=relative 大家可以看到这个关键语句比较长，我们不可能每次想要打印log的时候，都输入这么长的语句。 这样并不符合我们&quot;能懒就懒&quot;的原则。所以我们可以将这条语句配置到config配置文件里面
 关键配置语句如下：
-# 为了更简单,将log的别名设置为lg,以后就可以直接git lg输出日志了 git config --global alias.lg &#34;log --graph --pretty=format:'%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)<%cr>%Creset' --abbrev-commit --date=relative&#34; 执行了上面的配置语句之后，我们以后每次输出log就可以直接输入下面的语句：
+# 为了更简单,将log的别名设置为lg,以后就可以直接git lg输出日志了 git config --global alias.lg &#34;log --graph --pretty=format:&#39;%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)&lt;%cr&gt;%Creset&#39; --abbrev-commit --date=relative&#34; 执行了上面的配置语句之后，我们以后每次输出log就可以直接输入下面的语句：
 git lg 这样我们每次就只需要输入上面的一条语句，就可以看到我们的彩色log信息，关键字都已经变色，而且不同的信息用-分隔开，一目了然，在也不用面对黑底白字的命令行窗口了。 最后再给大家提供另一种log的格式，大家根据自己的喜好自行选择：
-git config --global alias.lg &#34;log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit&#34; git config --global alias.his &#34;log --graph --decorate --oneline --pretty=format:'%Creset %s %C(magenta)in %Cred%h %C(magenta)commited by %Cgreen%cn %C(magenta)on %C(yellow) %cd %C(magenta)from %Creset %C(yellow)%d' --abbrev-commit --date=format:'%Y-%m-%d %H:%M:%S'&#34; git config --global alias."><meta property="og:type" content="article"><meta property="og:url" content="https://example.org/posts/git-%E8%BE%93%E5%87%BA%E5%BD%A9%E8%89%B2log/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2016-07-28T15:17:34+00:00"><meta property="article:modified_time" content="2016-07-28T15:17:34+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Git配置彩色Log"><meta name=twitter:description content="Git 彩色Log配置 git 在打印log的时候，默认是黑底白字，这样我们很多的关键信息都不能够非常突出的显示出来，看起来也是比较费劲。我们可以通过如下的语句让git打印出来的log出现彩色的字体，这样的话可以让我们更直接的看到我们的提交信息的关键字。
+git config --global alias.lg &#34;log --color --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit&#34; git config --global alias.his &#34;log --graph --decorate --oneline --pretty=format:&#39;%Creset %s %C(magenta)in %Cred%h %C(magenta)commited by %Cgreen%cn %C(magenta)on %C(yellow) %cd %C(magenta)from %Creset %C(yellow)%d&#39; --abbrev-commit --date=format:&#39;%Y-%m-%d %H:%M:%S&#39;&#34; git config --global alias." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://houzixiashanxiedaima.github.io/posts/git-%E8%BE%93%E5%87%BA%E5%BD%A9%E8%89%B2log/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2016-07-28T15:17:34+00:00" />
+<meta property="article:modified_time" content="2016-07-28T15:17:34+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Git配置彩色Log"/>
+<meta name="twitter:description" content="Git 彩色Log配置 git 在打印log的时候，默认是黑底白字，这样我们很多的关键信息都不能够非常突出的显示出来，看起来也是比较费劲。我们可以通过如下的语句让git打印出来的log出现彩色的字体，这样的话可以让我们更直接的看到我们的提交信息的关键字。
 关键语句如下：
-git log --graph --pretty=format:'%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)<%cr>%Creset' --abbrev-commit --date=relative 大家可以看到这个关键语句比较长，我们不可能每次想要打印log的时候，都输入这么长的语句。 这样并不符合我们&#34;能懒就懒&#34;的原则。所以我们可以将这条语句配置到config配置文件里面
+git log --graph --pretty=format:&#39;%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)&lt;%cr&gt;%Creset&#39; --abbrev-commit --date=relative 大家可以看到这个关键语句比较长，我们不可能每次想要打印log的时候，都输入这么长的语句。 这样并不符合我们&quot;能懒就懒&quot;的原则。所以我们可以将这条语句配置到config配置文件里面
 关键配置语句如下：
-# 为了更简单,将log的别名设置为lg,以后就可以直接git lg输出日志了 git config --global alias.lg &#34;log --graph --pretty=format:'%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)<%cr>%Creset' --abbrev-commit --date=relative&#34; 执行了上面的配置语句之后，我们以后每次输出log就可以直接输入下面的语句：
+# 为了更简单,将log的别名设置为lg,以后就可以直接git lg输出日志了 git config --global alias.lg &#34;log --graph --pretty=format:&#39;%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)&lt;%cr&gt;%Creset&#39; --abbrev-commit --date=relative&#34; 执行了上面的配置语句之后，我们以后每次输出log就可以直接输入下面的语句：
 git lg 这样我们每次就只需要输入上面的一条语句，就可以看到我们的彩色log信息，关键字都已经变色，而且不同的信息用-分隔开，一目了然，在也不用面对黑底白字的命令行窗口了。 最后再给大家提供另一种log的格式，大家根据自己的喜好自行选择：
-git config --global alias.lg &#34;log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit&#34; git config --global alias.his &#34;log --graph --decorate --oneline --pretty=format:'%Creset %s %C(magenta)in %Cred%h %C(magenta)commited by %Cgreen%cn %C(magenta)on %C(yellow) %cd %C(magenta)from %Creset %C(yellow)%d' --abbrev-commit --date=format:'%Y-%m-%d %H:%M:%S'&#34; git config --global alias."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://example.org/posts/"},{"@type":"ListItem","position":2,"name":"Git配置彩色Log","item":"https://example.org/posts/git-%E8%BE%93%E5%87%BA%E5%BD%A9%E8%89%B2log/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Git配置彩色Log","name":"Git配置彩色Log","description":"Git 彩色Log配置 git 在打印log的时候，默认是黑底白字，这样我们很多的关键信息都不能够非常突出的显示出来，看起来也是比较费劲。我们可以通过如下的语句让git打印出来的log出现彩色的字体，这样的话可以让我们更直接的看到我们的提交信息的关键字。\n关键语句如下：\ngit log --graph --pretty=format:\u0026#39;%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)\u0026lt;%cr\u0026gt;%Creset\u0026#39; --abbrev-commit --date=relative 大家可以看到这个关键语句比较长，我们不可能每次想要打印log的时候，都输入这么长的语句。 这样并不符合我们\u0026quot;能懒就懒\u0026quot;的原则。所以我们可以将这条语句配置到config配置文件里面\n关键配置语句如下：\n# 为了更简单,将log的别名设置为lg,以后就可以直接git lg输出日志了 git config --global alias.lg \u0026#34;log --graph --pretty=format:\u0026#39;%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)\u0026lt;%cr\u0026gt;%Creset\u0026#39; --abbrev-commit --date=relative\u0026#34; 执行了上面的配置语句之后，我们以后每次输出log就可以直接输入下面的语句：\ngit lg 这样我们每次就只需要输入上面的一条语句，就可以看到我们的彩色log信息，关键字都已经变色，而且不同的信息用-分隔开，一目了然，在也不用面对黑底白字的命令行窗口了。 最后再给大家提供另一种log的格式，大家根据自己的喜好自行选择：\ngit config --global alias.lg \u0026#34;log --color --graph --pretty=format:\u0026#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)\u0026lt;%an\u0026gt;%Creset\u0026#39; --abbrev-commit\u0026#34; git config --global alias.his \u0026#34;log --graph --decorate --oneline --pretty=format:\u0026#39;%Creset %s %C(magenta)in %Cred%h %C(magenta)commited by %Cgreen%cn %C(magenta)on %C(yellow) %cd %C(magenta)from %Creset %C(yellow)%d\u0026#39; --abbrev-commit --date=format:\u0026#39;%Y-%m-%d %H:%M:%S\u0026#39;\u0026#34; git config --global alias.","keywords":[],"articleBody":"Git 彩色Log配置 git 在打印log的时候，默认是黑底白字，这样我们很多的关键信息都不能够非常突出的显示出来，看起来也是比较费劲。我们可以通过如下的语句让git打印出来的log出现彩色的字体，这样的话可以让我们更直接的看到我们的提交信息的关键字。\n关键语句如下：\ngit log --graph --pretty=format:'%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)\u003c%cr\u003e%Creset' --abbrev-commit --date=relative 大家可以看到这个关键语句比较长，我们不可能每次想要打印log的时候，都输入这么长的语句。 这样并不符合我们\"能懒就懒\"的原则。所以我们可以将这条语句配置到config配置文件里面\n关键配置语句如下：\n# 为了更简单,将log的别名设置为lg,以后就可以直接git lg输出日志了 git config --global alias.lg \"log --graph --pretty=format:'%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)\u003c%cr\u003e%Creset' --abbrev-commit --date=relative\" 执行了上面的配置语句之后，我们以后每次输出log就可以直接输入下面的语句：\ngit lg 这样我们每次就只需要输入上面的一条语句，就可以看到我们的彩色log信息，关键字都已经变色，而且不同的信息用-分隔开，一目了然，在也不用面对黑底白字的命令行窗口了。 最后再给大家提供另一种log的格式，大家根据自己的喜好自行选择：\ngit config --global alias.lg \"log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)\u003c%an\u003e%Creset' --abbrev-commit\" git config --global alias.his \"log --graph --decorate --oneline --pretty=format:'%Creset %s %C(magenta)in %Cred%h %C(magenta)commited by %Cgreen%cn %C(magenta)on %C(yellow) %cd %C(magenta)from %Creset %C(yellow)%d' --abbrev-commit --date=format:'%Y-%m-%d %H:%M:%S'\" git config --global alias.hist \"log --graph --decorate --oneline --pretty=format:'%Cred%h - %C(bold white) %s %Creset %C(yellow)%d %C(cyan) \u003c%cd\u003e %Creset %Cgreen(%cn)' --abbrev-commit --date=format:'%Y-%m-%d %H:%M:%S'\" ","wordCount":"101","inLanguage":"en","datePublished":"2016-07-28T15:17:34Z","dateModified":"2016-07-28T15:17:34Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://example.org/posts/git-%E8%BE%93%E5%87%BA%E5%BD%A9%E8%89%B2log/"},"publisher":{"@type":"Organization","name":"BLOG","logo":{"@type":"ImageObject","url":"https://example.org/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><a href=https://example.org/ accesskey=h title="BLOG (Alt + H)">BLOG</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://example.org/ title=BLOG><span>HOME</span></a></li><li><a href=https://example.org/archives/ title=Archive><span>ARCHIVE</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://example.org/>Home</a>&nbsp;»&nbsp;<a href=https://example.org/posts/>Posts</a></div><h1 class=post-title>Git配置彩色Log</h1><div class=post-meta><span title='2016-07-28 15:17:34 +0000 UTC'>July 28, 2016</span>&nbsp;·&nbsp;1 min</div></header><div class=toc><details open><summary accesskey=c title="(Alt + C)"><span class=details>Table of Contents</span></summary><div class=inner><ul><li><a href=#git-%e5%bd%a9%e8%89%b2log%e9%85%8d%e7%bd%ae aria-label="Git 彩色Log配置">Git 彩色Log配置</a></li></ul></div></details></div><div class=post-content><h1 id=git-彩色log配置>Git 彩色Log配置<a hidden class=anchor aria-hidden=true href=#git-彩色log配置>#</a></h1><p>git 在打印log的时候，默认是黑底白字，这样我们很多的关键信息都不能够非常突出的显示出来，看起来也是比较费劲。我们可以通过如下的语句让git打印出来的log出现彩色的字体，这样的话可以让我们更直接的看到我们的提交信息的关键字。</p><p><strong>关键语句如下：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git log --graph --pretty<span style=color:#f92672>=</span>format:<span style=color:#e6db74>&#39;%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)&lt;%cr&gt;%Creset&#39;</span> --abbrev-commit --date<span style=color:#f92672>=</span>relative
-</span></span></code></pre></div><p>大家可以看到这个关键语句比较长，我们不可能每次想要打印log的时候，都输入这么长的语句。 这样并不符合我们"能懒就懒"的原则。所以我们可以将这条语句配置到config配置文件里面</p><p><strong>关键配置语句如下：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 为了更简单,将log的别名设置为lg,以后就可以直接git lg输出日志了</span>
-</span></span><span style=display:flex><span>git config --global alias.lg <span style=color:#e6db74>&#34;log --graph --pretty=format:&#39;%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)&lt;%cr&gt;%Creset&#39; --abbrev-commit --date=relative&#34;</span>
-</span></span></code></pre></div><p>执行了上面的配置语句之后，我们以后每次输出log就可以直接输入下面的语句：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git lg
+git config --global alias.lg &#34;log --color --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit&#34; git config --global alias.his &#34;log --graph --decorate --oneline --pretty=format:&#39;%Creset %s %C(magenta)in %Cred%h %C(magenta)commited by %Cgreen%cn %C(magenta)on %C(yellow) %cd %C(magenta)from %Creset %C(yellow)%d&#39; --abbrev-commit --date=format:&#39;%Y-%m-%d %H:%M:%S&#39;&#34; git config --global alias."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://houzixiashanxiedaima.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Git配置彩色Log",
+      "item": "https://houzixiashanxiedaima.github.io/posts/git-%E8%BE%93%E5%87%BA%E5%BD%A9%E8%89%B2log/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Git配置彩色Log",
+  "name": "Git配置彩色Log",
+  "description": "Git 彩色Log配置 git 在打印log的时候，默认是黑底白字，这样我们很多的关键信息都不能够非常突出的显示出来，看起来也是比较费劲。我们可以通过如下的语句让git打印出来的log出现彩色的字体，这样的话可以让我们更直接的看到我们的提交信息的关键字。\n关键语句如下：\ngit log --graph --pretty=format:\u0026#39;%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)\u0026lt;%cr\u0026gt;%Creset\u0026#39; --abbrev-commit --date=relative 大家可以看到这个关键语句比较长，我们不可能每次想要打印log的时候，都输入这么长的语句。 这样并不符合我们\u0026quot;能懒就懒\u0026quot;的原则。所以我们可以将这条语句配置到config配置文件里面\n关键配置语句如下：\n# 为了更简单,将log的别名设置为lg,以后就可以直接git lg输出日志了 git config --global alias.lg \u0026#34;log --graph --pretty=format:\u0026#39;%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)\u0026lt;%cr\u0026gt;%Creset\u0026#39; --abbrev-commit --date=relative\u0026#34; 执行了上面的配置语句之后，我们以后每次输出log就可以直接输入下面的语句：\ngit lg 这样我们每次就只需要输入上面的一条语句，就可以看到我们的彩色log信息，关键字都已经变色，而且不同的信息用-分隔开，一目了然，在也不用面对黑底白字的命令行窗口了。 最后再给大家提供另一种log的格式，大家根据自己的喜好自行选择：\ngit config --global alias.lg \u0026#34;log --color --graph --pretty=format:\u0026#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)\u0026lt;%an\u0026gt;%Creset\u0026#39; --abbrev-commit\u0026#34; git config --global alias.his \u0026#34;log --graph --decorate --oneline --pretty=format:\u0026#39;%Creset %s %C(magenta)in %Cred%h %C(magenta)commited by %Cgreen%cn %C(magenta)on %C(yellow) %cd %C(magenta)from %Creset %C(yellow)%d\u0026#39; --abbrev-commit --date=format:\u0026#39;%Y-%m-%d %H:%M:%S\u0026#39;\u0026#34; git config --global alias.",
+  "keywords": [
+    
+  ],
+  "articleBody": "Git 彩色Log配置 git 在打印log的时候，默认是黑底白字，这样我们很多的关键信息都不能够非常突出的显示出来，看起来也是比较费劲。我们可以通过如下的语句让git打印出来的log出现彩色的字体，这样的话可以让我们更直接的看到我们的提交信息的关键字。\n关键语句如下：\ngit log --graph --pretty=format:'%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)\u003c%cr\u003e%Creset' --abbrev-commit --date=relative 大家可以看到这个关键语句比较长，我们不可能每次想要打印log的时候，都输入这么长的语句。 这样并不符合我们\"能懒就懒\"的原则。所以我们可以将这条语句配置到config配置文件里面\n关键配置语句如下：\n# 为了更简单,将log的别名设置为lg,以后就可以直接git lg输出日志了 git config --global alias.lg \"log --graph --pretty=format:'%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)\u003c%cr\u003e%Creset' --abbrev-commit --date=relative\" 执行了上面的配置语句之后，我们以后每次输出log就可以直接输入下面的语句：\ngit lg 这样我们每次就只需要输入上面的一条语句，就可以看到我们的彩色log信息，关键字都已经变色，而且不同的信息用-分隔开，一目了然，在也不用面对黑底白字的命令行窗口了。 最后再给大家提供另一种log的格式，大家根据自己的喜好自行选择：\ngit config --global alias.lg \"log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)\u003c%an\u003e%Creset' --abbrev-commit\" git config --global alias.his \"log --graph --decorate --oneline --pretty=format:'%Creset %s %C(magenta)in %Cred%h %C(magenta)commited by %Cgreen%cn %C(magenta)on %C(yellow) %cd %C(magenta)from %Creset %C(yellow)%d' --abbrev-commit --date=format:'%Y-%m-%d %H:%M:%S'\" git config --global alias.hist \"log --graph --decorate --oneline --pretty=format:'%Cred%h - %C(bold white) %s %Creset %C(yellow)%d %C(cyan) \u003c%cd\u003e %Creset %Cgreen(%cn)' --abbrev-commit --date=format:'%Y-%m-%d %H:%M:%S'\" ",
+  "wordCount" : "101",
+  "inLanguage": "en",
+  "datePublished": "2016-07-28T15:17:34Z",
+  "dateModified": "2016-07-28T15:17:34Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://houzixiashanxiedaima.github.io/posts/git-%E8%BE%93%E5%87%BA%E5%BD%A9%E8%89%B2log/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "BLOG",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://houzixiashanxiedaima.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://houzixiashanxiedaima.github.io/" accesskey="h" title="BLOG (Alt + H)">BLOG</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://houzixiashanxiedaima.github.io/" title="BLOG">
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://houzixiashanxiedaima.github.io/archives/" title="Archive">
+                    <span>ARCHIVE</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://houzixiashanxiedaima.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://houzixiashanxiedaima.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Git配置彩色Log
+    </h1>
+    <div class="post-meta"><span title='2016-07-28 15:17:34 +0000 UTC'>July 28, 2016</span>&nbsp;·&nbsp;1 min
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#git-%e5%bd%a9%e8%89%b2log%e9%85%8d%e7%bd%ae" aria-label="Git 彩色Log配置">Git 彩色Log配置</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="git-彩色log配置">Git 彩色Log配置<a hidden class="anchor" aria-hidden="true" href="#git-彩色log配置">#</a></h1>
+<p>git 在打印log的时候，默认是黑底白字，这样我们很多的关键信息都不能够非常突出的显示出来，看起来也是比较费劲。我们可以通过如下的语句让git打印出来的log出现彩色的字体，这样的话可以让我们更直接的看到我们的提交信息的关键字。</p>
+<!-- raw HTML omitted -->
+<p><strong>关键语句如下：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git log --graph --pretty<span style="color:#f92672">=</span>format:<span style="color:#e6db74">&#39;%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)&lt;%cr&gt;%Creset&#39;</span> --abbrev-commit --date<span style="color:#f92672">=</span>relative
+</span></span></code></pre></div><p>大家可以看到这个关键语句比较长，我们不可能每次想要打印log的时候，都输入这么长的语句。 这样并不符合我们&quot;能懒就懒&quot;的原则。所以我们可以将这条语句配置到config配置文件里面</p>
+<p><strong>关键配置语句如下：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 为了更简单,将log的别名设置为lg,以后就可以直接git lg输出日志了</span>
+</span></span><span style="display:flex;"><span>git config --global alias.lg <span style="color:#e6db74">&#34;log --graph --pretty=format:&#39;%Cred%h - %Cgreen[%an]%Creset -%C(yellow)%d%Creset %s %C(yellow)&lt;%cr&gt;%Creset&#39; --abbrev-commit --date=relative&#34;</span>
+</span></span></code></pre></div><p>执行了上面的配置语句之后，我们以后每次输出log就可以直接输入下面的语句：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git lg
 </span></span></code></pre></div><p>这样我们每次就只需要输入上面的一条语句，就可以看到我们的彩色log信息，关键字都已经变色，而且不同的信息用-分隔开，一目了然，在也不用面对黑底白字的命令行窗口了。
-最后再给大家提供另一种log的格式，大家根据自己的喜好自行选择：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git config --global alias.lg <span style=color:#e6db74>&#34;log --color --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit&#34;</span>
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git config --global alias.his <span style=color:#e6db74>&#34;log --graph --decorate --oneline --pretty=format:&#39;%Creset %s %C(magenta)in %Cred%h %C(magenta)commited by %Cgreen%cn %C(magenta)on %C(yellow) %cd %C(magenta)from %Creset %C(yellow)%d&#39; --abbrev-commit --date=format:&#39;%Y-%m-%d %H:%M:%S&#39;&#34;</span>
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git config --global alias.hist <span style=color:#e6db74>&#34;log --graph --decorate --oneline --pretty=format:&#39;%Cred%h - %C(bold white) %s %Creset %C(yellow)%d  %C(cyan) &lt;%cd&gt; %Creset %Cgreen(%cn)&#39; --abbrev-commit --date=format:&#39;%Y-%m-%d %H:%M:%S&#39;&#34;</span>
-</span></span></code></pre></div></div><footer class=post-footer><ul class=post-tags></ul><nav class=paginav><a class=prev href=https://example.org/posts/adb-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%97%A0%E7%BA%BF%E8%B0%83%E8%AF%95/><span class=title>« Prev</span><br><span>ADB 命令行无线调试</span></a>
-<a class=next href=https://example.org/posts/hexo-+-github-pages%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/><span class=title>Next »</span><br><span>Hexo + Github Pages搭建博客</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2023 <a href=https://example.org/>BLOG</a></span>
-<span>Powered by
-<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
-        <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></a><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="copy";function s(){t.innerHTML="copied!",setTimeout(()=>{t.innerHTML="copy"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>
+最后再给大家提供另一种log的格式，大家根据自己的喜好自行选择：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git config --global alias.lg <span style="color:#e6db74">&#34;log --color --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit&#34;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git config --global alias.his <span style="color:#e6db74">&#34;log --graph --decorate --oneline --pretty=format:&#39;%Creset %s %C(magenta)in %Cred%h %C(magenta)commited by %Cgreen%cn %C(magenta)on %C(yellow) %cd %C(magenta)from %Creset %C(yellow)%d&#39; --abbrev-commit --date=format:&#39;%Y-%m-%d %H:%M:%S&#39;&#34;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git config --global alias.hist <span style="color:#e6db74">&#34;log --graph --decorate --oneline --pretty=format:&#39;%Cred%h - %C(bold white) %s %Creset %C(yellow)%d  %C(cyan) &lt;%cd&gt; %Creset %Cgreen(%cn)&#39; --abbrev-commit --date=format:&#39;%Y-%m-%d %H:%M:%S&#39;&#34;</span>
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://houzixiashanxiedaima.github.io/posts/adb-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%97%A0%E7%BA%BF%E8%B0%83%E8%AF%95/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>ADB 命令行无线调试</span>
+  </a>
+  <a class="next" href="https://houzixiashanxiedaima.github.io/posts/hexo-&#43;-github-pages%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Hexo &#43; Github Pages搭建博客</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://houzixiashanxiedaima.github.io/">BLOG</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
