@@ -195,7 +195,7 @@
     <h1 class="post-title">
       Android自定义流式布局的探索
     </h1>
-    <div class="post-meta"><span title='2016-07-28 15:19:45 +0000 UTC'>July 28, 2016</span>&nbsp;·&nbsp;3 min
+    <div class="post-meta">&lt;span title=&#39;2016-07-28 15:19:45 &#43;0000 UTC&#39;&gt;July 28, 2016&lt;/span&gt;&amp;nbsp;·&amp;nbsp;3 min
 
 </div>
   </header> <div class="toc">
@@ -231,65 +231,65 @@
 </ol>
 <p>我们先从第一步开始</p>
 <p>首先直接放出onMeasure的代码</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">onMeasure</span><span style="color:#f92672">(</span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> widthMeasureSpec<span style="color:#f92672">,</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> heightMeasureSpec<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">//获取该ViewGroup的父布局为该ViewGroup推荐的宽高以及计算模式
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#66d9ef">int</span> sizeWidth <span style="color:#f92672">=</span> MeasureSpec<span style="color:#f92672">.</span><span style="color:#a6e22e">getSize</span><span style="color:#f92672">(</span>widthMeasureSpec<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> sizeHeight <span style="color:#f92672">=</span> MeasureSpec<span style="color:#f92672">.</span><span style="color:#a6e22e">getSize</span><span style="color:#f92672">(</span>heightMeasureSpec<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> modeWidth <span style="color:#f92672">=</span> MeasureSpec<span style="color:#f92672">.</span><span style="color:#a6e22e">getMode</span><span style="color:#f92672">(</span>widthMeasureSpec<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> modeHeight <span style="color:#f92672">=</span> MeasureSpec<span style="color:#f92672">.</span><span style="color:#a6e22e">getMode</span><span style="color:#f92672">(</span>heightMeasureSpec<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">//当该ViewGroup是wrap_content的时候，记录宽高
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#66d9ef">int</span> layoutWidth <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> layoutHeight <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">//每行的宽高，宽度永远都取最大值，高度则直接相加
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#66d9ef">int</span> lineWidth <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> lineHeight <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">//遍历childView计并算childView的宽高与margin值，然后通过计算结果来确定当
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#75715e">//我们的ViewGroup设置为wrap_content时ViewGroup的宽高
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">,</span> childCount <span style="color:#f92672">=</span> getChildCount<span style="color:#f92672">();</span> i <span style="color:#f92672">&lt;</span> childCount<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>          View childView <span style="color:#f92672">=</span> getChildAt<span style="color:#f92672">(</span>i<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#75715e">//通过ViewGroup的measureChild方法设置childView的宽高，执行完毕之后，
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>          <span style="color:#75715e">//所有的childView的宽高都已经确定了。
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>          measureChild<span style="color:#f92672">(</span>childView<span style="color:#f92672">,</span> widthMeasureSpec<span style="color:#f92672">,</span> heightMeasureSpec<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#75715e">//获取上一步中ViewGroup设置的childView的宽高
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>          <span style="color:#66d9ef">int</span> childWidth <span style="color:#f92672">=</span> childView<span style="color:#f92672">.</span><span style="color:#a6e22e">getMeasuredWidth</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">int</span> childHeight <span style="color:#f92672">=</span> childView<span style="color:#f92672">.</span><span style="color:#a6e22e">getMeasuredHeight</span><span style="color:#f92672">();</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">onMeasure</span>(<span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> widthMeasureSpec, <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> heightMeasureSpec) {
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">//获取该ViewGroup的父布局为该ViewGroup推荐的宽高以及计算模式</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> sizeWidth <span style="color:#f92672">=</span> MeasureSpec.<span style="color:#a6e22e">getSize</span>(widthMeasureSpec);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> sizeHeight <span style="color:#f92672">=</span> MeasureSpec.<span style="color:#a6e22e">getSize</span>(heightMeasureSpec);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> modeWidth <span style="color:#f92672">=</span> MeasureSpec.<span style="color:#a6e22e">getMode</span>(widthMeasureSpec);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> modeHeight <span style="color:#f92672">=</span> MeasureSpec.<span style="color:#a6e22e">getMode</span>(heightMeasureSpec);
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">//当该ViewGroup是wrap_content的时候，记录宽高</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> layoutWidth <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> layoutHeight <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">//每行的宽高，宽度永远都取最大值，高度则直接相加</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> lineWidth <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> lineHeight <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">//遍历childView计并算childView的宽高与margin值，然后通过计算结果来确定当</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">//我们的ViewGroup设置为wrap_content时ViewGroup的宽高</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>          <span style="color:#75715e">//获取childView的LayoutParams
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>          <span style="color:#75715e">// 每个布局都有一种特殊的LayoutParams，
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>          <span style="color:#75715e">//比如LinearLayout.LayoutParams,RelativeLayout.LayoutParams等等
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>          MarginLayoutParams mlp <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>MarginLayoutParams<span style="color:#f92672">)</span> childView<span style="color:#f92672">.</span><span style="color:#a6e22e">getLayoutParams</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#75715e">//计算实际上childView的宽高(childView本身的宽高加上它的Margin值)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>          <span style="color:#66d9ef">int</span> realChildWidth <span style="color:#f92672">=</span> childWidth <span style="color:#f92672">+</span> mlp<span style="color:#f92672">.</span><span style="color:#a6e22e">leftMargin</span> <span style="color:#f92672">+</span> mlp<span style="color:#f92672">.</span><span style="color:#a6e22e">rightMargin</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">int</span> realChildHeight <span style="color:#f92672">=</span> childHeight <span style="color:#f92672">+</span> mlp<span style="color:#f92672">.</span><span style="color:#a6e22e">topMargin</span> <span style="color:#f92672">+</span> mlp<span style="color:#f92672">.</span><span style="color:#a6e22e">bottomMargin</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0, childCount <span style="color:#f92672">=</span> getChildCount(); i <span style="color:#f92672">&lt;</span> childCount; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>          View childView <span style="color:#f92672">=</span> getChildAt(i);
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e">//通过ViewGroup的measureChild方法设置childView的宽高，执行完毕之后，</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e">//所有的childView的宽高都已经确定了。</span>
+</span></span><span style="display:flex;"><span>          measureChild(childView, widthMeasureSpec, heightMeasureSpec);
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e">//获取上一步中ViewGroup设置的childView的宽高</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">int</span> childWidth <span style="color:#f92672">=</span> childView.<span style="color:#a6e22e">getMeasuredWidth</span>();
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">int</span> childHeight <span style="color:#f92672">=</span> childView.<span style="color:#a6e22e">getMeasuredHeight</span>();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>          <span style="color:#75715e">//该行当前的宽度加上childView实际的宽度大于布局宽度，则换行
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>          <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>lineWidth <span style="color:#f92672">+</span> realChildWidth <span style="color:#f92672">&gt;</span> sizeWidth<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#75715e">//执行换行操作
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>              <span style="color:#75715e">//这里layoutWidth取lineWidth和realChildWidth的最大值是因为可能会
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>              <span style="color:#75715e">//出现如下的情况：
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>              <span style="color:#75715e">//上一行：= = = ==(宽度为8)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>              <span style="color:#75715e">//该childView：==========(宽度&gt;8)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>              layoutWidth <span style="color:#f92672">=</span> Math<span style="color:#f92672">.</span><span style="color:#a6e22e">max</span><span style="color:#f92672">(</span>lineWidth<span style="color:#f92672">,</span> realChildWidth<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#75715e">//当前计算的总高度累加一个realChildHeight即可
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>              layoutHeight <span style="color:#f92672">=</span> layoutHeight <span style="color:#f92672">+</span> realChildHeight<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#75715e">//换行之后，新行的宽度和高度需要重新计算，此处是设置为在该行的唯一一个childView的实际宽高
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>              lineWidth <span style="color:#f92672">=</span> realChildWidth<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>              lineHeight <span style="color:#f92672">=</span> realChildHeight<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#75715e">//宽度未超出，可以直接相加宽度
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>              lineWidth <span style="color:#f92672">=</span> lineWidth <span style="color:#f92672">+</span> realChildWidth<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#75715e">//获取最终的行高，取之前的行高和当前子View的高度
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>              lineHeight <span style="color:#f92672">=</span> Math<span style="color:#f92672">.</span><span style="color:#a6e22e">max</span><span style="color:#f92672">(</span>lineHeight<span style="color:#f92672">,</span> realChildHeight<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e">//获取childView的LayoutParams</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e">// 每个布局都有一种特殊的LayoutParams，</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e">//比如LinearLayout.LayoutParams,RelativeLayout.LayoutParams等等</span>
+</span></span><span style="display:flex;"><span>          MarginLayoutParams mlp <span style="color:#f92672">=</span> (MarginLayoutParams) childView.<span style="color:#a6e22e">getLayoutParams</span>();
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e">//计算实际上childView的宽高(childView本身的宽高加上它的Margin值)</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">int</span> realChildWidth <span style="color:#f92672">=</span> childWidth <span style="color:#f92672">+</span> mlp.<span style="color:#a6e22e">leftMargin</span> <span style="color:#f92672">+</span> mlp.<span style="color:#a6e22e">rightMargin</span>;
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">int</span> realChildHeight <span style="color:#f92672">=</span> childHeight <span style="color:#f92672">+</span> mlp.<span style="color:#a6e22e">topMargin</span> <span style="color:#f92672">+</span> mlp.<span style="color:#a6e22e">bottomMargin</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>          <span style="color:#75715e">// 如果是最后一个，需要做一些处理。
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>          <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>i <span style="color:#f92672">==</span> childCount <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#75715e">//将当前布局的宽度和最后一行的宽度相比，取最大值
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>              layoutWidth <span style="color:#f92672">=</span> Math<span style="color:#f92672">.</span><span style="color:#a6e22e">max</span><span style="color:#f92672">(</span>lineWidth<span style="color:#f92672">,</span> layoutWidth<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#75715e">//当前布局的行高还是简单的叠加即可
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>              layoutHeight <span style="color:#f92672">=</span> layoutHeight <span style="color:#f92672">+</span> lineHeight<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e">//该行当前的宽度加上childView实际的宽度大于布局宽度，则换行</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">if</span> (lineWidth <span style="color:#f92672">+</span> realChildWidth <span style="color:#f92672">&gt;</span> sizeWidth) {
+</span></span><span style="display:flex;"><span>              <span style="color:#75715e">//执行换行操作</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#75715e">//这里layoutWidth取lineWidth和realChildWidth的最大值是因为可能会</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#75715e">//出现如下的情况：</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#75715e">//上一行：= = = ==(宽度为8)</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#75715e">//该childView：==========(宽度&gt;8)</span>
+</span></span><span style="display:flex;"><span>              layoutWidth <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">max</span>(lineWidth, realChildWidth);
+</span></span><span style="display:flex;"><span>              <span style="color:#75715e">//当前计算的总高度累加一个realChildHeight即可</span>
+</span></span><span style="display:flex;"><span>              layoutHeight <span style="color:#f92672">=</span> layoutHeight <span style="color:#f92672">+</span> realChildHeight;
+</span></span><span style="display:flex;"><span>              <span style="color:#75715e">//换行之后，新行的宽度和高度需要重新计算，此处是设置为在该行的唯一一个childView的实际宽高</span>
+</span></span><span style="display:flex;"><span>              lineWidth <span style="color:#f92672">=</span> realChildWidth;
+</span></span><span style="display:flex;"><span>              lineHeight <span style="color:#f92672">=</span> realChildHeight;
+</span></span><span style="display:flex;"><span>          } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>              <span style="color:#75715e">//宽度未超出，可以直接相加宽度</span>
+</span></span><span style="display:flex;"><span>              lineWidth <span style="color:#f92672">=</span> lineWidth <span style="color:#f92672">+</span> realChildWidth;
+</span></span><span style="display:flex;"><span>              <span style="color:#75715e">//获取最终的行高，取之前的行高和当前子View的高度</span>
+</span></span><span style="display:flex;"><span>              lineHeight <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">max</span>(lineHeight, realChildHeight);
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e">// 如果是最后一个，需要做一些处理。</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">==</span> childCount <span style="color:#f92672">-</span> 1) {
+</span></span><span style="display:flex;"><span>              <span style="color:#75715e">//将当前布局的宽度和最后一行的宽度相比，取最大值</span>
+</span></span><span style="display:flex;"><span>              layoutWidth <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">max</span>(lineWidth, layoutWidth);
+</span></span><span style="display:flex;"><span>              <span style="color:#75715e">//当前布局的行高还是简单的叠加即可</span>
+</span></span><span style="display:flex;"><span>              layoutHeight <span style="color:#f92672">=</span> layoutHeight <span style="color:#f92672">+</span> lineHeight;
+</span></span><span style="display:flex;"><span>          }
 </span></span><span style="display:flex;"><span>          <span style="color:#75715e">/**
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">           *  Mode 一般有三种模式：
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">           *  MeasureSpec.EXACTLY: 一般是在childView设置match_parent时或者是设置了具体的宽高时使用。
@@ -297,13 +297,13 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">           *  MeasureSpec.UNSPECIFIC: childView想要多大都行，用的比较少，可能会在ScrollView的heightMode中见到。
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">           */</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>          <span style="color:#75715e">// 下面就是判断childView的宽高时是如何设置的，如果是设置了具体的宽高
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>          <span style="color:#75715e">//或者是match_parent，那就直接使用父布局给出的大小
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>          <span style="color:#75715e">// 否则就使用我们自己测量出来的宽高
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>          setMeasuredDimension<span style="color:#f92672">(</span>modeWidth <span style="color:#f92672">==</span> MeasureSpec<span style="color:#f92672">.</span><span style="color:#a6e22e">EXACTLY</span> <span style="color:#f92672">?</span> sizeWidth <span style="color:#f92672">:</span> layoutWidth<span style="color:#f92672">,</span>
-</span></span><span style="display:flex;"><span>                  modeHeight <span style="color:#f92672">==</span> MeasureSpec<span style="color:#f92672">.</span><span style="color:#a6e22e">EXACTLY</span> <span style="color:#f92672">?</span> sizeHeight <span style="color:#f92672">:</span> layoutHeight<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e">// 下面就是判断childView的宽高时是如何设置的，如果是设置了具体的宽高</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e">//或者是match_parent，那就直接使用父布局给出的大小</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e">// 否则就使用我们自己测量出来的宽高</span>
+</span></span><span style="display:flex;"><span>          setMeasuredDimension(modeWidth <span style="color:#f92672">==</span> MeasureSpec.<span style="color:#a6e22e">EXACTLY</span> <span style="color:#f92672">?</span> sizeWidth : layoutWidth,
+</span></span><span style="display:flex;"><span>                  modeHeight <span style="color:#f92672">==</span> MeasureSpec.<span style="color:#a6e22e">EXACTLY</span> <span style="color:#f92672">?</span> sizeHeight : layoutHeight);
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>  }
 </span></span></code></pre></div><p>上面的代码注释已经非常的清楚，在onMeasure中的步骤也非常的清晰：</p>
 <ol>
 <li>获取父布局对流式布局的测量宽高和测量模式。</li>
@@ -325,47 +325,47 @@
 <li>最后一行的时候进行一些处理，获取最终的流式布局的宽和高</li>
 </ul>
 <p>onMeasure基本上就是这些了，接下来就是onLayout，先放代码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">onLayout</span><span style="color:#f92672">(</span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">boolean</span> changed<span style="color:#f92672">,</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> l<span style="color:#f92672">,</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> t<span style="color:#f92672">,</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> r<span style="color:#f92672">,</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> b<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">onLayout</span>(<span style="color:#66d9ef">final</span> <span style="color:#66d9ef">boolean</span> changed, <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> l, <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> t, <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> r, <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> b) {
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>       <span style="color:#75715e">//获取该布局在onMeasure函数中测量的宽度
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>       <span style="color:#66d9ef">int</span> flowWidth <span style="color:#f92672">=</span> getWidth<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>       <span style="color:#75715e">//通过lineWidth和lineHeight来确定childView的位置
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>       <span style="color:#66d9ef">int</span> lineWidth <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">int</span> lineHeight <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>       <span style="color:#75715e">//记录childView的left和top来确定位置
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>       <span style="color:#66d9ef">int</span> childLeft <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">int</span> childTop <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>       <span style="color:#75715e">//遍历子控件，记录每个子view的位置
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>       <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">,</span> childCount <span style="color:#f92672">=</span> getChildCount<span style="color:#f92672">();</span> i <span style="color:#f92672">&lt;</span> childCount<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>           View childView <span style="color:#f92672">=</span> getChildAt<span style="color:#f92672">(</span>i<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>           <span style="color:#75715e">//获取到测量的宽和高
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>           <span style="color:#66d9ef">int</span> childWidth <span style="color:#f92672">=</span> childView<span style="color:#f92672">.</span><span style="color:#a6e22e">getMeasuredWidth</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">int</span> childHeight <span style="color:#f92672">=</span> childView<span style="color:#f92672">.</span><span style="color:#a6e22e">getMeasuredHeight</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>           <span style="color:#75715e">//因为childView可能设置margin，这里要加上margin的距离
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>           MarginLayoutParams mlp <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>MarginLayoutParams<span style="color:#f92672">)</span> childView<span style="color:#f92672">.</span><span style="color:#a6e22e">getLayoutParams</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>           <span style="color:#75715e">//判断整个childView所占的空间宽度+当前行的宽度是否大于父布局也就是我们ViewGroup的宽度
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>           <span style="color:#75715e">//若大于就进行换行处理
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>           <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>lineWidth <span style="color:#f92672">+</span> mlp<span style="color:#f92672">.</span><span style="color:#a6e22e">leftMargin</span> <span style="color:#f92672">+</span> childWidth <span style="color:#f92672">+</span> mlp<span style="color:#f92672">.</span><span style="color:#a6e22e">rightMargin</span> <span style="color:#f92672">&gt;</span> flowWidth<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>               <span style="color:#75715e">//换行之后，left为最左边的值
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>               childLeft <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>               <span style="color:#75715e">//换行之后，top为top+当前的行高
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>               childTop <span style="color:#f92672">=</span> childTop <span style="color:#f92672">+</span> lineHeight<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>               <span style="color:#75715e">//换行之后，当前行高为换行前的行高+childView的TopMargin+childView+BottomMargin
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>               lineHeight <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>mlp<span style="color:#f92672">.</span><span style="color:#a6e22e">topMargin</span> <span style="color:#f92672">+</span> childHeight <span style="color:#f92672">+</span> mlp<span style="color:#f92672">.</span><span style="color:#a6e22e">bottomMargin</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>               <span style="color:#75715e">//换行之后，当前行宽度为0
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>               lineWidth <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>           <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>           <span style="color:#75715e">//设置childView的上下左右坐标，统一处理margin
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>           <span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> childLeft <span style="color:#f92672">+</span> mlp<span style="color:#f92672">.</span><span style="color:#a6e22e">leftMargin</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">int</span> top <span style="color:#f92672">=</span> childTop <span style="color:#f92672">+</span> mlp<span style="color:#f92672">.</span><span style="color:#a6e22e">topMargin</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">int</span> right <span style="color:#f92672">=</span> left <span style="color:#f92672">+</span> childWidth<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">int</span> bottom <span style="color:#f92672">=</span> top <span style="color:#f92672">+</span> childHeight<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>           childView<span style="color:#f92672">.</span><span style="color:#a6e22e">layout</span><span style="color:#f92672">(</span>left<span style="color:#f92672">,</span> top<span style="color:#f92672">,</span> right<span style="color:#f92672">,</span> bottom<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>           <span style="color:#75715e">//记录当前行的宽度
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>           lineWidth <span style="color:#f92672">=</span> lineWidth <span style="color:#f92672">+</span> <span style="color:#f92672">(</span>mlp<span style="color:#f92672">.</span><span style="color:#a6e22e">leftMargin</span> <span style="color:#f92672">+</span> childWidth <span style="color:#f92672">+</span> mlp<span style="color:#f92672">.</span><span style="color:#a6e22e">rightMargin</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>           childLeft <span style="color:#f92672">=</span> lineWidth<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>       <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#75715e">//获取该布局在onMeasure函数中测量的宽度</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">int</span> flowWidth <span style="color:#f92672">=</span> getWidth();
+</span></span><span style="display:flex;"><span>       <span style="color:#75715e">//通过lineWidth和lineHeight来确定childView的位置</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">int</span> lineWidth <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">int</span> lineHeight <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>       <span style="color:#75715e">//记录childView的left和top来确定位置</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">int</span> childLeft <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">int</span> childTop <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>       <span style="color:#75715e">//遍历子控件，记录每个子view的位置</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0, childCount <span style="color:#f92672">=</span> getChildCount(); i <span style="color:#f92672">&lt;</span> childCount; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>           View childView <span style="color:#f92672">=</span> getChildAt(i);
+</span></span><span style="display:flex;"><span>           <span style="color:#75715e">//获取到测量的宽和高</span>
+</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">int</span> childWidth <span style="color:#f92672">=</span> childView.<span style="color:#a6e22e">getMeasuredWidth</span>();
+</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">int</span> childHeight <span style="color:#f92672">=</span> childView.<span style="color:#a6e22e">getMeasuredHeight</span>();
+</span></span><span style="display:flex;"><span>           <span style="color:#75715e">//因为childView可能设置margin，这里要加上margin的距离</span>
+</span></span><span style="display:flex;"><span>           MarginLayoutParams mlp <span style="color:#f92672">=</span> (MarginLayoutParams) childView.<span style="color:#a6e22e">getLayoutParams</span>();
+</span></span><span style="display:flex;"><span>           <span style="color:#75715e">//判断整个childView所占的空间宽度+当前行的宽度是否大于父布局也就是我们ViewGroup的宽度</span>
+</span></span><span style="display:flex;"><span>           <span style="color:#75715e">//若大于就进行换行处理</span>
+</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">if</span> (lineWidth <span style="color:#f92672">+</span> mlp.<span style="color:#a6e22e">leftMargin</span> <span style="color:#f92672">+</span> childWidth <span style="color:#f92672">+</span> mlp.<span style="color:#a6e22e">rightMargin</span> <span style="color:#f92672">&gt;</span> flowWidth) {
+</span></span><span style="display:flex;"><span>               <span style="color:#75715e">//换行之后，left为最左边的值</span>
+</span></span><span style="display:flex;"><span>               childLeft <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>               <span style="color:#75715e">//换行之后，top为top+当前的行高</span>
+</span></span><span style="display:flex;"><span>               childTop <span style="color:#f92672">=</span> childTop <span style="color:#f92672">+</span> lineHeight;
+</span></span><span style="display:flex;"><span>               <span style="color:#75715e">//换行之后，当前行高为换行前的行高+childView的TopMargin+childView+BottomMargin</span>
+</span></span><span style="display:flex;"><span>               lineHeight <span style="color:#f92672">=</span> (mlp.<span style="color:#a6e22e">topMargin</span> <span style="color:#f92672">+</span> childHeight <span style="color:#f92672">+</span> mlp.<span style="color:#a6e22e">bottomMargin</span>);
+</span></span><span style="display:flex;"><span>               <span style="color:#75715e">//换行之后，当前行宽度为0</span>
+</span></span><span style="display:flex;"><span>               lineWidth <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>           }
+</span></span><span style="display:flex;"><span>           <span style="color:#75715e">//设置childView的上下左右坐标，统一处理margin</span>
+</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> childLeft <span style="color:#f92672">+</span> mlp.<span style="color:#a6e22e">leftMargin</span>;
+</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">int</span> top <span style="color:#f92672">=</span> childTop <span style="color:#f92672">+</span> mlp.<span style="color:#a6e22e">topMargin</span>;
+</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">int</span> right <span style="color:#f92672">=</span> left <span style="color:#f92672">+</span> childWidth;
+</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">int</span> bottom <span style="color:#f92672">=</span> top <span style="color:#f92672">+</span> childHeight;
+</span></span><span style="display:flex;"><span>           childView.<span style="color:#a6e22e">layout</span>(left, top, right, bottom);
+</span></span><span style="display:flex;"><span>           <span style="color:#75715e">//记录当前行的宽度</span>
+</span></span><span style="display:flex;"><span>           lineWidth <span style="color:#f92672">=</span> lineWidth <span style="color:#f92672">+</span> (mlp.<span style="color:#a6e22e">leftMargin</span> <span style="color:#f92672">+</span> childWidth <span style="color:#f92672">+</span> mlp.<span style="color:#a6e22e">rightMargin</span>);
+</span></span><span style="display:flex;"><span>           childLeft <span style="color:#f92672">=</span> lineWidth;
+</span></span><span style="display:flex;"><span>       }
+</span></span><span style="display:flex;"><span>   }
 </span></span></code></pre></div><p>onLayoutd的代码也非常的清晰：</p>
 <ol>
 <li>遍历childView</li>
@@ -630,7 +630,7 @@
     </main>
     
 <footer class="footer">
-    <span>&copy; 2023 <a href="https://houzixiashanxiedaima.github.io/">BLOG</a></span>
+    <span>&copy; 2024 <a href="https://houzixiashanxiedaima.github.io/">BLOG</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

@@ -189,7 +189,7 @@
     <h1 class="post-title">
       Android中输出HTML格式下的文字
     </h1>
-    <div class="post-meta"><span title='2016-07-28 15:19:45 +0000 UTC'>July 28, 2016</span>&nbsp;·&nbsp;1 min
+    <div class="post-meta">&lt;span title=&#39;2016-07-28 15:19:45 &#43;0000 UTC&#39;&gt;July 28, 2016&lt;/span&gt;&amp;nbsp;·&amp;nbsp;1 min
 
 </div>
   </header> <div class="toc">
@@ -222,8 +222,8 @@
 </p>
 <h2 id="html下的文字解析快速版">HTML下的文字解析(快速版)<a hidden class="anchor" aria-hidden="true" href="#html下的文字解析快速版">#</a></h2>
 <p>从图片上我们可以看到，这段文字分别有<code>两种大小，三种颜色</code>。我们当然可以定义多个TextView来实现这样的效果，但是如果我们的文字变化较多，那么定义多个TextView也非常的麻烦。那么接下来我们就来介绍一个比较简单的方法：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>String str <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;恭喜您！您的手机跑分为&lt;font color=&#39;#F50057&#39;&gt;&lt;big&gt;&lt;big&gt;&lt;big&gt;888888分&lt;/big&gt;&lt;/big&gt;&lt;/big&gt;&lt;/font&gt;，已经超过全国&lt;font color=&#39;#00E676&#39;&gt;&lt;big&gt;&lt;big&gt;&lt;big&gt;99%&lt;/big&gt;&lt;/big&gt;&lt;/big&gt;&lt;/font&gt;的Android手机。&#34;</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>tv<span style="color:#f92672">.</span><span style="color:#a6e22e">setText</span><span style="color:#f92672">(</span>Html<span style="color:#f92672">.</span><span style="color:#a6e22e">fromHtml</span><span style="color:#f92672">(</span>str<span style="color:#f92672">));</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>String str <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;恭喜您！您的手机跑分为&lt;font color=&#39;#F50057&#39;&gt;&lt;big&gt;&lt;big&gt;&lt;big&gt;888888分&lt;/big&gt;&lt;/big&gt;&lt;/big&gt;&lt;/font&gt;，已经超过全国&lt;font color=&#39;#00E676&#39;&gt;&lt;big&gt;&lt;big&gt;&lt;big&gt;99%&lt;/big&gt;&lt;/big&gt;&lt;/big&gt;&lt;/font&gt;的Android手机。&#34;</span>;
+</span></span><span style="display:flex;"><span>tv.<span style="color:#a6e22e">setText</span>(Html.<span style="color:#a6e22e">fromHtml</span>(str));
 </span></span></code></pre></div><p>上面的代码中，我们用到了一个方法<code>Html.fromHtml()</code>，这个方法是Android中专门用来解析HTML格式的一个方法，我们可以将任意的HTML格式下的代码通过此方法解析，最后得到我们需要的结果。
 通过上面的方法，我们就可以实现在<code>setText()</code>中使用各种带HTML效果的文字了。这样应该能够实现我们开发中98%的需求了，那么还有1-2%的需求是什么呢？</p>
 <h2 id="html下的文字解析多语言支持">HTML下的文字解析(多语言支持)<a hidden class="anchor" aria-hidden="true" href="#html下的文字解析多语言支持">#</a></h2>
@@ -233,7 +233,7 @@
 </span></span><span style="display:flex;"><span>      恭喜您！您的手机跑分为<span style="color:#f92672">&lt;font</span> <span style="color:#a6e22e">color=</span><span style="color:#e6db74">&#39;#F50057&#39;</span><span style="color:#f92672">&gt;&lt;big&gt;&lt;big&gt;&lt;big&gt;</span>888888分<span style="color:#f92672">&lt;/big&gt;&lt;/big&gt;&lt;/big&gt;&lt;/font&gt;</span>
 </span></span><span style="display:flex;"><span>      ，已经超过全国<span style="color:#f92672">&lt;font</span> <span style="color:#a6e22e">color=</span><span style="color:#e6db74">&#39;#00E676&#39;</span><span style="color:#f92672">&gt;&lt;big&gt;&lt;big&gt;&lt;big&gt;</span>99%<span style="color:#f92672">&lt;/big&gt;&lt;/big&gt;&lt;/big&gt;&lt;/font&gt;</span>的Android手机。
 </span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;/string&gt;</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>tv<span style="color:#f92672">.</span><span style="color:#a6e22e">setText</span><span style="color:#f92672">(</span>Html<span style="color:#f92672">.</span><span style="color:#a6e22e">fromHtml</span><span style="color:#f92672">(</span>getString<span style="color:#f92672">(</span>R<span style="color:#f92672">.</span><span style="color:#a6e22e">string</span><span style="color:#f92672">.</span><span style="color:#a6e22e">test_string</span><span style="color:#f92672">)));</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>tv.<span style="color:#a6e22e">setText</span>(Html.<span style="color:#a6e22e">fromHtml</span>(getString(R.<span style="color:#a6e22e">string</span>.<span style="color:#a6e22e">test_string</span>)));
 </span></span></code></pre></div><p>运行程序，结果如下：</p>
 <p><img loading="lazy" src="http://upload-images.jianshu.io/upload_images/2524102-d8922d1d6ea9bc47.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图2"  />
 </p>
@@ -305,7 +305,7 @@ the formatted=&ldquo;false&rdquo; attribute?</li>
     </main>
     
 <footer class="footer">
-    <span>&copy; 2023 <a href="https://houzixiashanxiedaima.github.io/">BLOG</a></span>
+    <span>&copy; 2024 <a href="https://houzixiashanxiedaima.github.io/">BLOG</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

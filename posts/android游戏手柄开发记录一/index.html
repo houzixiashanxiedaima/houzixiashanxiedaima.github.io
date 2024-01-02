@@ -183,7 +183,7 @@
     <h1 class="post-title">
       Android游戏手柄开发记录（一）
     </h1>
-    <div class="post-meta"><span title='2016-07-28 15:19:45 +0000 UTC'>July 28, 2016</span>&nbsp;·&nbsp;1 min
+    <div class="post-meta">&lt;span title=&#39;2016-07-28 15:19:45 &#43;0000 UTC&#39;&gt;July 28, 2016&lt;/span&gt;&amp;nbsp;·&amp;nbsp;1 min
 
 </div>
   </header> <div class="toc">
@@ -253,24 +253,24 @@ Android官方建议开发者从与用户交互的<code>View</code>对象中去�
 下面我们就以从<code>Activity</code>中捕获事件为例进行记录。</p>
 <h1 id="dispatchkeyevent">DispatchKeyEvent<a hidden class="anchor" aria-hidden="true" href="#dispatchkeyevent">#</a></h1>
 <p><code>DispatchKeyEvent</code>可以处理几乎所有的输入动作，包括普通的游戏按键以及方向按键（D-pad）。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#75715e">//DispatchKeyEvent示例
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">@Override</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">dispatchKeyEvent</span><span style="color:#f92672">(</span>KeyEvent event<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>event<span style="color:#f92672">.</span><span style="color:#a6e22e">getAction</span><span style="color:#f92672">()</span> <span style="color:#f92672">==</span> KeyEvent<span style="color:#f92672">.</span><span style="color:#a6e22e">ACTION_DOWN</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span><span style="color:#75715e">//按键按下
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">switch</span> <span style="color:#f92672">(</span>event<span style="color:#f92672">.</span><span style="color:#a6e22e">getKeyCode</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> KeyEvent<span style="color:#f92672">.</span><span style="color:#a6e22e">KEYCODE_BUTTON_A</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">//do something
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span><span style="color:#75715e">//按键释放
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">switch</span> <span style="color:#f92672">(</span>event<span style="color:#f92672">.</span><span style="color:#a6e22e">getKeyCode</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> KeyEvent<span style="color:#f92672">.</span><span style="color:#a6e22e">KEYCODE_BUTTON_A</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">//do something
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#75715e">//DispatchKeyEvent示例</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">dispatchKeyEvent</span>(KeyEvent event) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (event.<span style="color:#a6e22e">getAction</span>() <span style="color:#f92672">==</span> KeyEvent.<span style="color:#a6e22e">ACTION_DOWN</span>) {<span style="color:#75715e">//按键按下</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">switch</span> (event.<span style="color:#a6e22e">getKeyCode</span>()) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> KeyEvent.<span style="color:#a6e22e">KEYCODE_BUTTON_A</span>:
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">//do something</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {<span style="color:#75715e">//按键释放</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">switch</span> (event.<span style="color:#a6e22e">getKeyCode</span>()) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> KeyEvent.<span style="color:#a6e22e">KEYCODE_BUTTON_A</span>:
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">//do something</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><p>上面的代码就是用来处理<code>KeyEvent</code>事件，但是在实际的开发过程中，我们可能遇到输入设备，如游戏手柄，具有摇杆和扳机键（Trigger）。上面的函数是无法去处理摇杆和扳机键事件的，因为摇杆和扳机键事件都有一个坐标（AXIS），那么摇杆和扳机键该如何处理呢，接下来我们就介绍另外一个函数：<code>dispatchMontionEvnet</code>。
 #DispatchMotionEvent
 <code>dispatchMontionEvnet</code>可以处理方向按键、摇杆、扳机键等具有坐标值的特殊按键。</p>
@@ -299,7 +299,7 @@ Android官方建议开发者从与用户交互的<code>View</code>对象中去�
     </main>
     
 <footer class="footer">
-    <span>&copy; 2023 <a href="https://houzixiashanxiedaima.github.io/">BLOG</a></span>
+    <span>&copy; 2024 <a href="https://houzixiashanxiedaima.github.io/">BLOG</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
