@@ -44,32 +44,11 @@
       <description>&lt;p&gt;这篇文章是针对Android 5.0及以上版本的系统进行透明的状态栏设置，Android 5.0以下的系统暂不在本篇文章的讨论范围之内。&lt;/p&gt;&#xA;&lt;h2 id=&#34;android-50透明状态栏普通界面&#34;&gt;Android 5.0透明状态栏——普通界面&lt;/h2&gt;&#xA;&lt;p&gt;先贴出MainActivity布局代码：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e889b&#34;&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;utf-8&amp;#34;?&amp;gt;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;RelativeLayout&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#658b00&#34;&gt;xmlns:android=&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;http://schemas.android.com/apk/res/android&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#658b00&#34;&gt;xmlns:tools=&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;http://schemas.android.com/tools&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#658b00&#34;&gt;android:layout_width=&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;match_parent&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#658b00&#34;&gt;android:layout_height=&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;match_parent&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#658b00&#34;&gt;android:background=&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;@color/colorPrimary&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#658b00&#34;&gt;android:fitsSystemWindows=&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#658b00&#34;&gt;tools:context=&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;stephen.com.material_design.NoteActivity&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;gt;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;include&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#658b00&#34;&gt;layout=&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;@layout/app_bar_note&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#658b00&#34;&gt;android:layout_width=&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;match_parent&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#658b00&#34;&gt;android:layout_height=&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;match_parent&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;/&amp;gt;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;/RelativeLayout&amp;gt;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     <item>
-      <title>Android中输出HTML格式下的文字</title>
-      <link>https://houzixiashanxiedaima.github.io/posts/android%E4%B8%AD%E8%BE%93%E5%87%BAhtml%E6%A0%BC%E5%BC%8F%E4%B8%8B%E7%9A%84%E6%96%87%E5%AD%97/</link>
-      <pubDate>Thu, 28 Jul 2016 15:19:45 +0000</pubDate>
-      <guid>https://houzixiashanxiedaima.github.io/posts/android%E4%B8%AD%E8%BE%93%E5%87%BAhtml%E6%A0%BC%E5%BC%8F%E4%B8%8B%E7%9A%84%E6%96%87%E5%AD%97/</guid>
-      <description>&lt;h1 id=&#34;android中输出html格式下的文字&#34;&gt;Android中输出HTML格式下的文字&lt;/h1&gt;&#xA;&lt;p&gt;在Android中，我们经常会用到TextView这个控件，在使用的过程中，我们用到最多的方法就是setText()，单纯的使用基本上能够满足我们日常的需求，但是有时候我们需要对文字进行一些处理，比如说加粗、斜体、下划线等等，这些也都是可以通过Android提供的原生方法完成。但是如果我们需要实现下面的效果呢：&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/2524102-92f803de79292a20.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;图1&#34;&gt;&lt;/p&gt;</description>
-    </item>
-    <item>
       <title>Android光速打包</title>
       <link>https://houzixiashanxiedaima.github.io/posts/android%E5%85%89%E9%80%9F%E6%89%93%E5%8C%85/</link>
       <pubDate>Thu, 28 Jul 2016 15:19:45 +0000</pubDate>
       <guid>https://houzixiashanxiedaima.github.io/posts/android%E5%85%89%E9%80%9F%E6%89%93%E5%8C%85/</guid>
       <description>&lt;h1 id=&#34;快速打包插件-packer-ng-plugin-使用心得&#34;&gt;快速打包插件 packer-ng-plugin 使用心得&lt;/h1&gt;&#xA;&lt;p&gt;首先放出这个工具的Github地址：https://github.com/mcxiaoke/packer-ng-plugin 在这个工具里面，作者已经非常详细的介绍了该如何使用这个打包工具，在此我主要记录一下我使用这个打包工具的过程。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Android开发之View坐标问题</title>
-      <link>https://houzixiashanxiedaima.github.io/posts/android%E5%BC%80%E5%8F%91%E4%B9%8Bview%E5%9D%90%E6%A0%87%E9%97%AE%E9%A2%98/</link>
-      <pubDate>Thu, 28 Jul 2016 15:19:45 +0000</pubDate>
-      <guid>https://houzixiashanxiedaima.github.io/posts/android%E5%BC%80%E5%8F%91%E4%B9%8Bview%E5%9D%90%E6%A0%87%E9%97%AE%E9%A2%98/</guid>
-      <description>&lt;p&gt;在我们日常的开发过程中，接触最多的就是View了，各种各样的View，但是我们可能对View的知识了解一些，但是还是感觉有些地方不太够，尤其是View的坐标问题。我们今天就来看看这个View的坐标到底是怎么定义的。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Android开发使用lambda表达式</title>
-      <link>https://houzixiashanxiedaima.github.io/posts/android%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
-      <pubDate>Thu, 28 Jul 2016 15:19:45 +0000</pubDate>
-      <guid>https://houzixiashanxiedaima.github.io/posts/android%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
-      <description>&lt;p&gt;在Java9即将发布之际，我们来讲讲如何使用Java8的新特性&amp;ndash;&amp;gt;lambda表达式。lambda表达式可以让我们的代码非常简洁，提高代码的可读性，那么如何在Android开发中来使用lambda表达式呢。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Android开发常用开源库整理（不定期更新）</title>
@@ -79,11 +58,32 @@
       <description>&lt;p&gt;在此整理一下Android开发中常用的开源库，主要是为了在新建一个项目的时候能够快速的搭建好我们需要的环境，同时也能够方便的获取各个开源库的最新版本。&lt;/p&gt;</description>
     </item>
     <item>
+      <title>Android开发使用lambda表达式</title>
+      <link>https://houzixiashanxiedaima.github.io/posts/android%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
+      <pubDate>Thu, 28 Jul 2016 15:19:45 +0000</pubDate>
+      <guid>https://houzixiashanxiedaima.github.io/posts/android%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
+      <description>&lt;p&gt;在Java9即将发布之际，我们来讲讲如何使用Java8的新特性&amp;ndash;&amp;gt;lambda表达式。lambda表达式可以让我们的代码非常简洁，提高代码的可读性，那么如何在Android开发中来使用lambda表达式呢。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Android开发之View坐标问题</title>
+      <link>https://houzixiashanxiedaima.github.io/posts/android%E5%BC%80%E5%8F%91%E4%B9%8Bview%E5%9D%90%E6%A0%87%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Thu, 28 Jul 2016 15:19:45 +0000</pubDate>
+      <guid>https://houzixiashanxiedaima.github.io/posts/android%E5%BC%80%E5%8F%91%E4%B9%8Bview%E5%9D%90%E6%A0%87%E9%97%AE%E9%A2%98/</guid>
+      <description>&lt;p&gt;在我们日常的开发过程中，接触最多的就是View了，各种各样的View，但是我们可能对View的知识了解一些，但是还是感觉有些地方不太够，尤其是View的坐标问题。我们今天就来看看这个View的坐标到底是怎么定义的。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>Android游戏手柄开发记录（一）</title>
       <link>https://houzixiashanxiedaima.github.io/posts/android%E6%B8%B8%E6%88%8F%E6%89%8B%E6%9F%84%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95%E4%B8%80/</link>
       <pubDate>Thu, 28 Jul 2016 15:19:45 +0000</pubDate>
       <guid>https://houzixiashanxiedaima.github.io/posts/android%E6%B8%B8%E6%88%8F%E6%89%8B%E6%9F%84%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95%E4%B8%80/</guid>
       <description>&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;&#xA;&lt;p&gt;最近一直在进行Android游戏手柄的开发，在这里简单记录一下自己在这个过程中遇到的问题，同时也能够为自己以后的开发提供一些帮助。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Android中输出HTML格式下的文字</title>
+      <link>https://houzixiashanxiedaima.github.io/posts/android%E4%B8%AD%E8%BE%93%E5%87%BAhtml%E6%A0%BC%E5%BC%8F%E4%B8%8B%E7%9A%84%E6%96%87%E5%AD%97/</link>
+      <pubDate>Thu, 28 Jul 2016 15:19:45 +0000</pubDate>
+      <guid>https://houzixiashanxiedaima.github.io/posts/android%E4%B8%AD%E8%BE%93%E5%87%BAhtml%E6%A0%BC%E5%BC%8F%E4%B8%8B%E7%9A%84%E6%96%87%E5%AD%97/</guid>
+      <description>&lt;h1 id=&#34;android中输出html格式下的文字&#34;&gt;Android中输出HTML格式下的文字&lt;/h1&gt;&#xA;&lt;p&gt;在Android中，我们经常会用到TextView这个控件，在使用的过程中，我们用到最多的方法就是setText()，单纯的使用基本上能够满足我们日常的需求，但是有时候我们需要对文字进行一些处理，比如说加粗、斜体、下划线等等，这些也都是可以通过Android提供的原生方法完成。但是如果我们需要实现下面的效果呢：&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/2524102-92f803de79292a20.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;图1&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Android自定义流式布局的探索</title>

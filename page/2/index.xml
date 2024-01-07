@@ -13,81 +13,74 @@
     
     
         <item>
-        <title>Android游戏手柄开发记录（一）</title>
-        <link>https://houzixiashanxiedaima.github.io/posts/android%E6%B8%B8%E6%88%8F%E6%89%8B%E6%9F%84%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95%E4%B8%80/</link>
+        <title>Android中输出HTML格式下的文字</title>
+        <link>https://houzixiashanxiedaima.github.io/posts/android%E4%B8%AD%E8%BE%93%E5%87%BAhtml%E6%A0%BC%E5%BC%8F%E4%B8%8B%E7%9A%84%E6%96%87%E5%AD%97/</link>
         <pubDate>Thu, 28 Jul 2016 15:19:45 +0000</pubDate>
         
-        <guid>https://houzixiashanxiedaima.github.io/posts/android%E6%B8%B8%E6%88%8F%E6%89%8B%E6%9F%84%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95%E4%B8%80/</guid>
-        <description>雅俗共赏 https://houzixiashanxiedaima.github.io/posts/android%E6%B8%B8%E6%88%8F%E6%89%8B%E6%9F%84%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95%E4%B8%80/ -&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
-&lt;p&gt;最近一直在进行Android游戏手柄的开发，在这里简单记录一下自己在这个过程中遇到的问题，同时也能够为自己以后的开发提供一些帮助。&lt;/p&gt;
-&lt;h1 id=&#34;android手柄事件&#34;&gt;Android手柄事件&lt;/h1&gt;
-&lt;p&gt;先来看下Android官方文档关于&lt;strong&gt;处理控制器输入动作&lt;/strong&gt;的介绍：&lt;/p&gt;
+        <guid>https://houzixiashanxiedaima.github.io/posts/android%E4%B8%AD%E8%BE%93%E5%87%BAhtml%E6%A0%BC%E5%BC%8F%E4%B8%8B%E7%9A%84%E6%96%87%E5%AD%97/</guid>
+        <description>雅俗共赏 https://houzixiashanxiedaima.github.io/posts/android%E4%B8%AD%E8%BE%93%E5%87%BAhtml%E6%A0%BC%E5%BC%8F%E4%B8%8B%E7%9A%84%E6%96%87%E5%AD%97/ -&lt;h1 id=&#34;android中输出html格式下的文字&#34;&gt;Android中输出HTML格式下的文字&lt;/h1&gt;
+&lt;p&gt;在Android中，我们经常会用到TextView这个控件，在使用的过程中，我们用到最多的方法就是setText()，单纯的使用基本上能够满足我们日常的需求，但是有时候我们需要对文字进行一些处理，比如说加粗、斜体、下划线等等，这些也都是可以通过Android提供的原生方法完成。但是如果我们需要实现下面的效果呢：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/2524102-92f803de79292a20.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;图1&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;html下的文字解析快速版&#34;&gt;HTML下的文字解析(快速版)&lt;/h2&gt;
+&lt;p&gt;从图片上我们可以看到，这段文字分别有&lt;code&gt;两种大小，三种颜色&lt;/code&gt;。我们当然可以定义多个TextView来实现这样的效果，但是如果我们的文字变化较多，那么定义多个TextView也非常的麻烦。那么接下来我们就来介绍一个比较简单的方法：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Java&#34; data-lang=&#34;Java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;String&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;str&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;=&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;恭喜您！您的手机跑分为&amp;lt;font color=&amp;#39;#F50057&amp;#39;&amp;gt;&amp;lt;big&amp;gt;&amp;lt;big&amp;gt;&amp;lt;big&amp;gt;888888分&amp;lt;/big&amp;gt;&amp;lt;/big&amp;gt;&amp;lt;/big&amp;gt;&amp;lt;/font&amp;gt;，已经超过全国&amp;lt;font color=&amp;#39;#00E676&amp;#39;&amp;gt;&amp;lt;big&amp;gt;&amp;lt;big&amp;gt;&amp;lt;big&amp;gt;99%&amp;lt;/big&amp;gt;&amp;lt;/big&amp;gt;&amp;lt;/big&amp;gt;&amp;lt;/font&amp;gt;的Android手机。&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;tv.&lt;span style=&#34;color:#658b00&#34;&gt;setText&lt;/span&gt;(Html.&lt;span style=&#34;color:#658b00&#34;&gt;fromHtml&lt;/span&gt;(str));&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面的代码中，我们用到了一个方法&lt;code&gt;Html.fromHtml()&lt;/code&gt;，这个方法是Android中专门用来解析HTML格式的一个方法，我们可以将任意的HTML格式下的代码通过此方法解析，最后得到我们需要的结果。
+通过上面的方法，我们就可以实现在&lt;code&gt;setText()&lt;/code&gt;中使用各种带HTML效果的文字了。这样应该能够实现我们开发中98%的需求了，那么还有1-2%的需求是什么呢？&lt;/p&gt;
+&lt;h2 id=&#34;html下的文字解析多语言支持&#34;&gt;HTML下的文字解析(多语言支持)&lt;/h2&gt;
+&lt;p&gt;比如说我们现在的APP需要兼容多种语言，包括中文、法语、英语、日语等等。在平时的开发过程中，我们都知道多语言的实现可以通过不同&lt;code&gt;values&lt;/code&gt;文件夹下的&lt;code&gt;string.xml&lt;/code&gt;文件来实现。我们这里就以中文来举例，看看我们如何在&lt;code&gt;string.xml&lt;/code&gt;文件中定义HTML格式的文字。
+首先我们来尝试将我们上面定义的&lt;code&gt;str&lt;/code&gt;中的字符串直接放到&lt;code&gt;string.xml&lt;/code&gt;中。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;string&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;test_string&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      恭喜您！您的手机跑分为&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;font&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;color=&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;#F50057&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;gt;&amp;lt;big&amp;gt;&amp;lt;big&amp;gt;&amp;lt;big&amp;gt;&lt;/span&gt;888888分&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;/big&amp;gt;&amp;lt;/big&amp;gt;&amp;lt;/big&amp;gt;&amp;lt;/font&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      ，已经超过全国&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;font&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;color=&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;#00E676&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;gt;&amp;lt;big&amp;gt;&amp;lt;big&amp;gt;&amp;lt;big&amp;gt;&lt;/span&gt;99%&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;/big&amp;gt;&amp;lt;/big&amp;gt;&amp;lt;/big&amp;gt;&amp;lt;/font&amp;gt;&lt;/span&gt;的Android手机。
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tv.&lt;span style=&#34;color:#658b00&#34;&gt;setText&lt;/span&gt;(Html.&lt;span style=&#34;color:#658b00&#34;&gt;fromHtml&lt;/span&gt;(getString(R.&lt;span style=&#34;color:#658b00&#34;&gt;string&lt;/span&gt;.&lt;span style=&#34;color:#658b00&#34;&gt;test_string&lt;/span&gt;)));&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;运行程序，结果如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/2524102-d8922d1d6ea9bc47.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;图2&#34;&gt;&lt;/p&gt;
+&lt;p&gt;并没有出现我们预期的效果，HTML格式并没有被解析出来。这是什么原因呢？原因就在于我们使用的&lt;code&gt;getString()&lt;/code&gt;方法，官方对于这个方法的解释如下：&lt;/p&gt;
 &lt;blockquote&gt;
+&lt;p&gt;Return the string value associated with a particular resource ID. It will be stripped of any styled text information.
+返回与特定资源ID相关联的字符串值，它将删除任何样式的文本信息。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;那么也就是说我们的HTML格式被&lt;code&gt;getString()&lt;/code&gt;方法给删除了，所以我们的文字才会变成普通的字符串。要解决这个问题，我们需要将我们的&lt;code&gt;string.xml&lt;/code&gt;中的字符串使用&lt;code&gt;&amp;lt;![CDATA[...your html...]]&amp;gt;&lt;/code&gt;包裹起来，被&lt;code&gt;CDATA&lt;/code&gt;包裹起来的字符都会被解析器忽略，也就是说&lt;code&gt;CDATA&lt;/code&gt;中的HTML格式将会被原封不动的保留下来，最终交给我们的&lt;code&gt;Html.fromHtml()&lt;/code&gt;进行解析。那么我们来尝试以下，将我们&lt;code&gt;string.xml&lt;/code&gt;中的字符串改为如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;string&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;test_string&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#1e889b&#34;&gt;&amp;lt;![CDATA[
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e889b&#34;&gt;            恭喜您！您的手机跑分为&amp;lt;font color=&amp;#39;#F50057&amp;#39;&amp;gt;&amp;lt;big&amp;gt;&amp;lt;big&amp;gt;&amp;lt;big&amp;gt;888888分&amp;lt;/big&amp;gt;&amp;lt;/big&amp;gt;&amp;lt;/big&amp;gt;&amp;lt;/font&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e889b&#34;&gt;            ，已经超过全国&amp;lt;font color=&amp;#39;#00E676&amp;#39;&amp;gt;&amp;lt;big&amp;gt;&amp;lt;big&amp;gt;&amp;lt;big&amp;gt;99%&amp;lt;/big&amp;gt;&amp;lt;/big&amp;gt;&amp;lt;/big&amp;gt;&amp;lt;/font&amp;gt;的Android手机。
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e889b&#34;&gt;        ]]&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译运行，结果编译时报错：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Error:(17, 5) Apostrophe not preceded by \ (in  鎭枩鎮紒鎮ㄧ殑鎵嬫満璺戝垎涓?&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;font&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;color=&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#39;#F50057&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;gt;&amp;lt;big&amp;gt;&amp;lt;big&amp;gt;&amp;lt;big&amp;gt;&lt;/span&gt;888888鍒?&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;/big&amp;gt;&amp;lt;/big&amp;gt;&amp;lt;/big&amp;gt;&amp;lt;/font&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;报错的关键词为：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Apostrophe not preceded by &lt;br&gt;
+撇号前面没有\&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;通过上面的这个报错信息我们可以知道，这是因为&lt;code&gt;&#39;&lt;/code&gt;没有进行转义，那么我根据报错信息将所有的单引号进行转义。最后的结果如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;string&lt;/span&gt; &lt;span style=&#34;color:#658b00&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;test_string&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       &lt;span style=&#34;color:#1e889b&#34;&gt;&amp;lt;![CDATA[
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e889b&#34;&gt;           恭喜您！您的手机跑分为&amp;lt;font color=\&amp;#39;#F50057\&amp;#39;&amp;gt;&amp;lt;big&amp;gt;&amp;lt;big&amp;gt;&amp;lt;big&amp;gt;888888分&amp;lt;/big&amp;gt;&amp;lt;/big&amp;gt;&amp;lt;/big&amp;gt;&amp;lt;/font&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e889b&#34;&gt;           ，已经超过全国&amp;lt;font color=\&amp;#39;#00E676\&amp;#39;&amp;gt;&amp;lt;big&amp;gt;&amp;lt;big&amp;gt;&amp;lt;big&amp;gt;99%&amp;lt;/big&amp;gt;&amp;lt;/big&amp;gt;&amp;lt;/big&amp;gt;&amp;lt;/font&amp;gt;的Android手机。
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e889b&#34;&gt;       ]]&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最后我们再次运行，得到的就是和我们文章开头一样的结果。
+关于Android中HTML格式下的文字解析大概就是这样了，如果大家还有其他的方法，欢迎交流。&lt;/p&gt;
+&lt;h2 id=&#34;后记&#34;&gt;后记&lt;/h2&gt;
+&lt;p&gt;最后附上一个在尝试过程中遇到的错误，本来想情景重现的，结果怎么样都无法再遇到那个错误了。如果有遇到这个错误的朋友，可以尝试下面的解决办法。
+错误：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Multiple annotations found at this line:&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;ul&gt;
-&lt;li&gt;在 &lt;code&gt;Activity&lt;/code&gt;中：&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;dispatchGenericMotionEvent(android.view.MotionEvent)&lt;/code&gt;
-&lt;ul&gt;
-&lt;li&gt;处理一般的运动事件，如摇动摇杆。&lt;/li&gt;
+&lt;li&gt;error: Multiple substitutions specified in non-positional format; did you mean to add&lt;br&gt;
+the formatted=&amp;ldquo;false&amp;rdquo; attribute?&lt;/li&gt;
+&lt;li&gt;error: Unexpected end tag string&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;dispatchKeyEvent(android.view.KeyEvent)&lt;/code&gt;
-&lt;ul&gt;
-&lt;li&gt;处理按键事件，如按下或释放游戏键盘的按键或者D-pad的按钮。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;在&lt;code&gt;View&lt;/code&gt;中：&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;onGenericMotionEvent(android.view.MotionEvent)&lt;/code&gt;
-&lt;ul&gt;
-&lt;li&gt;处理一般的运动事件，如摇动摇杆。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;onKeyDown(int, android.view.KeyEvent)&lt;/code&gt;
-&lt;ul&gt;
-&lt;li&gt;处理按下一个按键的事件，如按下游戏键盘的按键或者 D-pad 按钮。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;onKeyUp(int, android.view.KeyEvent)&lt;/code&gt;
-&lt;ul&gt;
-&lt;li&gt;处理释放一个按键的事件，如释放游戏键盘的按键或者 D-pad 按钮。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;从上面的介绍中，我们可以知道处理输入动作就两个事件：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;KeyEvent&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;MotionEvent&lt;/code&gt;
-处理输入动作的地方也就是两个：&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Activity&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;View&lt;/code&gt;
-Android官方建议开发者从与用户交互的&lt;code&gt;View&lt;/code&gt;对象中去捕获输入事件。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;在实际的开发过程中，大家也可以根据自己的需求，决定是从&lt;code&gt;Activity&lt;/code&gt;或者&lt;code&gt;View&lt;/code&gt;中去捕获输入事件。
-下面我们就以从&lt;code&gt;Activity&lt;/code&gt;中捕获事件为例进行记录。&lt;/p&gt;
-&lt;h1 id=&#34;dispatchkeyevent&#34;&gt;DispatchKeyEvent&lt;/h1&gt;
-&lt;p&gt;&lt;code&gt;DispatchKeyEvent&lt;/code&gt;可以处理几乎所有的输入动作，包括普通的游戏按键以及方向按键（D-pad）。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//DispatchKeyEvent示例&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#707a7c&#34;&gt;@Override&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;public&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#00688b;font-weight:bold&#34;&gt;boolean&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#008b45&#34;&gt;dispatchKeyEvent&lt;/span&gt;(KeyEvent&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;event)&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;if&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(event.&lt;span style=&#34;color:#658b00&#34;&gt;getAction&lt;/span&gt;()&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;==&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;KeyEvent.&lt;span style=&#34;color:#658b00&#34;&gt;ACTION_DOWN&lt;/span&gt;)&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#228b22&#34;&gt;//按键按下&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;            &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;switch&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(event.&lt;span style=&#34;color:#658b00&#34;&gt;getKeyCode&lt;/span&gt;())&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;                &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;case&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;KeyEvent.&lt;span style=&#34;color:#658b00&#34;&gt;KEYCODE_BUTTON_A&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;                    &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//do something&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;                    &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;break&lt;/span&gt;;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;            &lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;        &lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;else&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#228b22&#34;&gt;//按键释放&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;            &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;switch&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;(event.&lt;span style=&#34;color:#658b00&#34;&gt;getKeyCode&lt;/span&gt;())&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;                &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;case&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;KeyEvent.&lt;span style=&#34;color:#658b00&#34;&gt;KEYCODE_BUTTON_A&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;                    &lt;/span&gt;&lt;span style=&#34;color:#228b22&#34;&gt;//do something&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;                    &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;break&lt;/span&gt;;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;            &lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;        &lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;return&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;true&lt;/span&gt;;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;}&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面的代码就是用来处理&lt;code&gt;KeyEvent&lt;/code&gt;事件，但是在实际的开发过程中，我们可能遇到输入设备，如游戏手柄，具有摇杆和扳机键（Trigger）。上面的函数是无法去处理摇杆和扳机键事件的，因为摇杆和扳机键事件都有一个坐标（AXIS），那么摇杆和扳机键该如何处理呢，接下来我们就介绍另外一个函数：&lt;code&gt;dispatchMontionEvnet&lt;/code&gt;。
-#DispatchMotionEvent
-&lt;code&gt;dispatchMontionEvnet&lt;/code&gt;可以处理方向按键、摇杆、扳机键等具有坐标值的特殊按键。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;MotionEvent&lt;/code&gt;的优先级是要高于&lt;code&gt;KeyEvent&lt;/code&gt;的，也就是说，当操作手柄的事件发生时，会先将获取到的&lt;strong&gt;KeyCode&lt;/strong&gt;传递到&lt;code&gt;dispatchMotionEvent&lt;/code&gt;或者&lt;code&gt;on&lt;/code&gt;中进行处理，&lt;/p&gt;- https://houzixiashanxiedaima.github.io/posts/android%E6%B8%B8%E6%88%8F%E6%89%8B%E6%9F%84%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95%E4%B8%80/ - </description>
+&lt;p&gt;导致错误的可能原因及解决方法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;string.xml中的字符串中有&lt;code&gt;%&lt;/code&gt;，对&lt;code&gt;%&lt;/code&gt;进行转义，即改为&lt;code&gt;\%&lt;/code&gt;；或者使用两个百分号表示一个，即改为&lt;code&gt;%%&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;string.xml中的字符串被格式化了，导致解析器解析出错，解决办法为&lt;code&gt;&amp;lt;string name=&amp;quot;test_string&amp;quot; formatted=&amp;quot;false&amp;quot;&amp;gt;&lt;/code&gt;，将formatted设置为false即可。&lt;/li&gt;
+&lt;/ol&gt;- https://houzixiashanxiedaima.github.io/posts/android%E4%B8%AD%E8%BE%93%E5%87%BAhtml%E6%A0%BC%E5%BC%8F%E4%B8%8B%E7%9A%84%E6%96%87%E5%AD%97/ - </description>
         </item>
     
     
