@@ -1,12 +1,11 @@
 <?xml-stylesheet href="/rss.xsl" type="text/xsl"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Blog</title>
+    <title>雅俗共赏</title>
     <link>https://houzixiashanxiedaima.github.io/</link>
-    <description>Recent content on Blog</description>
+    <description>Recent content on 雅俗共赏</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>This is a customized copyright.</copyright>
     <lastBuildDate>Tue, 02 Jan 2024 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://houzixiashanxiedaima.github.io/index.xml" rel="self" type="application/rss+xml" />
@@ -19,7 +18,7 @@
         <pubDate>Thu, 28 Jul 2016 15:19:45 +0000</pubDate>
         
         <guid>https://houzixiashanxiedaima.github.io/posts/android%E6%B8%B8%E6%88%8F%E6%89%8B%E6%9F%84%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95%E4%B8%80/</guid>
-        <description>Blog https://houzixiashanxiedaima.github.io/posts/android%E6%B8%B8%E6%88%8F%E6%89%8B%E6%9F%84%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95%E4%B8%80/ -&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
+        <description>雅俗共赏 https://houzixiashanxiedaima.github.io/posts/android%E6%B8%B8%E6%88%8F%E6%89%8B%E6%9F%84%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95%E4%B8%80/ -&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;最近一直在进行Android游戏手柄的开发，在这里简单记录一下自己在这个过程中遇到的问题，同时也能够为自己以后的开发提供一些帮助。&lt;/p&gt;
 &lt;h1 id=&#34;android手柄事件&#34;&gt;Android手柄事件&lt;/h1&gt;
 &lt;p&gt;先来看下Android官方文档关于&lt;strong&gt;处理控制器输入动作&lt;/strong&gt;的介绍：&lt;/p&gt;
@@ -88,7 +87,7 @@ Android官方建议开发者从与用户交互的&lt;code&gt;View&lt;/code&gt;�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面的代码就是用来处理&lt;code&gt;KeyEvent&lt;/code&gt;事件，但是在实际的开发过程中，我们可能遇到输入设备，如游戏手柄，具有摇杆和扳机键（Trigger）。上面的函数是无法去处理摇杆和扳机键事件的，因为摇杆和扳机键事件都有一个坐标（AXIS），那么摇杆和扳机键该如何处理呢，接下来我们就介绍另外一个函数：&lt;code&gt;dispatchMontionEvnet&lt;/code&gt;。
 #DispatchMotionEvent
 &lt;code&gt;dispatchMontionEvnet&lt;/code&gt;可以处理方向按键、摇杆、扳机键等具有坐标值的特殊按键。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;MotionEvent&lt;/code&gt;的优先级是要高于&lt;code&gt;KeyEvent&lt;/code&gt;的，也就是说，当操作手柄的事件发生时，会先将获取到的&lt;strong&gt;KeyCode&lt;/strong&gt;传递到&lt;code&gt;dispatchMotionEvent&lt;/code&gt;或者&lt;code&gt;on&lt;/code&gt;中进行处理，&lt;/p&gt;- https://houzixiashanxiedaima.github.io/posts/android%E6%B8%B8%E6%88%8F%E6%89%8B%E6%9F%84%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95%E4%B8%80/ - This is a customized copyright.</description>
+&lt;p&gt;&lt;code&gt;MotionEvent&lt;/code&gt;的优先级是要高于&lt;code&gt;KeyEvent&lt;/code&gt;的，也就是说，当操作手柄的事件发生时，会先将获取到的&lt;strong&gt;KeyCode&lt;/strong&gt;传递到&lt;code&gt;dispatchMotionEvent&lt;/code&gt;或者&lt;code&gt;on&lt;/code&gt;中进行处理，&lt;/p&gt;- https://houzixiashanxiedaima.github.io/posts/android%E6%B8%B8%E6%88%8F%E6%89%8B%E6%9F%84%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95%E4%B8%80/ - </description>
         </item>
     
     
@@ -99,7 +98,7 @@ Android官方建议开发者从与用户交互的&lt;code&gt;View&lt;/code&gt;�
         <pubDate>Thu, 28 Jul 2016 15:19:45 +0000</pubDate>
         
         <guid>https://houzixiashanxiedaima.github.io/posts/android%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80%E7%9A%84%E6%8E%A2%E7%B4%A2/</guid>
-        <description>Blog https://houzixiashanxiedaima.github.io/posts/android%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80%E7%9A%84%E6%8E%A2%E7%B4%A2/ -&lt;p&gt;最近在学习Android中自定义View的一些知识，为了检验成果，先来自定义一个流式布局。&lt;/p&gt;
+        <description>雅俗共赏 https://houzixiashanxiedaima.github.io/posts/android%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80%E7%9A%84%E6%8E%A2%E7%B4%A2/ -&lt;p&gt;最近在学习Android中自定义View的一些知识，为了检验成果，先来自定义一个流式布局。&lt;/p&gt;
 &lt;h3 id=&#34;什么是流式布局&#34;&gt;什么是流式布局？&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/2524102-a4edfa75da430455.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;流式布局示例1&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/2524102-9b3989321f3e5db6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;流式布局示例2.png&#34;&gt;&lt;/p&gt;
@@ -484,7 +483,7 @@ Android官方建议开发者从与用户交互的&lt;code&gt;View&lt;/code&gt;�
 &lt;p&gt;这种情况是只有这个childView的这一行的行距出现了问题。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/2524102-33b1287cfc34db14.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;情况2.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;这种情况看起来好像是正常的，但是实际上是从这个childView之后的所有行高都变大了。&lt;/p&gt;
-&lt;p&gt;上面这两种情况的出现对应着代码中有一些微小的改动，在这里就不放出来了。针对上面的这两种情况，都尝试过解决办法，但是都失败了，可能是因为我们在onLayout中使用了行高来确定上下两行的间隔距离，而这个childView的行高要特殊一些，所以就导致出现这个问题。但是这个小问题也不用太在意，因为我们的流式布局基本上是不会碰到一个childView的宽度比整个布局的宽度还宽的。&lt;/p&gt;- https://houzixiashanxiedaima.github.io/posts/android%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80%E7%9A%84%E6%8E%A2%E7%B4%A2/ - This is a customized copyright.</description>
+&lt;p&gt;上面这两种情况的出现对应着代码中有一些微小的改动，在这里就不放出来了。针对上面的这两种情况，都尝试过解决办法，但是都失败了，可能是因为我们在onLayout中使用了行高来确定上下两行的间隔距离，而这个childView的行高要特殊一些，所以就导致出现这个问题。但是这个小问题也不用太在意，因为我们的流式布局基本上是不会碰到一个childView的宽度比整个布局的宽度还宽的。&lt;/p&gt;- https://houzixiashanxiedaima.github.io/posts/android%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80%E7%9A%84%E6%8E%A2%E7%B4%A2/ - </description>
         </item>
     
     
@@ -495,7 +494,7 @@ Android官方建议开发者从与用户交互的&lt;code&gt;View&lt;/code&gt;�
         <pubDate>Thu, 28 Jul 2016 15:19:45 +0000</pubDate>
         
         <guid>https://houzixiashanxiedaima.github.io/posts/drawerlayoutwrite-oncerun-everywhere/</guid>
-        <description>Blog https://houzixiashanxiedaima.github.io/posts/drawerlayoutwrite-oncerun-everywhere/ -&lt;p&gt;自从Material Design出来之后，各种各样的控件也是让人眼花缭乱，但是用的时候还是需要克制，比如Google在官方的Material Design Guideline中就建议内容相同的列表不要使用Cardview，而是推荐使用普通的布局，中间加上divider即可，避免给人一种分裂感。&lt;/p&gt;
+        <description>雅俗共赏 https://houzixiashanxiedaima.github.io/posts/drawerlayoutwrite-oncerun-everywhere/ -&lt;p&gt;自从Material Design出来之后，各种各样的控件也是让人眼花缭乱，但是用的时候还是需要克制，比如Google在官方的Material Design Guideline中就建议内容相同的列表不要使用Cardview，而是推荐使用普通的布局，中间加上divider即可，避免给人一种分裂感。&lt;/p&gt;
 &lt;p&gt;在使用DrawerLayout的时候，可能我们多个Activity中都需要用到，我们是不是每个Activity都需要新建为Navigation Drawer Activity呢，答案是：NO。所以这次我们就来看看，如何“克制地”使用DrawerLayout&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Write Once，Run Everywhere&lt;/p&gt;
@@ -590,7 +589,7 @@ Android官方建议开发者从与用户交互的&lt;code&gt;View&lt;/code&gt;�
 &lt;img src=&#34;http://upload-images.jianshu.io/upload_images/2524102-d49733181469cf69.gif?imageMogr2/auto-orient/strip&#34; alt=&#34;drawer-layout-new.gif&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;如果点击菜单键没有反应的话，请删除掉继承自BaseActivity的activity中的setSupportActionBar这行代码即可&lt;/p&gt;
-&lt;/blockquote&gt;- https://houzixiashanxiedaima.github.io/posts/drawerlayoutwrite-oncerun-everywhere/ - This is a customized copyright.</description>
+&lt;/blockquote&gt;- https://houzixiashanxiedaima.github.io/posts/drawerlayoutwrite-oncerun-everywhere/ - </description>
         </item>
     
     
@@ -601,7 +600,7 @@ Android官方建议开发者从与用户交互的&lt;code&gt;View&lt;/code&gt;�
         <pubDate>Thu, 28 Jul 2016 15:19:45 +0000</pubDate>
         
         <guid>https://houzixiashanxiedaima.github.io/posts/material-design-%E4%B9%8Btablayout%E4%B8%8Etoolbar/</guid>
-        <description>Blog https://houzixiashanxiedaima.github.io/posts/material-design-%E4%B9%8Btablayout%E4%B8%8Etoolbar/ -&lt;p&gt;今天在学习Material Design的过程中，遇到了一个比较坑的问题，在这里记录一下，以后如果有人遇到的话，可以做个参考吧。首先来看看我们的需求，今天我们需要实现下面这个效果：&lt;/p&gt;
+        <description>雅俗共赏 https://houzixiashanxiedaima.github.io/posts/material-design-%E4%B9%8Btablayout%E4%B8%8Etoolbar/ -&lt;p&gt;今天在学习Material Design的过程中，遇到了一个比较坑的问题，在这里记录一下，以后如果有人遇到的话，可以做个参考吧。首先来看看我们的需求，今天我们需要实现下面这个效果：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/2524102-d8903fa389d460a8.gif?imageMogr2/auto-orient/strip&#34; alt=&#34;需求.gif&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;图片来自blog：http://blog.csdn.net/eclipsexys/article/details/46349721&lt;/p&gt;
@@ -707,7 +706,7 @@ Android官方建议开发者从与用户交互的&lt;code&gt;View&lt;/code&gt;�
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;/resources&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面这个是&lt;code&gt;style.xml&lt;/code&gt;(v21)的代码，从这段代码中我们就可以找到这次这个bug的罪魁祸首了。就是这一行&lt;code&gt;&amp;lt;item name=&amp;quot;android:statusBarColor&amp;quot;&amp;gt;@android:color/transparent&amp;lt;/item&amp;gt;&lt;/code&gt;
 就是这行代码将我们的状态栏给弄成了透明了，结果就导致我们看到的状态栏和布局文件是在同一个z轴上，也就是会被挤上去，从而导致我们的Toolbar不能完全的隐藏起来。&lt;/p&gt;
-&lt;p&gt;最后，为什么这个小bug费了这么大劲才找出来，我上面这一整套代码，基本上都是在android studio 中新建一个TabActivity 自动生成的。也就说原本自动生成的代码就有这个Bug，谁能想到android studio 这个浓眉大眼的家伙也&amp;quot;叛变革命&amp;quot;了呢。&lt;/p&gt;- https://houzixiashanxiedaima.github.io/posts/material-design-%E4%B9%8Btablayout%E4%B8%8Etoolbar/ - This is a customized copyright.</description>
+&lt;p&gt;最后，为什么这个小bug费了这么大劲才找出来，我上面这一整套代码，基本上都是在android studio 中新建一个TabActivity 自动生成的。也就说原本自动生成的代码就有这个Bug，谁能想到android studio 这个浓眉大眼的家伙也&amp;quot;叛变革命&amp;quot;了呢。&lt;/p&gt;- https://houzixiashanxiedaima.github.io/posts/material-design-%E4%B9%8Btablayout%E4%B8%8Etoolbar/ - </description>
         </item>
     
     
@@ -718,7 +717,7 @@ Android官方建议开发者从与用户交互的&lt;code&gt;View&lt;/code&gt;�
         <pubDate>Thu, 28 Jul 2016 15:19:45 +0000</pubDate>
         
         <guid>https://houzixiashanxiedaima.github.io/posts/navigationview-%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/</guid>
-        <description>Blog https://houzixiashanxiedaima.github.io/posts/navigationview-%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/ -&lt;p&gt;在Android 5.0之后，Google推出了Material Design兼容库，在Material Design的兼容库中，有个用的比较多的控件就是&lt;code&gt;NavigationView&lt;/code&gt;。在我们平时使用过程中，对于&lt;code&gt;NavigationView&lt;/code&gt;的一些小细节可能也并没有过多的关注，所以就导致我们在遇到特殊需求的时候无从下手，那么在这里我就简单记录一下使用&lt;code&gt;NavigationView&lt;/code&gt;的一些小坑，暂时可能也并没有遇到很多的坑，如果以后遇到的话会不定时更新。&lt;/p&gt;
+        <description>雅俗共赏 https://houzixiashanxiedaima.github.io/posts/navigationview-%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/ -&lt;p&gt;在Android 5.0之后，Google推出了Material Design兼容库，在Material Design的兼容库中，有个用的比较多的控件就是&lt;code&gt;NavigationView&lt;/code&gt;。在我们平时使用过程中，对于&lt;code&gt;NavigationView&lt;/code&gt;的一些小细节可能也并没有过多的关注，所以就导致我们在遇到特殊需求的时候无从下手，那么在这里我就简单记录一下使用&lt;code&gt;NavigationView&lt;/code&gt;的一些小坑，暂时可能也并没有遇到很多的坑，如果以后遇到的话会不定时更新。&lt;/p&gt;
 &lt;h2 id=&#34;navigationview基本使用&#34;&gt;NavigationView基本使用&lt;/h2&gt;
 &lt;p&gt;有很多人对于&lt;code&gt;NavigationView&lt;/code&gt;的基本使用还是比较了解的， 那么我这里推荐一种非常偷懒的方法，就是我们在&lt;code&gt;Android Studio&lt;/code&gt;中新建&lt;code&gt;Activity&lt;/code&gt;时可以直接进行如下操作：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://upload-images.jianshu.io/upload_images/2524102-ed42f064db473404.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;New Navigation Activity.png&#34;&gt;&lt;/p&gt;
@@ -862,7 +861,7 @@ Android官方建议开发者从与用户交互的&lt;code&gt;View&lt;/code&gt;�
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;/group&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8b008b;font-weight:bold&#34;&gt;&amp;lt;/menu&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个布局文件就是用&lt;code&gt;group&lt;/code&gt;包裹起每个组的&lt;code&gt;item&lt;/code&gt;，有点类似第二种布局，但是&lt;strong&gt;最关键&lt;/strong&gt;的地方就是要为每一个&lt;code&gt;group&lt;/code&gt;设置一个&lt;code&gt;id&lt;/code&gt;，设置完成之后就可以得到第三种布局的效果。&lt;/p&gt;- https://houzixiashanxiedaima.github.io/posts/navigationview-%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/ - This is a customized copyright.</description>
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个布局文件就是用&lt;code&gt;group&lt;/code&gt;包裹起每个组的&lt;code&gt;item&lt;/code&gt;，有点类似第二种布局，但是&lt;strong&gt;最关键&lt;/strong&gt;的地方就是要为每一个&lt;code&gt;group&lt;/code&gt;设置一个&lt;code&gt;id&lt;/code&gt;，设置完成之后就可以得到第三种布局的效果。&lt;/p&gt;- https://houzixiashanxiedaima.github.io/posts/navigationview-%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/ - </description>
         </item>
     
     
@@ -873,7 +872,7 @@ Android官方建议开发者从与用户交互的&lt;code&gt;View&lt;/code&gt;�
         <pubDate>Thu, 28 Jul 2016 15:19:45 +0000</pubDate>
         
         <guid>https://houzixiashanxiedaima.github.io/posts/virtualbox%E4%B8%8Emactype%E5%85%B1%E5%AD%98/</guid>
-        <description>Blog https://houzixiashanxiedaima.github.io/posts/virtualbox%E4%B8%8Emactype%E5%85%B1%E5%AD%98/ -&lt;h1 id=&#34;virtualbox与mactype共存&#34;&gt;Virtualbox与Mactype共存&lt;/h1&gt;
+        <description>雅俗共赏 https://houzixiashanxiedaima.github.io/posts/virtualbox%E4%B8%8Emactype%E5%85%B1%E5%AD%98/ -&lt;h1 id=&#34;virtualbox与mactype共存&#34;&gt;Virtualbox与Mactype共存&lt;/h1&gt;
 &lt;p&gt;最近心血来潮，准备重启吃灰好久的ubuntu虚拟机玩玩，于是开开心心准备打开机器，顺利进入，准备更新下软件，发现网速好慢，虽然主机能够高速访问“外网”，但是虚拟机并没有享受到这种福利，那么能不能让虚拟机也享受呢？这么一说，就是一段折腾史……&lt;/p&gt;
 &lt;p&gt;##　虚拟机“外网”访问
 虚拟机访问“外网”，可以通过设置虚拟机的网络为桥接模式，然后在虚拟机中设置主机的ip和端口即可。具体设置我们后面再说，先来打开桥接模式。
@@ -892,7 +891,7 @@ Android官方建议开发者从与用户交互的&lt;code&gt;View&lt;/code&gt;�
 在宿主机windows上运行shadowsocks.exe并勾选“允许局域网连接”
 使用桥接方式运行虚拟机（这时虚拟机与宿主处于同一个局域网）
 进入ubuntu系统，System Settings – Network – Network proxy勾选Manual（手动）,地址全部填宿主机IP（局域网网段），设置好代理端口（可在windows下的shadowsocks查看，一般为默认1080）
-ubuntu用浏览器访问www.google.com，成功。&lt;/p&gt;- https://houzixiashanxiedaima.github.io/posts/virtualbox%E4%B8%8Emactype%E5%85%B1%E5%AD%98/ - This is a customized copyright.</description>
+ubuntu用浏览器访问www.google.com，成功。&lt;/p&gt;- https://houzixiashanxiedaima.github.io/posts/virtualbox%E4%B8%8Emactype%E5%85%B1%E5%AD%98/ - </description>
         </item>
     
     
@@ -903,7 +902,7 @@ ubuntu用浏览器访问www.google.com，成功。&lt;/p&gt;- https://houzixiash
         <pubDate>Thu, 28 Jul 2016 15:19:45 +0000</pubDate>
         
         <guid>https://houzixiashanxiedaima.github.io/posts/%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%8A%B6%E6%80%81%E6%A0%8F%E6%8E%A2%E7%B4%A2/</guid>
-        <description>Blog https://houzixiashanxiedaima.github.io/posts/%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%8A%B6%E6%80%81%E6%A0%8F%E6%8E%A2%E7%B4%A2/ -&lt;h1 id=&#34;概念解析&#34;&gt;概念解析&lt;/h1&gt;
+        <description>雅俗共赏 https://houzixiashanxiedaima.github.io/posts/%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%8A%B6%E6%80%81%E6%A0%8F%E6%8E%A2%E7%B4%A2/ -&lt;h1 id=&#34;概念解析&#34;&gt;概念解析&lt;/h1&gt;
 &lt;p&gt;在Adnroid 4.4(API level 19)中引入了“沉浸式”状态栏的概念，现在许多对这个“沉浸式”状态栏的解释。但是感觉大部分的解释好像“差一点”，要么是把“沉浸式”状态栏解释为“透明状态栏”，要么是解释为Toolbar颜色和状态栏颜色不一致（前者为colorprimary，后者为colorprimary_dark）的状态栏。但是其实Android官方对于沉浸式状态栏的解释是非常清楚的。&lt;/p&gt;
 &lt;h2 id=&#34;沉浸式状态栏&#34;&gt;沉浸式状态栏&lt;/h2&gt;
 &lt;p&gt;这个概念的提出对于手机是虚拟按键的用户来说是非常有意义的，因为“沉浸式”的体验可以增加手机的阅读空间，将上面的状态栏（statusbar）和下面的导航栏（navigationbar）隐藏起来，从而造成“沉浸式”的体验。&lt;/p&gt;
@@ -941,7 +940,7 @@ ubuntu用浏览器访问www.google.com，成功。&lt;/p&gt;- https://houzixiash
 &lt;p&gt;从上面我们可以知道“沉浸式”是像我们前面所说的，将状态栏（statusbar）和导航栏（navigationbar）给隐藏起来（气泡[3]的状态），并不是像大部分的应用那样，将我们的状态栏设置为透明，或者是将状态栏颜色加深。
 气泡[4]的状态是我们在“沉浸式”过程中点击屏幕之后产生的效果，即当我们阅读完毕时，点击屏幕，让屏幕获取焦点， 显示出状态栏和导航栏，然后进行其他的操作。
 使用colorPrimary和colorPrimaryDark只是为了设置状态栏颜色，而且在Android 5.0之后，Material Design中引入了Toolbar，这也可以将Toolbar颜色和状态颜色区分开。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;最后希望各位通过篇文章了解什么是“沉浸式”状态栏，或者了解什么是“沉浸式”，而不是简单的将透明状态栏或是所谓的“变色龙”状态栏成为沉浸式状态栏。&lt;/strong&gt;&lt;/p&gt;- https://houzixiashanxiedaima.github.io/posts/%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%8A%B6%E6%80%81%E6%A0%8F%E6%8E%A2%E7%B4%A2/ - This is a customized copyright.</description>
+&lt;p&gt;&lt;strong&gt;最后希望各位通过篇文章了解什么是“沉浸式”状态栏，或者了解什么是“沉浸式”，而不是简单的将透明状态栏或是所谓的“变色龙”状态栏成为沉浸式状态栏。&lt;/strong&gt;&lt;/p&gt;- https://houzixiashanxiedaima.github.io/posts/%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%8A%B6%E6%80%81%E6%A0%8F%E6%8E%A2%E7%B4%A2/ - </description>
         </item>
     
     
@@ -952,7 +951,7 @@ ubuntu用浏览器访问www.google.com，成功。&lt;/p&gt;- https://houzixiash
         <pubDate>Thu, 28 Jul 2016 15:17:34 +0000</pubDate>
         
         <guid>https://houzixiashanxiedaima.github.io/posts/adb-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%97%A0%E7%BA%BF%E8%B0%83%E8%AF%95/</guid>
-        <description>Blog https://houzixiashanxiedaima.github.io/posts/adb-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%97%A0%E7%BA%BF%E8%B0%83%E8%AF%95/ -&lt;h1 id=&#34;adb无线调试步骤不用root&#34;&gt;ADB无线调试步骤（不用root）&lt;/h1&gt;
+        <description>雅俗共赏 https://houzixiashanxiedaima.github.io/posts/adb-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%97%A0%E7%BA%BF%E8%B0%83%E8%AF%95/ -&lt;h1 id=&#34;adb无线调试步骤不用root&#34;&gt;ADB无线调试步骤（不用root）&lt;/h1&gt;
 &lt;ol start=&#34;0&#34;&gt;
 &lt;li&gt;将手机通过USB连接到PC&lt;/li&gt;
 &lt;li&gt;在命令行输入：&lt;code&gt;adb tcpip 5555&lt;/code&gt;开启无线调试模式&lt;/li&gt;
@@ -962,7 +961,7 @@ ubuntu用浏览器访问www.google.com，成功。&lt;/p&gt;- https://houzixiash
 &lt;li&gt;若要恢复USB有线调试模式，只需要在保持手机与PC连接状态下输入&lt;code&gt;adb usb&lt;/code&gt;即可&lt;/li&gt;
 &lt;li&gt;若要断开连接，在命令行输入&lt;code&gt;adb disconnect&lt;/code&gt;即可。&lt;/li&gt;
 &lt;/ol&gt;
-- https://houzixiashanxiedaima.github.io/posts/adb-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%97%A0%E7%BA%BF%E8%B0%83%E8%AF%95/ - This is a customized copyright.</description>
+- https://houzixiashanxiedaima.github.io/posts/adb-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%97%A0%E7%BA%BF%E8%B0%83%E8%AF%95/ - </description>
         </item>
     
     
@@ -973,7 +972,7 @@ ubuntu用浏览器访问www.google.com，成功。&lt;/p&gt;- https://houzixiash
         <pubDate>Thu, 28 Jul 2016 15:17:34 +0000</pubDate>
         
         <guid>https://houzixiashanxiedaima.github.io/posts/git-%E8%BE%93%E5%87%BA%E5%BD%A9%E8%89%B2log/</guid>
-        <description>Blog https://houzixiashanxiedaima.github.io/posts/git-%E8%BE%93%E5%87%BA%E5%BD%A9%E8%89%B2log/ -&lt;h1 id=&#34;git-彩色log配置&#34;&gt;Git 彩色Log配置&lt;/h1&gt;
+        <description>雅俗共赏 https://houzixiashanxiedaima.github.io/posts/git-%E8%BE%93%E5%87%BA%E5%BD%A9%E8%89%B2log/ -&lt;h1 id=&#34;git-彩色log配置&#34;&gt;Git 彩色Log配置&lt;/h1&gt;
 &lt;p&gt;git 在打印log的时候，默认是黑底白字，这样我们很多的关键信息都不能够非常突出的显示出来，看起来也是比较费劲。我们可以通过如下的语句让git打印出来的log出现彩色的字体，这样的话可以让我们更直接的看到我们的提交信息的关键字。&lt;/p&gt;
 &lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;&lt;strong&gt;关键语句如下：&lt;/strong&gt;&lt;/p&gt;
@@ -989,7 +988,7 @@ ubuntu用浏览器访问www.google.com，成功。&lt;/p&gt;- https://houzixiash
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git config --global alias.lg &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;log --color --graph --pretty=format:&amp;#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&amp;lt;%an&amp;gt;%Creset&amp;#39; --abbrev-commit&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git config --global alias.his &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;log --graph --decorate --oneline --pretty=format:&amp;#39;%Creset %s %C(magenta)in %Cred%h %C(magenta)commited by %Cgreen%cn %C(magenta)on %C(yellow) %cd %C(magenta)from %Creset %C(yellow)%d&amp;#39; --abbrev-commit --date=format:&amp;#39;%Y-%m-%d %H:%M:%S&amp;#39;&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git config --global alias.hist &lt;span style=&#34;color:#cd5555&#34;&gt;&amp;#34;log --graph --decorate --oneline --pretty=format:&amp;#39;%Cred%h - %C(bold white) %s %Creset %C(yellow)%d  %C(cyan) &amp;lt;%cd&amp;gt; %Creset %Cgreen(%cn)&amp;#39; --abbrev-commit --date=format:&amp;#39;%Y-%m-%d %H:%M:%S&amp;#39;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://houzixiashanxiedaima.github.io/posts/git-%E8%BE%93%E5%87%BA%E5%BD%A9%E8%89%B2log/ - This is a customized copyright.</description>
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://houzixiashanxiedaima.github.io/posts/git-%E8%BE%93%E5%87%BA%E5%BD%A9%E8%89%B2log/ - </description>
         </item>
     
     
