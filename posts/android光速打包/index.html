@@ -1,280 +1,343 @@
 <!DOCTYPE html>
-<html lang="en" dir="auto">
-
-<head><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>Android光速打包 | BLOG</title>
-<meta name="keywords" content="">
-<meta name="description" content="快速打包插件 packer-ng-plugin 使用心得
-首先放出这个工具的Github地址：https://github.com/mcxiaoke/packer-ng-plugin 在这个工具里面，作者已经非常详细的介绍了该如何使用这个打包工具，在此我主要记录一下我使用这个打包工具的过程。">
-<meta name="author" content="">
-<link rel="canonical" href="https://houzixiashanxiedaima.github.io/posts/android%E5%85%89%E9%80%9F%E6%89%93%E5%8C%85/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.5cfc680b1eeaeef9efbced92d46c2a9e876b72ee14fba85846afc4cff9e6e6f8.css" integrity="sha256-XPxoCx7q7vnvvO2S1Gwqnodrcu4U&#43;6hYRq/Ez/nm5vg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
-    onload="hljs.initHighlightingOnLoad();"></script>
-<link rel="icon" href="https://houzixiashanxiedaima.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://houzixiashanxiedaima.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://houzixiashanxiedaima.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://houzixiashanxiedaima.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://houzixiashanxiedaima.github.io/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --hljs-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript><meta property="og:title" content="Android光速打包" />
-<meta property="og:description" content="快速打包插件 packer-ng-plugin 使用心得
-首先放出这个工具的Github地址：https://github.com/mcxiaoke/packer-ng-plugin 在这个工具里面，作者已经非常详细的介绍了该如何使用这个打包工具，在此我主要记录一下我使用这个打包工具的过程。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://houzixiashanxiedaima.github.io/posts/android%E5%85%89%E9%80%9F%E6%89%93%E5%8C%85/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2016-07-28T15:19:45+00:00" />
-<meta property="article:modified_time" content="2016-07-28T15:19:45+00:00" />
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Android光速打包"/>
-<meta name="twitter:description" content="快速打包插件 packer-ng-plugin 使用心得
-首先放出这个工具的Github地址：https://github.com/mcxiaoke/packer-ng-plugin 在这个工具里面，作者已经非常详细的介绍了该如何使用这个打包工具，在此我主要记录一下我使用这个打包工具的过程。"/>
+<html><head>
+<title>Android光速打包</title>
 
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://houzixiashanxiedaima.github.io/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Android光速打包",
-      "item": "https://houzixiashanxiedaima.github.io/posts/android%E5%85%89%E9%80%9F%E6%89%93%E5%8C%85/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Android光速打包",
-  "name": "Android光速打包",
-  "description": "快速打包插件 packer-ng-plugin 使用心得 首先放出这个工具的Github地址：https://github.com/mcxiaoke/packer-ng-plugin 在这个工具里面，作者已经非常详细的介绍了该如何使用这个打包工具，在此我主要记录一下我使用这个打包工具的过程。\n",
-  "keywords": [
+
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="description" content="">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+      <script src="/js/toc.js"></script>
     
-  ],
-  "articleBody": "快速打包插件 packer-ng-plugin 使用心得 首先放出这个工具的Github地址：https://github.com/mcxiaoke/packer-ng-plugin 在这个工具里面，作者已经非常详细的介绍了该如何使用这个打包工具，在此我主要记录一下我使用这个打包工具的过程。\n导入依赖库文件 这个工具导入依赖库文件有两个地方\n在项目的根目录中的build.gradle添加依赖 buildscript { ...... dependencies{ // add packer-ng classpath 'com.mcxiaoke.gradle:packer-ng:1.0.7' } } 在APP中的build.gradle添加依赖 apply plugin: 'packer' dependencies { compile 'com.mcxiaoke.gradle:packer-helper:1.0.7' } android { //... signingConfigs { release { // 同时满足下面两个条件才需要此配置 // 1. Gradle版本 \u003e= 2.14.1 // 2. Android Gradle Plugin 版本 \u003e= 2.2.0 // 作用是只使用旧版签名，禁用V2版签名模式 // 兼容7.0版本的Android系统才需要,否则不需要 v2SigningEnabled false } } } ##这里有个非常重要的信息大家要注意一下，就是packer-helper:1.0.7和packer-ng:1.0.7这两个地方的版本号一定要保持一致##\n在APP的build.gradle中配置签名信息 signingConfigs { release { storeFile file(\"D:/keystore/release.keystore\") storePassword \"release\" keyAlias \"release123\" keyPassword \"release123\" } debug { //debug 的签名信息 } } 在APP的build.gradle中添加buildTypes buildTypes { release { ...... //这里是配置签名的关键信息 signingConfig signingConfigs.release } debug { ...... //这里是配置签名的关键信息 signingConfig signingConfigs.debug } } 以上的工作完成之后,我们的配置基本上就完成了,但是这个工具的作者在文档的最后说了\n注意事项 不支持productFlavors中定义的条件编译变量，不支持修改AndroidManifest 如果你的项目有多个productFlavors，默认只会用第一个flavor生成的APK文件作为打包工具的输入参数，忽略其它flavor生成的apk，代码里用的是 theVariant.outputs[0].outputFile。如果你想指定使用某个flavor来生成渠道包，可以用 apkFlavor1Release，apkFlavor2Beta这样的名字，示例（假设flavor名字是Intel）：./gradlew -Pmarket=markets.txt clean apkIntelRelease 注意事项中给我们说明了两件事情:\n不支持productFlavors中定义的条件编译 不支持修改AndroidManifest文件 那么这个时候就会有个问题,如果我们需要多渠道打包怎么办?\n多渠道打包 首先在项目的根目录中添加一个markets.txt 文件,文件中每一行表示一个渠道,这个工具会自动识别空行和不符合规定的行,每一行的渠道和注释之间用**#**隔开,但是也可以没有注释,比如我可以在markets.txt 中进行如下定义:\nGoogle#google channel Baidu#baidu channel Test 在进行了如上的定义之后,我们就可以进行多渠道打包,多渠道打包时我个人还是比较喜欢用Gradle来进行打包，在项目的根目录中执行Gradle命令行：\ngradlew -Pmarket=markets.txt clean apkRelease 但是这个时候如果我们有对友盟的配置,就不能使用友盟官方SDK文档中推荐的方法,友盟官方推荐的方法是在AndroidManifest中设置各种配置信息,但是因为这个工具的限制,我们需要在代码中进行配置.\n配置友盟的多渠道信息 首先我们在程序的入口处,一般都是ApplicationMain中的onCreate()中进行如下的配置:\nprivate static final String APP_KEY = \"YOUR_APP_KEY\"; private MobclickAgent.UMAnalyticsConfig mUMAnalyticsConfig; @Override public void onCreate() { super.onCreate(); setChannelID(); } private void setChannelID() { final String channelID = PackerNg.getMarket(this); mUMAnalyticsConfig = new MobclickAgent.UMAnalyticsConfig(this, APP_KEY, channelID); MobclickAgent.startWithConfigure(mUMAnalyticsConfig); } 当然最后别忘记在AndroidManifest.xml的application结点中加上android:name=\".Application.ApplicationMain\"\n进行了以上的所有设置之后,我们就可以享受光速打包了,根据我亲测,打50个包的速度是1分钟左右,这一分钟包括检查插件和编译信息等等.其实开始打第0个包到第49个包大概是10多秒钟吧。\n",
-  "wordCount" : "165",
-  "inLanguage": "en",
-  "datePublished": "2016-07-28T15:19:45Z",
-  "dateModified": "2016-07-28T15:19:45Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://houzixiashanxiedaima.github.io/posts/android%E5%85%89%E9%80%9F%E6%89%93%E5%8C%85/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "BLOG",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://houzixiashanxiedaima.github.io/favicon.ico"
-    }
-  }
-}
-</script>
+    <link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="/scss/dark-mode.min.cb53f1bee2b8900cb4f082afbf00175d6618f281cf9a2fe8619e3b52d20b5721.css" integrity="sha256-y1PxvuK4kAy08IKvvwAXXWYY8oHPmi/oYZ47UtILVyE=" media="screen">
+
+
+<link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Material+Icons">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </head>
-
-<body class="" id="top">
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.body.classList.add('dark');
-    } else if (localStorage.getItem("pref-theme") === "light") {
-        document.body.classList.remove('dark')
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark');
-    }
-
-</script>
-
-<header class="header">
-    <nav class="nav">
-        <div class="logo">
-            <a href="https://houzixiashanxiedaima.github.io/" accesskey="h" title="BLOG (Alt + H)">BLOG</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu">
-            <li>
-                <a href="https://houzixiashanxiedaima.github.io/" title="BLOG">
-                    <span>HOME</span>
+<body>
+    	<div id="app"><div class="single-column-drawer-container" id="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+            
+                
+                
+                
+                    
+                
+                
+                
+                <a class="a-block drawer-menu-item active" href="/posts">
+                    Archive
                 </a>
-            </li>
-            <li>
-                <a href="https://houzixiashanxiedaima.github.io/archives/" title="Archive">
-                    <span>ARCHIVE</span>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/tags">
+                    Tags
                 </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<main class="main">
+                
+            
+            
+            <div class="toc">
 
-<article class="post-single">
-  <header class="post-header">
-    <div class="breadcrumbs"><a href="https://houzixiashanxiedaima.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://houzixiashanxiedaima.github.io/posts/">Posts</a></div>
-    <h1 class="post-title">
-      Android光速打包
-    </h1>
-    <div class="post-meta">&lt;span title=&#39;2016-07-28 15:19:45 &#43;0000 UTC&#39;&gt;July 28, 2016&lt;/span&gt;&amp;nbsp;·&amp;nbsp;1 min
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%bf%ab%e9%80%9f%e6%89%93%e5%8c%85%e6%8f%92%e4%bb%b6-packer-ng-plugin-%e4%bd%bf%e7%94%a8%e5%bf%83%e5%be%97" class="nav-快速打包插件-packer-ng-plugin-使用心得">
+									快速打包插件 packer-ng-plugin 使用心得
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e5%af%bc%e5%85%a5%e4%be%9d%e8%b5%96%e5%ba%93%e6%96%87%e4%bb%b6" class="nav-导入依赖库文件">
+									导入依赖库文件
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%a4%9a%e6%b8%a0%e9%81%93%e6%89%93%e5%8c%85" class="nav-多渠道打包">
+									多渠道打包
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e9%85%8d%e7%bd%ae%e5%8f%8b%e7%9b%9f%e7%9a%84%e5%a4%9a%e6%b8%a0%e9%81%93%e4%bf%a1%e6%81%af" class="nav-配置友盟的多渠道信息">
+									配置友盟的多渠道信息
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
 
 </div>
-  </header> <div class="toc">
-    <details  open>
-        <summary accesskey="c" title="(Alt + C)">
-            <span class="details">Table of Contents</span>
-        </summary>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div id="drawer-mask" v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav id="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div id="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a id="navTitle" class="navbar-brand" href="https://houzixiashanxiedaima.github.io/">
+            Blog
+        </a>
+        
+        <button type="button" class="nav-darkmode-toggle" id="darkModeToggleButton2">
+            <i class="material-icons" id="darkModeToggleIcon2">
+                dark_mode
+            </i>
+        </button>
+        
+    </div>
+</nav>
+<div class="single-column-header-container" id="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="https://houzixiashanxiedaima.github.io/">
+        <div class="single-column-header-title">Blog</div>
+        
+        <div class="single-column-header-subtitle">Be Free To Say Anything</div>
+        
 
-        <div class="inner"><ul>
-                <li>
-                    <a href="#%e5%bf%ab%e9%80%9f%e6%89%93%e5%8c%85%e6%8f%92%e4%bb%b6-packer-ng-plugin-%e4%bd%bf%e7%94%a8%e5%bf%83%e5%be%97" aria-label="快速打包插件 packer-ng-plugin 使用心得">快速打包插件 packer-ng-plugin 使用心得</a><ul>
+    </a>
+</div>
+
+            <div id="content">
+                <div id="streamContainer" class="stream-container">
+
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+
+            <div class="post-head-wrapper-text-only"
+                
+            >
+                <div class="post-title">
+                    Android光速打包
+                    
+                    <div class="post-meta">
                         
-                <li>
-                    <a href="#%e5%af%bc%e5%85%a5%e4%be%9d%e8%b5%96%e5%ba%93%e6%96%87%e4%bb%b6" aria-label="导入依赖库文件">导入依赖库文件</a></li>
-                <li>
-                    <a href="#%e5%a4%9a%e6%b8%a0%e9%81%93%e6%89%93%e5%8c%85" aria-label="多渠道打包">多渠道打包</a></li>
-                <li>
-                    <a href="#%e9%85%8d%e7%bd%ae%e5%8f%8b%e7%9b%9f%e7%9a%84%e5%a4%9a%e6%b8%a0%e9%81%93%e4%bf%a1%e6%81%af" aria-label="配置友盟的多渠道信息">配置友盟的多渠道信息</a>
-                </li>
-            </ul>
-            </li>
-            </ul>
-        </div>
-    </details>
-</div>
+                        <time itemprop="datePublished">
+                            2016-07-28 15:19
+                        </time>
+                        
 
-  <div class="post-content"><h1 id="快速打包插件-packer-ng-plugin-使用心得">快速打包插件 packer-ng-plugin 使用心得<a hidden class="anchor" aria-hidden="true" href="#快速打包插件-packer-ng-plugin-使用心得">#</a></h1>
+                        
+
+                        
+                        
+                            <i class="material-icons" style="">schedule</i>
+                            
+
+                            
+                            
+
+                            
+                            6 min
+                            
+                            46 s.
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                
+                <div class="post-body" v-pre>
+                
+                    <h1 id="快速打包插件-packer-ng-plugin-使用心得">快速打包插件 packer-ng-plugin 使用心得</h1>
 <p>首先放出这个工具的Github地址：https://github.com/mcxiaoke/packer-ng-plugin 在这个工具里面，作者已经非常详细的介绍了该如何使用这个打包工具，在此我主要记录一下我使用这个打包工具的过程。</p>
-<h2 id="导入依赖库文件">导入依赖库文件<a hidden class="anchor" aria-hidden="true" href="#导入依赖库文件">#</a></h2>
+<h2 id="导入依赖库文件">导入依赖库文件</h2>
 <p>这个工具导入依赖库文件有两个地方</p>
 <ul>
 <li>在项目的根目录中的<code>build.gradle</code>添加依赖</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-groovy" data-lang="groovy"><span style="display:flex;"><span>buildscript <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">......</span>
-</span></span><span style="display:flex;"><span>    dependencies<span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// add packer-ng
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        classpath <span style="color:#e6db74">&#39;com.mcxiaoke.gradle:packer-ng:1.0.7&#39;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-groovy" data-lang="groovy"><span style="display:flex;"><span>buildscript {
+</span></span><span style="display:flex;"><span>    ......
+</span></span><span style="display:flex;"><span>    dependencies{
+</span></span><span style="display:flex;"><span>    <span style="color:#228b22">// add packer-ng
+</span></span></span><span style="display:flex;"><span><span style="color:#228b22"></span>        classpath <span style="color:#cd5555">&#39;com.mcxiaoke.gradle:packer-ng:1.0.7&#39;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li>在APP中的<code>build.gradle</code>添加依赖</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-groovy" data-lang="groovy"><span style="display:flex;"><span>apply plugin: <span style="color:#e6db74">&#39;packer&#39;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-groovy" data-lang="groovy"><span style="display:flex;"><span>apply plugin: <span style="color:#cd5555">&#39;packer&#39;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>dependencies <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    compile <span style="color:#e6db74">&#39;com.mcxiaoke.gradle:packer-helper:1.0.7&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>android <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    signingConfigs <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>      release <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 同时满足下面两个条件才需要此配置
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// 1. Gradle版本 &gt;= 2.14.1
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// 2. Android Gradle Plugin 版本 &gt;= 2.2.0
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// 作用是只使用旧版签名，禁用V2版签名模式
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// 兼容7.0版本的Android系统才需要,否则不需要
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        v2SigningEnabled <span style="color:#66d9ef">false</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>dependencies {
+</span></span><span style="display:flex;"><span>    compile <span style="color:#cd5555">&#39;com.mcxiaoke.gradle:packer-helper:1.0.7&#39;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>android {
+</span></span><span style="display:flex;"><span>    <span style="color:#228b22">//...
+</span></span></span><span style="display:flex;"><span><span style="color:#228b22"></span>    signingConfigs {
+</span></span><span style="display:flex;"><span>      release {
+</span></span><span style="display:flex;"><span>        <span style="color:#228b22">// 同时满足下面两个条件才需要此配置
+</span></span></span><span style="display:flex;"><span><span style="color:#228b22"></span>        <span style="color:#228b22">// 1. Gradle版本 &gt;= 2.14.1
+</span></span></span><span style="display:flex;"><span><span style="color:#228b22"></span>        <span style="color:#228b22">// 2. Android Gradle Plugin 版本 &gt;= 2.2.0
+</span></span></span><span style="display:flex;"><span><span style="color:#228b22"></span>        <span style="color:#228b22">// 作用是只使用旧版签名，禁用V2版签名模式
+</span></span></span><span style="display:flex;"><span><span style="color:#228b22"></span>        <span style="color:#228b22">// 兼容7.0版本的Android系统才需要,否则不需要
+</span></span></span><span style="display:flex;"><span><span style="color:#228b22"></span>        v2SigningEnabled <span style="color:#8b008b;font-weight:bold">false</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
 </span></span></code></pre></div><p>##这里有个非常重要的信息大家要注意一下，就是<code>packer-helper:1.0.7</code>和<code>packer-ng:1.0.7</code>这两个地方的版本号一定要保持一致##</p>
 <ul>
 <li>在APP的<code>build.gradle</code>中配置签名信息</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-groovy" data-lang="groovy"><span style="display:flex;"><span>signingConfigs <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>       release <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>           storeFile <span style="color:#a6e22e">file</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;D:/keystore/release.keystore&#34;</span><span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>           storePassword <span style="color:#e6db74">&#34;release&#34;</span>
-</span></span><span style="display:flex;"><span>           keyAlias <span style="color:#e6db74">&#34;release123&#34;</span>
-</span></span><span style="display:flex;"><span>           keyPassword <span style="color:#e6db74">&#34;release123&#34;</span>
-</span></span><span style="display:flex;"><span>       <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>       debug <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#75715e">//debug 的签名信息
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>       <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">}</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-groovy" data-lang="groovy"><span style="display:flex;"><span>signingConfigs {
+</span></span><span style="display:flex;"><span>       release {
+</span></span><span style="display:flex;"><span>           storeFile <span style="color:#008b45">file</span>(<span style="color:#cd5555">&#34;D:/keystore/release.keystore&#34;</span>)
+</span></span><span style="display:flex;"><span>           storePassword <span style="color:#cd5555">&#34;release&#34;</span>
+</span></span><span style="display:flex;"><span>           keyAlias <span style="color:#cd5555">&#34;release123&#34;</span>
+</span></span><span style="display:flex;"><span>           keyPassword <span style="color:#cd5555">&#34;release123&#34;</span>
+</span></span><span style="display:flex;"><span>       }
+</span></span><span style="display:flex;"><span>       debug {
+</span></span><span style="display:flex;"><span>          <span style="color:#228b22">//debug 的签名信息
+</span></span></span><span style="display:flex;"><span><span style="color:#228b22"></span>       }
+</span></span><span style="display:flex;"><span>   }
 </span></span></code></pre></div><ul>
 <li>在APP的<code>build.gradle</code>中添加<code>buildTypes</code></li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-groovy" data-lang="groovy"><span style="display:flex;"><span>buildTypes <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>       release <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">......</span>
-</span></span><span style="display:flex;"><span>           <span style="color:#75715e">//这里是配置签名的关键信息
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>           signingConfig signingConfigs<span style="color:#f92672">.</span><span style="color:#a6e22e">release</span>
-</span></span><span style="display:flex;"><span>       <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>       debug <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">......</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#75715e">//这里是配置签名的关键信息
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>           signingConfig signingConfigs<span style="color:#f92672">.</span><span style="color:#a6e22e">debug</span>
-</span></span><span style="display:flex;"><span>       <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">}</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-groovy" data-lang="groovy"><span style="display:flex;"><span>buildTypes {
+</span></span><span style="display:flex;"><span>       release {
+</span></span><span style="display:flex;"><span>          ......
+</span></span><span style="display:flex;"><span>           <span style="color:#228b22">//这里是配置签名的关键信息
+</span></span></span><span style="display:flex;"><span><span style="color:#228b22"></span>           signingConfig signingConfigs.<span style="color:#658b00">release</span>
+</span></span><span style="display:flex;"><span>       }
+</span></span><span style="display:flex;"><span>       debug {
+</span></span><span style="display:flex;"><span>          ......
+</span></span><span style="display:flex;"><span>          <span style="color:#228b22">//这里是配置签名的关键信息
+</span></span></span><span style="display:flex;"><span><span style="color:#228b22"></span>           signingConfig signingConfigs.<span style="color:#658b00">debug</span>
+</span></span><span style="display:flex;"><span>       }
+</span></span><span style="display:flex;"><span>   }
 </span></span></code></pre></div><p>以上的工作完成之后,我们的配置基本上就完成了,但是这个工具的作者在文档的最后说了</p>
 <blockquote>
 <ul>
@@ -289,169 +352,260 @@
 <li>不支持修改<code>AndroidManifest</code>文件</li>
 </ol>
 <p>那么这个时候就会有个问题,如果我们需要多渠道打包怎么办?</p>
-<h2 id="多渠道打包">多渠道打包<a hidden class="anchor" aria-hidden="true" href="#多渠道打包">#</a></h2>
+<h2 id="多渠道打包">多渠道打包</h2>
 <p>首先在项目的根目录中添加一个<code>markets.txt</code> 文件,文件中每一行表示一个渠道,这个工具会自动识别空行和不符合规定的行,每一行的<code>渠道</code>和<code>注释</code>之间用**#**隔开,但是也可以没有注释,比如我可以在<code>markets.txt</code> 中进行如下定义:</p>
 <pre tabindex="0"><code>Google#google channel
 Baidu#baidu channel
 Test
 </code></pre><p>在进行了如上的定义之后,我们就可以进行多渠道打包,多渠道打包时我个人还是比较喜欢用<code>Gradle</code>来进行打包，在项目的根目录中执行<code>Gradle</code>命令行：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gradlew -Pmarket<span style="color:#f92672">=</span>markets.txt clean apkRelease
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gradlew -Pmarket=markets.txt clean apkRelease
 </span></span></code></pre></div><p>但是这个时候如果我们有对友盟的配置,就不能使用友盟官方SDK文档中推荐的方法,友盟官方推荐的方法是在AndroidManifest中设置各种配置信息,但是因为这个工具的限制,我们需要在代码中进行配置.</p>
-<h2 id="配置友盟的多渠道信息">配置友盟的多渠道信息<a hidden class="anchor" aria-hidden="true" href="#配置友盟的多渠道信息">#</a></h2>
+<h2 id="配置友盟的多渠道信息">配置友盟的多渠道信息</h2>
 <p>首先我们在程序的入口处,一般都是<code>ApplicationMain</code>中的<code>onCreate()</code>中进行如下的配置:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> String APP_KEY <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;YOUR_APP_KEY&#34;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span> MobclickAgent.<span style="color:#a6e22e">UMAnalyticsConfig</span> mUMAnalyticsConfig;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">@Override</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">onCreate</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">super</span>.<span style="color:#a6e22e">onCreate</span>();
-</span></span><span style="display:flex;"><span>        setChannelID();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setChannelID</span>() {
-</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">final</span> String channelID <span style="color:#f92672">=</span> PackerNg.<span style="color:#a6e22e">getMarket</span>(<span style="color:#66d9ef">this</span>);
-</span></span><span style="display:flex;"><span>          mUMAnalyticsConfig <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MobclickAgent.<span style="color:#a6e22e">UMAnalyticsConfig</span>(<span style="color:#66d9ef">this</span>, APP_KEY, channelID);
-</span></span><span style="display:flex;"><span>          MobclickAgent.<span style="color:#a6e22e">startWithConfigure</span>(mUMAnalyticsConfig);
-</span></span><span style="display:flex;"><span>      }
-</span></span></code></pre></div><p>当然最后别忘记在<code>AndroidManifest.xml</code>的<code>application</code>结点中加上<code>android:name=&quot;.Application.ApplicationMain&quot;</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">private</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">static</span><span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">final</span><span style="color:#bbb"> </span>String<span style="color:#bbb"> </span>APP_KEY<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span><span style="color:#cd5555">&#34;YOUR_APP_KEY&#34;</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#8b008b;font-weight:bold">private</span><span style="color:#bbb"> </span>MobclickAgent.<span style="color:#658b00">UMAnalyticsConfig</span><span style="color:#bbb"> </span>mUMAnalyticsConfig;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"> </span><span style="color:#707a7c">@Override</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#8b008b;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#00688b;font-weight:bold">void</span><span style="color:#bbb"> </span><span style="color:#008b45">onCreate</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#8b008b;font-weight:bold">super</span>.<span style="color:#658b00">onCreate</span>();<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>setChannelID();<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#8b008b;font-weight:bold">private</span><span style="color:#bbb"> </span><span style="color:#00688b;font-weight:bold">void</span><span style="color:#bbb"> </span><span style="color:#008b45">setChannelID</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span><span style="color:#8b008b;font-weight:bold">final</span><span style="color:#bbb"> </span>String<span style="color:#bbb"> </span>channelID<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>PackerNg.<span style="color:#658b00">getMarket</span>(<span style="color:#8b008b;font-weight:bold">this</span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span>mUMAnalyticsConfig<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span><span style="color:#8b008b;font-weight:bold">new</span><span style="color:#bbb"> </span>MobclickAgent.<span style="color:#658b00">UMAnalyticsConfig</span>(<span style="color:#8b008b;font-weight:bold">this</span>,<span style="color:#bbb"> </span>APP_KEY,<span style="color:#bbb"> </span>channelID);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span>MobclickAgent.<span style="color:#658b00">startWithConfigure</span>(mUMAnalyticsConfig);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>}<span style="color:#bbb">
+</span></span></span></code></pre></div><p>当然最后别忘记在<code>AndroidManifest.xml</code>的<code>application</code>结点中加上<code>android:name=&quot;.Application.ApplicationMain&quot;</code></p>
 <p>进行了以上的所有设置之后,我们就可以享受光速打包了,根据我亲测,打50个包的速度是1分钟左右,这一分钟包括检查插件和编译信息等等.其实开始打第0个包到第49个包大概是10多秒钟吧。</p>
+                    
+                    <HR width="100%" id="EOF">
+		    <p style="color:#777;">Last modified on 2016-07-28</p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
 
-  </div>
+                
+                <a class="newer-posts" href="/posts/android%E4%B8%AD%E8%BE%93%E5%87%BAhtml%E6%A0%BC%E5%BC%8F%E4%B8%8B%E7%9A%84%E6%96%87%E5%AD%97/">
+			Next<br>Android中输出HTML格式下的文字
+                </a>
+                
+                
+                
+                <a class="older-posts" href="/posts/android%E5%BC%80%E5%8F%91%E4%B9%8Bview%E5%9D%90%E6%A0%87%E9%97%AE%E9%A2%98/">
+			Previous<br>Android开发之View坐标问题
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
 
-  <footer class="post-footer">
-    <ul class="post-tags">
-    </ul>
-<nav class="paginav">
-  <a class="prev" href="https://houzixiashanxiedaima.github.io/posts/android%E4%B8%AD%E8%BE%93%E5%87%BAhtml%E6%A0%BC%E5%BC%8F%E4%B8%8B%E7%9A%84%E6%96%87%E5%AD%97/">
-    <span class="title">« Prev</span>
-    <br>
-    <span>Android中输出HTML格式下的文字</span>
-  </a>
-  <a class="next" href="https://houzixiashanxiedaima.github.io/posts/android%E5%BC%80%E5%8F%91%E4%B9%8Bview%E5%9D%90%E6%A0%87%E9%97%AE%E9%A2%98/">
-    <span class="title">Next »</span>
-    <br>
-    <span>Android开发之View坐标问题</span>
-  </a>
-</nav>
 
-  </footer>
-</article>
-    </main>
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+                    </div>
+            </div><div id="sideContainer" class="side-container">
     
-<footer class="footer">
-    <span>&copy; 2024 <a href="https://houzixiashanxiedaima.github.io/">BLOG</a></span>
-    <span>
-        Powered by
-        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-        <path d="M12 6H0l6-6z" />
-    </svg>
-</a>
+    <a class="a-block nav-head false" href="https://houzixiashanxiedaima.github.io/">
+    
+        <div class="nav-title">
+            Blog
+        </div>
+        
+        <div class="nav-subtitle">
+            Be Free To Say Anything
+        </div>
+        
+    </a>
 
-<script>
-    let menu = document.getElementById('menu')
-    if (menu) {
-        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var mybutton = document.getElementById("top-link");
-    window.onscroll = function () {
-        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-            mybutton.style.visibility = "visible";
-            mybutton.style.opacity = "1";
-        } else {
-            mybutton.style.visibility = "hidden";
-            mybutton.style.opacity = "0";
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (document.body.className.includes("dark")) {
-            document.body.classList.remove('dark');
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            document.body.classList.add('dark');
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
-<script>
-    document.querySelectorAll('pre > code').forEach((codeblock) => {
-        const container = codeblock.parentNode.parentNode;
-
-        const copybutton = document.createElement('button');
-        copybutton.classList.add('copy-code');
-        copybutton.innerHTML = 'copy';
-
-        function copyingDone() {
-            copybutton.innerHTML = 'copied!';
-            setTimeout(() => {
-                copybutton.innerHTML = 'copy';
-            }, 2000);
-        }
-
-        copybutton.addEventListener('click', (cb) => {
-            if ('clipboard' in navigator) {
-                navigator.clipboard.writeText(codeblock.textContent);
-                copyingDone();
-                return;
-            }
-
-            const range = document.createRange();
-            range.selectNodeContents(codeblock);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-            try {
-                document.execCommand('copy');
-                copyingDone();
-            } catch (e) { };
-            selection.removeRange(range);
-        });
-
-        if (container.classList.contains("highlight")) {
-            container.appendChild(copybutton);
-        } else if (container.parentNode.firstChild == container) {
+    <div class="nav-link-list">
+        
+        
             
-        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
             
-            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
-        } else {
             
-            codeblock.parentNode.appendChild(copybutton);
-        }
-    });
-</script>
-</body>
+                
+            
+            
+            
+            <a class="a-block nav-link-item active" href="/posts">
+                Archive
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/tags">
+                Tags
+            </a>
+            
+        
+    </div>
 
+    
+
+    <div class="nav-footer">
+        
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://risehere.net/">Rise</a>
+<br>
+Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	This is a customized copyright.
+	
+
+    </div>
+    
+</div><div id="extraContainer" class="extra-container">
+    <div class="toc-wrapper">
+        
+
+        
+        <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%bf%ab%e9%80%9f%e6%89%93%e5%8c%85%e6%8f%92%e4%bb%b6-packer-ng-plugin-%e4%bd%bf%e7%94%a8%e5%bf%83%e5%be%97" class="nav-快速打包插件-packer-ng-plugin-使用心得">
+									快速打包插件 packer-ng-plugin 使用心得
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e5%af%bc%e5%85%a5%e4%be%9d%e8%b5%96%e5%ba%93%e6%96%87%e4%bb%b6" class="nav-导入依赖库文件">
+									导入依赖库文件
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%a4%9a%e6%b8%a0%e9%81%93%e6%89%93%e5%8c%85" class="nav-多渠道打包">
+									多渠道打包
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e9%85%8d%e7%bd%ae%e5%8f%8b%e7%9b%9f%e7%9a%84%e5%a4%9a%e6%b8%a0%e9%81%93%e4%bf%a1%e6%81%af" class="nav-配置友盟的多渠道信息">
+									配置友盟的多渠道信息
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+        
+    </div>
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top"
+            :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+        <a type="button" class="pagination-action" id="darkModeToggleButton">
+            <span class="material-icons pagination-action-icon" id="darkModeToggleIcon">
+                dark_mode
+            </span>
+        </a>
+        
+        
+    </div>
+</div><div id="single-column-footer">
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://risehere.net/">Rise</a>
+<br>
+Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	This is a customized copyright.
+	
+</div>
+            </div>
+    
+    <script src="/js/journal.js"></script></body>
 </html>

@@ -1,281 +1,261 @@
 <!DOCTYPE html>
-<html lang="en" dir="auto">
-
-<head><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>Android 5.0透明状态栏设置 | BLOG</title>
-<meta name="keywords" content="">
-<meta name="description" content="这篇文章是针对Android 5.0及以上版本的系统进行透明的状态栏设置，Android 5.0以下的系统暂不在本篇文章的讨论范围之内。
-Android 5.0透明状态栏——普通界面
-先贴出MainActivity布局代码：
-&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;
-&lt;RelativeLayout
-    xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;
-    xmlns:tools=&#34;http://schemas.android.com/tools&#34;
-    android:layout_width=&#34;match_parent&#34;
-    android:layout_height=&#34;match_parent&#34;
-    android:background=&#34;@color/colorPrimary&#34;
-    android:fitsSystemWindows=&#34;true&#34;
-    tools:context=&#34;stephen.com.material_design.NoteActivity&#34;&gt;
-        
-    &lt;include
-        layout=&#34;@layout/app_bar_note&#34;
-        android:layout_width=&#34;match_parent&#34;
-        android:layout_height=&#34;match_parent&#34;/&gt;
-
-&lt;/RelativeLayout&gt;
-">
-<meta name="author" content="">
-<link rel="canonical" href="https://houzixiashanxiedaima.github.io/posts/android-5.0%E9%80%8F%E6%98%8E%E7%8A%B6%E6%80%81%E6%A0%8F%E8%AE%BE%E7%BD%AE/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.5cfc680b1eeaeef9efbced92d46c2a9e876b72ee14fba85846afc4cff9e6e6f8.css" integrity="sha256-XPxoCx7q7vnvvO2S1Gwqnodrcu4U&#43;6hYRq/Ez/nm5vg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
-    onload="hljs.initHighlightingOnLoad();"></script>
-<link rel="icon" href="https://houzixiashanxiedaima.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://houzixiashanxiedaima.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://houzixiashanxiedaima.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://houzixiashanxiedaima.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://houzixiashanxiedaima.github.io/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --hljs-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript><meta property="og:title" content="Android 5.0透明状态栏设置" />
-<meta property="og:description" content="这篇文章是针对Android 5.0及以上版本的系统进行透明的状态栏设置，Android 5.0以下的系统暂不在本篇文章的讨论范围之内。
-Android 5.0透明状态栏——普通界面
-先贴出MainActivity布局代码：
-&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;
-&lt;RelativeLayout
-    xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;
-    xmlns:tools=&#34;http://schemas.android.com/tools&#34;
-    android:layout_width=&#34;match_parent&#34;
-    android:layout_height=&#34;match_parent&#34;
-    android:background=&#34;@color/colorPrimary&#34;
-    android:fitsSystemWindows=&#34;true&#34;
-    tools:context=&#34;stephen.com.material_design.NoteActivity&#34;&gt;
-        
-    &lt;include
-        layout=&#34;@layout/app_bar_note&#34;
-        android:layout_width=&#34;match_parent&#34;
-        android:layout_height=&#34;match_parent&#34;/&gt;
-
-&lt;/RelativeLayout&gt;
-" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://houzixiashanxiedaima.github.io/posts/android-5.0%E9%80%8F%E6%98%8E%E7%8A%B6%E6%80%81%E6%A0%8F%E8%AE%BE%E7%BD%AE/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2016-07-28T15:19:45+00:00" />
-<meta property="article:modified_time" content="2016-07-28T15:19:45+00:00" />
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Android 5.0透明状态栏设置"/>
-<meta name="twitter:description" content="这篇文章是针对Android 5.0及以上版本的系统进行透明的状态栏设置，Android 5.0以下的系统暂不在本篇文章的讨论范围之内。
-Android 5.0透明状态栏——普通界面
-先贴出MainActivity布局代码：
-&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;
-&lt;RelativeLayout
-    xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;
-    xmlns:tools=&#34;http://schemas.android.com/tools&#34;
-    android:layout_width=&#34;match_parent&#34;
-    android:layout_height=&#34;match_parent&#34;
-    android:background=&#34;@color/colorPrimary&#34;
-    android:fitsSystemWindows=&#34;true&#34;
-    tools:context=&#34;stephen.com.material_design.NoteActivity&#34;&gt;
-        
-    &lt;include
-        layout=&#34;@layout/app_bar_note&#34;
-        android:layout_width=&#34;match_parent&#34;
-        android:layout_height=&#34;match_parent&#34;/&gt;
-
-&lt;/RelativeLayout&gt;
-"/>
+<html><head>
+<title>Android 5.0透明状态栏设置</title>
 
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://houzixiashanxiedaima.github.io/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Android 5.0透明状态栏设置",
-      "item": "https://houzixiashanxiedaima.github.io/posts/android-5.0%E9%80%8F%E6%98%8E%E7%8A%B6%E6%80%81%E6%A0%8F%E8%AE%BE%E7%BD%AE/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Android 5.0透明状态栏设置",
-  "name": "Android 5.0透明状态栏设置",
-  "description": "这篇文章是针对Android 5.0及以上版本的系统进行透明的状态栏设置，Android 5.0以下的系统暂不在本篇文章的讨论范围之内。\nAndroid 5.0透明状态栏——普通界面 先贴出MainActivity布局代码：\n\u0026lt;?xml version=\u0026#34;1.0\u0026#34; encoding=\u0026#34;utf-8\u0026#34;?\u0026gt; \u0026lt;RelativeLayout xmlns:android=\u0026#34;http://schemas.android.com/apk/res/android\u0026#34; xmlns:tools=\u0026#34;http://schemas.android.com/tools\u0026#34; android:layout_width=\u0026#34;match_parent\u0026#34; android:layout_height=\u0026#34;match_parent\u0026#34; android:background=\u0026#34;@color/colorPrimary\u0026#34; android:fitsSystemWindows=\u0026#34;true\u0026#34; tools:context=\u0026#34;stephen.com.material_design.NoteActivity\u0026#34;\u0026gt; \u0026lt;include layout=\u0026#34;@layout/app_bar_note\u0026#34; android:layout_width=\u0026#34;match_parent\u0026#34; android:layout_height=\u0026#34;match_parent\u0026#34;/\u0026gt; \u0026lt;/RelativeLayout\u0026gt; ",
-  "keywords": [
+
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="description" content="">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+      <script src="/js/toc.js"></script>
     
-  ],
-  "articleBody": "这篇文章是针对Android 5.0及以上版本的系统进行透明的状态栏设置，Android 5.0以下的系统暂不在本篇文章的讨论范围之内。\nAndroid 5.0透明状态栏——普通界面 先贴出MainActivity布局代码：\n\u003c?xml version=\"1.0\" encoding=\"utf-8\"?\u003e ",
-  "wordCount" : "94",
-  "inLanguage": "en",
-  "datePublished": "2016-07-28T15:19:45Z",
-  "dateModified": "2016-07-28T15:19:45Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://houzixiashanxiedaima.github.io/posts/android-5.0%E9%80%8F%E6%98%8E%E7%8A%B6%E6%80%81%E6%A0%8F%E8%AE%BE%E7%BD%AE/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "BLOG",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://houzixiashanxiedaima.github.io/favicon.ico"
-    }
-  }
-}
-</script>
+    <link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="/scss/dark-mode.min.cb53f1bee2b8900cb4f082afbf00175d6618f281cf9a2fe8619e3b52d20b5721.css" integrity="sha256-y1PxvuK4kAy08IKvvwAXXWYY8oHPmi/oYZ47UtILVyE=" media="screen">
+
+
+<link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Material+Icons">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </head>
+<body>
+    	<div id="app"><div class="single-column-drawer-container" id="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+            
+                
+                
+                
+                    
+                
+                
+                
+                <a class="a-block drawer-menu-item active" href="/posts">
+                    Archive
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/tags">
+                    Tags
+                </a>
+                
+            
+            
+            <div class="toc">
 
-<body class="" id="top">
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.body.classList.add('dark');
-    } else if (localStorage.getItem("pref-theme") === "light") {
-        document.body.classList.remove('dark')
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark');
-    }
 
-</script>
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#android-50%e9%80%8f%e6%98%8e%e7%8a%b6%e6%80%81%e6%a0%8f%e6%99%ae%e9%80%9a%e7%95%8c%e9%9d%a2" class="nav-android-50透明状态栏普通界面">
+									Android 5.0透明状态栏——普通界面
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#android-50%e9%80%8f%e6%98%8e%e7%8a%b6%e6%80%81%e6%a0%8f%e5%b8%a6drawerlayout%e7%95%8c%e9%9d%a2" class="nav-android-50透明状态栏带drawerlayout界面">
+									Android 5.0透明状态栏——带DrawerLayout界面
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
 
-<header class="header">
-    <nav class="nav">
-        <div class="logo">
-            <a href="https://houzixiashanxiedaima.github.io/" accesskey="h" title="BLOG (Alt + H)">BLOG</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div id="drawer-mask" v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav id="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div id="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a id="navTitle" class="navbar-brand" href="https://houzixiashanxiedaima.github.io/">
+            Blog
+        </a>
+        
+        <button type="button" class="nav-darkmode-toggle" id="darkModeToggleButton2">
+            <i class="material-icons" id="darkModeToggleIcon2">
+                dark_mode
+            </i>
+        </button>
+        
+    </div>
+</nav>
+<div class="single-column-header-container" id="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="https://houzixiashanxiedaima.github.io/">
+        <div class="single-column-header-title">Blog</div>
+        
+        <div class="single-column-header-subtitle">Be Free To Say Anything</div>
+        
+
+    </a>
+</div>
+
+            <div id="content">
+                <div id="streamContainer" class="stream-container">
+
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+
+            <div class="post-head-wrapper-text-only"
+                
+            >
+                <div class="post-title">
+                    Android 5.0透明状态栏设置
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2016-07-28 15:19
+                        </time>
+                        
+
+                        
+
+                        
+                        
+                            <i class="material-icons" style="">schedule</i>
+                            
+
+                            
+                            
+
+                            
+                            8 min
+                            
+                            37 s.
+                        
+                    </div>
+                </div>
             </div>
-        </div>
-        <ul id="menu">
-            <li>
-                <a href="https://houzixiashanxiedaima.github.io/" title="BLOG">
-                    <span>HOME</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://houzixiashanxiedaima.github.io/archives/" title="Archive">
-                    <span>ARCHIVE</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<main class="main">
-
-<article class="post-single">
-  <header class="post-header">
-    <div class="breadcrumbs"><a href="https://houzixiashanxiedaima.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://houzixiashanxiedaima.github.io/posts/">Posts</a></div>
-    <h1 class="post-title">
-      Android 5.0透明状态栏设置
-    </h1>
-    <div class="post-meta">&lt;span title=&#39;2016-07-28 15:19:45 &#43;0000 UTC&#39;&gt;July 28, 2016&lt;/span&gt;&amp;nbsp;·&amp;nbsp;1 min
-
-</div>
-  </header> <div class="toc">
-    <details  open>
-        <summary accesskey="c" title="(Alt + C)">
-            <span class="details">Table of Contents</span>
-        </summary>
-
-        <div class="inner"><ul>
-                <li>
-                    <a href="#android-50%e9%80%8f%e6%98%8e%e7%8a%b6%e6%80%81%e6%a0%8f%e6%99%ae%e9%80%9a%e7%95%8c%e9%9d%a2" aria-label="Android 5.0透明状态栏——普通界面">Android 5.0透明状态栏——普通界面</a></li>
-                <li>
-                    <a href="#android-50%e9%80%8f%e6%98%8e%e7%8a%b6%e6%80%81%e6%a0%8f%e5%b8%a6drawerlayout%e7%95%8c%e9%9d%a2" aria-label="Android 5.0透明状态栏——带DrawerLayout界面">Android 5.0透明状态栏——带DrawerLayout界面</a>
-                </li>
-            </ul>
-        </div>
-    </details>
-</div>
-
-  <div class="post-content"><p>这篇文章是针对Android 5.0及以上版本的系统进行透明的状态栏设置，Android 5.0以下的系统暂不在本篇文章的讨论范围之内。</p>
-<h2 id="android-50透明状态栏普通界面">Android 5.0透明状态栏——普通界面<a hidden class="anchor" aria-hidden="true" href="#android-50透明状态栏普通界面">#</a></h2>
+            
+            <div class="post-body-wrapper">
+                
+                <div class="post-body" v-pre>
+                
+                    <p>这篇文章是针对Android 5.0及以上版本的系统进行透明的状态栏设置，Android 5.0以下的系统暂不在本篇文章的讨论范围之内。</p>
+<h2 id="android-50透明状态栏普通界面">Android 5.0透明状态栏——普通界面</h2>
 <p>先贴出MainActivity布局代码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;RelativeLayout</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">xmlns:android=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res/android&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">xmlns:tools=</span><span style="color:#e6db74">&#34;http://schemas.android.com/tools&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">android:layout_width=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">android:layout_height=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">android:background=</span><span style="color:#e6db74">&#34;@color/colorPrimary&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">android:fitsSystemWindows=</span><span style="color:#e6db74">&#34;true&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">tools:context=</span><span style="color:#e6db74">&#34;stephen.com.material_design.NoteActivity&#34;</span><span style="color:#f92672">&gt;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#1e889b">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">&lt;RelativeLayout</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#658b00">xmlns:android=</span><span style="color:#cd5555">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#658b00">xmlns:tools=</span><span style="color:#cd5555">&#34;http://schemas.android.com/tools&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#658b00">android:layout_width=</span><span style="color:#cd5555">&#34;match_parent&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#658b00">android:layout_height=</span><span style="color:#cd5555">&#34;match_parent&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#658b00">android:background=</span><span style="color:#cd5555">&#34;@color/colorPrimary&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#658b00">android:fitsSystemWindows=</span><span style="color:#cd5555">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#658b00">tools:context=</span><span style="color:#cd5555">&#34;stephen.com.material_design.NoteActivity&#34;</span><span style="color:#8b008b;font-weight:bold">&gt;</span>
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;include</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">layout=</span><span style="color:#e6db74">&#34;@layout/app_bar_note&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:layout_width=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:layout_height=</span><span style="color:#e6db74">&#34;match_parent&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8b008b;font-weight:bold">&lt;include</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#658b00">layout=</span><span style="color:#cd5555">&#34;@layout/app_bar_note&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#658b00">android:layout_width=</span><span style="color:#cd5555">&#34;match_parent&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#658b00">android:layout_height=</span><span style="color:#cd5555">&#34;match_parent&#34;</span><span style="color:#8b008b;font-weight:bold">/&gt;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/RelativeLayout&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">&lt;/RelativeLayout&gt;</span>
 </span></span></code></pre></div><p>上面的代码中，最主要的两行分别是：</p>
 <ul>
 <li>设置最外层布局背景色为Toolbar的颜色：<code>android:background=&quot;@color/colorPrimary&quot;</code></li>
@@ -295,43 +275,42 @@ Android 5.0透明状态栏——普通界面
 </blockquote>
 <p>主要需要用到的参数就是以上的几个，其他的参数在实际的开发中用的相对较少，这里也就不列举出来了。
 通过上面的两个地方的代码设置之后，我们的APP就可以实现透明状态栏的效果了。</p>
-<p><img loading="lazy" src="http://upload-images.jianshu.io/upload_images/2524102-c81ed81629099945.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="普通界面的透明状态栏"  />
-</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2524102-c81ed81629099945.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="普通界面的透明状态栏"></p>
 <p>以上就是普通的界面设置透明状态栏的方法。</p>
-<h2 id="android-50透明状态栏带drawerlayout界面">Android 5.0透明状态栏——带DrawerLayout界面<a hidden class="anchor" aria-hidden="true" href="#android-50透明状态栏带drawerlayout界面">#</a></h2>
+<h2 id="android-50透明状态栏带drawerlayout界面">Android 5.0透明状态栏——带DrawerLayout界面</h2>
 <p>带有DrawerLayout的界面设置透明状态栏，最终效果是和网易云音乐一样的，方法其实和上面的差不多，但是有个小的地方需要注意，在这里我还是把代码和方法都完整的讲一遍。
 带有DrawerLayout的布局文件：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;android.support.v4.widget.DrawerLayout</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">xmlns:android=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res/android&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">xmlns:app=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">xmlns:tools=</span><span style="color:#e6db74">&#34;http://schemas.android.com/tools&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/drawer_layout&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">android:layout_width=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">android:layout_height=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">android:background=</span><span style="color:#e6db74">&#34;@color/colorPrimary&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">tools:openDrawer=</span><span style="color:#e6db74">&#34;start&#34;</span><span style="color:#f92672">&gt;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#1e889b">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">&lt;android.support.v4.widget.DrawerLayout</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#658b00">xmlns:android=</span><span style="color:#cd5555">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#658b00">xmlns:app=</span><span style="color:#cd5555">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#658b00">xmlns:tools=</span><span style="color:#cd5555">&#34;http://schemas.android.com/tools&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#658b00">android:id=</span><span style="color:#cd5555">&#34;@+id/drawer_layout&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#658b00">android:layout_width=</span><span style="color:#cd5555">&#34;match_parent&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#658b00">android:layout_height=</span><span style="color:#cd5555">&#34;match_parent&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#658b00">android:background=</span><span style="color:#cd5555">&#34;@color/colorPrimary&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#658b00">tools:openDrawer=</span><span style="color:#cd5555">&#34;start&#34;</span><span style="color:#8b008b;font-weight:bold">&gt;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;LinearLayout</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:layout_width=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:layout_height=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:fitsSystemWindows=</span><span style="color:#e6db74">&#34;true&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:orientation=</span><span style="color:#e6db74">&#34;vertical&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8b008b;font-weight:bold">&lt;LinearLayout</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#658b00">android:layout_width=</span><span style="color:#cd5555">&#34;match_parent&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#658b00">android:layout_height=</span><span style="color:#cd5555">&#34;match_parent&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#658b00">android:fitsSystemWindows=</span><span style="color:#cd5555">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#658b00">android:orientation=</span><span style="color:#cd5555">&#34;vertical&#34;</span><span style="color:#8b008b;font-weight:bold">&gt;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;include</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">layout=</span><span style="color:#e6db74">&#34;@layout/app_bar_main&#34;</span><span style="color:#f92672">/&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/LinearLayout&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8b008b;font-weight:bold">&lt;include</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#658b00">layout=</span><span style="color:#cd5555">&#34;@layout/app_bar_main&#34;</span><span style="color:#8b008b;font-weight:bold">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8b008b;font-weight:bold">&lt;/LinearLayout&gt;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;android.support.design.widget.NavigationView</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/nav_view&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:layout_width=</span><span style="color:#e6db74">&#34;wrap_content&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:layout_height=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:layout_gravity=</span><span style="color:#e6db74">&#34;start&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:fitsSystemWindows=</span><span style="color:#e6db74">&#34;true&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">app:headerLayout=</span><span style="color:#e6db74">&#34;@layout/nav_header_main&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">app:menu=</span><span style="color:#e6db74">&#34;@menu/activity_main_drawer&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8b008b;font-weight:bold">&lt;android.support.design.widget.NavigationView</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#658b00">android:id=</span><span style="color:#cd5555">&#34;@+id/nav_view&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#658b00">android:layout_width=</span><span style="color:#cd5555">&#34;wrap_content&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#658b00">android:layout_height=</span><span style="color:#cd5555">&#34;match_parent&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#658b00">android:layout_gravity=</span><span style="color:#cd5555">&#34;start&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#658b00">android:fitsSystemWindows=</span><span style="color:#cd5555">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#658b00">app:headerLayout=</span><span style="color:#cd5555">&#34;@layout/nav_header_main&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#658b00">app:menu=</span><span style="color:#cd5555">&#34;@menu/activity_main_drawer&#34;</span><span style="color:#8b008b;font-weight:bold">/&gt;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/android.support.v4.widget.DrawerLayout&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">&lt;/android.support.v4.widget.DrawerLayout&gt;</span>
 </span></span></code></pre></div><p>在这里说一下要注意的几个点：</p>
 <ol>
 <li>这个<code>&lt;LinearLayout&gt; ... &lt;/LinearLayout&gt;</code>的作用，我之前没有用这个<code>&lt;LinearLayout&gt;</code>包裹<code>Toolbar</code>，结果怎么设置，都不能实现非常完美的透明状态栏，要么是statusbar颜色问题，要么是statusbar和NavigationView颜色不统一的问题。后来查找了很多资料，在一个小角落里面发现了，需要外层用<code>&lt;LinearLayout&gt;</code>包裹一下，这样的话就可以非常完美的显示出网易云音乐的效果了。</li>
@@ -344,149 +323,202 @@ Android 5.0透明状态栏——普通界面
 <li>设置状态栏和APP的位置关系：<code>getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);</code></li>
 </ul>
 <p>将以上的所有代码都设置完毕之后，最终呈现的效果如下：</p>
-<p><img loading="lazy" src="http://upload-images.jianshu.io/upload_images/2524102-d795e4d2e40a3f9f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="没有打开抽屉.png"  />
-</p>
-<p><img loading="lazy" src="http://upload-images.jianshu.io/upload_images/2524102-911543b2ad913c29.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="打开抽屉"  />
-</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2524102-d795e4d2e40a3f9f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="没有打开抽屉.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2524102-911543b2ad913c29.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="打开抽屉"></p>
 <p>至此，我们已经在Android 5.0上实现透明状态栏。但是对于这样的透明状态栏，我个人是不推荐的。因为我们进行的Android开发，而这个透明状态栏却给人一种IOS的风格，Android开发就应该从方方面面都能够体现出Android的特性。虽然在Android 5.0之前，Android的UI风格一直都惨不忍睹，但是我们一路都坚持下来了，而在Android 5.0之后，因为Material Design的推出，Android的颜值可以说是提升了非常多。所以我们开发人员更应该开发Pure Android的程序，而不是模仿和抄袭IOS的各种风格。</p>
+                    
+                    <HR width="100%" id="EOF">
+		    <p style="color:#777;">Last modified on 2016-07-28</p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
 
-  </div>
+                
+                <a class="newer-posts" href="/posts/alertdialog%E4%B8%AD%E4%BD%BF%E7%94%A8webview%E6%98%BE%E7%A4%BA%E5%86%85%E5%AE%B9/">
+			Next<br>AlertDialog中使用WebView显示内容
+                </a>
+                
+                
+                
+                <a class="older-posts" href="/posts/android%E4%B8%AD%E8%BE%93%E5%87%BAhtml%E6%A0%BC%E5%BC%8F%E4%B8%8B%E7%9A%84%E6%96%87%E5%AD%97/">
+			Previous<br>Android中输出HTML格式下的文字
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
 
-  <footer class="post-footer">
-    <ul class="post-tags">
-    </ul>
-<nav class="paginav">
-  <a class="prev" href="https://houzixiashanxiedaima.github.io/posts/alertdialog%E4%B8%AD%E4%BD%BF%E7%94%A8webview%E6%98%BE%E7%A4%BA%E5%86%85%E5%AE%B9/">
-    <span class="title">« Prev</span>
-    <br>
-    <span>AlertDialog中使用WebView显示内容</span>
-  </a>
-  <a class="next" href="https://houzixiashanxiedaima.github.io/posts/android%E4%B8%AD%E8%BE%93%E5%87%BAhtml%E6%A0%BC%E5%BC%8F%E4%B8%8B%E7%9A%84%E6%96%87%E5%AD%97/">
-    <span class="title">Next »</span>
-    <br>
-    <span>Android中输出HTML格式下的文字</span>
-  </a>
-</nav>
 
-  </footer>
-</article>
-    </main>
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+                    </div>
+            </div><div id="sideContainer" class="side-container">
     
-<footer class="footer">
-    <span>&copy; 2024 <a href="https://houzixiashanxiedaima.github.io/">BLOG</a></span>
-    <span>
-        Powered by
-        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-        <path d="M12 6H0l6-6z" />
-    </svg>
-</a>
+    <a class="a-block nav-head false" href="https://houzixiashanxiedaima.github.io/">
+    
+        <div class="nav-title">
+            Blog
+        </div>
+        
+        <div class="nav-subtitle">
+            Be Free To Say Anything
+        </div>
+        
+    </a>
 
-<script>
-    let menu = document.getElementById('menu')
-    if (menu) {
-        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var mybutton = document.getElementById("top-link");
-    window.onscroll = function () {
-        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-            mybutton.style.visibility = "visible";
-            mybutton.style.opacity = "1";
-        } else {
-            mybutton.style.visibility = "hidden";
-            mybutton.style.opacity = "0";
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (document.body.className.includes("dark")) {
-            document.body.classList.remove('dark');
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            document.body.classList.add('dark');
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
-<script>
-    document.querySelectorAll('pre > code').forEach((codeblock) => {
-        const container = codeblock.parentNode.parentNode;
-
-        const copybutton = document.createElement('button');
-        copybutton.classList.add('copy-code');
-        copybutton.innerHTML = 'copy';
-
-        function copyingDone() {
-            copybutton.innerHTML = 'copied!';
-            setTimeout(() => {
-                copybutton.innerHTML = 'copy';
-            }, 2000);
-        }
-
-        copybutton.addEventListener('click', (cb) => {
-            if ('clipboard' in navigator) {
-                navigator.clipboard.writeText(codeblock.textContent);
-                copyingDone();
-                return;
-            }
-
-            const range = document.createRange();
-            range.selectNodeContents(codeblock);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-            try {
-                document.execCommand('copy');
-                copyingDone();
-            } catch (e) { };
-            selection.removeRange(range);
-        });
-
-        if (container.classList.contains("highlight")) {
-            container.appendChild(copybutton);
-        } else if (container.parentNode.firstChild == container) {
+    <div class="nav-link-list">
+        
+        
             
-        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
             
-            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
-        } else {
             
-            codeblock.parentNode.appendChild(copybutton);
-        }
-    });
-</script>
-</body>
+                
+            
+            
+            
+            <a class="a-block nav-link-item active" href="/posts">
+                Archive
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/tags">
+                Tags
+            </a>
+            
+        
+    </div>
 
+    
+
+    <div class="nav-footer">
+        
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://risehere.net/">Rise</a>
+<br>
+Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	This is a customized copyright.
+	
+
+    </div>
+    
+</div><div id="extraContainer" class="extra-container">
+    <div class="toc-wrapper">
+        
+
+        
+        <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#android-50%e9%80%8f%e6%98%8e%e7%8a%b6%e6%80%81%e6%a0%8f%e6%99%ae%e9%80%9a%e7%95%8c%e9%9d%a2" class="nav-android-50透明状态栏普通界面">
+									Android 5.0透明状态栏——普通界面
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#android-50%e9%80%8f%e6%98%8e%e7%8a%b6%e6%80%81%e6%a0%8f%e5%b8%a6drawerlayout%e7%95%8c%e9%9d%a2" class="nav-android-50透明状态栏带drawerlayout界面">
+									Android 5.0透明状态栏——带DrawerLayout界面
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+        
+    </div>
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top"
+            :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+        <a type="button" class="pagination-action" id="darkModeToggleButton">
+            <span class="material-icons pagination-action-icon" id="darkModeToggleIcon">
+                dark_mode
+            </span>
+        </a>
+        
+        
+    </div>
+</div><div id="single-column-footer">
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://risehere.net/">Rise</a>
+<br>
+Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	This is a customized copyright.
+	
+</div>
+            </div>
+    
+    <script src="/js/journal.js"></script></body>
 </html>
