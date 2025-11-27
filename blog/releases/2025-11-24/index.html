@@ -1,0 +1,334 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.16.0"><meta name="description" content="AI 自动生成的开源项目更新总结,今日共 16 个更新"><link rel="canonical" href="https://blog.yuyins.com/blog/releases/2025-11-24/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/blog/releases/2025-11-24/"><meta property="og:title" content="GitHub Releases 日报 - 2025-11-24"><meta property="og:description" content="AI 自动生成的开源项目更新总结,今日共 16 个更新"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/blog/releases/2025-11-24/"><meta property="twitter:title" content="GitHub Releases 日报 - 2025-11-24"><meta property="twitter:description" content="AI 自动生成的开源项目更新总结,今日共 16 个更新"><title>GitHub Releases 日报 - 2025-11-24</title><!-- Color scheme script (runs before page loads to prevent flash) --><script>
+			const colorScheme = localStorage.getItem('colorScheme') || 'warm-paper';
+			document.documentElement.setAttribute('data-color', colorScheme);
+		</script><link rel="stylesheet" href="/_astro/_slug_.XT2r3__V.css">
+<link rel="stylesheet" href="/_astro/_slug_.Cyfj5-02.css"></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2>
+AstroBlog
+</a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link nav-link--active" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/rss.xml" class="nav-link" target="_blank" rel="noopener noreferrer" data-astro-cid-3ef6ksr2> RSS </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM18 18l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-modal" data-astro-cid-otpdt6jm> <div class="modal-content" data-astro-cid-otpdt6jm> <div class="modal-header" data-astro-cid-otpdt6jm> <h2 class="modal-title" data-astro-cid-otpdt6jm>搜索文章</h2> <button id="close-search" class="close-button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-otpdt6jm></path> </svg> </button> </div> <div id="pagefind-ui" data-astro-cid-otpdt6jm></div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.DjHyAxEv.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  <div class="color-scheme-toggle" data-astro-cid-i6hk4rsz> <button id="color-scheme-button" class="toggle-button" aria-label="切换配色方案" title="切换配色方案" data-astro-cid-i6hk4rsz> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-i6hk4rsz> <circle cx="12" cy="12" r="10" data-astro-cid-i6hk4rsz></circle> <path d="M12 2a10 10 0 0 1 0 20" data-astro-cid-i6hk4rsz></path> </svg> </button> <div id="color-scheme-menu" class="color-menu" hidden data-astro-cid-i6hk4rsz> <div class="menu-header" data-astro-cid-i6hk4rsz>配色方案</div> <button class="color-option" data-color="warm-paper" title="暖纸" data-astro-cid-i6hk4rsz> <span class="color-preview" style="background: linear-gradient(135deg, #FAF9F7 50%, #1C1917 50%);" data-astro-cid-i6hk4rsz></span> <span class="color-name" data-astro-cid-i6hk4rsz>暖纸</span> </button><button class="color-option" data-color="cool-zinc" title="冷锌" data-astro-cid-i6hk4rsz> <span class="color-preview" style="background: linear-gradient(135deg, #FAFAFA 50%, #18181B 50%);" data-astro-cid-i6hk4rsz></span> <span class="color-name" data-astro-cid-i6hk4rsz>冷锌</span> </button><button class="color-option" data-color="sepia" title="复古" data-astro-cid-i6hk4rsz> <span class="color-preview" style="background: linear-gradient(135deg, #F8F4E9 50%, #1F1D1A 50%);" data-astro-cid-i6hk4rsz></span> <span class="color-name" data-astro-cid-i6hk4rsz>复古</span> </button><button class="color-option" data-color="soft-gray" title="柔灰" data-astro-cid-i6hk4rsz> <span class="color-preview" style="background: linear-gradient(135deg, #F7F7F7 50%, #1A1A1A 50%);" data-astro-cid-i6hk4rsz></span> <span class="color-name" data-astro-cid-i6hk4rsz>柔灰</span> </button> </div> </div> <script type="module">function initColorSchemeToggle() {
+  const button = document.getElementById("color-scheme-button");
+  const menu = document.getElementById("color-scheme-menu");
+  const options = document.querySelectorAll(".color-option");
+  if (!button || !menu) return;
+  const savedColor = localStorage.getItem("colorScheme") || "warm-paper";
+  document.documentElement.setAttribute("data-color", savedColor);
+  updateActiveOption(savedColor);
+  button.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isHidden = menu.hidden;
+    menu.hidden = !isHidden;
+    button.setAttribute("aria-expanded", String(!isHidden));
+  });
+  options.forEach((option) => {
+    option.addEventListener("click", () => {
+      const colorId = option.getAttribute("data-color");
+      if (colorId) {
+        document.documentElement.setAttribute("data-color", colorId);
+        localStorage.setItem("colorScheme", colorId);
+        updateActiveOption(colorId);
+        menu.hidden = true;
+      }
+    });
+  });
+  document.addEventListener("click", (e) => {
+    if (!button.contains(e.target) && !menu.contains(e.target)) {
+      menu.hidden = true;
+    }
+  });
+  function updateActiveOption(colorId) {
+    options.forEach((opt) => {
+      opt.classList.toggle("active", opt.getAttribute("data-color") === colorId);
+    });
+  }
+}
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initColorSchemeToggle);
+} else {
+  initColorSchemeToggle();
+}
+document.addEventListener("astro:page-load", initColorSchemeToggle);
+//# sourceMappingURL=ColorSchemeToggle.astro_astro_type_script_index_0_lang.DYTFbvNv.js.map</script>  </div> </div> </nav> </header>  <main id="main-content" class="mx-auto px-4 pb-12 max-w-5xl" data-astro-cid-sckkx6r4>  <script type="module">let copyButtonsInitialized = false;
+function initCodeCopyButtons() {
+  if (copyButtonsInitialized) return;
+  copyButtonsInitialized = true;
+  const codeBlocks = document.querySelectorAll("pre:has(code)");
+  codeBlocks.forEach((block) => {
+    if (block.querySelector(".copy-button")) return;
+    if (!block.parentElement?.classList.contains("code-block-wrapper")) {
+      const wrapper = document.createElement("div");
+      wrapper.className = "code-block-wrapper";
+      block.parentNode?.insertBefore(wrapper, block);
+      wrapper.appendChild(block);
+    }
+    const button = document.createElement("button");
+    button.className = "copy-button";
+    button.setAttribute("aria-label", "复制代码");
+    button.title = "复制代码";
+    button.innerHTML = `
+        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+        <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      `;
+    button.addEventListener("click", async () => {
+      const code = block.querySelector("code");
+      if (!code) return;
+      try {
+        const text = code.textContent || "";
+        await navigator.clipboard.writeText(text);
+        button.classList.add("copied");
+        setTimeout(() => {
+          button.classList.remove("copied");
+        }, 2e3);
+      } catch (err) {
+        console.error("Failed to copy:", err);
+      }
+    });
+    block.parentElement?.appendChild(button);
+  });
+}
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initCodeCopyButtons);
+} else {
+  initCodeCopyButtons();
+}
+document.addEventListener("astro:page-load", () => {
+  copyButtonsInitialized = false;
+  initCodeCopyButtons();
+});
+//# sourceMappingURL=CodeCopyButton.astro_astro_type_script_index_0_lang.BQH_fAJu.js.map</script>  <script type="module">let anchorInitialized = false;
+function initHeadingAnchors() {
+  if (anchorInitialized) return;
+  anchorInitialized = true;
+  const headings = document.querySelectorAll(".article-content h2[id], .article-content h3[id], .article-content h4[id], .article-content h5[id], .article-content h6[id]");
+  headings.forEach((heading) => {
+    const id = heading.getAttribute("id");
+    if (!id) return;
+    if (heading.querySelector(".heading-anchor")) return;
+    const anchor = document.createElement("a");
+    anchor.href = `#${id}`;
+    anchor.className = "heading-anchor";
+    anchor.setAttribute("aria-label", `链接到 ${heading.textContent}`);
+    anchor.title = "复制链接";
+    anchor.textContent = "#";
+    anchor.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const url = window.location.origin + window.location.pathname + `#${id}`;
+      try {
+        await navigator.clipboard.writeText(url);
+        anchor.classList.add("copied");
+        setTimeout(() => {
+          anchor.classList.remove("copied");
+        }, 1500);
+        heading.scrollIntoView({ behavior: "smooth", block: "start" });
+        history.pushState(null, "", `#${id}`);
+      } catch (err) {
+        console.error("Failed to copy:", err);
+        window.location.hash = id;
+      }
+    });
+    heading.style.position = "relative";
+    heading.insertBefore(anchor, heading.firstChild);
+  });
+}
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initHeadingAnchors);
+} else {
+  initHeadingAnchors();
+}
+document.addEventListener("astro:page-load", () => {
+  anchorInitialized = false;
+  initHeadingAnchors();
+});
+//# sourceMappingURL=HeadingAnchor.astro_astro_type_script_index_0_lang.CnSKxYFk.js.map</script>  <div id="image-lightbox" class="lightbox" hidden data-astro-cid-fbflauxb> <button id="lightbox-close" class="lightbox-close" aria-label="关闭" data-astro-cid-fbflauxb> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-fbflauxb> <line x1="18" y1="6" x2="6" y2="18" data-astro-cid-fbflauxb></line> <line x1="6" y1="6" x2="18" y2="18" data-astro-cid-fbflauxb></line> </svg> </button> <img id="lightbox-image" class="lightbox-image" src="" alt="" data-astro-cid-fbflauxb> </div> <script type="module">let lightboxInitialized = false;
+function initImageLightbox() {
+  if (lightboxInitialized) return;
+  lightboxInitialized = true;
+  const lightbox = document.getElementById("image-lightbox");
+  const lightboxImage = document.getElementById("lightbox-image");
+  const closeButton = document.getElementById("lightbox-close");
+  if (!lightbox || !lightboxImage || !closeButton) return;
+  const images = document.querySelectorAll(".article-content img");
+  images.forEach((img) => {
+    if (img.classList.contains("lightbox-enabled")) return;
+    img.classList.add("lightbox-enabled");
+    img.style.cursor = "zoom-in";
+    img.addEventListener("click", () => {
+      const src = img.getAttribute("src");
+      const alt = img.getAttribute("alt") || "";
+      if (!src) return;
+      lightboxImage.src = src;
+      lightboxImage.alt = alt;
+      lightbox.hidden = false;
+      document.body.style.overflow = "hidden";
+    });
+  });
+  const closeLightbox = () => {
+    lightbox.hidden = true;
+    document.body.style.overflow = "";
+    lightboxImage.src = "";
+  };
+  closeButton.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+      closeLightbox();
+    }
+  });
+  const handleEscape = (e) => {
+    if (e.key === "Escape" && !lightbox.hidden) {
+      closeLightbox();
+    }
+  };
+  document.addEventListener("keydown", handleEscape);
+  document.addEventListener("astro:before-swap", () => {
+    closeButton.removeEventListener("click", closeLightbox);
+    lightbox.removeEventListener("click", closeLightbox);
+    document.removeEventListener("keydown", handleEscape);
+    lightboxInitialized = false;
+  }, { once: true });
+}
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initImageLightbox);
+} else {
+  initImageLightbox();
+}
+document.addEventListener("astro:page-load", () => {
+  lightboxInitialized = false;
+  initImageLightbox();
+});
+//# sourceMappingURL=ImageLightbox.astro_astro_type_script_index_0_lang.B0CYijgy.js.map</script>   <div class="blog-post-container" data-astro-cid-bvzihdzo> <article class="blog-post" data-astro-cid-bvzihdzo> <header class="article-header" data-astro-cid-bvzihdzo> <!-- Title and description --> <h1 data-astro-cid-bvzihdzo>GitHub Releases 日报 - 2025-11-24</h1> <p class="article-description" data-astro-cid-bvzihdzo>AI 自动生成的开源项目更新总结,今日共 16 个更新</p> <!-- Tags and Meta row --> <div class="article-info-row" data-astro-cid-bvzihdzo>  <div class="article-tags" data-astro-cid-bvzihdzo> <a href="/blog/tag/releases" class="tag-link" data-astro-cid-bvzihdzo>#releases</a><a href="/blog/tag/daily" class="tag-link" data-astro-cid-bvzihdzo>#daily</a><a href="/blog/tag/automation" class="tag-link" data-astro-cid-bvzihdzo>#automation</a> </div>  <div class="article-meta" data-astro-cid-bvzihdzo> <time datetime="2025-11-24T02:21:53.443Z" class="meta-item" data-astro-cid-bvzihdzo> 2025年11月24日 </time> <span class="meta-item" data-astro-cid-bvzihdzo>4 分钟阅读</span> <a href="/category/开源追踪" class="meta-item meta-category" data-astro-cid-bvzihdzo>开源追踪</a> </div> </div> </header> <!-- Content --> <div class="article-content app-prose" data-astro-cid-bvzihdzo>  <h1 id="2025-11-24-更新摘要">2025-11-24 更新摘要</h1>
+<p><strong>统计信息</strong></p>
+<ul>
+<li>由 Qwen 2.5 72B (10), GLM-4-Flash (5), DeepSeek V3.1 (1) 总结</li>
+<li>监控仓库: 157 个</li>
+<li>今日更新: 16 个项目 (16 个版本)</li>
+<li>生成时间: 2025-11-24 10:21:53 (北京时间)</li>
+</ul>
+<h4 id="google-geminigemini-cli-v0190-nightly20251124e177314a4"><a href="https://github.com/google-gemini/gemini-cli/releases/tag/v0.19.0-nightly.20251124.e177314a4" rel="noopener noreferrer" target="_blank">google-gemini/gemini-cli v0.19.0-nightly.20251124.e177314a4</a></h4>
+<p><strong>更新内容</strong></p>
+<ul>
+<li>将版本号从 <code>0.19.0-nightly.20251123.dadd606c0</code> 升级到 <code>0.19.0-nightly.20251124.e177314a4</code>。<a href="https://github.com/google-gemini/gemini-cli/pull/13675" rel="noopener noreferrer" target="_blank">@gemini-cli-robot</a></li>
+</ul>
+<h4 id="spacecowboyfeeder-2161"><a href="https://github.com/spacecowboy/Feeder/releases/tag/2.16.1" rel="noopener noreferrer" target="_blank">spacecowboy/Feeder 2.16.1</a></h4>
+<p><strong>问题修复</strong></p>
+<ul>
+<li><strong>翻译</strong>: 更新了包括捷克语、土耳其语、乌克兰语、匈牙利语、德语、西班牙语、法语、波兰语、简体中文、塞尔维亚语、斯洛文尼亚语和丹麦语在内的多个语言的翻译。</li>
+<li><strong>新贡献者</strong>: @Fjuro 首次为项目做出贡献。</li>
+<li><em>影响范围</em>*: 所有使用 Feeder 的用户。</li>
+</ul>
+<h4 id="zed-industrieszed-v02134"><a href="https://github.com/zed-industries/zed/releases/tag/v0.213.4" rel="noopener noreferrer" target="_blank">zed-industries/zed v0.213.4</a></h4>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>之前从 CleanShot X 等截图工具复制的图片无法正确粘贴到 Agent 面板中，此问题已得到解决。(<a href="https://github.com/zed-industries/zed/pull/43255" rel="noopener noreferrer" target="_blank">#43255</a>)</li>
+</ul>
+<h4 id="sstopencode-v10106"><a href="https://github.com/sst/opencode/releases/tag/v1.0.106" rel="noopener noreferrer" target="_blank">sst/opencode v1.0.106</a></h4>
+<p><strong>新内容</strong></p>
+<ul>
+<li>添加了可选的 <code>selectedListItemText</code> 元素，支持基于亮度的回退，解决 #4369 问题。</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>防止权限快捷键在按下 Ctrl/Meta 键时触发。</li>
+<li>捆绑了 AI SDK 包，提升了性能。</li>
+<li><em>影响范围</em>*: 所有使用 TUI 和 Bash 工具的用户。</li>
+</ul>
+<h4 id="aisoulergkd_subscription-v352"><a href="https://github.com/AIsouler/GKD_subscription/releases/tag/v352" rel="noopener noreferrer" target="_blank">AIsouler/GKD_subscription v352</a></h4>
+<p><strong>新内容</strong></p>
+<ul>
+<li>此次更新主要针对 Windows 版本的微信用户，解锁了某些使用限制，提升了用户体验。其他应用和规则未受影响。</li>
+</ul>
+<h4 id="roocodeincroo-code-v3341"><a href="https://github.com/RooCodeInc/Roo-Code/releases/tag/v3.34.1" rel="noopener noreferrer" target="_blank">RooCodeInc/Roo-Code v3.34.1</a></h4>
+<p><strong>新内容</strong></p>
+<ul>
+<li>在用户界面中显示图像生成提示（PR #9505 by @mrubens）</li>
+<li>增加对云同步消息的跟踪支持（PR #9518 by @mrubens）</li>
+<li>在评估环境中启用 Roo Code Cloud 提供商（PR #9492 by @cte）</li>
+</ul>
+<h4 id="jandedobbeleeroh-my-posh-v2800"><a href="https://github.com/JanDeDobbeleer/oh-my-posh/releases/tag/v28.0.0" rel="noopener noreferrer" target="_blank">JanDeDobbeleer/oh-my-posh v28.0.0</a></h4>
+<p><strong>新内容</strong></p>
+<ul>
+<li>移除 <code>command</code> 段，鼓励使用内置段或替代方案。</li>
+<li>使用 <code>command</code> 段的用户需调整配置。</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li><code>command</code> 段被完全移除，需更新配置。</li>
+</ul>
+<h4 id="quantumnousnew-api-v0925"><a href="https://github.com/QuantumNous/new-api/releases/tag/v0.9.25" rel="noopener noreferrer" target="_blank">QuantumNous/new-api v0.9.25</a></h4>
+<h4 id="libcheckerlibchecker-253"><a href="https://github.com/LibChecker/LibChecker/releases/tag/2.5.3" rel="noopener noreferrer" target="_blank">LibChecker/LibChecker 2.5.3</a></h4>
+<p><strong>新内容</strong></p>
+<ul>
+<li>支持分享 APK 链接，快速查看应用信息</li>
+<li>支持对比 APKS 文件</li>
+<li>检测应用主题、启动图标和实时更新通知</li>
+<li>支持提取原生库和分享应用</li>
+</ul>
+<h4 id="continuedevcontinue-v1514-beta20251123"><a href="https://github.com/continuedev/continue/releases/tag/v1.5.14-beta.20251123" rel="noopener noreferrer" target="_blank">continuedev/continue v1.5.14-beta.20251123</a></h4>
+<p><strong>新内容</strong></p>
+<ul>
+<li>优化了系统性能，提升了响应速度</li>
+<li>改进了日志记录的详细程度，便于调试和问题追踪</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>解决了某些用户报告的界面卡顿问题</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li><strong>所有用户</strong>：性能提升和稳定性改进将影响所有用户，建议更新以获得更好的体验。</li>
+</ul>
+<h4 id="jxxghpmoviepilot-v286"><a href="https://github.com/jxxghp/MoviePilot/releases/tag/v2.8.6" rel="noopener noreferrer" target="_blank">jxxghp/MoviePilot v2.8.6</a></h4>
+<h4 id="2dustv2rayn-7164"><a href="https://github.com/2dust/v2rayN/releases/tag/7.16.4" rel="noopener noreferrer" target="_blank">2dust/v2rayN 7.16.4</a></h4>
+<p><strong>新内容</strong></p>
+<ul>
+<li><strong>代理设置优化</strong>：Windows 支持自定义 PAC 文件路径，非 Windows 系统支持自定义代理脚本路径</li>
+<li><strong>路由规则升级</strong>：规则集升级至 V4 版，全面代理 Google 域名（影响范围：所有使用路由规则的用户）</li>
+<li><strong>操作体验优化</strong>：删除重复节点增加二次确认，支持 shadowsocks-ws-tls 配置导入</li>
+</ul>
+<h4 id="maillabcloud-mail-v250"><a href="https://github.com/maillab/cloud-mail/releases/tag/v2.5.0" rel="noopener noreferrer" target="_blank">maillab/cloud-mail v2.5.0</a></h4>
+<p><strong>新内容</strong></p>
+<ul>
+<li>显示未读邮件，帮助用户快速识别新邮件。</li>
+<li>最新邮件通知弹窗，确保用户不会错过任何重要信息。</li>
+<li>邮箱名禁止包含指定字符串，增强账户安全性和规范性。</li>
+<li>邮件列表样式优化，提升用户体验和界面美观度。</li>
+</ul>
+<h4 id="yang991178fluent-reader-lite-v10512"><a href="https://github.com/yang991178/fluent-reader-lite/releases/tag/v1.0.5%2B12" rel="noopener noreferrer" target="_blank">yang991178/fluent-reader-lite v1.0.5+12</a></h4>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>解决了与 Miniflux 服务的连接问题，增强了数据同步的可靠性。[影响范围：使用 Miniflux 作为 RSS 源的用户]</li>
+</ul>
+<p><strong>更新内容</strong></p>
+<ul>
+<li><em>发布日期:</em>* 2025-11-23</li>
+<li><strong>更新 Flutter 和依赖项至最新版本</strong></li>
+</ul>
+<h4 id="mas-climas-v310"><a href="https://github.com/mas-cli/mas/releases/tag/v3.1.0" rel="noopener noreferrer" target="_blank">mas-cli/mas v3.1.0</a></h4>
+<p><strong>新内容</strong></p>
+<ul>
+<li>默认使用更快的预 3.0.0 版本检测逻辑，并提供<code>--accurate</code>和<code>--accurate-ignore-unknown-apps</code>标志以使用更精确但较慢的检测逻辑。</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>正确格式化<code>outdated</code>输出。</li>
+<li>改进下载 / 安装进度输出。</li>
+<li>更新 GitHub Actions 配置。</li>
+</ul>
+<h4 id="triwindsns-emu-tools-059"><a href="https://github.com/triwinds/ns-emu-tools/releases/tag/0.5.9" rel="noopener noreferrer" target="_blank">triwinds/ns-emu-tools 0.5.9</a></h4>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>解决了一些用户界面的小问题，提升了用户体验。</li>
+<li>此次更新主要集中在稳定性和用户体验的提升上，建议所有用户升级以获得最佳体验。</li>
+</ul>
+<p><strong>帮助我们改进</strong></p>
+<p>对今日摘要质量有建议？欢迎反馈！</p>
+<ul>
+<li><a href="https://github.com/houzixiashanxiedaima/AstroBlog/issues/new" rel="noopener noreferrer" target="_blank">📝 反馈摘要质量</a></li>
+<li><a href="https://github.com/houzixiashanxiedaima/AstroBlog/issues/new" rel="noopener noreferrer" target="_blank">⭐ 评价今日日报</a></li>
+</ul>
+<p>您的反馈将帮助我们优化 AI Prompt, 提升摘要准确性 🙏</p>  </div> <!-- Footer navigation --> <footer class="article-footer" data-astro-cid-bvzihdzo> <!-- Prev/Next navigation --> <nav class="post-navigation" data-astro-cid-bvzihdzo> <div class="nav-prev" data-astro-cid-bvzihdzo> <a href="/blog/releases/2025-11-23" class="nav-link" data-astro-cid-bvzihdzo> <span class="nav-label" data-astro-cid-bvzihdzo>上一篇</span> <span class="nav-title" data-astro-cid-bvzihdzo>GitHub Releases 日报 - 2025-11-23</span> </a> </div> <div class="nav-next" data-astro-cid-bvzihdzo> <a href="/blog/releases/2025-11-25" class="nav-link" data-astro-cid-bvzihdzo> <span class="nav-label" data-astro-cid-bvzihdzo>下一篇</span> <span class="nav-title" data-astro-cid-bvzihdzo>GitHub Releases 日报 - 2025-11-25</span> </a> </div> </nav> <div class="back-to-list" data-astro-cid-bvzihdzo> <a href="/" class="back-link" data-astro-cid-bvzihdzo>← 返回文章列表</a> </div> </footer> </article> <!-- Table of Contents --> <aside class="toc-aside" data-astro-cid-bvzihdzo> <nav class="toc" aria-label="目录导航" data-astro-cid-xvrfupwn><ul class="toc-list" data-astro-cid-xvrfupwn><li class="toc-item toc-item-4" data-slug="google-geminigemini-cli-v0190-nightly20251124e177314a4" data-astro-cid-xvrfupwn><a href="#google-geminigemini-cli-v0190-nightly20251124e177314a4" class="toc-link" data-slug="google-geminigemini-cli-v0190-nightly20251124e177314a4" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>google-gemini/gemini-cli v0.19.0-nightly.20251124.e177314a4</span></a></li><li class="toc-item toc-item-4" data-slug="spacecowboyfeeder-2161" data-astro-cid-xvrfupwn><a href="#spacecowboyfeeder-2161" class="toc-link" data-slug="spacecowboyfeeder-2161" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>spacecowboy/Feeder 2.16.1</span></a></li><li class="toc-item toc-item-4" data-slug="zed-industrieszed-v02134" data-astro-cid-xvrfupwn><a href="#zed-industrieszed-v02134" class="toc-link" data-slug="zed-industrieszed-v02134" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>zed-industries/zed v0.213.4</span></a></li><li class="toc-item toc-item-4" data-slug="sstopencode-v10106" data-astro-cid-xvrfupwn><a href="#sstopencode-v10106" class="toc-link" data-slug="sstopencode-v10106" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>sst/opencode v1.0.106</span></a></li><li class="toc-item toc-item-4" data-slug="aisoulergkd_subscription-v352" data-astro-cid-xvrfupwn><a href="#aisoulergkd_subscription-v352" class="toc-link" data-slug="aisoulergkd_subscription-v352" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>AIsouler/GKD_subscription v352</span></a></li><li class="toc-item toc-item-4" data-slug="roocodeincroo-code-v3341" data-astro-cid-xvrfupwn><a href="#roocodeincroo-code-v3341" class="toc-link" data-slug="roocodeincroo-code-v3341" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>RooCodeInc/Roo-Code v3.34.1</span></a></li><li class="toc-item toc-item-4" data-slug="jandedobbeleeroh-my-posh-v2800" data-astro-cid-xvrfupwn><a href="#jandedobbeleeroh-my-posh-v2800" class="toc-link" data-slug="jandedobbeleeroh-my-posh-v2800" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>JanDeDobbeleer/oh-my-posh v28.0.0</span></a></li><li class="toc-item toc-item-4" data-slug="quantumnousnew-api-v0925" data-astro-cid-xvrfupwn><a href="#quantumnousnew-api-v0925" class="toc-link" data-slug="quantumnousnew-api-v0925" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>QuantumNous/new-api v0.9.25</span></a></li><li class="toc-item toc-item-4" data-slug="libcheckerlibchecker-253" data-astro-cid-xvrfupwn><a href="#libcheckerlibchecker-253" class="toc-link" data-slug="libcheckerlibchecker-253" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>LibChecker/LibChecker 2.5.3</span></a></li><li class="toc-item toc-item-4" data-slug="continuedevcontinue-v1514-beta20251123" data-astro-cid-xvrfupwn><a href="#continuedevcontinue-v1514-beta20251123" class="toc-link" data-slug="continuedevcontinue-v1514-beta20251123" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>continuedev/continue v1.5.14-beta.20251123</span></a></li><li class="toc-item toc-item-4" data-slug="jxxghpmoviepilot-v286" data-astro-cid-xvrfupwn><a href="#jxxghpmoviepilot-v286" class="toc-link" data-slug="jxxghpmoviepilot-v286" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>jxxghp/MoviePilot v2.8.6</span></a></li><li class="toc-item toc-item-4" data-slug="2dustv2rayn-7164" data-astro-cid-xvrfupwn><a href="#2dustv2rayn-7164" class="toc-link" data-slug="2dustv2rayn-7164" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>2dust/v2rayN 7.16.4</span></a></li><li class="toc-item toc-item-4" data-slug="maillabcloud-mail-v250" data-astro-cid-xvrfupwn><a href="#maillabcloud-mail-v250" class="toc-link" data-slug="maillabcloud-mail-v250" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>maillab/cloud-mail v2.5.0</span></a></li><li class="toc-item toc-item-4" data-slug="yang991178fluent-reader-lite-v10512" data-astro-cid-xvrfupwn><a href="#yang991178fluent-reader-lite-v10512" class="toc-link" data-slug="yang991178fluent-reader-lite-v10512" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>yang991178/fluent-reader-lite v1.0.5+12</span></a></li><li class="toc-item toc-item-4" data-slug="mas-climas-v310" data-astro-cid-xvrfupwn><a href="#mas-climas-v310" class="toc-link" data-slug="mas-climas-v310" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>mas-cli/mas v3.1.0</span></a></li><li class="toc-item toc-item-4" data-slug="triwindsns-emu-tools-059" data-astro-cid-xvrfupwn><a href="#triwindsns-emu-tools-059" class="toc-link" data-slug="triwindsns-emu-tools-059" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>triwinds/ns-emu-tools 0.5.9</span></a></li></ul></nav><script type="module" src="/_astro/TableOfContents.astro_astro_type_script_index_0_lang.CZx3HNA-.js"></script> </aside> </div>  </main> <footer class="site-footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text" data-astro-cid-sz7xmlte>
+&copy; 2025 AstroBlog. Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> <div class="social-links" data-astro-cid-sz7xmlte> <a href="/rss.xml" target="_blank" class="social-link" aria-label="RSS 订阅" title="RSS 订阅" data-astro-cid-sz7xmlte> <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-sz7xmlte> <path d="M4 11a9 9 0 0 1 9 9" data-astro-cid-sz7xmlte></path> <path d="M4 4a16 16 0 0 1 16 16" data-astro-cid-sz7xmlte></path> <circle cx="5" cy="19" r="1" data-astro-cid-sz7xmlte></circle> </svg> </a> <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub" title="GitHub" data-astro-cid-sz7xmlte> <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-sz7xmlte> <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter" title="Twitter" data-astro-cid-sz7xmlte> <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-sz7xmlte> <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" data-astro-cid-sz7xmlte></path> </svg> </a> </div> </div> </footer>  </body></html> 

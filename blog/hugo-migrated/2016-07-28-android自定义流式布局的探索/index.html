@@ -1,0 +1,591 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.16.0"><meta name="description" content="Android自定义流式布局的探索"><link rel="canonical" href="https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80%E7%9A%84%E6%8E%A2%E7%B4%A2/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80%E7%9A%84%E6%8E%A2%E7%B4%A2/"><meta property="og:title" content="Android自定义流式布局的探索"><meta property="og:description" content="Android自定义流式布局的探索"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80%E7%9A%84%E6%8E%A2%E7%B4%A2/"><meta property="twitter:title" content="Android自定义流式布局的探索"><meta property="twitter:description" content="Android自定义流式布局的探索"><title>Android自定义流式布局的探索</title><!-- Color scheme script (runs before page loads to prevent flash) --><script>
+			const colorScheme = localStorage.getItem('colorScheme') || 'warm-paper';
+			document.documentElement.setAttribute('data-color', colorScheme);
+		</script><link rel="stylesheet" href="/_astro/_slug_.XT2r3__V.css">
+<link rel="stylesheet" href="/_astro/_slug_.Cyfj5-02.css"></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2>
+AstroBlog
+</a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link nav-link--active" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/rss.xml" class="nav-link" target="_blank" rel="noopener noreferrer" data-astro-cid-3ef6ksr2> RSS </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM18 18l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-modal" data-astro-cid-otpdt6jm> <div class="modal-content" data-astro-cid-otpdt6jm> <div class="modal-header" data-astro-cid-otpdt6jm> <h2 class="modal-title" data-astro-cid-otpdt6jm>搜索文章</h2> <button id="close-search" class="close-button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-otpdt6jm></path> </svg> </button> </div> <div id="pagefind-ui" data-astro-cid-otpdt6jm></div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.DjHyAxEv.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  <div class="color-scheme-toggle" data-astro-cid-i6hk4rsz> <button id="color-scheme-button" class="toggle-button" aria-label="切换配色方案" title="切换配色方案" data-astro-cid-i6hk4rsz> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-i6hk4rsz> <circle cx="12" cy="12" r="10" data-astro-cid-i6hk4rsz></circle> <path d="M12 2a10 10 0 0 1 0 20" data-astro-cid-i6hk4rsz></path> </svg> </button> <div id="color-scheme-menu" class="color-menu" hidden data-astro-cid-i6hk4rsz> <div class="menu-header" data-astro-cid-i6hk4rsz>配色方案</div> <button class="color-option" data-color="warm-paper" title="暖纸" data-astro-cid-i6hk4rsz> <span class="color-preview" style="background: linear-gradient(135deg, #FAF9F7 50%, #1C1917 50%);" data-astro-cid-i6hk4rsz></span> <span class="color-name" data-astro-cid-i6hk4rsz>暖纸</span> </button><button class="color-option" data-color="cool-zinc" title="冷锌" data-astro-cid-i6hk4rsz> <span class="color-preview" style="background: linear-gradient(135deg, #FAFAFA 50%, #18181B 50%);" data-astro-cid-i6hk4rsz></span> <span class="color-name" data-astro-cid-i6hk4rsz>冷锌</span> </button><button class="color-option" data-color="sepia" title="复古" data-astro-cid-i6hk4rsz> <span class="color-preview" style="background: linear-gradient(135deg, #F8F4E9 50%, #1F1D1A 50%);" data-astro-cid-i6hk4rsz></span> <span class="color-name" data-astro-cid-i6hk4rsz>复古</span> </button><button class="color-option" data-color="soft-gray" title="柔灰" data-astro-cid-i6hk4rsz> <span class="color-preview" style="background: linear-gradient(135deg, #F7F7F7 50%, #1A1A1A 50%);" data-astro-cid-i6hk4rsz></span> <span class="color-name" data-astro-cid-i6hk4rsz>柔灰</span> </button> </div> </div> <script type="module">function initColorSchemeToggle() {
+  const button = document.getElementById("color-scheme-button");
+  const menu = document.getElementById("color-scheme-menu");
+  const options = document.querySelectorAll(".color-option");
+  if (!button || !menu) return;
+  const savedColor = localStorage.getItem("colorScheme") || "warm-paper";
+  document.documentElement.setAttribute("data-color", savedColor);
+  updateActiveOption(savedColor);
+  button.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isHidden = menu.hidden;
+    menu.hidden = !isHidden;
+    button.setAttribute("aria-expanded", String(!isHidden));
+  });
+  options.forEach((option) => {
+    option.addEventListener("click", () => {
+      const colorId = option.getAttribute("data-color");
+      if (colorId) {
+        document.documentElement.setAttribute("data-color", colorId);
+        localStorage.setItem("colorScheme", colorId);
+        updateActiveOption(colorId);
+        menu.hidden = true;
+      }
+    });
+  });
+  document.addEventListener("click", (e) => {
+    if (!button.contains(e.target) && !menu.contains(e.target)) {
+      menu.hidden = true;
+    }
+  });
+  function updateActiveOption(colorId) {
+    options.forEach((opt) => {
+      opt.classList.toggle("active", opt.getAttribute("data-color") === colorId);
+    });
+  }
+}
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initColorSchemeToggle);
+} else {
+  initColorSchemeToggle();
+}
+document.addEventListener("astro:page-load", initColorSchemeToggle);
+//# sourceMappingURL=ColorSchemeToggle.astro_astro_type_script_index_0_lang.DYTFbvNv.js.map</script>  </div> </div> </nav> </header>  <main id="main-content" class="mx-auto px-4 pb-12 max-w-5xl" data-astro-cid-sckkx6r4>  <script type="module">let copyButtonsInitialized = false;
+function initCodeCopyButtons() {
+  if (copyButtonsInitialized) return;
+  copyButtonsInitialized = true;
+  const codeBlocks = document.querySelectorAll("pre:has(code)");
+  codeBlocks.forEach((block) => {
+    if (block.querySelector(".copy-button")) return;
+    if (!block.parentElement?.classList.contains("code-block-wrapper")) {
+      const wrapper = document.createElement("div");
+      wrapper.className = "code-block-wrapper";
+      block.parentNode?.insertBefore(wrapper, block);
+      wrapper.appendChild(block);
+    }
+    const button = document.createElement("button");
+    button.className = "copy-button";
+    button.setAttribute("aria-label", "复制代码");
+    button.title = "复制代码";
+    button.innerHTML = `
+        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+        <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      `;
+    button.addEventListener("click", async () => {
+      const code = block.querySelector("code");
+      if (!code) return;
+      try {
+        const text = code.textContent || "";
+        await navigator.clipboard.writeText(text);
+        button.classList.add("copied");
+        setTimeout(() => {
+          button.classList.remove("copied");
+        }, 2e3);
+      } catch (err) {
+        console.error("Failed to copy:", err);
+      }
+    });
+    block.parentElement?.appendChild(button);
+  });
+}
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initCodeCopyButtons);
+} else {
+  initCodeCopyButtons();
+}
+document.addEventListener("astro:page-load", () => {
+  copyButtonsInitialized = false;
+  initCodeCopyButtons();
+});
+//# sourceMappingURL=CodeCopyButton.astro_astro_type_script_index_0_lang.BQH_fAJu.js.map</script>  <script type="module">let anchorInitialized = false;
+function initHeadingAnchors() {
+  if (anchorInitialized) return;
+  anchorInitialized = true;
+  const headings = document.querySelectorAll(".article-content h2[id], .article-content h3[id], .article-content h4[id], .article-content h5[id], .article-content h6[id]");
+  headings.forEach((heading) => {
+    const id = heading.getAttribute("id");
+    if (!id) return;
+    if (heading.querySelector(".heading-anchor")) return;
+    const anchor = document.createElement("a");
+    anchor.href = `#${id}`;
+    anchor.className = "heading-anchor";
+    anchor.setAttribute("aria-label", `链接到 ${heading.textContent}`);
+    anchor.title = "复制链接";
+    anchor.textContent = "#";
+    anchor.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const url = window.location.origin + window.location.pathname + `#${id}`;
+      try {
+        await navigator.clipboard.writeText(url);
+        anchor.classList.add("copied");
+        setTimeout(() => {
+          anchor.classList.remove("copied");
+        }, 1500);
+        heading.scrollIntoView({ behavior: "smooth", block: "start" });
+        history.pushState(null, "", `#${id}`);
+      } catch (err) {
+        console.error("Failed to copy:", err);
+        window.location.hash = id;
+      }
+    });
+    heading.style.position = "relative";
+    heading.insertBefore(anchor, heading.firstChild);
+  });
+}
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initHeadingAnchors);
+} else {
+  initHeadingAnchors();
+}
+document.addEventListener("astro:page-load", () => {
+  anchorInitialized = false;
+  initHeadingAnchors();
+});
+//# sourceMappingURL=HeadingAnchor.astro_astro_type_script_index_0_lang.CnSKxYFk.js.map</script>  <div id="image-lightbox" class="lightbox" hidden data-astro-cid-fbflauxb> <button id="lightbox-close" class="lightbox-close" aria-label="关闭" data-astro-cid-fbflauxb> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-fbflauxb> <line x1="18" y1="6" x2="6" y2="18" data-astro-cid-fbflauxb></line> <line x1="6" y1="6" x2="18" y2="18" data-astro-cid-fbflauxb></line> </svg> </button> <img id="lightbox-image" class="lightbox-image" src="" alt="" data-astro-cid-fbflauxb> </div> <script type="module">let lightboxInitialized = false;
+function initImageLightbox() {
+  if (lightboxInitialized) return;
+  lightboxInitialized = true;
+  const lightbox = document.getElementById("image-lightbox");
+  const lightboxImage = document.getElementById("lightbox-image");
+  const closeButton = document.getElementById("lightbox-close");
+  if (!lightbox || !lightboxImage || !closeButton) return;
+  const images = document.querySelectorAll(".article-content img");
+  images.forEach((img) => {
+    if (img.classList.contains("lightbox-enabled")) return;
+    img.classList.add("lightbox-enabled");
+    img.style.cursor = "zoom-in";
+    img.addEventListener("click", () => {
+      const src = img.getAttribute("src");
+      const alt = img.getAttribute("alt") || "";
+      if (!src) return;
+      lightboxImage.src = src;
+      lightboxImage.alt = alt;
+      lightbox.hidden = false;
+      document.body.style.overflow = "hidden";
+    });
+  });
+  const closeLightbox = () => {
+    lightbox.hidden = true;
+    document.body.style.overflow = "";
+    lightboxImage.src = "";
+  };
+  closeButton.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+      closeLightbox();
+    }
+  });
+  const handleEscape = (e) => {
+    if (e.key === "Escape" && !lightbox.hidden) {
+      closeLightbox();
+    }
+  };
+  document.addEventListener("keydown", handleEscape);
+  document.addEventListener("astro:before-swap", () => {
+    closeButton.removeEventListener("click", closeLightbox);
+    lightbox.removeEventListener("click", closeLightbox);
+    document.removeEventListener("keydown", handleEscape);
+    lightboxInitialized = false;
+  }, { once: true });
+}
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initImageLightbox);
+} else {
+  initImageLightbox();
+}
+document.addEventListener("astro:page-load", () => {
+  lightboxInitialized = false;
+  initImageLightbox();
+});
+//# sourceMappingURL=ImageLightbox.astro_astro_type_script_index_0_lang.B0CYijgy.js.map</script>   <div class="blog-post-container" data-astro-cid-bvzihdzo> <article class="blog-post" data-astro-cid-bvzihdzo> <header class="article-header" data-astro-cid-bvzihdzo> <!-- Title and description --> <h1 data-astro-cid-bvzihdzo>Android自定义流式布局的探索</h1> <p class="article-description" data-astro-cid-bvzihdzo>Android自定义流式布局的探索</p> <!-- Tags and Meta row --> <div class="article-info-row" data-astro-cid-bvzihdzo>  <div class="article-tags" data-astro-cid-bvzihdzo> <a href="/blog/tag/Android" class="tag-link" data-astro-cid-bvzihdzo>#Android</a> </div>  <div class="article-meta" data-astro-cid-bvzihdzo> <time datetime="2016-07-28T00:00:00.000Z" class="meta-item" data-astro-cid-bvzihdzo> 2016年7月28日 </time> <span class="meta-item" data-astro-cid-bvzihdzo>4 分钟阅读</span> <a href="/category/Android" class="meta-item meta-category" data-astro-cid-bvzihdzo>Android</a> </div> </div> </header> <!-- Content --> <div class="article-content app-prose" data-astro-cid-bvzihdzo>  <p>最近在学习 Android 中自定义 View 的一些知识，为了检验成果，先来自定义一个流式布局。</p>
+<h3 id="什么是流式布局">什么是流式布局？</h3>
+<p><img src="http://upload-images.jianshu.io/upload_images/2524102-a4edfa75da430455.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="流式布局示例 1"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2524102-9b3989321f3e5db6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="流式布局示例 2.png"></p>
+<!--more-->
+<p>上面就是流式布局的示例，简单来说就是一些不同宽度的控件显示的时候根据自己的宽度和当前行剩余的宽度来决定是显示在当前行还是换行显示。</p>
+<h3 id="如何实现流式布局">如何实现流式布局</h3>
+<p>实现流式布局毫无疑问是需要自定义布局的，虽然 Android 官方给我们提供了 Recyclerview 中的瀑布流布局，但是这种效果却并不好，因为瀑布流的布局需要给定一个 spanCount，也就是瀑布的列数。但是我们的流式布局是不清楚有多少列多少行的，因为这完全取决于我们的控件的宽度和整个流式布局的宽度。
+自定义流式布局和自定义其他的一些 ViewGroup 的步骤基本是一致的：</p>
+<ol>
+<li>先 onMeasure</li>
+<li>后 onLayout</li>
+</ol>
+<p>我们先从第一步开始</p>
+<p>首先直接放出 onMeasure 的代码</p>
+<figure data-rehype-pretty-code-figure=""><pre tabindex="0" data-language="Java" data-theme="github-light github-dark-dimmed"><code data-language="Java" data-theme="github-light github-dark-dimmed" style="display: grid;"><span data-line=""><span>protected void onMeasure(final int widthMeasureSpec, final int heightMeasureSpec) {</span></span>
+<span data-line=""><span>      //获取该ViewGroup的父布局为该ViewGroup推荐的宽高以及计算模式</span></span>
+<span data-line=""><span>      int sizeWidth = MeasureSpec.getSize(widthMeasureSpec);</span></span>
+<span data-line=""><span>      int sizeHeight = MeasureSpec.getSize(heightMeasureSpec);</span></span>
+<span data-line=""><span>      int modeWidth = MeasureSpec.getMode(widthMeasureSpec);</span></span>
+<span data-line=""><span>      int modeHeight = MeasureSpec.getMode(heightMeasureSpec);</span></span>
+<span data-line=""><span>      //当该ViewGroup是wrap_content的时候，记录宽高</span></span>
+<span data-line=""><span>      int layoutWidth = 0;</span></span>
+<span data-line=""><span>      int layoutHeight = 0;</span></span>
+<span data-line=""><span>      //每行的宽高，宽度永远都取最大值，高度则直接相加</span></span>
+<span data-line=""><span>      int lineWidth = 0;</span></span>
+<span data-line=""><span>      int lineHeight = 0;</span></span>
+<span data-line=""><span>      //遍历childView计并算childView的宽高与margin值，然后通过计算结果来确定当</span></span>
+<span data-line=""><span>      //我们的ViewGroup设置为wrap_content时ViewGroup的宽高</span></span>
+<span data-line=""> </span>
+<span data-line=""><span>      for (int i = 0, childCount = getChildCount(); i &#x3C; childCount; i++) {</span></span>
+<span data-line=""><span>          View childView = getChildAt(i);</span></span>
+<span data-line=""><span>          //通过ViewGroup的measureChild方法设置childView的宽高，执行完毕之后，</span></span>
+<span data-line=""><span>          //所有的childView的宽高都已经确定了。</span></span>
+<span data-line=""><span>          measureChild(childView, widthMeasureSpec, heightMeasureSpec);</span></span>
+<span data-line=""><span>          //获取上一步中ViewGroup设置的childView的宽高</span></span>
+<span data-line=""><span>          int childWidth = childView.getMeasuredWidth();</span></span>
+<span data-line=""><span>          int childHeight = childView.getMeasuredHeight();</span></span>
+<span data-line=""> </span>
+<span data-line=""><span>          //获取childView的LayoutParams</span></span>
+<span data-line=""><span>          // 每个布局都有一种特殊的LayoutParams，</span></span>
+<span data-line=""><span>          //比如LinearLayout.LayoutParams,RelativeLayout.LayoutParams等等</span></span>
+<span data-line=""><span>          MarginLayoutParams mlp = (MarginLayoutParams) childView.getLayoutParams();</span></span>
+<span data-line=""><span>          //计算实际上childView的宽高(childView本身的宽高加上它的Margin值)</span></span>
+<span data-line=""><span>          int realChildWidth = childWidth + mlp.leftMargin + mlp.rightMargin;</span></span>
+<span data-line=""><span>          int realChildHeight = childHeight + mlp.topMargin + mlp.bottomMargin;</span></span>
+<span data-line=""> </span>
+<span data-line=""><span>          //该行当前的宽度加上childView实际的宽度大于布局宽度，则换行</span></span>
+<span data-line=""><span>          if (lineWidth + realChildWidth > sizeWidth) {</span></span>
+<span data-line=""><span>              //执行换行操作</span></span>
+<span data-line=""><span>              //这里layoutWidth取lineWidth和realChildWidth的最大值是因为可能会</span></span>
+<span data-line=""><span>              //出现如下的情况：</span></span>
+<span data-line=""><span>              //上一行：= = = ==(宽度为8)</span></span>
+<span data-line=""><span>              //该childView：==========(宽度>8)</span></span>
+<span data-line=""><span>              layoutWidth = Math.max(lineWidth, realChildWidth);</span></span>
+<span data-line=""><span>              //当前计算的总高度累加一个realChildHeight即可</span></span>
+<span data-line=""><span>              layoutHeight = layoutHeight + realChildHeight;</span></span>
+<span data-line=""><span>              //换行之后，新行的宽度和高度需要重新计算，此处是设置为在该行的唯一一个childView的实际宽高</span></span>
+<span data-line=""><span>              lineWidth = realChildWidth;</span></span>
+<span data-line=""><span>              lineHeight = realChildHeight;</span></span>
+<span data-line=""><span>          } else {</span></span>
+<span data-line=""><span>              //宽度未超出，可以直接相加宽度</span></span>
+<span data-line=""><span>              lineWidth = lineWidth + realChildWidth;</span></span>
+<span data-line=""><span>              //获取最终的行高，取之前的行高和当前子View的高度</span></span>
+<span data-line=""><span>              lineHeight = Math.max(lineHeight, realChildHeight);</span></span>
+<span data-line=""><span>          }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span>          // 如果是最后一个，需要做一些处理。</span></span>
+<span data-line=""><span>          if (i == childCount - 1) {</span></span>
+<span data-line=""><span>              //将当前布局的宽度和最后一行的宽度相比，取最大值</span></span>
+<span data-line=""><span>              layoutWidth = Math.max(lineWidth, layoutWidth);</span></span>
+<span data-line=""><span>              //当前布局的行高还是简单的叠加即可</span></span>
+<span data-line=""><span>              layoutHeight = layoutHeight + lineHeight;</span></span>
+<span data-line=""><span>          }</span></span>
+<span data-line=""><span>          /**</span></span>
+<span data-line=""><span>           *  Mode 一般有三种模式：</span></span>
+<span data-line=""><span>           *  MeasureSpec.EXACTLY: 一般是在childView设置match_parent时或者是设置了具体的宽高时使用。</span></span>
+<span data-line=""><span>           *  MeasureSPec.AT_MOST: 一般是在childView设置wrap_content时使用</span></span>
+<span data-line=""><span>           *  MeasureSpec.UNSPECIFIC: childView想要多大都行，用的比较少，可能会在ScrollView的heightMode中见到。</span></span>
+<span data-line=""><span>           */</span></span>
+<span data-line=""> </span>
+<span data-line=""><span>          // 下面就是判断childView的宽高时是如何设置的，如果是设置了具体的宽高</span></span>
+<span data-line=""><span>          //或者是match_parent，那就直接使用父布局给出的大小</span></span>
+<span data-line=""><span>          // 否则就使用我们自己测量出来的宽高</span></span>
+<span data-line=""><span>          setMeasuredDimension(modeWidth == MeasureSpec.EXACTLY ? sizeWidth : layoutWidth,</span></span>
+<span data-line=""><span>                  modeHeight == MeasureSpec.EXACTLY ? sizeHeight : layoutHeight);</span></span>
+<span data-line=""><span>      }</span></span>
+<span data-line=""><span>  }</span></span></code></pre></figure>
+<p>上面的代码注释已经非常的清楚，在 onMeasure 中的步骤也非常的清晰：</p>
+<ol>
+<li>获取父布局对流式布局的测量宽高和测量模式。</li>
+<li>遍历流式布局中的 childView。
+<ul>
+<li>测量并设置 childView 的宽高，执行这一步之后 childView 的宽高就已经确定</li>
+<li>获取测量的 childView 的宽高和 Layoutparams</li>
+<li>计算实际上的 childView 宽高（包括 margin）</li>
+<li>判断 childView 的实际宽高 + 当前行的宽度是否超出流式布局的宽度
+<ul>
+<li>若超过，则换行 [注 1]</li>
+<li>若未超过，则宽度累加，行高取当前行高与 childView 高度的最大值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>最后一行的时候进行一些处理，获取最终的流式布局的宽和高</li>
+</ul>
+<p>onMeasure 基本上就是这些了，接下来就是 onLayout，先放代码：</p>
+<figure data-rehype-pretty-code-figure=""><pre tabindex="0" data-language="Java" data-theme="github-light github-dark-dimmed"><code data-language="Java" data-theme="github-light github-dark-dimmed" style="display: grid;"><span data-line=""><span>protected void onLayout(final boolean changed, final int l, final int t, final int r, final int b) {</span></span>
+<span data-line=""> </span>
+<span data-line=""><span>       //获取该布局在onMeasure函数中测量的宽度</span></span>
+<span data-line=""><span>       int flowWidth = getWidth();</span></span>
+<span data-line=""><span>       //通过lineWidth和lineHeight来确定childView的位置</span></span>
+<span data-line=""><span>       int lineWidth = 0;</span></span>
+<span data-line=""><span>       int lineHeight = 0;</span></span>
+<span data-line=""><span>       //记录childView的left和top来确定位置</span></span>
+<span data-line=""><span>       int childLeft = 0;</span></span>
+<span data-line=""><span>       int childTop = 0;</span></span>
+<span data-line=""><span>       //遍历子控件，记录每个子view的位置</span></span>
+<span data-line=""><span>       for (int i = 0, childCount = getChildCount(); i &#x3C; childCount; i++) {</span></span>
+<span data-line=""><span>           View childView = getChildAt(i);</span></span>
+<span data-line=""><span>           //获取到测量的宽和高</span></span>
+<span data-line=""><span>           int childWidth = childView.getMeasuredWidth();</span></span>
+<span data-line=""><span>           int childHeight = childView.getMeasuredHeight();</span></span>
+<span data-line=""><span>           //因为childView可能设置margin，这里要加上margin的距离</span></span>
+<span data-line=""><span>           MarginLayoutParams mlp = (MarginLayoutParams) childView.getLayoutParams();</span></span>
+<span data-line=""><span>           //判断整个childView所占的空间宽度+当前行的宽度是否大于父布局也就是我们ViewGroup的宽度</span></span>
+<span data-line=""><span>           //若大于就进行换行处理</span></span>
+<span data-line=""><span>           if (lineWidth + mlp.leftMargin + childWidth + mlp.rightMargin > flowWidth) {</span></span>
+<span data-line=""><span>               //换行之后，left为最左边的值</span></span>
+<span data-line=""><span>               childLeft = 0;</span></span>
+<span data-line=""><span>               //换行之后，top为top+当前的行高</span></span>
+<span data-line=""><span>               childTop = childTop + lineHeight;</span></span>
+<span data-line=""><span>               //换行之后，当前行高为换行前的行高+childView的TopMargin+childView+BottomMargin</span></span>
+<span data-line=""><span>               lineHeight = (mlp.topMargin + childHeight + mlp.bottomMargin);</span></span>
+<span data-line=""><span>               //换行之后，当前行宽度为0</span></span>
+<span data-line=""><span>               lineWidth = 0;</span></span>
+<span data-line=""><span>           }</span></span>
+<span data-line=""><span>           //设置childView的上下左右坐标，统一处理margin</span></span>
+<span data-line=""><span>           int left = childLeft + mlp.leftMargin;</span></span>
+<span data-line=""><span>           int top = childTop + mlp.topMargin;</span></span>
+<span data-line=""><span>           int right = left + childWidth;</span></span>
+<span data-line=""><span>           int bottom = top + childHeight;</span></span>
+<span data-line=""><span>           childView.layout(left, top, right, bottom);</span></span>
+<span data-line=""><span>           //记录当前行的宽度</span></span>
+<span data-line=""><span>           lineWidth = lineWidth + (mlp.leftMargin + childWidth + mlp.rightMargin);</span></span>
+<span data-line=""><span>           childLeft = lineWidth;</span></span>
+<span data-line=""><span>       }</span></span>
+<span data-line=""><span>   }</span></span></code></pre></figure>
+<p>onLayoutd 的代码也非常的清晰：</p>
+<ol>
+<li>遍历 childView</li>
+<li>获取 childView 的宽高，并判断是否换行</li>
+</ol>
+<ul>
+<li>若换行，则下一个 childView 的 Left 和下一行的 width 重置，行高为当前 childView 的实际高度，childTop 则累加行高。</li>
+<li>若不换行，宽度累加，行高不变。</li>
+</ul>
+<p>通过上面的 onMeasure 和 onLayout 之后，整个流式布局就已经基本完成，接下来我们设置布局文件：</p>
+<figure data-rehype-pretty-code-figure=""><pre tabindex="0" data-language="xml" data-theme="github-light github-dark-dimmed"><code data-language="xml" data-theme="github-light github-dark-dimmed" style="display: grid;"><span data-line=""><span style="--shiki-light:#6A737D;--shiki-dark:#768390"> &#x3C;!--  布局文件--></span></span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7"> &#x3C;?</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">xml</span><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF"> version</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"1.0"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF"> encoding</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"utf-8"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">?></span></span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">&#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">RelativeLayout</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">        xmlns:android</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"http://schemas.android.com/apk/res/android"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">        xmlns:tools</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"http://schemas.android.com/tools"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">        xmlns:app</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"http://schemas.android.com/apk/res-auto"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">        android:id</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@+id/content_flow"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">        android:layout_width</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"match_parent"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">        android:layout_height</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"match_parent"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">        app:layout_behavior</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@string/appbar_scrolling_view_behavior"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">        tools:showIn</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@layout/activity_flow"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">        tools:context</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"stephen.com.bugstest.FlowActivity"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">    &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">stephen.com.bugstest.customwidgets.FlowLayout</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">            android:id</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@+id/flow_layout"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">            android:layout_width</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"match_parent"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">            android:layout_height</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"match_parent"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"Welcome"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"IT工程师"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"学习ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"恋爱ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"挣钱ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"努力ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"I thick i can"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"Welcome"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"IT工程师"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"学习ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"恋爱ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"挣钱ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"努力ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"I thick i can"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"Welcome"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"IT工程师"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"学习ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"恋爱ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"挣钱ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"努力ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"I thick i can"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"Welcome"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"学习ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"恋爱ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"挣钱ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"努力ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"I thick i can"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"Welcome"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"IT工程师"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"学习ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"恋爱ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"挣钱ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"努力ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"I thick i can"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"Welcome"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"IT工程师"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"学习ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"恋爱ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"挣钱ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"努力ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"I thick i can"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"Welcome"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"IT工程师"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"学习ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"恋爱ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"挣钱ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"努力ing"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">TextView</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                style</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@style/text_flag_01"</span></span>
+<span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">                android:text</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"I thick i can"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">/></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">    &#x3C;/</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">stephen.com.bugstest.customwidgets.FlowLayout</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">></span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">&#x3C;/</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">RelativeLayout</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">></span></span>
+<span data-line=""> </span></code></pre></figure>
+<p>最终效果：
+<img src="http://upload-images.jianshu.io/upload_images/2524102-ba18794a67eec0ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="最终效果图.png"></p>
+<p>从上面的图中我们可以看到，每一行都是根据宽度自动换行，最终形成了流式布局。</p>
+<p>在上面的说明中，我标注了一个注 [1]，这里具体来说一下：
+在实际的编码和测试过程中，我发现如果我们的 childView 宽度大于本身整个流式布局的宽度，那么整个流式布局就被破坏了。直接上图看看吧：
+<img src="http://upload-images.jianshu.io/upload_images/2524102-da6b6c9312731b6c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="情况 1.png"></p>
+<p>这种情况是只有这个 childView 的这一行的行距出现了问题。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2524102-33b1287cfc34db14.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="情况 2.png"></p>
+<p>这种情况看起来好像是正常的，但是实际上是从这个 childView 之后的所有行高都变大了。</p>
+<p>上面这两种情况的出现对应着代码中有一些微小的改动，在这里就不放出来了。针对上面的这两种情况，都尝试过解决办法，但是都失败了，可能是因为我们在 onLayout 中使用了行高来确定上下两行的间隔距离，而这个 childView 的行高要特殊一些，所以就导致出现这个问题。但是这个小问题也不用太在意，因为我们的流式布局基本上是不会碰到一个 childView 的宽度比整个布局的宽度还宽的。</p>  </div> <!-- Footer navigation --> <footer class="article-footer" data-astro-cid-bvzihdzo> <!-- Prev/Next navigation --> <nav class="post-navigation" data-astro-cid-bvzihdzo> <div class="nav-prev" data-astro-cid-bvzihdzo> <a href="/blog/hugo-migrated/2016-07-28-git配置彩色log" class="nav-link" data-astro-cid-bvzihdzo> <span class="nav-label" data-astro-cid-bvzihdzo>上一篇</span> <span class="nav-title" data-astro-cid-bvzihdzo>Git配置彩色Log</span> </a> </div> <div class="nav-next" data-astro-cid-bvzihdzo> <a href="/blog/hugo-migrated/2016-07-28-android光速打包" class="nav-link" data-astro-cid-bvzihdzo> <span class="nav-label" data-astro-cid-bvzihdzo>下一篇</span> <span class="nav-title" data-astro-cid-bvzihdzo>Android光速打包</span> </a> </div> </nav> <div class="back-to-list" data-astro-cid-bvzihdzo> <a href="/" class="back-link" data-astro-cid-bvzihdzo>← 返回文章列表</a> </div> </footer> </article> <!-- Table of Contents --> <aside class="toc-aside" data-astro-cid-bvzihdzo> <nav class="toc" aria-label="目录导航" data-astro-cid-xvrfupwn><ul class="toc-list" data-astro-cid-xvrfupwn><li class="toc-item toc-item-3" data-slug="什么是流式布局" data-astro-cid-xvrfupwn><a href="#什么是流式布局" class="toc-link" data-slug="什么是流式布局" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>什么是流式布局？</span></a></li><li class="toc-item toc-item-3" data-slug="如何实现流式布局" data-astro-cid-xvrfupwn><a href="#如何实现流式布局" class="toc-link" data-slug="如何实现流式布局" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>如何实现流式布局</span></a></li></ul></nav><script type="module" src="/_astro/TableOfContents.astro_astro_type_script_index_0_lang.CZx3HNA-.js"></script> </aside> </div>  </main> <footer class="site-footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text" data-astro-cid-sz7xmlte>
+&copy; 2025 AstroBlog. Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> <div class="social-links" data-astro-cid-sz7xmlte> <a href="/rss.xml" target="_blank" class="social-link" aria-label="RSS 订阅" title="RSS 订阅" data-astro-cid-sz7xmlte> <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-sz7xmlte> <path d="M4 11a9 9 0 0 1 9 9" data-astro-cid-sz7xmlte></path> <path d="M4 4a16 16 0 0 1 16 16" data-astro-cid-sz7xmlte></path> <circle cx="5" cy="19" r="1" data-astro-cid-sz7xmlte></circle> </svg> </a> <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub" title="GitHub" data-astro-cid-sz7xmlte> <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-sz7xmlte> <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter" title="Twitter" data-astro-cid-sz7xmlte> <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-sz7xmlte> <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" data-astro-cid-sz7xmlte></path> </svg> </a> </div> </div> </footer>  </body></html> 

@@ -1,0 +1,233 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.16.0"><meta name="description" content="记录一次 Flutter 键盘顶起对话框的排障过程及解决方案"><link rel="canonical" href="https://blog.yuyins.com/blog/flutter-keyboard-handling/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/blog/flutter-keyboard-handling/"><meta property="og:title" content="Flutter 键盘顶起对话框排障记录"><meta property="og:description" content="记录一次 Flutter 键盘顶起对话框的排障过程及解决方案"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/blog/flutter-keyboard-handling/"><meta property="twitter:title" content="Flutter 键盘顶起对话框排障记录"><meta property="twitter:description" content="记录一次 Flutter 键盘顶起对话框的排障过程及解决方案"><title>Flutter 键盘顶起对话框排障记录</title><!-- Color scheme script (runs before page loads to prevent flash) --><script>
+			const colorScheme = localStorage.getItem('colorScheme') || 'warm-paper';
+			document.documentElement.setAttribute('data-color', colorScheme);
+		</script><link rel="stylesheet" href="/_astro/_slug_.XT2r3__V.css">
+<link rel="stylesheet" href="/_astro/_slug_.Cyfj5-02.css"></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2>
+AstroBlog
+</a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link nav-link--active" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/rss.xml" class="nav-link" target="_blank" rel="noopener noreferrer" data-astro-cid-3ef6ksr2> RSS </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM18 18l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-modal" data-astro-cid-otpdt6jm> <div class="modal-content" data-astro-cid-otpdt6jm> <div class="modal-header" data-astro-cid-otpdt6jm> <h2 class="modal-title" data-astro-cid-otpdt6jm>搜索文章</h2> <button id="close-search" class="close-button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-otpdt6jm></path> </svg> </button> </div> <div id="pagefind-ui" data-astro-cid-otpdt6jm></div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.DjHyAxEv.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  <div class="color-scheme-toggle" data-astro-cid-i6hk4rsz> <button id="color-scheme-button" class="toggle-button" aria-label="切换配色方案" title="切换配色方案" data-astro-cid-i6hk4rsz> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-i6hk4rsz> <circle cx="12" cy="12" r="10" data-astro-cid-i6hk4rsz></circle> <path d="M12 2a10 10 0 0 1 0 20" data-astro-cid-i6hk4rsz></path> </svg> </button> <div id="color-scheme-menu" class="color-menu" hidden data-astro-cid-i6hk4rsz> <div class="menu-header" data-astro-cid-i6hk4rsz>配色方案</div> <button class="color-option" data-color="warm-paper" title="暖纸" data-astro-cid-i6hk4rsz> <span class="color-preview" style="background: linear-gradient(135deg, #FAF9F7 50%, #1C1917 50%);" data-astro-cid-i6hk4rsz></span> <span class="color-name" data-astro-cid-i6hk4rsz>暖纸</span> </button><button class="color-option" data-color="cool-zinc" title="冷锌" data-astro-cid-i6hk4rsz> <span class="color-preview" style="background: linear-gradient(135deg, #FAFAFA 50%, #18181B 50%);" data-astro-cid-i6hk4rsz></span> <span class="color-name" data-astro-cid-i6hk4rsz>冷锌</span> </button><button class="color-option" data-color="sepia" title="复古" data-astro-cid-i6hk4rsz> <span class="color-preview" style="background: linear-gradient(135deg, #F8F4E9 50%, #1F1D1A 50%);" data-astro-cid-i6hk4rsz></span> <span class="color-name" data-astro-cid-i6hk4rsz>复古</span> </button><button class="color-option" data-color="soft-gray" title="柔灰" data-astro-cid-i6hk4rsz> <span class="color-preview" style="background: linear-gradient(135deg, #F7F7F7 50%, #1A1A1A 50%);" data-astro-cid-i6hk4rsz></span> <span class="color-name" data-astro-cid-i6hk4rsz>柔灰</span> </button> </div> </div> <script type="module">function initColorSchemeToggle() {
+  const button = document.getElementById("color-scheme-button");
+  const menu = document.getElementById("color-scheme-menu");
+  const options = document.querySelectorAll(".color-option");
+  if (!button || !menu) return;
+  const savedColor = localStorage.getItem("colorScheme") || "warm-paper";
+  document.documentElement.setAttribute("data-color", savedColor);
+  updateActiveOption(savedColor);
+  button.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isHidden = menu.hidden;
+    menu.hidden = !isHidden;
+    button.setAttribute("aria-expanded", String(!isHidden));
+  });
+  options.forEach((option) => {
+    option.addEventListener("click", () => {
+      const colorId = option.getAttribute("data-color");
+      if (colorId) {
+        document.documentElement.setAttribute("data-color", colorId);
+        localStorage.setItem("colorScheme", colorId);
+        updateActiveOption(colorId);
+        menu.hidden = true;
+      }
+    });
+  });
+  document.addEventListener("click", (e) => {
+    if (!button.contains(e.target) && !menu.contains(e.target)) {
+      menu.hidden = true;
+    }
+  });
+  function updateActiveOption(colorId) {
+    options.forEach((opt) => {
+      opt.classList.toggle("active", opt.getAttribute("data-color") === colorId);
+    });
+  }
+}
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initColorSchemeToggle);
+} else {
+  initColorSchemeToggle();
+}
+document.addEventListener("astro:page-load", initColorSchemeToggle);
+//# sourceMappingURL=ColorSchemeToggle.astro_astro_type_script_index_0_lang.DYTFbvNv.js.map</script>  </div> </div> </nav> </header>  <main id="main-content" class="mx-auto px-4 pb-12 max-w-5xl" data-astro-cid-sckkx6r4>  <script type="module">let copyButtonsInitialized = false;
+function initCodeCopyButtons() {
+  if (copyButtonsInitialized) return;
+  copyButtonsInitialized = true;
+  const codeBlocks = document.querySelectorAll("pre:has(code)");
+  codeBlocks.forEach((block) => {
+    if (block.querySelector(".copy-button")) return;
+    if (!block.parentElement?.classList.contains("code-block-wrapper")) {
+      const wrapper = document.createElement("div");
+      wrapper.className = "code-block-wrapper";
+      block.parentNode?.insertBefore(wrapper, block);
+      wrapper.appendChild(block);
+    }
+    const button = document.createElement("button");
+    button.className = "copy-button";
+    button.setAttribute("aria-label", "复制代码");
+    button.title = "复制代码";
+    button.innerHTML = `
+        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+        <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      `;
+    button.addEventListener("click", async () => {
+      const code = block.querySelector("code");
+      if (!code) return;
+      try {
+        const text = code.textContent || "";
+        await navigator.clipboard.writeText(text);
+        button.classList.add("copied");
+        setTimeout(() => {
+          button.classList.remove("copied");
+        }, 2e3);
+      } catch (err) {
+        console.error("Failed to copy:", err);
+      }
+    });
+    block.parentElement?.appendChild(button);
+  });
+}
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initCodeCopyButtons);
+} else {
+  initCodeCopyButtons();
+}
+document.addEventListener("astro:page-load", () => {
+  copyButtonsInitialized = false;
+  initCodeCopyButtons();
+});
+//# sourceMappingURL=CodeCopyButton.astro_astro_type_script_index_0_lang.BQH_fAJu.js.map</script>  <script type="module">let anchorInitialized = false;
+function initHeadingAnchors() {
+  if (anchorInitialized) return;
+  anchorInitialized = true;
+  const headings = document.querySelectorAll(".article-content h2[id], .article-content h3[id], .article-content h4[id], .article-content h5[id], .article-content h6[id]");
+  headings.forEach((heading) => {
+    const id = heading.getAttribute("id");
+    if (!id) return;
+    if (heading.querySelector(".heading-anchor")) return;
+    const anchor = document.createElement("a");
+    anchor.href = `#${id}`;
+    anchor.className = "heading-anchor";
+    anchor.setAttribute("aria-label", `链接到 ${heading.textContent}`);
+    anchor.title = "复制链接";
+    anchor.textContent = "#";
+    anchor.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const url = window.location.origin + window.location.pathname + `#${id}`;
+      try {
+        await navigator.clipboard.writeText(url);
+        anchor.classList.add("copied");
+        setTimeout(() => {
+          anchor.classList.remove("copied");
+        }, 1500);
+        heading.scrollIntoView({ behavior: "smooth", block: "start" });
+        history.pushState(null, "", `#${id}`);
+      } catch (err) {
+        console.error("Failed to copy:", err);
+        window.location.hash = id;
+      }
+    });
+    heading.style.position = "relative";
+    heading.insertBefore(anchor, heading.firstChild);
+  });
+}
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initHeadingAnchors);
+} else {
+  initHeadingAnchors();
+}
+document.addEventListener("astro:page-load", () => {
+  anchorInitialized = false;
+  initHeadingAnchors();
+});
+//# sourceMappingURL=HeadingAnchor.astro_astro_type_script_index_0_lang.CnSKxYFk.js.map</script>  <div id="image-lightbox" class="lightbox" hidden data-astro-cid-fbflauxb> <button id="lightbox-close" class="lightbox-close" aria-label="关闭" data-astro-cid-fbflauxb> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-fbflauxb> <line x1="18" y1="6" x2="6" y2="18" data-astro-cid-fbflauxb></line> <line x1="6" y1="6" x2="18" y2="18" data-astro-cid-fbflauxb></line> </svg> </button> <img id="lightbox-image" class="lightbox-image" src="" alt="" data-astro-cid-fbflauxb> </div> <script type="module">let lightboxInitialized = false;
+function initImageLightbox() {
+  if (lightboxInitialized) return;
+  lightboxInitialized = true;
+  const lightbox = document.getElementById("image-lightbox");
+  const lightboxImage = document.getElementById("lightbox-image");
+  const closeButton = document.getElementById("lightbox-close");
+  if (!lightbox || !lightboxImage || !closeButton) return;
+  const images = document.querySelectorAll(".article-content img");
+  images.forEach((img) => {
+    if (img.classList.contains("lightbox-enabled")) return;
+    img.classList.add("lightbox-enabled");
+    img.style.cursor = "zoom-in";
+    img.addEventListener("click", () => {
+      const src = img.getAttribute("src");
+      const alt = img.getAttribute("alt") || "";
+      if (!src) return;
+      lightboxImage.src = src;
+      lightboxImage.alt = alt;
+      lightbox.hidden = false;
+      document.body.style.overflow = "hidden";
+    });
+  });
+  const closeLightbox = () => {
+    lightbox.hidden = true;
+    document.body.style.overflow = "";
+    lightboxImage.src = "";
+  };
+  closeButton.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+      closeLightbox();
+    }
+  });
+  const handleEscape = (e) => {
+    if (e.key === "Escape" && !lightbox.hidden) {
+      closeLightbox();
+    }
+  };
+  document.addEventListener("keydown", handleEscape);
+  document.addEventListener("astro:before-swap", () => {
+    closeButton.removeEventListener("click", closeLightbox);
+    lightbox.removeEventListener("click", closeLightbox);
+    document.removeEventListener("keydown", handleEscape);
+    lightboxInitialized = false;
+  }, { once: true });
+}
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initImageLightbox);
+} else {
+  initImageLightbox();
+}
+document.addEventListener("astro:page-load", () => {
+  lightboxInitialized = false;
+  initImageLightbox();
+});
+//# sourceMappingURL=ImageLightbox.astro_astro_type_script_index_0_lang.B0CYijgy.js.map</script>   <div class="blog-post-container" data-astro-cid-bvzihdzo> <article class="blog-post" data-astro-cid-bvzihdzo> <header class="article-header" data-astro-cid-bvzihdzo> <!-- Title and description --> <h1 data-astro-cid-bvzihdzo>Flutter 键盘顶起对话框排障记录</h1> <p class="article-description" data-astro-cid-bvzihdzo>记录一次 Flutter 键盘顶起对话框的排障过程及解决方案</p> <!-- Tags and Meta row --> <div class="article-info-row" data-astro-cid-bvzihdzo>  <div class="article-tags" data-astro-cid-bvzihdzo> <a href="/blog/tag/Flutter" class="tag-link" data-astro-cid-bvzihdzo>#Flutter</a><a href="/blog/tag/键盘处理" class="tag-link" data-astro-cid-bvzihdzo>#键盘处理</a><a href="/blog/tag/问题排查" class="tag-link" data-astro-cid-bvzihdzo>#问题排查</a> </div>  <div class="article-meta" data-astro-cid-bvzihdzo> <time datetime="2024-10-24T00:00:00.000Z" class="meta-item" data-astro-cid-bvzihdzo> 2024年10月24日 </time> <span class="meta-item" data-astro-cid-bvzihdzo>2 分钟阅读</span> <a href="/category/Flutter" class="meta-item meta-category" data-astro-cid-bvzihdzo>Flutter</a> </div> </div> </header> <!-- Content --> <div class="article-content app-prose" data-astro-cid-bvzihdzo>  <p><strong>记录一次 Flutter 键盘顶起对话框的排障过程</strong></p>
+<blockquote>
+<p>背景</p>
+</blockquote>
+<p>对话框里新增了一个输入框，结果在真机上发现：键盘一弹出，底部浮动按钮和背景层整体被挤到屏幕外，对话框内容也被遮住。开发同学一开始只改了对话框所在页面的 <code>Scaffold</code> 配置，希望阻止键盘顶起，结果完全无效。</p>
+<blockquote>
+<p>排查经过</p>
+</blockquote>
+<ol>
+<li><strong>局部调整无效</strong>：在页面内部把 <code>Scaffold</code> 改为 <code>resizeToAvoidBottomInset: false</code>，键盘仍然顶走了浮动按钮。原因是整个应用的顶层 <code>Scaffold</code> 仍处于默认值 <code>true</code>，全局布局已经被压缩。</li>
+<li><strong>全局调整奏效</strong>：把入口页面（<code>main.dart</code>）的 <code>Scaffold</code> 改成 <code>resizeToAvoidBottomInset: false</code> 后，键盘终于不会再把底层 UI 挤走。</li>
+<li><strong>连锁影响</strong>：全局改动后，之前依赖默认行为的输入页也不再跟随键盘移动，导致登录等页面无法正常输入。这时需要在这些页面内部重新包一层局部 <code>Scaffold(resizeToAvoidBottomInset: true)</code> 或者在最外层使用 <code>AnimatedPadding</code> + <code>MediaQuery.viewInsets.bottom</code> 手动补偿。凡是有自己 <code>Scaffold</code> 的页面，只要按需调整，就不会互相干扰。</li>
+</ol>
+<blockquote>
+<p>最终方案</p>
+</blockquote>
+<ul>
+<li>顶层 <code>Scaffold</code> 统一设为 <code>resizeToAvoidBottomInset: false</code>，整站布局保持稳定。</li>
+<li>需要键盘避让的页面再单独开启或手动处理。</li>
+<li>对话框本身保持原布局，聚焦输入时只做局部展示（例如切换到浮动输入层），键盘不会再影响背景。</li>
+</ul>
+<blockquote>
+<p>经验总结</p>
+</blockquote>
+<ul>
+<li>Flutter 的键盘避让是自顶向下的：顶层关闭之后，子树也不会再自动收缩，反之亦然。</li>
+<li>全局调整一定要评估对已有输入流程的影响，必要时局部 override。</li>
+<li>对话框内部要么自带 <code>Scaffold</code>，要么像本次一样通过 overlay 等方式自行管理输入，避免牵扯底层布局。</li>
+</ul>
+<p>只有做到” 全局稳住，局部按需”，键盘顶起对话框的问题才不会反复出现。</p>  </div> <!-- Footer navigation --> <footer class="article-footer" data-astro-cid-bvzihdzo> <!-- Prev/Next navigation --> <nav class="post-navigation" data-astro-cid-bvzihdzo> <div class="nav-prev" data-astro-cid-bvzihdzo> <a href="/blog/flutter-keyboard-best-practices" class="nav-link" data-astro-cid-bvzihdzo> <span class="nav-label" data-astro-cid-bvzihdzo>上一篇</span> <span class="nav-title" data-astro-cid-bvzihdzo>Flutter 键盘处理最佳实践：避免键盘推挤界面</span> </a> </div> <div class="nav-next" data-astro-cid-bvzihdzo> <a href="/blog/flutter-keyboard-dialog-issue" class="nav-link" data-astro-cid-bvzihdzo> <span class="nav-label" data-astro-cid-bvzihdzo>下一篇</span> <span class="nav-title" data-astro-cid-bvzihdzo>Flutter 键盘顶起对话框排障记录</span> </a> </div> </nav> <div class="back-to-list" data-astro-cid-bvzihdzo> <a href="/" class="back-link" data-astro-cid-bvzihdzo>← 返回文章列表</a> </div> </footer> </article> <!-- Table of Contents -->  </div>  </main> <footer class="site-footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text" data-astro-cid-sz7xmlte>
+&copy; 2025 AstroBlog. Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> <div class="social-links" data-astro-cid-sz7xmlte> <a href="/rss.xml" target="_blank" class="social-link" aria-label="RSS 订阅" title="RSS 订阅" data-astro-cid-sz7xmlte> <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-sz7xmlte> <path d="M4 11a9 9 0 0 1 9 9" data-astro-cid-sz7xmlte></path> <path d="M4 4a16 16 0 0 1 16 16" data-astro-cid-sz7xmlte></path> <circle cx="5" cy="19" r="1" data-astro-cid-sz7xmlte></circle> </svg> </a> <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub" title="GitHub" data-astro-cid-sz7xmlte> <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-sz7xmlte> <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter" title="Twitter" data-astro-cid-sz7xmlte> <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-sz7xmlte> <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" data-astro-cid-sz7xmlte></path> </svg> </a> </div> </div> </footer>  </body></html> 

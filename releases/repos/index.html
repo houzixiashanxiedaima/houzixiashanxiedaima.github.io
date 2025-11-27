@@ -1,0 +1,934 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.16.0"><meta name="description" content="A minimal, accessible and SEO-friendly Astro blog"><link rel="canonical" href="https://blog.yuyins.com/releases/repos/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/releases/repos/"><meta property="og:title" content="AstroBlog"><meta property="og:description" content="A minimal, accessible and SEO-friendly Astro blog"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/releases/repos/"><meta property="twitter:title" content="AstroBlog"><meta property="twitter:description" content="A minimal, accessible and SEO-friendly Astro blog"><title>AstroBlog</title><!-- Color scheme script (runs before page loads to prevent flash) --><script>
+			const colorScheme = localStorage.getItem('colorScheme') || 'warm-paper';
+			document.documentElement.setAttribute('data-color', colorScheme);
+		</script><link rel="stylesheet" href="/_astro/_slug_.Cyfj5-02.css"></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2>
+AstroBlog
+</a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/rss.xml" class="nav-link" target="_blank" rel="noopener noreferrer" data-astro-cid-3ef6ksr2> RSS </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM18 18l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-modal" data-astro-cid-otpdt6jm> <div class="modal-content" data-astro-cid-otpdt6jm> <div class="modal-header" data-astro-cid-otpdt6jm> <h2 class="modal-title" data-astro-cid-otpdt6jm>搜索文章</h2> <button id="close-search" class="close-button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-otpdt6jm></path> </svg> </button> </div> <div id="pagefind-ui" data-astro-cid-otpdt6jm></div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.DjHyAxEv.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  <div class="color-scheme-toggle" data-astro-cid-i6hk4rsz> <button id="color-scheme-button" class="toggle-button" aria-label="切换配色方案" title="切换配色方案" data-astro-cid-i6hk4rsz> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-i6hk4rsz> <circle cx="12" cy="12" r="10" data-astro-cid-i6hk4rsz></circle> <path d="M12 2a10 10 0 0 1 0 20" data-astro-cid-i6hk4rsz></path> </svg> </button> <div id="color-scheme-menu" class="color-menu" hidden data-astro-cid-i6hk4rsz> <div class="menu-header" data-astro-cid-i6hk4rsz>配色方案</div> <button class="color-option" data-color="warm-paper" title="暖纸" data-astro-cid-i6hk4rsz> <span class="color-preview" style="background: linear-gradient(135deg, #FAF9F7 50%, #1C1917 50%);" data-astro-cid-i6hk4rsz></span> <span class="color-name" data-astro-cid-i6hk4rsz>暖纸</span> </button><button class="color-option" data-color="cool-zinc" title="冷锌" data-astro-cid-i6hk4rsz> <span class="color-preview" style="background: linear-gradient(135deg, #FAFAFA 50%, #18181B 50%);" data-astro-cid-i6hk4rsz></span> <span class="color-name" data-astro-cid-i6hk4rsz>冷锌</span> </button><button class="color-option" data-color="sepia" title="复古" data-astro-cid-i6hk4rsz> <span class="color-preview" style="background: linear-gradient(135deg, #F8F4E9 50%, #1F1D1A 50%);" data-astro-cid-i6hk4rsz></span> <span class="color-name" data-astro-cid-i6hk4rsz>复古</span> </button><button class="color-option" data-color="soft-gray" title="柔灰" data-astro-cid-i6hk4rsz> <span class="color-preview" style="background: linear-gradient(135deg, #F7F7F7 50%, #1A1A1A 50%);" data-astro-cid-i6hk4rsz></span> <span class="color-name" data-astro-cid-i6hk4rsz>柔灰</span> </button> </div> </div> <script type="module">function initColorSchemeToggle() {
+  const button = document.getElementById("color-scheme-button");
+  const menu = document.getElementById("color-scheme-menu");
+  const options = document.querySelectorAll(".color-option");
+  if (!button || !menu) return;
+  const savedColor = localStorage.getItem("colorScheme") || "warm-paper";
+  document.documentElement.setAttribute("data-color", savedColor);
+  updateActiveOption(savedColor);
+  button.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isHidden = menu.hidden;
+    menu.hidden = !isHidden;
+    button.setAttribute("aria-expanded", String(!isHidden));
+  });
+  options.forEach((option) => {
+    option.addEventListener("click", () => {
+      const colorId = option.getAttribute("data-color");
+      if (colorId) {
+        document.documentElement.setAttribute("data-color", colorId);
+        localStorage.setItem("colorScheme", colorId);
+        updateActiveOption(colorId);
+        menu.hidden = true;
+      }
+    });
+  });
+  document.addEventListener("click", (e) => {
+    if (!button.contains(e.target) && !menu.contains(e.target)) {
+      menu.hidden = true;
+    }
+  });
+  function updateActiveOption(colorId) {
+    options.forEach((opt) => {
+      opt.classList.toggle("active", opt.getAttribute("data-color") === colorId);
+    });
+  }
+}
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initColorSchemeToggle);
+} else {
+  initColorSchemeToggle();
+}
+document.addEventListener("astro:page-load", initColorSchemeToggle);
+//# sourceMappingURL=ColorSchemeToggle.astro_astro_type_script_index_0_lang.DYTFbvNv.js.map</script>  </div> </div> </nav> </header>  <main id="main-content" class="mx-auto px-4 pb-12 max-w-app" data-astro-cid-sckkx6r4> <h1 id="-github-releases-监控列表">📦 GitHub Releases 监控列表</h1>
+<p>当前系统监控 <strong>158</strong> 个开源项目，每日自动抓取最新版本并生成 AI 摘要。</p>
+<p>最后更新: 2025-11-27</p>
+<hr>
+<h2 id="astro-1">Astro (1)</h2>
+<ul>
+<li><strong><a href="https://github.com/satnaing/astro-paper" rel="noopener noreferrer" target="_blank">satnaing/astro-paper</a></strong> ⭐ 3.9k
+A minimal, accessible and SEO-friendly Astro blog theme
+<em>最后更新: 2025-11-26</em></li>
+</ul>
+<hr>
+<h2 id="batchfile-1">Batchfile (1)</h2>
+<ul>
+<li><strong><a href="https://github.com/Atlas-OS/Atlas" rel="noopener noreferrer" target="_blank">Atlas-OS/Atlas</a></strong> ⭐ 18.7k
+🚀 An open and lightweight modification to Windows, designed to optimize performance, privacy and usability.
+<em>最后更新: 2025-11-27</em></li>
+</ul>
+<hr>
+<h2 id="c-6">C (6)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/Genymobile/scrcpy" rel="noopener noreferrer" target="_blank">Genymobile/scrcpy</a></strong> ⭐ 131.6k
+Display and control your Android device
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/ventoy/Ventoy" rel="noopener noreferrer" target="_blank">ventoy/Ventoy</a></strong> ⭐ 72.6k
+A new bootable USB solution.
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/pbatard/rufus" rel="noopener noreferrer" target="_blank">pbatard/rufus</a></strong> ⭐ 33.8k
+The Reliable USB Formatting Utility
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/HandBrake/HandBrake" rel="noopener noreferrer" target="_blank">HandBrake/HandBrake</a></strong> ⭐ 21.5k
+HandBrake’s development repository
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/fastfetch-cli/fastfetch" rel="noopener noreferrer" target="_blank">fastfetch-cli/fastfetch</a></strong> ⭐ 18.3k
+A maintained, feature-rich and performance oriented, neofetch like system information tool.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/sabrogden/Ditto" rel="noopener noreferrer" target="_blank">sabrogden/Ditto</a></strong> ⭐ 5.5k
+Ditto is an extension to the Windows Clipboard. You copy something to the Clipboard and Ditto takes what you copied and stores it in a database to retrieve at a later time.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="c-12">C# (12)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/microsoft/PowerToys" rel="noopener noreferrer" target="_blank">microsoft/PowerToys</a></strong> ⭐ 126.0k
+Microsoft PowerToys is a collection of utilities that help you customize Windows and streamline everyday tasks
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/2dust/v2rayN" rel="noopener noreferrer" target="_blank">2dust/v2rayN</a></strong> ⭐ 90.9k
+A GUI client for Windows, Linux and macOS, support Xray and sing-box and others
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/PowerShell/PowerShell" rel="noopener noreferrer" target="_blank">PowerShell/PowerShell</a></strong> ⭐ 50.9k
+PowerShell for every system!
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/NickeManarin/ScreenToGif" rel="noopener noreferrer" target="_blank">NickeManarin/ScreenToGif</a></strong> ⭐ 26.0k
+🎬 ScreenToGif allows you to record a selected area of your screen, edit and save it as a gif or video.
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/marticliment/UniGetUI" rel="noopener noreferrer" target="_blank">marticliment/UniGetUI</a></strong> ⭐ 19.3k
+UniGetUI: The Graphical Interface for your package managers. Could be terribly described as a package manager manager to manage your package managers
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/Klocman/Bulk-Crap-Uninstaller" rel="noopener noreferrer" target="_blank">Klocman/Bulk-Crap-Uninstaller</a></strong> ⭐ 16.4k
+Remove large amounts of unwanted applications quickly.
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/srwi/EverythingToolbar" rel="noopener noreferrer" target="_blank">srwi/EverythingToolbar</a></strong> ⭐ 12.8k
+Everything integration for the Windows taskbar.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/studyzy/imewlconverter" rel="noopener noreferrer" target="_blank">studyzy/imewlconverter</a></strong> ⭐ 9.3k
+” 深蓝词库转换 “ 一款开源免费的输入法词库转换程序
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/AutoDarkMode/Windows-Auto-Night-Mode" rel="noopener noreferrer" target="_blank">AutoDarkMode/Windows-Auto-Night-Mode</a></strong> ⭐ 8.9k
+Automatically switches between the dark and light theme of Windows 10 and Windows 11
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/nilaoda/N_m3u8DL-RE" rel="noopener noreferrer" target="_blank">nilaoda/N_m3u8DL-RE</a></strong> ⭐ 6.8k
+Cross-Platform, modern and powerful stream downloader for MPD/M3U8/ISM. English / 简体中文 / 繁體中文.
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/ZGGSONG/STranslate" rel="noopener noreferrer" target="_blank">ZGGSONG/STranslate</a></strong> ⭐ 4.5k
+A ready-to-go translation ocr tool developed with WPF/WPF 开发的一款即用即走的翻译、OCR 工具
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/IgorMundstein/WinMemoryCleaner" rel="noopener noreferrer" target="_blank">IgorMundstein/WinMemoryCleaner</a></strong> ⭐ 3.9k
+This free RAM cleaner uses native Windows features to optimize memory areas. It’s a compact, portable, and smart application.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="c-7">C++ (7)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/aristocratos/btop" rel="noopener noreferrer" target="_blank">aristocratos/btop</a></strong> ⭐ 28.7k
+A monitor of resources
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/transmission/transmission" rel="noopener noreferrer" target="_blank">transmission/transmission</a></strong> ⭐ 13.7k
+Official Transmission BitTorrent client repository
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/M2Team/NanaZip" rel="noopener noreferrer" target="_blank">M2Team/NanaZip</a></strong> ⭐ 12.4k
+The 7-Zip derivative intended for the modern Windows experience
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/rime/weasel" rel="noopener noreferrer" target="_blank">rime/weasel</a></strong> ⭐ 6.3k
+【小狼毫】Rime for Windows
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/sbarex/SourceCodeSyntaxHighlight" rel="noopener noreferrer" target="_blank">sbarex/SourceCodeSyntaxHighlight</a></strong> ⭐ 3.8k
+Quick Look extension for highlight source code files on macOS 10.15 and later.
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/std-microblock/breeze-shell" rel="noopener noreferrer" target="_blank">std-microblock/breeze-shell</a></strong> ⭐ 2.8k
+An alternative Windows context menu, and more.
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/cool2528/GDownload" rel="noopener noreferrer" target="_blank">cool2528/GDownload</a></strong> ⭐ 0.4k
+A full-featured download manager developed in C++.
+<em>最后更新: 2025-11-26</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="dart-9">Dart (9)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/AppFlowy-IO/AppFlowy" rel="noopener noreferrer" target="_blank">AppFlowy-IO/AppFlowy</a></strong> ⭐ 66.7k
+Bring projects, wikis, and teams together with AI. AppFlowy is the AI collaborative workspace where you achieve more without losing control of your data. The leading open source Notion alternative.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/KRTirtho/spotube" rel="noopener noreferrer" target="_blank">KRTirtho/spotube</a></strong> ⭐ 42.7k
+🎧 Open source music client! Available for both desktop &#x26; mobile!
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/chen08209/FlClash" rel="noopener noreferrer" target="_blank">chen08209/FlClash</a></strong> ⭐ 25.8k
+A multi-platform proxy client based on ClashMeta,simple and easy to use, open-source and ad-free.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/GopeedLab/gopeed" rel="noopener noreferrer" target="_blank">GopeedLab/gopeed</a></strong> ⭐ 21.9k
+A modern download manager that supports all platforms.  Built with Golang and Flutter.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/ImranR98/Obtainium" rel="noopener noreferrer" target="_blank">ImranR98/Obtainium</a></strong> ⭐ 13.5k
+Get Android app updates straight from the source.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/wanghongenpin/proxypin" rel="noopener noreferrer" target="_blank">wanghongenpin/proxypin</a></strong> ⭐ 11.1k
+Open source free capture HTTP(S) traffic  software ProxyPin, supporting full platform systems
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/leoafarias/fvm" rel="noopener noreferrer" target="_blank">leoafarias/fvm</a></strong> ⭐ 5.3k
+Flutter Version Management: A simple CLI to manage Flutter SDK versions.
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/yang991178/fluent-reader-lite" rel="noopener noreferrer" target="_blank">yang991178/fluent-reader-lite</a></strong> ⭐ 1.6k
+Simplistic mobile RSS client built with Flutter
+<em>最后更新: 2025-11-25</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/doraemonkeys/WindSend" rel="noopener noreferrer" target="_blank">doraemonkeys/WindSend</a></strong> ⭐ 0.6k
+Quickly and securely sync clipboard, transfer files and directories between devices. 快速安全的同步剪切板，传输文件或文件夹
+<em>最后更新: 2025-11-24</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="gherkin-1">Gherkin (1)</h2>
+<ul>
+<li><strong><a href="https://github.com/sdkman/sdkman-cli" rel="noopener noreferrer" target="_blank">sdkman/sdkman-cli</a></strong> ⭐ 6.6k
+The SDKMAN! Command Line Interface
+<em>最后更新: 2025-11-26</em></li>
+</ul>
+<hr>
+<h2 id="go-11">Go (11)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/jesseduffield/lazygit" rel="noopener noreferrer" target="_blank">jesseduffield/lazygit</a></strong> ⭐ 68.6k
+simple terminal UI for git commands
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/rclone/rclone" rel="noopener noreferrer" target="_blank">rclone/rclone</a></strong> ⭐ 53.7k
+“rsync for cloud storage” - Google Drive, S3, Dropbox, Backblaze B2, One Drive, Swift, Hubic, Wasabi, Google Cloud Storage, Azure Blob, Azure Files, Yandex Files
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/AlistGo/alist" rel="noopener noreferrer" target="_blank">AlistGo/alist</a></strong> ⭐ 48.6k
+🗂️A file list/WebDAV program that supports multiple storages, powered by Gin and Solidjs. / 一个支持多存储的文件列表 / WebDAV 程序，使用 Gin 和 Solidjs。
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/1Panel-dev/1Panel" rel="noopener noreferrer" target="_blank">1Panel-dev/1Panel</a></strong> ⭐ 32.2k
+🔥 1Panel provides an intuitive web interface and MCP Server to manage websites, files, containers, databases, and LLMs on a Linux server.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/SagerNet/sing-box" rel="noopener noreferrer" target="_blank">SagerNet/sing-box</a></strong> ⭐ 28.4k
+The universal proxy platform
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/JanDeDobbeleer/oh-my-posh" rel="noopener noreferrer" target="_blank">JanDeDobbeleer/oh-my-posh</a></strong> ⭐ 20.7k
+The most customisable and low-latency cross platform/shell prompt renderer
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/apernet/hysteria" rel="noopener noreferrer" target="_blank">apernet/hysteria</a></strong> ⭐ 17.9k
+Hysteria is a powerful, lightning fast and censorship resistant proxy.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/wavetermdev/waveterm" rel="noopener noreferrer" target="_blank">wavetermdev/waveterm</a></strong> ⭐ 13.7k
+An open-source, cross-platform terminal for seamless workflows
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/daeuniverse/dae" rel="noopener noreferrer" target="_blank">daeuniverse/dae</a></strong> ⭐ 4.8k
+eBPF-based Linux high-performance transparent proxy solution.
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/beck-8/subs-check" rel="noopener noreferrer" target="_blank">beck-8/subs-check</a></strong> ⭐ 3.7k
+订阅转换、测速、测活、流媒体检测、重命名、导出为任意格式的工具
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/nkanaev/yarr" rel="noopener noreferrer" target="_blank">nkanaev/yarr</a></strong> ⭐ 3.6k
+yet another rss reader
+<em>最后更新: 2025-11-26</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="html-2">HTML (2)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/MHSanaei/3x-ui" rel="noopener noreferrer" target="_blank">MHSanaei/3x-ui</a></strong> ⭐ 26.3k
+Xray panel supporting multi-protocol multi-user expire day &#x26; traffic &#x26; IP limit (Vmess, Vless, Trojan, ShadowSocks, Wireguard, Tunnel, Mixed, HTTP)
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/vernesong/OpenClash" rel="noopener noreferrer" target="_blank">vernesong/OpenClash</a></strong> ⭐ 22.8k
+A Clash Client For OpenWrt
+<em>最后更新: 2025-11-27</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="java-5">Java (5)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/Stirling-Tools/Stirling-PDF" rel="noopener noreferrer" target="_blank">Stirling-Tools/Stirling-PDF</a></strong> ⭐ 70.3k
+#1 Locally hosted web application that allows you to perform various operations on PDF files
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/TeamNewPipe/NewPipe" rel="noopener noreferrer" target="_blank">TeamNewPipe/NewPipe</a></strong> ⭐ 35.7k
+A libre lightweight streaming front-end for Android.
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/jenkinsci/jenkins" rel="noopener noreferrer" target="_blank">jenkinsci/jenkins</a></strong> ⭐ 24.7k
+Jenkins automation server
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/Suwayomi/Suwayomi-Server" rel="noopener noreferrer" target="_blank">Suwayomi/Suwayomi-Server</a></strong> ⭐ 6.0k
+A rewrite of Tachiyomi for the Desktop
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/jarvis2f/telegram-files" rel="noopener noreferrer" target="_blank">jarvis2f/telegram-files</a></strong> ⭐ 1.7k
+A self-hosted Telegram file downloader for continuous, stable, and unattended downloads.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="javascript-9">JavaScript (9)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/louislam/uptime-kuma" rel="noopener noreferrer" target="_blank">louislam/uptime-kuma</a></strong> ⭐ 79.0k
+A fancy self-hosted monitoring tool
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/alyssaxuu/screenity" rel="noopener noreferrer" target="_blank">alyssaxuu/screenity</a></strong> ⭐ 17.6k
+The free and privacy-friendly screen recorder with no limits 🎥
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/xifangczy/cat-catch" rel="noopener noreferrer" target="_blank">xifangczy/cat-catch</a></strong> ⭐ 16.8k
+猫抓 浏览器资源嗅探扩展 /cat-catch Browser Resource Sniffing Extension
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/QuantumNous/new-api" rel="noopener noreferrer" target="_blank">QuantumNous/new-api</a></strong> ⭐ 12.8k
+AI 模型聚合管理中转分发系统，一个应用管理您的所有 AI 模型，支持将多种大模型转为统一格式调用，支持 OpenAI、Claude、Gemini 等格式，可供个人或者企业内部管理与分发渠道使用。🍥 The next-generation LLM gateway and AI asset management system supports multiple languages.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/fishjar/kiss-translator" rel="noopener noreferrer" target="_blank">fishjar/kiss-translator</a></strong> ⭐ 8.1k
+A simple, open source bilingual translation extension &#x26; Greasemonkey script (一个简约、开源的 双语对照翻译扩展 &#x26; 油猴脚本)
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/floccusaddon/floccus" rel="noopener noreferrer" target="_blank">floccusaddon/floccus</a></strong> ⭐ 7.3k
+:cloud: Sync your bookmarks privately across browsers and devices
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/nikkinikki-org/OpenWrt-nikki" rel="noopener noreferrer" target="_blank">nikkinikki-org/OpenWrt-nikki</a></strong> ⭐ 4.0k
+Transparent Proxy with Mihomo on OpenWrt.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/maillab/cloud-mail" rel="noopener noreferrer" target="_blank">maillab/cloud-mail</a></strong> ⭐ 3.3k
+cloudflare email 邮箱  临时邮箱 邮件发送 mail
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/EZ118/BiliChrome" rel="noopener noreferrer" target="_blank">EZ118/BiliChrome</a></strong> ⭐ 0.1k
+BiliScape - 第三方哔哩哔哩客户端浏览器扩展
+<em>最后更新: 2025-11-19</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="kotlin-21">Kotlin (21)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/2dust/v2rayNG" rel="noopener noreferrer" target="_blank">2dust/v2rayNG</a></strong> ⭐ 47.5k
+A V2Ray client for Android, support Xray core and v2fly core
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/gkd-kit/gkd" rel="noopener noreferrer" target="_blank">gkd-kit/gkd</a></strong> ⭐ 33.8k
+基于无障碍，高级选择器，订阅规则的自定义屏幕点击 Android 应用 | An Android APP with custom screen tapping based on Accessibility, Advanced Selectors, and Subscription Rules
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/MetaCubeX/ClashMetaForAndroid" rel="noopener noreferrer" target="_blank">MetaCubeX/ClashMetaForAndroid</a></strong> ⭐ 30.2k
+A rule-based tunnel for Android.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/MatsuriDayo/NekoBoxForAndroid" rel="noopener noreferrer" target="_blank">MatsuriDayo/NekoBoxForAndroid</a></strong> ⭐ 17.3k
+NekoBox for Android / sing-box / universal proxy toolchain for Android
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/mihonapp/mihon" rel="noopener noreferrer" target="_blank">mihonapp/mihon</a></strong> ⭐ 17.2k
+Free and open source manga reader for Android
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/amir1376/ab-download-manager" rel="noopener noreferrer" target="_blank">amir1376/ab-download-manager</a></strong> ⭐ 12.0k
+A Download Manager that speeds up your downloads
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/libre-tube/LibreTube" rel="noopener noreferrer" target="_blank">libre-tube/LibreTube</a></strong> ⭐ 10.8k
+An alternative frontend for YouTube, for Android.
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/ReadYouApp/ReadYou" rel="noopener noreferrer" target="_blank">ReadYouApp/ReadYou</a></strong> ⭐ 6.6k
+An Android RSS reader presented in Material You style.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/pinterest/ktlint" rel="noopener noreferrer" target="_blank">pinterest/ktlint</a></strong> ⭐ 6.6k
+An anti-bikeshedding Kotlin linter with built-in formatter
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/LibChecker/LibChecker" rel="noopener noreferrer" target="_blank">LibChecker/LibChecker</a></strong> ⭐ 6.3k
+An app to view libraries used in apps in your device.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/d4rken-org/sdmaid-se" rel="noopener noreferrer" target="_blank">d4rken-org/sdmaid-se</a></strong> ⭐ 5.7k
+SD Maid 2/SE is Android’s most thorough cleaning tool.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/gotson/komga" rel="noopener noreferrer" target="_blank">gotson/komga</a></strong> ⭐ 5.6k
+Media server for comics/mangas/BDs/magazines/eBooks with API, OPDS, Kobo Sync and KOReader Sync support
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/ben-manes/gradle-versions-plugin" rel="noopener noreferrer" target="_blank">ben-manes/gradle-versions-plugin</a></strong> ⭐ 4.0k
+Gradle plugin to discover dependency updates
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/rumboalla/apkupdater" rel="noopener noreferrer" target="_blank">rumboalla/apkupdater</a></strong> ⭐ 3.5k
+APKUpdater is an open source tool that simplifies the process of finding updates for your installed apps.
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/rikkahub/rikkahub" rel="noopener noreferrer" target="_blank">rikkahub/rikkahub</a></strong> ⭐ 2.5k
+RikkaHub is an Android APP that supports for multiple LLM providers.
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/spacecowboy/Feeder" rel="noopener noreferrer" target="_blank">spacecowboy/Feeder</a></strong> ⭐ 2.4k
+Android feed reader app
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/AChep/keyguard-app" rel="noopener noreferrer" target="_blank">AChep/keyguard-app</a></strong> ⭐ 2.1k
+Keyguard is an alternative client for the Bitwarden® platform &#x26; KeePass (KDBX), created to provide the best user experience possible.
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/AAswordman/Operit" rel="noopener noreferrer" target="_blank">AAswordman/Operit</a></strong> ⭐ 2.0k
+The most powerful AI agent and AI chat software on Android/Operit 是一款 Android 上目前能力最为强大的 AI Agent
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/JLLeitschuh/ktlint-gradle" rel="noopener noreferrer" target="_blank">JLLeitschuh/ktlint-gradle</a></strong> ⭐ 1.6k
+A ktlint gradle plugin
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/xchacha20-poly1305/husi" rel="noopener noreferrer" target="_blank">xchacha20-poly1305/husi</a></strong> ⭐ 1.4k
+Husi (虎兕) is a non-professional and recreational proxy tool integration for the weird beliefs and free software spirit!
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/irgaly/android-remove-unused-resources-plugin" rel="noopener noreferrer" target="_blank">irgaly/android-remove-unused-resources-plugin</a></strong> ⭐ 0.1k
+A gradle plugin to remove unused android resources by Android Lint results xml file.
+<em>最后更新: 2025-10-12</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="objective-c-3">Objective-C (3)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/objective-see/LuLu" rel="noopener noreferrer" target="_blank">objective-see/LuLu</a></strong> ⭐ 11.6k
+LuLu is the free open-source macOS firewall
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/Tencent/lemon-cleaner" rel="noopener noreferrer" target="_blank">Tencent/lemon-cleaner</a></strong> ⭐ 6.0k
+腾讯柠檬清理是针对 macOS 系统专属制定的清理工具。主要功能包括重复文件和相似照片的识别、软件的定制化垃圾扫描、可视化的全盘空间分析、内存释放、浏览器隐私清理以及设备实时状态的监控等。重点聚焦清理功能，对上百款软件提供定制化的清理方案，提供专业的清理建议，帮助用户轻松完成一键式清理。
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/ViennaRSS/vienna-rss" rel="noopener noreferrer" target="_blank">ViennaRSS/vienna-rss</a></strong> ⭐ 1.9k
+Vienna is a free and open-source RSS/Atom newsreader for macOS.
+<em>最后更新: 2025-11-20</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="other-1">Other (1)</h2>
+<ul>
+<li><strong><a href="https://github.com/JeoJay127/RapidEFI-Tool" rel="noopener noreferrer" target="_blank">JeoJay127/RapidEFI-Tool</a></strong> ⭐ 2.2k
+An excellent one-click EFI configuration tool based on OpenCore
+<em>最后更新: 2025-11-26</em></li>
+</ul>
+<hr>
+<h2 id="php-3">PHP (3)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/FreshRSS/FreshRSS" rel="noopener noreferrer" target="_blank">FreshRSS/FreshRSS</a></strong> ⭐ 13.2k
+A free, self-hostable news aggregator…
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/ellite/Wallos" rel="noopener noreferrer" target="_blank">ellite/Wallos</a></strong> ⭐ 6.6k
+Wallos: Open-Source Personal Subscription Tracker
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/aonez/Keka" rel="noopener noreferrer" target="_blank">aonez/Keka</a></strong> ⭐ 6.0k
+The macOS &#x26; iOS file archiver
+<em>最后更新: 2025-11-26</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="powershell-2">PowerShell (2)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/ChrisTitusTech/winutil" rel="noopener noreferrer" target="_blank">ChrisTitusTech/winutil</a></strong> ⭐ 43.2k
+Chris Titus Tech’s Windows Utility - Install Programs, Tweaks, Fixes, and Updates
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/meetrevision/playbook" rel="noopener noreferrer" target="_blank">meetrevision/playbook</a></strong> ⭐ 1.6k
+A lightweight, stable, and performance-focused customized version of Windows that enhances privacy and compatibility
+<em>最后更新: 2025-11-26</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="python-7">Python (7)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/MetaCubeX/mihomo" rel="noopener noreferrer" target="_blank">MetaCubeX/mihomo</a></strong> ⭐ 24.7k
+A simple Python Pydantic model for Honkai: Star Rail parsed data from the Mihomo API.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/subframe7536/maple-font" rel="noopener noreferrer" target="_blank">subframe7536/maple-font</a></strong> ⭐ 20.9k
+Maple Mono: Open source monospace font with round corner, ligatures and Nerd-Font icons for IDE and terminal, fine-grained customization options. 带连字和控制台图标的圆角等宽字体，中英文宽度完美 2:1，细粒度的自定义选项
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/Guovin/iptv-api" rel="noopener noreferrer" target="_blank">Guovin/iptv-api</a></strong> ⭐ 20.3k
+📺IPTV 直播源自动更新平台『🤖全自动采集、筛选、测速、生成流程🚀』：每日更新两次，提供免费结果订阅，输入播放器即可观看；频道自定义；个性化配置；订阅源 / 组播源 / 酒店源 / 本地源；IPv4/IPv6；接口验效；推流；工作流、Docker、命令行、GUI 多端部署 | IPTV live streaming source automatic update platform
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/dortania/OpenCore-Legacy-Patcher" rel="noopener noreferrer" target="_blank">dortania/OpenCore-Legacy-Patcher</a></strong> ⭐ 16.0k
+Experience macOS just like before
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/jxxghp/MoviePilot" rel="noopener noreferrer" target="_blank">jxxghp/MoviePilot</a></strong> ⭐ 9.9k
+NAS 媒体库自动化管理工具
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/triwinds/ns-emu-tools" rel="noopener noreferrer" target="_blank">triwinds/ns-emu-tools</a></strong> ⭐ 4.7k
+一个用于安装 / 更新 NS 模拟器的工具
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/PDFMathTranslate-next/PDFMathTranslate-next" rel="noopener noreferrer" target="_blank">PDFMathTranslate-next/PDFMathTranslate-next</a></strong> ⭐ 1.8k
+PDF scientific paper translation with preserved formats - 基于 AI 完整保留排版的 PDF 文档全文双语翻译，支持 Google/DeepL/Ollama/OpenAI 等服务，提供 CLI/GUI/Docker
+<em>最后更新: 2025-11-26</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="ruby-1">Ruby (1)</h2>
+<ul>
+<li><strong><a href="https://github.com/Homebrew/brew" rel="noopener noreferrer" target="_blank">Homebrew/brew</a></strong> ⭐ 45.6k
+🍺 The missing package manager for macOS (or Linux)
+<em>最后更新: 2025-11-27</em></li>
+</ul>
+<hr>
+<h2 id="rust-9">Rust (9)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/rustdesk/rustdesk" rel="noopener noreferrer" target="_blank">rustdesk/rustdesk</a></strong> ⭐ 103.1k
+An open-source remote desktop application designed for self-hosting, as an alternative to TeamViewer.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/zed-industries/zed" rel="noopener noreferrer" target="_blank">zed-industries/zed</a></strong> ⭐ 70.5k
+Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/openai/codex" rel="noopener noreferrer" target="_blank">openai/codex</a></strong> ⭐ 51.3k
+Lightweight coding agent that runs in your terminal
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/dani-garcia/vaultwarden" rel="noopener noreferrer" target="_blank">dani-garcia/vaultwarden</a></strong> ⭐ 51.3k
+Unofficial Bitwarden compatible server written in Rust, formerly known as bitwarden_rs
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/tw93/Pake" rel="noopener noreferrer" target="_blank">tw93/Pake</a></strong> ⭐ 43.6k
+🤱🏻 Turn any webpage into a desktop app with one command. 一键打包网页生成轻量桌面应用
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/jdx/mise" rel="noopener noreferrer" target="_blank">jdx/mise</a></strong> ⭐ 21.7k
+dev tools, env vars, task runner
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/lsd-rs/lsd" rel="noopener noreferrer" target="_blank">lsd-rs/lsd</a></strong> ⭐ 15.1k
+The next gen ls command
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/o2sh/onefetch" rel="noopener noreferrer" target="_blank">o2sh/onefetch</a></strong> ⭐ 11.4k
+Command-line Git information tool
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/sdkman/sdkman-cli-native" rel="noopener noreferrer" target="_blank">sdkman/sdkman-cli-native</a></strong> ⭐ 0.3k
+The next generation of SDKMAN! CLI commands, written in Rust
+<em>最后更新: 2025-11-26</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="shell-7">Shell (7)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/233boy/v2ray" rel="noopener noreferrer" target="_blank">233boy/v2ray</a></strong> ⭐ 27.5k
+最好用的 V2Ray 一键安装脚本 &#x26; 管理脚本
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/lxgw/LxgwWenKai" rel="noopener noreferrer" target="_blank">lxgw/LxgwWenKai</a></strong> ⭐ 22.2k
+An unprofessional open-source Chinese font derived from Fontworks’ Klee One. 一款非专业的开源中文字体，基于 FONTWORKS 出品字体 Klee One 衍生。<br>
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/mack-a/v2ray-agent" rel="noopener noreferrer" target="_blank">mack-a/v2ray-agent</a></strong> ⭐ 17.7k
+Xray、Tuic、hysteria2、sing-box 八合一一键脚本
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/233boy/sing-box" rel="noopener noreferrer" target="_blank">233boy/sing-box</a></strong> ⭐ 2.3k
+最好用的 sing-box 一键安装脚本 &#x26; 管理脚本，自动创建 REALITY 协议；支持 TUIC，Trojan，Hysteria2 等所有常见的协议
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/233boy/Xray" rel="noopener noreferrer" target="_blank">233boy/Xray</a></strong> ⭐ 2.0k
+最好用的 Xray 一键安装脚本 &#x26; 管理脚本
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/1995chen/dnf" rel="noopener noreferrer" target="_blank">1995chen/dnf</a></strong> ⭐ 1.7k
+(无描述)
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/ffuqiangg/build_openwrt" rel="noopener noreferrer" target="_blank">ffuqiangg/build_openwrt</a></strong> ⭐ 0.2k
+编译 Phicomm N1 使用的 OpenWrt、ImmortalWrt、LEDE、iStoreOS 固件
+<em>最后更新: 2025-11-24</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="swift-10">Swift (10)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/exelban/stats" rel="noopener noreferrer" target="_blank">exelban/stats</a></strong> ⭐ 34.9k
+macOS system monitor in your menu bar
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/rxhanson/Rectangle" rel="noopener noreferrer" target="_blank">rxhanson/Rectangle</a></strong> ⭐ 27.9k
+Move and resize windows on macOS with keyboard shortcuts and snap areas
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/jordanbaird/Ice" rel="noopener noreferrer" target="_blank">jordanbaird/Ice</a></strong> ⭐ 24.3k
+Powerful menu bar manager for macOS
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/lwouis/alt-tab-macos" rel="noopener noreferrer" target="_blank">lwouis/alt-tab-macos</a></strong> ⭐ 13.8k
+Windows alt-tab on macOS
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/mas-cli/mas" rel="noopener noreferrer" target="_blank">mas-cli/mas</a></strong> ⭐ 11.8k
+:package: Mac App Store command line interface
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/tisfeng/Easydict" rel="noopener noreferrer" target="_blank">tisfeng/Easydict</a></strong> ⭐ 11.0k
+一个简洁优雅的词典翻译 macOS App。开箱即用，支持离线 OCR 识别，支持有道词典，🍎 苹果系统词典，🍎 苹果系统翻译，OpenAI，Gemini，DeepL，Google，Bing，腾讯，百度，阿里，小牛，彩云和火山翻译。A concise and elegant Dictionary and Translator macOS App for looking up words and translating text.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/alienator88/Pearcleaner" rel="noopener noreferrer" target="_blank">alienator88/Pearcleaner</a></strong> ⭐ 9.6k
+A free, source-available and fair-code licensed mac app cleaner
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/Ranchero-Software/NetNewsWire" rel="noopener noreferrer" target="_blank">Ranchero-Software/NetNewsWire</a></strong> ⭐ 9.3k
+RSS reader for macOS and iOS.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/tw93/MiaoYan" rel="noopener noreferrer" target="_blank">tw93/MiaoYan</a></strong> ⭐ 6.9k
+⛷ Lightweight Markdown app to help you write great sentences. 轻灵的 Markdown 笔记本伴你写出妙言
+<em>最后更新: 2025-11-25</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/DamascenoRafael/reminders-menubar" rel="noopener noreferrer" target="_blank">DamascenoRafael/reminders-menubar</a></strong> ⭐ 3.6k
+Simple macOS menu bar application to view and interact with reminders. Developed with SwiftUI and using Apple Reminders as a source.
+<em>最后更新: 2025-11-26</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="typescript-27">TypeScript (27)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/ChatGPTNextWeb/NextChat" rel="noopener noreferrer" target="_blank">ChatGPTNextWeb/NextChat</a></strong> ⭐ 86.5k
+✨ Light and Fast AI Assistant. Support: Web | iOS | MacOS | Android |  Linux | Windows
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/immich-app/immich" rel="noopener noreferrer" target="_blank">immich-app/immich</a></strong> ⭐ 85.1k
+High performance self-hosted photo and video management solution.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/google-gemini/gemini-cli" rel="noopener noreferrer" target="_blank">google-gemini/gemini-cli</a></strong> ⭐ 84.8k
+An open-source AI agent that brings the power of Gemini directly into your terminal.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/clash-verge-rev/clash-verge-rev" rel="noopener noreferrer" target="_blank">clash-verge-rev/clash-verge-rev</a></strong> ⭐ 84.3k
+A modern GUI client based on Tauri, designed to run in Windows, macOS and Linux for tailored proxy experience
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/Eugeny/tabby" rel="noopener noreferrer" target="_blank">Eugeny/tabby</a></strong> ⭐ 67.3k
+A terminal for a more modern age
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/laurent22/joplin" rel="noopener noreferrer" target="_blank">laurent22/joplin</a></strong> ⭐ 52.3k
+Joplin - the privacy-focused note taking app with sync capabilities for Windows, macOS, Linux, Android and iOS.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/tldraw/tldraw" rel="noopener noreferrer" target="_blank">tldraw/tldraw</a></strong> ⭐ 43.9k
+very good whiteboard SDK / infinite canvas SDK
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/RSSNext/Folo" rel="noopener noreferrer" target="_blank">RSSNext/Folo</a></strong> ⭐ 36.0k
+🧡 Folo is the AI Reader
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/CherryHQ/cherry-studio" rel="noopener noreferrer" target="_blank">CherryHQ/cherry-studio</a></strong> ⭐ 35.8k
+🍒 Cherry Studio is a desktop client that supports for multiple LLM providers.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/sst/opencode" rel="noopener noreferrer" target="_blank">sst/opencode</a></strong> ⭐ 34.1k
+The AI coding agent built for the terminal.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/TriliumNext/Trilium" rel="noopener noreferrer" target="_blank">TriliumNext/Trilium</a></strong> ⭐ 33.2k
+Build your personal knowledge base with Trilium Notes
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/continuedev/continue" rel="noopener noreferrer" target="_blank">continuedev/continue</a></strong> ⭐ 30.0k
+⏩ Ship faster with Continuous AI. Open-source CLI that can be used in TUI mode as a coding agent or Headless mode to run background agents
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/Molunerfinn/PicGo" rel="noopener noreferrer" target="_blank">Molunerfinn/PicGo</a></strong> ⭐ 25.9k
+:rocket:A simple &#x26; beautiful tool for pictures uploading built by vue-cli-electron-builder
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/nextai-translator/nextai-translator" rel="noopener noreferrer" target="_blank">nextai-translator/nextai-translator</a></strong> ⭐ 24.7k
+基于 ChatGPT API 的划词翻译浏览器插件和跨平台桌面端应用    -    Browser extension and cross-platform desktop application for translation based on ChatGPT API.
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/maotoumao/MusicFree" rel="noopener noreferrer" target="_blank">maotoumao/MusicFree</a></strong> ⭐ 21.6k
+插件化、定制化、无广告的免费音乐播放器
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/karakeep-app/karakeep" rel="noopener noreferrer" target="_blank">karakeep-app/karakeep</a></strong> ⭐ 21.5k
+A self-hostable bookmark-everything app (links, notes and images) with AI-based automatic tagging and full text search
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/RooCodeInc/Roo-Code" rel="noopener noreferrer" target="_blank">RooCodeInc/Roo-Code</a></strong> ⭐ 20.9k
+Roo Code gives you a whole dev team of AI agents in your code editor.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/mihomo-party-org/clash-party" rel="noopener noreferrer" target="_blank">mihomo-party-org/clash-party</a></strong> ⭐ 18.4k
+:electron: Another Mihomo GUI.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/linkwarden/linkwarden" rel="noopener noreferrer" target="_blank">linkwarden/linkwarden</a></strong> ⭐ 15.9k
+⚡️⚡️⚡️ Self-hosted collaborative bookmark manager to collect, read, annotate, and fully preserve what matters, all in one place.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/getmaxun/maxun" rel="noopener noreferrer" target="_blank">getmaxun/maxun</a></strong> ⭐ 13.9k
+Turn any website into clean, contextualized data pipelines for your workflows
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/AIsouler/GKD_subscription" rel="noopener noreferrer" target="_blank">AIsouler/GKD_subscription</a></strong> ⭐ 9.4k
+GKD 第三方订阅规则
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/ryoppippi/ccusage" rel="noopener noreferrer" target="_blank">ryoppippi/ccusage</a></strong> ⭐ 9.0k
+A CLI tool for analyzing Claude Code/Codex CLI usage from local JSONL files.
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/yikart/AiToEarn" rel="noopener noreferrer" target="_blank">yikart/AiToEarn</a></strong> ⭐ 8.1k
+Let’s use AI to Earn!
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/xishang0128/sparkle" rel="noopener noreferrer" target="_blank">xishang0128/sparkle</a></strong> ⭐ 5.6k
+:electron: Another Mihomo GUI. (🛠building…)
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/HuolalaTech/page-spy-web" rel="noopener noreferrer" target="_blank">HuolalaTech/page-spy-web</a></strong> ⭐ 5.5k
+A remote debugging platform you can definitely use.
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/shd101wyy/vscode-markdown-preview-enhanced" rel="noopener noreferrer" target="_blank">shd101wyy/vscode-markdown-preview-enhanced</a></strong> ⭐ 1.8k
+One of the “BEST” markdown preview extensions for Visual Studio Code
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/GtxFury/FlyClash" rel="noopener noreferrer" target="_blank">GtxFury/FlyClash</a></strong> ⭐ 0.9k
+简洁美观的代理工具
+<em>最后更新: 2025-11-27</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="vue-3">Vue (3)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/ccbikai/Sink" rel="noopener noreferrer" target="_blank">ccbikai/Sink</a></strong> ⭐ 5.9k
+⚡ A Simple / Speedy / Secure Link Shortener with Analytics, 100% run on Cloudflare.
+<em>最后更新: 2025-11-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/Zephyruso/zashboard" rel="noopener noreferrer" target="_blank">Zephyruso/zashboard</a></strong> ⭐ 1.9k
+A Dashboard Using Clash API
+<em>最后更新: 2025-11-27</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/anghunk/linuxdo-scripts" rel="noopener noreferrer" target="_blank">anghunk/linuxdo-scripts</a></strong> ⭐ 1.9k
+LinuxDo Scripts 扩展，功能持续更新，欢迎提出新想法！已上架 Chrome Web Store 和 Firefox 商店！文档地址：<a href="https://linuxdo-scripts.zishu.me" rel="noopener noreferrer" target="_blank">https://linuxdo-scripts.zishu.me</a>
+<em>最后更新: 2025-11-26</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="-说明">📖 说明</h2>
+<ul>
+<li><strong>Star 数</strong>: 显示项目的 GitHub Star 数量</li>
+<li><strong>最后更新</strong>: 项目最后一次更新时间</li>
+<li><strong>监控范围</strong>: 系统每日检查这些项目是否有新版本发布</li>
+</ul>
+<p>想要添加或删除监控项目？请在 GitHub 上 Watch/Unwatch 对应的仓库，系统会自动同步。</p>
+<p><a href="/blog">← 返回日报列表</a></p> </main> <footer class="site-footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text" data-astro-cid-sz7xmlte>
+&copy; 2025 AstroBlog. Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> <div class="social-links" data-astro-cid-sz7xmlte> <a href="/rss.xml" target="_blank" class="social-link" aria-label="RSS 订阅" title="RSS 订阅" data-astro-cid-sz7xmlte> <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-sz7xmlte> <path d="M4 11a9 9 0 0 1 9 9" data-astro-cid-sz7xmlte></path> <path d="M4 4a16 16 0 0 1 16 16" data-astro-cid-sz7xmlte></path> <circle cx="5" cy="19" r="1" data-astro-cid-sz7xmlte></circle> </svg> </a> <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub" title="GitHub" data-astro-cid-sz7xmlte> <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-sz7xmlte> <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter" title="Twitter" data-astro-cid-sz7xmlte> <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-sz7xmlte> <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" data-astro-cid-sz7xmlte></path> </svg> </a> </div> </div> </footer>  </body></html>
