@@ -1182,7 +1182,7 @@
   }
 
   section, footer {
-    max-width: 900px;
+    max-width: var(--container-5xl);
     padding-inline: calc(var(--spacing) * 4);
     margin-inline: auto;
   }
@@ -1205,6 +1205,10 @@
     padding: 0;
     position: absolute;
     overflow: hidden;
+  }
+
+  .absolute {
+    position: absolute;
   }
 
   .fixed {
@@ -1313,6 +1317,10 @@
     display: inline;
   }
 
+  .table {
+    display: table;
+  }
+
   .h-6 {
     height: calc(var(--spacing) * 6);
   }
@@ -1333,8 +1341,8 @@
     max-width: var(--container-5xl);
   }
 
-  .max-w-app {
-    max-width: 900px;
+  .max-w-prose {
+    max-width: 65ch;
   }
 
   .flex-shrink {
