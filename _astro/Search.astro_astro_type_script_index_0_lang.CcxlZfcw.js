@@ -3,6 +3,7 @@ const PAGEFIND_LOADED_KEY = "pagefind-loaded";
 async function loadPagefind(retryCount = 0) {
   const maxRetries = 2;
   if (sessionStorage.getItem(PAGEFIND_LOADED_KEY) === "true") {
+    initializePagefind();
     return true;
   }
   const pagefindContainer = document.getElementById("pagefind-ui");
@@ -11,37 +12,15 @@ async function loadPagefind(retryCount = 0) {
   try {
     const isDev = false;
     if (isDev) ;
-    const pagefindPath = "/pagefind/pagefind-ui.js";
-    const pagefindUI = await import(
-      /* @vite-ignore */
-      pagefindPath
-    );
-    new pagefindUI.PagefindUI({
-      element: "#pagefind-ui",
-      showSubResults: true,
-      showImages: false,
-      excerptLength: 15,
-      translations: {
-        placeholder: "搜索文章...",
-        clear_search: "清除",
-        load_more: "加载更多",
-        search_label: "搜索此站点",
-        filters_label: "筛选",
-        zero_results: "未找到结果 [SEARCH_TERM]",
-        many_results: "找到 [COUNT] 个结果 [SEARCH_TERM]",
-        one_result: "找到 [COUNT] 个结果 [SEARCH_TERM]",
-        alt_search: "未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",
-        search_suggestion: "未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",
-        searching: "搜索中 [SEARCH_TERM]..."
-      }
+    await new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = "/pagefind/pagefind-ui.js";
+      script.onload = resolve;
+      script.onerror = reject;
+      document.head.appendChild(script);
     });
+    initializePagefind();
     sessionStorage.setItem(PAGEFIND_LOADED_KEY, "true");
-    setTimeout(() => {
-      const input = document.querySelector(".pagefind-ui__search-input");
-      if (input instanceof HTMLElement) {
-        input.focus();
-      }
-    }, 100);
     return true;
   } catch (error) {
     console.error("Failed to load search:", error);
@@ -66,6 +45,35 @@ async function loadPagefind(retryCount = 0) {
       });
     }
     return false;
+  }
+}
+function initializePagefind() {
+  if (typeof PagefindUI !== "undefined") {
+    new PagefindUI({
+      element: "#pagefind-ui",
+      showSubResults: true,
+      showImages: false,
+      excerptLength: 15,
+      translations: {
+        placeholder: "搜索文章...",
+        clear_search: "清除",
+        load_more: "加载更多",
+        search_label: "搜索此站点",
+        filters_label: "筛选",
+        zero_results: "未找到结果 [SEARCH_TERM]",
+        many_results: "找到 [COUNT] 个结果 [SEARCH_TERM]",
+        one_result: "找到 [COUNT] 个结果 [SEARCH_TERM]",
+        alt_search: "未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",
+        search_suggestion: "未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",
+        searching: "搜索中 [SEARCH_TERM]..."
+      }
+    });
+    setTimeout(() => {
+      const input = document.querySelector(".pagefind-ui__search-input");
+      if (input instanceof HTMLElement) {
+        input.focus();
+      }
+    }, 100);
   }
 }
 function initSearch() {
@@ -137,4 +145,4 @@ if (document.readyState === "loading") {
   initSearch();
 }
 document.addEventListener("astro:page-load", initSearch);
-//# sourceMappingURL=Search.astro_astro_type_script_index_0_lang.DjHyAxEv.js.map
+//# sourceMappingURL=Search.astro_astro_type_script_index_0_lang.CcxlZfcw.js.map
