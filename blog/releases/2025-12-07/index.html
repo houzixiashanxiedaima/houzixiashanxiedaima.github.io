@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.16.1"><meta name="description" content="沉浸式状态栏"><link rel="canonical" href="https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%8A%B6%E6%80%81%E6%A0%8F/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%8A%B6%E6%80%81%E6%A0%8F/"><meta property="og:title" content="沉浸式状态栏"><meta property="og:description" content="沉浸式状态栏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%8A%B6%E6%80%81%E6%A0%8F/"><meta property="twitter:title" content="沉浸式状态栏"><meta property="twitter:description" content="沉浸式状态栏"><title>沉浸式状态栏</title><!-- Theme and color scheme script (runs before page loads to prevent flash) --><script>
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.16.1"><meta name="description" content="AI 自动生成的开源项目更新总结,今日共 10 个更新"><link rel="canonical" href="https://blog.yuyins.com/blog/releases/2025-12-07/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/blog/releases/2025-12-07/"><meta property="og:title" content="GitHub Releases 日报 - 2025-12-07"><meta property="og:description" content="AI 自动生成的开源项目更新总结,今日共 10 个更新"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/blog/releases/2025-12-07/"><meta property="twitter:title" content="GitHub Releases 日报 - 2025-12-07"><meta property="twitter:description" content="AI 自动生成的开源项目更新总结,今日共 10 个更新"><title>GitHub Releases 日报 - 2025-12-07</title><!-- Theme and color scheme script (runs before page loads to prevent flash) --><script>
 			// 初始化配色方案 - 默认使用 stone-amber
 			const colorScheme = localStorage.getItem('colorScheme') || 'stone-amber';
 			document.documentElement.setAttribute('data-color', colorScheme);
@@ -196,47 +196,112 @@ document.addEventListener("astro:page-load", () => {
   lightboxInitialized = false;
   initImageLightbox();
 });
-//# sourceMappingURL=ImageLightbox.astro_astro_type_script_index_0_lang.B0CYijgy.js.map</script>   <div class="blog-post-container" data-astro-cid-bvzihdzo> <article class="blog-post" data-astro-cid-bvzihdzo> <header class="article-header" data-astro-cid-bvzihdzo> <!-- Title and description --> <h1 data-astro-cid-bvzihdzo>沉浸式状态栏</h1> <p class="article-description" data-astro-cid-bvzihdzo>沉浸式状态栏</p> <!-- Tags and Meta row --> <div class="article-info-row" data-astro-cid-bvzihdzo>  <div class="tags-and-category" data-astro-cid-bvzihdzo> <a href="/category/Android" class="category-pill" data-astro-cid-wsafccrt>Android</a> <div class="tags-list" data-astro-cid-lga65v7i><a href="/blog/tag/Android" class="tag tag-link" data-astro-cid-lga65v7i>
-#Android</a></div> </div>  <div class="article-meta" data-astro-cid-bvzihdzo> <time datetime="2016-07-28T00:00:00.000Z" class="meta-item" data-astro-cid-bvzihdzo> 2016年7月28日 </time> <span class="meta-item" data-astro-cid-bvzihdzo>5 分钟阅读</span> </div> </div> </header> <!-- Content --> <div class="article-content app-prose" data-astro-cid-bvzihdzo>  <h1 id="概念解析">概念解析</h1>
-<p>在 Adnroid 4.4 (API level 19) 中引入了 “沉浸式” 状态栏的概念，现在许多对这个 “沉浸式” 状态栏的解释。但是感觉大部分的解释好像 “差一点”，要么是把 “沉浸式” 状态栏解释为 “透明状态栏”，要么是解释为 Toolbar 颜色和状态栏颜色不一致（前者为 colorprimary，后者为 colorprimary_dark）的状态栏。但是其实 Android 官方对于沉浸式状态栏的解释是非常清楚的。</p>
-<!--more-->
-<h2 id="沉浸式状态栏">沉浸式状态栏</h2>
-<p>这个概念的提出对于手机是虚拟按键的用户来说是非常有意义的，因为 “沉浸式” 的体验可以增加手机的阅读空间，将上面的状态栏（statusbar）和下面的导航栏（navigationbar）隐藏起来，从而造成 “沉浸式” 的体验。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2524102-0ecbdedddfa6ac6e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="沉浸模式状态.png"></p>
-<p>图中展示了不同的 “沉浸式” 状态
-在上图中：</p>
-<blockquote>
-<ol>
-<li><strong>非沉浸模式</strong> —— 展示了应用进入沉浸模式之前的状态。也展示了设置 IMMERSIVE
-标签后用户滑动展示系统栏的状态。用户滑动后，SYSTEM_UI_FLAG_HIDE_NAVIGATION
-和 SYSTEM_UI_FLAG_FULLSCREEN
-就会被清除，系统栏就会重新显示并保持可见。 请注意，最好的实践方式就是让所有的 UI 控件的变化与系统栏的显示隐藏保持同步，这样可以减少屏幕显示所处的状态，同时提供了更无缝平滑的用户体验。因此所有的 UI 控件跟随系统栏一同显示。一旦应用进入了沉浸模式，相应的 UI 控件也跟随着系统栏一同隐藏。为了确保 UI 的可见性与系统栏保持一致，我们需要一个监听器 View.OnSystemUiVisibilityChangeListener
-来监听系统栏的变化。这在下一节中将详细讲解。</li>
-<li><strong>提示气泡</strong>—— 第一次进入沉浸模式时，系统将会显示一个提示气泡，提示用户如何再让系统栏显示出来。</li>
-</ol>
-</blockquote>
-<blockquote>
-<blockquote>
-<p><strong>Note</strong>：如果为了测试你想强制显示提示气泡，你可以先将应用设为沉浸模式，然后按下电源键进入锁屏模式，并在 5 秒中之后打开屏幕。</p>
-</blockquote>
-<ol start="3">
-<li><strong>沉浸模式</strong>—— 这张图展示了隐藏了系统栏和其他 UI 控件的状态。你可以设置 IMMERSIVE
-和 IMMERSIVE_STICKY
-来进入这个状态。</li>
-<li><strong>粘性标签</strong>—— 这就是你设置了 IMMERSIVE_STICKY
-标签时的 UI 状态，用户会向内滑动以展示系统栏。半透明的系统栏会临时的进行显示，一段时间后自动隐藏。滑动的操作并不会清空任何标签，也不会触发系统 UI 可见性的监听器，因为暂时显示的导航栏并不被认为是一种可见性状态的变化。</li>
-</ol>
-<blockquote>
-<p><strong>Note</strong>：immersive 类的标签只有在
-与 SYSTEM_UI_FLAG_HIDE_NAVIGATION,SYSTEM_UI_FLAG_FULLSCREEN
-中一个或两个一起使用的时候才会生效。你可以只使用其中的一个，但是一般情况下你需要同时隐藏状态栏和导航栏以达到沉浸的效果。</p>
-</blockquote>
-</blockquote>
-<p>上面引用了 Android 官方培训课程中对于 “沉浸式” 的讲解。</p>
-<p>从上面我们可以知道 “沉浸式” 是像我们前面所说的，将状态栏（statusbar）和导航栏（navigationbar）给隐藏起来（气泡 [3] 的状态），并不是像大部分的应用那样，将我们的状态栏设置为透明，或者是将状态栏颜色加深。
-气泡 [4] 的状态是我们在 “沉浸式” 过程中点击屏幕之后产生的效果，即当我们阅读完毕时，点击屏幕，让屏幕获取焦点， 显示出状态栏和导航栏，然后进行其他的操作。
-使用 colorPrimary 和 colorPrimaryDark 只是为了设置状态栏颜色，而且在 Android 5.0 之后，Material Design 中引入了 Toolbar，这也可以将 Toolbar 颜色和状态颜色区分开。</p>
-<p><strong>最后希望各位通过篇文章了解什么是 “沉浸式” 状态栏，或者了解什么是 “沉浸式”，而不是简单的将透明状态栏或是所谓的 “变色龙” 状态栏成为沉浸式状态栏。</strong></p>  </div> <!-- Footer navigation --> <footer class="article-footer" data-astro-cid-bvzihdzo> <!-- Prev/Next navigation --> <nav class="post-navigation" data-astro-cid-bvzihdzo> <div class="nav-prev" data-astro-cid-bvzihdzo> <a href="/blog/hugo-migrated/2016-07-28-git配置彩色log" class="nav-link" data-astro-cid-bvzihdzo> <span class="nav-label" data-astro-cid-bvzihdzo>上一篇</span> <span class="nav-title" data-astro-cid-bvzihdzo>Git配置彩色Log</span> </a> </div> <div class="nav-next" data-astro-cid-bvzihdzo> <a href="/blog/hugo-migrated/2016-07-28-virtualbox与mactype共存" class="nav-link" data-astro-cid-bvzihdzo> <span class="nav-label" data-astro-cid-bvzihdzo>下一篇</span> <span class="nav-title" data-astro-cid-bvzihdzo>Virtualbox与Mactype共存</span> </a> </div> </nav> <div class="back-to-list" data-astro-cid-bvzihdzo> <a href="/" class="back-link" data-astro-cid-bvzihdzo>← 返回文章列表</a> </div> </footer> </article> <!-- Table of Contents --> <aside class="toc-aside" data-astro-cid-bvzihdzo> <nav class="toc" aria-label="目录导航" data-astro-cid-xvrfupwn><ul class="toc-list" data-astro-cid-xvrfupwn><li class="toc-item toc-item-2" data-slug="沉浸式状态栏" data-astro-cid-xvrfupwn><a href="#沉浸式状态栏" class="toc-link" data-slug="沉浸式状态栏" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>沉浸式状态栏</span></a></li></ul></nav><script type="module" src="/_astro/TableOfContents.astro_astro_type_script_index_0_lang.CZx3HNA-.js"></script> </aside> </div>  </main> <footer class="site-footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text" data-astro-cid-sz7xmlte>
+//# sourceMappingURL=ImageLightbox.astro_astro_type_script_index_0_lang.B0CYijgy.js.map</script>   <div class="blog-post-container" data-astro-cid-bvzihdzo> <article class="blog-post" data-astro-cid-bvzihdzo> <header class="article-header" data-astro-cid-bvzihdzo> <!-- Title and description --> <h1 data-astro-cid-bvzihdzo>GitHub Releases 日报 - 2025-12-07</h1> <p class="article-description" data-astro-cid-bvzihdzo>AI 自动生成的开源项目更新总结,今日共 10 个更新</p> <!-- Tags and Meta row --> <div class="article-info-row" data-astro-cid-bvzihdzo>  <div class="tags-and-category" data-astro-cid-bvzihdzo> <a href="/category/开源追踪" class="category-pill" data-astro-cid-wsafccrt>开源追踪</a> <div class="tags-list" data-astro-cid-lga65v7i><a href="/blog/tag/releases" class="tag tag-link" data-astro-cid-lga65v7i>
+#releases</a><a href="/blog/tag/daily" class="tag tag-link" data-astro-cid-lga65v7i>
+#daily</a><a href="/blog/tag/automation" class="tag tag-link" data-astro-cid-lga65v7i>
+#automation</a></div> </div>  <div class="article-meta" data-astro-cid-bvzihdzo> <time datetime="2025-12-07T02:27:05.775Z" class="meta-item" data-astro-cid-bvzihdzo> 2025年12月7日 </time> <span class="meta-item" data-astro-cid-bvzihdzo>3 分钟阅读</span> </div> </div> </header> <!-- Content --> <div class="article-content app-prose" data-astro-cid-bvzihdzo>  <h1 id="2025-12-07-更新摘要">2025-12-07 更新摘要</h1>
+<p><strong>统计信息</strong></p>
+<ul>
+<li>由 DeepSeek V3.1 (1), GLM-4-Flash (1), Qwen 2.5 72B (5), 直译 (3) 总结</li>
+<li>监控仓库: 157 个</li>
+<li>今日更新: 9 个项目 (10 个版本)</li>
+<li>生成时间: 2025-12-07 10:27:05 (北京时间)</li>
+</ul>
+<h3 id="google-geminigemini-cli-v0210-nightly20251207025e450ac-deepseek-v31"><a href="https://github.com/google-gemini/gemini-cli/releases/tag/v0.21.0-nightly.20251207.025e450ac" rel="noopener noreferrer" target="_blank">google-gemini/gemini-cli v0.21.0-nightly.20251207.025e450ac</a> <sup>DeepSeek V3.1</sup></h3>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>禁止了浮动的 Promise 调用，提升代码健壮性</li>
+</ul>
+<h3 id="aisoulergkd_subscription-v363-glm-4-flash"><a href="https://github.com/AIsouler/GKD_subscription/releases/tag/v363" rel="noopener noreferrer" target="_blank">AIsouler/GKD_subscription v363</a> <sup>GLM-4-Flash</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增应用规则</li>
+<li>优化广告规则类别</li>
+<li>掌通家园新增全屏广告规则</li>
+</ul>
+<h3 id="groupultratelegram-search-v1134-beta1-qwen-25"><a href="https://github.com/groupultra/telegram-search/releases/tag/v1.1.34-beta.1" rel="noopener noreferrer" target="_blank">groupultra/telegram-search v1.1.34-beta.1</a> <sup>Qwen 2.5</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>Web: 增加设置超时功能</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>客户端：修复空 UUID 问题</li>
+<li>依赖：更新所有非主要依赖</li>
+</ul>
+<h3 id="pdfmathtranslate-nextpdfmathtranslate-next-v281-qwen-25"><a href="https://github.com/PDFMathTranslate-next/PDFMathTranslate-next/releases/tag/v2.8.1" rel="noopener noreferrer" target="_blank">PDFMathTranslate-next/PDFMathTranslate-next v2.8.1</a> <sup>Qwen 2.5</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>支持多文件上传和批量下载压缩包</li>
+<li>添加 GUI 国际化支持并更新命令行信息</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复多种语言中高级文档生成错误</li>
+<li>更新文档中的分块 ID 和起始行号以保持一致性和准确性</li>
+</ul>
+<h3 id="jesseduffieldlazygit-v0570-qwen-25"><a href="https://github.com/jesseduffield/lazygit/releases/tag/v0.57.0" rel="noopener noreferrer" target="_blank">jesseduffield/lazygit v0.57.0</a> <sup>Qwen 2.5</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>支持在浏览器中打开拉取请求时去除多余的斜杠</li>
+<li>增加自定义命令中使用选定子模块的功能</li>
+<li>添加创建远程仓库分支命令</li>
+<li>切换仓库时立即触发后台同步</li>
+<li>优化文件列表过滤功能，提高性能</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复导航时光标位置问题</li>
+<li>切换提交时自动跳转到分支视图</li>
+<li>修复删除同名远程标签或分支的问题</li>
+<li>修正刷新文件时的罕见崩溃问题</li>
+<li>支持通过 SSH 别名克隆的仓库创建合并请求</li>
+</ul>
+<h3 id="clash-verge-revclash-verge-rev-v244-rc-qwen-25"><a href="https://github.com/clash-verge-rev/clash-verge-rev/releases/tag/v2.4.4-rc" rel="noopener noreferrer" target="_blank">clash-verge-rev/clash-verge-rev v2.4.4-rc</a> <sup>Qwen 2.5</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>支持连接页面项目排序</li>
+<li>实现可选自动备份</li>
+<li>日志页面支持按时间倒序</li>
+<li>增加重新激活订阅的快捷键</li>
+<li>WebView2 Runtime 升级到 133.0.3065.92</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 Linux 无法切换 TUN 堆栈</li>
+<li>彻底修复 macOS 连接页面显示异常</li>
+<li>修复代理按钮和高亮状态不同步</li>
+<li>修复 IP 检测切页后强制刷新</li>
+<li>修复创建窗口时的短暂闪烁</li>
+</ul>
+<h3 id="continuedevcontinue-v1523---v1523-beta20251206-直译"><a href="https://github.com/continuedev/continue/releases" rel="noopener noreferrer" target="_blank">continuedev/continue v1.5.23 - v1.5.23-beta.20251206</a> <sup>直译</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>每日测试版发布。如果在 7 天内未发现严重问题，此版本将被提升为稳定版。</li>
+<li>直接从主分支发布稳定版本。版本 1.5.23 从最新主分支构建并发布。</li>
+</ul>
+<h3 id="openaicodex-rust-v0660-alpha9-直译"><a href="https://github.com/openai/codex/releases/tag/rust-v0.66.0-alpha.9" rel="noopener noreferrer" target="_blank">openai/codex rust-v0.66.0-alpha.9</a> <sup>直译</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>无内容</li>
+</ul>
+<h3 id="cool2528gdownload-v107-qwen-25"><a href="https://github.com/cool2528/GDownload/releases/tag/v1.0.7" rel="noopener noreferrer" target="_blank">cool2528/GDownload v1.0.7</a> <sup>Qwen 2.5</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>修复 Linux AppImage 打包问题，确保 QtQuick.Controls 和 Qt.labs.platform 包含在内</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>解决 Linux 自动更新因缺少 QML 模块无法启动的问题</li>
+<li>修复 Windows/Linux 更新弹窗显示的发行说明格式问题</li>
+</ul>
+<p><strong>帮助我们改进</strong></p>
+<p>对今日摘要质量有建议？欢迎反馈！</p>
+<ul>
+<li><a href="https://github.com/houzixiashanxiedaima/AstroBlog/issues/new" rel="noopener noreferrer" target="_blank">📝 反馈摘要质量</a></li>
+<li><a href="https://github.com/houzixiashanxiedaima/AstroBlog/issues/new" rel="noopener noreferrer" target="_blank">⭐ 评价今日日报</a></li>
+</ul>
+<p>您的反馈将帮助我们优化 AI Prompt, 提升摘要准确性 🙏</p>  </div> <!-- Footer navigation --> <footer class="article-footer" data-astro-cid-bvzihdzo> <!-- Prev/Next navigation --> <nav class="post-navigation" data-astro-cid-bvzihdzo> <div class="nav-prev" data-astro-cid-bvzihdzo> <a href="/blog/releases/2025-12-06" class="nav-link" data-astro-cid-bvzihdzo> <span class="nav-label" data-astro-cid-bvzihdzo>上一篇</span> <span class="nav-title" data-astro-cid-bvzihdzo>GitHub Releases 日报 - 2025-12-06</span> </a> </div> <div class="nav-next" data-astro-cid-bvzihdzo>  </div> </nav> <div class="back-to-list" data-astro-cid-bvzihdzo> <a href="/" class="back-link" data-astro-cid-bvzihdzo>← 返回文章列表</a> </div> </footer> </article> <!-- Table of Contents --> <aside class="toc-aside" data-astro-cid-bvzihdzo> <nav class="toc" aria-label="目录导航" data-astro-cid-xvrfupwn><ul class="toc-list" data-astro-cid-xvrfupwn><li class="toc-item toc-item-3" data-slug="google-geminigemini-cli-v0210-nightly20251207025e450ac-deepseek-v31" data-astro-cid-xvrfupwn><a href="#google-geminigemini-cli-v0210-nightly20251207025e450ac-deepseek-v31" class="toc-link" data-slug="google-geminigemini-cli-v0210-nightly20251207025e450ac-deepseek-v31" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>google-gemini/gemini-cli v0.21.0-nightly.20251207.025e450ac DeepSeek V3.1</span></a></li><li class="toc-item toc-item-3" data-slug="aisoulergkd_subscription-v363-glm-4-flash" data-astro-cid-xvrfupwn><a href="#aisoulergkd_subscription-v363-glm-4-flash" class="toc-link" data-slug="aisoulergkd_subscription-v363-glm-4-flash" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>AIsouler/GKD_subscription v363 GLM-4-Flash</span></a></li><li class="toc-item toc-item-3" data-slug="groupultratelegram-search-v1134-beta1-qwen-25" data-astro-cid-xvrfupwn><a href="#groupultratelegram-search-v1134-beta1-qwen-25" class="toc-link" data-slug="groupultratelegram-search-v1134-beta1-qwen-25" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>groupultra/telegram-search v1.1.34-beta.1 Qwen 2.5</span></a></li><li class="toc-item toc-item-3" data-slug="pdfmathtranslate-nextpdfmathtranslate-next-v281-qwen-25" data-astro-cid-xvrfupwn><a href="#pdfmathtranslate-nextpdfmathtranslate-next-v281-qwen-25" class="toc-link" data-slug="pdfmathtranslate-nextpdfmathtranslate-next-v281-qwen-25" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>PDFMathTranslate-next/PDFMathTranslate-next v2.8.1 Qwen 2.5</span></a></li><li class="toc-item toc-item-3" data-slug="jesseduffieldlazygit-v0570-qwen-25" data-astro-cid-xvrfupwn><a href="#jesseduffieldlazygit-v0570-qwen-25" class="toc-link" data-slug="jesseduffieldlazygit-v0570-qwen-25" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>jesseduffield/lazygit v0.57.0 Qwen 2.5</span></a></li><li class="toc-item toc-item-3" data-slug="clash-verge-revclash-verge-rev-v244-rc-qwen-25" data-astro-cid-xvrfupwn><a href="#clash-verge-revclash-verge-rev-v244-rc-qwen-25" class="toc-link" data-slug="clash-verge-revclash-verge-rev-v244-rc-qwen-25" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>clash-verge-rev/clash-verge-rev v2.4.4-rc Qwen 2.5</span></a></li><li class="toc-item toc-item-3" data-slug="continuedevcontinue-v1523---v1523-beta20251206-直译" data-astro-cid-xvrfupwn><a href="#continuedevcontinue-v1523---v1523-beta20251206-直译" class="toc-link" data-slug="continuedevcontinue-v1523---v1523-beta20251206-直译" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>continuedev/continue v1.5.23 - v1.5.23-beta.20251206 直译</span></a></li><li class="toc-item toc-item-3" data-slug="openaicodex-rust-v0660-alpha9-直译" data-astro-cid-xvrfupwn><a href="#openaicodex-rust-v0660-alpha9-直译" class="toc-link" data-slug="openaicodex-rust-v0660-alpha9-直译" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>openai/codex rust-v0.66.0-alpha.9 直译</span></a></li><li class="toc-item toc-item-3" data-slug="cool2528gdownload-v107-qwen-25" data-astro-cid-xvrfupwn><a href="#cool2528gdownload-v107-qwen-25" class="toc-link" data-slug="cool2528gdownload-v107-qwen-25" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>cool2528/GDownload v1.0.7 Qwen 2.5</span></a></li></ul></nav><script type="module" src="/_astro/TableOfContents.astro_astro_type_script_index_0_lang.CZx3HNA-.js"></script> </aside> </div>  </main> <footer class="site-footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text" data-astro-cid-sz7xmlte>
 &copy; 2025 AstroBlog
 </p> <p class="footer-text" data-astro-cid-sz7xmlte>
 Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
