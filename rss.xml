@@ -487,6 +487,41 @@ the formatted=&quot;false&quot; attribute?&lt;/li&gt;
 &lt;li&gt;Glide Pattele：https://github.com/florent37/GlidePalette&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
+</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>Android开发之View坐标问题</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E5%BC%80%E5%8F%91%E4%B9%8Bview%E5%9D%90%E6%A0%87%E9%97%AE%E9%A2%98/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E5%BC%80%E5%8F%91%E4%B9%8Bview%E5%9D%90%E6%A0%87%E9%97%AE%E9%A2%98/</guid><description>Android开发之View坐标问题</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;在我们日常的开发过程中，接触最多的就是View了，各种各样的View，但是我们可能对View的知识了解一些，但是还是感觉有些地方不太够，尤其是View的坐标问题。我们今天就来看看这个View的坐标到底是怎么定义的。&lt;/p&gt;
+&lt;p&gt;&amp;lt;!--more--&amp;gt;&lt;/p&gt;
+&lt;p&gt;别的不说，先上代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;
+&amp;lt;RelativeLayout
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    app:layout_behavior=&quot;@string/appbar_scrolling_view_behavior&quot;
+    tools:context=&quot;stephen.com.bugstest.MainActivity&quot;
+    tools:showIn=&quot;@layout/activity_main&quot;&amp;gt;
+
+    &amp;lt;TextView
+        android:id=&quot;@+id/tv_test&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_centerInParent=&quot;true&quot;
+        android:background=&quot;@color/colorPrimary&quot;
+        android:padding=&quot;10dp&quot;
+        android:text=&quot;测试文本&quot;
+        android:textColor=&quot;#FFFFFF&quot;/&amp;gt;
+&amp;lt;/RelativeLayout&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上面这个是一个简单布局文件，这个布局文件对应的&lt;code&gt;坐标信息&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-c83b13d3a71e882f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;TextView的坐标信息&quot; /&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;图画的很粗糙，意思表达到了就行。
+win10 下有什么好的画这种图的软件也可以推荐下。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;上面图中，外层红色框表示的RelativeLayout，里面的蓝色实心矩形表示的是TextView。图中的标明的坐标信息解释如下：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;getTop()表示Textview上边缘距离父布局上边的距离&lt;/p&gt;
+&lt;/blockquote&gt;
 </content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>Astro 快速入门指南</title><link>https://blog.yuyins.com/blog/astro-guide/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/astro-guide/</guid><description>学习如何使用 Astro 构建快速、现代的网站。</description><pubDate>Wed, 10 Jan 2024 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Astro 是一个现代化的静态站点生成器，它专注于性能和开发体验。&lt;/p&gt;
 &lt;h2&gt;为什么选择 Astro？&lt;/h2&gt;
 &lt;h3&gt;1. 零 JavaScript（默认）&lt;/h3&gt;
@@ -524,42 +559,7 @@ export const collections = { blog };
 &lt;li&gt;GitHub Pages&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;开始你的 Astro 之旅吧！&lt;/p&gt;
-</content:encoded><category>教程</category><category>Astro</category><category>Web开发</category><category>教程</category><author>博客作者</author></item><item><title>Android开发之View坐标问题</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E5%BC%80%E5%8F%91%E4%B9%8Bview%E5%9D%90%E6%A0%87%E9%97%AE%E9%A2%98/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E5%BC%80%E5%8F%91%E4%B9%8Bview%E5%9D%90%E6%A0%87%E9%97%AE%E9%A2%98/</guid><description>Android开发之View坐标问题</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;在我们日常的开发过程中，接触最多的就是View了，各种各样的View，但是我们可能对View的知识了解一些，但是还是感觉有些地方不太够，尤其是View的坐标问题。我们今天就来看看这个View的坐标到底是怎么定义的。&lt;/p&gt;
-&lt;p&gt;&amp;lt;!--more--&amp;gt;&lt;/p&gt;
-&lt;p&gt;别的不说，先上代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;
-&amp;lt;RelativeLayout
-    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
-    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;
-    app:layout_behavior=&quot;@string/appbar_scrolling_view_behavior&quot;
-    tools:context=&quot;stephen.com.bugstest.MainActivity&quot;
-    tools:showIn=&quot;@layout/activity_main&quot;&amp;gt;
-
-    &amp;lt;TextView
-        android:id=&quot;@+id/tv_test&quot;
-        android:layout_width=&quot;wrap_content&quot;
-        android:layout_height=&quot;wrap_content&quot;
-        android:layout_centerInParent=&quot;true&quot;
-        android:background=&quot;@color/colorPrimary&quot;
-        android:padding=&quot;10dp&quot;
-        android:text=&quot;测试文本&quot;
-        android:textColor=&quot;#FFFFFF&quot;/&amp;gt;
-&amp;lt;/RelativeLayout&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;上面这个是一个简单布局文件，这个布局文件对应的&lt;code&gt;坐标信息&lt;/code&gt;：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-c83b13d3a71e882f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;TextView的坐标信息&quot; /&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;图画的很粗糙，意思表达到了就行。
-win10 下有什么好的画这种图的软件也可以推荐下。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;上面图中，外层红色框表示的RelativeLayout，里面的蓝色实心矩形表示的是TextView。图中的标明的坐标信息解释如下：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;getTop()表示Textview上边缘距离父布局上边的距离&lt;/p&gt;
-&lt;/blockquote&gt;
-</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>Android游戏手柄开发记录（一）</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E6%B8%B8%E6%88%8F%E6%89%8B%E6%9F%84%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95%E4%B8%80/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E6%B8%B8%E6%88%8F%E6%89%8B%E6%9F%84%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95%E4%B8%80/</guid><description>Android游戏手柄开发记录（一）</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;前言&lt;/h1&gt;
+</content:encoded><category>教程</category><category>Astro</category><category>Web开发</category><category>教程</category><author>博客作者</author></item><item><title>Android游戏手柄开发记录（一）</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E6%B8%B8%E6%88%8F%E6%89%8B%E6%9F%84%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95%E4%B8%80/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E6%B8%B8%E6%88%8F%E6%89%8B%E6%9F%84%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95%E4%B8%80/</guid><description>Android游戏手柄开发记录（一）</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;前言&lt;/h1&gt;
 &lt;p&gt;最近一直在进行Android游戏手柄的开发，在这里简单记录一下自己在这个过程中遇到的问题，同时也能够为自己以后的开发提供一些帮助。&lt;/p&gt;
 &lt;p&gt;&amp;lt;!--more--&amp;gt;&lt;/p&gt;
 &lt;h1&gt;Android手柄事件&lt;/h1&gt;
@@ -666,6 +666,120 @@ Android官方建议开发者从与用户交互的&lt;code&gt;View&lt;/code&gt;�
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;以上的内容添加完毕之后，即可在Android中使用lambda表达式，这时候我们可以回到Android Studio中看看我们使用匿名内部类的一些情况，比如注册View的点击事件、RxJava的一些事件，可以发现IDE会提示我们可以使用lambda来代替。&lt;/p&gt;
+</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>Android光速打包</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E5%85%89%E9%80%9F%E6%89%93%E5%8C%85/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E5%85%89%E9%80%9F%E6%89%93%E5%8C%85/</guid><description>Android光速打包</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;快速打包插件 packer-ng-plugin 使用心得&lt;/h1&gt;
+&lt;p&gt;首先放出这个工具的Github地址：https://github.com/mcxiaoke/packer-ng-plugin 在这个工具里面，作者已经非常详细的介绍了该如何使用这个打包工具，在此我主要记录一下我使用这个打包工具的过程。&lt;/p&gt;
+&lt;p&gt;&amp;lt;!--more--&amp;gt;&lt;/p&gt;
+&lt;h2&gt;导入依赖库文件&lt;/h2&gt;
+&lt;p&gt;这个工具导入依赖库文件有两个地方&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在项目的根目录中的&lt;code&gt;build.gradle&lt;/code&gt;添加依赖&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;buildscript {
+    ......
+    dependencies{
+    // add packer-ng
+        classpath &apos;com.mcxiaoke.gradle:packer-ng:1.0.7&apos;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;在APP中的&lt;code&gt;build.gradle&lt;/code&gt;添加依赖&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;apply plugin: &apos;packer&apos;
+
+dependencies {
+    compile &apos;com.mcxiaoke.gradle:packer-helper:1.0.7&apos;
+}
+android {
+    //...
+    signingConfigs {
+      release {
+        // 同时满足下面两个条件才需要此配置
+        // 1. Gradle版本 &amp;gt;= 2.14.1
+        // 2. Android Gradle Plugin 版本 &amp;gt;= 2.2.0
+        // 作用是只使用旧版签名，禁用V2版签名模式
+        // 兼容7.0版本的Android系统才需要,否则不需要
+        v2SigningEnabled false
+      }
+    }
+  }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;##这里有个非常重要的信息大家要注意一下，就是&lt;code&gt;packer-helper:1.0.7&lt;/code&gt;和&lt;code&gt;packer-ng:1.0.7&lt;/code&gt;这两个地方的版本号一定要保持一致##&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在APP的&lt;code&gt;build.gradle&lt;/code&gt;中配置签名信息&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;signingConfigs {
+       release {
+           storeFile file(&quot;D:/keystore/release.keystore&quot;)
+           storePassword &quot;release&quot;
+           keyAlias &quot;release123&quot;
+           keyPassword &quot;release123&quot;
+       }
+       debug {
+          //debug 的签名信息
+       }
+   }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;在APP的&lt;code&gt;build.gradle&lt;/code&gt;中添加&lt;code&gt;buildTypes&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;buildTypes {
+       release {
+          ......
+           //这里是配置签名的关键信息
+           signingConfig signingConfigs.release
+       }
+       debug {
+          ......
+          //这里是配置签名的关键信息
+           signingConfig signingConfigs.debug
+       }
+   }
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;以上的工作完成之后,我们的配置基本上就完成了,但是这个工具的作者在文档的最后说了&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;注意事项
+不支持productFlavors中定义的条件编译变量，不支持修改AndroidManifest
+如果你的项目有多个productFlavors，默认只会用第一个flavor生成的APK文件作为打包工具的输入参数，忽略其它flavor生成的apk，代码里用的是 theVariant.outputs[0].outputFile。如果你想指定使用某个flavor来生成渠道包，可以用 apkFlavor1Release，apkFlavor2Beta这样的名字，示例（假设flavor名字是Intel）：./gradlew -Pmarket=markets.txt clean apkIntelRelease&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;注意事项中给我们说明了两件事情:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;不支持&lt;code&gt;productFlavors&lt;/code&gt;中定义的条件编译&lt;/li&gt;
+&lt;li&gt;不支持修改&lt;code&gt;AndroidManifest&lt;/code&gt;文件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;那么这个时候就会有个问题,如果我们需要多渠道打包怎么办?&lt;/p&gt;
+&lt;h2&gt;多渠道打包&lt;/h2&gt;
+&lt;p&gt;首先在项目的根目录中添加一个&lt;code&gt;markets.txt&lt;/code&gt; 文件,文件中每一行表示一个渠道,这个工具会自动识别空行和不符合规定的行,每一行的&lt;code&gt;渠道&lt;/code&gt;和&lt;code&gt;注释&lt;/code&gt;之间用**#**隔开,但是也可以没有注释,比如我可以在&lt;code&gt;markets.txt&lt;/code&gt; 中进行如下定义:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Google#google channel
+Baidu#baidu channel
+Test
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在进行了如上的定义之后,我们就可以进行多渠道打包,多渠道打包时我个人还是比较喜欢用&lt;code&gt;Gradle&lt;/code&gt;来进行打包，在项目的根目录中执行&lt;code&gt;Gradle&lt;/code&gt;命令行：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;gradlew -Pmarket=markets.txt clean apkRelease
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;但是这个时候如果我们有对友盟的配置,就不能使用友盟官方SDK文档中推荐的方法,友盟官方推荐的方法是在AndroidManifest中设置各种配置信息,但是因为这个工具的限制,我们需要在代码中进行配置.&lt;/p&gt;
+&lt;h2&gt;配置友盟的多渠道信息&lt;/h2&gt;
+&lt;p&gt;首先我们在程序的入口处,一般都是&lt;code&gt;ApplicationMain&lt;/code&gt;中的&lt;code&gt;onCreate()&lt;/code&gt;中进行如下的配置:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;private static final String APP_KEY = &quot;YOUR_APP_KEY&quot;;
+private MobclickAgent.UMAnalyticsConfig mUMAnalyticsConfig;
+
+ @Override
+    public void onCreate() {
+        super.onCreate();
+        setChannelID();
+    }
+    private void setChannelID() {
+          final String channelID = PackerNg.getMarket(this);
+          mUMAnalyticsConfig = new MobclickAgent.UMAnalyticsConfig(this, APP_KEY, channelID);
+          MobclickAgent.startWithConfigure(mUMAnalyticsConfig);
+      }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;当然最后别忘记在&lt;code&gt;AndroidManifest.xml&lt;/code&gt;的&lt;code&gt;application&lt;/code&gt;结点中加上&lt;code&gt;android:name=&quot;.Application.ApplicationMain&quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;进行了以上的所有设置之后,我们就可以享受光速打包了,根据我亲测,打50个包的速度是1分钟左右,这一分钟包括检查插件和编译信息等等.其实开始打第0个包到第49个包大概是10多秒钟吧。&lt;/p&gt;
 </content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>Android自定义流式布局的探索</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80%E7%9A%84%E6%8E%A2%E7%B4%A2/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80%E7%9A%84%E6%8E%A2%E7%B4%A2/</guid><description>Android自定义流式布局的探索</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;最近在学习Android中自定义View的一些知识，为了检验成果，先来自定义一个流式布局。&lt;/p&gt;
 &lt;h3&gt;什么是流式布局？&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-a4edfa75da430455.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;流式布局示例1&quot; /&gt;&lt;/p&gt;
@@ -1057,222 +1171,6 @@ Android官方建议开发者从与用户交互的&lt;code&gt;View&lt;/code&gt;�
 &lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-33b1287cfc34db14.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;情况2.png&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;这种情况看起来好像是正常的，但是实际上是从这个childView之后的所有行高都变大了。&lt;/p&gt;
 &lt;p&gt;上面这两种情况的出现对应着代码中有一些微小的改动，在这里就不放出来了。针对上面的这两种情况，都尝试过解决办法，但是都失败了，可能是因为我们在onLayout中使用了行高来确定上下两行的间隔距离，而这个childView的行高要特殊一些，所以就导致出现这个问题。但是这个小问题也不用太在意，因为我们的流式布局基本上是不会碰到一个childView的宽度比整个布局的宽度还宽的。&lt;/p&gt;
-</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>Android光速打包</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E5%85%89%E9%80%9F%E6%89%93%E5%8C%85/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E5%85%89%E9%80%9F%E6%89%93%E5%8C%85/</guid><description>Android光速打包</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;快速打包插件 packer-ng-plugin 使用心得&lt;/h1&gt;
-&lt;p&gt;首先放出这个工具的Github地址：https://github.com/mcxiaoke/packer-ng-plugin 在这个工具里面，作者已经非常详细的介绍了该如何使用这个打包工具，在此我主要记录一下我使用这个打包工具的过程。&lt;/p&gt;
-&lt;p&gt;&amp;lt;!--more--&amp;gt;&lt;/p&gt;
-&lt;h2&gt;导入依赖库文件&lt;/h2&gt;
-&lt;p&gt;这个工具导入依赖库文件有两个地方&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;在项目的根目录中的&lt;code&gt;build.gradle&lt;/code&gt;添加依赖&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;buildscript {
-    ......
-    dependencies{
-    // add packer-ng
-        classpath &apos;com.mcxiaoke.gradle:packer-ng:1.0.7&apos;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;ul&gt;
-&lt;li&gt;在APP中的&lt;code&gt;build.gradle&lt;/code&gt;添加依赖&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;apply plugin: &apos;packer&apos;
-
-dependencies {
-    compile &apos;com.mcxiaoke.gradle:packer-helper:1.0.7&apos;
-}
-android {
-    //...
-    signingConfigs {
-      release {
-        // 同时满足下面两个条件才需要此配置
-        // 1. Gradle版本 &amp;gt;= 2.14.1
-        // 2. Android Gradle Plugin 版本 &amp;gt;= 2.2.0
-        // 作用是只使用旧版签名，禁用V2版签名模式
-        // 兼容7.0版本的Android系统才需要,否则不需要
-        v2SigningEnabled false
-      }
-    }
-  }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;##这里有个非常重要的信息大家要注意一下，就是&lt;code&gt;packer-helper:1.0.7&lt;/code&gt;和&lt;code&gt;packer-ng:1.0.7&lt;/code&gt;这两个地方的版本号一定要保持一致##&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;在APP的&lt;code&gt;build.gradle&lt;/code&gt;中配置签名信息&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;signingConfigs {
-       release {
-           storeFile file(&quot;D:/keystore/release.keystore&quot;)
-           storePassword &quot;release&quot;
-           keyAlias &quot;release123&quot;
-           keyPassword &quot;release123&quot;
-       }
-       debug {
-          //debug 的签名信息
-       }
-   }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;ul&gt;
-&lt;li&gt;在APP的&lt;code&gt;build.gradle&lt;/code&gt;中添加&lt;code&gt;buildTypes&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;buildTypes {
-       release {
-          ......
-           //这里是配置签名的关键信息
-           signingConfig signingConfigs.release
-       }
-       debug {
-          ......
-          //这里是配置签名的关键信息
-           signingConfig signingConfigs.debug
-       }
-   }
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;以上的工作完成之后,我们的配置基本上就完成了,但是这个工具的作者在文档的最后说了&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;注意事项
-不支持productFlavors中定义的条件编译变量，不支持修改AndroidManifest
-如果你的项目有多个productFlavors，默认只会用第一个flavor生成的APK文件作为打包工具的输入参数，忽略其它flavor生成的apk，代码里用的是 theVariant.outputs[0].outputFile。如果你想指定使用某个flavor来生成渠道包，可以用 apkFlavor1Release，apkFlavor2Beta这样的名字，示例（假设flavor名字是Intel）：./gradlew -Pmarket=markets.txt clean apkIntelRelease&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;注意事项中给我们说明了两件事情:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;不支持&lt;code&gt;productFlavors&lt;/code&gt;中定义的条件编译&lt;/li&gt;
-&lt;li&gt;不支持修改&lt;code&gt;AndroidManifest&lt;/code&gt;文件&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;那么这个时候就会有个问题,如果我们需要多渠道打包怎么办?&lt;/p&gt;
-&lt;h2&gt;多渠道打包&lt;/h2&gt;
-&lt;p&gt;首先在项目的根目录中添加一个&lt;code&gt;markets.txt&lt;/code&gt; 文件,文件中每一行表示一个渠道,这个工具会自动识别空行和不符合规定的行,每一行的&lt;code&gt;渠道&lt;/code&gt;和&lt;code&gt;注释&lt;/code&gt;之间用**#**隔开,但是也可以没有注释,比如我可以在&lt;code&gt;markets.txt&lt;/code&gt; 中进行如下定义:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Google#google channel
-Baidu#baidu channel
-Test
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;在进行了如上的定义之后,我们就可以进行多渠道打包,多渠道打包时我个人还是比较喜欢用&lt;code&gt;Gradle&lt;/code&gt;来进行打包，在项目的根目录中执行&lt;code&gt;Gradle&lt;/code&gt;命令行：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;gradlew -Pmarket=markets.txt clean apkRelease
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;但是这个时候如果我们有对友盟的配置,就不能使用友盟官方SDK文档中推荐的方法,友盟官方推荐的方法是在AndroidManifest中设置各种配置信息,但是因为这个工具的限制,我们需要在代码中进行配置.&lt;/p&gt;
-&lt;h2&gt;配置友盟的多渠道信息&lt;/h2&gt;
-&lt;p&gt;首先我们在程序的入口处,一般都是&lt;code&gt;ApplicationMain&lt;/code&gt;中的&lt;code&gt;onCreate()&lt;/code&gt;中进行如下的配置:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;private static final String APP_KEY = &quot;YOUR_APP_KEY&quot;;
-private MobclickAgent.UMAnalyticsConfig mUMAnalyticsConfig;
-
- @Override
-    public void onCreate() {
-        super.onCreate();
-        setChannelID();
-    }
-    private void setChannelID() {
-          final String channelID = PackerNg.getMarket(this);
-          mUMAnalyticsConfig = new MobclickAgent.UMAnalyticsConfig(this, APP_KEY, channelID);
-          MobclickAgent.startWithConfigure(mUMAnalyticsConfig);
-      }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;当然最后别忘记在&lt;code&gt;AndroidManifest.xml&lt;/code&gt;的&lt;code&gt;application&lt;/code&gt;结点中加上&lt;code&gt;android:name=&quot;.Application.ApplicationMain&quot;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;进行了以上的所有设置之后,我们就可以享受光速打包了,根据我亲测,打50个包的速度是1分钟左右,这一分钟包括检查插件和编译信息等等.其实开始打第0个包到第49个包大概是10多秒钟吧。&lt;/p&gt;
-</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>DrawerLayout：Write-Once，Run-EveryWhere</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-drawerlayoutwriteonceruneverywhere/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-drawerlayoutwriteonceruneverywhere/</guid><description>DrawerLayout：Write-Once，Run-EveryWhere</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;自从Material Design出来之后，各种各样的控件也是让人眼花缭乱，但是用的时候还是需要克制，比如Google在官方的Material Design Guideline中就建议内容相同的列表不要使用Cardview，而是推荐使用普通的布局，中间加上divider即可，避免给人一种分裂感。&lt;/p&gt;
-&lt;p&gt;在使用DrawerLayout的时候，可能我们多个Activity中都需要用到，我们是不是每个Activity都需要新建为Navigation Drawer Activity呢，答案是：NO。所以这次我们就来看看，如何“克制地”使用DrawerLayout&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Write Once，Run Everywhere&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&amp;lt;!--more--&amp;gt;&lt;/p&gt;
-&lt;h2&gt;新建Navigation Drawer Activity&lt;/h2&gt;
-&lt;p&gt;首先我们新建一个Navigation Drawer Activity作为我们BaseActivity，布局文件如下：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;
-&amp;lt;android.support.v4.widget.DrawerLayout
-    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
-    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
-    android:id=&quot;@+id/drawer_layout&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;
-    android:fitsSystemWindows=&quot;true&quot;
-    tools:openDrawer=&quot;start&quot;&amp;gt;
-
-    &amp;lt;!--&amp;lt;include
-        layout=&quot;@layout/app_bar_base_drawer&quot;
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;match_parent&quot;/&amp;gt;
---&amp;gt;
-    &amp;lt;FrameLayout
-        android:id=&quot;@+id/frame_container&quot;
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;match_parent&quot;/&amp;gt;
-
-    &amp;lt;android.support.design.widget.NavigationView
-        android:id=&quot;@+id/nav_view&quot;
-        android:layout_width=&quot;wrap_content&quot;
-        android:layout_height=&quot;match_parent&quot;
-        android:layout_gravity=&quot;start&quot;
-        android:fitsSystemWindows=&quot;true&quot;
-        app:headerLayout=&quot;@layout/nav_header_base_drawer&quot;
-        app:menu=&quot;@menu/activity_base_drawer_drawer&quot;/&amp;gt;
-
-&amp;lt;/android.support.v4.widget.DrawerLayout&amp;gt;
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;我们首先将Android studio自己生成的&lt;code&gt;&amp;lt;include&amp;gt;&amp;lt;/include&amp;gt;&lt;/code&gt;注释掉，换成代码中的FrameLayout，接下来修改自动生成的BaseActivity代码：&lt;/p&gt;
-&lt;p&gt;重写setContentView函数,重写后的函数如下：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;   override fun onCreate(savedInstanceState: Bundle?) {
-       super.onCreate(savedInstanceState)
-   }
-   override fun setContentView(layoutResID: Int) {
-       //首先获取带有DrawerLayout的布局
-       val drawer = layoutInflater.inflate(R.layout.activity_base_drawer, null) as DrawerLayout
-       //然后获取这个布局里面的FrameLayout，也就是我们刚才在xml中添加的FrameLayout
-       val frameContainer = drawer.findViewById(R.id.frame_container) as FrameLayout
-       //然后将子类的布局添加到FrameLayout中
-       layoutInflater.inflate(layoutResID, frameContainer, true)
-       //最后设置布局为DrawerLayout的布局
-       setContentView(drawer)
-       //下面就是一些设置DrawerLayout动作和点击事件的代码
-       val toggle = ActionBarDrawerToggle(
-               this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-       drawer.setDrawerListener(toggle)
-       toggle.syncState()
-
-       val navigationView = findViewById(R.id.nav_view) as NavigationView
-       navigationView.setNavigationItemSelectedListener(this)
-
-       toolbar.setNavigationOnClickListener { view -&amp;gt; drawer.openDrawer(Gravity.START) }
-   }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;上面的代码使用Kotlin写的，顺便提一句：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;在今天凌晨的Google I/O 2017上，Android Team已经将Kotlin做为Android开发的&quot;first-class&quot;了。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;上面设置完之后，我们可以随便新建一个Activity，然后继承BaseActivity即可。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;class DrawerActivity : BaseDrawerActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.app_bar_base_drawer)
-        fab.setOnClickListener { view -&amp;gt; Snackbar.make(view, &quot;可以&quot;, Snackbar.LENGTH_SHORT).show() }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;来看看结果：
-&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-d6e24c1d16735925.gif?imageMogr2/auto-orient/strip&quot; alt=&quot;drawer-layout.gif&quot; /&gt;
-可以看到我们的功能已经实现了，但是有一些小瑕疵：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Toolbar上面没有菜单键，需要通过从屏幕左边滑才能呼出Drawer&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;这个问题从我们上面的代码中也体现出来了，在BaseActivity中并没有将Drawer的操作与Toolbar联系到一起，接下来我们就来添加代码，让Toolbar和Drawer联系到一起，添加到上面重写的setContentView中相应的位置&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;  //获取Toolbar
-  val toolbar = frameContainer.findViewById(R.id.toolbar) as Toolbar
-        setSupportActionBar(toolbar)
-  // 将Toolbar与Drawer的动作联系起来
-  val toggle = ActionBarDrawerToggle(
-                this, drawer,toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-  //最后设置toolbar的点击事件
-  toolbar.setNavigationOnClickListener { view -&amp;gt; drawer.openDrawer(Gravity.START) }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;经过上面的设置之后，再来看看运行效果：
-&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-d49733181469cf69.gif?imageMogr2/auto-orient/strip&quot; alt=&quot;drawer-layout-new.gif&quot; /&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;如果点击菜单键没有反应的话，请删除掉继承自BaseActivity的activity中的setSupportActionBar这行代码即可&lt;/p&gt;
-&lt;/blockquote&gt;
 </content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>Git配置彩色Log</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-git%E9%85%8D%E7%BD%AE%E5%BD%A9%E8%89%B2log/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-git%E9%85%8D%E7%BD%AE%E5%BD%A9%E8%89%B2log/</guid><description>Git配置彩色Log</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Git 彩色Log配置&lt;/h1&gt;
 &lt;p&gt;git 在打印log的时候，默认是黑底白字，这样我们很多的关键信息都不能够非常突出的显示出来，看起来也是比较费劲。我们可以通过如下的语句让git打印出来的log出现彩色的字体，这样的话可以让我们更直接的看到我们的提交信息的关键字。&lt;/p&gt;
 &lt;p&gt;&amp;lt;!-- More--&amp;gt;&lt;/p&gt;
@@ -1295,6 +1193,67 @@ git config --global alias.lg &quot;log --graph --pretty=format:&apos;%Cred%h - %
 &lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;git config --global alias.hist &quot;log --graph --decorate --oneline --pretty=format:&apos;%Cred%h - %C(bold white) %s %Creset %C(yellow)%d  %C(cyan) &amp;lt;%cd&amp;gt; %Creset %Cgreen(%cn)&apos; --abbrev-commit --date=format:&apos;%Y-%m-%d %H:%M:%S&apos;&quot;
 &lt;/code&gt;&lt;/pre&gt;
+</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>Virtualbox与Mactype共存</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-virtualbox%E4%B8%8Emactype%E5%85%B1%E5%AD%98/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-virtualbox%E4%B8%8Emactype%E5%85%B1%E5%AD%98/</guid><description>Virtualbox与Mactype共存</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Virtualbox与Mactype共存&lt;/h1&gt;
+&lt;p&gt;最近心血来潮，准备重启吃灰好久的ubuntu虚拟机玩玩，于是开开心心准备打开机器，顺利进入，准备更新下软件，发现网速好慢，虽然主机能够高速访问“外网”，但是虚拟机并没有享受到这种福利，那么能不能让虚拟机也享受呢？这么一说，就是一段折腾史……&lt;/p&gt;
+&lt;p&gt;&amp;lt;!--more--&amp;gt;&lt;/p&gt;
+&lt;p&gt;##　虚拟机“外网”访问
+虚拟机访问“外网”，可以通过设置虚拟机的网络为桥接模式，然后在虚拟机中设置主机的ip和端口即可。具体设置我们后面再说，先来打开桥接模式。
+首先我们打开virtualbox的设置-&amp;gt;网络-&amp;gt;网卡1-&amp;gt;连接方式-&amp;gt;桥接网卡。到这一步的时候，被无情的提示“未指定”。原因是下图中红色箭头标记的那个东西没有
+&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-7d2b077d6ffba4d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;未指定.png&quot; /&gt;
+根据网上的&lt;a href=&quot;http://www.dabu.info/the-virtual-box-bridging-error-not-specified-network-interface-to-be-bridged.html&quot;&gt;提示&lt;/a&gt;安装桥接网卡驱动，但是安装完毕之后，依然没有显示出来。经过多方查证，发现是虚拟机版本太低，于是选择将4.3.12升级到5.1.18（最新版），升级完毕之后选择桥接网卡，一切顺利。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-c9fc08a01d6f881c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;桥接网卡.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;准备开机起飞……还没飞起来就被无情打脸，虚拟机不能启动，报错信息如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-4cb56fa29e06e494.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;虚拟机报错.png&quot; /&gt;
+这个报错信息就是我们今天的关键信息，这个报错信息一般都是出现在&lt;code&gt;virtualbox 5.0+&lt;/code&gt;和&lt;code&gt;windows 8+&lt;/code&gt;上面，那么具体是什么原因呢，是因为virtualbox5.0之后对于系统的要求更严格了，说白了就是系统中如果安装了一些杀毒软件、主题修改的东西，那么虚拟机基本上就是会报这个错误。但是由于我的电脑一直是裸奔状态，于是我就将目标转向了mactype，这是我装的唯一一个主题修改类软件，于是经过多方查证找到了&lt;a href=&quot;https://www.zhihu.com/question/27159349&quot;&gt;解决办法&lt;/a&gt;
+按照上面的步骤操作之后，然后准备再次起飞……依然没飞起来被打脸，打脸的还是那个报错信息。于是再次排查，找了半天，发现virtualbox5.0之后安装完虚拟机还要安装一个驱动，具体操作&lt;a href=&quot;https://jingyan.baidu.com/article/4d58d541186ad89dd4e9c018.html&quot;&gt;在这里&lt;/a&gt;
+这次安装完毕之后，再次信心满满的准备起飞……最后还是被打脸，我在想这飞机是不是有问题，准备换回4.3.12了，但是内心有个声音告诉我，一定要征服这个虚拟机，我就不信了。然后又到处找资料，找来找去还是找回到之前的杀毒软件和主题修改软件方向上，于是我仔细检查了一下我的电脑，搞了一下午，结果发现电脑右下角有一个净网大师，于是怒卸载之。
+卸载完毕，再次小心翼翼的准备起飞，这一次飞机平稳的起飞，心中的大石头也落地了，这一下午算是值了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-81efa0e0b9c7c6b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;飞机平稳起飞咯&quot; /&gt;
+最后说一下关于ubuntu虚拟机桥接主机高速访问“外网”的方法：
+在宿主机windows上运行shadowsocks.exe并勾选“允许局域网连接”
+使用桥接方式运行虚拟机（这时虚拟机与宿主处于同一个局域网）
+进入ubuntu系统，System Settings – Network – Network proxy勾选Manual（手动）,地址全部填宿主机IP（局域网网段），设置好代理端口（可在windows下的shadowsocks查看，一般为默认1080）
+ubuntu用浏览器访问www.google.com，成功。&lt;/p&gt;
+</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>沉浸式状态栏</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%8A%B6%E6%80%81%E6%A0%8F/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%8A%B6%E6%80%81%E6%A0%8F/</guid><description>沉浸式状态栏</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;概念解析&lt;/h1&gt;
+&lt;p&gt;在Adnroid 4.4(API level 19)中引入了“沉浸式”状态栏的概念，现在许多对这个“沉浸式”状态栏的解释。但是感觉大部分的解释好像“差一点”，要么是把“沉浸式”状态栏解释为“透明状态栏”，要么是解释为Toolbar颜色和状态栏颜色不一致（前者为colorprimary，后者为colorprimary_dark）的状态栏。但是其实Android官方对于沉浸式状态栏的解释是非常清楚的。&lt;/p&gt;
+&lt;p&gt;&amp;lt;!--more--&amp;gt;&lt;/p&gt;
+&lt;h2&gt;沉浸式状态栏&lt;/h2&gt;
+&lt;p&gt;这个概念的提出对于手机是虚拟按键的用户来说是非常有意义的，因为“沉浸式”的体验可以增加手机的阅读空间，将上面的状态栏（statusbar）和下面的导航栏（navigationbar）隐藏起来，从而造成“沉浸式”的体验。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-0ecbdedddfa6ac6e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;沉浸模式状态.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;图中展示了不同的“沉浸式”状态
+在上图中：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;非沉浸模式&lt;/strong&gt; —— 展示了应用进入沉浸模式之前的状态。也展示了设置IMMERSIVE
+标签后用户滑动展示系统栏的状态。用户滑动后，SYSTEM_UI_FLAG_HIDE_NAVIGATION
+和SYSTEM_UI_FLAG_FULLSCREEN
+就会被清除，系统栏就会重新显示并保持可见。 请注意，最好的实践方式就是让所有的UI控件的变化与系统栏的显示隐藏保持同步，这样可以减少屏幕显示所处的状态，同时提供了更无缝平滑的用户体验。因此所有的UI控件跟随系统栏一同显示。一旦应用进入了沉浸模式，相应的UI控件也跟随着系统栏一同隐藏。为了确保UI的可见性与系统栏保持一致，我们需要一个监听器View.OnSystemUiVisibilityChangeListener
+来监听系统栏的变化。这在下一节中将详细讲解。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;提示气泡&lt;/strong&gt;——第一次进入沉浸模式时，系统将会显示一个提示气泡，提示用户如何再让系统栏显示出来。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;：如果为了测试你想强制显示提示气泡，你可以先将应用设为沉浸模式，然后按下电源键进入锁屏模式，并在5秒中之后打开屏幕。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;沉浸模式&lt;/strong&gt;—— 这张图展示了隐藏了系统栏和其他UI控件的状态。你可以设置IMMERSIVE
+和IMMERSIVE_STICKY
+来进入这个状态。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;粘性标签&lt;/strong&gt;——这就是你设置了IMMERSIVE_STICKY
+标签时的UI状态，用户会向内滑动以展示系统栏。半透明的系统栏会临时的进行显示，一段时间后自动隐藏。滑动的操作并不会清空任何标签，也不会触发系统UI可见性的监听器，因为暂时显示的导航栏并不被认为是一种可见性状态的变化。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;：immersive类的标签只有在
+与SYSTEM_UI_FLAG_HIDE_NAVIGATION,SYSTEM_UI_FLAG_FULLSCREEN
+中一个或两个一起使用的时候才会生效。你可以只使用其中的一个，但是一般情况下你需要同时隐藏状态栏和导航栏以达到沉浸的效果。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;上面引用了Android官方培训课程中对于“沉浸式”的讲解。&lt;/p&gt;
+&lt;p&gt;从上面我们可以知道“沉浸式”是像我们前面所说的，将状态栏（statusbar）和导航栏（navigationbar）给隐藏起来（气泡[3]的状态），并不是像大部分的应用那样，将我们的状态栏设置为透明，或者是将状态栏颜色加深。
+气泡[4]的状态是我们在“沉浸式”过程中点击屏幕之后产生的效果，即当我们阅读完毕时，点击屏幕，让屏幕获取焦点， 显示出状态栏和导航栏，然后进行其他的操作。
+使用colorPrimary和colorPrimaryDark只是为了设置状态栏颜色，而且在Android 5.0之后，Material Design中引入了Toolbar，这也可以将Toolbar颜色和状态颜色区分开。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;最后希望各位通过篇文章了解什么是“沉浸式”状态栏，或者了解什么是“沉浸式”，而不是简单的将透明状态栏或是所谓的“变色龙”状态栏成为沉浸式状态栏。&lt;/strong&gt;&lt;/p&gt;
 </content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>Material-Design-之TabLayout与Toolbar</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-materialdesign%E4%B9%8Btablayout%E4%B8%8Etoolbar/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-materialdesign%E4%B9%8Btablayout%E4%B8%8Etoolbar/</guid><description>Material-Design-之TabLayout与Toolbar</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;今天在学习Material Design的过程中，遇到了一个比较坑的问题，在这里记录一下，以后如果有人遇到的话，可以做个参考吧。首先来看看我们的需求，今天我们需要实现下面这个效果：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-d8903fa389d460a8.gif?imageMogr2/auto-orient/strip&quot; alt=&quot;需求.gif&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;&amp;lt;!--more--&amp;gt;&lt;/p&gt;
@@ -1408,67 +1367,6 @@ git config --global alias.lg &quot;log --graph --pretty=format:&apos;%Cred%h - %
 &lt;p&gt;上面这个是&lt;code&gt;style.xml&lt;/code&gt;(v21)的代码，从这段代码中我们就可以找到这次这个bug的罪魁祸首了。就是这一行&lt;code&gt;&amp;lt;item name=&quot;android:statusBarColor&quot;&amp;gt;@android:color/transparent&amp;lt;/item&amp;gt;&lt;/code&gt;
 就是这行代码将我们的状态栏给弄成了透明了，结果就导致我们看到的状态栏和布局文件是在同一个z轴上，也就是会被挤上去，从而导致我们的Toolbar不能完全的隐藏起来。&lt;/p&gt;
 &lt;p&gt;最后，为什么这个小bug费了这么大劲才找出来，我上面这一整套代码，基本上都是在android studio 中新建一个TabActivity 自动生成的。也就说原本自动生成的代码就有这个Bug，谁能想到android studio 这个浓眉大眼的家伙也&quot;叛变革命&quot;了呢。&lt;/p&gt;
-</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>Virtualbox与Mactype共存</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-virtualbox%E4%B8%8Emactype%E5%85%B1%E5%AD%98/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-virtualbox%E4%B8%8Emactype%E5%85%B1%E5%AD%98/</guid><description>Virtualbox与Mactype共存</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Virtualbox与Mactype共存&lt;/h1&gt;
-&lt;p&gt;最近心血来潮，准备重启吃灰好久的ubuntu虚拟机玩玩，于是开开心心准备打开机器，顺利进入，准备更新下软件，发现网速好慢，虽然主机能够高速访问“外网”，但是虚拟机并没有享受到这种福利，那么能不能让虚拟机也享受呢？这么一说，就是一段折腾史……&lt;/p&gt;
-&lt;p&gt;&amp;lt;!--more--&amp;gt;&lt;/p&gt;
-&lt;p&gt;##　虚拟机“外网”访问
-虚拟机访问“外网”，可以通过设置虚拟机的网络为桥接模式，然后在虚拟机中设置主机的ip和端口即可。具体设置我们后面再说，先来打开桥接模式。
-首先我们打开virtualbox的设置-&amp;gt;网络-&amp;gt;网卡1-&amp;gt;连接方式-&amp;gt;桥接网卡。到这一步的时候，被无情的提示“未指定”。原因是下图中红色箭头标记的那个东西没有
-&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-7d2b077d6ffba4d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;未指定.png&quot; /&gt;
-根据网上的&lt;a href=&quot;http://www.dabu.info/the-virtual-box-bridging-error-not-specified-network-interface-to-be-bridged.html&quot;&gt;提示&lt;/a&gt;安装桥接网卡驱动，但是安装完毕之后，依然没有显示出来。经过多方查证，发现是虚拟机版本太低，于是选择将4.3.12升级到5.1.18（最新版），升级完毕之后选择桥接网卡，一切顺利。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-c9fc08a01d6f881c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;桥接网卡.png&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;准备开机起飞……还没飞起来就被无情打脸，虚拟机不能启动，报错信息如下：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-4cb56fa29e06e494.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;虚拟机报错.png&quot; /&gt;
-这个报错信息就是我们今天的关键信息，这个报错信息一般都是出现在&lt;code&gt;virtualbox 5.0+&lt;/code&gt;和&lt;code&gt;windows 8+&lt;/code&gt;上面，那么具体是什么原因呢，是因为virtualbox5.0之后对于系统的要求更严格了，说白了就是系统中如果安装了一些杀毒软件、主题修改的东西，那么虚拟机基本上就是会报这个错误。但是由于我的电脑一直是裸奔状态，于是我就将目标转向了mactype，这是我装的唯一一个主题修改类软件，于是经过多方查证找到了&lt;a href=&quot;https://www.zhihu.com/question/27159349&quot;&gt;解决办法&lt;/a&gt;
-按照上面的步骤操作之后，然后准备再次起飞……依然没飞起来被打脸，打脸的还是那个报错信息。于是再次排查，找了半天，发现virtualbox5.0之后安装完虚拟机还要安装一个驱动，具体操作&lt;a href=&quot;https://jingyan.baidu.com/article/4d58d541186ad89dd4e9c018.html&quot;&gt;在这里&lt;/a&gt;
-这次安装完毕之后，再次信心满满的准备起飞……最后还是被打脸，我在想这飞机是不是有问题，准备换回4.3.12了，但是内心有个声音告诉我，一定要征服这个虚拟机，我就不信了。然后又到处找资料，找来找去还是找回到之前的杀毒软件和主题修改软件方向上，于是我仔细检查了一下我的电脑，搞了一下午，结果发现电脑右下角有一个净网大师，于是怒卸载之。
-卸载完毕，再次小心翼翼的准备起飞，这一次飞机平稳的起飞，心中的大石头也落地了，这一下午算是值了。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-81efa0e0b9c7c6b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;飞机平稳起飞咯&quot; /&gt;
-最后说一下关于ubuntu虚拟机桥接主机高速访问“外网”的方法：
-在宿主机windows上运行shadowsocks.exe并勾选“允许局域网连接”
-使用桥接方式运行虚拟机（这时虚拟机与宿主处于同一个局域网）
-进入ubuntu系统，System Settings – Network – Network proxy勾选Manual（手动）,地址全部填宿主机IP（局域网网段），设置好代理端口（可在windows下的shadowsocks查看，一般为默认1080）
-ubuntu用浏览器访问www.google.com，成功。&lt;/p&gt;
-</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>沉浸式状态栏</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%8A%B6%E6%80%81%E6%A0%8F/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%8A%B6%E6%80%81%E6%A0%8F/</guid><description>沉浸式状态栏</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;概念解析&lt;/h1&gt;
-&lt;p&gt;在Adnroid 4.4(API level 19)中引入了“沉浸式”状态栏的概念，现在许多对这个“沉浸式”状态栏的解释。但是感觉大部分的解释好像“差一点”，要么是把“沉浸式”状态栏解释为“透明状态栏”，要么是解释为Toolbar颜色和状态栏颜色不一致（前者为colorprimary，后者为colorprimary_dark）的状态栏。但是其实Android官方对于沉浸式状态栏的解释是非常清楚的。&lt;/p&gt;
-&lt;p&gt;&amp;lt;!--more--&amp;gt;&lt;/p&gt;
-&lt;h2&gt;沉浸式状态栏&lt;/h2&gt;
-&lt;p&gt;这个概念的提出对于手机是虚拟按键的用户来说是非常有意义的，因为“沉浸式”的体验可以增加手机的阅读空间，将上面的状态栏（statusbar）和下面的导航栏（navigationbar）隐藏起来，从而造成“沉浸式”的体验。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-0ecbdedddfa6ac6e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;沉浸模式状态.png&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;图中展示了不同的“沉浸式”状态
-在上图中：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;非沉浸模式&lt;/strong&gt; —— 展示了应用进入沉浸模式之前的状态。也展示了设置IMMERSIVE
-标签后用户滑动展示系统栏的状态。用户滑动后，SYSTEM_UI_FLAG_HIDE_NAVIGATION
-和SYSTEM_UI_FLAG_FULLSCREEN
-就会被清除，系统栏就会重新显示并保持可见。 请注意，最好的实践方式就是让所有的UI控件的变化与系统栏的显示隐藏保持同步，这样可以减少屏幕显示所处的状态，同时提供了更无缝平滑的用户体验。因此所有的UI控件跟随系统栏一同显示。一旦应用进入了沉浸模式，相应的UI控件也跟随着系统栏一同隐藏。为了确保UI的可见性与系统栏保持一致，我们需要一个监听器View.OnSystemUiVisibilityChangeListener
-来监听系统栏的变化。这在下一节中将详细讲解。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;提示气泡&lt;/strong&gt;——第一次进入沉浸模式时，系统将会显示一个提示气泡，提示用户如何再让系统栏显示出来。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;：如果为了测试你想强制显示提示气泡，你可以先将应用设为沉浸模式，然后按下电源键进入锁屏模式，并在5秒中之后打开屏幕。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;沉浸模式&lt;/strong&gt;—— 这张图展示了隐藏了系统栏和其他UI控件的状态。你可以设置IMMERSIVE
-和IMMERSIVE_STICKY
-来进入这个状态。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;粘性标签&lt;/strong&gt;——这就是你设置了IMMERSIVE_STICKY
-标签时的UI状态，用户会向内滑动以展示系统栏。半透明的系统栏会临时的进行显示，一段时间后自动隐藏。滑动的操作并不会清空任何标签，也不会触发系统UI可见性的监听器，因为暂时显示的导航栏并不被认为是一种可见性状态的变化。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;：immersive类的标签只有在
-与SYSTEM_UI_FLAG_HIDE_NAVIGATION,SYSTEM_UI_FLAG_FULLSCREEN
-中一个或两个一起使用的时候才会生效。你可以只使用其中的一个，但是一般情况下你需要同时隐藏状态栏和导航栏以达到沉浸的效果。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;上面引用了Android官方培训课程中对于“沉浸式”的讲解。&lt;/p&gt;
-&lt;p&gt;从上面我们可以知道“沉浸式”是像我们前面所说的，将状态栏（statusbar）和导航栏（navigationbar）给隐藏起来（气泡[3]的状态），并不是像大部分的应用那样，将我们的状态栏设置为透明，或者是将状态栏颜色加深。
-气泡[4]的状态是我们在“沉浸式”过程中点击屏幕之后产生的效果，即当我们阅读完毕时，点击屏幕，让屏幕获取焦点， 显示出状态栏和导航栏，然后进行其他的操作。
-使用colorPrimary和colorPrimaryDark只是为了设置状态栏颜色，而且在Android 5.0之后，Material Design中引入了Toolbar，这也可以将Toolbar颜色和状态颜色区分开。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;最后希望各位通过篇文章了解什么是“沉浸式”状态栏，或者了解什么是“沉浸式”，而不是简单的将透明状态栏或是所谓的“变色龙”状态栏成为沉浸式状态栏。&lt;/strong&gt;&lt;/p&gt;
 </content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>NavigationView-子菜单问题</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-navigationview%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-navigationview%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/</guid><description>NavigationView-子菜单问题</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;在Android 5.0之后，Google推出了Material Design兼容库，在Material Design的兼容库中，有个用的比较多的控件就是&lt;code&gt;NavigationView&lt;/code&gt;。在我们平时使用过程中，对于&lt;code&gt;NavigationView&lt;/code&gt;的一些小细节可能也并没有过多的关注，所以就导致我们在遇到特殊需求的时候无从下手，那么在这里我就简单记录一下使用&lt;code&gt;NavigationView&lt;/code&gt;的一些小坑，暂时可能也并没有遇到很多的坑，如果以后遇到的话会不定时更新。&lt;/p&gt;
 &lt;p&gt;&amp;lt;!--more--&amp;gt;&lt;/p&gt;
 &lt;h2&gt;NavigationView基本使用&lt;/h2&gt;
@@ -1618,6 +1516,108 @@ ubuntu用浏览器访问www.google.com，成功。&lt;/p&gt;
 &amp;lt;/menu&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;这个布局文件就是用&lt;code&gt;group&lt;/code&gt;包裹起每个组的&lt;code&gt;item&lt;/code&gt;，有点类似第二种布局，但是&lt;strong&gt;最关键&lt;/strong&gt;的地方就是要为每一个&lt;code&gt;group&lt;/code&gt;设置一个&lt;code&gt;id&lt;/code&gt;，设置完成之后就可以得到第三种布局的效果。&lt;/p&gt;
+</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>DrawerLayout：Write-Once，Run-EveryWhere</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-drawerlayoutwriteonceruneverywhere/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-drawerlayoutwriteonceruneverywhere/</guid><description>DrawerLayout：Write-Once，Run-EveryWhere</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;自从Material Design出来之后，各种各样的控件也是让人眼花缭乱，但是用的时候还是需要克制，比如Google在官方的Material Design Guideline中就建议内容相同的列表不要使用Cardview，而是推荐使用普通的布局，中间加上divider即可，避免给人一种分裂感。&lt;/p&gt;
+&lt;p&gt;在使用DrawerLayout的时候，可能我们多个Activity中都需要用到，我们是不是每个Activity都需要新建为Navigation Drawer Activity呢，答案是：NO。所以这次我们就来看看，如何“克制地”使用DrawerLayout&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Write Once，Run Everywhere&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&amp;lt;!--more--&amp;gt;&lt;/p&gt;
+&lt;h2&gt;新建Navigation Drawer Activity&lt;/h2&gt;
+&lt;p&gt;首先我们新建一个Navigation Drawer Activity作为我们BaseActivity，布局文件如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;
+&amp;lt;android.support.v4.widget.DrawerLayout
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:id=&quot;@+id/drawer_layout&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:fitsSystemWindows=&quot;true&quot;
+    tools:openDrawer=&quot;start&quot;&amp;gt;
+
+    &amp;lt;!--&amp;lt;include
+        layout=&quot;@layout/app_bar_base_drawer&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;/&amp;gt;
+--&amp;gt;
+    &amp;lt;FrameLayout
+        android:id=&quot;@+id/frame_container&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;/&amp;gt;
+
+    &amp;lt;android.support.design.widget.NavigationView
+        android:id=&quot;@+id/nav_view&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;match_parent&quot;
+        android:layout_gravity=&quot;start&quot;
+        android:fitsSystemWindows=&quot;true&quot;
+        app:headerLayout=&quot;@layout/nav_header_base_drawer&quot;
+        app:menu=&quot;@menu/activity_base_drawer_drawer&quot;/&amp;gt;
+
+&amp;lt;/android.support.v4.widget.DrawerLayout&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;我们首先将Android studio自己生成的&lt;code&gt;&amp;lt;include&amp;gt;&amp;lt;/include&amp;gt;&lt;/code&gt;注释掉，换成代码中的FrameLayout，接下来修改自动生成的BaseActivity代码：&lt;/p&gt;
+&lt;p&gt;重写setContentView函数,重写后的函数如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;   override fun onCreate(savedInstanceState: Bundle?) {
+       super.onCreate(savedInstanceState)
+   }
+   override fun setContentView(layoutResID: Int) {
+       //首先获取带有DrawerLayout的布局
+       val drawer = layoutInflater.inflate(R.layout.activity_base_drawer, null) as DrawerLayout
+       //然后获取这个布局里面的FrameLayout，也就是我们刚才在xml中添加的FrameLayout
+       val frameContainer = drawer.findViewById(R.id.frame_container) as FrameLayout
+       //然后将子类的布局添加到FrameLayout中
+       layoutInflater.inflate(layoutResID, frameContainer, true)
+       //最后设置布局为DrawerLayout的布局
+       setContentView(drawer)
+       //下面就是一些设置DrawerLayout动作和点击事件的代码
+       val toggle = ActionBarDrawerToggle(
+               this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+       drawer.setDrawerListener(toggle)
+       toggle.syncState()
+
+       val navigationView = findViewById(R.id.nav_view) as NavigationView
+       navigationView.setNavigationItemSelectedListener(this)
+
+       toolbar.setNavigationOnClickListener { view -&amp;gt; drawer.openDrawer(Gravity.START) }
+   }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上面的代码使用Kotlin写的，顺便提一句：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在今天凌晨的Google I/O 2017上，Android Team已经将Kotlin做为Android开发的&quot;first-class&quot;了。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;上面设置完之后，我们可以随便新建一个Activity，然后继承BaseActivity即可。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class DrawerActivity : BaseDrawerActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.app_bar_base_drawer)
+        fab.setOnClickListener { view -&amp;gt; Snackbar.make(view, &quot;可以&quot;, Snackbar.LENGTH_SHORT).show() }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;来看看结果：
+&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-d6e24c1d16735925.gif?imageMogr2/auto-orient/strip&quot; alt=&quot;drawer-layout.gif&quot; /&gt;
+可以看到我们的功能已经实现了，但是有一些小瑕疵：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Toolbar上面没有菜单键，需要通过从屏幕左边滑才能呼出Drawer&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这个问题从我们上面的代码中也体现出来了，在BaseActivity中并没有将Drawer的操作与Toolbar联系到一起，接下来我们就来添加代码，让Toolbar和Drawer联系到一起，添加到上面重写的setContentView中相应的位置&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  //获取Toolbar
+  val toolbar = frameContainer.findViewById(R.id.toolbar) as Toolbar
+        setSupportActionBar(toolbar)
+  // 将Toolbar与Drawer的动作联系起来
+  val toggle = ActionBarDrawerToggle(
+                this, drawer,toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+  //最后设置toolbar的点击事件
+  toolbar.setNavigationOnClickListener { view -&amp;gt; drawer.openDrawer(Gravity.START) }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;经过上面的设置之后，再来看看运行效果：
+&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-d49733181469cf69.gif?imageMogr2/auto-orient/strip&quot; alt=&quot;drawer-layout-new.gif&quot; /&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果点击菜单键没有反应的话，请删除掉继承自BaseActivity的activity中的setSupportActionBar这行代码即可&lt;/p&gt;
+&lt;/blockquote&gt;
 </content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>build.gradle.kts + buildSrc管理Gradle依赖</title><link>https://blog.yuyins.com/blog/hugo-migrated/2020-08-09-buildgradlekts-buildsrc%E7%AE%A1%E7%90%86gradle%E4%BE%9D%E8%B5%96/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2020-08-09-buildgradlekts-buildsrc%E7%AE%A1%E7%90%86gradle%E4%BE%9D%E8%B5%96/</guid><description>build.gradle.kts + buildSrc管理Gradle依赖</description><pubDate>Sun, 09 Aug 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;在Android开发过程中，经常需要管理Gradle的依赖，但是传统的Gradle管理方式有几个不好的地方&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;对于多个module支持不太好，无法共用&lt;/li&gt;
@@ -1873,7 +1873,26 @@ object BuildType {
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;上述的依赖库可以根据自己的需要调整，也可以把每个&lt;code&gt;object&lt;/code&gt;都提取为单独的文件，这部分就是根据个人喜好自己调整。&lt;/p&gt;
 &lt;p&gt;至此，我们的&lt;code&gt;build.gradle&lt;/code&gt;就完全改造完成了。现在就可以在&lt;code&gt;build.gradle.kts&lt;/code&gt;中使用Kotlin的语法进行依赖导入了，同时还能使用Kotlin的自动补全功能，更方便的管理和导入依赖了。&lt;/p&gt;
-</content:encoded><category>[Android,Gradle,Kotlin]</category><category>[Android,Gradle,Kotlin]</category><author>博客作者</author></item><item><title>开发环境配置</title><link>https://blog.yuyins.com/blog/hugo-migrated/2021-10-17-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2021-10-17-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid><description>开发环境配置</description><pubDate>Sun, 17 Oct 2021 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;为了防止每次配置环境都要去搜索，每次配置完成之后都要重新做一些个性化设置，记录一下环境配置，一次搞定。后续会将这些配置写成一个macOS/Linux的脚本，一键配置，Windows下还是得自己手动配置。&lt;/p&gt;
+</content:encoded><category>[Android,Gradle,Kotlin]</category><category>[Android,Gradle,Kotlin]</category><author>博客作者</author></item><item><title>Hexo使用本地图片</title><link>https://blog.yuyins.com/blog/hugo-migrated/2020-4-28-hexo%E4%BD%BF%E7%94%A8%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2020-4-28-hexo%E4%BD%BF%E7%94%A8%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/</guid><description>Hexo使用本地图片</description><pubDate>Tue, 28 Apr 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;在日常写博客时，免不了需要插入图片帮助读者更好的理解。&lt;/p&gt;
+&lt;p&gt;对于&lt;code&gt;Markdown&lt;/code&gt;语法，插入图片只需要输入&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;![图片描述](图片路径/xxx.png)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;但是对于图片的存储，有几种方法&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;云服务，借助七牛云这类云服务进行图片的存储，可能需要收费&lt;/li&gt;
+&lt;li&gt;图床，&lt;code&gt;sm.ms&lt;/code&gt;这类的公开图床，对于图片大小有一定的限制&lt;/li&gt;
+&lt;li&gt;自建&lt;code&gt;Github&lt;/code&gt;仓库，相对有点麻烦&lt;/li&gt;
+&lt;li&gt;本地图片&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在此主要推荐最后一种，就是放在本地，当然这里说的本地并不是指放在本机，而是指放在博客本身的目录中，也就是不通过外链引入图片。&lt;/p&gt;
+&lt;p&gt;对于&lt;code&gt;Hexo&lt;/code&gt;博客使用本地图片，需要在配置文件&lt;code&gt;_config.yml&lt;/code&gt;中设置&lt;code&gt;post_asset_folder: true&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;设置完毕之后，每次写新的文章，只需要在命令行运行&lt;code&gt;hexo new post xxx&lt;/code&gt;，就可以在博客的目录中自动生成一个名为&lt;code&gt;xxx&lt;/code&gt;的目录和一个名为&lt;code&gt;xxx.md&lt;/code&gt;的文件，写作的时候将我们需要的图片放入目录中，就可以在文章中直接引用了。&lt;/p&gt;
+&lt;p&gt;但是在写博客的时候，可能更多的是通过&lt;code&gt;Typora&lt;/code&gt;这个软件来新建文件，这时候就没法自动生成同名目录，可以通过对&lt;code&gt;Typora&lt;/code&gt;这个软件进行设置：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;文件-偏好设置-图像-插入图片时-复制到指定路径-&lt;code&gt;./${filename}&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这样设置之后，我们每次写文章就可以直接将图片复制粘贴到文章中，&lt;code&gt;Typora&lt;/code&gt;会自动帮我们生成文件夹并且把图片放入其中，也会将我们的图片引用路径改为相对路径。&lt;/p&gt;
+</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>开发环境配置</title><link>https://blog.yuyins.com/blog/hugo-migrated/2021-10-17-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2021-10-17-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid><description>开发环境配置</description><pubDate>Sun, 17 Oct 2021 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;为了防止每次配置环境都要去搜索，每次配置完成之后都要重新做一些个性化设置，记录一下环境配置，一次搞定。后续会将这些配置写成一个macOS/Linux的脚本，一键配置，Windows下还是得自己手动配置。&lt;/p&gt;
 &lt;h4&gt;配置Java&lt;/h4&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -1916,26 +1935,7 @@ Path: &lt;code&gt;%NVM_HOME%;%NVM_SYMLINK%&lt;/code&gt;&lt;/li&gt;
 PYTHON_HOME: &lt;code&gt;C:\Users\xxx\AppData\Local\Programs\Python\Python310\&lt;/code&gt;
 Path: &lt;code&gt;%PYTHON_HOME%;%PYTHON_HOME%\Scripts\&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
-</content:encoded><category>[Android]</category><category>[Android]</category><author>博客作者</author></item><item><title>Hexo使用本地图片</title><link>https://blog.yuyins.com/blog/hugo-migrated/2020-4-28-hexo%E4%BD%BF%E7%94%A8%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2020-4-28-hexo%E4%BD%BF%E7%94%A8%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/</guid><description>Hexo使用本地图片</description><pubDate>Tue, 28 Apr 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;在日常写博客时，免不了需要插入图片帮助读者更好的理解。&lt;/p&gt;
-&lt;p&gt;对于&lt;code&gt;Markdown&lt;/code&gt;语法，插入图片只需要输入&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;![图片描述](图片路径/xxx.png)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;但是对于图片的存储，有几种方法&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;云服务，借助七牛云这类云服务进行图片的存储，可能需要收费&lt;/li&gt;
-&lt;li&gt;图床，&lt;code&gt;sm.ms&lt;/code&gt;这类的公开图床，对于图片大小有一定的限制&lt;/li&gt;
-&lt;li&gt;自建&lt;code&gt;Github&lt;/code&gt;仓库，相对有点麻烦&lt;/li&gt;
-&lt;li&gt;本地图片&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;在此主要推荐最后一种，就是放在本地，当然这里说的本地并不是指放在本机，而是指放在博客本身的目录中，也就是不通过外链引入图片。&lt;/p&gt;
-&lt;p&gt;对于&lt;code&gt;Hexo&lt;/code&gt;博客使用本地图片，需要在配置文件&lt;code&gt;_config.yml&lt;/code&gt;中设置&lt;code&gt;post_asset_folder: true&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;设置完毕之后，每次写新的文章，只需要在命令行运行&lt;code&gt;hexo new post xxx&lt;/code&gt;，就可以在博客的目录中自动生成一个名为&lt;code&gt;xxx&lt;/code&gt;的目录和一个名为&lt;code&gt;xxx.md&lt;/code&gt;的文件，写作的时候将我们需要的图片放入目录中，就可以在文章中直接引用了。&lt;/p&gt;
-&lt;p&gt;但是在写博客的时候，可能更多的是通过&lt;code&gt;Typora&lt;/code&gt;这个软件来新建文件，这时候就没法自动生成同名目录，可以通过对&lt;code&gt;Typora&lt;/code&gt;这个软件进行设置：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;文件-偏好设置-图像-插入图片时-复制到指定路径-&lt;code&gt;./${filename}&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;这样设置之后，我们每次写文章就可以直接将图片复制粘贴到文章中，&lt;code&gt;Typora&lt;/code&gt;会自动帮我们生成文件夹并且把图片放入其中，也会将我们的图片引用路径改为相对路径。&lt;/p&gt;
-</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>Hexo + Github Pages搭建博客</title><link>https://blog.yuyins.com/blog/hugo-migrated/2020-2-13-hexo-github-pages%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2020-2-13-hexo-github-pages%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</guid><description>Hexo + Github Pages搭建博客</description><pubDate>Thu, 13 Feb 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;本文以Windows 10操作系统为例，介绍Hexo + Github Pages搭建个人博客的具体步骤。先简单介绍下Hexo和Github Pages&lt;/p&gt;
+</content:encoded><category>[Android]</category><category>[Android]</category><author>博客作者</author></item><item><title>Hexo + Github Pages搭建博客</title><link>https://blog.yuyins.com/blog/hugo-migrated/2020-2-13-hexo-github-pages%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2020-2-13-hexo-github-pages%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</guid><description>Hexo + Github Pages搭建博客</description><pubDate>Thu, 13 Feb 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;本文以Windows 10操作系统为例，介绍Hexo + Github Pages搭建个人博客的具体步骤。先简单介绍下Hexo和Github Pages&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Hexo是一个快速、简洁且高效的博客框架&lt;/li&gt;
 &lt;li&gt;Github Pages是Github推出的静态页面托管服务&lt;/li&gt;
@@ -2726,137 +2726,6 @@ hexo g -d //将生成的网站部署到Github Pages静态页面上
 &lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;⭐ 评价今日日报&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;您的反馈将帮助我们优化 AI Prompt,提升摘要准确性 🙏&lt;/p&gt;
-</content:encoded><category>开源追踪</category><category>releases</category><category>daily</category><category>automation</category><author>Release Bot</author></item><item><title>GitHub Releases 日报 - 2025-11-24</title><link>https://blog.yuyins.com/blog/releases/2025-11-24/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/releases/2025-11-24/</guid><description>AI 自动生成的开源项目更新总结,今日共 16 个更新</description><pubDate>Mon, 24 Nov 2025 02:21:53 GMT</pubDate><content:encoded>&lt;h1&gt;2025-11-24 更新摘要&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;统计信息&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;由 Qwen 2.5 72B (10), GLM-4-Flash (5), DeepSeek V3.1 (1) 总结&lt;/li&gt;
-&lt;li&gt;监控仓库: 157 个&lt;/li&gt;
-&lt;li&gt;今日更新: 16 个项目 (16 个版本)&lt;/li&gt;
-&lt;li&gt;生成时间: 2025-11-24 10:21:53 (北京时间)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;&lt;a href=&quot;https://github.com/google-gemini/gemini-cli/releases/tag/v0.19.0-nightly.20251124.e177314a4&quot;&gt;google-gemini/gemini-cli v0.19.0-nightly.20251124.e177314a4&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;更新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;将版本号从 &lt;code&gt;0.19.0-nightly.20251123.dadd606c0&lt;/code&gt; 升级到 &lt;code&gt;0.19.0-nightly.20251124.e177314a4&lt;/code&gt;。&lt;a href=&quot;https://github.com/google-gemini/gemini-cli/pull/13675&quot;&gt;@gemini-cli-robot&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;&lt;a href=&quot;https://github.com/spacecowboy/Feeder/releases/tag/2.16.1&quot;&gt;spacecowboy/Feeder 2.16.1&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;翻译&lt;/strong&gt;: 更新了包括捷克语、土耳其语、乌克兰语、匈牙利语、德语、西班牙语、法语、波兰语、简体中文、塞尔维亚语、斯洛文尼亚语和丹麦语在内的多个语言的翻译。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;新贡献者&lt;/strong&gt;: @Fjuro 首次为项目做出贡献。&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;影响范围&lt;/em&gt;*: 所有使用 Feeder 的用户。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;&lt;a href=&quot;https://github.com/zed-industries/zed/releases/tag/v0.213.4&quot;&gt;zed-industries/zed v0.213.4&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;之前从 CleanShot X 等截图工具复制的图片无法正确粘贴到 Agent 面板中，此问题已得到解决。(&lt;a href=&quot;https://github.com/zed-industries/zed/pull/43255&quot;&gt;#43255&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;&lt;a href=&quot;https://github.com/sst/opencode/releases/tag/v1.0.106&quot;&gt;sst/opencode v1.0.106&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;添加了可选的 &lt;code&gt;selectedListItemText&lt;/code&gt; 元素，支持基于亮度的回退，解决 #4369 问题。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;防止权限快捷键在按下 Ctrl/Meta 键时触发。&lt;/li&gt;
-&lt;li&gt;捆绑了 AI SDK 包，提升了性能。&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;影响范围&lt;/em&gt;*: 所有使用 TUI 和 Bash 工具的用户。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;&lt;a href=&quot;https://github.com/AIsouler/GKD_subscription/releases/tag/v352&quot;&gt;AIsouler/GKD_subscription v352&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;此次更新主要针对 Windows 版本的微信用户，解锁了某些使用限制，提升了用户体验。其他应用和规则未受影响。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;&lt;a href=&quot;https://github.com/RooCodeInc/Roo-Code/releases/tag/v3.34.1&quot;&gt;RooCodeInc/Roo-Code v3.34.1&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;在用户界面中显示图像生成提示（PR #9505 by @mrubens）&lt;/li&gt;
-&lt;li&gt;增加对云同步消息的跟踪支持（PR #9518 by @mrubens）&lt;/li&gt;
-&lt;li&gt;在评估环境中启用 Roo Code Cloud 提供商（PR #9492 by @cte）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;&lt;a href=&quot;https://github.com/JanDeDobbeleer/oh-my-posh/releases/tag/v28.0.0&quot;&gt;JanDeDobbeleer/oh-my-posh v28.0.0&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;移除 &lt;code&gt;command&lt;/code&gt; 段，鼓励使用内置段或替代方案。&lt;/li&gt;
-&lt;li&gt;使用 &lt;code&gt;command&lt;/code&gt; 段的用户需调整配置。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Breaking Changes&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;command&lt;/code&gt; 段被完全移除，需更新配置。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;&lt;a href=&quot;https://github.com/QuantumNous/new-api/releases/tag/v0.9.25&quot;&gt;QuantumNous/new-api v0.9.25&lt;/a&gt;&lt;/h4&gt;
-&lt;h4&gt;&lt;a href=&quot;https://github.com/LibChecker/LibChecker/releases/tag/2.5.3&quot;&gt;LibChecker/LibChecker 2.5.3&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;支持分享 APK 链接，快速查看应用信息&lt;/li&gt;
-&lt;li&gt;支持对比 APKS 文件&lt;/li&gt;
-&lt;li&gt;检测应用主题、启动图标和实时更新通知&lt;/li&gt;
-&lt;li&gt;支持提取原生库和分享应用&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;&lt;a href=&quot;https://github.com/continuedev/continue/releases/tag/v1.5.14-beta.20251123&quot;&gt;continuedev/continue v1.5.14-beta.20251123&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;优化了系统性能，提升了响应速度&lt;/li&gt;
-&lt;li&gt;改进了日志记录的详细程度，便于调试和问题追踪&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;解决了某些用户报告的界面卡顿问题&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Breaking Changes&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;所有用户&lt;/strong&gt;：性能提升和稳定性改进将影响所有用户，建议更新以获得更好的体验。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;&lt;a href=&quot;https://github.com/jxxghp/MoviePilot/releases/tag/v2.8.6&quot;&gt;jxxghp/MoviePilot v2.8.6&lt;/a&gt;&lt;/h4&gt;
-&lt;h4&gt;&lt;a href=&quot;https://github.com/2dust/v2rayN/releases/tag/7.16.4&quot;&gt;2dust/v2rayN 7.16.4&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;代理设置优化&lt;/strong&gt;：Windows 支持自定义 PAC 文件路径，非 Windows 系统支持自定义代理脚本路径&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;路由规则升级&lt;/strong&gt;：规则集升级至 V4 版，全面代理 Google 域名（影响范围：所有使用路由规则的用户）&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;操作体验优化&lt;/strong&gt;：删除重复节点增加二次确认，支持 shadowsocks-ws-tls 配置导入&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;&lt;a href=&quot;https://github.com/maillab/cloud-mail/releases/tag/v2.5.0&quot;&gt;maillab/cloud-mail v2.5.0&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;显示未读邮件，帮助用户快速识别新邮件。&lt;/li&gt;
-&lt;li&gt;最新邮件通知弹窗，确保用户不会错过任何重要信息。&lt;/li&gt;
-&lt;li&gt;邮箱名禁止包含指定字符串，增强账户安全性和规范性。&lt;/li&gt;
-&lt;li&gt;邮件列表样式优化，提升用户体验和界面美观度。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;&lt;a href=&quot;https://github.com/yang991178/fluent-reader-lite/releases/tag/v1.0.5%2B12&quot;&gt;yang991178/fluent-reader-lite v1.0.5+12&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;Breaking Changes&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;解决了与 Miniflux 服务的连接问题，增强了数据同步的可靠性。[影响范围: 使用 Miniflux 作为 RSS 源的用户]&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;更新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;发布日期:&lt;/em&gt;* 2025-11-23&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;更新 Flutter 和依赖项至最新版本&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;&lt;a href=&quot;https://github.com/mas-cli/mas/releases/tag/v3.1.0&quot;&gt;mas-cli/mas v3.1.0&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;默认使用更快的预3.0.0版本检测逻辑，并提供&lt;code&gt;--accurate&lt;/code&gt;和&lt;code&gt;--accurate-ignore-unknown-apps&lt;/code&gt;标志以使用更精确但较慢的检测逻辑。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;正确格式化&lt;code&gt;outdated&lt;/code&gt;输出。&lt;/li&gt;
-&lt;li&gt;改进下载/安装进度输出。&lt;/li&gt;
-&lt;li&gt;更新GitHub Actions配置。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;&lt;a href=&quot;https://github.com/triwinds/ns-emu-tools/releases/tag/0.5.9&quot;&gt;triwinds/ns-emu-tools 0.5.9&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;解决了一些用户界面的小问题，提升了用户体验。&lt;/li&gt;
-&lt;li&gt;此次更新主要集中在稳定性和用户体验的提升上，建议所有用户升级以获得最佳体验。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;帮助我们改进&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;对今日摘要质量有建议? 欢迎反馈！&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;📝 反馈摘要质量&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;⭐ 评价今日日报&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;您的反馈将帮助我们优化 AI Prompt,提升摘要准确性 🙏&lt;/p&gt;
 </content:encoded><category>开源追踪</category><category>releases</category><category>daily</category><category>automation</category><author>Release Bot</author></item><item><title>GitHub Releases 日报 - 2025-11-23</title><link>https://blog.yuyins.com/blog/releases/2025-11-23/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/releases/2025-11-23/</guid><description>AI 自动生成的开源项目更新总结,今日共 24 个更新</description><pubDate>Sun, 23 Nov 2025 02:35:42 GMT</pubDate><content:encoded>&lt;h1&gt;2025-11-23 更新摘要&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;统计信息&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -2998,6 +2867,137 @@ hexo g -d //将生成的网站部署到Github Pages静态页面上
 &lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;解决 apply_diff 性能回归&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;帮助我们改进&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;对今日摘要质量有建议? 欢迎反馈！&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;📝 反馈摘要质量&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;⭐ 评价今日日报&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;您的反馈将帮助我们优化 AI Prompt,提升摘要准确性 🙏&lt;/p&gt;
+</content:encoded><category>开源追踪</category><category>releases</category><category>daily</category><category>automation</category><author>Release Bot</author></item><item><title>GitHub Releases 日报 - 2025-11-24</title><link>https://blog.yuyins.com/blog/releases/2025-11-24/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/releases/2025-11-24/</guid><description>AI 自动生成的开源项目更新总结,今日共 16 个更新</description><pubDate>Mon, 24 Nov 2025 02:21:53 GMT</pubDate><content:encoded>&lt;h1&gt;2025-11-24 更新摘要&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;统计信息&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;由 Qwen 2.5 72B (10), GLM-4-Flash (5), DeepSeek V3.1 (1) 总结&lt;/li&gt;
+&lt;li&gt;监控仓库: 157 个&lt;/li&gt;
+&lt;li&gt;今日更新: 16 个项目 (16 个版本)&lt;/li&gt;
+&lt;li&gt;生成时间: 2025-11-24 10:21:53 (北京时间)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;&lt;a href=&quot;https://github.com/google-gemini/gemini-cli/releases/tag/v0.19.0-nightly.20251124.e177314a4&quot;&gt;google-gemini/gemini-cli v0.19.0-nightly.20251124.e177314a4&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;更新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将版本号从 &lt;code&gt;0.19.0-nightly.20251123.dadd606c0&lt;/code&gt; 升级到 &lt;code&gt;0.19.0-nightly.20251124.e177314a4&lt;/code&gt;。&lt;a href=&quot;https://github.com/google-gemini/gemini-cli/pull/13675&quot;&gt;@gemini-cli-robot&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;&lt;a href=&quot;https://github.com/spacecowboy/Feeder/releases/tag/2.16.1&quot;&gt;spacecowboy/Feeder 2.16.1&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;翻译&lt;/strong&gt;: 更新了包括捷克语、土耳其语、乌克兰语、匈牙利语、德语、西班牙语、法语、波兰语、简体中文、塞尔维亚语、斯洛文尼亚语和丹麦语在内的多个语言的翻译。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;新贡献者&lt;/strong&gt;: @Fjuro 首次为项目做出贡献。&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;影响范围&lt;/em&gt;*: 所有使用 Feeder 的用户。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;&lt;a href=&quot;https://github.com/zed-industries/zed/releases/tag/v0.213.4&quot;&gt;zed-industries/zed v0.213.4&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;之前从 CleanShot X 等截图工具复制的图片无法正确粘贴到 Agent 面板中，此问题已得到解决。(&lt;a href=&quot;https://github.com/zed-industries/zed/pull/43255&quot;&gt;#43255&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;&lt;a href=&quot;https://github.com/sst/opencode/releases/tag/v1.0.106&quot;&gt;sst/opencode v1.0.106&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;添加了可选的 &lt;code&gt;selectedListItemText&lt;/code&gt; 元素，支持基于亮度的回退，解决 #4369 问题。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;防止权限快捷键在按下 Ctrl/Meta 键时触发。&lt;/li&gt;
+&lt;li&gt;捆绑了 AI SDK 包，提升了性能。&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;影响范围&lt;/em&gt;*: 所有使用 TUI 和 Bash 工具的用户。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;&lt;a href=&quot;https://github.com/AIsouler/GKD_subscription/releases/tag/v352&quot;&gt;AIsouler/GKD_subscription v352&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;此次更新主要针对 Windows 版本的微信用户，解锁了某些使用限制，提升了用户体验。其他应用和规则未受影响。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;&lt;a href=&quot;https://github.com/RooCodeInc/Roo-Code/releases/tag/v3.34.1&quot;&gt;RooCodeInc/Roo-Code v3.34.1&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在用户界面中显示图像生成提示（PR #9505 by @mrubens）&lt;/li&gt;
+&lt;li&gt;增加对云同步消息的跟踪支持（PR #9518 by @mrubens）&lt;/li&gt;
+&lt;li&gt;在评估环境中启用 Roo Code Cloud 提供商（PR #9492 by @cte）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;&lt;a href=&quot;https://github.com/JanDeDobbeleer/oh-my-posh/releases/tag/v28.0.0&quot;&gt;JanDeDobbeleer/oh-my-posh v28.0.0&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;移除 &lt;code&gt;command&lt;/code&gt; 段，鼓励使用内置段或替代方案。&lt;/li&gt;
+&lt;li&gt;使用 &lt;code&gt;command&lt;/code&gt; 段的用户需调整配置。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Breaking Changes&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;command&lt;/code&gt; 段被完全移除，需更新配置。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;&lt;a href=&quot;https://github.com/QuantumNous/new-api/releases/tag/v0.9.25&quot;&gt;QuantumNous/new-api v0.9.25&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a href=&quot;https://github.com/LibChecker/LibChecker/releases/tag/2.5.3&quot;&gt;LibChecker/LibChecker 2.5.3&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持分享 APK 链接，快速查看应用信息&lt;/li&gt;
+&lt;li&gt;支持对比 APKS 文件&lt;/li&gt;
+&lt;li&gt;检测应用主题、启动图标和实时更新通知&lt;/li&gt;
+&lt;li&gt;支持提取原生库和分享应用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;&lt;a href=&quot;https://github.com/continuedev/continue/releases/tag/v1.5.14-beta.20251123&quot;&gt;continuedev/continue v1.5.14-beta.20251123&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;优化了系统性能，提升了响应速度&lt;/li&gt;
+&lt;li&gt;改进了日志记录的详细程度，便于调试和问题追踪&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;解决了某些用户报告的界面卡顿问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Breaking Changes&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;所有用户&lt;/strong&gt;：性能提升和稳定性改进将影响所有用户，建议更新以获得更好的体验。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;&lt;a href=&quot;https://github.com/jxxghp/MoviePilot/releases/tag/v2.8.6&quot;&gt;jxxghp/MoviePilot v2.8.6&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a href=&quot;https://github.com/2dust/v2rayN/releases/tag/7.16.4&quot;&gt;2dust/v2rayN 7.16.4&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;代理设置优化&lt;/strong&gt;：Windows 支持自定义 PAC 文件路径，非 Windows 系统支持自定义代理脚本路径&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;路由规则升级&lt;/strong&gt;：规则集升级至 V4 版，全面代理 Google 域名（影响范围：所有使用路由规则的用户）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;操作体验优化&lt;/strong&gt;：删除重复节点增加二次确认，支持 shadowsocks-ws-tls 配置导入&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;&lt;a href=&quot;https://github.com/maillab/cloud-mail/releases/tag/v2.5.0&quot;&gt;maillab/cloud-mail v2.5.0&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;显示未读邮件，帮助用户快速识别新邮件。&lt;/li&gt;
+&lt;li&gt;最新邮件通知弹窗，确保用户不会错过任何重要信息。&lt;/li&gt;
+&lt;li&gt;邮箱名禁止包含指定字符串，增强账户安全性和规范性。&lt;/li&gt;
+&lt;li&gt;邮件列表样式优化，提升用户体验和界面美观度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;&lt;a href=&quot;https://github.com/yang991178/fluent-reader-lite/releases/tag/v1.0.5%2B12&quot;&gt;yang991178/fluent-reader-lite v1.0.5+12&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;Breaking Changes&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;解决了与 Miniflux 服务的连接问题，增强了数据同步的可靠性。[影响范围: 使用 Miniflux 作为 RSS 源的用户]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;更新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;发布日期:&lt;/em&gt;* 2025-11-23&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;更新 Flutter 和依赖项至最新版本&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;&lt;a href=&quot;https://github.com/mas-cli/mas/releases/tag/v3.1.0&quot;&gt;mas-cli/mas v3.1.0&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;默认使用更快的预3.0.0版本检测逻辑，并提供&lt;code&gt;--accurate&lt;/code&gt;和&lt;code&gt;--accurate-ignore-unknown-apps&lt;/code&gt;标志以使用更精确但较慢的检测逻辑。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;正确格式化&lt;code&gt;outdated&lt;/code&gt;输出。&lt;/li&gt;
+&lt;li&gt;改进下载/安装进度输出。&lt;/li&gt;
+&lt;li&gt;更新GitHub Actions配置。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;&lt;a href=&quot;https://github.com/triwinds/ns-emu-tools/releases/tag/0.5.9&quot;&gt;triwinds/ns-emu-tools 0.5.9&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;解决了一些用户界面的小问题，提升了用户体验。&lt;/li&gt;
+&lt;li&gt;此次更新主要集中在稳定性和用户体验的提升上，建议所有用户升级以获得最佳体验。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;帮助我们改进&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;对今日摘要质量有建议? 欢迎反馈！&lt;/p&gt;
@@ -4625,6 +4625,203 @@ hexo g -d //将生成的网站部署到Github Pages静态页面上
 &lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;⭐ 评价今日日报&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;您的反馈将帮助我们优化 AI Prompt,提升摘要准确性 🙏&lt;/p&gt;
+</content:encoded><category>开源追踪</category><category>releases</category><category>daily</category><category>automation</category><author>Release Bot</author></item><item><title>GitHub Releases 日报 - 2025-12-05</title><link>https://blog.yuyins.com/blog/releases/2025-12-05/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/releases/2025-12-05/</guid><description>AI 自动生成的开源项目更新总结,今日共 27 个更新</description><pubDate>Fri, 05 Dec 2025 03:41:22 GMT</pubDate><content:encoded>&lt;h1&gt;2025-12-05 更新摘要&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;统计信息&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;由 直译 (12), Qwen 2.5 72B (14), 本地降级 (1) 总结&lt;/li&gt;
+&lt;li&gt;监控仓库: 157 个&lt;/li&gt;
+&lt;li&gt;今日更新: 13 个项目 (27 个版本)&lt;/li&gt;
+&lt;li&gt;生成时间: 2025-12-05 11:41:22 (北京时间)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/openai/codex/releases&quot;&gt;openai/codex rust-v0.65.0-alpha.9 - rust-v0.66.0-alpha.5&lt;/a&gt; &amp;lt;sup&amp;gt;直译&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;无内容&lt;/li&gt;
+&lt;li&gt;Codex Max 成为默认模型&lt;/li&gt;
+&lt;li&gt;添加 /resume 命令，提高恢复工作时的性能&lt;/li&gt;
+&lt;li&gt;工具提示和提示信息支持 Markdown 渲染&lt;/li&gt;
+&lt;li&gt;TUI 改进：Ctrl-P/N 导航、屏幕行数限制的 Shell 输出&lt;/li&gt;
+&lt;li&gt;历史记录和上下文清理：历史记录大小限制、忽略常见垃圾目录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复 TUI 异步代码导致的崩溃问题&lt;/li&gt;
+&lt;li&gt;修复 Windows 剪贴板图片粘贴问题&lt;/li&gt;
+&lt;li&gt;解决统一执行沙箱检测中的路径解析错误&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/continuedev/continue/releases&quot;&gt;continuedev/continue v1.5.21-beta.20251204 - @continuedev/fetch@1.7.0&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;添加不区分大小写的查找替换策略&lt;/li&gt;
+&lt;li&gt;默认 CLI 配置文件更名&lt;/li&gt;
+&lt;li&gt;处理 JSON 内容的 create_new_file 方法&lt;/li&gt;
+&lt;li&gt;自动批准并行读取的内置工具&lt;/li&gt;
+&lt;li&gt;每日测试版发布。如果在 7 天内未发现严重问题，此版本将被提升为稳定版。&lt;/li&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复 TypeScript 错误&lt;/li&gt;
+&lt;li&gt;修复多个测试相关问题&lt;/li&gt;
+&lt;li&gt;修复加载 MCP 密钥时的错误&lt;/li&gt;
+&lt;li&gt;处理创建新文件时的 JSON 内容&lt;/li&gt;
+&lt;li&gt;同步 package-lock.json 与 npm 注册表&lt;/li&gt;
+&lt;li&gt;升级 AWS SDK 客户端至 3.929.0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/sst/opencode/releases&quot;&gt;sst/opencode v1.0.130 - v1.0.133&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持 SAP AI Core 提供商&lt;/li&gt;
+&lt;li&gt;GitHub Action 增加可选提示输入&lt;/li&gt;
+&lt;li&gt;增强 DeepSeek 推理内容处理&lt;/li&gt;
+&lt;li&gt;添加 tool_details 快捷键&lt;/li&gt;
+&lt;li&gt;添加 messages_last_user 命令滚动到最后一用户消息&lt;/li&gt;
+&lt;li&gt;添加 experimental.primary_tools 设置&lt;/li&gt;
+&lt;li&gt;添加 Grok 资源耗尽重试机制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复 /new 命令保存问题&lt;/li&gt;
+&lt;li&gt;改善 bash 工具消息&lt;/li&gt;
+&lt;li&gt;修复模型传递问题&lt;/li&gt;
+&lt;li&gt;修复了使用提供者配置时 Anthropic API 密钥错误问题&lt;/li&gt;
+&lt;li&gt;修复了计算令牌成本时出现的 TypeError&lt;/li&gt;
+&lt;li&gt;修复提供者 ID 问题&lt;/li&gt;
+&lt;li&gt;修复压缩类型问题&lt;/li&gt;
+&lt;li&gt;修复 DAX 拼写错误&lt;/li&gt;
+&lt;li&gt;修复 Windows 下 bunfs 路径问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/transmission/transmission/releases/tag/4.1.0-beta.4&quot;&gt;transmission/transmission 4.1.0-beta.4&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;统一 RPC 和 settings.json 字符串为 snake_case，兼容旧版&lt;/li&gt;
+&lt;li&gt;新增 JSON-RPC 2.0 兼容的 RPC API&lt;/li&gt;
+&lt;li&gt;支持下载完成后立即验证 torrent&lt;/li&gt;
+&lt;li&gt;添加 BEP-21 下载者计数到 tr_tracker_view 和 RPC&lt;/li&gt;
+&lt;li&gt;添加对 libevent 2.2.1-alpha-dev 的支持&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复 macOS 客户端 Torrent 表视图中组行缺少工具提示的问题&lt;/li&gt;
+&lt;li&gt;修复 transmission-remote -pi 显示错误速度的问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Breaking Changes&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;弃用 tcp-enabled 和 udp-enabled，改为 preferred_transports&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/caddyserver/caddy/releases/tag/v2.11.0-beta.1&quot;&gt;caddyserver/caddy v2.11.0-beta.1&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持使用 SIGUSR1 信号重新加载文件配置&lt;/li&gt;
+&lt;li&gt;替换日志库为支持时间滚动的 timberjack&lt;/li&gt;
+&lt;li&gt;支持命名套接字激活绑定监听&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复 handle_errors 导致的响应损坏问题&lt;/li&gt;
+&lt;li&gt;修复 Caddyfile 中嵌套引号格式化错误&lt;/li&gt;
+&lt;li&gt;修复 Caddyfile 环境变量前的尾随空格问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/leoafarias/fvm/releases/tag/4.0.2&quot;&gt;leoafarias/fvm 4.0.2&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复 Flutter 3.38+ 版本检测问题&lt;/li&gt;
+&lt;li&gt;过滤缓存版本列表中的隐藏目录&lt;/li&gt;
+&lt;li&gt;修复文档站点导航冲突&lt;/li&gt;
+&lt;li&gt;改进 Android Studio/IntelliJ IDE 配置指南&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/AIsouler/GKD_subscription/releases/tag/v361&quot;&gt;AIsouler/GKD_subscription v361&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;新增动漫共和国全屏广告规则&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;调整哔哩哔哩分段广告规则&lt;/li&gt;
+&lt;li&gt;调整动漫共和国开屏广告规则&lt;/li&gt;
+&lt;li&gt;调整多屏互动开屏广告规则&lt;/li&gt;
+&lt;li&gt;调整拼多多更新提示规则&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/fishjar/kiss-translator/releases/tag/v2.0.13&quot;&gt;fishjar/kiss-translator v2.0.13&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持鼠标悬停字幕翻译单词&lt;/li&gt;
+&lt;li&gt;支持同步滚动显示字幕列表，点击跳转播放进度并下载字幕&lt;/li&gt;
+&lt;li&gt;集成字幕查词后的生词本功能，并支持导出&lt;/li&gt;
+&lt;li&gt;增加三种格式聚合翻译的默认提示，方便切换适应不同的AI&lt;/li&gt;
+&lt;li&gt;css选择器支持+号（追加）和-号（剔除）作为前缀&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复鼠标悬停翻译快捷键置空时无法切换翻译的bug&lt;/li&gt;
+&lt;li&gt;修复cloudflare AI接口出错的bug&lt;/li&gt;
+&lt;li&gt;修复置空全局规则的忽略元素选择器时的bug&lt;/li&gt;
+&lt;li&gt;修复输入框翻译无法删除原文的bug&lt;/li&gt;
+&lt;li&gt;转移原文的html代码，避免译文错误渲染&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/RooCodeInc/Roo-Code/releases/tag/v3.36.0&quot;&gt;RooCodeInc/Roo-Code v3.36.0&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;添加 reasoning_details 支持，增强模型推理可见性&lt;/li&gt;
+&lt;li&gt;默认使用原生工具提高所有模型性能&lt;/li&gt;
+&lt;li&gt;为 Minimax 模型启用 search_and_replace 功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复回滚后上下文恢复问题&lt;/li&gt;
+&lt;li&gt;解决 Vercel AI Gateway 模型获取问题&lt;/li&gt;
+&lt;li&gt;修正下载计数显示错误&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/jdx/mise/releases/tag/v2025.12.0&quot;&gt;jdx/mise v2025.12.0&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持 .netrc 文件&lt;/li&gt;
+&lt;li&gt;添加 resolve_lock_info 用于校验和获取&lt;/li&gt;
+&lt;li&gt;支持通过 HTTPS 下载 Ruby 压缩包&lt;/li&gt;
+&lt;li&gt;在运行脚本时添加 usage 参数到 Tera 上下文&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复读取锁定文件时平台限定符验证问题&lt;/li&gt;
+&lt;li&gt;修复 shebang 脚本在 ETXTBUSY 错误时重试问题&lt;/li&gt;
+&lt;li&gt;移除冗余的 &apos;mise&apos; 前缀在详细输出中&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/GtxFury/FlyClash/releases/tag/v0.2.3&quot;&gt;GtxFury/FlyClash v0.2.3&lt;/a&gt; &amp;lt;sup&amp;gt;降级&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;本次更新暂无 AI 摘要，请查看原始 Release Notes&lt;/em&gt;&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/1Panel-dev/1Panel/releases/tag/v2.0.14&quot;&gt;1Panel-dev/1Panel v2.0.14&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DNS 账号支持 AlibabaCloud ESA 和 Amazon Route 53&lt;/li&gt;
+&lt;li&gt;MySQL 数据库创建支持更多字符集和自定义排序规则&lt;/li&gt;
+&lt;li&gt;支持添加和管理 PostgreSQL 18 远程数据库&lt;/li&gt;
+&lt;li&gt;容器创建和编辑操作支持多网卡配置&lt;/li&gt;
+&lt;li&gt;支持容器与镜像的收藏操作及容器管理页面备注功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/Ranchero-Software/NetNewsWire/releases&quot;&gt;Ranchero-Software/NetNewsWire iOS-6.2.1-6203 - mac-6.2.1&lt;/a&gt; &amp;lt;sup&amp;gt;直译&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;(Same as 6.2.1b1，但包含 6.2.1 最终版本。)&lt;/li&gt;
+&lt;li&gt;自 6.2 的更改：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复了一些导致程序崩溃的 bug&lt;/li&gt;
+&lt;li&gt;修复了一个 bug，该 bug 在某些 Mac 上导致用户无法选择要导入的 OPML 文件&lt;/li&gt;
+&lt;li&gt;修复多个状态恢复问题&lt;/li&gt;
+&lt;li&gt;修复打开网页视图时可能发生的崩溃&lt;/li&gt;
+&lt;li&gt;修复部分用户无法选择 OPML 文件的问题&lt;/li&gt;
+&lt;li&gt;修复 iPad 上文章在切换订阅源选择后仍显示的问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;帮助我们改进&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;对今日摘要质量有建议? 欢迎反馈！&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;📝 反馈摘要质量&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;⭐ 评价今日日报&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;您的反馈将帮助我们优化 AI Prompt,提升摘要准确性 🙏&lt;/p&gt;
 </content:encoded><category>开源追踪</category><category>releases</category><category>daily</category><category>automation</category><author>Release Bot</author></item><item><title>GitHub Releases 日报 - 2025-12-07</title><link>https://blog.yuyins.com/blog/releases/2025-12-07/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/releases/2025-12-07/</guid><description>AI 自动生成的开源项目更新总结,今日共 10 个更新</description><pubDate>Sun, 07 Dec 2025 02:27:05 GMT</pubDate><content:encoded>&lt;h1&gt;2025-12-07 更新摘要&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;统计信息&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -4863,395 +5060,6 @@ hexo g -d //将生成的网站部署到Github Pages静态页面上
 &lt;li&gt;右键删除重复节点增加二次确认&lt;/li&gt;
 &lt;li&gt;改进 Linux Emoji 字体兼容性&lt;/li&gt;
 &lt;li&gt;支持 shadowsocks-ws-tls 导入&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;帮助我们改进&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;对今日摘要质量有建议? 欢迎反馈！&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;📝 反馈摘要质量&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;⭐ 评价今日日报&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;您的反馈将帮助我们优化 AI Prompt,提升摘要准确性 🙏&lt;/p&gt;
-</content:encoded><category>开源追踪</category><category>releases</category><category>daily</category><category>automation</category><author>Release Bot</author></item><item><title>GitHub Releases 日报 - 2025-12-05</title><link>https://blog.yuyins.com/blog/releases/2025-12-05/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/releases/2025-12-05/</guid><description>AI 自动生成的开源项目更新总结,今日共 27 个更新</description><pubDate>Fri, 05 Dec 2025 03:41:22 GMT</pubDate><content:encoded>&lt;h1&gt;2025-12-05 更新摘要&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;统计信息&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;由 直译 (12), Qwen 2.5 72B (14), 本地降级 (1) 总结&lt;/li&gt;
-&lt;li&gt;监控仓库: 157 个&lt;/li&gt;
-&lt;li&gt;今日更新: 13 个项目 (27 个版本)&lt;/li&gt;
-&lt;li&gt;生成时间: 2025-12-05 11:41:22 (北京时间)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/openai/codex/releases&quot;&gt;openai/codex rust-v0.65.0-alpha.9 - rust-v0.66.0-alpha.5&lt;/a&gt; &amp;lt;sup&amp;gt;直译&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;无内容&lt;/li&gt;
-&lt;li&gt;Codex Max 成为默认模型&lt;/li&gt;
-&lt;li&gt;添加 /resume 命令，提高恢复工作时的性能&lt;/li&gt;
-&lt;li&gt;工具提示和提示信息支持 Markdown 渲染&lt;/li&gt;
-&lt;li&gt;TUI 改进：Ctrl-P/N 导航、屏幕行数限制的 Shell 输出&lt;/li&gt;
-&lt;li&gt;历史记录和上下文清理：历史记录大小限制、忽略常见垃圾目录&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;修复 TUI 异步代码导致的崩溃问题&lt;/li&gt;
-&lt;li&gt;修复 Windows 剪贴板图片粘贴问题&lt;/li&gt;
-&lt;li&gt;解决统一执行沙箱检测中的路径解析错误&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/continuedev/continue/releases&quot;&gt;continuedev/continue v1.5.21-beta.20251204 - @continuedev/fetch@1.7.0&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;添加不区分大小写的查找替换策略&lt;/li&gt;
-&lt;li&gt;默认 CLI 配置文件更名&lt;/li&gt;
-&lt;li&gt;处理 JSON 内容的 create_new_file 方法&lt;/li&gt;
-&lt;li&gt;自动批准并行读取的内置工具&lt;/li&gt;
-&lt;li&gt;每日测试版发布。如果在 7 天内未发现严重问题，此版本将被提升为稳定版。&lt;/li&gt;
-&lt;li&gt;
-&lt;pre&gt;&lt;code&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;修复 TypeScript 错误&lt;/li&gt;
-&lt;li&gt;修复多个测试相关问题&lt;/li&gt;
-&lt;li&gt;修复加载 MCP 密钥时的错误&lt;/li&gt;
-&lt;li&gt;处理创建新文件时的 JSON 内容&lt;/li&gt;
-&lt;li&gt;同步 package-lock.json 与 npm 注册表&lt;/li&gt;
-&lt;li&gt;升级 AWS SDK 客户端至 3.929.0&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/sst/opencode/releases&quot;&gt;sst/opencode v1.0.130 - v1.0.133&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;支持 SAP AI Core 提供商&lt;/li&gt;
-&lt;li&gt;GitHub Action 增加可选提示输入&lt;/li&gt;
-&lt;li&gt;增强 DeepSeek 推理内容处理&lt;/li&gt;
-&lt;li&gt;添加 tool_details 快捷键&lt;/li&gt;
-&lt;li&gt;添加 messages_last_user 命令滚动到最后一用户消息&lt;/li&gt;
-&lt;li&gt;添加 experimental.primary_tools 设置&lt;/li&gt;
-&lt;li&gt;添加 Grok 资源耗尽重试机制&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;修复 /new 命令保存问题&lt;/li&gt;
-&lt;li&gt;改善 bash 工具消息&lt;/li&gt;
-&lt;li&gt;修复模型传递问题&lt;/li&gt;
-&lt;li&gt;修复了使用提供者配置时 Anthropic API 密钥错误问题&lt;/li&gt;
-&lt;li&gt;修复了计算令牌成本时出现的 TypeError&lt;/li&gt;
-&lt;li&gt;修复提供者 ID 问题&lt;/li&gt;
-&lt;li&gt;修复压缩类型问题&lt;/li&gt;
-&lt;li&gt;修复 DAX 拼写错误&lt;/li&gt;
-&lt;li&gt;修复 Windows 下 bunfs 路径问题&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/transmission/transmission/releases/tag/4.1.0-beta.4&quot;&gt;transmission/transmission 4.1.0-beta.4&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;统一 RPC 和 settings.json 字符串为 snake_case，兼容旧版&lt;/li&gt;
-&lt;li&gt;新增 JSON-RPC 2.0 兼容的 RPC API&lt;/li&gt;
-&lt;li&gt;支持下载完成后立即验证 torrent&lt;/li&gt;
-&lt;li&gt;添加 BEP-21 下载者计数到 tr_tracker_view 和 RPC&lt;/li&gt;
-&lt;li&gt;添加对 libevent 2.2.1-alpha-dev 的支持&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;修复 macOS 客户端 Torrent 表视图中组行缺少工具提示的问题&lt;/li&gt;
-&lt;li&gt;修复 transmission-remote -pi 显示错误速度的问题&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Breaking Changes&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;弃用 tcp-enabled 和 udp-enabled，改为 preferred_transports&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/caddyserver/caddy/releases/tag/v2.11.0-beta.1&quot;&gt;caddyserver/caddy v2.11.0-beta.1&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;支持使用 SIGUSR1 信号重新加载文件配置&lt;/li&gt;
-&lt;li&gt;替换日志库为支持时间滚动的 timberjack&lt;/li&gt;
-&lt;li&gt;支持命名套接字激活绑定监听&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;修复 handle_errors 导致的响应损坏问题&lt;/li&gt;
-&lt;li&gt;修复 Caddyfile 中嵌套引号格式化错误&lt;/li&gt;
-&lt;li&gt;修复 Caddyfile 环境变量前的尾随空格问题&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/leoafarias/fvm/releases/tag/4.0.2&quot;&gt;leoafarias/fvm 4.0.2&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;修复 Flutter 3.38+ 版本检测问题&lt;/li&gt;
-&lt;li&gt;过滤缓存版本列表中的隐藏目录&lt;/li&gt;
-&lt;li&gt;修复文档站点导航冲突&lt;/li&gt;
-&lt;li&gt;改进 Android Studio/IntelliJ IDE 配置指南&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/AIsouler/GKD_subscription/releases/tag/v361&quot;&gt;AIsouler/GKD_subscription v361&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;新增动漫共和国全屏广告规则&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;调整哔哩哔哩分段广告规则&lt;/li&gt;
-&lt;li&gt;调整动漫共和国开屏广告规则&lt;/li&gt;
-&lt;li&gt;调整多屏互动开屏广告规则&lt;/li&gt;
-&lt;li&gt;调整拼多多更新提示规则&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/fishjar/kiss-translator/releases/tag/v2.0.13&quot;&gt;fishjar/kiss-translator v2.0.13&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;支持鼠标悬停字幕翻译单词&lt;/li&gt;
-&lt;li&gt;支持同步滚动显示字幕列表，点击跳转播放进度并下载字幕&lt;/li&gt;
-&lt;li&gt;集成字幕查词后的生词本功能，并支持导出&lt;/li&gt;
-&lt;li&gt;增加三种格式聚合翻译的默认提示，方便切换适应不同的AI&lt;/li&gt;
-&lt;li&gt;css选择器支持+号（追加）和-号（剔除）作为前缀&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;修复鼠标悬停翻译快捷键置空时无法切换翻译的bug&lt;/li&gt;
-&lt;li&gt;修复cloudflare AI接口出错的bug&lt;/li&gt;
-&lt;li&gt;修复置空全局规则的忽略元素选择器时的bug&lt;/li&gt;
-&lt;li&gt;修复输入框翻译无法删除原文的bug&lt;/li&gt;
-&lt;li&gt;转移原文的html代码，避免译文错误渲染&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/RooCodeInc/Roo-Code/releases/tag/v3.36.0&quot;&gt;RooCodeInc/Roo-Code v3.36.0&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;添加 reasoning_details 支持，增强模型推理可见性&lt;/li&gt;
-&lt;li&gt;默认使用原生工具提高所有模型性能&lt;/li&gt;
-&lt;li&gt;为 Minimax 模型启用 search_and_replace 功能&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;修复回滚后上下文恢复问题&lt;/li&gt;
-&lt;li&gt;解决 Vercel AI Gateway 模型获取问题&lt;/li&gt;
-&lt;li&gt;修正下载计数显示错误&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/jdx/mise/releases/tag/v2025.12.0&quot;&gt;jdx/mise v2025.12.0&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;支持 .netrc 文件&lt;/li&gt;
-&lt;li&gt;添加 resolve_lock_info 用于校验和获取&lt;/li&gt;
-&lt;li&gt;支持通过 HTTPS 下载 Ruby 压缩包&lt;/li&gt;
-&lt;li&gt;在运行脚本时添加 usage 参数到 Tera 上下文&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;修复读取锁定文件时平台限定符验证问题&lt;/li&gt;
-&lt;li&gt;修复 shebang 脚本在 ETXTBUSY 错误时重试问题&lt;/li&gt;
-&lt;li&gt;移除冗余的 &apos;mise&apos; 前缀在详细输出中&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/GtxFury/FlyClash/releases/tag/v0.2.3&quot;&gt;GtxFury/FlyClash v0.2.3&lt;/a&gt; &amp;lt;sup&amp;gt;降级&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;本次更新暂无 AI 摘要，请查看原始 Release Notes&lt;/em&gt;&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/1Panel-dev/1Panel/releases/tag/v2.0.14&quot;&gt;1Panel-dev/1Panel v2.0.14&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;DNS 账号支持 AlibabaCloud ESA 和 Amazon Route 53&lt;/li&gt;
-&lt;li&gt;MySQL 数据库创建支持更多字符集和自定义排序规则&lt;/li&gt;
-&lt;li&gt;支持添加和管理 PostgreSQL 18 远程数据库&lt;/li&gt;
-&lt;li&gt;容器创建和编辑操作支持多网卡配置&lt;/li&gt;
-&lt;li&gt;支持容器与镜像的收藏操作及容器管理页面备注功能&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/Ranchero-Software/NetNewsWire/releases&quot;&gt;Ranchero-Software/NetNewsWire iOS-6.2.1-6203 - mac-6.2.1&lt;/a&gt; &amp;lt;sup&amp;gt;直译&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;(Same as 6.2.1b1，但包含 6.2.1 最终版本。)&lt;/li&gt;
-&lt;li&gt;自 6.2 的更改：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;修复了一些导致程序崩溃的 bug&lt;/li&gt;
-&lt;li&gt;修复了一个 bug，该 bug 在某些 Mac 上导致用户无法选择要导入的 OPML 文件&lt;/li&gt;
-&lt;li&gt;修复多个状态恢复问题&lt;/li&gt;
-&lt;li&gt;修复打开网页视图时可能发生的崩溃&lt;/li&gt;
-&lt;li&gt;修复部分用户无法选择 OPML 文件的问题&lt;/li&gt;
-&lt;li&gt;修复 iPad 上文章在切换订阅源选择后仍显示的问题&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;帮助我们改进&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;对今日摘要质量有建议? 欢迎反馈！&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;📝 反馈摘要质量&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;⭐ 评价今日日报&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;您的反馈将帮助我们优化 AI Prompt,提升摘要准确性 🙏&lt;/p&gt;
-</content:encoded><category>开源追踪</category><category>releases</category><category>daily</category><category>automation</category><author>Release Bot</author></item><item><title>GitHub Releases 日报 - 2025-12-09</title><link>https://blog.yuyins.com/blog/releases/2025-12-09/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/releases/2025-12-09/</guid><description>AI 自动生成的开源项目更新总结,今日共 22 个更新</description><pubDate>Tue, 09 Dec 2025 02:13:28 GMT</pubDate><content:encoded>&lt;h1&gt;2025-12-09 更新摘要&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;统计信息&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;由 Qwen 2.5 72B (14), 直译 (7), GLM-4-Flash (1) 总结&lt;/li&gt;
-&lt;li&gt;监控仓库: 157 个&lt;/li&gt;
-&lt;li&gt;今日更新: 18 个项目 (22 个版本)&lt;/li&gt;
-&lt;li&gt;生成时间: 2025-12-09 10:13:28 (北京时间)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/google-gemini/gemini-cli/releases&quot;&gt;google-gemini/gemini-cli v0.20.0-preview.2 - v0.20.0-preview.5&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;集成模型可用性服务到后端逻辑&lt;/li&gt;
-&lt;li&gt;添加 a2a-server 任务中的 prompt_id 传播&lt;/li&gt;
-&lt;li&gt;增加 OTEL 日志事件 &lt;code&gt;gemini_cli.startup_stats&lt;/code&gt; 用于启动统计&lt;/li&gt;
-&lt;li&gt;支持用户范围的扩展设置&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;修复了 v0.20.0-preview.2 版本中的问题&lt;/li&gt;
-&lt;li&gt;修复非交互模式下启用调试模式时的冻结问题&lt;/li&gt;
-&lt;li&gt;改善音频文件读取&lt;/li&gt;
-&lt;li&gt;修复链式 e2e 流程失败状态设置&lt;/li&gt;
-&lt;li&gt;修复了 v0.20.0-preview.1 版本中的问题&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/wavetermdev/waveterm/releases/tag/v0.13.0-beta.1&quot;&gt;wavetermdev/waveterm v0.13.0-beta.1&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;支持本地和第三方 AI 模型，包括 Ollama 和 Google Gemini&lt;/li&gt;
-&lt;li&gt;新增统一配置界面，简化设置管理&lt;/li&gt;
-&lt;li&gt;终端改进：默认启用 Bracketed Paste Mode，修复 Windows 粘贴问题&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;修复 SSH 密码管理，支持存储在 Wave 的密钥库中&lt;/li&gt;
-&lt;li&gt;升级依赖包，提高稳定性和性能&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/openai/codex/releases&quot;&gt;openai/codex rust-v0.66.0-alpha.11 - rust-v0.66.0-alpha.12&lt;/a&gt; &amp;lt;sup&amp;gt;直译&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;无内容&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/ryoppippi/ccusage/releases/tag/v17.1.7&quot;&gt;ryoppippi/ccusage v17.1.7&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;支持 Bedrock 前缀模型的 Opus 4.5 定价&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/jdx/mise/releases/tag/v2025.12.1&quot;&gt;jdx/mise v2025.12.1&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;支持 pnpm 作为 npm 后端的包管理器&lt;/li&gt;
-&lt;li&gt;mise generate tool-stub 命令增加 --bootstrap 标志&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;增加 Alpine 发布超时时间至 60 分钟&lt;/li&gt;
-&lt;li&gt;Windows 上 aarch64 架构使用 x64-baseline&lt;/li&gt;
-&lt;li&gt;允许工具中使用环境变量&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/AIsouler/GKD_subscription/releases/tag/v365&quot;&gt;AIsouler/GKD_subscription v365&lt;/a&gt; &amp;lt;sup&amp;gt;GLM-4-Flash&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;应用规则数量增加1&lt;/li&gt;
-&lt;li&gt;分段广告类别新增1条规则&lt;/li&gt;
-&lt;li&gt;快手应用分段广告信息流广告新增1条规则&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/ffuqiangg/build_openwrt/releases/tag/2025.12.08&quot;&gt;ffuqiangg/build_openwrt 2025.12.08&lt;/a&gt; &amp;lt;sup&amp;gt;直译&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;测试固件请谨慎下载和使用&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;默认 IP：192.168.1.99 | 默认密码：password&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/xchacha20-poly1305/husi/releases/tag/v0.15.1&quot;&gt;xchacha20-poly1305/husi v0.15.1&lt;/a&gt; &amp;lt;sup&amp;gt;直译&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;:memo: 发行说明&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/STranslate/STranslate/releases/tag/2.0.0&quot;&gt;STranslate/STranslate 2.0.0&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;引入插件系统，支持扩展应用功能&lt;/li&gt;
-&lt;li&gt;使用 Fluent Design 2 重构用户界面&lt;/li&gt;
-&lt;li&gt;升级 .NET 10 框架，提升性能&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Breaking Changes&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;与 1.x 版本不兼容，需备份数据&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/mas-cli/mas/releases/tag/v4.1.0&quot;&gt;mas-cli/mas v4.1.0&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;sudo 从 Swift 调用，支持非过期的 sudo 凭证&lt;/li&gt;
-&lt;li&gt;macOS 15 Intel GHA 运行器支持&lt;/li&gt;
-&lt;li&gt;大量代码清理和文档更新&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/ventoy/Ventoy/releases/tag/v1.1.08&quot;&gt;ventoy/Ventoy v1.1.08&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;增加对 FreeBSD 15.0 的支持&lt;/li&gt;
-&lt;li&gt;测试了 1300+ 个新 ISO 文件&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/continuedev/continue/releases/tag/v1.5.25-beta.20251208&quot;&gt;continuedev/continue v1.5.25-beta.20251208&lt;/a&gt; &amp;lt;sup&amp;gt;直译&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;每日测试版发布。如果在 7 天内未发现严重问题，此版本将被提升为稳定版。&lt;/li&gt;
-&lt;li&gt;
-&lt;pre&gt;&lt;code&gt;
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/Homebrew/brew/releases/tag/5.0.5&quot;&gt;Homebrew/brew 5.0.5&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;shellenv: 优先使用 lsof 而非 ps 读取进程命令&lt;/li&gt;
-&lt;li&gt;重构 Homebrew 治理结构&lt;/li&gt;
-&lt;li&gt;添加主要维护者到 README 和手册页&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;修复 README 中的链接错误&lt;/li&gt;
-&lt;li&gt;抑制 lsof 的警告信息&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Breaking Changes&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;弃用 Formula#needs 和移除 needs :openmp 支持&lt;/li&gt;
-&lt;li&gt;弃用 option :cxx11 和 option :universal&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/1Panel-dev/1Panel/releases/tag/v2.0.15&quot;&gt;1Panel-dev/1Panel v2.0.15&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;优化了容器编排页面的界面样式&lt;/li&gt;
-&lt;li&gt;移除无效的 stat 检查逻辑以优化请求处理效率&lt;/li&gt;
-&lt;li&gt;优化了 volume 和 device 清理操作的关闭逻辑&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;修复了应用升级版本文件对比高亮未显示的问题&lt;/li&gt;
-&lt;li&gt;修复了远程 MySQL 数据库 root 用户密码获取异常问题&lt;/li&gt;
-&lt;li&gt;修复了运行环境安装成功后缺失重定向的问题&lt;/li&gt;
-&lt;li&gt;修复了部分场景下添加 PostgreSQL 远程数据库失败的问题&lt;/li&gt;
-&lt;li&gt;修复了包含特殊字符的远程 PostgreSQL 数据库备份失败的问题&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/tw93/Pake/releases/tag/V3.6.0&quot;&gt;tw93/Pake V3.6.0&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;菜单栏增强：新增原生菜单体系及丰富快捷键&lt;/li&gt;
-&lt;li&gt;多账号/OAuth 登录支持：优化第三方登录流程&lt;/li&gt;
-&lt;li&gt;主题自动适配：Mac 端 Titlebar 自动切换颜色&lt;/li&gt;
-&lt;li&gt;CLI 参数增强：新增 --zoom 等参数&lt;/li&gt;
-&lt;li&gt;Windows 安装优化：智能重试与 CN 镜像自动切换&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;CSS 注入修复：解决特殊字符导致的注入问题&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/CherryHQ/cherry-studio/releases/tag/v1.7.2&quot;&gt;CherryHQ/cherry-studio v1.7.2&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;添加斯洛伐克语拼写检查支持&lt;/li&gt;
-&lt;li&gt;支持文档文件翻译并重构文件读取逻辑&lt;/li&gt;
-&lt;li&gt;为模型选择添加工具提示并改进国际化&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;修复代码块中选定区域滚动后变化的问题&lt;/li&gt;
-&lt;li&gt;修复删除最后一个主题后主题名称仍保留的问题&lt;/li&gt;
-&lt;li&gt;修复多文件选择时的 UI 冻结问题&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/Ranchero-Software/NetNewsWire/releases&quot;&gt;Ranchero-Software/NetNewsWire iOS-6.2.1-6205 - iOS-6.2.1-6206&lt;/a&gt; &amp;lt;sup&amp;gt;直译&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;修复了先前测试版引入的问题，其中“隐藏已读文章”设置对于文件夹无效或无法保存&lt;/li&gt;
-&lt;li&gt;修复了所有未读源在刷新时无法移除已读文章的问题&lt;/li&gt;
-&lt;li&gt;修复了 iPad 上分屏视图中文章视图可能变得非常窄的问题&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/maillab/cloud-mail/releases/tag/v2.6.0&quot;&gt;maillab/cloud-mail v2.6.0&lt;/a&gt; &amp;lt;sup&amp;gt;直译&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;新增显示所有邮箱邮件&lt;/li&gt;
-&lt;li&gt;全部邮件选择复制不再触发点击&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;修复了一些已知 Bug&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;帮助我们改进&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;对今日摘要质量有建议? 欢迎反馈！&lt;/p&gt;
@@ -5981,6 +5789,198 @@ hexo g -d //将生成的网站部署到Github Pages静态页面上
 &lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;升级 Nextjs 以修补 CVE-2025-67779 安全漏洞&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;帮助我们改进&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;对今日摘要质量有建议? 欢迎反馈！&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;📝 反馈摘要质量&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;⭐ 评价今日日报&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;您的反馈将帮助我们优化 AI Prompt,提升摘要准确性 🙏&lt;/p&gt;
+</content:encoded><category>开源追踪</category><category>releases</category><category>daily</category><category>automation</category><author>Release Bot</author></item><item><title>GitHub Releases 日报 - 2025-12-09</title><link>https://blog.yuyins.com/blog/releases/2025-12-09/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/releases/2025-12-09/</guid><description>AI 自动生成的开源项目更新总结,今日共 22 个更新</description><pubDate>Tue, 09 Dec 2025 02:13:28 GMT</pubDate><content:encoded>&lt;h1&gt;2025-12-09 更新摘要&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;统计信息&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;由 Qwen 2.5 72B (14), 直译 (7), GLM-4-Flash (1) 总结&lt;/li&gt;
+&lt;li&gt;监控仓库: 157 个&lt;/li&gt;
+&lt;li&gt;今日更新: 18 个项目 (22 个版本)&lt;/li&gt;
+&lt;li&gt;生成时间: 2025-12-09 10:13:28 (北京时间)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/google-gemini/gemini-cli/releases&quot;&gt;google-gemini/gemini-cli v0.20.0-preview.2 - v0.20.0-preview.5&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;集成模型可用性服务到后端逻辑&lt;/li&gt;
+&lt;li&gt;添加 a2a-server 任务中的 prompt_id 传播&lt;/li&gt;
+&lt;li&gt;增加 OTEL 日志事件 &lt;code&gt;gemini_cli.startup_stats&lt;/code&gt; 用于启动统计&lt;/li&gt;
+&lt;li&gt;支持用户范围的扩展设置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复了 v0.20.0-preview.2 版本中的问题&lt;/li&gt;
+&lt;li&gt;修复非交互模式下启用调试模式时的冻结问题&lt;/li&gt;
+&lt;li&gt;改善音频文件读取&lt;/li&gt;
+&lt;li&gt;修复链式 e2e 流程失败状态设置&lt;/li&gt;
+&lt;li&gt;修复了 v0.20.0-preview.1 版本中的问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/wavetermdev/waveterm/releases/tag/v0.13.0-beta.1&quot;&gt;wavetermdev/waveterm v0.13.0-beta.1&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持本地和第三方 AI 模型，包括 Ollama 和 Google Gemini&lt;/li&gt;
+&lt;li&gt;新增统一配置界面，简化设置管理&lt;/li&gt;
+&lt;li&gt;终端改进：默认启用 Bracketed Paste Mode，修复 Windows 粘贴问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复 SSH 密码管理，支持存储在 Wave 的密钥库中&lt;/li&gt;
+&lt;li&gt;升级依赖包，提高稳定性和性能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/openai/codex/releases&quot;&gt;openai/codex rust-v0.66.0-alpha.11 - rust-v0.66.0-alpha.12&lt;/a&gt; &amp;lt;sup&amp;gt;直译&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;无内容&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/ryoppippi/ccusage/releases/tag/v17.1.7&quot;&gt;ryoppippi/ccusage v17.1.7&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持 Bedrock 前缀模型的 Opus 4.5 定价&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/jdx/mise/releases/tag/v2025.12.1&quot;&gt;jdx/mise v2025.12.1&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持 pnpm 作为 npm 后端的包管理器&lt;/li&gt;
+&lt;li&gt;mise generate tool-stub 命令增加 --bootstrap 标志&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;增加 Alpine 发布超时时间至 60 分钟&lt;/li&gt;
+&lt;li&gt;Windows 上 aarch64 架构使用 x64-baseline&lt;/li&gt;
+&lt;li&gt;允许工具中使用环境变量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/AIsouler/GKD_subscription/releases/tag/v365&quot;&gt;AIsouler/GKD_subscription v365&lt;/a&gt; &amp;lt;sup&amp;gt;GLM-4-Flash&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;应用规则数量增加1&lt;/li&gt;
+&lt;li&gt;分段广告类别新增1条规则&lt;/li&gt;
+&lt;li&gt;快手应用分段广告信息流广告新增1条规则&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/ffuqiangg/build_openwrt/releases/tag/2025.12.08&quot;&gt;ffuqiangg/build_openwrt 2025.12.08&lt;/a&gt; &amp;lt;sup&amp;gt;直译&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;测试固件请谨慎下载和使用&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;默认 IP：192.168.1.99 | 默认密码：password&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/xchacha20-poly1305/husi/releases/tag/v0.15.1&quot;&gt;xchacha20-poly1305/husi v0.15.1&lt;/a&gt; &amp;lt;sup&amp;gt;直译&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;:memo: 发行说明&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/STranslate/STranslate/releases/tag/2.0.0&quot;&gt;STranslate/STranslate 2.0.0&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;引入插件系统，支持扩展应用功能&lt;/li&gt;
+&lt;li&gt;使用 Fluent Design 2 重构用户界面&lt;/li&gt;
+&lt;li&gt;升级 .NET 10 框架，提升性能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Breaking Changes&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;与 1.x 版本不兼容，需备份数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/mas-cli/mas/releases/tag/v4.1.0&quot;&gt;mas-cli/mas v4.1.0&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;sudo 从 Swift 调用，支持非过期的 sudo 凭证&lt;/li&gt;
+&lt;li&gt;macOS 15 Intel GHA 运行器支持&lt;/li&gt;
+&lt;li&gt;大量代码清理和文档更新&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/ventoy/Ventoy/releases/tag/v1.1.08&quot;&gt;ventoy/Ventoy v1.1.08&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;增加对 FreeBSD 15.0 的支持&lt;/li&gt;
+&lt;li&gt;测试了 1300+ 个新 ISO 文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/continuedev/continue/releases/tag/v1.5.25-beta.20251208&quot;&gt;continuedev/continue v1.5.25-beta.20251208&lt;/a&gt; &amp;lt;sup&amp;gt;直译&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每日测试版发布。如果在 7 天内未发现严重问题，此版本将被提升为稳定版。&lt;/li&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/Homebrew/brew/releases/tag/5.0.5&quot;&gt;Homebrew/brew 5.0.5&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;shellenv: 优先使用 lsof 而非 ps 读取进程命令&lt;/li&gt;
+&lt;li&gt;重构 Homebrew 治理结构&lt;/li&gt;
+&lt;li&gt;添加主要维护者到 README 和手册页&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复 README 中的链接错误&lt;/li&gt;
+&lt;li&gt;抑制 lsof 的警告信息&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Breaking Changes&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;弃用 Formula#needs 和移除 needs :openmp 支持&lt;/li&gt;
+&lt;li&gt;弃用 option :cxx11 和 option :universal&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/1Panel-dev/1Panel/releases/tag/v2.0.15&quot;&gt;1Panel-dev/1Panel v2.0.15&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;优化了容器编排页面的界面样式&lt;/li&gt;
+&lt;li&gt;移除无效的 stat 检查逻辑以优化请求处理效率&lt;/li&gt;
+&lt;li&gt;优化了 volume 和 device 清理操作的关闭逻辑&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复了应用升级版本文件对比高亮未显示的问题&lt;/li&gt;
+&lt;li&gt;修复了远程 MySQL 数据库 root 用户密码获取异常问题&lt;/li&gt;
+&lt;li&gt;修复了运行环境安装成功后缺失重定向的问题&lt;/li&gt;
+&lt;li&gt;修复了部分场景下添加 PostgreSQL 远程数据库失败的问题&lt;/li&gt;
+&lt;li&gt;修复了包含特殊字符的远程 PostgreSQL 数据库备份失败的问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/tw93/Pake/releases/tag/V3.6.0&quot;&gt;tw93/Pake V3.6.0&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;菜单栏增强：新增原生菜单体系及丰富快捷键&lt;/li&gt;
+&lt;li&gt;多账号/OAuth 登录支持：优化第三方登录流程&lt;/li&gt;
+&lt;li&gt;主题自动适配：Mac 端 Titlebar 自动切换颜色&lt;/li&gt;
+&lt;li&gt;CLI 参数增强：新增 --zoom 等参数&lt;/li&gt;
+&lt;li&gt;Windows 安装优化：智能重试与 CN 镜像自动切换&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CSS 注入修复：解决特殊字符导致的注入问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/CherryHQ/cherry-studio/releases/tag/v1.7.2&quot;&gt;CherryHQ/cherry-studio v1.7.2&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;添加斯洛伐克语拼写检查支持&lt;/li&gt;
+&lt;li&gt;支持文档文件翻译并重构文件读取逻辑&lt;/li&gt;
+&lt;li&gt;为模型选择添加工具提示并改进国际化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复代码块中选定区域滚动后变化的问题&lt;/li&gt;
+&lt;li&gt;修复删除最后一个主题后主题名称仍保留的问题&lt;/li&gt;
+&lt;li&gt;修复多文件选择时的 UI 冻结问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/Ranchero-Software/NetNewsWire/releases&quot;&gt;Ranchero-Software/NetNewsWire iOS-6.2.1-6205 - iOS-6.2.1-6206&lt;/a&gt; &amp;lt;sup&amp;gt;直译&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复了先前测试版引入的问题，其中“隐藏已读文章”设置对于文件夹无效或无法保存&lt;/li&gt;
+&lt;li&gt;修复了所有未读源在刷新时无法移除已读文章的问题&lt;/li&gt;
+&lt;li&gt;修复了 iPad 上分屏视图中文章视图可能变得非常窄的问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/maillab/cloud-mail/releases/tag/v2.6.0&quot;&gt;maillab/cloud-mail v2.6.0&lt;/a&gt; &amp;lt;sup&amp;gt;直译&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;新增显示所有邮箱邮件&lt;/li&gt;
+&lt;li&gt;全部邮件选择复制不再触发点击&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复了一些已知 Bug&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;帮助我们改进&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;对今日摘要质量有建议? 欢迎反馈！&lt;/p&gt;
@@ -7260,114 +7260,6 @@ hexo g -d //将生成的网站部署到Github Pages静态页面上
 &lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;⭐ 评价今日日报&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;您的反馈将帮助我们优化 AI Prompt,提升摘要准确性 🙏&lt;/p&gt;
-</content:encoded><category>开源追踪</category><category>releases</category><category>daily</category><category>automation</category><author>Release Bot</author></item><item><title>GitHub Releases 日报 - 2025-12-24</title><link>https://blog.yuyins.com/blog/releases/2025-12-24/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/releases/2025-12-24/</guid><description>AI 自动生成的开源项目更新总结,今日共 10 个更新</description><pubDate>Wed, 24 Dec 2025 02:14:50 GMT</pubDate><content:encoded>&lt;h1&gt;2025-12-24 更新摘要&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;统计信息&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;由 Qwen 2.5 72B (8), GLM-4-Flash (1), 本地降级 (1) 总结&lt;/li&gt;
-&lt;li&gt;监控仓库: 156 个&lt;/li&gt;
-&lt;li&gt;今日更新: 8 个项目 (10 个版本)&lt;/li&gt;
-&lt;li&gt;生成时间: 2025-12-24 10:14:50 (北京时间)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/RooCodeInc/Roo-Code/releases&quot;&gt;RooCodeInc/Roo-Code v3.37.0 - v3.37.1&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;添加空助手消息重试机制&lt;/li&gt;
-&lt;li&gt;支持所有 OpenAI 兼容提供者合并工具结果文本&lt;/li&gt;
-&lt;li&gt;增强本地工具使用指导&lt;/li&gt;
-&lt;li&gt;账户中心化注册流程&lt;/li&gt;
-&lt;li&gt;添加 MiniMax M2.1 和改进 Minimax 思维模型环境处理&lt;/li&gt;
-&lt;li&gt;支持 Zai 提供商的 GLM-4.7 模型及思维模式&lt;/li&gt;
-&lt;li&gt;实验性自定义工具调用功能&lt;/li&gt;
-&lt;li&gt;添加云团队页面，提供全面的团队管理功能&lt;/li&gt;
-&lt;li&gt;添加消息日志去重工具&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;默认发送本地工具定义给 OpenAI&lt;/li&gt;
-&lt;li&gt;保持推理详情格式防止响应出错&lt;/li&gt;
-&lt;li&gt;等待询问时清空消息队列&lt;/li&gt;
-&lt;li&gt;修复 OpenAI 处理器流结束时未发出 tool_call_end 事件&lt;/li&gt;
-&lt;li&gt;修复 MCP 工具严格模式导致可选参数丢失&lt;/li&gt;
-&lt;li&gt;修复 normalizeToolSchema 中特定属性处理问题&lt;/li&gt;
-&lt;li&gt;修复 search_replace 工具的 CRLF 行尾规范化&lt;/li&gt;
-&lt;li&gt;修复 Chutes 提供商模型解析的优雅回退&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Breaking Changes&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;弃用 XML 工具协议选择，强制使用原生工具格式&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/AIsouler/GKD_subscription/releases/tag/v375&quot;&gt;AIsouler/GKD_subscription v375&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;微博: 优化信息流广告和评论区荐读规则&lt;/li&gt;
-&lt;li&gt;微信: 调整朋友圈广告规则&lt;/li&gt;
-&lt;li&gt;小米社区: 更新公告板弹窗规则&lt;/li&gt;
-&lt;li&gt;番茄免费小说: 改进阅读页面广告规则&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/continuedev/continue/releases/tag/v1.5.28&quot;&gt;continuedev/continue v1.5.28&lt;/a&gt; &amp;lt;sup&amp;gt;GLM-4-Flash&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;直接从最新主分支构建并发布&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/rikkahub/rikkahub/releases/tag/1.7.2&quot;&gt;rikkahub/rikkahub 1.7.2&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;新增提示词注入功能，支持模式和关键词注入&lt;/li&gt;
-&lt;li&gt;支持将对话移动到其他助手&lt;/li&gt;
-&lt;li&gt;代码块支持显示行号&lt;/li&gt;
-&lt;li&gt;支持从其他应用选择文本跳转至 RikkaHub&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;BUG 修复和 UI 改进&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/sst/opencode/releases&quot;&gt;sst/opencode v1.0.191 - v1.0.193&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;改进 &lt;code&gt;mcp&lt;/code&gt; CLI 并增加调试 MCP OAuth 功能&lt;/li&gt;
-&lt;li&gt;技能工具描述中添加按代理过滤功能&lt;/li&gt;
-&lt;li&gt;允许压缩钩子完全替换提示&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;修复 grep 工具处理 Windows CRLF 换行问题&lt;/li&gt;
-&lt;li&gt;改善小屏幕样式显示&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/amir1376/ab-download-manager/releases/tag/v1.8.2&quot;&gt;amir1376/ab-download-manager v1.8.2&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;更新了翻译&lt;/li&gt;
-&lt;li&gt;添加了操作按钮的工具提示&lt;/li&gt;
-&lt;li&gt;桌面版“多下载”页面显示已选数量&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;解决了部分安卓设备应用内更新问题&lt;/li&gt;
-&lt;li&gt;禁用了安卓启动图标的通知徽章&lt;/li&gt;
-&lt;li&gt;修复了因系统主题检测逻辑导致的部分桌面设备崩溃&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/Molunerfinn/PicGo/releases/tag/v2.4.1&quot;&gt;Molunerfinn/PicGo v2.4.1&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;新增 &lt;code&gt;showMenubarIcon&lt;/code&gt; 配置项，控制 macOS 菜单栏图标显示&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;修复 macOS 顶部栏窗口无法读取剪贴板图片问题&lt;/li&gt;
-&lt;li&gt;修复 macOS Intel 构建无法打开问题&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/JanDeDobbeleer/oh-my-posh/releases/tag/v28.5.1&quot;&gt;JanDeDobbeleer/oh-my-posh v28.5.1&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;改善了 Python 环境下的 uv 命令支持&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;帮助我们改进&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;对今日摘要质量有建议? 欢迎反馈！&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;📝 反馈摘要质量&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;⭐ 评价今日日报&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;您的反馈将帮助我们优化 AI Prompt,提升摘要准确性 🙏&lt;/p&gt;
 </content:encoded><category>开源追踪</category><category>releases</category><category>daily</category><category>automation</category><author>Release Bot</author></item><item><title>GitHub Releases 日报 - 2025-12-23</title><link>https://blog.yuyins.com/blog/releases/2025-12-23/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/releases/2025-12-23/</guid><description>AI 自动生成的开源项目更新总结,今日共 13 个更新</description><pubDate>Tue, 23 Dec 2025 02:17:04 GMT</pubDate><content:encoded>&lt;h1&gt;2025-12-23 更新摘要&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;统计信息&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -7484,6 +7376,114 @@ hexo g -d //将生成的网站部署到Github Pages静态页面上
 &lt;p&gt;&lt;strong&gt;原始更新记录&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;style(App): 添加 showAuthorName 配置项并更新样式代码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;帮助我们改进&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;对今日摘要质量有建议? 欢迎反馈！&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;📝 反馈摘要质量&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;⭐ 评价今日日报&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;您的反馈将帮助我们优化 AI Prompt,提升摘要准确性 🙏&lt;/p&gt;
+</content:encoded><category>开源追踪</category><category>releases</category><category>daily</category><category>automation</category><author>Release Bot</author></item><item><title>GitHub Releases 日报 - 2025-12-24</title><link>https://blog.yuyins.com/blog/releases/2025-12-24/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/releases/2025-12-24/</guid><description>AI 自动生成的开源项目更新总结,今日共 10 个更新</description><pubDate>Wed, 24 Dec 2025 02:14:50 GMT</pubDate><content:encoded>&lt;h1&gt;2025-12-24 更新摘要&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;统计信息&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;由 Qwen 2.5 72B (8), GLM-4-Flash (1), 本地降级 (1) 总结&lt;/li&gt;
+&lt;li&gt;监控仓库: 156 个&lt;/li&gt;
+&lt;li&gt;今日更新: 8 个项目 (10 个版本)&lt;/li&gt;
+&lt;li&gt;生成时间: 2025-12-24 10:14:50 (北京时间)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/RooCodeInc/Roo-Code/releases&quot;&gt;RooCodeInc/Roo-Code v3.37.0 - v3.37.1&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;添加空助手消息重试机制&lt;/li&gt;
+&lt;li&gt;支持所有 OpenAI 兼容提供者合并工具结果文本&lt;/li&gt;
+&lt;li&gt;增强本地工具使用指导&lt;/li&gt;
+&lt;li&gt;账户中心化注册流程&lt;/li&gt;
+&lt;li&gt;添加 MiniMax M2.1 和改进 Minimax 思维模型环境处理&lt;/li&gt;
+&lt;li&gt;支持 Zai 提供商的 GLM-4.7 模型及思维模式&lt;/li&gt;
+&lt;li&gt;实验性自定义工具调用功能&lt;/li&gt;
+&lt;li&gt;添加云团队页面，提供全面的团队管理功能&lt;/li&gt;
+&lt;li&gt;添加消息日志去重工具&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;默认发送本地工具定义给 OpenAI&lt;/li&gt;
+&lt;li&gt;保持推理详情格式防止响应出错&lt;/li&gt;
+&lt;li&gt;等待询问时清空消息队列&lt;/li&gt;
+&lt;li&gt;修复 OpenAI 处理器流结束时未发出 tool_call_end 事件&lt;/li&gt;
+&lt;li&gt;修复 MCP 工具严格模式导致可选参数丢失&lt;/li&gt;
+&lt;li&gt;修复 normalizeToolSchema 中特定属性处理问题&lt;/li&gt;
+&lt;li&gt;修复 search_replace 工具的 CRLF 行尾规范化&lt;/li&gt;
+&lt;li&gt;修复 Chutes 提供商模型解析的优雅回退&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Breaking Changes&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;弃用 XML 工具协议选择，强制使用原生工具格式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/AIsouler/GKD_subscription/releases/tag/v375&quot;&gt;AIsouler/GKD_subscription v375&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;微博: 优化信息流广告和评论区荐读规则&lt;/li&gt;
+&lt;li&gt;微信: 调整朋友圈广告规则&lt;/li&gt;
+&lt;li&gt;小米社区: 更新公告板弹窗规则&lt;/li&gt;
+&lt;li&gt;番茄免费小说: 改进阅读页面广告规则&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/continuedev/continue/releases/tag/v1.5.28&quot;&gt;continuedev/continue v1.5.28&lt;/a&gt; &amp;lt;sup&amp;gt;GLM-4-Flash&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;直接从最新主分支构建并发布&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/rikkahub/rikkahub/releases/tag/1.7.2&quot;&gt;rikkahub/rikkahub 1.7.2&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;新增提示词注入功能，支持模式和关键词注入&lt;/li&gt;
+&lt;li&gt;支持将对话移动到其他助手&lt;/li&gt;
+&lt;li&gt;代码块支持显示行号&lt;/li&gt;
+&lt;li&gt;支持从其他应用选择文本跳转至 RikkaHub&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;BUG 修复和 UI 改进&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/sst/opencode/releases&quot;&gt;sst/opencode v1.0.191 - v1.0.193&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;改进 &lt;code&gt;mcp&lt;/code&gt; CLI 并增加调试 MCP OAuth 功能&lt;/li&gt;
+&lt;li&gt;技能工具描述中添加按代理过滤功能&lt;/li&gt;
+&lt;li&gt;允许压缩钩子完全替换提示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复 grep 工具处理 Windows CRLF 换行问题&lt;/li&gt;
+&lt;li&gt;改善小屏幕样式显示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/amir1376/ab-download-manager/releases/tag/v1.8.2&quot;&gt;amir1376/ab-download-manager v1.8.2&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;更新了翻译&lt;/li&gt;
+&lt;li&gt;添加了操作按钮的工具提示&lt;/li&gt;
+&lt;li&gt;桌面版“多下载”页面显示已选数量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;解决了部分安卓设备应用内更新问题&lt;/li&gt;
+&lt;li&gt;禁用了安卓启动图标的通知徽章&lt;/li&gt;
+&lt;li&gt;修复了因系统主题检测逻辑导致的部分桌面设备崩溃&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/Molunerfinn/PicGo/releases/tag/v2.4.1&quot;&gt;Molunerfinn/PicGo v2.4.1&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;新增 &lt;code&gt;showMenubarIcon&lt;/code&gt; 配置项，控制 macOS 菜单栏图标显示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复 macOS 顶部栏窗口无法读取剪贴板图片问题&lt;/li&gt;
+&lt;li&gt;修复 macOS Intel 构建无法打开问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/JanDeDobbeleer/oh-my-posh/releases/tag/v28.5.1&quot;&gt;JanDeDobbeleer/oh-my-posh v28.5.1&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;改善了 Python 环境下的 uv 命令支持&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;帮助我们改进&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;对今日摘要质量有建议? 欢迎反馈！&lt;/p&gt;
@@ -11711,6 +11711,208 @@ hexo g -d //将生成的网站部署到Github Pages静态页面上
 &lt;p&gt;&lt;strong&gt;Breaking Changes&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;移除 diffEnabled 和 fuzzyMatchThreshold 设置，移除 MULTI_FILE_APPLY_DIFF 实验，移除 POWER_STEERING 实验功能，移除遗留的 XML 工具调用代码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;帮助我们改进&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;对今日摘要质量有建议? 欢迎反馈！&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;📝 反馈摘要质量&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;⭐ 评价今日日报&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;您的反馈将帮助我们优化 AI Prompt,提升摘要准确性 🙏&lt;/p&gt;
+</content:encoded><category>开源追踪</category><category>releases</category><category>daily</category><category>automation</category><author>Release Bot</author></item><item><title>GitHub Releases 日报 - 2026-01-26</title><link>https://blog.yuyins.com/blog/releases/2026-01-26/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/releases/2026-01-26/</guid><description>AI 自动生成的开源项目更新总结,今日共 19 个更新</description><pubDate>Mon, 26 Jan 2026 02:40:11 GMT</pubDate><content:encoded>&lt;h1&gt;2026-01-26 更新摘要&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;统计信息&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;由 Qwen 2.5 72B (18), GLM-4-Flash (1) 总结&lt;/li&gt;
+&lt;li&gt;监控仓库: 164 个&lt;/li&gt;
+&lt;li&gt;今日更新: 14 个项目 (19 个版本)&lt;/li&gt;
+&lt;li&gt;生成时间: 2026-01-26 10:40:11 (北京时间)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/OthmanAdi/planning-with-files/releases&quot;&gt;OthmanAdi/planning-with-files v2.8.0 - v2.11.0&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;添加了更短的 /plan 命令，方便在自动补全中找到&lt;/li&gt;
+&lt;li&gt;支持 Kiro 转向文件，无需转换工具&lt;/li&gt;
+&lt;li&gt;添加 Kiro 相关文档和脚本&lt;/li&gt;
+&lt;li&gt;支持 11+ IDEs，新增 Kiro 格式&lt;/li&gt;
+&lt;li&gt;添加 Clawd CLI 支持，包括工作区和本地技能集成&lt;/li&gt;
+&lt;li&gt;支持 10+ AI 编码助手&lt;/li&gt;
+&lt;li&gt;更新插件描述，增加多 IDE 支持关键词&lt;/li&gt;
+&lt;li&gt;添加 Continue.dev 集成支持 VS Code 和 JetBrains IDE&lt;/li&gt;
+&lt;li&gt;创建 .continue 相关技能包和命令&lt;/li&gt;
+&lt;li&gt;提供 Continue 安装指南&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复 Debian/Ubuntu 系统上 Stop 钩子失败问题&lt;/li&gt;
+&lt;li&gt;替换为 POSIX 兼容语法&lt;/li&gt;
+&lt;li&gt;增加 Windows 检测&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/openai/codex/releases&quot;&gt;openai/codex rust-v0.90.0 - rust-v0.91.0&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;添加网络沙箱代理，增强出站网络访问控制&lt;/li&gt;
+&lt;li&gt;引入连接器支持的第一阶段，包括新的配置和文档更新&lt;/li&gt;
+&lt;li&gt;在 TUI 中推出协作模式的 beta 版本，简化模式选择&lt;/li&gt;
+&lt;li&gt;WebSocket 连接支持代理配置&lt;/li&gt;
+&lt;li&gt;更严格的多代理限制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复多行带引号参数的执行策略解析问题&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--yolo&lt;/code&gt; 选项现在跳过 Git 仓库检查&lt;/li&gt;
+&lt;li&gt;提高恢复可靠性，处理事件顺序问题和工作目录差异&lt;/li&gt;
+&lt;li&gt;修复光标位于元素左边缘时删除文本的问题&lt;/li&gt;
+&lt;li&gt;配置加载错误信息更清晰和可操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Breaking Changes&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将最大子代理数减少到 6，以优化资源使用和代理分散行为&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/lwouis/alt-tab-macos/releases/tag/v8.3.3&quot;&gt;lwouis/alt-tab-macos v8.3.3&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复应用图标有时不可见的问题&lt;/li&gt;
+&lt;li&gt;改善触控板手势检测&lt;/li&gt;
+&lt;li&gt;修复切换器有时不预选窗口的问题&lt;/li&gt;
+&lt;li&gt;修复应用图标标题偏移的问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/TriliumNext/Trilium/releases/tag/web-clipper-v1.1.0&quot;&gt;TriliumNext/Trilium web-clipper-v1.1.0&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持 Chrome Manifest V3&lt;/li&gt;
+&lt;li&gt;捕获页面 hash 值&lt;/li&gt;
+&lt;li&gt;检查页面是否已保存&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修正 &lt;code&gt;modifiedDate&lt;/code&gt; 使用错误&lt;/li&gt;
+&lt;li&gt;修复上下文菜单重复项&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/jdx/mise/releases/tag/v2026.1.7&quot;&gt;jdx/mise v2026.1.7&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;增加对 claude-powerline 和 rpk 工具的支持&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复插件文件缓存问题，提高环境变量加载性能&lt;/li&gt;
+&lt;li&gt;解决注册表不匹配导致工具解析失败的问题&lt;/li&gt;
+&lt;li&gt;改善 GitHub 标签格式处理，扩展兼容性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/FreshRSS/FreshRSS/releases/tag/1.28.1&quot;&gt;FreshRSS/FreshRSS 1.28.1&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;注册关闭时可自定义消息&lt;/li&gt;
+&lt;li&gt;Apache访问日志中添加用户名&lt;/li&gt;
+&lt;li&gt;禁用Ajax请求中未使用的文章计数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复用户查询扩展问题&lt;/li&gt;
+&lt;li&gt;修复标签过滤器编码问题&lt;/li&gt;
+&lt;li&gt;修复匿名刷新时的令牌问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/anomalyco/opencode/releases/tag/v1.1.36&quot;&gt;anomalyco/opencode v1.1.36&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持 Google Vertex Anthropic 模型思考功能&lt;/li&gt;
+&lt;li&gt;放宽问题验证以避免工具调用失败&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复主题搜索无结果时崩溃问题&lt;/li&gt;
+&lt;li&gt;修复未设置默认模型时崩溃问题&lt;/li&gt;
+&lt;li&gt;修复移动设备水平滚动问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/ReadYouApp/ReadYou/releases/tag/0.16.0&quot;&gt;ReadYouApp/ReadYou 0.16.0&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;添加滚动条&lt;/li&gt;
+&lt;li&gt;使用 Google Sans Flex 字体&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;同步 Google Reader API 时不再覆盖远程状态&lt;/li&gt;
+&lt;li&gt;提高文章列表中星标图标可见性&lt;/li&gt;
+&lt;li&gt;优先使用 HTTP 头中的字符集，缺失时回退到 UTF-8&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Breaking Changes&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;应用现使用旋转后的密钥签名&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/srwi/EverythingToolbar/releases/tag/2.1.2&quot;&gt;srwi/EverythingToolbar 2.1.2&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;添加了控制 Home 和 End 键行为的选项&lt;/li&gt;
+&lt;li&gt;为 Filters.csv 设置了默认路径&lt;/li&gt;
+&lt;li&gt;通过 Crowdin 改进了翻译&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复了自定义过滤器搜索项中宏未被使用的问题&lt;/li&gt;
+&lt;li&gt;提高了自动启动检查的可靠性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/zed-industries/zed/releases/tag/v0.220.6&quot;&gt;zed-industries/zed v0.220.6&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复了 Copilot 聊天模型选择器中未显示 Anthropic 模型的问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/CherryHQ/cherry-studio/releases&quot;&gt;CherryHQ/cherry-studio v1.7.15 - v1.7.13&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;添加 Anthropic 缓存支持&lt;/li&gt;
+&lt;li&gt;增加百川模型支持&lt;/li&gt;
+&lt;li&gt;将飞书通知脚本迁移到 TypeScript CLI 工具&lt;/li&gt;
+&lt;li&gt;添加 Qwen 文本嵌入功能&lt;/li&gt;
+&lt;li&gt;增加 Baichuan M3 模型支持&lt;/li&gt;
+&lt;li&gt;导出笔记到 Word 功能&lt;/li&gt;
+&lt;li&gt;集成 Kimi CLI 到 Code Tools&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;移除差异包禁用后的区块映射处理&lt;/li&gt;
+&lt;li&gt;修复托盘设置 X11 窗口类和名称&lt;/li&gt;
+&lt;li&gt;修复 macOS 修改键检测支持&lt;/li&gt;
+&lt;li&gt;修复 MCP 配置 timeout 字段不支持字符串类型的问题&lt;/li&gt;
+&lt;li&gt;防止路径遍历漏洞&lt;/li&gt;
+&lt;li&gt;修复 API URL 中尾斜杠处理问题&lt;/li&gt;
+&lt;li&gt;修复严格 JSON 模式导致的 MCP 工具支持问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/AChep/keyguard-app/releases/tag/r20260125.1&quot;&gt;AChep/keyguard-app r20260125.1&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;合并 Windows 证书存储管理器&lt;/li&gt;
+&lt;li&gt;动态调整窗口标题以匹配应用主题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复空白标签被保存的问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/clash-verge-rev/clash-verge-rev/releases/tag/v2.4.5&quot;&gt;clash-verge-rev/clash-verge-rev v2.4.5&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;允许代理页面高级过滤搜索&lt;/li&gt;
+&lt;li&gt;新增导入备份按钮&lt;/li&gt;
+&lt;li&gt;支持收起导航栏&lt;/li&gt;
+&lt;li&gt;允许将出站模式显示在托盘一级菜单&lt;/li&gt;
+&lt;li&gt;新增系统代理绕过和 TUN 排除自定义网段的可视化编辑器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复 macOS 有线网络 DNS 劫持失败&lt;/li&gt;
+&lt;li&gt;修复 Monaco 编辑器内右键菜单显示异常&lt;/li&gt;
+&lt;li&gt;修复设置代理端口时检查端口占用&lt;/li&gt;
+&lt;li&gt;修复恢复备份时文件字段未正确恢复&lt;/li&gt;
+&lt;li&gt;修复 Windows 下系统主题同步问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Breaking Changes&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;macOS 和 Linux 对服务 IPC 权限进一步限制，部分环境需要手动处理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/continuedev/continue/releases/tag/v1.5.37&quot;&gt;continuedev/continue v1.5.37&lt;/a&gt; &amp;lt;sup&amp;gt;GLM-4-Flash&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;直接从最新主分支构建并发布&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;帮助我们改进&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;对今日摘要质量有建议? 欢迎反馈！&lt;/p&gt;
