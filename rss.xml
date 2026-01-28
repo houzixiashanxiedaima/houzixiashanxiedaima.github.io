@@ -169,43 +169,7 @@ console.log(&apos;Hello, World!&apos;);
 &lt;p&gt;自动适配系统主题，并支持手动切换。&lt;/p&gt;
 &lt;h2&gt;开始使用&lt;/h2&gt;
 &lt;p&gt;查看更多文章，了解如何使用这个主题！&lt;/p&gt;
-</content:encoded><category>公告</category><category>Astro</category><category>博客</category><category>设计</category><author>博客作者</author></item><item><title>AlertDialog中使用WebView显示内容</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-alertdialog%E4%B8%AD%E4%BD%BF%E7%94%A8webview%E6%98%BE%E7%A4%BA%E5%86%85%E5%AE%B9/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-alertdialog%E4%B8%AD%E4%BD%BF%E7%94%A8webview%E6%98%BE%E7%A4%BA%E5%86%85%E5%AE%B9/</guid><description>AlertDialog中使用WebView显示内容</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;在最近的开发中，需要用到在AlertDialog中通过WebView显示内容，但是在实际操作过程中，发现有一个小小的问题需要注意一下，在此也记录一下。
-首先放出代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt; AlertDialog.Builder builder = new Builder(this)
-            .setView(R.layout.new_dialog_user_guide);
-        View view = getLayoutInflater().inflate(R.layout.new_dialog_user_guide, null);
-        WebView webView = (WebView) view.findViewById(R.id.web_user_guide);
-        webView.loadUrl(&quot;http://www.baidu.com&quot;);
-        builder.show();
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;上面这段代码，看似是没问题的，但是在实际显示过程中，WebView一直都是空白页面，啥也没有。开始排查问题：&lt;/p&gt;
-&lt;p&gt;&amp;lt;!--more--&amp;gt;&lt;/p&gt;
-&lt;h4&gt;网络问题&lt;/h4&gt;
-&lt;p&gt;一开始以为是网络问题，于是将&lt;code&gt;http://www.baidu.com&lt;/code&gt;换成本地的assets中的文件，更换后关键代码如下：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;  webView.loadUrl(&quot;file:///android_asset/test.html&quot;);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;更换为本地文件之后，WebView中显示的依然是空白页面，啥也没有。继续排查&lt;/p&gt;
-&lt;h4&gt;文件问题&lt;/h4&gt;
-&lt;p&gt;是否是这个HTML的文件有问题，如果直接加载HTML字符串，问题能否结局，继续修改关键代码如下：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;webView.loadData(&quot;&amp;lt;html&amp;gt;这是一段HTML的代码&amp;lt;/html&amp;gt;&quot;,&quot;text/html&quot;, &quot;utf-8&quot;);
-//或者也可以这样
-webView.loadDataWithBaseURL(null, &quot;&amp;lt;html&amp;gt;这是一段html代码&amp;lt;/html&amp;gt;&quot;, &quot;text/html&quot;, &quot;utf-8&quot;, null);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;更改成直接加载HTML字符串之后，WebView还是现实空白页面，啥也没有。最后想来想去，是不是因为我们将WebView放在了AlertDialog中，所以导致我们的WebView显示有问题。于是我们将WebView单独移出来，结果发现可以显示出正确的内容。那也就是说这个问题出在AlertDialog身上了，难道WebView不能放在AlertDialog中吗。显然不是的，于是参考了官方教程之后，终于发现了问题所在。&lt;/p&gt;
-&lt;h4&gt;震惊！导致WebView显示空白的罪魁祸首竟然是……&lt;/h4&gt;
-&lt;p&gt;先直接贴出可以运行的正确代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;AlertDialog.Builder builder = new Builder(this);
-        View view = getLayoutInflater().inflate(R.layout.new_dialog_user_guide, null);
-        WebView webView = (WebView) view.findViewById(R.id.web_user_guide);
-        webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl(&quot;http://www.baidu.com&quot;);
-        builder.setView(view);
-        builder.setPositiveButton(R.string.confirm, null);
-        builder.show();
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;问题就出在这个&lt;code&gt;setView&lt;/code&gt;身上，我们的&quot;错误代码&quot;是先setView，然后再使用webview进行load，但是正确的顺序应该是先使用webview进行load，然后再setView。
-问题到此排查结束。&lt;/p&gt;
-</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>Flutter 键盘处理最佳实践：避免键盘推挤界面</title><link>https://blog.yuyins.com/blog/flutter-keyboard-best-practices/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/flutter-keyboard-best-practices/</guid><description>详细讲解 Flutter 中键盘避让机制的原理和最佳实践，帮助你彻底解决键盘推挤界面的问题</description><pubDate>Thu, 24 Oct 2024 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;1. 问题诊断：为何键盘会&quot;顶起&quot;你的界面？&lt;/h2&gt;
+</content:encoded><category>公告</category><category>Astro</category><category>博客</category><category>设计</category><author>博客作者</author></item><item><title>Flutter 键盘处理最佳实践：避免键盘推挤界面</title><link>https://blog.yuyins.com/blog/flutter-keyboard-best-practices/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/flutter-keyboard-best-practices/</guid><description>详细讲解 Flutter 中键盘避让机制的原理和最佳实践，帮助你彻底解决键盘推挤界面的问题</description><pubDate>Thu, 24 Oct 2024 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;1. 问题诊断：为何键盘会&quot;顶起&quot;你的界面？&lt;/h2&gt;
 &lt;p&gt;在 Flutter 开发中，我们经常遇到键盘弹出时，页面底部的内容（如按钮或对话框）被向上推挤，甚至移出屏幕的问题。&lt;/p&gt;
 &lt;p&gt;这个行为的根源在于 &lt;code&gt;Scaffold&lt;/code&gt; 组件的 &lt;code&gt;resizeToAvoidBottomInset&lt;/code&gt; 属性。它的默认值为 &lt;code&gt;true&lt;/code&gt;，意味着当键盘等系统窗口（&lt;code&gt;viewInsets&lt;/code&gt;）出现时，&lt;code&gt;Scaffold&lt;/code&gt; 的主体内容（&lt;code&gt;body&lt;/code&gt;）会自动调整大小以避让，从而导致整体布局被压缩。&lt;/p&gt;
 &lt;h2&gt;2. 核心原理：&lt;code&gt;resizeToAvoidBottomInset&lt;/code&gt; 的层级影响&lt;/h2&gt;
@@ -254,7 +218,43 @@ Scaffold(
 &lt;li&gt;&lt;strong&gt;分层处理&lt;/strong&gt;：理解 &lt;code&gt;Scaffold&lt;/code&gt; 的影响范围，区分页面 &lt;code&gt;body&lt;/code&gt; 和 &lt;code&gt;Overlay&lt;/code&gt; 中的组件，采用不同的处理方式。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;遵循这一原则，可以高效、稳定地管理 Flutter 应用中的键盘行为。&lt;/p&gt;
-</content:encoded><category>Flutter</category><category>Flutter</category><category>键盘处理</category><category>最佳实践</category><category>UI布局</category><category>Scaffold</category><author>博客作者</author></item><item><title>Android 5.0透明状态栏设置</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android-50%E9%80%8F%E6%98%8E%E7%8A%B6%E6%80%81%E6%A0%8F%E8%AE%BE%E7%BD%AE/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android-50%E9%80%8F%E6%98%8E%E7%8A%B6%E6%80%81%E6%A0%8F%E8%AE%BE%E7%BD%AE/</guid><description>Android 5.0透明状态栏设置</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;这篇文章是针对Android 5.0及以上版本的系统进行透明的状态栏设置，Android 5.0以下的系统暂不在本篇文章的讨论范围之内。&lt;/p&gt;
+</content:encoded><category>Flutter</category><category>Flutter</category><category>键盘处理</category><category>最佳实践</category><category>UI布局</category><category>Scaffold</category><author>博客作者</author></item><item><title>AlertDialog中使用WebView显示内容</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-alertdialog%E4%B8%AD%E4%BD%BF%E7%94%A8webview%E6%98%BE%E7%A4%BA%E5%86%85%E5%AE%B9/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-alertdialog%E4%B8%AD%E4%BD%BF%E7%94%A8webview%E6%98%BE%E7%A4%BA%E5%86%85%E5%AE%B9/</guid><description>AlertDialog中使用WebView显示内容</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;在最近的开发中，需要用到在AlertDialog中通过WebView显示内容，但是在实际操作过程中，发现有一个小小的问题需要注意一下，在此也记录一下。
+首先放出代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; AlertDialog.Builder builder = new Builder(this)
+            .setView(R.layout.new_dialog_user_guide);
+        View view = getLayoutInflater().inflate(R.layout.new_dialog_user_guide, null);
+        WebView webView = (WebView) view.findViewById(R.id.web_user_guide);
+        webView.loadUrl(&quot;http://www.baidu.com&quot;);
+        builder.show();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上面这段代码，看似是没问题的，但是在实际显示过程中，WebView一直都是空白页面，啥也没有。开始排查问题：&lt;/p&gt;
+&lt;p&gt;&amp;lt;!--more--&amp;gt;&lt;/p&gt;
+&lt;h4&gt;网络问题&lt;/h4&gt;
+&lt;p&gt;一开始以为是网络问题，于是将&lt;code&gt;http://www.baidu.com&lt;/code&gt;换成本地的assets中的文件，更换后关键代码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  webView.loadUrl(&quot;file:///android_asset/test.html&quot;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;更换为本地文件之后，WebView中显示的依然是空白页面，啥也没有。继续排查&lt;/p&gt;
+&lt;h4&gt;文件问题&lt;/h4&gt;
+&lt;p&gt;是否是这个HTML的文件有问题，如果直接加载HTML字符串，问题能否结局，继续修改关键代码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;webView.loadData(&quot;&amp;lt;html&amp;gt;这是一段HTML的代码&amp;lt;/html&amp;gt;&quot;,&quot;text/html&quot;, &quot;utf-8&quot;);
+//或者也可以这样
+webView.loadDataWithBaseURL(null, &quot;&amp;lt;html&amp;gt;这是一段html代码&amp;lt;/html&amp;gt;&quot;, &quot;text/html&quot;, &quot;utf-8&quot;, null);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;更改成直接加载HTML字符串之后，WebView还是现实空白页面，啥也没有。最后想来想去，是不是因为我们将WebView放在了AlertDialog中，所以导致我们的WebView显示有问题。于是我们将WebView单独移出来，结果发现可以显示出正确的内容。那也就是说这个问题出在AlertDialog身上了，难道WebView不能放在AlertDialog中吗。显然不是的，于是参考了官方教程之后，终于发现了问题所在。&lt;/p&gt;
+&lt;h4&gt;震惊！导致WebView显示空白的罪魁祸首竟然是……&lt;/h4&gt;
+&lt;p&gt;先直接贴出可以运行的正确代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;AlertDialog.Builder builder = new Builder(this);
+        View view = getLayoutInflater().inflate(R.layout.new_dialog_user_guide, null);
+        WebView webView = (WebView) view.findViewById(R.id.web_user_guide);
+        webView.setWebViewClient(new WebViewClient());
+        webView.loadUrl(&quot;http://www.baidu.com&quot;);
+        builder.setView(view);
+        builder.setPositiveButton(R.string.confirm, null);
+        builder.show();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;问题就出在这个&lt;code&gt;setView&lt;/code&gt;身上，我们的&quot;错误代码&quot;是先setView，然后再使用webview进行load，但是正确的顺序应该是先使用webview进行load，然后再setView。
+问题到此排查结束。&lt;/p&gt;
+</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>Android 5.0透明状态栏设置</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android-50%E9%80%8F%E6%98%8E%E7%8A%B6%E6%80%81%E6%A0%8F%E8%AE%BE%E7%BD%AE/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android-50%E9%80%8F%E6%98%8E%E7%8A%B6%E6%80%81%E6%A0%8F%E8%AE%BE%E7%BD%AE/</guid><description>Android 5.0透明状态栏设置</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;这篇文章是针对Android 5.0及以上版本的系统进行透明的状态栏设置，Android 5.0以下的系统暂不在本篇文章的讨论范围之内。&lt;/p&gt;
 &lt;h2&gt;Android 5.0透明状态栏——普通界面&lt;/h2&gt;
 &lt;p&gt;先贴出MainActivity布局代码：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;
@@ -416,7 +416,44 @@ the formatted=&quot;false&quot; attribute?&lt;/li&gt;
 &lt;li&gt;string.xml中的字符串中有&lt;code&gt;%&lt;/code&gt;，对&lt;code&gt;%&lt;/code&gt;进行转义，即改为&lt;code&gt;\%&lt;/code&gt;；或者使用两个百分号表示一个，即改为&lt;code&gt;%%&lt;/code&gt;。&lt;/li&gt;
 &lt;li&gt;string.xml中的字符串被格式化了，导致解析器解析出错，解决办法为&lt;code&gt;&amp;lt;string name=&quot;test_string&quot; formatted=&quot;false&quot;&amp;gt;&lt;/code&gt;，将formatted设置为false即可。&lt;/li&gt;
 &lt;/ol&gt;
-</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>Android开发常用开源库整理（不定期更新）</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E5%BC%80%E6%BA%90%E5%BA%93%E6%95%B4%E7%90%86%E4%B8%8D%E5%AE%9A%E6%9C%9F%E6%9B%B4%E6%96%B0/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E5%BC%80%E6%BA%90%E5%BA%93%E6%95%B4%E7%90%86%E4%B8%8D%E5%AE%9A%E6%9C%9F%E6%9B%B4%E6%96%B0/</guid><description>Android开发常用开源库整理（不定期更新）</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;在此整理一下Android开发中常用的开源库，主要是为了在新建一个项目的时候能够快速的搭建好我们需要的环境，同时也能够方便的获取各个开源库的最新版本。&lt;/p&gt;
+</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>Astro 快速入门指南</title><link>https://blog.yuyins.com/blog/astro-guide/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/astro-guide/</guid><description>学习如何使用 Astro 构建快速、现代的网站。</description><pubDate>Wed, 10 Jan 2024 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Astro 是一个现代化的静态站点生成器，它专注于性能和开发体验。&lt;/p&gt;
+&lt;h2&gt;为什么选择 Astro？&lt;/h2&gt;
+&lt;h3&gt;1. 零 JavaScript（默认）&lt;/h3&gt;
+&lt;p&gt;Astro 默认不发送任何 JavaScript 到浏览器，这使得网站加载速度极快。&lt;/p&gt;
+&lt;h3&gt;2. 岛屿架构&lt;/h3&gt;
+&lt;p&gt;当你需要交互时，可以使用&quot;岛屿&quot;来按需加载 JavaScript：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;---
+import Counter from &apos;./Counter.jsx&apos;;
+---
+
+&amp;lt;Counter client:load /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;3. 框架无关&lt;/h3&gt;
+&lt;p&gt;可以混合使用 React、Vue、Svelte 等框架。&lt;/p&gt;
+&lt;h2&gt;Content Collections&lt;/h2&gt;
+&lt;p&gt;这是 Astro 最强大的特性之一：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// src/content/config.ts
+import { defineCollection, z } from &apos;astro:content&apos;;
+
+const blog = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    date: z.date(),
+  }),
+});
+
+export const collections = { blog };
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;部署&lt;/h2&gt;
+&lt;p&gt;Astro 可以部署到任何支持静态站点的平台：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cloudflare Pages&lt;/li&gt;
+&lt;li&gt;Vercel&lt;/li&gt;
+&lt;li&gt;Netlify&lt;/li&gt;
+&lt;li&gt;GitHub Pages&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;开始你的 Astro 之旅吧！&lt;/p&gt;
+</content:encoded><category>教程</category><category>Astro</category><category>Web开发</category><category>教程</category><author>博客作者</author></item><item><title>Android开发常用开源库整理（不定期更新）</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E5%BC%80%E6%BA%90%E5%BA%93%E6%95%B4%E7%90%86%E4%B8%8D%E5%AE%9A%E6%9C%9F%E6%9B%B4%E6%96%B0/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E5%BC%80%E6%BA%90%E5%BA%93%E6%95%B4%E7%90%86%E4%B8%8D%E5%AE%9A%E6%9C%9F%E6%9B%B4%E6%96%B0/</guid><description>Android开发常用开源库整理（不定期更新）</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;在此整理一下Android开发中常用的开源库，主要是为了在新建一个项目的时候能够快速的搭建好我们需要的环境，同时也能够方便的获取各个开源库的最新版本。&lt;/p&gt;
 &lt;p&gt;&amp;lt;!--more--&amp;gt;&lt;/p&gt;
 &lt;h2&gt;网络操作类：&lt;/h2&gt;
 &lt;ol&gt;
@@ -487,44 +524,7 @@ the formatted=&quot;false&quot; attribute?&lt;/li&gt;
 &lt;li&gt;Glide Pattele：https://github.com/florent37/GlidePalette&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
-</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>Astro 快速入门指南</title><link>https://blog.yuyins.com/blog/astro-guide/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/astro-guide/</guid><description>学习如何使用 Astro 构建快速、现代的网站。</description><pubDate>Wed, 10 Jan 2024 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Astro 是一个现代化的静态站点生成器，它专注于性能和开发体验。&lt;/p&gt;
-&lt;h2&gt;为什么选择 Astro？&lt;/h2&gt;
-&lt;h3&gt;1. 零 JavaScript（默认）&lt;/h3&gt;
-&lt;p&gt;Astro 默认不发送任何 JavaScript 到浏览器，这使得网站加载速度极快。&lt;/p&gt;
-&lt;h3&gt;2. 岛屿架构&lt;/h3&gt;
-&lt;p&gt;当你需要交互时，可以使用&quot;岛屿&quot;来按需加载 JavaScript：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;---
-import Counter from &apos;./Counter.jsx&apos;;
----
-
-&amp;lt;Counter client:load /&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;3. 框架无关&lt;/h3&gt;
-&lt;p&gt;可以混合使用 React、Vue、Svelte 等框架。&lt;/p&gt;
-&lt;h2&gt;Content Collections&lt;/h2&gt;
-&lt;p&gt;这是 Astro 最强大的特性之一：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;// src/content/config.ts
-import { defineCollection, z } from &apos;astro:content&apos;;
-
-const blog = defineCollection({
-  schema: z.object({
-    title: z.string(),
-    date: z.date(),
-  }),
-});
-
-export const collections = { blog };
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;部署&lt;/h2&gt;
-&lt;p&gt;Astro 可以部署到任何支持静态站点的平台：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Cloudflare Pages&lt;/li&gt;
-&lt;li&gt;Vercel&lt;/li&gt;
-&lt;li&gt;Netlify&lt;/li&gt;
-&lt;li&gt;GitHub Pages&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;开始你的 Astro 之旅吧！&lt;/p&gt;
-</content:encoded><category>教程</category><category>Astro</category><category>Web开发</category><category>教程</category><author>博客作者</author></item><item><title>Android开发之View坐标问题</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E5%BC%80%E5%8F%91%E4%B9%8Bview%E5%9D%90%E6%A0%87%E9%97%AE%E9%A2%98/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E5%BC%80%E5%8F%91%E4%B9%8Bview%E5%9D%90%E6%A0%87%E9%97%AE%E9%A2%98/</guid><description>Android开发之View坐标问题</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;在我们日常的开发过程中，接触最多的就是View了，各种各样的View，但是我们可能对View的知识了解一些，但是还是感觉有些地方不太够，尤其是View的坐标问题。我们今天就来看看这个View的坐标到底是怎么定义的。&lt;/p&gt;
+</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>Android开发之View坐标问题</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E5%BC%80%E5%8F%91%E4%B9%8Bview%E5%9D%90%E6%A0%87%E9%97%AE%E9%A2%98/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-android%E5%BC%80%E5%8F%91%E4%B9%8Bview%E5%9D%90%E6%A0%87%E9%97%AE%E9%A2%98/</guid><description>Android开发之View坐标问题</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;在我们日常的开发过程中，接触最多的就是View了，各种各样的View，但是我们可能对View的知识了解一些，但是还是感觉有些地方不太够，尤其是View的坐标问题。我们今天就来看看这个View的坐标到底是怎么定义的。&lt;/p&gt;
 &lt;p&gt;&amp;lt;!--more--&amp;gt;&lt;/p&gt;
 &lt;p&gt;别的不说，先上代码：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;
@@ -1193,67 +1193,108 @@ git config --global alias.lg &quot;log --graph --pretty=format:&apos;%Cred%h - %
 &lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;git config --global alias.hist &quot;log --graph --decorate --oneline --pretty=format:&apos;%Cred%h - %C(bold white) %s %Creset %C(yellow)%d  %C(cyan) &amp;lt;%cd&amp;gt; %Creset %Cgreen(%cn)&apos; --abbrev-commit --date=format:&apos;%Y-%m-%d %H:%M:%S&apos;&quot;
 &lt;/code&gt;&lt;/pre&gt;
-</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>Virtualbox与Mactype共存</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-virtualbox%E4%B8%8Emactype%E5%85%B1%E5%AD%98/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-virtualbox%E4%B8%8Emactype%E5%85%B1%E5%AD%98/</guid><description>Virtualbox与Mactype共存</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Virtualbox与Mactype共存&lt;/h1&gt;
-&lt;p&gt;最近心血来潮，准备重启吃灰好久的ubuntu虚拟机玩玩，于是开开心心准备打开机器，顺利进入，准备更新下软件，发现网速好慢，虽然主机能够高速访问“外网”，但是虚拟机并没有享受到这种福利，那么能不能让虚拟机也享受呢？这么一说，就是一段折腾史……&lt;/p&gt;
+</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>DrawerLayout：Write-Once，Run-EveryWhere</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-drawerlayoutwriteonceruneverywhere/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-drawerlayoutwriteonceruneverywhere/</guid><description>DrawerLayout：Write-Once，Run-EveryWhere</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;自从Material Design出来之后，各种各样的控件也是让人眼花缭乱，但是用的时候还是需要克制，比如Google在官方的Material Design Guideline中就建议内容相同的列表不要使用Cardview，而是推荐使用普通的布局，中间加上divider即可，避免给人一种分裂感。&lt;/p&gt;
+&lt;p&gt;在使用DrawerLayout的时候，可能我们多个Activity中都需要用到，我们是不是每个Activity都需要新建为Navigation Drawer Activity呢，答案是：NO。所以这次我们就来看看，如何“克制地”使用DrawerLayout&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Write Once，Run Everywhere&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&amp;lt;!--more--&amp;gt;&lt;/p&gt;
-&lt;p&gt;##　虚拟机“外网”访问
-虚拟机访问“外网”，可以通过设置虚拟机的网络为桥接模式，然后在虚拟机中设置主机的ip和端口即可。具体设置我们后面再说，先来打开桥接模式。
-首先我们打开virtualbox的设置-&amp;gt;网络-&amp;gt;网卡1-&amp;gt;连接方式-&amp;gt;桥接网卡。到这一步的时候，被无情的提示“未指定”。原因是下图中红色箭头标记的那个东西没有
-&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-7d2b077d6ffba4d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;未指定.png&quot; /&gt;
-根据网上的&lt;a href=&quot;http://www.dabu.info/the-virtual-box-bridging-error-not-specified-network-interface-to-be-bridged.html&quot;&gt;提示&lt;/a&gt;安装桥接网卡驱动，但是安装完毕之后，依然没有显示出来。经过多方查证，发现是虚拟机版本太低，于是选择将4.3.12升级到5.1.18（最新版），升级完毕之后选择桥接网卡，一切顺利。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-c9fc08a01d6f881c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;桥接网卡.png&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;准备开机起飞……还没飞起来就被无情打脸，虚拟机不能启动，报错信息如下：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-4cb56fa29e06e494.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;虚拟机报错.png&quot; /&gt;
-这个报错信息就是我们今天的关键信息，这个报错信息一般都是出现在&lt;code&gt;virtualbox 5.0+&lt;/code&gt;和&lt;code&gt;windows 8+&lt;/code&gt;上面，那么具体是什么原因呢，是因为virtualbox5.0之后对于系统的要求更严格了，说白了就是系统中如果安装了一些杀毒软件、主题修改的东西，那么虚拟机基本上就是会报这个错误。但是由于我的电脑一直是裸奔状态，于是我就将目标转向了mactype，这是我装的唯一一个主题修改类软件，于是经过多方查证找到了&lt;a href=&quot;https://www.zhihu.com/question/27159349&quot;&gt;解决办法&lt;/a&gt;
-按照上面的步骤操作之后，然后准备再次起飞……依然没飞起来被打脸，打脸的还是那个报错信息。于是再次排查，找了半天，发现virtualbox5.0之后安装完虚拟机还要安装一个驱动，具体操作&lt;a href=&quot;https://jingyan.baidu.com/article/4d58d541186ad89dd4e9c018.html&quot;&gt;在这里&lt;/a&gt;
-这次安装完毕之后，再次信心满满的准备起飞……最后还是被打脸，我在想这飞机是不是有问题，准备换回4.3.12了，但是内心有个声音告诉我，一定要征服这个虚拟机，我就不信了。然后又到处找资料，找来找去还是找回到之前的杀毒软件和主题修改软件方向上，于是我仔细检查了一下我的电脑，搞了一下午，结果发现电脑右下角有一个净网大师，于是怒卸载之。
-卸载完毕，再次小心翼翼的准备起飞，这一次飞机平稳的起飞，心中的大石头也落地了，这一下午算是值了。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-81efa0e0b9c7c6b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;飞机平稳起飞咯&quot; /&gt;
-最后说一下关于ubuntu虚拟机桥接主机高速访问“外网”的方法：
-在宿主机windows上运行shadowsocks.exe并勾选“允许局域网连接”
-使用桥接方式运行虚拟机（这时虚拟机与宿主处于同一个局域网）
-进入ubuntu系统，System Settings – Network – Network proxy勾选Manual（手动）,地址全部填宿主机IP（局域网网段），设置好代理端口（可在windows下的shadowsocks查看，一般为默认1080）
-ubuntu用浏览器访问www.google.com，成功。&lt;/p&gt;
-</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>沉浸式状态栏</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%8A%B6%E6%80%81%E6%A0%8F/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%8A%B6%E6%80%81%E6%A0%8F/</guid><description>沉浸式状态栏</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;概念解析&lt;/h1&gt;
-&lt;p&gt;在Adnroid 4.4(API level 19)中引入了“沉浸式”状态栏的概念，现在许多对这个“沉浸式”状态栏的解释。但是感觉大部分的解释好像“差一点”，要么是把“沉浸式”状态栏解释为“透明状态栏”，要么是解释为Toolbar颜色和状态栏颜色不一致（前者为colorprimary，后者为colorprimary_dark）的状态栏。但是其实Android官方对于沉浸式状态栏的解释是非常清楚的。&lt;/p&gt;
-&lt;p&gt;&amp;lt;!--more--&amp;gt;&lt;/p&gt;
-&lt;h2&gt;沉浸式状态栏&lt;/h2&gt;
-&lt;p&gt;这个概念的提出对于手机是虚拟按键的用户来说是非常有意义的，因为“沉浸式”的体验可以增加手机的阅读空间，将上面的状态栏（statusbar）和下面的导航栏（navigationbar）隐藏起来，从而造成“沉浸式”的体验。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-0ecbdedddfa6ac6e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;沉浸模式状态.png&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;图中展示了不同的“沉浸式”状态
-在上图中：&lt;/p&gt;
+&lt;h2&gt;新建Navigation Drawer Activity&lt;/h2&gt;
+&lt;p&gt;首先我们新建一个Navigation Drawer Activity作为我们BaseActivity，布局文件如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;
+&amp;lt;android.support.v4.widget.DrawerLayout
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:id=&quot;@+id/drawer_layout&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:fitsSystemWindows=&quot;true&quot;
+    tools:openDrawer=&quot;start&quot;&amp;gt;
+
+    &amp;lt;!--&amp;lt;include
+        layout=&quot;@layout/app_bar_base_drawer&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;/&amp;gt;
+--&amp;gt;
+    &amp;lt;FrameLayout
+        android:id=&quot;@+id/frame_container&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;/&amp;gt;
+
+    &amp;lt;android.support.design.widget.NavigationView
+        android:id=&quot;@+id/nav_view&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;match_parent&quot;
+        android:layout_gravity=&quot;start&quot;
+        android:fitsSystemWindows=&quot;true&quot;
+        app:headerLayout=&quot;@layout/nav_header_base_drawer&quot;
+        app:menu=&quot;@menu/activity_base_drawer_drawer&quot;/&amp;gt;
+
+&amp;lt;/android.support.v4.widget.DrawerLayout&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;我们首先将Android studio自己生成的&lt;code&gt;&amp;lt;include&amp;gt;&amp;lt;/include&amp;gt;&lt;/code&gt;注释掉，换成代码中的FrameLayout，接下来修改自动生成的BaseActivity代码：&lt;/p&gt;
+&lt;p&gt;重写setContentView函数,重写后的函数如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;   override fun onCreate(savedInstanceState: Bundle?) {
+       super.onCreate(savedInstanceState)
+   }
+   override fun setContentView(layoutResID: Int) {
+       //首先获取带有DrawerLayout的布局
+       val drawer = layoutInflater.inflate(R.layout.activity_base_drawer, null) as DrawerLayout
+       //然后获取这个布局里面的FrameLayout，也就是我们刚才在xml中添加的FrameLayout
+       val frameContainer = drawer.findViewById(R.id.frame_container) as FrameLayout
+       //然后将子类的布局添加到FrameLayout中
+       layoutInflater.inflate(layoutResID, frameContainer, true)
+       //最后设置布局为DrawerLayout的布局
+       setContentView(drawer)
+       //下面就是一些设置DrawerLayout动作和点击事件的代码
+       val toggle = ActionBarDrawerToggle(
+               this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+       drawer.setDrawerListener(toggle)
+       toggle.syncState()
+
+       val navigationView = findViewById(R.id.nav_view) as NavigationView
+       navigationView.setNavigationItemSelectedListener(this)
+
+       toolbar.setNavigationOnClickListener { view -&amp;gt; drawer.openDrawer(Gravity.START) }
+   }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上面的代码使用Kotlin写的，顺便提一句：&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;非沉浸模式&lt;/strong&gt; —— 展示了应用进入沉浸模式之前的状态。也展示了设置IMMERSIVE
-标签后用户滑动展示系统栏的状态。用户滑动后，SYSTEM_UI_FLAG_HIDE_NAVIGATION
-和SYSTEM_UI_FLAG_FULLSCREEN
-就会被清除，系统栏就会重新显示并保持可见。 请注意，最好的实践方式就是让所有的UI控件的变化与系统栏的显示隐藏保持同步，这样可以减少屏幕显示所处的状态，同时提供了更无缝平滑的用户体验。因此所有的UI控件跟随系统栏一同显示。一旦应用进入了沉浸模式，相应的UI控件也跟随着系统栏一同隐藏。为了确保UI的可见性与系统栏保持一致，我们需要一个监听器View.OnSystemUiVisibilityChangeListener
-来监听系统栏的变化。这在下一节中将详细讲解。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;提示气泡&lt;/strong&gt;——第一次进入沉浸模式时，系统将会显示一个提示气泡，提示用户如何再让系统栏显示出来。&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;在今天凌晨的Google I/O 2017上，Android Team已经将Kotlin做为Android开发的&quot;first-class&quot;了。&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;p&gt;上面设置完之后，我们可以随便新建一个Activity，然后继承BaseActivity即可。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class DrawerActivity : BaseDrawerActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.app_bar_base_drawer)
+        fab.setOnClickListener { view -&amp;gt; Snackbar.make(view, &quot;可以&quot;, Snackbar.LENGTH_SHORT).show() }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;来看看结果：
+&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-d6e24c1d16735925.gif?imageMogr2/auto-orient/strip&quot; alt=&quot;drawer-layout.gif&quot; /&gt;
+可以看到我们的功能已经实现了，但是有一些小瑕疵：&lt;/p&gt;
 &lt;blockquote&gt;
+&lt;p&gt;Toolbar上面没有菜单键，需要通过从屏幕左边滑才能呼出Drawer&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这个问题从我们上面的代码中也体现出来了，在BaseActivity中并没有将Drawer的操作与Toolbar联系到一起，接下来我们就来添加代码，让Toolbar和Drawer联系到一起，添加到上面重写的setContentView中相应的位置&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  //获取Toolbar
+  val toolbar = frameContainer.findViewById(R.id.toolbar) as Toolbar
+        setSupportActionBar(toolbar)
+  // 将Toolbar与Drawer的动作联系起来
+  val toggle = ActionBarDrawerToggle(
+                this, drawer,toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+  //最后设置toolbar的点击事件
+  toolbar.setNavigationOnClickListener { view -&amp;gt; drawer.openDrawer(Gravity.START) }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;经过上面的设置之后，再来看看运行效果：
+&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-d49733181469cf69.gif?imageMogr2/auto-orient/strip&quot; alt=&quot;drawer-layout-new.gif&quot; /&gt;&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;：如果为了测试你想强制显示提示气泡，你可以先将应用设为沉浸模式，然后按下电源键进入锁屏模式，并在5秒中之后打开屏幕。&lt;/p&gt;
+&lt;p&gt;如果点击菜单键没有反应的话，请删除掉继承自BaseActivity的activity中的setSupportActionBar这行代码即可&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;沉浸模式&lt;/strong&gt;—— 这张图展示了隐藏了系统栏和其他UI控件的状态。你可以设置IMMERSIVE
-和IMMERSIVE_STICKY
-来进入这个状态。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;粘性标签&lt;/strong&gt;——这就是你设置了IMMERSIVE_STICKY
-标签时的UI状态，用户会向内滑动以展示系统栏。半透明的系统栏会临时的进行显示，一段时间后自动隐藏。滑动的操作并不会清空任何标签，也不会触发系统UI可见性的监听器，因为暂时显示的导航栏并不被认为是一种可见性状态的变化。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;：immersive类的标签只有在
-与SYSTEM_UI_FLAG_HIDE_NAVIGATION,SYSTEM_UI_FLAG_FULLSCREEN
-中一个或两个一起使用的时候才会生效。你可以只使用其中的一个，但是一般情况下你需要同时隐藏状态栏和导航栏以达到沉浸的效果。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;上面引用了Android官方培训课程中对于“沉浸式”的讲解。&lt;/p&gt;
-&lt;p&gt;从上面我们可以知道“沉浸式”是像我们前面所说的，将状态栏（statusbar）和导航栏（navigationbar）给隐藏起来（气泡[3]的状态），并不是像大部分的应用那样，将我们的状态栏设置为透明，或者是将状态栏颜色加深。
-气泡[4]的状态是我们在“沉浸式”过程中点击屏幕之后产生的效果，即当我们阅读完毕时，点击屏幕，让屏幕获取焦点， 显示出状态栏和导航栏，然后进行其他的操作。
-使用colorPrimary和colorPrimaryDark只是为了设置状态栏颜色，而且在Android 5.0之后，Material Design中引入了Toolbar，这也可以将Toolbar颜色和状态颜色区分开。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;最后希望各位通过篇文章了解什么是“沉浸式”状态栏，或者了解什么是“沉浸式”，而不是简单的将透明状态栏或是所谓的“变色龙”状态栏成为沉浸式状态栏。&lt;/strong&gt;&lt;/p&gt;
 </content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>Material-Design-之TabLayout与Toolbar</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-materialdesign%E4%B9%8Btablayout%E4%B8%8Etoolbar/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-materialdesign%E4%B9%8Btablayout%E4%B8%8Etoolbar/</guid><description>Material-Design-之TabLayout与Toolbar</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;今天在学习Material Design的过程中，遇到了一个比较坑的问题，在这里记录一下，以后如果有人遇到的话，可以做个参考吧。首先来看看我们的需求，今天我们需要实现下面这个效果：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-d8903fa389d460a8.gif?imageMogr2/auto-orient/strip&quot; alt=&quot;需求.gif&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;&amp;lt;!--more--&amp;gt;&lt;/p&gt;
@@ -1367,7 +1408,130 @@ ubuntu用浏览器访问www.google.com，成功。&lt;/p&gt;
 &lt;p&gt;上面这个是&lt;code&gt;style.xml&lt;/code&gt;(v21)的代码，从这段代码中我们就可以找到这次这个bug的罪魁祸首了。就是这一行&lt;code&gt;&amp;lt;item name=&quot;android:statusBarColor&quot;&amp;gt;@android:color/transparent&amp;lt;/item&amp;gt;&lt;/code&gt;
 就是这行代码将我们的状态栏给弄成了透明了，结果就导致我们看到的状态栏和布局文件是在同一个z轴上，也就是会被挤上去，从而导致我们的Toolbar不能完全的隐藏起来。&lt;/p&gt;
 &lt;p&gt;最后，为什么这个小bug费了这么大劲才找出来，我上面这一整套代码，基本上都是在android studio 中新建一个TabActivity 自动生成的。也就说原本自动生成的代码就有这个Bug，谁能想到android studio 这个浓眉大眼的家伙也&quot;叛变革命&quot;了呢。&lt;/p&gt;
-</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>NavigationView-子菜单问题</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-navigationview%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-navigationview%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/</guid><description>NavigationView-子菜单问题</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;在Android 5.0之后，Google推出了Material Design兼容库，在Material Design的兼容库中，有个用的比较多的控件就是&lt;code&gt;NavigationView&lt;/code&gt;。在我们平时使用过程中，对于&lt;code&gt;NavigationView&lt;/code&gt;的一些小细节可能也并没有过多的关注，所以就导致我们在遇到特殊需求的时候无从下手，那么在这里我就简单记录一下使用&lt;code&gt;NavigationView&lt;/code&gt;的一些小坑，暂时可能也并没有遇到很多的坑，如果以后遇到的话会不定时更新。&lt;/p&gt;
+</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>Virtualbox与Mactype共存</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-virtualbox%E4%B8%8Emactype%E5%85%B1%E5%AD%98/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-virtualbox%E4%B8%8Emactype%E5%85%B1%E5%AD%98/</guid><description>Virtualbox与Mactype共存</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Virtualbox与Mactype共存&lt;/h1&gt;
+&lt;p&gt;最近心血来潮，准备重启吃灰好久的ubuntu虚拟机玩玩，于是开开心心准备打开机器，顺利进入，准备更新下软件，发现网速好慢，虽然主机能够高速访问“外网”，但是虚拟机并没有享受到这种福利，那么能不能让虚拟机也享受呢？这么一说，就是一段折腾史……&lt;/p&gt;
+&lt;p&gt;&amp;lt;!--more--&amp;gt;&lt;/p&gt;
+&lt;p&gt;##　虚拟机“外网”访问
+虚拟机访问“外网”，可以通过设置虚拟机的网络为桥接模式，然后在虚拟机中设置主机的ip和端口即可。具体设置我们后面再说，先来打开桥接模式。
+首先我们打开virtualbox的设置-&amp;gt;网络-&amp;gt;网卡1-&amp;gt;连接方式-&amp;gt;桥接网卡。到这一步的时候，被无情的提示“未指定”。原因是下图中红色箭头标记的那个东西没有
+&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-7d2b077d6ffba4d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;未指定.png&quot; /&gt;
+根据网上的&lt;a href=&quot;http://www.dabu.info/the-virtual-box-bridging-error-not-specified-network-interface-to-be-bridged.html&quot;&gt;提示&lt;/a&gt;安装桥接网卡驱动，但是安装完毕之后，依然没有显示出来。经过多方查证，发现是虚拟机版本太低，于是选择将4.3.12升级到5.1.18（最新版），升级完毕之后选择桥接网卡，一切顺利。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-c9fc08a01d6f881c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;桥接网卡.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;准备开机起飞……还没飞起来就被无情打脸，虚拟机不能启动，报错信息如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-4cb56fa29e06e494.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;虚拟机报错.png&quot; /&gt;
+这个报错信息就是我们今天的关键信息，这个报错信息一般都是出现在&lt;code&gt;virtualbox 5.0+&lt;/code&gt;和&lt;code&gt;windows 8+&lt;/code&gt;上面，那么具体是什么原因呢，是因为virtualbox5.0之后对于系统的要求更严格了，说白了就是系统中如果安装了一些杀毒软件、主题修改的东西，那么虚拟机基本上就是会报这个错误。但是由于我的电脑一直是裸奔状态，于是我就将目标转向了mactype，这是我装的唯一一个主题修改类软件，于是经过多方查证找到了&lt;a href=&quot;https://www.zhihu.com/question/27159349&quot;&gt;解决办法&lt;/a&gt;
+按照上面的步骤操作之后，然后准备再次起飞……依然没飞起来被打脸，打脸的还是那个报错信息。于是再次排查，找了半天，发现virtualbox5.0之后安装完虚拟机还要安装一个驱动，具体操作&lt;a href=&quot;https://jingyan.baidu.com/article/4d58d541186ad89dd4e9c018.html&quot;&gt;在这里&lt;/a&gt;
+这次安装完毕之后，再次信心满满的准备起飞……最后还是被打脸，我在想这飞机是不是有问题，准备换回4.3.12了，但是内心有个声音告诉我，一定要征服这个虚拟机，我就不信了。然后又到处找资料，找来找去还是找回到之前的杀毒软件和主题修改软件方向上，于是我仔细检查了一下我的电脑，搞了一下午，结果发现电脑右下角有一个净网大师，于是怒卸载之。
+卸载完毕，再次小心翼翼的准备起飞，这一次飞机平稳的起飞，心中的大石头也落地了，这一下午算是值了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-81efa0e0b9c7c6b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;飞机平稳起飞咯&quot; /&gt;
+最后说一下关于ubuntu虚拟机桥接主机高速访问“外网”的方法：
+在宿主机windows上运行shadowsocks.exe并勾选“允许局域网连接”
+使用桥接方式运行虚拟机（这时虚拟机与宿主处于同一个局域网）
+进入ubuntu系统，System Settings – Network – Network proxy勾选Manual（手动）,地址全部填宿主机IP（局域网网段），设置好代理端口（可在windows下的shadowsocks查看，一般为默认1080）
+ubuntu用浏览器访问www.google.com，成功。&lt;/p&gt;
+</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>沉浸式状态栏</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%8A%B6%E6%80%81%E6%A0%8F/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%8A%B6%E6%80%81%E6%A0%8F/</guid><description>沉浸式状态栏</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;概念解析&lt;/h1&gt;
+&lt;p&gt;在Adnroid 4.4(API level 19)中引入了“沉浸式”状态栏的概念，现在许多对这个“沉浸式”状态栏的解释。但是感觉大部分的解释好像“差一点”，要么是把“沉浸式”状态栏解释为“透明状态栏”，要么是解释为Toolbar颜色和状态栏颜色不一致（前者为colorprimary，后者为colorprimary_dark）的状态栏。但是其实Android官方对于沉浸式状态栏的解释是非常清楚的。&lt;/p&gt;
+&lt;p&gt;&amp;lt;!--more--&amp;gt;&lt;/p&gt;
+&lt;h2&gt;沉浸式状态栏&lt;/h2&gt;
+&lt;p&gt;这个概念的提出对于手机是虚拟按键的用户来说是非常有意义的，因为“沉浸式”的体验可以增加手机的阅读空间，将上面的状态栏（statusbar）和下面的导航栏（navigationbar）隐藏起来，从而造成“沉浸式”的体验。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-0ecbdedddfa6ac6e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;沉浸模式状态.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;图中展示了不同的“沉浸式”状态
+在上图中：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;非沉浸模式&lt;/strong&gt; —— 展示了应用进入沉浸模式之前的状态。也展示了设置IMMERSIVE
+标签后用户滑动展示系统栏的状态。用户滑动后，SYSTEM_UI_FLAG_HIDE_NAVIGATION
+和SYSTEM_UI_FLAG_FULLSCREEN
+就会被清除，系统栏就会重新显示并保持可见。 请注意，最好的实践方式就是让所有的UI控件的变化与系统栏的显示隐藏保持同步，这样可以减少屏幕显示所处的状态，同时提供了更无缝平滑的用户体验。因此所有的UI控件跟随系统栏一同显示。一旦应用进入了沉浸模式，相应的UI控件也跟随着系统栏一同隐藏。为了确保UI的可见性与系统栏保持一致，我们需要一个监听器View.OnSystemUiVisibilityChangeListener
+来监听系统栏的变化。这在下一节中将详细讲解。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;提示气泡&lt;/strong&gt;——第一次进入沉浸模式时，系统将会显示一个提示气泡，提示用户如何再让系统栏显示出来。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;：如果为了测试你想强制显示提示气泡，你可以先将应用设为沉浸模式，然后按下电源键进入锁屏模式，并在5秒中之后打开屏幕。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;沉浸模式&lt;/strong&gt;—— 这张图展示了隐藏了系统栏和其他UI控件的状态。你可以设置IMMERSIVE
+和IMMERSIVE_STICKY
+来进入这个状态。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;粘性标签&lt;/strong&gt;——这就是你设置了IMMERSIVE_STICKY
+标签时的UI状态，用户会向内滑动以展示系统栏。半透明的系统栏会临时的进行显示，一段时间后自动隐藏。滑动的操作并不会清空任何标签，也不会触发系统UI可见性的监听器，因为暂时显示的导航栏并不被认为是一种可见性状态的变化。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;：immersive类的标签只有在
+与SYSTEM_UI_FLAG_HIDE_NAVIGATION,SYSTEM_UI_FLAG_FULLSCREEN
+中一个或两个一起使用的时候才会生效。你可以只使用其中的一个，但是一般情况下你需要同时隐藏状态栏和导航栏以达到沉浸的效果。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;上面引用了Android官方培训课程中对于“沉浸式”的讲解。&lt;/p&gt;
+&lt;p&gt;从上面我们可以知道“沉浸式”是像我们前面所说的，将状态栏（statusbar）和导航栏（navigationbar）给隐藏起来（气泡[3]的状态），并不是像大部分的应用那样，将我们的状态栏设置为透明，或者是将状态栏颜色加深。
+气泡[4]的状态是我们在“沉浸式”过程中点击屏幕之后产生的效果，即当我们阅读完毕时，点击屏幕，让屏幕获取焦点， 显示出状态栏和导航栏，然后进行其他的操作。
+使用colorPrimary和colorPrimaryDark只是为了设置状态栏颜色，而且在Android 5.0之后，Material Design中引入了Toolbar，这也可以将Toolbar颜色和状态颜色区分开。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;最后希望各位通过篇文章了解什么是“沉浸式”状态栏，或者了解什么是“沉浸式”，而不是简单的将透明状态栏或是所谓的“变色龙”状态栏成为沉浸式状态栏。&lt;/strong&gt;&lt;/p&gt;
+</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>Hexo使用本地图片</title><link>https://blog.yuyins.com/blog/hugo-migrated/2020-4-28-hexo%E4%BD%BF%E7%94%A8%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2020-4-28-hexo%E4%BD%BF%E7%94%A8%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/</guid><description>Hexo使用本地图片</description><pubDate>Tue, 28 Apr 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;在日常写博客时，免不了需要插入图片帮助读者更好的理解。&lt;/p&gt;
+&lt;p&gt;对于&lt;code&gt;Markdown&lt;/code&gt;语法，插入图片只需要输入&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;![图片描述](图片路径/xxx.png)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;但是对于图片的存储，有几种方法&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;云服务，借助七牛云这类云服务进行图片的存储，可能需要收费&lt;/li&gt;
+&lt;li&gt;图床，&lt;code&gt;sm.ms&lt;/code&gt;这类的公开图床，对于图片大小有一定的限制&lt;/li&gt;
+&lt;li&gt;自建&lt;code&gt;Github&lt;/code&gt;仓库，相对有点麻烦&lt;/li&gt;
+&lt;li&gt;本地图片&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在此主要推荐最后一种，就是放在本地，当然这里说的本地并不是指放在本机，而是指放在博客本身的目录中，也就是不通过外链引入图片。&lt;/p&gt;
+&lt;p&gt;对于&lt;code&gt;Hexo&lt;/code&gt;博客使用本地图片，需要在配置文件&lt;code&gt;_config.yml&lt;/code&gt;中设置&lt;code&gt;post_asset_folder: true&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;设置完毕之后，每次写新的文章，只需要在命令行运行&lt;code&gt;hexo new post xxx&lt;/code&gt;，就可以在博客的目录中自动生成一个名为&lt;code&gt;xxx&lt;/code&gt;的目录和一个名为&lt;code&gt;xxx.md&lt;/code&gt;的文件，写作的时候将我们需要的图片放入目录中，就可以在文章中直接引用了。&lt;/p&gt;
+&lt;p&gt;但是在写博客的时候，可能更多的是通过&lt;code&gt;Typora&lt;/code&gt;这个软件来新建文件，这时候就没法自动生成同名目录，可以通过对&lt;code&gt;Typora&lt;/code&gt;这个软件进行设置：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;文件-偏好设置-图像-插入图片时-复制到指定路径-&lt;code&gt;./${filename}&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这样设置之后，我们每次写文章就可以直接将图片复制粘贴到文章中，&lt;code&gt;Typora&lt;/code&gt;会自动帮我们生成文件夹并且把图片放入其中，也会将我们的图片引用路径改为相对路径。&lt;/p&gt;
+</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>开发环境配置</title><link>https://blog.yuyins.com/blog/hugo-migrated/2021-10-17-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2021-10-17-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid><description>开发环境配置</description><pubDate>Sun, 17 Oct 2021 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;为了防止每次配置环境都要去搜索，每次配置完成之后都要重新做一些个性化设置，记录一下环境配置，一次搞定。后续会将这些配置写成一个macOS/Linux的脚本，一键配置，Windows下还是得自己手动配置。&lt;/p&gt;
+&lt;h4&gt;配置Java&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;下载&lt;a href=&quot;https://www.azul.com/downloads/?version=java-8-lts&amp;amp;package=jdk&quot;&gt;JAVA_8&lt;/a&gt;、&lt;a href=&quot;https://www.azul.com/downloads/?version=java-11-lts&amp;amp;package=jdk&quot;&gt;JAVA_11&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;配置环境&lt;/p&gt;
+&lt;p&gt;JAVA_HOME: &lt;code&gt;C:\Java\jdk11&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Path: &lt;code&gt;%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;CLASSPATH: &lt;code&gt;.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;配置Android&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.jetbrains.com/toolbox-app/&quot;&gt;下载Toolbox&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;配置环境
+ANDROID_HOME: &lt;code&gt;C:\AndroidSDK&lt;/code&gt;
+Path: &lt;code&gt;%ANDROID_HOME%\tools;%ANDROID_HOME%\platform-tools;&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;配置Flutter&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;https://flutter.cn/docs/get-started/install&quot;&gt;下载Flutter&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;配置环境
+FLUTTER_HOME: &lt;code&gt;C:\androidsdk\flutter\bin&lt;/code&gt;
+Path: &lt;code&gt;%FLUTTER_HOME%&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;配置Node&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/coreybutler/nvm-windows/releases&quot;&gt;下载nvm-windows-upgrader&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;安装Node &lt;code&gt;nvm install lts&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;配置环境
+NODE_HOME: &lt;code&gt;C:\Users\xxx\AppData\Roaming\nvm&lt;/code&gt;
+NVM_SYMLINK: &lt;code&gt;C:\Program Files\nodejs&lt;/code&gt;
+Path: &lt;code&gt;%NVM_HOME%;%NVM_SYMLINK%&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;配置python&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.python.org/downloads/&quot;&gt;下载python&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;配置环境
+PYTHON_HOME: &lt;code&gt;C:\Users\xxx\AppData\Local\Programs\Python\Python310\&lt;/code&gt;
+Path: &lt;code&gt;%PYTHON_HOME%;%PYTHON_HOME%\Scripts\&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content:encoded><category>[Android]</category><category>[Android]</category><author>博客作者</author></item><item><title>NavigationView-子菜单问题</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-navigationview%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-navigationview%E5%AD%90%E8%8F%9C%E5%8D%95%E9%97%AE%E9%A2%98/</guid><description>NavigationView-子菜单问题</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;在Android 5.0之后，Google推出了Material Design兼容库，在Material Design的兼容库中，有个用的比较多的控件就是&lt;code&gt;NavigationView&lt;/code&gt;。在我们平时使用过程中，对于&lt;code&gt;NavigationView&lt;/code&gt;的一些小细节可能也并没有过多的关注，所以就导致我们在遇到特殊需求的时候无从下手，那么在这里我就简单记录一下使用&lt;code&gt;NavigationView&lt;/code&gt;的一些小坑，暂时可能也并没有遇到很多的坑，如果以后遇到的话会不定时更新。&lt;/p&gt;
 &lt;p&gt;&amp;lt;!--more--&amp;gt;&lt;/p&gt;
 &lt;h2&gt;NavigationView基本使用&lt;/h2&gt;
 &lt;p&gt;有很多人对于&lt;code&gt;NavigationView&lt;/code&gt;的基本使用还是比较了解的， 那么我这里推荐一种非常偷懒的方法，就是我们在&lt;code&gt;Android Studio&lt;/code&gt;中新建&lt;code&gt;Activity&lt;/code&gt;时可以直接进行如下操作：&lt;/p&gt;
@@ -1516,108 +1680,6 @@ ubuntu用浏览器访问www.google.com，成功。&lt;/p&gt;
 &amp;lt;/menu&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;这个布局文件就是用&lt;code&gt;group&lt;/code&gt;包裹起每个组的&lt;code&gt;item&lt;/code&gt;，有点类似第二种布局，但是&lt;strong&gt;最关键&lt;/strong&gt;的地方就是要为每一个&lt;code&gt;group&lt;/code&gt;设置一个&lt;code&gt;id&lt;/code&gt;，设置完成之后就可以得到第三种布局的效果。&lt;/p&gt;
-</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>DrawerLayout：Write-Once，Run-EveryWhere</title><link>https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-drawerlayoutwriteonceruneverywhere/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2016-07-28-drawerlayoutwriteonceruneverywhere/</guid><description>DrawerLayout：Write-Once，Run-EveryWhere</description><pubDate>Thu, 28 Jul 2016 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;自从Material Design出来之后，各种各样的控件也是让人眼花缭乱，但是用的时候还是需要克制，比如Google在官方的Material Design Guideline中就建议内容相同的列表不要使用Cardview，而是推荐使用普通的布局，中间加上divider即可，避免给人一种分裂感。&lt;/p&gt;
-&lt;p&gt;在使用DrawerLayout的时候，可能我们多个Activity中都需要用到，我们是不是每个Activity都需要新建为Navigation Drawer Activity呢，答案是：NO。所以这次我们就来看看，如何“克制地”使用DrawerLayout&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Write Once，Run Everywhere&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&amp;lt;!--more--&amp;gt;&lt;/p&gt;
-&lt;h2&gt;新建Navigation Drawer Activity&lt;/h2&gt;
-&lt;p&gt;首先我们新建一个Navigation Drawer Activity作为我们BaseActivity，布局文件如下：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;
-&amp;lt;android.support.v4.widget.DrawerLayout
-    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
-    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
-    android:id=&quot;@+id/drawer_layout&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;
-    android:fitsSystemWindows=&quot;true&quot;
-    tools:openDrawer=&quot;start&quot;&amp;gt;
-
-    &amp;lt;!--&amp;lt;include
-        layout=&quot;@layout/app_bar_base_drawer&quot;
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;match_parent&quot;/&amp;gt;
---&amp;gt;
-    &amp;lt;FrameLayout
-        android:id=&quot;@+id/frame_container&quot;
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;match_parent&quot;/&amp;gt;
-
-    &amp;lt;android.support.design.widget.NavigationView
-        android:id=&quot;@+id/nav_view&quot;
-        android:layout_width=&quot;wrap_content&quot;
-        android:layout_height=&quot;match_parent&quot;
-        android:layout_gravity=&quot;start&quot;
-        android:fitsSystemWindows=&quot;true&quot;
-        app:headerLayout=&quot;@layout/nav_header_base_drawer&quot;
-        app:menu=&quot;@menu/activity_base_drawer_drawer&quot;/&amp;gt;
-
-&amp;lt;/android.support.v4.widget.DrawerLayout&amp;gt;
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;我们首先将Android studio自己生成的&lt;code&gt;&amp;lt;include&amp;gt;&amp;lt;/include&amp;gt;&lt;/code&gt;注释掉，换成代码中的FrameLayout，接下来修改自动生成的BaseActivity代码：&lt;/p&gt;
-&lt;p&gt;重写setContentView函数,重写后的函数如下：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;   override fun onCreate(savedInstanceState: Bundle?) {
-       super.onCreate(savedInstanceState)
-   }
-   override fun setContentView(layoutResID: Int) {
-       //首先获取带有DrawerLayout的布局
-       val drawer = layoutInflater.inflate(R.layout.activity_base_drawer, null) as DrawerLayout
-       //然后获取这个布局里面的FrameLayout，也就是我们刚才在xml中添加的FrameLayout
-       val frameContainer = drawer.findViewById(R.id.frame_container) as FrameLayout
-       //然后将子类的布局添加到FrameLayout中
-       layoutInflater.inflate(layoutResID, frameContainer, true)
-       //最后设置布局为DrawerLayout的布局
-       setContentView(drawer)
-       //下面就是一些设置DrawerLayout动作和点击事件的代码
-       val toggle = ActionBarDrawerToggle(
-               this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-       drawer.setDrawerListener(toggle)
-       toggle.syncState()
-
-       val navigationView = findViewById(R.id.nav_view) as NavigationView
-       navigationView.setNavigationItemSelectedListener(this)
-
-       toolbar.setNavigationOnClickListener { view -&amp;gt; drawer.openDrawer(Gravity.START) }
-   }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;上面的代码使用Kotlin写的，顺便提一句：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;在今天凌晨的Google I/O 2017上，Android Team已经将Kotlin做为Android开发的&quot;first-class&quot;了。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;上面设置完之后，我们可以随便新建一个Activity，然后继承BaseActivity即可。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;class DrawerActivity : BaseDrawerActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.app_bar_base_drawer)
-        fab.setOnClickListener { view -&amp;gt; Snackbar.make(view, &quot;可以&quot;, Snackbar.LENGTH_SHORT).show() }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;来看看结果：
-&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-d6e24c1d16735925.gif?imageMogr2/auto-orient/strip&quot; alt=&quot;drawer-layout.gif&quot; /&gt;
-可以看到我们的功能已经实现了，但是有一些小瑕疵：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Toolbar上面没有菜单键，需要通过从屏幕左边滑才能呼出Drawer&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;这个问题从我们上面的代码中也体现出来了，在BaseActivity中并没有将Drawer的操作与Toolbar联系到一起，接下来我们就来添加代码，让Toolbar和Drawer联系到一起，添加到上面重写的setContentView中相应的位置&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;  //获取Toolbar
-  val toolbar = frameContainer.findViewById(R.id.toolbar) as Toolbar
-        setSupportActionBar(toolbar)
-  // 将Toolbar与Drawer的动作联系起来
-  val toggle = ActionBarDrawerToggle(
-                this, drawer,toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-  //最后设置toolbar的点击事件
-  toolbar.setNavigationOnClickListener { view -&amp;gt; drawer.openDrawer(Gravity.START) }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;经过上面的设置之后，再来看看运行效果：
-&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/2524102-d49733181469cf69.gif?imageMogr2/auto-orient/strip&quot; alt=&quot;drawer-layout-new.gif&quot; /&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;如果点击菜单键没有反应的话，请删除掉继承自BaseActivity的activity中的setSupportActionBar这行代码即可&lt;/p&gt;
-&lt;/blockquote&gt;
 </content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>build.gradle.kts + buildSrc管理Gradle依赖</title><link>https://blog.yuyins.com/blog/hugo-migrated/2020-08-09-buildgradlekts-buildsrc%E7%AE%A1%E7%90%86gradle%E4%BE%9D%E8%B5%96/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2020-08-09-buildgradlekts-buildsrc%E7%AE%A1%E7%90%86gradle%E4%BE%9D%E8%B5%96/</guid><description>build.gradle.kts + buildSrc管理Gradle依赖</description><pubDate>Sun, 09 Aug 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;在Android开发过程中，经常需要管理Gradle的依赖，但是传统的Gradle管理方式有几个不好的地方&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;对于多个module支持不太好，无法共用&lt;/li&gt;
@@ -1873,69 +1935,7 @@ object BuildType {
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;上述的依赖库可以根据自己的需要调整，也可以把每个&lt;code&gt;object&lt;/code&gt;都提取为单独的文件，这部分就是根据个人喜好自己调整。&lt;/p&gt;
 &lt;p&gt;至此，我们的&lt;code&gt;build.gradle&lt;/code&gt;就完全改造完成了。现在就可以在&lt;code&gt;build.gradle.kts&lt;/code&gt;中使用Kotlin的语法进行依赖导入了，同时还能使用Kotlin的自动补全功能，更方便的管理和导入依赖了。&lt;/p&gt;
-</content:encoded><category>[Android,Gradle,Kotlin]</category><category>[Android,Gradle,Kotlin]</category><author>博客作者</author></item><item><title>开发环境配置</title><link>https://blog.yuyins.com/blog/hugo-migrated/2021-10-17-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2021-10-17-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid><description>开发环境配置</description><pubDate>Sun, 17 Oct 2021 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;为了防止每次配置环境都要去搜索，每次配置完成之后都要重新做一些个性化设置，记录一下环境配置，一次搞定。后续会将这些配置写成一个macOS/Linux的脚本，一键配置，Windows下还是得自己手动配置。&lt;/p&gt;
-&lt;h4&gt;配置Java&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;下载&lt;a href=&quot;https://www.azul.com/downloads/?version=java-8-lts&amp;amp;package=jdk&quot;&gt;JAVA_8&lt;/a&gt;、&lt;a href=&quot;https://www.azul.com/downloads/?version=java-11-lts&amp;amp;package=jdk&quot;&gt;JAVA_11&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;配置环境&lt;/p&gt;
-&lt;p&gt;JAVA_HOME: &lt;code&gt;C:\Java\jdk11&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Path: &lt;code&gt;%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;CLASSPATH: &lt;code&gt;.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4&gt;配置Android&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.jetbrains.com/toolbox-app/&quot;&gt;下载Toolbox&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;配置环境
-ANDROID_HOME: &lt;code&gt;C:\AndroidSDK&lt;/code&gt;
-Path: &lt;code&gt;%ANDROID_HOME%\tools;%ANDROID_HOME%\platform-tools;&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4&gt;配置Flutter&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&quot;https://flutter.cn/docs/get-started/install&quot;&gt;下载Flutter&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;配置环境
-FLUTTER_HOME: &lt;code&gt;C:\androidsdk\flutter\bin&lt;/code&gt;
-Path: &lt;code&gt;%FLUTTER_HOME%&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4&gt;配置Node&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/coreybutler/nvm-windows/releases&quot;&gt;下载nvm-windows-upgrader&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;安装Node &lt;code&gt;nvm install lts&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;配置环境
-NODE_HOME: &lt;code&gt;C:\Users\xxx\AppData\Roaming\nvm&lt;/code&gt;
-NVM_SYMLINK: &lt;code&gt;C:\Program Files\nodejs&lt;/code&gt;
-Path: &lt;code&gt;%NVM_HOME%;%NVM_SYMLINK%&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4&gt;配置python&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.python.org/downloads/&quot;&gt;下载python&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;配置环境
-PYTHON_HOME: &lt;code&gt;C:\Users\xxx\AppData\Local\Programs\Python\Python310\&lt;/code&gt;
-Path: &lt;code&gt;%PYTHON_HOME%;%PYTHON_HOME%\Scripts\&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-</content:encoded><category>[Android]</category><category>[Android]</category><author>博客作者</author></item><item><title>Hexo使用本地图片</title><link>https://blog.yuyins.com/blog/hugo-migrated/2020-4-28-hexo%E4%BD%BF%E7%94%A8%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2020-4-28-hexo%E4%BD%BF%E7%94%A8%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/</guid><description>Hexo使用本地图片</description><pubDate>Tue, 28 Apr 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;在日常写博客时，免不了需要插入图片帮助读者更好的理解。&lt;/p&gt;
-&lt;p&gt;对于&lt;code&gt;Markdown&lt;/code&gt;语法，插入图片只需要输入&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;![图片描述](图片路径/xxx.png)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;但是对于图片的存储，有几种方法&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;云服务，借助七牛云这类云服务进行图片的存储，可能需要收费&lt;/li&gt;
-&lt;li&gt;图床，&lt;code&gt;sm.ms&lt;/code&gt;这类的公开图床，对于图片大小有一定的限制&lt;/li&gt;
-&lt;li&gt;自建&lt;code&gt;Github&lt;/code&gt;仓库，相对有点麻烦&lt;/li&gt;
-&lt;li&gt;本地图片&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;在此主要推荐最后一种，就是放在本地，当然这里说的本地并不是指放在本机，而是指放在博客本身的目录中，也就是不通过外链引入图片。&lt;/p&gt;
-&lt;p&gt;对于&lt;code&gt;Hexo&lt;/code&gt;博客使用本地图片，需要在配置文件&lt;code&gt;_config.yml&lt;/code&gt;中设置&lt;code&gt;post_asset_folder: true&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;设置完毕之后，每次写新的文章，只需要在命令行运行&lt;code&gt;hexo new post xxx&lt;/code&gt;，就可以在博客的目录中自动生成一个名为&lt;code&gt;xxx&lt;/code&gt;的目录和一个名为&lt;code&gt;xxx.md&lt;/code&gt;的文件，写作的时候将我们需要的图片放入目录中，就可以在文章中直接引用了。&lt;/p&gt;
-&lt;p&gt;但是在写博客的时候，可能更多的是通过&lt;code&gt;Typora&lt;/code&gt;这个软件来新建文件，这时候就没法自动生成同名目录，可以通过对&lt;code&gt;Typora&lt;/code&gt;这个软件进行设置：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;文件-偏好设置-图像-插入图片时-复制到指定路径-&lt;code&gt;./${filename}&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;这样设置之后，我们每次写文章就可以直接将图片复制粘贴到文章中，&lt;code&gt;Typora&lt;/code&gt;会自动帮我们生成文件夹并且把图片放入其中，也会将我们的图片引用路径改为相对路径。&lt;/p&gt;
-</content:encoded><category>Android</category><category>Android</category><author>博客作者</author></item><item><title>Hexo + Github Pages搭建博客</title><link>https://blog.yuyins.com/blog/hugo-migrated/2020-2-13-hexo-github-pages%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2020-2-13-hexo-github-pages%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</guid><description>Hexo + Github Pages搭建博客</description><pubDate>Thu, 13 Feb 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;本文以Windows 10操作系统为例，介绍Hexo + Github Pages搭建个人博客的具体步骤。先简单介绍下Hexo和Github Pages&lt;/p&gt;
+</content:encoded><category>[Android,Gradle,Kotlin]</category><category>[Android,Gradle,Kotlin]</category><author>博客作者</author></item><item><title>Hexo + Github Pages搭建博客</title><link>https://blog.yuyins.com/blog/hugo-migrated/2020-2-13-hexo-github-pages%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/hugo-migrated/2020-2-13-hexo-github-pages%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</guid><description>Hexo + Github Pages搭建博客</description><pubDate>Thu, 13 Feb 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;本文以Windows 10操作系统为例，介绍Hexo + Github Pages搭建个人博客的具体步骤。先简单介绍下Hexo和Github Pages&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Hexo是一个快速、简洁且高效的博客框架&lt;/li&gt;
 &lt;li&gt;Github Pages是Github推出的静态页面托管服务&lt;/li&gt;
@@ -5068,179 +5068,6 @@ hexo g -d //将生成的网站部署到Github Pages静态页面上
 &lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;⭐ 评价今日日报&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;您的反馈将帮助我们优化 AI Prompt,提升摘要准确性 🙏&lt;/p&gt;
-</content:encoded><category>开源追踪</category><category>releases</category><category>daily</category><category>automation</category><author>Release Bot</author></item><item><title>GitHub Releases 日报 - 2025-12-10</title><link>https://blog.yuyins.com/blog/releases/2025-12-10/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/releases/2025-12-10/</guid><description>AI 自动生成的开源项目更新总结,今日共 22 个更新</description><pubDate>Wed, 10 Dec 2025 02:18:10 GMT</pubDate><content:encoded>&lt;h1&gt;2025-12-10 更新摘要&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;统计信息&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;由 Qwen 2.5 72B (15), 本地降级 (5), DeepSeek V3.1 (2) 总结&lt;/li&gt;
-&lt;li&gt;监控仓库: 158 个&lt;/li&gt;
-&lt;li&gt;今日更新: 13 个项目 (22 个版本)&lt;/li&gt;
-&lt;li&gt;生成时间: 2025-12-10 10:18:10 (北京时间)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/google-gemini/gemini-cli/releases&quot;&gt;google-gemini/gemini-cli v0.21.0-preview.0 - v0.21.0-nightly.20251210.d90356e8a&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;支持 MCP 资源&lt;/li&gt;
-&lt;li&gt;添加 a2a 服务器恢复命令&lt;/li&gt;
-&lt;li&gt;显示未使用模型的配额统计&lt;/li&gt;
-&lt;li&gt;提高请求令牌计算精度&lt;/li&gt;
-&lt;li&gt;实现基于策略的模型回退机制&lt;/li&gt;
-&lt;li&gt;添加可配置的命令超时设置&lt;/li&gt;
-&lt;li&gt;集成工具执行钩子&lt;/li&gt;
-&lt;li&gt;显示等待中的 MCP 服务器&lt;/li&gt;
-&lt;li&gt;实现设置中的模糊搜索&lt;/li&gt;
-&lt;li&gt;默认启用消息总线集成&lt;/li&gt;
-&lt;li&gt;支持扩展挂钩的安全警告&lt;/li&gt;
-&lt;li&gt;添加计划工作流关闭过期问题&lt;/li&gt;
-&lt;li&gt;支持远程会话中的复制命令&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;处理缺失的本地扩展配置&lt;/li&gt;
-&lt;li&gt;修复剪贴板中不支持的图像格式&lt;/li&gt;
-&lt;li&gt;修复了 v0.21.0-preview.0 版本中的问题&lt;/li&gt;
-&lt;li&gt;改善 API 密钥认证流程&lt;/li&gt;
-&lt;li&gt;修复清除命令时保留输入历史&lt;/li&gt;
-&lt;li&gt;处理钩子运行器中的 EPIPE 错误&lt;/li&gt;
-&lt;li&gt;排除默认非交互模式下的 web-fetch 工具&lt;/li&gt;
-&lt;li&gt;自动执行简单的斜杠命令&lt;/li&gt;
-&lt;li&gt;修复 npm 审计漏洞&lt;/li&gt;
-&lt;li&gt;修复 CJK 字符的单词导航&lt;/li&gt;
-&lt;li&gt;修复 Homebrew 更新指令&lt;/li&gt;
-&lt;li&gt;防止不必要的凭证缓存清除&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/wavetermdev/waveterm/releases&quot;&gt;wavetermdev/waveterm v0.13.0-beta.3 - v0.13.0&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;支持本地 AI 模型和第三方提供商&lt;/li&gt;
-&lt;li&gt;集成 Google Gemini 模型&lt;/li&gt;
-&lt;li&gt;全新的配置界面，支持多种配置类型&lt;/li&gt;
-&lt;li&gt;终端改进：默认启用括号粘贴模式，修复 Windows 粘贴问题&lt;/li&gt;
-&lt;li&gt;支持本地 AI 模型和第三方提供者&lt;/li&gt;
-&lt;li&gt;新的统一配置界面&lt;/li&gt;
-&lt;li&gt;增强终端功能，如默认启用括号粘贴模式&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;多项依赖库更新&lt;/li&gt;
-&lt;li&gt;各种 Bug 修复和稳定性提升&lt;/li&gt;
-&lt;li&gt;修复 Windows 下 Ctrl+V 粘贴问题&lt;/li&gt;
-&lt;li&gt;多项稳定性改进和依赖更新&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/groupultra/telegram-search/releases/tag/v1.1.34-beta.6&quot;&gt;groupultra/telegram-search v1.1.34-beta.6&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;按 MIME 类型获取媒体文件&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;正确解析存储的媒体文件&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/sst/opencode/releases&quot;&gt;sst/opencode v1.0.137 - v1.0.138&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;添加项目更新时间戳，跟踪最后修改时间&lt;/li&gt;
-&lt;li&gt;实验性遥测中添加 userId 和 sessionId 元数据&lt;/li&gt;
-&lt;li&gt;TUI 底部添加权限指示器&lt;/li&gt;
-&lt;li&gt;新增 orng、catppuccin-macchiato 和 mercury.com 主题&lt;/li&gt;
-&lt;li&gt;支持切换 MCP 服务器、卸载命令及动态终端标题&lt;/li&gt;
-&lt;li&gt;增加 bash、terraform 和 OCaml 语言服务器支持&lt;/li&gt;
-&lt;li&gt;读取工具支持 PDF，会话聊天可选滚动条&lt;/li&gt;
-&lt;li&gt;实验性插件钩子支持文本补全&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;修复 MCP 在 OAuth 设置下仍发送自定义头的问题&lt;/li&gt;
-&lt;li&gt;修复侧边栏工作目录颜色对比度问题&lt;/li&gt;
-&lt;li&gt;修复会话按更新时间排序及主题按字母排序&lt;/li&gt;
-&lt;li&gt;修复自动完成弹出窗口重定位和 shell 检测&lt;/li&gt;
-&lt;li&gt;修复 CLI 帮助文本换行及会话消失问题&lt;/li&gt;
-&lt;li&gt;修复时间戳切换显示和模型选择器中弃用模型&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/openai/codex/releases&quot;&gt;openai/codex rust-v0.66.0-alpha.14 - rust-v0.67.0-alpha.2&lt;/a&gt; &amp;lt;sup&amp;gt;DeepSeek V3.1&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Alpha 预览版本发布&lt;/li&gt;
-&lt;li&gt;常规更新与改进&lt;/li&gt;
-&lt;li&gt;TUI 命令白名单功能，提高安全性&lt;/li&gt;
-&lt;li&gt;统一执行与 Shell 稳定性，改善进度显示&lt;/li&gt;
-&lt;li&gt;跨平台快捷键处理一致，提升导航体验&lt;/li&gt;
-&lt;li&gt;Windows 下应用补丁时保留 CRLF 行尾&lt;/li&gt;
-&lt;li&gt;云执行支持分支参数及状态/差异/应用流程&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;修复 Windows 统一执行崩溃问题&lt;/li&gt;
-&lt;li&gt;解决长命令布局问题&lt;/li&gt;
-&lt;li&gt;减少工具调用后的会话挂起&lt;/li&gt;
-&lt;li&gt;修复并行工具调用聊天返回问题&lt;/li&gt;
-&lt;li&gt;修正缺失工具名称导致的崩溃&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/microsoft/vscode-copilot-chat/releases&quot;&gt;microsoft/vscode-copilot-chat v0.35.2025120901 - v0.35.2025120903&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;代理会话候选功能&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;确保最终模型更新时选择正确的提示&lt;/li&gt;
-&lt;li&gt;修复缓存云会话的问题&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/d4rken-org/sdmaid-se/releases/tag/v1.5.6-rc0&quot;&gt;d4rken-org/sdmaid-se v1.5.6-rc0&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;修复三星 One UI 8.5 上的自动化问题&lt;/li&gt;
-&lt;li&gt;解决查询大应用大小时的超时问题&lt;/li&gt;
-&lt;li&gt;修正全球版 HyperOS 检测问题&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/Molunerfinn/PicGo/releases/tag/v2.4.1-beta.0&quot;&gt;Molunerfinn/PicGo v2.4.1-beta.0&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;统一 Windows/Linux 主窗口 UI 至 macOS 风格&lt;/li&gt;
-&lt;li&gt;更新 ARM64 构建产物，新增 Linux deb 包&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;修复 macOS 顶部栏窗口无法获取剪贴板图片的问题&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/continuedev/continue/releases/tag/v1.5.25-beta.20251209&quot;&gt;continuedev/continue v1.5.25-beta.20251209&lt;/a&gt; &amp;lt;sup&amp;gt;降级&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;本次更新暂无 AI 摘要，请查看原始 Release Notes&lt;/em&gt;&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/Zephyruso/zashboard/releases/tag/v2.4.0&quot;&gt;Zephyruso/zashboard v2.4.0&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;添加日志过滤功能，支持正则表达式&lt;/li&gt;
-&lt;li&gt;增加全代理链显示切换，提升用户体验&lt;/li&gt;
-&lt;li&gt;增强 ProxyName 组件动态显示拨号代理信息&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;优化 TopologyCharts 组件，实现节点排序和 ID 重映射&lt;/li&gt;
-&lt;li&gt;更新 ProxyNodeCard 布局和文本样式，提高可读性和响应性&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/anghunk/linuxdo-scripts/releases/tag/1.5.12&quot;&gt;anghunk/linuxdo-scripts 1.5.12&lt;/a&gt; &amp;lt;sup&amp;gt;DeepSeek V3.1&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;优化 markdown 生成逻辑及格式处理&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;修复导出 Markdown 时空锚点链接的处理&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/2dust/v2rayNG/releases/tag/1.10.31&quot;&gt;2dust/v2rayNG 1.10.31&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;订阅设置中增加 User Agent&lt;/li&gt;
-&lt;li&gt;调整 hevtun 参数&lt;/li&gt;
-&lt;li&gt;调整连接信息测试地址&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;https://github.com/ryoppippi/ccusage/releases/tag/v17.1.8&quot;&gt;ryoppippi/ccusage v17.1.8&lt;/a&gt; &amp;lt;sup&amp;gt;降级&amp;lt;/sup&amp;gt;&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;本次更新暂无 AI 摘要，请查看原始 Release Notes&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;帮助我们改进&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;对今日摘要质量有建议? 欢迎反馈！&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;📝 反馈摘要质量&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;⭐ 评价今日日报&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;您的反馈将帮助我们优化 AI Prompt,提升摘要准确性 🙏&lt;/p&gt;
 </content:encoded><category>开源追踪</category><category>releases</category><category>daily</category><category>automation</category><author>Release Bot</author></item><item><title>GitHub Releases 日报 - 2025-12-09</title><link>https://blog.yuyins.com/blog/releases/2025-12-09/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/releases/2025-12-09/</guid><description>AI 自动生成的开源项目更新总结,今日共 22 个更新</description><pubDate>Tue, 09 Dec 2025 02:13:28 GMT</pubDate><content:encoded>&lt;h1&gt;2025-12-09 更新摘要&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;统计信息&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -5426,6 +5253,179 @@ hexo g -d //将生成的网站部署到Github Pages静态页面上
 &lt;ul&gt;
 &lt;li&gt;修复了一些已知 Bug&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;帮助我们改进&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;对今日摘要质量有建议? 欢迎反馈！&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;📝 反馈摘要质量&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/houzixiashanxiedaima/AstroBlog/issues/new&quot;&gt;⭐ 评价今日日报&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;您的反馈将帮助我们优化 AI Prompt,提升摘要准确性 🙏&lt;/p&gt;
+</content:encoded><category>开源追踪</category><category>releases</category><category>daily</category><category>automation</category><author>Release Bot</author></item><item><title>GitHub Releases 日报 - 2025-12-10</title><link>https://blog.yuyins.com/blog/releases/2025-12-10/</link><guid isPermaLink="true">https://blog.yuyins.com/blog/releases/2025-12-10/</guid><description>AI 自动生成的开源项目更新总结,今日共 22 个更新</description><pubDate>Wed, 10 Dec 2025 02:18:10 GMT</pubDate><content:encoded>&lt;h1&gt;2025-12-10 更新摘要&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;统计信息&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;由 Qwen 2.5 72B (15), 本地降级 (5), DeepSeek V3.1 (2) 总结&lt;/li&gt;
+&lt;li&gt;监控仓库: 158 个&lt;/li&gt;
+&lt;li&gt;今日更新: 13 个项目 (22 个版本)&lt;/li&gt;
+&lt;li&gt;生成时间: 2025-12-10 10:18:10 (北京时间)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/google-gemini/gemini-cli/releases&quot;&gt;google-gemini/gemini-cli v0.21.0-preview.0 - v0.21.0-nightly.20251210.d90356e8a&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持 MCP 资源&lt;/li&gt;
+&lt;li&gt;添加 a2a 服务器恢复命令&lt;/li&gt;
+&lt;li&gt;显示未使用模型的配额统计&lt;/li&gt;
+&lt;li&gt;提高请求令牌计算精度&lt;/li&gt;
+&lt;li&gt;实现基于策略的模型回退机制&lt;/li&gt;
+&lt;li&gt;添加可配置的命令超时设置&lt;/li&gt;
+&lt;li&gt;集成工具执行钩子&lt;/li&gt;
+&lt;li&gt;显示等待中的 MCP 服务器&lt;/li&gt;
+&lt;li&gt;实现设置中的模糊搜索&lt;/li&gt;
+&lt;li&gt;默认启用消息总线集成&lt;/li&gt;
+&lt;li&gt;支持扩展挂钩的安全警告&lt;/li&gt;
+&lt;li&gt;添加计划工作流关闭过期问题&lt;/li&gt;
+&lt;li&gt;支持远程会话中的复制命令&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;处理缺失的本地扩展配置&lt;/li&gt;
+&lt;li&gt;修复剪贴板中不支持的图像格式&lt;/li&gt;
+&lt;li&gt;修复了 v0.21.0-preview.0 版本中的问题&lt;/li&gt;
+&lt;li&gt;改善 API 密钥认证流程&lt;/li&gt;
+&lt;li&gt;修复清除命令时保留输入历史&lt;/li&gt;
+&lt;li&gt;处理钩子运行器中的 EPIPE 错误&lt;/li&gt;
+&lt;li&gt;排除默认非交互模式下的 web-fetch 工具&lt;/li&gt;
+&lt;li&gt;自动执行简单的斜杠命令&lt;/li&gt;
+&lt;li&gt;修复 npm 审计漏洞&lt;/li&gt;
+&lt;li&gt;修复 CJK 字符的单词导航&lt;/li&gt;
+&lt;li&gt;修复 Homebrew 更新指令&lt;/li&gt;
+&lt;li&gt;防止不必要的凭证缓存清除&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/wavetermdev/waveterm/releases&quot;&gt;wavetermdev/waveterm v0.13.0-beta.3 - v0.13.0&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持本地 AI 模型和第三方提供商&lt;/li&gt;
+&lt;li&gt;集成 Google Gemini 模型&lt;/li&gt;
+&lt;li&gt;全新的配置界面，支持多种配置类型&lt;/li&gt;
+&lt;li&gt;终端改进：默认启用括号粘贴模式，修复 Windows 粘贴问题&lt;/li&gt;
+&lt;li&gt;支持本地 AI 模型和第三方提供者&lt;/li&gt;
+&lt;li&gt;新的统一配置界面&lt;/li&gt;
+&lt;li&gt;增强终端功能，如默认启用括号粘贴模式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;多项依赖库更新&lt;/li&gt;
+&lt;li&gt;各种 Bug 修复和稳定性提升&lt;/li&gt;
+&lt;li&gt;修复 Windows 下 Ctrl+V 粘贴问题&lt;/li&gt;
+&lt;li&gt;多项稳定性改进和依赖更新&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/groupultra/telegram-search/releases/tag/v1.1.34-beta.6&quot;&gt;groupultra/telegram-search v1.1.34-beta.6&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;按 MIME 类型获取媒体文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;正确解析存储的媒体文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/sst/opencode/releases&quot;&gt;sst/opencode v1.0.137 - v1.0.138&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;添加项目更新时间戳，跟踪最后修改时间&lt;/li&gt;
+&lt;li&gt;实验性遥测中添加 userId 和 sessionId 元数据&lt;/li&gt;
+&lt;li&gt;TUI 底部添加权限指示器&lt;/li&gt;
+&lt;li&gt;新增 orng、catppuccin-macchiato 和 mercury.com 主题&lt;/li&gt;
+&lt;li&gt;支持切换 MCP 服务器、卸载命令及动态终端标题&lt;/li&gt;
+&lt;li&gt;增加 bash、terraform 和 OCaml 语言服务器支持&lt;/li&gt;
+&lt;li&gt;读取工具支持 PDF，会话聊天可选滚动条&lt;/li&gt;
+&lt;li&gt;实验性插件钩子支持文本补全&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复 MCP 在 OAuth 设置下仍发送自定义头的问题&lt;/li&gt;
+&lt;li&gt;修复侧边栏工作目录颜色对比度问题&lt;/li&gt;
+&lt;li&gt;修复会话按更新时间排序及主题按字母排序&lt;/li&gt;
+&lt;li&gt;修复自动完成弹出窗口重定位和 shell 检测&lt;/li&gt;
+&lt;li&gt;修复 CLI 帮助文本换行及会话消失问题&lt;/li&gt;
+&lt;li&gt;修复时间戳切换显示和模型选择器中弃用模型&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/openai/codex/releases&quot;&gt;openai/codex rust-v0.66.0-alpha.14 - rust-v0.67.0-alpha.2&lt;/a&gt; &amp;lt;sup&amp;gt;DeepSeek V3.1&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Alpha 预览版本发布&lt;/li&gt;
+&lt;li&gt;常规更新与改进&lt;/li&gt;
+&lt;li&gt;TUI 命令白名单功能，提高安全性&lt;/li&gt;
+&lt;li&gt;统一执行与 Shell 稳定性，改善进度显示&lt;/li&gt;
+&lt;li&gt;跨平台快捷键处理一致，提升导航体验&lt;/li&gt;
+&lt;li&gt;Windows 下应用补丁时保留 CRLF 行尾&lt;/li&gt;
+&lt;li&gt;云执行支持分支参数及状态/差异/应用流程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复 Windows 统一执行崩溃问题&lt;/li&gt;
+&lt;li&gt;解决长命令布局问题&lt;/li&gt;
+&lt;li&gt;减少工具调用后的会话挂起&lt;/li&gt;
+&lt;li&gt;修复并行工具调用聊天返回问题&lt;/li&gt;
+&lt;li&gt;修正缺失工具名称导致的崩溃&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/microsoft/vscode-copilot-chat/releases&quot;&gt;microsoft/vscode-copilot-chat v0.35.2025120901 - v0.35.2025120903&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;代理会话候选功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;确保最终模型更新时选择正确的提示&lt;/li&gt;
+&lt;li&gt;修复缓存云会话的问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/d4rken-org/sdmaid-se/releases/tag/v1.5.6-rc0&quot;&gt;d4rken-org/sdmaid-se v1.5.6-rc0&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复三星 One UI 8.5 上的自动化问题&lt;/li&gt;
+&lt;li&gt;解决查询大应用大小时的超时问题&lt;/li&gt;
+&lt;li&gt;修正全球版 HyperOS 检测问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/Molunerfinn/PicGo/releases/tag/v2.4.1-beta.0&quot;&gt;Molunerfinn/PicGo v2.4.1-beta.0&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;统一 Windows/Linux 主窗口 UI 至 macOS 风格&lt;/li&gt;
+&lt;li&gt;更新 ARM64 构建产物，新增 Linux deb 包&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复 macOS 顶部栏窗口无法获取剪贴板图片的问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/continuedev/continue/releases/tag/v1.5.25-beta.20251209&quot;&gt;continuedev/continue v1.5.25-beta.20251209&lt;/a&gt; &amp;lt;sup&amp;gt;降级&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;本次更新暂无 AI 摘要，请查看原始 Release Notes&lt;/em&gt;&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/Zephyruso/zashboard/releases/tag/v2.4.0&quot;&gt;Zephyruso/zashboard v2.4.0&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;添加日志过滤功能，支持正则表达式&lt;/li&gt;
+&lt;li&gt;增加全代理链显示切换，提升用户体验&lt;/li&gt;
+&lt;li&gt;增强 ProxyName 组件动态显示拨号代理信息&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;优化 TopologyCharts 组件，实现节点排序和 ID 重映射&lt;/li&gt;
+&lt;li&gt;更新 ProxyNodeCard 布局和文本样式，提高可读性和响应性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/anghunk/linuxdo-scripts/releases/tag/1.5.12&quot;&gt;anghunk/linuxdo-scripts 1.5.12&lt;/a&gt; &amp;lt;sup&amp;gt;DeepSeek V3.1&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;优化 markdown 生成逻辑及格式处理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复导出 Markdown 时空锚点链接的处理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/2dust/v2rayNG/releases/tag/1.10.31&quot;&gt;2dust/v2rayNG 1.10.31&lt;/a&gt; &amp;lt;sup&amp;gt;Qwen 2.5&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;新内容&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;订阅设置中增加 User Agent&lt;/li&gt;
+&lt;li&gt;调整 hevtun 参数&lt;/li&gt;
+&lt;li&gt;调整连接信息测试地址&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;https://github.com/ryoppippi/ccusage/releases/tag/v17.1.8&quot;&gt;ryoppippi/ccusage v17.1.8&lt;/a&gt; &amp;lt;sup&amp;gt;降级&amp;lt;/sup&amp;gt;&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;本次更新暂无 AI 摘要，请查看原始 Release Notes&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;帮助我们改进&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;对今日摘要质量有建议? 欢迎反馈！&lt;/p&gt;
 &lt;ul&gt;
