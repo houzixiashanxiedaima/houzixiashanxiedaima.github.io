@@ -28,7 +28,7 @@ AstroBlog
               重试
             </button>
           </div>
-        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Writing my own static site generator</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://maurycyz.com" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>maurycyz.com</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年1月16日</time> </div> </header> <!-- Render HTML content from RSS feed --> <div class="article-content app-prose" data-astro-cid-wrgicudb><!-- mksite: start of content -->
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Writing my own static site generator</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://maurycyz.com" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>maurycyz.com</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年1月16日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb>
 <p>
 
 <em>In principle, a static site generator is a good idea:</em>
@@ -38,7 +38,7 @@ Unlike a CMS like Wordpress, they don't add runtime cost or security vulnerabili
 They run once to generate your site and are never exposed to the internet.
 </p><p>
 However, they all put weird restrictions on how you structure your site:
-<!-- snip -->
+
 </p>
 <p>
 <em>Nearly all of them require you to write in Markdown</em>, which is common, but poorly specified and difficult to parse.
@@ -47,28 +47,22 @@ As soon as you do anything more complex then bolding a few words, it becomes a s
 I recently spent way too much time trying to figure out how to stop it from link-ifying something that looked like a URL. 
 </p><p>
 In any case, the whole thing seems pointless:
-I'm writing a <a href=/tutorials/website>website</a>, something that will be published exclusively on the web... so...
+I'm writing a <a href="/tutorials/website" target="_blank" rel="noopener noreferrer">website</a>, something that will be published exclusively on the web... so...
 </p><p>
-<h1>Why not just use HTML?</h1>
-</p><p>
+</p><h1>Why not just use HTML?</h1>
+<p></p><p>
 <em>Converting from Markdown</em> would make sense if HTML was super ugly, but it's not.
 Here's what bolding looks like in Markdown:
 </p>
-<style>
-	h-n {color: #F27;}
-	h-v {color: #B8F;}
-	h-s {color: #AEE;}
-	h-c {color: #777; font-family: monospace;}
-	h-e {color: #F6F;}
-</style>
+
 <pre>
-This is an <b><h-n>**</h-n>important point<h-n>**</h-n></b>
+This is an <b>**important point**</b>
 </pre>
 <p>
 ... and here's the same in HTML:
 </p>
 <pre>
-This is an &lt;<h-n>b</h-n>&gt;<b>important point</b>&lt;/<h-n>b</h-n>&gt;
+This is an &lt;b&gt;<b>important point</b>&lt;/b&gt;
 </pre>
 <p>
 That might be harder to type on a phone keyboard, but if you're writing on a phone, you're not having a good time anyway. 
@@ -77,12 +71,12 @@ There are some things that suck with HTML, like manual syntax highlighting, but 
 Adding a whole markdown parser just to improve code blocks is overkill.
 </p><p>
 <em>These translation layers are fragile</em>:
-The <a href=https://info.cern.ch/hypertext/WWW/TheProject.html>original website</a> still renders fine in modern browsers,
+The <a href="https://info.cern.ch/hypertext/WWW/TheProject.html" target="_blank" rel="noopener noreferrer">original website</a> still renders fine in modern browsers,
 but there's no shortage of Wordpress blogs where all the formatting broke after a server update...
-and not just a <a href=https://madebynathan.com/posts/2021-12-05-how-docker-saved-my-blog/>Wordpress problem</a>.
+and not just a <a href="https://madebynathan.com/posts/2021-12-05-how-docker-saved-my-blog/" target="_blank" rel="noopener noreferrer">Wordpress problem</a>.
 </p><p>
-<h1>Configuration:</h1>
-</p><p>
+</p><h1>Configuration:</h1>
+<p></p><p>
 The Markdown thing is somewhat justifiable:
 A lot of people are more comfortable with markdown then HTML.
 </p><p>
@@ -91,29 +85,29 @@ complete with questionable design decisions and without nearly enough documentat
 As a result, it's very difficult to get these tools to do what you want:
 </p><p>
 I knew that something as simple as removing the publication date from pages that shouldn't have one 
-(like the <a href=/archive>archives</a>)
+(like the <a href="/archive" target="_blank" rel="noopener noreferrer">archives</a>)
 would result in hours of googling cryptic error messages.
 </p><p>
 <em>Using them doesn't feel like handcrafting a website.</em>
 It feels like throwing arcane bullshit at the wall and seeing what sticks. 
 </p><p>
-<h1>I'll just do it myself:</h1>
-</p><p>
+</p><h1>I'll just do it myself:</h1>
+<p></p><p>
 <em>Each article on my site is an HTML file</em> prefixed with a metadata block:
 
 </p><pre>
-<h-s>title</h-s> <h-v>Example page:</h-v>
-<h-s>date</h-s> <h-v>2021-02-11</h-v>
-<h-s>edited</h-s> <h-v>2025-01-21</h-v>
-<h-s>tag</h-s> <h-v>electronics</h-v>
-<h-s>tag</h-s> <h-v>radiation</h-v>
-<h-n>---</h-n>
+title Example page:
+date 2021-02-11
+edited 2025-01-21
+tag electronics
+tag radiation
+---
 
 Paragraph one.
-<h-n>.</h-n>
+.
 Paragraph two 
-<h-c>&lt;!-- snip --&gt;</h-c>
-<h-n>.</h-n>
+&lt;!-- snip --&gt;
+.
 ... the rest of the page
 </pre><p>
 
@@ -122,87 +116,76 @@ Everything except HTML is left unchanged.
 </p><p>
 When it sees an HTML file:
 The metadata block is parsed and saved for later.
-Everything else is added to a template with the navigation bar and <a href=/misc/inline_css/>styles</a> and written to the output directory.
+Everything else is added to a template with the navigation bar and <a href="/misc/inline_css/" target="_blank" rel="noopener noreferrer">styles</a> and written to the output directory.
 </p><p>
 To make writing easier, the generator supports using a dot on it's own line:
 </p><p>
-<pre>
-<h-n>.</h-n>
+</p><pre>
+.
 </pre>
-</p><p>
+<p></p><p>
 ... as a shorthand for paragraph breaks:
 </p><p>
-<pre>
-&lt;/<h-n>p</h-n>&gt;&lt;<h-n>p</h-n>&gt;
+</p><pre>
+&lt;/p&gt;&lt;p&gt;
 </pre>
-</p><p>
-During this process, the generator also saves everything before the <span title="the perks of HTML"><h-c>&lt;!-- snip --&gt;</h-c></span> comment as an excerpt for the homepage.
+<p></p><p>
+During this process, the generator also saves everything before the <span>&lt;!-- snip --&gt;</span> comment as an excerpt for the homepage.
 This manual because a good excerpt should be long enough get an idea of what the post is about...
 but not any longer.
 </p><p>
 <em>Once done with the content</em>, all the posts are sorted by date in reverse order:
-The first 5 are added to the <a href=/>homepage</a>.
-The first 20 are included in the <a href=/index.xml>the RSS feed</a>. 
-All posts except space photos are included in the <a href=/archive/>archive</a> page. 
-All <a href=/tags/>12 tags</a> get their own index pages.
+The first 5 are added to the <a href="/" target="_blank" rel="noopener noreferrer">homepage</a>.
+The first 20 are included in the <a href="/index.xml" target="_blank" rel="noopener noreferrer">the RSS feed</a>. 
+All posts except space photos are included in the <a href="/archive/" target="_blank" rel="noopener noreferrer">archive</a> page. 
+All <a href="/tags/" target="_blank" rel="noopener noreferrer">12 tags</a> get their own index pages.
 </p><p>
-There's also my <a href=/astro/catalog.html>catalog page</a> which is generated from objects tagged in photos I've taken:
+There's also my <a href="/astro/catalog.html" target="_blank" rel="noopener noreferrer">catalog page</a> which is generated from objects tagged in photos I've taken:
 The index page has a section for each astronomical catalog (i.e. NGC), with links sorted by their number in that catalog. (i.e. 5194)
 Images of the same object are grouped together, and sorted by date taken.
 Everything shoulds to be on one page for easy searching and browsing. 
 </p><p>
 <em>This would be very difficult or even impossible to do in a templateing language</em>, but is trivial with a custom site generator. 
 </p><p>
-<b>All of this is contained in a <a href=/mksite.c>single C file</a></b>:
+<b>All of this is contained in a <a href="/mksite.c" target="_blank" rel="noopener noreferrer">single C file</a></b>:
 It has no configuration files, no external assets and no weird domain-specific-language. 
 The code is ~700 lines, including the template HTML.
 It's something one person can understand and maintain.
 </p><p>
 <em>I highly recommend doing this</em>:
 </p><p>
-<ul>
-<li>There will never be an update that <a href=https://www.ii.com/hugo-update-nope/>breaks your site</a>.
-Sure, you could stay on an old version, but it's only a matter of time before you find an annoying bug.<br><br></li>
-<li>You have complete control: Want to write pages in Emacs <a href=https://github.com/adityaathalye/shite>Org-mode</a>? LaTeX? AsciiDoc? Plain text? No problem.<br><br></li>
-<li>Do you need something weird and very specific? Just add it.<br><br></li>
+</p><ul>
+<li>There will never be an update that <a href="https://www.ii.com/hugo-update-nope/" target="_blank" rel="noopener noreferrer">breaks your site</a>.
+Sure, you could stay on an old version, but it's only a matter of time before you find an annoying bug.<br /><br /></li>
+<li>You have complete control: Want to write pages in Emacs <a href="https://github.com/adityaathalye/shite" target="_blank" rel="noopener noreferrer">Org-mode</a>? LaTeX? AsciiDoc? Plain text? No problem.<br /><br /></li>
+<li>Do you need something weird and very specific? Just add it.<br /><br /></li>
 </ul>
-</p><p>
+<p></p><p>
 It's not hard to write one:
-It took only a few hours of work to get mine to the point it could replace <a href=https://gohugo.io/>Hugo</a> with it's 1000+ dependencies...
+It took only a few hours of work to get mine to the point it could replace <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> with it's 1000+ dependencies...
 and mine is written in C: Not exactly the friendliest language. 
 </p><p>
-<!--
-Previosly, this site was using <a href=https://gohugo.io/>Hugo</a> which pulls in <em>1000+ dependencies</em> from the internet.
-This simply <em>too much code</em> for me to ever read.
-</p><p>
-Hugo might be the right choice for a company that can afford to pay multiple people to maintain the site full-time.
-For me, I've spent more time trying to fix it then it took to <em>write a replacement</em>.
-</p><p>
-To be clear: I'm not hating on Hugo.
-I'm sure it works great for the developers: 
-It's just not the right tool for <em>my site</em> (and probobly not for yours)
-</p><p>
--->
-<h1>Switching:</h1>
-</p><p>
+
+</p><h1>Switching:</h1>
+<p></p><p>
 <em>The longest part</em> was converting all my 100+ blog posts into the new format. 
 This could have been automated, but I wanted the chance to freshen up the writing.
-(... and it still took less time then configuring <a href=https://gohugo.io/>Hugo.</a>)
+(... and it still took less time then configuring <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo.</a>)
 </p><p>
 I started this blog to get better at writing:
 <b>All the posts from before 2023 are bad</b>.
 </p><p>
 Really, wanting to delete everything out of shame proves it's working.
-But since this is <a href=/misc/starting_a_blog/>a blog</a>, I don't have to delete the old stuff: I can just fix all the mistakes.
+But since this is <a href="/misc/starting_a_blog/" target="_blank" rel="noopener noreferrer">a blog</a>, I don't have to delete the old stuff: I can just fix all the mistakes.
 </p><p>
-I made sure to keep all URLs and RSS &lt;<h-n>guid</h-n>&gt;-s the same as the old site, so most people shouldn't notice the change. 
+I made sure to keep all URLs and RSS &lt;guid&gt;-s the same as the old site, so most people shouldn't notice the change. 
 If something broke, please send me an email:
 
 </p><pre>
 blog@maurycyz.com
 </pre><p>
 </p>
-<!-- mksite: end of content -->
+
 				</div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://maurycyz.com/misc/new_ssg/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
 阅读原文 ↗
 </a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text" data-astro-cid-sz7xmlte>

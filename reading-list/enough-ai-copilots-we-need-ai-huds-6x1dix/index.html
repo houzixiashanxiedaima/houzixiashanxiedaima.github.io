@@ -19,76 +19,76 @@ AstroBlog
               重试
             </button>
           </div>
-        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Enough AI copilots! We need AI HUDs</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://geoffreylitt.com" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>geoffreylitt.com</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2025年7月27日</time> </div> </header> <!-- Render HTML content from RSS feed --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>In my opinion, one of the best critiques of modern AI design comes from <a href="https://cgi.csc.liv.ac.uk/~coopes/comp319/2016/papers/UbiquitousComputingAndInterfaceAgents-Weiser.pdf">a 1992 talk</a> by the researcher <a href="https://en.wikipedia.org/wiki/Mark_Weiser">Mark Weiser</a> where he ranted against &ldquo;copilot&rdquo; as a metaphor for AI.</p>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Enough AI copilots! We need AI HUDs</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://geoffreylitt.com" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>geoffreylitt.com</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2025年7月27日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>In my opinion, one of the best critiques of modern AI design comes from <a href="https://cgi.csc.liv.ac.uk/~coopes/comp319/2016/papers/UbiquitousComputingAndInterfaceAgents-Weiser.pdf" target="_blank" rel="noopener noreferrer">a 1992 talk</a> by the researcher <a href="https://en.wikipedia.org/wiki/Mark_Weiser" target="_blank" rel="noopener noreferrer">Mark Weiser</a> where he ranted against “copilot” as a metaphor for AI.</p>
 
-<p>This was 33 years ago, but it&rsquo;s still incredibly relevant for anyone designing with AI.</p>
+<p>This was 33 years ago, but it’s still incredibly relevant for anyone designing with AI.</p>
 
-<h2 id="weisers-rant">Weiser&rsquo;s rant</h2>
+<h2>Weiser’s rant</h2>
 
-<p>Weiser was speaking at an <a href="https://www.dropbox.com/scl/fo/axpzd925tcsnkc9x5nd51/AJMdLqxafEYFun4Ns6fqMHo?dl=0&amp;e=1&amp;preview=frames_1992_014_Nov.pdf&amp;rlkey=znit21hyth8w24m6gm02rq2y7">MIT Media Lab event</a> on &ldquo;interface agents&rdquo;. They were grappling with many of the same issues we&rsquo;re discussing in 2025: how to make a personal assistant that automates tasks for you and knows your full context. They even had a human &ldquo;butler&rdquo; on stage representing an AI agent.</p>
+<p>Weiser was speaking at an <a href="https://www.dropbox.com/scl/fo/axpzd925tcsnkc9x5nd51/AJMdLqxafEYFun4Ns6fqMHo?dl=0&amp;e=1&amp;preview=frames_1992_014_Nov.pdf&amp;rlkey=znit21hyth8w24m6gm02rq2y7" target="_blank" rel="noopener noreferrer">MIT Media Lab event</a> on “interface agents”. They were grappling with many of the same issues we’re discussing in 2025: how to make a personal assistant that automates tasks for you and knows your full context. They even had a human “butler” on stage representing an AI agent.</p>
 
-<p>Everyone was super excited about this&hellip; except Weiser. He was opposed to the whole idea of agents! He gave this example: how should a computer help you fly a plane and avoid collisions?</p>
+<p>Everyone was super excited about this… except Weiser. He was opposed to the whole idea of agents! He gave this example: how should a computer help you fly a plane and avoid collisions?</p>
 
-<p><strong>The agentic option is a &ldquo;copilot&rdquo; — a virtual human who you talk with to get help flying the plane.</strong> If you&rsquo;re about to run into another plane it might yell at you &ldquo;collision, go right and down!&rdquo;</p>
+<p><strong>The agentic option is a “copilot” — a virtual human who you talk with to get help flying the plane.</strong> If you’re about to run into another plane it might yell at you “collision, go right and down!”</p>
 
-<p>Weiser offered a different option: <strong>design the cockpit so that the human pilot is naturally aware of their surroundings.</strong> In his words: &ldquo;You’ll no more run into another airplane than you would try to walk through a wall.&rdquo;</p>
+<p>Weiser offered a different option: <strong>design the cockpit so that the human pilot is naturally aware of their surroundings.</strong> In his words: “You’ll no more run into another airplane than you would try to walk through a wall.”</p>
 
-<p>Weiser&rsquo;s goal was an &ldquo;invisible computer&quot;—not an assistant that grabs your attention, but a computer that fades into the background and becomes &quot;an extension of [your] body&rdquo;.</p>
+<p>Weiser’s goal was an “invisible computer"—not an assistant that grabs your attention, but a computer that fades into the background and becomes "an extension of [your] body”.</p>
 
-<figure style="margin: 0;">
-  <img src="/images/article_images/weiser-slide.png" alt="">
-  <figcaption>Weiser&rsquo;s 1992 slide on airplane interfaces</figcaption>
+<figure>
+  <img src="/images/article_images/weiser-slide.png" alt="" />
+  <figcaption>Weiser’s 1992 slide on airplane interfaces</figcaption>
 </figure>
 
-<h2 id="huds">HUDs</h2>
+<h2>HUDs</h2>
 
-<p>There&rsquo;s a tool in modern planes that I think nicely illustrates Weiser&rsquo;s philosophy: <strong>the Head-Up Display (HUD), which overlays flight info like the horizon and altitude on a transparent display directly in the pilot&rsquo;s field of view.</strong></p>
+<p>There’s a tool in modern planes that I think nicely illustrates Weiser’s philosophy: <strong>the Head-Up Display (HUD), which overlays flight info like the horizon and altitude on a transparent display directly in the pilot’s field of view.</strong></p>
 
-<p>A HUD feels completely different from a copilot! You don&rsquo;t talk to it. It&rsquo;s literally part invisible—you just become naturally aware of more things, as if you had magic eyes.</p>
+<p>A HUD feels completely different from a copilot! You don’t talk to it. It’s literally part invisible—you just become naturally aware of more things, as if you had magic eyes.</p>
 
 <p><img src="/images/article_images/copilot-hud.png" alt="" /></p>
 
-<h2 id="designing-huds">Designing HUDs</h2>
+<h2>Designing HUDs</h2>
 
 <p>OK enough analogies. What might a HUD feel like in modern software design?</p>
 
-<p>One familiar example is spellcheck. Think about it: <strong>spellcheck isn&rsquo;t designed as a &ldquo;virtual collaborator&rdquo; talking to you about your spelling.</strong> It just instantly adds red squigglies when you misspell something! You now have a new sense you didn&rsquo;t have before. It&rsquo;s a HUD.</p>
+<p>One familiar example is spellcheck. Think about it: <strong>spellcheck isn’t designed as a “virtual collaborator” talking to you about your spelling.</strong> It just instantly adds red squigglies when you misspell something! You now have a new sense you didn’t have before. It’s a HUD.</p>
 
-<p>(This example comes from Jeffrey Heer&rsquo;s excellent <a href="https://idl.cs.washington.edu/files/2019-AgencyPlusAutomation-PNAS.pdf">Agency plus Automation</a> paper. We may not consider spellcheck an AI feature today, but it&rsquo;s still a fuzzy algorithm under the hood.)</p>
+<p>(This example comes from Jeffrey Heer’s excellent <a href="https://idl.cs.washington.edu/files/2019-AgencyPlusAutomation-PNAS.pdf" target="_blank" rel="noopener noreferrer">Agency plus Automation</a> paper. We may not consider spellcheck an AI feature today, but it’s still a fuzzy algorithm under the hood.)</p>
 
-<figure style="margin: 0;">
-  <img src="/images/article_images/spellcheck.png" alt="">
-  <figcaption>Spellcheck makes you aware of misspelled words without an &ldquo;assistant&rdquo; interface.</figcaption>
+<figure>
+  <img src="/images/article_images/spellcheck.png" alt="" />
+  <figcaption>Spellcheck makes you aware of misspelled words without an “assistant” interface.</figcaption>
 </figure>
 
-<p>Here&rsquo;s another personal example from AI coding. Let&rsquo;s say you want to fix a bug. The obvious &ldquo;copilot&rdquo; way is to open an agent chat and ask it to do the fix.</p>
+<p>Here’s another personal example from AI coding. Let’s say you want to fix a bug. The obvious “copilot” way is to open an agent chat and ask it to do the fix.</p>
 
-<p>But there&rsquo;s another approach I&rsquo;ve found more powerful at times: <strong>use AI to build a custom debugger UI which visualizes the behavior of my program!</strong> In one example, I <a href="/2024/12/22/making-programming-more-fun-with-an-ai-generated-debugger.html">built a hacker-themed debug view of a Prolog interpreter</a>.</p>
+<p>But there’s another approach I’ve found more powerful at times: <strong>use AI to build a custom debugger UI which visualizes the behavior of my program!</strong> In one example, I <a href="/2024/12/22/making-programming-more-fun-with-an-ai-generated-debugger.html" target="_blank" rel="noopener noreferrer">built a hacker-themed debug view of a Prolog interpreter</a>.</p>
 
 <p>With the debugger, I have a HUD! I have new senses, I can see how my program runs. The HUD extends beyond the narrow task of fixing the bug. I can ambiently build up my own understanding, spotting new problems and opportunities.</p>
 
-<video autoplay loop controls="controls" preload="auto" muted="muted" data-video="0" type="video/mp4" src="/images/article_images/debugger/demo.mp4" width="100%"></video>
 
-<p>Both the spellchecker and custom debuggers show that automation / &ldquo;virtual assistant&rdquo; isn&rsquo;t the only possible UI. We can instead use tech to build better HUDs that enhance our human senses.</p>
 
-<h2 id="tradeoffs">Tradeoffs</h2>
+<p>Both the spellchecker and custom debuggers show that automation / “virtual assistant” isn’t the only possible UI. We can instead use tech to build better HUDs that enhance our human senses.</p>
 
-<p>I don&rsquo;t believe HUDs are universally better than copilots! But I do believe <strong>anyone serious about designing for AI should consider non-copilot form factors that more directly extend the human mind.</strong></p>
+<h2>Tradeoffs</h2>
 
-<p>So when should we use one or the other? I think it&rsquo;s quite tricky to answer that, but we can try to use the airplane analogy for some intuition:</p>
+<p>I don’t believe HUDs are universally better than copilots! But I do believe <strong>anyone serious about designing for AI should consider non-copilot form factors that more directly extend the human mind.</strong></p>
 
-<p>When pilots just want the plane to fly straight and level, they fully delegate that task to an autopilot, which is close to a &ldquo;virtual copilot&rdquo;. But if the plane just hit a flock of birds and needs to land in the Hudson, the pilot is going to take manual control, and we better hope they have great instruments that help them understand the situation.</p>
+<p>So when should we use one or the other? I think it’s quite tricky to answer that, but we can try to use the airplane analogy for some intuition:</p>
 
-<p>In other words: routine predictable work might make sense to delegate to a virtual copilot / assistant. But when you&rsquo;re shooting for extraordinary outcomes, perhaps the best bet is to equip human experts with new superpowers.</p>
+<p>When pilots just want the plane to fly straight and level, they fully delegate that task to an autopilot, which is close to a “virtual copilot”. But if the plane just hit a flock of birds and needs to land in the Hudson, the pilot is going to take manual control, and we better hope they have great instruments that help them understand the situation.</p>
 
-<hr>
+<p>In other words: routine predictable work might make sense to delegate to a virtual copilot / assistant. But when you’re shooting for extraordinary outcomes, perhaps the best bet is to equip human experts with new superpowers.</p>
 
-<h2 id="further-reading">Further reading</h2>
+<hr />
+
+<h2>Further reading</h2>
 
 <ul>
-<li>A nice discussion of one approach to this idea can be found in <a href="https://distill.pub/2017/aia/">Using Artificial Intelligence to Augment Human Intelligence</a> by Michael Nielsen and Shan Carter.</li>
-<li>A more cryptic take on the same topic: <a href="/2025/06/29/chat-ai-dialogue.html">Is chat a good UI for AI? A Socratic dialogue</a></li>
-<li>A discussion of how the the HUD philosophy intersects with on-demand software creation: <a href="/2023/03/25/llm-end-user-programming.html">Malleable software in the age of LLMs</a></li>
+<li>A nice discussion of one approach to this idea can be found in <a href="https://distill.pub/2017/aia/" target="_blank" rel="noopener noreferrer">Using Artificial Intelligence to Augment Human Intelligence</a> by Michael Nielsen and Shan Carter.</li>
+<li>A more cryptic take on the same topic: <a href="/2025/06/29/chat-ai-dialogue.html" target="_blank" rel="noopener noreferrer">Is chat a good UI for AI? A Socratic dialogue</a></li>
+<li>A discussion of how the the HUD philosophy intersects with on-demand software creation: <a href="/2023/03/25/llm-end-user-programming.html" target="_blank" rel="noopener noreferrer">Malleable software in the age of LLMs</a></li>
 </ul>
 </div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://geoffreylitt.com/2025/07/27/enough-ai-copilots-we-need-ai-huds.html" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
 阅读原文 ↗

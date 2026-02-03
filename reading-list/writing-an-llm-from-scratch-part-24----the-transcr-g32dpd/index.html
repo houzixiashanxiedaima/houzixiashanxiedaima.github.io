@@ -25,13 +25,13 @@ AstroBlog
               重试
             </button>
           </div>
-        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Writing an LLM from scratch, part 24 -- the transcript hack</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://gilesthomas.com" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>gilesthomas.com</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2025年10月28日</time> </div> </header> <!-- Render HTML content from RSS feed --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>Chapter 7 of <a href="https://sebastianraschka.com/">Sebastian Raschka</a>'s book
-"<a href="https://www.manning.com/books/build-a-large-language-model-from-scratch">Build a Large Language Model (from Scratch)</a>"
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Writing an LLM from scratch, part 24 -- the transcript hack</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://gilesthomas.com" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>gilesthomas.com</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2025年10月28日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>Chapter 7 of <a href="https://sebastianraschka.com/" target="_blank" rel="noopener noreferrer">Sebastian Raschka</a>'s book
+"<a href="https://www.manning.com/books/build-a-large-language-model-from-scratch" target="_blank" rel="noopener noreferrer">Build a Large Language Model (from Scratch)</a>"
 explains how we fine-tune our LLM to follow instructions -- essentially turning
 a model that can do next-token completion for text generation into something we
 can use for a chatbot.</p>
 
-<p>Back when I <a href="/2023/03/ai-llm-bot-beginners-tutorial-01">first started looking into LLMs</a>,
+<p>Back when I <a href="/2023/03/ai-llm-bot-beginners-tutorial-01" target="_blank" rel="noopener noreferrer">first started looking into LLMs</a>,
 I used a setup that didn't require that, and got surprisingly good results, at least
 with later OpenAI models.</p>
 
@@ -61,9 +61,9 @@ later ones could.</p>
 <p>How does our GPT-2 model stack up with this kind of thing -- and for comparison,
 how about a newer, more sophisticated base (as in, not instruction fine-tuned)
 model?</p>
-<h3 id="comparing-the-gpt-2-models">Comparing the GPT-2 models</h3>
+<h3>Comparing the GPT-2 models</h3>
 
-<p>I wrote a <a href="https://github.com/gpjt/llm-from-scratch/blob/main/transcript-hack.py">simple script</a>
+<p>I wrote a <a href="https://github.com/gpjt/llm-from-scratch/blob/main/transcript-hack.py" target="_blank" rel="noopener noreferrer">simple script</a>
 that just allowed me to test the transcript above against
 different GPT-2 models, using the infrastructure that I'd already written for the
 code in the book.  It uses the <code>generate_text_simple</code> function -- that is, the
@@ -72,7 +72,7 @@ gets the next 23 tokens.</p>
 
 <p>Here's what I got with the different GPT-2 models:</p>
 
-<h4 id="gpt2-small-124m">gpt2-small (124M)</h4>
+<h4>gpt2-small (124M)</h4>
 
 <pre><code>This is a transcript of a conversation between a helpful bot, 'Bot', and a human,
 'User'.  The bot is very intelligent and always answers the human's questions
@@ -95,7 +95,7 @@ User
 
 <p>It looks like it has the concept of a transcript, at least -- but not very useful.</p>
 
-<h4 id="gpt2-medium-355m">gpt2-medium (355M)</h4>
+<h4>gpt2-medium (355M)</h4>
 
 <pre><code>This is a transcript of a conversation between a helpful bot, 'Bot', and a human,
 'User'.  The bot is very intelligent and always answers the human's questions
@@ -110,7 +110,7 @@ User:  Bright is a synonym for bright.
 
 <p>Better in a way -- it's got some actual text in there.</p>
 
-<h4 id="gpt2-large-774m">gpt2-large (774M)</h4>
+<h4>gpt2-large (774M)</h4>
 
 <pre><code>This is a transcript of a conversation between a helpful bot, 'Bot', and a human,
 'User'.  The bot is very intelligent and always answers the human's questions
@@ -128,7 +128,7 @@ Bot:
 <p>Hmm.  Still not looking good, and that dodgy Unicode isn't great (unless the bot
 was trying to say <code>^_^</code> ;-)</p>
 
-<h4 id="gpt2-xl-1558m">gpt2-xl (1558M)</h4>
+<h4>gpt2-xl (1558M)</h4>
 
 <pre><code>This is a transcript of a conversation between a helpful bot, 'Bot', and a human,
 'User'.  The bot is very intelligent and always answers the human's questions
@@ -171,7 +171,7 @@ fine-tuned already?</p>
 
 <p>That doesn't quite make sense, though, because instruction fine-tuning is normally
 done using a particular format.  Imagine that a model was fine-tuned on chats that
-looked like this <a href="https://huggingface.co/datasets/timdettmers/openassistant-guanaco">Guanaco</a>-format
+looked like this <a href="https://huggingface.co/datasets/timdettmers/openassistant-guanaco" target="_blank" rel="noopener noreferrer">Guanaco</a>-format
 dataset:</p>
 
 <pre><code>### Human: Hello there
@@ -180,7 +180,7 @@ dataset:</p>
 </code></pre>
 
 <p>...and then it was fed something more like this (which is from a
-<a href="https://www.reddit.com/r/LocalLLaMA/comments/155po2p/get_llama_2_prompt_format_right/">Reddit post about the Llama 2 prompt format</a>):</p>
+<a href="https://www.reddit.com/r/LocalLLaMA/comments/155po2p/get_llama_2_prompt_format_right/" target="_blank" rel="noopener noreferrer">Reddit post about the Llama 2 prompt format</a>):</p>
 
 <pre><code>&lt;s&gt;[INST] &lt;&lt;SYS&gt;&gt;
 You are a helpful, respectful and honest assistant. Always answer as helpfully as
@@ -202,10 +202,10 @@ Hello, how are you?
 
 <p>What happens if we take a look at a more modern model, but make sure it's a base one?</p>
 
-<h3 id="qwen3-06b-base">Qwen3-0.6B-Base</h3>
+<h3>Qwen3-0.6B-Base</h3>
 
-<p>I've been playing with <a href="https://huggingface.co/Qwen/Qwen3-0.6B-Base"><code>Qwen/Qwen3-0.6B-Base</code></a>,
-so I wrote <a href="https://github.com/gpjt/llm-from-scratch/blob/main/qwen-transcript-hack.py">a script</a> to use it.
+<p>I've been playing with <a href="https://huggingface.co/Qwen/Qwen3-0.6B-Base" target="_blank" rel="noopener noreferrer"><code>Qwen/Qwen3-0.6B-Base</code></a>,
+so I wrote <a href="https://github.com/gpjt/llm-from-scratch/blob/main/qwen-transcript-hack.py" target="_blank" rel="noopener noreferrer">a script</a> to use it.
 Here's what I got:</p>
 
 <pre><code>This is a transcript of a conversation between a helpful bot, 'Bot', and a human,
@@ -271,9 +271,9 @@ or a group
 
 <p>This is looking almost solid.
 And there's no mention of instruction training on the
-<a href="https://huggingface.co/Qwen/Qwen3-0.6B-Base">model card for <code>Qwen/Qwen3-0.6B-Base</code></a>.</p>
+<a href="https://huggingface.co/Qwen/Qwen3-0.6B-Base" target="_blank" rel="noopener noreferrer">model card for <code>Qwen/Qwen3-0.6B-Base</code></a>.</p>
 
-<h3 id="conclusion">Conclusion</h3>
+<h3>Conclusion</h3>
 
 <p>I think that my initial intuition was right -- a sufficiently advanced base
 model can operate as a chatbot without instruction fine-tuning.</p>
@@ -293,16 +293,16 @@ years since GPT-2, it's the size and quality of the dataset it was trained on.</
 
 <p>GPT-2 was trained
 on "8 million documents for a total of 40GB of text" according to
-<a href="https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf">the paper</a>.
+<a href="https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf" target="_blank" rel="noopener noreferrer">the paper</a>.
 It's not entirely clear how many tokens that is, but I've seen claims of 10B tokens
-(for example <a href="https://www.reddit.com/r/mlscaling/comments/1d3a793/andrej_karpathy_gpt2_124m_in_llmc_in_90_minutes/">here</a>),
+(for example <a href="https://www.reddit.com/r/mlscaling/comments/1d3a793/andrej_karpathy_gpt2_124m_in_llmc_in_90_minutes/" target="_blank" rel="noopener noreferrer">here</a>),
 and that seems in line with 40GB, as that would be 40 billion bytes, and 4 bytes/token
 seems reasonable.</p>
 
-<p>GPT-3, according to <a href="https://en.wikipedia.org/wiki/GPT-3">Wikipedia</a>, was trained on
+<p>GPT-3, according to <a href="https://en.wikipedia.org/wiki/GPT-3" target="_blank" rel="noopener noreferrer">Wikipedia</a>, was trained on
 around 500B tokens.</p>
 
-<p>The Qwen3 series, by contrast, according to the <a href="https://huggingface.co/Qwen/Qwen3-0.6B-Base">model card</a>,
+<p>The Qwen3 series, by contrast, according to the <a href="https://huggingface.co/Qwen/Qwen3-0.6B-Base" target="_blank" rel="noopener noreferrer">model card</a>,
 was trained on 36 trillion tokens across 119 languages.</p>
 
 <p>That's 72 times as much data -- and the data was probably much more curated, too.
@@ -320,7 +320,7 @@ and trained on enough data.   That's useful to know!</p>
 <p>Time to go back to the book; coming next, my notes on the actual fine-tuning
 I was meant to be doing rather than messing around with this :-)</p>
 
-<p><a href="/2025/10/llm-from-scratch-25-instruction-fine-tuning">Here's a link to the next post in this series</a>.</p>
+<p><a href="/2025/10/llm-from-scratch-25-instruction-fine-tuning" target="_blank" rel="noopener noreferrer">Here's a link to the next post in this series</a>.</p>
 </div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://www.gilesthomas.com/2025/10/llm-from-scratch-24-the-transcript-hack" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
 阅读原文 ↗
 </a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text" data-astro-cid-sz7xmlte>

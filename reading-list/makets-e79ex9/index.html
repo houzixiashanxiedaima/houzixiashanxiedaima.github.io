@@ -31,10 +31,10 @@ AstroBlog
               重试
             </button>
           </div>
-        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>make.ts</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://matklad.github.io" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>matklad.github.io</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年1月27日</time> </div> </header> <!-- Render HTML content from RSS feed --> <div class="article-content app-prose" data-astro-cid-wrgicudb>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>make.ts</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://matklad.github.io" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>matklad.github.io</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年1月27日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb>
 <header>
   <h1>make.ts</h1>
-  <time class="meta" datetime="2026-01-27">Jan 27, 2026</time>
+  <time>Jan 27, 2026</time>
 </header>
 <p><kbd><kbd>Up Enter</kbd></kbd> <kbd><kbd>Up Up Enter</kbd></kbd> <kbd><kbd>Up Up Up Enter</kbd></kbd></p>
 <p>Sounds familiar? This is how I historically have been running benchmarks and other experiments
@@ -43,9 +43,9 @@ requiring a repeated sequence of commands — type them manually once, then rely
 workflow pattern — <code>make.ts</code>. I was forced to adapt it once I started working with multiprocess
 applications, where manually entering commands is borderline infeasible. In retrospect, I should
 have adapted the workflow years earlier.</p>
-<section id="The-Pattern">
+<section>
 
-<h2><a href="#The-Pattern">The Pattern</a></h2>
+<h2><a href="#The-Pattern" target="_blank" rel="noopener noreferrer">The Pattern</a></h2>
 <p>Use a (gitignored) file for interactive scripting. Instead of entering a command directly into the
 terminal, write it to a file first, and then run the file. For me, I type stuff into <code>make.ts</code> and
 then run <code>./make.ts</code> in my terminal (Ok, I need <em>one</em> <kbd><kbd>Up Enter</kbd></kbd> for that).</p>
@@ -83,22 +83,22 @@ switching between terminal splits.
 </li>
 </ul>
 </section>
-<section id="Details">
+<section>
 
-<h2><a href="#Details">Details</a></h2>
+<h2><a href="#Details" target="_blank" rel="noopener noreferrer">Details</a></h2>
 <p>Use a consistent filename for the script. I use <code>make.ts</code>, and so there’s a <code>make.ts</code> in the root
 of most projects I work on. Correspondingly, I have <code>make.ts</code> line in project’s <code>.git/info/exclude</code>
 — the <code>.gitignore</code> file which is not shared. The fixed name reduces fixed costs — whenever I
 need complex interactivity I don’t need to come up with a name for a new file, I open my
 pre-existing <code>make.ts</code>, wipe whatever was there and start hacking. Similarly, I have <code>./make.ts</code> in
 my shell history, so
-<a href="https://fishshell.com/docs/current/interactive.html#autosuggestions">fish autosuggestions</a>
+<a href="https://fishshell.com/docs/current/interactive.html#autosuggestions" target="_blank" rel="noopener noreferrer">fish autosuggestions</a>
 work for me. At one point, I had a VS Code task to run <code>make.ts</code>, though I now use
-<a href="https://matklad.github.io/2025/08/31/vibe-coding-terminal-editor.html">terminal editor</a>.</p>
+<a href="https://matklad.github.io/2025/08/31/vibe-coding-terminal-editor.html" target="_blank" rel="noopener noreferrer">terminal editor</a>.</p>
 <p>Start the script with hash bang,
-<span class="display"><code>#!/usr/bin/env -S deno run --allow-all</code></span>
+<span><code>#!/usr/bin/env -S deno run --allow-all</code></span>
 in my case, and
-<span class="display"><code>chmod a+x make.ts</code></span>
+<span><code>chmod a+x make.ts</code></span>
 the file, to make it easy to run.</p>
 <p>Write the script in a language that:</p>
 <ul>
@@ -120,106 +120,106 @@ typing is a sweet spot that gives you reasonable code completion, but still allo
 problem by throwing enough stringly dicts at it.</p>
 <p>JavaScript’s tagged template syntax is brilliant for scripting use-cases:</p>
 
-<figure class="code-block">
+<figure>
 
 
-<pre><code><span class="line"><span class="hl-keyword">function</span> <span class="hl-title function_">$</span>(<span class="hl-params">literal, ...interpolated</span>) {</span>
-<span class="line">  <span class="hl-variable language_">console</span>.<span class="hl-title function_">log</span>({ literal, interpolated });</span>
-<span class="line">}</span>
-<span class="line"></span>
-<span class="line"><span class="hl-keyword">const</span> dir = <span class="hl-string">&quot;hello, world&quot;</span>;</span>
-<span class="line">$<span class="hl-string">`ls <span class="hl-subst">${dir}</span>`</span>;</span></code></pre>
+<pre><code><span><span>function</span> <span>$</span>(<span>literal, ...interpolated</span>) {</span>
+<span>  <span>console</span>.<span>log</span>({ literal, interpolated });</span>
+<span>}</span>
+<span></span>
+<span><span>const</span> dir = <span>"hello, world"</span>;</span>
+<span>$<span>`ls <span>${dir}</span>`</span>;</span></code></pre>
 
 </figure>
 <p>prints</p>
 
-<figure class="code-block">
+<figure>
 
 
-<pre><code><span class="line"><span class="hl-punctuation">{</span></span>
-<span class="line">    literal<span class="hl-punctuation">:</span> <span class="hl-punctuation">[</span> <span class="hl-string">&quot;ls &quot;</span><span class="hl-punctuation">,</span> <span class="hl-string">&quot;&quot;</span> <span class="hl-punctuation">]</span><span class="hl-punctuation">,</span></span>
-<span class="line">    interpolated<span class="hl-punctuation">:</span> <span class="hl-punctuation">[</span> <span class="hl-string">&quot;hello, world&quot;</span> <span class="hl-punctuation">]</span></span>
-<span class="line"><span class="hl-punctuation">}</span></span></code></pre>
+<pre><code><span><span>{</span></span>
+<span>    literal<span>:</span> <span>[</span> <span>"ls "</span><span>,</span> <span>""</span> <span>]</span><span>,</span></span>
+<span>    interpolated<span>:</span> <span>[</span> <span>"hello, world"</span> <span>]</span></span>
+<span><span>}</span></span></code></pre>
 
 </figure>
 <p>What happens here is that <code>$</code> gets a list of literal string fragments inside the backticks, and
 then, separately, a list of values to be interpolated in-between. It <em>could</em> concatenate everything
 to just a single string, but it doesn’t have to. This is precisely what is required for process
 spawning, where you want to pass an array of strings to the <code>exec</code> syscall.</p>
-<p>Specifically, I use <a href="https://github.com/dsherret/dax">dax</a> library with Deno, which is excellent as
+<p>Specifically, I use <a href="https://github.com/dsherret/dax" target="_blank" rel="noopener noreferrer">dax</a> library with Deno, which is excellent as
 a single-binary batteries-included scripting environment
-(see <a href="https://matklad.github.io/2023/02/12/a-love-letter-to-deno.html">&lt;3 Deno</a>). Bun has a dax-like
+(see <a href="https://matklad.github.io/2023/02/12/a-love-letter-to-deno.html" target="_blank" rel="noopener noreferrer">&lt;3 Deno</a>). Bun has a dax-like
 library in the box and is a good alternative (though I personally stick with Deno because of
 <code>deno fmt</code> and <code>deno lsp</code>). You could also use famous zx, though be mindful that it
-<a href="https://google.github.io/zx/configuration#shell">uses your shell as a middleman</a>, something I
-consider to be sloppy (<a href="https://julialang.org/blog/2012/03/shelling-out-sucks/">explanation</a>).</p>
+<a href="https://google.github.io/zx/configuration#shell" target="_blank" rel="noopener noreferrer">uses your shell as a middleman</a>, something I
+consider to be sloppy (<a href="https://julialang.org/blog/2012/03/shelling-out-sucks/" target="_blank" rel="noopener noreferrer">explanation</a>).</p>
 <p>While <code>dax</code> makes it convenient to spawn a single program, <code>async/await</code> is excellent for herding a
 slither of processes:</p>
 
-<figure class="code-block">
+<figure>
 
 
-<pre><code><span class="line"><span class="hl-keyword">await</span> <span class="hl-title class_">Promise</span>.<span class="hl-title function_">all</span>([</span>
-<span class="line">    $<span class="hl-string">`sleep 5`</span>,</span>
-<span class="line">    $<span class="hl-string">`sleep 10`</span>,</span>
-<span class="line">]);</span></code></pre>
+<pre><code><span><span>await</span> <span>Promise</span>.<span>all</span>([</span>
+<span>    $<span>`sleep 5`</span>,</span>
+<span>    $<span>`sleep 10`</span>,</span>
+<span>]);</span></code></pre>
 
 </figure>
 </section>
-<section id="Concrete-Example">
+<section>
 
-<h2><a href="#Concrete-Example">Concrete Example</a></h2>
+<h2><a href="#Concrete-Example" target="_blank" rel="noopener noreferrer">Concrete Example</a></h2>
 <p>Here’s how I applied this pattern earlier today. I wanted to measure how TigerBeetle cluster
 recovers from the crash of the primary. The manual way to do that would be to create a bunch of ssh
 sessions for several cloud machines, format datafiles, start replicas, and then create some load. I
 <em>almost</em> started to split my terminal up, but then figured out I can do it the smart way.</p>
 <p>The first step was cross-compiling the binary, uploading it to the cloud machines, and running the
 cluster
-(using my <a href="https://matklad.github.io/2026/01/20/vibecoding-2.html">box</a> from the other week):</p>
+(using my <a href="https://matklad.github.io/2026/01/20/vibecoding-2.html" target="_blank" rel="noopener noreferrer">box</a> from the other week):</p>
 
-<figure class="code-block">
+<figure>
 
 
-<pre><code><span class="line"><span class="hl-meta">#!/usr/bin/env -S deno run --allow-all</span></span>
-<span class="line"><span class="hl-keyword">import</span> $ <span class="hl-keyword">from</span> <span class="hl-string">&quot;jsr:@david/dax@0.44.2&quot;</span>;</span>
-<span class="line"></span>
-<span class="line"><span class="hl-keyword">await</span> $<span class="hl-string">`./zig/zig build -Drelease -Dtarget=x86_64-linux`</span>;</span>
-<span class="line"><span class="hl-keyword">await</span> $<span class="hl-string">`box sync 0-5 ./tigerbeetle`</span>;</span>
-<span class="line"><span class="hl-keyword">await</span> $<span class="hl-string">`box run 0-5</span></span>
-<span class="line"><span class="hl-string">    ./tigerbeetle format --cluster=0 --replica-count=6 --replica=?? 0_??.tigerbeetle`</span>;</span>
-<span class="line"><span class="hl-keyword">await</span> $<span class="hl-string">`box run 0-5</span></span>
-<span class="line"><span class="hl-string">    ./tigerbeetle start --addresses=?0-5? 0_??.tigerbeetle`</span>;</span></code></pre>
+<pre><code><span><span>#!/usr/bin/env -S deno run --allow-all</span></span>
+<span><span>import</span> $ <span>from</span> <span>"jsr:@david/dax@0.44.2"</span>;</span>
+<span></span>
+<span><span>await</span> $<span>`./zig/zig build -Drelease -Dtarget=x86_64-linux`</span>;</span>
+<span><span>await</span> $<span>`box sync 0-5 ./tigerbeetle`</span>;</span>
+<span><span>await</span> $<span>`box run 0-5</span></span>
+<span><span>    ./tigerbeetle format --cluster=0 --replica-count=6 --replica=?? 0_??.tigerbeetle`</span>;</span>
+<span><span>await</span> $<span>`box run 0-5</span></span>
+<span><span>    ./tigerbeetle start --addresses=?0-5? 0_??.tigerbeetle`</span>;</span></code></pre>
 
 </figure>
 <p>Running the above the second time, I realized that I need to kill the old cluster first, so two new
 commands are “interactively” inserted:</p>
 
-<figure class="code-block">
+<figure>
 
 
-<pre><code><span class="line"><span class="hl-keyword">await</span> $<span class="hl-string">`./zig/zig build -Drelease -Dtarget=x86_64-linux`</span>;</span>
-<span class="line"><span class="hl-keyword">await</span> $<span class="hl-string">`box sync 0-5 ./tigerbeetle`</span>;</span>
-<span class="line"></span>
-<span class="line"><span class="hl-keyword">await</span> $<span class="hl-string">`box run 0-5 rm 0_??.tigerbeetle`</span>.<span class="hl-title function_">noThrow</span>();</span>
-<span class="line"><span class="hl-keyword">await</span> $<span class="hl-string">`box run 0-5 pkill tigerbeetle`</span>.<span class="hl-title function_">noThrow</span>();</span>
-<span class="line"></span>
-<span class="line"><span class="hl-keyword">await</span> $<span class="hl-string">`box run 0-5</span></span>
-<span class="line"><span class="hl-string">    ./tigerbeetle format --cluster=0 --replica-count=6 --replica=?? 0_??.tigerbeetle`</span>;</span>
-<span class="line"><span class="hl-keyword">await</span> $<span class="hl-string">`box run 0-5</span></span>
-<span class="line"><span class="hl-string">    ./tigerbeetle start --addresses=?0-5? 0_??.tigerbeetle`</span>;</span></code></pre>
+<pre><code><span><span>await</span> $<span>`./zig/zig build -Drelease -Dtarget=x86_64-linux`</span>;</span>
+<span><span>await</span> $<span>`box sync 0-5 ./tigerbeetle`</span>;</span>
+<span></span>
+<span><span>await</span> $<span>`box run 0-5 rm 0_??.tigerbeetle`</span>.<span>noThrow</span>();</span>
+<span><span>await</span> $<span>`box run 0-5 pkill tigerbeetle`</span>.<span>noThrow</span>();</span>
+<span></span>
+<span><span>await</span> $<span>`box run 0-5</span></span>
+<span><span>    ./tigerbeetle format --cluster=0 --replica-count=6 --replica=?? 0_??.tigerbeetle`</span>;</span>
+<span><span>await</span> $<span>`box run 0-5</span></span>
+<span><span>    ./tigerbeetle start --addresses=?0-5? 0_??.tigerbeetle`</span>;</span></code></pre>
 
 </figure>
 <p>At this point, my investment in writing this file and not just entering the commands one-by-one
 already paid off!</p>
 <p>The next step is to run the benchmark load in parallel with the cluster:</p>
 
-<figure class="code-block">
+<figure>
 
 
-<pre><code><span class="line"><span class="hl-keyword">await</span> <span class="hl-title class_">Promise</span>.<span class="hl-title function_">all</span>([</span>
-<span class="line">    $<span class="hl-string">`box run 0-5 ./tigerbeetle start     --addresses=?0-5? 0_??.tigerbeetle`</span>,</span>
-<span class="line">    $<span class="hl-string">`box run 6   ./tigerbeetle benchmark --addresses=?0-5?`</span>,</span>
-<span class="line">])</span></code></pre>
+<pre><code><span><span>await</span> <span>Promise</span>.<span>all</span>([</span>
+<span>    $<span>`box run 0-5 ./tigerbeetle start     --addresses=?0-5? 0_??.tigerbeetle`</span>,</span>
+<span>    $<span>`box run 6   ./tigerbeetle benchmark --addresses=?0-5?`</span>,</span>
+<span>])</span></code></pre>
 
 </figure>
 <p>I don’t need two terminals for two processes, and I get to copy-paste-edit the mostly same command.</p>
@@ -227,28 +227,28 @@ already paid off!</p>
 logs, to see in real-time how the cluster reacts. This is where <code>0-5</code> multiplexing syntax of box
 falls short, but, given that this is JavaScript, I can just write a for loop:</p>
 
-<figure class="code-block">
+<figure>
 
 
-<pre><code><span class="line"><span class="hl-keyword">const</span> replicas = <span class="hl-title function_">range</span>(<span class="hl-number">6</span>).<span class="hl-title function_">map</span>(<span class="hl-function">(<span class="hl-params">it</span>) =&gt;</span></span>
-<span class="line">    $<span class="hl-string">`box run <span class="hl-subst">${it}</span></span></span>
-<span class="line"><span class="hl-string">        ./tigerbeetle start --addresses=?0-5? 0_??.tigerbeetle</span></span>
-<span class="line"><span class="hl-string">        &amp;&gt; logs/<span class="hl-subst">${it}</span>.log`</span></span>
-<span class="line">        .<span class="hl-title function_">noThrow</span>()</span>
-<span class="line">        .<span class="hl-title function_">spawn</span>()</span>
-<span class="line">);</span>
-<span class="line"></span>
-<span class="line"><span class="hl-keyword">await</span> <span class="hl-title class_">Promise</span>.<span class="hl-title function_">all</span>([</span>
-<span class="line">    $<span class="hl-string">`box run 6 ./tigerbeetle benchmark --addresses=?0-5?`</span>,</span>
-<span class="line">    (<span class="hl-keyword">async</span> () =&gt; {</span>
-<span class="line">        <span class="hl-keyword">await</span> $.<span class="hl-title function_">sleep</span>(<span class="hl-string">&quot;20s&quot;</span>);</span>
-<span class="line">        <span class="hl-variable language_">console</span>.<span class="hl-title function_">log</span>(<span class="hl-string">&quot;REDRUM&quot;</span>);</span>
-<span class="line">        <span class="hl-keyword">await</span> $<span class="hl-string">`box run 1 pkill tigerbeetle`</span>;</span>
-<span class="line">    })(),</span>
-<span class="line">]);</span>
-<span class="line"></span>
-<span class="line">replicas.<span class="hl-title function_">forEach</span>(<span class="hl-function">(<span class="hl-params">it</span>) =&gt;</span> it.<span class="hl-title function_">kill</span>());</span>
-<span class="line"><span class="hl-keyword">await</span> <span class="hl-title class_">Promise</span>.<span class="hl-title function_">all</span>(replicas);</span></code></pre>
+<pre><code><span><span>const</span> replicas = <span>range</span>(<span>6</span>).<span>map</span>(<span>(<span>it</span>) =&gt;</span></span>
+<span>    $<span>`box run <span>${it}</span></span></span>
+<span><span>        ./tigerbeetle start --addresses=?0-5? 0_??.tigerbeetle</span></span>
+<span><span>        &amp;&gt; logs/<span>${it}</span>.log`</span></span>
+<span>        .<span>noThrow</span>()</span>
+<span>        .<span>spawn</span>()</span>
+<span>);</span>
+<span></span>
+<span><span>await</span> <span>Promise</span>.<span>all</span>([</span>
+<span>    $<span>`box run 6 ./tigerbeetle benchmark --addresses=?0-5?`</span>,</span>
+<span>    (<span>async</span> () =&gt; {</span>
+<span>        <span>await</span> $.<span>sleep</span>(<span>"20s"</span>);</span>
+<span>        <span>console</span>.<span>log</span>(<span>"REDRUM"</span>);</span>
+<span>        <span>await</span> $<span>`box run 1 pkill tigerbeetle`</span>;</span>
+<span>    })(),</span>
+<span>]);</span>
+<span></span>
+<span>replicas.<span>forEach</span>(<span>(<span>it</span>) =&gt;</span> it.<span>kill</span>());</span>
+<span><span>await</span> <span>Promise</span>.<span>all</span>(replicas);</span></code></pre>
 
 </figure>
 <p>At this point, I do need two terminals. One runs <code>./make.ts</code> and shows the log from the benchmark
@@ -261,38 +261,38 @@ was in the file to begin with.</p>
 benchmark against a different, baseline version TigerBeetle, you replace <code>./tigerbeetle</code> with
 <code>./${tigerbeetle}</code> and wrap everything into</p>
 
-<figure class="code-block">
+<figure>
 
 
-<pre><code><span class="line"><span class="hl-keyword">async</span> <span class="hl-keyword">function</span> <span class="hl-title function_">benchmark</span>(<span class="hl-params">tigerbeetle: <span class="hl-built_in">string</span></span>) {</span>
-<span class="line">    <span class="hl-comment">// ...</span></span>
-<span class="line">}</span>
-<span class="line"></span>
-<span class="line"><span class="hl-keyword">const</span> tigerbeetle = <span class="hl-title class_">Deno</span>.<span class="hl-property">args</span>[<span class="hl-number">0</span>]</span>
-<span class="line"><span class="hl-keyword">await</span> <span class="hl-title function_">benchmark</span>(tigerbeetle);</span></code></pre>
+<pre><code><span><span>async</span> <span>function</span> <span>benchmark</span>(<span>tigerbeetle: <span>string</span></span>) {</span>
+<span>    <span>// ...</span></span>
+<span>}</span>
+<span></span>
+<span><span>const</span> tigerbeetle = <span>Deno</span>.<span>args</span>[<span>0</span>]</span>
+<span><span>await</span> <span>benchmark</span>(tigerbeetle);</span></code></pre>
 
 </figure>
 
-<figure class="code-block">
+<figure>
 
 
-<pre><code><span class="line"><span class="hl-title function_">$</span> ./make.ts tigerbeetle-baseline</span>
-<span class="line"><span class="hl-title function_">$</span> ./make.ts tigerbeetle</span></code></pre>
+<pre><code><span><span>$</span> ./make.ts tigerbeetle-baseline</span>
+<span><span>$</span> ./make.ts tigerbeetle</span></code></pre>
 
 </figure>
 <p>A bit more hacking, and you end up with a repeatable benchmark schedule for a matrix of parameters:</p>
 
-<figure class="code-block">
+<figure>
 
 
-<pre><code><span class="line"><span class="hl-keyword">for</span> (<span class="hl-keyword">const</span> attempt <span class="hl-keyword">of</span> [<span class="hl-number">0</span>, <span class="hl-number">1</span>])</span>
-<span class="line"><span class="hl-keyword">for</span> (<span class="hl-keyword">const</span> tigerbeetle <span class="hl-keyword">of</span> [<span class="hl-string">&quot;baseline&quot;</span>, <span class="hl-string">&quot;tigerbeetle&quot;</span>])</span>
-<span class="line"><span class="hl-keyword">for</span> (<span class="hl-keyword">const</span> mode <span class="hl-keyword">of</span> [<span class="hl-string">&quot;normal&quot;</span>, <span class="hl-string">&quot;viewchange&quot;</span>]) {</span>
-<span class="line">    <span class="hl-keyword">const</span> results = $.<span class="hl-title function_">path</span>(</span>
-<span class="line">        <span class="hl-string">`./results/<span class="hl-subst">${tigerbeetle}</span>-<span class="hl-subst">${mode}</span>-<span class="hl-subst">${attempt}</span>`</span>,</span>
-<span class="line">    );</span>
-<span class="line">    <span class="hl-keyword">await</span> <span class="hl-title function_">benchmark</span>(tigerbeetle, mode, results);</span>
-<span class="line">}</span></code></pre>
+<pre><code><span><span>for</span> (<span>const</span> attempt <span>of</span> [<span>0</span>, <span>1</span>])</span>
+<span><span>for</span> (<span>const</span> tigerbeetle <span>of</span> [<span>"baseline"</span>, <span>"tigerbeetle"</span>])</span>
+<span><span>for</span> (<span>const</span> mode <span>of</span> [<span>"normal"</span>, <span>"viewchange"</span>]) {</span>
+<span>    <span>const</span> results = $.<span>path</span>(</span>
+<span>        <span>`./results/<span>${tigerbeetle}</span>-<span>${mode}</span>-<span>${attempt}</span>`</span>,</span>
+<span>    );</span>
+<span>    <span>await</span> <span>benchmark</span>(tigerbeetle, mode, results);</span>
+<span>}</span></code></pre>
 
 </figure>
 <p>That’s the gist of it. Don’t let the shell history be your source, capture it into the file first!</p>

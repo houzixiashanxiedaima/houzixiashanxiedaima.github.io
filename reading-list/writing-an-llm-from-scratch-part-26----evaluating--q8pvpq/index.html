@@ -28,10 +28,10 @@ AstroBlog
               重试
             </button>
           </div>
-        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Writing an LLM from scratch, part 26 -- evaluating the fine-tuned model</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://gilesthomas.com" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>gilesthomas.com</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2025年11月3日</time> </div> </header> <!-- Render HTML content from RSS feed --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>This post is on the second half of chapter 7 of
-<a href="https://sebastianraschka.com/">Sebastian Raschka</a>'s book
-"<a href="https://www.manning.com/books/build-a-large-language-model-from-scratch">Build a Large Language Model (from Scratch)</a>".
-In the <a href="/2025/10/llm-from-scratch-25-instruction-fine-tuning">last post</a> I covered
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Writing an LLM from scratch, part 26 -- evaluating the fine-tuned model</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://gilesthomas.com" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>gilesthomas.com</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2025年11月3日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>This post is on the second half of chapter 7 of
+<a href="https://sebastianraschka.com/" target="_blank" rel="noopener noreferrer">Sebastian Raschka</a>'s book
+"<a href="https://www.manning.com/books/build-a-large-language-model-from-scratch" target="_blank" rel="noopener noreferrer">Build a Large Language Model (from Scratch)</a>".
+In the <a href="/2025/10/llm-from-scratch-25-instruction-fine-tuning" target="_blank" rel="noopener noreferrer">last post</a> I covered
 the part of the chapter that covers instruction fine-tuning; this time round,
 we evaluate our model -- particularly interestingly, we try using another, smarter,
 model to judge how good its responses are.</p>
@@ -39,7 +39,7 @@ model to judge how good its responses are.</p>
 <p>Once again, Raschka's explanation in this section is very clear, and there's not
 that much that was conceptually new to me, so I don't have that many
 notes -- in fact, this post is probably the shortest one in my series so far!</p>
-<h3 id="generating-the-test-set-responses">Generating the test set responses</h3>
+<h3>Generating the test set responses</h3>
 
 <p>Unusually, when at the start of section 7.7 we generate
 some sample responses for the instructions in our test set, I got exactly the same
@@ -53,10 +53,10 @@ a minute on an A100, per the book -- that's quite surprising!)</p>
 <p>Once that was done, it was time to install Ollama so that I could use the Llama 3
 model to evaluate my own.</p>
 
-<h3 id="ollama">Ollama</h3>
+<h3>Ollama</h3>
 
 <p>I've never used Ollama before -- when playing with other people's models, I've always
-used <a href="https://huggingface.co/docs/transformers/en/index">Hugging Face's Transformers</a>
+used <a href="https://huggingface.co/docs/transformers/en/index" target="_blank" rel="noopener noreferrer">Hugging Face's Transformers</a>
 library.</p>
 
 <p>It's a neat package, though.  It wraps <code>llama.cpp</code>, which is a pure C/C++ inference
@@ -70,32 +70,32 @@ use the default install procedure (which puts it into your system-wide <code>/bi
 directories).  But it turns out that it's a very well-packaged app,
 and you don't need to do that.</p>
 
-<p>Using the manual <a href="https://docs.ollama.com/linux">install instructions for Linux</a>,
+<p>Using the manual <a href="https://docs.ollama.com/linux" target="_blank" rel="noopener noreferrer">install instructions for Linux</a>,
 I just created a new directory <code>~/Dev/ollama</code>, and then <code>cd</code>ed there and downloaded it:</p>
 
-<div class="codehilite">
-<pre><span></span><code>wget<span class="w"> </span>https://ollama.com/download/ollama-linux-amd64.tgz
+<div>
+<pre><span></span><code>wget<span> </span>https://ollama.com/download/ollama-linux-amd64.tgz
 </code></pre>
 </div>
 
 <p>It was about 1.75 GiB.  I then untarred it:</p>
 
-<div class="codehilite">
-<pre><span></span><code>tar<span class="w"> </span>xf<span class="w"> </span>ollama-linux-amd64.tgz
+<div>
+<pre><span></span><code>tar<span> </span>xf<span> </span>ollama-linux-amd64.tgz
 </code></pre>
 </div>
 
 <p>...and then I could run commands with full paths, for example:</p>
 
-<div class="codehilite">
-<pre><span></span><code>~/Dev/ollama/bin/ollama<span class="w"> </span>serve
+<div>
+<pre><span></span><code>~/Dev/ollama/bin/ollama<span> </span>serve
 </code></pre>
 </div>
 
 <p>...to start up the server, or</p>
 
-<div class="codehilite">
-<pre><span></span><code>~/Dev/ollama/bin/ollama<span class="w"> </span>run<span class="w"> </span>llama3
+<div>
+<pre><span></span><code>~/Dev/ollama/bin/ollama<span> </span>run<span> </span>llama3
 </code></pre>
 </div>
 
@@ -103,7 +103,7 @@ I just created a new directory <code>~/Dev/ollama</code>, and then <code>cd</cod
 
 <p>Neat!  It's always good to see pre-built binary packages that have no issues with their install location.</p>
 
-<h3 id="actually-running-the-evaluation">Actually running the evaluation</h3>
+<h3>Actually running the evaluation</h3>
 
 <p>The next step was to throw all of the generated test responses (and their associated
 targets) at Llama 3 and see what it thought about how close they were.</p>
@@ -116,7 +116,7 @@ wonder why it accepts a <code>seed</code> parameter in the API call).</p>
 <p>When I got on to the final eval, where you run the test results through Llama 3
 and ask it to rate them compared to the target outputs, it took 11 seconds to run,
 and I got an average score of 48.95 / 100, which is close enough to the 50.32 that
-appears in the book. <sup class="footnote-ref" id="fnref-1"><a href="#fn-1">1</a></sup> I'd run an eval on my model, using a smarter model to judge
+appears in the book. <sup><a href="#fn-1" target="_blank" rel="noopener noreferrer">1</a></sup> I'd run an eval on my model, using a smarter model to judge
 its responses!</p>
 
 <p>Somewhat surprisingly, that number was stable over multiple runs.  So perhaps there
@@ -130,30 +130,30 @@ the chapter -- and almost the end of the  book.  We've built an LLM from scratch
 fine-tuned it, and evaluated it by using a smarter model to judge how well it was
 following instructions.</p>
 
-<h3 id="this-is-the-end">This is the end...</h3>
+<h3>This is the end...</h3>
 
 <p>...or at least the end of the beginning.</p>
 
 <p>Having run the evaluation, I've reached the end of the main part of
-"<a href="https://www.manning.com/books/build-a-large-language-model-from-scratch">Build a Large Language Model (from Scratch)</a>".
+"<a href="https://www.manning.com/books/build-a-large-language-model-from-scratch" target="_blank" rel="noopener noreferrer">Build a Large Language Model (from Scratch)</a>".
 But I don't think I've reached the end of this project, there's still more to do
 (not least working through the appendices).</p>
 
 <p>So, coming up next: a post summarising what I've got through so far in this series,
 and what the next steps are to wrap it up.</p>
 
-<p><a href="/2025/11/llm-from-scratch-27-whats-left-and-whats-next">Here's a link to the next post in this series</a>.</p>
+<p><a href="/2025/11/llm-from-scratch-27-whats-left-and-whats-next" target="_blank" rel="noopener noreferrer">Here's a link to the next post in this series</a>.</p>
 
-<div class="footnotes">
+<div>
 <hr />
 <ol>
-<li id="fn-1">
+<li>
 <p>I also got 110 out of 110 scores -- that is, every response from Llama 3
 was parseable as an integer.  That actually kind of surprised me!  Models like
 to be chatty and helpful.  But looking into it,
-<a href="https://x.com/goodside/status/1657396491676164096">the famous X post by Riley Goodside</a>
+<a href="https://x.com/goodside/status/1657396491676164096" target="_blank" rel="noopener noreferrer">the famous X post by Riley Goodside</a>
 where he had to "threaten" Bard to stop it from saying "Sure, no problem!  Here's your
-JSON" was almost two years ago.&#160;<a href="#fnref-1" class="footnoteBackLink" title="Jump back to footnote 1 in the text.">&#8617;</a></p>
+JSON" was almost two years ago. <a href="#fnref-1" target="_blank" rel="noopener noreferrer">↩</a></p>
 </li>
 </ol>
 </div>

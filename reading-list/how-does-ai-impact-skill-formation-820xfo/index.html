@@ -16,45 +16,19 @@ AstroBlog
               重试
             </button>
           </div>
-        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>How does AI impact skill formation?</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://seangoedecke.com" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>seangoedecke.com</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年1月31日</time> </div> </header> <!-- Render HTML content from RSS feed --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>Two days ago, the Anthropic Fellows program released a paper called <a href="https://arxiv.org/pdf/2601.20245"><em>How AI Impacts Skill Formation</em></a>. Like <a href="/your-brain-on-chatgpt">other</a> <a href="/real-reasoning">papers</a> on AI before it, this one is being <a href="https://www.reddit.com/r/ExperiencedDevs/comments/1qqy2ro/anthropic_ai_assisted_coding_doesnt_show/">treated</a> as proof that AI makes you slower and dumber. Does it prove that?</p>
-<p>The structure of the paper is sort of similar to the 2025 MIT study <a href="https://arxiv.org/pdf/2506.08872"><em>Your Brain on ChatGPT</em></a>. They got a group of people to perform a cognitive task that required learning a new skill: in this case, the Python Trio library. Half of those people were required to use AI and half were forbidden from using it. The researchers then quizzed those people to see how much information they retained about Trio.</p>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>How does AI impact skill formation?</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://seangoedecke.com" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>seangoedecke.com</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年1月31日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>Two days ago, the Anthropic Fellows program released a paper called <a href="https://arxiv.org/pdf/2601.20245" target="_blank" rel="noopener noreferrer"><em>How AI Impacts Skill Formation</em></a>. Like <a href="/your-brain-on-chatgpt" target="_blank" rel="noopener noreferrer">other</a> <a href="/real-reasoning" target="_blank" rel="noopener noreferrer">papers</a> on AI before it, this one is being <a href="https://www.reddit.com/r/ExperiencedDevs/comments/1qqy2ro/anthropic_ai_assisted_coding_doesnt_show/" target="_blank" rel="noopener noreferrer">treated</a> as proof that AI makes you slower and dumber. Does it prove that?</p>
+<p>The structure of the paper is sort of similar to the 2025 MIT study <a href="https://arxiv.org/pdf/2506.08872" target="_blank" rel="noopener noreferrer"><em>Your Brain on ChatGPT</em></a>. They got a group of people to perform a cognitive task that required learning a new skill: in this case, the Python Trio library. Half of those people were required to use AI and half were forbidden from using it. The researchers then quizzed those people to see how much information they retained about Trio.</p>
 <p>The banner result was that <strong>AI users did not complete the task faster, but performed much worse on the quiz</strong>. If you were so inclined, you could naturally conclude that any perceived AI speedup is illusory, and the people who are using AI tooling are cooking their brains. But I don’t think that conclusion is reasonable.</p>
 <h3>Retyping AI-generated code</h3>
 <p>To see why, let’s look at Figure 13 from the paper:</p>
-<p><span
-      class="gatsby-resp-image-wrapper"
-      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; "
-    >
-      <a
-    class="gatsby-resp-image-link"
-    href="/static/1deb94af67210428f7358afe10795555/f238d/fig13.png"
-    style="display: block"
-    target="_blank"
-    rel="noopener"
-  >
-    <span
-    class="gatsby-resp-image-background-image"
-    style="padding-bottom: 45.94594594594595%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAABYlAAAWJQFJUiTwAAABb0lEQVQoz5VR20rDQBDtF/sngoh4A6moKLTUh6pFpGApovhSH0TtLX0waZpWTWquzWY3x51tGyvWBwcO2Tmz5+xkJocsUiwGi2N4foAwThCEEaIoVIglz5MEaZpKiKky/dbm5gRRgid4ausY2b4qOpYBq/kA/2OIN9uDbY8RM4aQcbB01sJM+8tQ0Ct8gtXDGxS3dzC8PsFLYR2NtRUM7ys4rXdwnt+DcXUArVrEc2kTo8e7aYdC/GEIgXK9hVrhGK9nW+hdHqF3kYfdasB899C+raJX3oVW2UertIFho/bbcDqLNJuD4AyT2W8FkxgRSxSfECdz4sOYSZ5n81vU57AkOOfwXBdBEPxYlpCduO4nAt9fJlOmuURujIRRFMGXFwlhGMJxHAWqudKceM/zFDcej9WZQDzVafuqQxJ0u11omoZms5mdO50ODMOAaZoK/X5fwbIsleu6jsFgoHK6R6bZDMmdyRktfucv/ifI6wv8la2gmKE0VgAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
-  ></span>
-  <img
-        class="gatsby-resp-image-image"
-        alt="figure 13"
-        title="figure 13"
-        src="/static/1deb94af67210428f7358afe10795555/fcda8/fig13.png"
-        srcset="/static/1deb94af67210428f7358afe10795555/12f09/fig13.png 148w,
-/static/1deb94af67210428f7358afe10795555/e4a3f/fig13.png 295w,
-/static/1deb94af67210428f7358afe10795555/fcda8/fig13.png 590w,
-/static/1deb94af67210428f7358afe10795555/efc66/fig13.png 885w,
-/static/1deb94af67210428f7358afe10795555/c83ae/fig13.png 1180w,
-/static/1deb94af67210428f7358afe10795555/f238d/fig13.png 2078w"
-        sizes="(max-width: 590px) 100vw, 590px"
-        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
-        loading="lazy"
-      />
+<p><span>
+      <a href="/static/1deb94af67210428f7358afe10795555/f238d/fig13.png" target="_blank" rel="noopener noreferrer">
+    <span></span>
+  <img alt="figure 13" title="figure 13" src="/static/1deb94af67210428f7358afe10795555/fcda8/fig13.png" />
   </a>
     </span></p>
 <p>The researchers noticed half of the AI-using cohort spent most of their time <em>literally retyping the AI-generated code</em> into their solution, instead of copy-pasting or “manual coding”: writing their code from scratch with light AI guidance. <strong>If you ignore the people who spent most of their time retyping, the AI-users were 25% faster.</strong></p>
-<p>I confess that this kind of baffles me. What kind of person manually retypes AI-generated code? Did they not know how to copy and paste (unlikely, since the study was mostly composed of professional or hobby developers<sup id="fnref-1"><a href="#fn-1" class="footnote-ref">1</a></sup>)? It certainly didn’t help them on the quiz score. The retypers got the same (low) scores as the pure copy-pasters.</p>
+<p>I confess that this kind of baffles me. What kind of person manually retypes AI-generated code? Did they not know how to copy and paste (unlikely, since the study was mostly composed of professional or hobby developers<sup><a href="#fn-1" target="_blank" rel="noopener noreferrer">1</a></sup>)? It certainly didn’t help them on the quiz score. The retypers got the same (low) scores as the pure copy-pasters.</p>
 <p>In any case, if you know how to copy-paste or use an AI agent, I wouldn’t use this paper as evidence that AI will not be able to speed you up. </p>
 <h3>What about the quiz scores?</h3>
 <p>Even if AI use offers a 25% speedup, is that worth sacrificing the opportunity to learn new skills? What about the quiz scores?</p>
@@ -71,22 +45,22 @@ AstroBlog
 <p>Anyway, the point is simply that a lower learning rate does not by itself prove that less learning is happening overall.</p>
 <h3>We need to talk about GPT-4o</h3>
 <p>Finally, I will reluctantly point out that the model used for this task was GPT-4o (see section 4.1). I’m reluctant here because I sympathize with the AI skeptics, who are perpetually frustrated by the pro-AI response of “well, you just haven’t tried the <em>right</em> model”. In a world where new AI models are released every month or two, demanding that people always study the best model makes it functionally impossible to study AI use at all.</p>
-<p>Still, I’m just kind of confused about why GPT-4o was chosen. This study was funded by Anthropic, who have much better models. This study was conducted <em>in 2025</em><sup id="fnref-2"><a href="#fn-2" class="footnote-ref">2</a></sup>, at least six months after the release of GPT-4o (that’s like five years in AI time). I can’t help but wonder if the AI-users cohort would have run into fewer problems with a more powerful model.</p>
+<p>Still, I’m just kind of confused about why GPT-4o was chosen. This study was funded by Anthropic, who have much better models. This study was conducted <em>in 2025</em><sup><a href="#fn-2" target="_blank" rel="noopener noreferrer">2</a></sup>, at least six months after the release of GPT-4o (that’s like five years in AI time). I can’t help but wonder if the AI-users cohort would have run into fewer problems with a more powerful model.</p>
 <h3>Summary</h3>
 <p>I don’t have any real problem with this paper. They set out to study how different patterns of AI use affect learning, and their main conclusion - that pure “just give the problem to the model” AI use means you learn a lot less - seems correct to me.</p>
 <p>I don’t like their conclusion that AI use doesn’t speed you up, since it relies on the fact that 50% of their participants spent their time <em>literally retyping AI code</em>. I wish they’d been more explicit in the introduction that this was the case, but I don’t really blame them for the result - I’m more inclined to blame the study participants themselves, who should have known better.</p>
 <p>Overall, I don’t think this paper provides much new ammunition to the AI skeptic. Like I said above, it doesn’t support the point that AI speedup is a mirage. And the point it does support (that AI use means you learn less) is obvious. Nobody seriously believes that typing “build me a todo app” into Claude Code means you’ll learn as much as if you built it by hand.</p>
 <p>That said, I’d like to see more investigation into long-term patterns of AI use in tech companies. Is the slower learning rate per-task balanced out by the higher rate of task completion? Can it be replaced by carving out explicit time to study the codebase? It’s probably too early to answer these questions - strong coding agents have only been around for a handful of months - but the answers may determine what it’s like to be a software engineer for the next decade.</p>
-<div class="footnotes">
-<hr>
+<div>
+<hr />
 <ol>
-<li id="fn-1">
+<li>
 <p>See Figure 17.</p>
-<a href="#fnref-1" class="footnote-backref">↩</a>
+<a href="#fnref-1" target="_blank" rel="noopener noreferrer">↩</a>
 </li>
-<li id="fn-2">
+<li>
 <p>I suppose the study doesn’t say that explicitly, but the Anthropic Fellows program was only launched in December 2024, and the paper was published in January 2026.</p>
-<a href="#fnref-2" class="footnote-backref">↩</a>
+<a href="#fnref-2" target="_blank" rel="noopener noreferrer">↩</a>
 </li>
 </ol>
 </div></div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://seangoedecke.com/how-does-ai-impact-skill-formation/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>

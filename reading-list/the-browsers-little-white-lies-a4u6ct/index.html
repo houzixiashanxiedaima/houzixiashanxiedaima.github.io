@@ -19,19 +19,19 @@ AstroBlog
               重试
             </button>
           </div>
-        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>The Browser’s Little White Lies</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://blog.jim-nielsen.com" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>blog.jim-nielsen.com</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年2月1日</time> </div> </header> <!-- Render HTML content from RSS feed --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>So I’m making a thing and I want it to be styled different if the link’s been visited.</p>
-<p>Rather than build something myself in JavaScript, I figure I’ll just hook into the browser’s mechanism for tracking if a link’s been visited (a sensible approach, <a href="https://blog.jim-nielsen.com/2025/browser-apis-as-sass/" >if I do say so myself</a>). </p>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>The Browser’s Little White Lies</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://blog.jim-nielsen.com" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>blog.jim-nielsen.com</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年2月1日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>So I’m making a thing and I want it to be styled different if the link’s been visited.</p>
+<p>Rather than build something myself in JavaScript, I figure I’ll just hook into the browser’s mechanism for tracking if a link’s been visited (a sensible approach, <a href="https://blog.jim-nielsen.com/2025/browser-apis-as-sass/" target="_blank" rel="noopener noreferrer">if I do say so myself</a>). </p>
 <p>Why write JavaScript when a little CSS will do? So I craft this:</p>
-<pre><code class="language language-css"><span class="hljs-selector-class">.entry</span><span class="hljs-selector-pseudo">:has</span>(<span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:visited</span>) {
-  <span class="hljs-attribute">opacity</span>: .<span class="hljs-number">5</span>;
-  <span class="hljs-attribute">filter</span>: <span class="hljs-built_in">grayscale</span>(<span class="hljs-number">1</span>);
+<pre><code><span>.entry</span><span>:has</span>(<span>a</span><span>:visited</span>) {
+  <span>opacity</span>: .<span>5</span>;
+  <span>filter</span>: <span>grayscale</span>(<span>1</span>);
 }
 </code></pre>
 <p>But it doesn’t work.</p>
 <p><code>:has()</code> is relatively new, and I’ve been known to muff it, so it’s probably just a syntax issue.</p>
 <p>I start researching.</p>
 <p>Wouldn’t you know it? We can’t have nice things. <code>:visited</code> doesn’t always work like you’d expect because we (not me, mind you) exploited it.</p>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Selectors/Privacy_and_:visited" >Here’s MDN</a>:</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Selectors/Privacy_and_:visited" target="_blank" rel="noopener noreferrer">Here’s MDN</a>:</p>
 <blockquote>
 <p>You can style visited links, but there are limits to which styles you can use.</p>
 </blockquote>
@@ -43,7 +43,7 @@ AstroBlog
 <p>If it were not so, somebody could come along with a little JavaScript and uncover a user’s browsing history (imagine, for example, setting styles for visited and unvisited links, then using <code>window.getComputedStyle</code> and checking style computations).</p>
 <p>MDN says browsers tell little white lies:</p>
 <blockquote>
-<p>To preserve users&#39; privacy, browsers lie to web applications under certain circumstances</p>
+<p>To preserve users' privacy, browsers lie to web applications under certain circumstances</p>
 </blockquote>
 <p>So, from what I can tell, when I write <code>.entry:has(a:visited)</code> the browser is telling the engine that handles styling that all <code>.entry</code> items have never been <code>:visited</code> (even if they have been).</p>
 <p>So where does that leave me?</p>
@@ -57,13 +57,10 @@ AstroBlog
       Reply via:
       
 
-      <a
-        href="mailto:jimniels%2Bblog@gmail.com?subject=Re:%20blog.jim-nielsen.com/2026/browsers-white-lies/"
-        >Email</a
-      >
-      · <a href="https://mastodon.social/@jimniels">Mastodon</a> ·
+      <a href="mailto:jimniels%2Bblog@gmail.com?subject=Re:%20blog.jim-nielsen.com/2026/browsers-white-lies/" target="_blank" rel="noopener noreferrer">Email</a>
+      · <a href="https://mastodon.social/@jimniels" target="_blank" rel="noopener noreferrer">Mastodon</a> ·
 
-      <a href="https://bsky.app/profile/jim-nielsen.com">Bluesky</a>
+      <a href="https://bsky.app/profile/jim-nielsen.com" target="_blank" rel="noopener noreferrer">Bluesky</a>
     </p>
 
     

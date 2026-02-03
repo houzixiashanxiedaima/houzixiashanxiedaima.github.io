@@ -16,18 +16,18 @@ AstroBlog
               重试
             </button>
           </div>
-        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Letting Claude Play Text Adventures</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://borretti.me" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>borretti.me</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年1月12日</time> </div> </header> <!-- Render HTML content from RSS feed --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>The other day I went to an <a href="https://luma.com/ycc02hpc">AI hackathon</a> organized by my friends
-<a href="https://x.com/lucia_quirke">Lucia</a> and <a href="https://x.com/mahlenr">Malin</a>. The theme was <a href="https://en.wikipedia.org/wiki/Mechanistic_interpretability">mech interp</a>, but I hardly
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Letting Claude Play Text Adventures</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://borretti.me" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>borretti.me</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年1月12日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>The other day I went to an <a href="https://luma.com/ycc02hpc" target="_blank" rel="noopener noreferrer">AI hackathon</a> organized by my friends
+<a href="https://x.com/lucia_quirke" target="_blank" rel="noopener noreferrer">Lucia</a> and <a href="https://x.com/mahlenr" target="_blank" rel="noopener noreferrer">Malin</a>. The theme was <a href="https://en.wikipedia.org/wiki/Mechanistic_interpretability" target="_blank" rel="noopener noreferrer">mech interp</a>, but I hardly
 know PyTorch so I planned to do something at the API layer rather than the model
 layer.</p>
 
-<p>Something I think about a lot is <a href="https://en.wikipedia.org/wiki/Cognitive_architecture">cognitive architectures</a> (like
-<a href="https://en.wikipedia.org/wiki/Soar_(cognitive_architecture)">Soar</a> and <a href="https://en.wikipedia.org/wiki/ACT-R">ACT-R</a>). This is like a continuation of <a href="https://en.wikipedia.org/wiki/GOFAI">GOFAI</a>
+<p>Something I think about a lot is <a href="https://en.wikipedia.org/wiki/Cognitive_architecture" target="_blank" rel="noopener noreferrer">cognitive architectures</a> (like
+<a href="https://en.wikipedia.org/wiki/Soar_(cognitive_architecture)" target="_blank" rel="noopener noreferrer">Soar</a> and <a href="https://en.wikipedia.org/wiki/ACT-R" target="_blank" rel="noopener noreferrer">ACT-R</a>). This is like a continuation of <a href="https://en.wikipedia.org/wiki/GOFAI" target="_blank" rel="noopener noreferrer">GOFAI</a>
 research, inspired by cognitive science. And like GOFAI it’s never yielded
 anything useful. But I often think: can we scaffold LLMs with cog arch-inspired
 harnesses to overcome their limitations?</p>
 
-<p>LLM agents like <a href="https://github.com/anthropics/claude-code">Claude Code</a> are basically “accidental” cognitive
+<p>LLM agents like <a href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener noreferrer">Claude Code</a> are basically “accidental” cognitive
 architectures: they are designed and built my practitioners rather than
 theorists, but they have commonalities, they all need a way to manage memory,
 tool use, a task agenda etc. Maybe building an agent on a more “principled”
@@ -40,25 +40,25 @@ performs better than baseline? I need an eval, a task.</p>
 
 <p>Math problems? Too one-shottable. A chatbot? Too interactive, I want something
 hands-off and long-horizon. A coding agent? That’s too freeform and requires too
-much tool use. And then I thought: <a href="https://en.wikipedia.org/wiki/Interactive_fiction">text adventures</a>! You have a stylized,
+much tool use. And then I thought: <a href="https://en.wikipedia.org/wiki/Interactive_fiction" target="_blank" rel="noopener noreferrer">text adventures</a>! You have a stylized,
 hierarchically-structured world accessible entirely tthrough text, long-term
 goals, puzzles, physical exploration and discovery of the environment. Even the
-data model of text adventures resembles <a href="https://en.wikipedia.org/wiki/Frame_(artificial_intelligence)">frame-based</a> knowledge
-representation systems. And there’s a <a href="https://ifdb.org/">vast collection</a> of games available
+data model of text adventures resembles <a href="https://en.wikipedia.org/wiki/Frame_(artificial_intelligence)" target="_blank" rel="noopener noreferrer">frame-based</a> knowledge
+representation systems. And there’s a <a href="https://ifdb.org/" target="_blank" rel="noopener noreferrer">vast collection</a> of games available
 online.</p>
 
-<p><a href="https://en.wikipedia.org/wiki/Anchorhead"><em>Anchorhead</em></a>, which I played years ago, is a Lovecraft-inspired text
+<p><a href="https://en.wikipedia.org/wiki/Anchorhead" target="_blank" rel="noopener noreferrer"><em>Anchorhead</em></a>, which I played years ago, is a Lovecraft-inspired text
 adventure by Michael S. Gentry. It takes on the order of hundrds of turns to win
 across multiple in-game days. And the game world is huge and very open. In other
 words: a perfect long-horizon task.</p>
 
-<p>So I started hacking. The <a href="https://davidgriffith.gitlab.io/frotz/">frotz</a> interpreter runs on the command line and has a
-“dumb” interface called <code class="language-plaintext highlighter-rouge">dfrotz</code>, which takes the ncurses fluff out, and gives
+<p>So I started hacking. The <a href="https://davidgriffith.gitlab.io/frotz/" target="_blank" rel="noopener noreferrer">frotz</a> interpreter runs on the command line and has a
+“dumb” interface called <code>dfrotz</code>, which takes the ncurses fluff out, and gives
 you a very stripped command-line experience. It looks like this:</p>
 
-<div class="language-plaintext highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code>$ dfrotz games/anchor.z8
+<div>
+  <div>
+    <pre><code>$ dfrotz games/anchor.z8
 ...
  Outside the Real Estate Office                      day one
 
@@ -93,47 +93,47 @@ window.
 </div>
 
 <p>It is easy to write a little Python wrapper to drive the interpreter through
-<code class="language-plaintext highlighter-rouge">stdin</code> and <code class="language-plaintext highlighter-rouge">stdout</code>:</p>
+<code>stdin</code> and <code>stdout</code>:</p>
 
-<div class="language-python highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code><span class="k">class</span> <span class="nc">Interpreter</span><span class="p">:</span>
-    <span class="s">"""Manages the dfrotz Z-machine interpreter process."""</span>
+<div>
+  <div>
+    <pre><code><span>class</span> <span>Interpreter</span><span>:</span>
+    <span>"""Manages the dfrotz Z-machine interpreter process."""</span>
 
-    <span class="n">p</span><span class="p">:</span> <span class="n">Popen</span>
+    <span>p</span><span>:</span> <span>Popen</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">log</span><span class="p">(</span><span class="s">"Starting dfrotz."</span><span class="p">)</span>
-        <span class="n">p</span><span class="p">:</span> <span class="n">Popen</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">(</span>
-            <span class="p">[</span><span class="s">"dfrotz"</span><span class="p">,</span> <span class="s">"-m"</span><span class="p">,</span> <span class="n">GAME</span><span class="p">],</span>
-            <span class="n">stdin</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span>
-            <span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span>
-            <span class="n">stderr</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s">"Started dfrotz with PID=</span><span class="si">{</span><span class="n">p</span><span class="p">.</span><span class="n">pid</span><span class="si">}</span><span class="s">."</span><span class="p">)</span>
-        <span class="c1"># Set stdout/stderr to non-blocking mode.
-</span>        <span class="k">for</span> <span class="n">stream</span> <span class="ow">in</span> <span class="p">[</span><span class="n">p</span><span class="p">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">stderr</span><span class="p">]:</span>
-            <span class="k">assert</span> <span class="n">stream</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
-            <span class="n">fd</span> <span class="o">=</span> <span class="n">stream</span><span class="p">.</span><span class="n">fileno</span><span class="p">()</span>
-            <span class="n">flags</span> <span class="o">=</span> <span class="n">fcntl</span><span class="p">.</span><span class="n">fcntl</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">fcntl</span><span class="p">.</span><span class="n">F_GETFL</span><span class="p">)</span>
-            <span class="n">fcntl</span><span class="p">.</span><span class="n">fcntl</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">fcntl</span><span class="p">.</span><span class="n">F_SETFL</span><span class="p">,</span> <span class="n">flags</span> <span class="o">|</span> <span class="n">os</span><span class="p">.</span><span class="n">O_NONBLOCK</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">p</span> <span class="o">=</span> <span class="n">p</span>
+    <span>def</span> <span>__init__</span><span>(</span><span>self</span><span>):</span>
+        <span>log</span><span>(</span><span>"Starting dfrotz."</span><span>)</span>
+        <span>p</span><span>:</span> <span>Popen</span> <span>=</span> <span>Popen</span><span>(</span>
+            <span>[</span><span>"dfrotz"</span><span>,</span> <span>"-m"</span><span>,</span> <span>GAME</span><span>],</span>
+            <span>stdin</span><span>=</span><span>PIPE</span><span>,</span>
+            <span>stdout</span><span>=</span><span>PIPE</span><span>,</span>
+            <span>stderr</span><span>=</span><span>PIPE</span><span>,</span>
+        <span>)</span>
+        <span>log</span><span>(</span><span>f</span><span>"Started dfrotz with PID=</span><span>{</span><span>p</span><span>.</span><span>pid</span><span>}</span><span>."</span><span>)</span>
+        <span># Set stdout/stderr to non-blocking mode.
+</span>        <span>for</span> <span>stream</span> <span>in</span> <span>[</span><span>p</span><span>.</span><span>stdout</span><span>,</span> <span>p</span><span>.</span><span>stderr</span><span>]:</span>
+            <span>assert</span> <span>stream</span> <span>is</span> <span>not</span> <span>None</span>
+            <span>fd</span> <span>=</span> <span>stream</span><span>.</span><span>fileno</span><span>()</span>
+            <span>flags</span> <span>=</span> <span>fcntl</span><span>.</span><span>fcntl</span><span>(</span><span>fd</span><span>,</span> <span>fcntl</span><span>.</span><span>F_GETFL</span><span>)</span>
+            <span>fcntl</span><span>.</span><span>fcntl</span><span>(</span><span>fd</span><span>,</span> <span>fcntl</span><span>.</span><span>F_SETFL</span><span>,</span> <span>flags</span> <span>|</span> <span>os</span><span>.</span><span>O_NONBLOCK</span><span>)</span>
+        <span>self</span><span>.</span><span>p</span> <span>=</span> <span>p</span>
 
-    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">assert</span> <span class="bp">self</span><span class="p">.</span><span class="n">p</span><span class="p">.</span><span class="n">stdout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
-        <span class="n">b</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="bp">None</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">p</span><span class="p">.</span><span class="n">stdout</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">b</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">t</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">t</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s">""</span>
+    <span>def</span> <span>read</span><span>(</span><span>self</span><span>)</span> <span>-&gt;</span> <span>str</span><span>:</span>
+        <span>assert</span> <span>self</span><span>.</span><span>p</span><span>.</span><span>stdout</span> <span>is</span> <span>not</span> <span>None</span>
+        <span>b</span><span>:</span> <span>bytes</span> <span>|</span> <span>None</span> <span>=</span> <span>self</span><span>.</span><span>p</span><span>.</span><span>stdout</span><span>.</span><span>read</span><span>()</span>
+        <span>if</span> <span>b</span> <span>is</span> <span>not</span> <span>None</span><span>:</span>
+            <span>t</span><span>:</span> <span>str</span> <span>=</span> <span>b</span><span>.</span><span>decode</span><span>(</span><span>"utf-8"</span><span>)</span>
+            <span>return</span> <span>t</span>
+        <span>else</span><span>:</span>
+            <span>return</span> <span>""</span>
 
-    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="k">assert</span> <span class="bp">self</span><span class="p">.</span><span class="n">p</span><span class="p">.</span><span class="n">stdin</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">p</span><span class="p">.</span><span class="n">stdin</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">p</span><span class="p">.</span><span class="n">stdin</span><span class="p">.</span><span class="n">flush</span><span class="p">()</span>
-        <span class="c1"># Give the interpreter time to respond. Not ideal!
-</span>        <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+    <span>def</span> <span>write</span><span>(</span><span>self</span><span>,</span> <span>t</span><span>:</span> <span>str</span><span>)</span> <span>-&gt;</span> <span>None</span><span>:</span>
+        <span>assert</span> <span>self</span><span>.</span><span>p</span><span>.</span><span>stdin</span> <span>is</span> <span>not</span> <span>None</span>
+        <span>self</span><span>.</span><span>p</span><span>.</span><span>stdin</span><span>.</span><span>write</span><span>(</span><span>t</span><span>.</span><span>encode</span><span>(</span><span>"utf-8"</span><span>))</span>
+        <span>self</span><span>.</span><span>p</span><span>.</span><span>stdin</span><span>.</span><span>flush</span><span>()</span>
+        <span># Give the interpreter time to respond. Not ideal!
+</span>        <span>time</span><span>.</span><span>sleep</span><span>(</span><span>0.1</span><span>)</span>
 </code></pre>
   </div>
 </div>
@@ -141,33 +141,33 @@ window.
 <p>Now we can play the game from Python: send commands, get game output. Now we
 need the dual of this: a player.</p>
 
-<div class="language-python highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code><span class="k">class</span> <span class="nc">Player</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-    <span class="s">"""
+<div>
+  <div>
+    <pre><code><span>class</span> <span>Player</span><span>(</span><span>ABC</span><span>):</span>
+    <span>"""
     Interface for game-playing agents.
     """</span>
 
-    <span class="o">@</span><span class="n">abstractmethod</span>
-    <span class="k">def</span> <span class="nf">cycle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="s">"""
+    <span>@</span><span>abstractmethod</span>
+    <span>def</span> <span>cycle</span><span>(</span><span>self</span><span>,</span> <span>text</span><span>:</span> <span>str</span><span>)</span> <span>-&gt;</span> <span>str</span><span>:</span>
+        <span>"""
         Send the game's output to the agent, and return the next command to execute.
         """</span>
-        <span class="k">pass</span>
+        <span>pass</span>
 </code></pre>
   </div>
 </div>
 
-<h1 id="the-trivial-harness">The Trivial Harness</h1>
+<h1>The Trivial Harness</h1>
 
 <p>The trivial harness is basically nothing at all: treat the LLM/game interaction
 like a chat history. The LLM reads the game output from the interpreter, writes
-some reasoning tokens, and writes a command that is sent via <code class="language-plaintext highlighter-rouge">stdin</code> to the
+some reasoning tokens, and writes a command that is sent via <code>stdin</code> to the
 interpreter.</p>
 
-<div class="language-python highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code><span class="n">SYSTEM_PROMPT</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s">"""
+<div>
+  <div>
+    <pre><code><span>SYSTEM_PROMPT</span><span>:</span> <span>str</span> <span>=</span> <span>"""
 Hello Claude. Your task is to play an adventure game. I've hooked up
 your output to the dfrotz (dumb frotz) interpreter.
 
@@ -189,48 +189,48 @@ Have fun! 😊
 """</span>
 
 
-<span class="k">class</span> <span class="nc">SimplePlayer</span><span class="p">(</span><span class="n">Player</span><span class="p">):</span>
-    <span class="s">"""
+<span>class</span> <span>SimplePlayer</span><span>(</span><span>Player</span><span>):</span>
+    <span>"""
     The simplest game-playing agent: keep the entire game histoyr in-context.
     """</span>
 
-    <span class="n">client</span><span class="p">:</span> <span class="n">Anthropic</span>
-    <span class="n">history</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="n">EntryType</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span>
+    <span>client</span><span>:</span> <span>Anthropic</span>
+    <span>history</span><span>:</span> <span>list</span><span>[</span><span>tuple</span><span>[</span><span>EntryType</span><span>,</span> <span>str</span><span>]]</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Anthropic</span><span class="p">()</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">history</span> <span class="o">=</span> <span class="p">[]</span>
+    <span>def</span> <span>__init__</span><span>(</span><span>self</span><span>):</span>
+        <span>self</span><span>.</span><span>client</span> <span>=</span> <span>Anthropic</span><span>()</span>
+        <span>self</span><span>.</span><span>history</span> <span>=</span> <span>[]</span>
 
-    <span class="k">def</span> <span class="nf">cycle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">history</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">EntryType</span><span class="p">.</span><span class="n">GAME</span><span class="p">,</span> <span class="n">text</span><span class="p">))</span>
-        <span class="n">system</span> <span class="o">=</span> <span class="n">trim</span><span class="p">(</span><span class="n">SYSTEM_PROMPT</span><span class="p">)</span>
-        <span class="n">messages</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">MessageParam</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">entry_type</span><span class="p">,</span> <span class="n">entry_text</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">history</span><span class="p">:</span>
-            <span class="n">role</span><span class="p">:</span> <span class="nb">str</span>
-            <span class="n">match</span> <span class="n">entry_type</span><span class="p">:</span>
-                <span class="n">case</span> <span class="n">EntryType</span><span class="p">.</span><span class="n">GAME</span><span class="p">:</span>
-                    <span class="n">role</span> <span class="o">=</span> <span class="s">"user"</span>
-                <span class="n">case</span> <span class="n">EntryType</span><span class="p">.</span><span class="n">COMMAND</span><span class="p">:</span>
-                    <span class="n">role</span> <span class="o">=</span> <span class="s">"assistant"</span>
-            <span class="n">messages</span><span class="p">.</span><span class="n">append</span><span class="p">(</span>
-                <span class="p">{</span>
-                    <span class="s">"role"</span><span class="p">:</span> <span class="n">role</span><span class="p">,</span>
-                    <span class="s">"content"</span><span class="p">:</span> <span class="n">entry_text</span><span class="p">,</span>
-                <span class="p">}</span>
-            <span class="p">)</span>
-        <span class="n">message</span><span class="p">:</span> <span class="n">Message</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">messages</span><span class="p">.</span><span class="n">create</span><span class="p">(</span>
-            <span class="n">max_tokens</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
-            <span class="n">model</span><span class="o">=</span><span class="n">MODEL</span><span class="p">,</span>
-            <span class="n">system</span><span class="o">=</span><span class="n">system</span><span class="p">,</span>
-            <span class="n">messages</span><span class="o">=</span><span class="n">messages</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s">"Tokens: </span><span class="si">{</span><span class="n">message</span><span class="p">.</span><span class="n">usage</span><span class="p">.</span><span class="n">input_tokens</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
-        <span class="n">response</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">message</span><span class="p">.</span><span class="n">content</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">text</span>
-        <span class="n">log_claude</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-        <span class="n">lines</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">response</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span> <span class="k">if</span> <span class="n">line</span><span class="p">]</span>
-        <span class="n">cmd</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span> <span class="k">if</span> <span class="n">line</span><span class="p">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">"&gt;"</span><span class="p">)][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">history</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">EntryType</span><span class="p">.</span><span class="n">COMMAND</span><span class="p">,</span> <span class="n">response</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">cmd</span>
+    <span>def</span> <span>cycle</span><span>(</span><span>self</span><span>,</span> <span>text</span><span>:</span> <span>str</span><span>)</span> <span>-&gt;</span> <span>str</span><span>:</span>
+        <span>self</span><span>.</span><span>history</span><span>.</span><span>append</span><span>((</span><span>EntryType</span><span>.</span><span>GAME</span><span>,</span> <span>text</span><span>))</span>
+        <span>system</span> <span>=</span> <span>trim</span><span>(</span><span>SYSTEM_PROMPT</span><span>)</span>
+        <span>messages</span><span>:</span> <span>list</span><span>[</span><span>MessageParam</span><span>]</span> <span>=</span> <span>[]</span>
+        <span>for</span> <span>entry_type</span><span>,</span> <span>entry_text</span> <span>in</span> <span>self</span><span>.</span><span>history</span><span>:</span>
+            <span>role</span><span>:</span> <span>str</span>
+            <span>match</span> <span>entry_type</span><span>:</span>
+                <span>case</span> <span>EntryType</span><span>.</span><span>GAME</span><span>:</span>
+                    <span>role</span> <span>=</span> <span>"user"</span>
+                <span>case</span> <span>EntryType</span><span>.</span><span>COMMAND</span><span>:</span>
+                    <span>role</span> <span>=</span> <span>"assistant"</span>
+            <span>messages</span><span>.</span><span>append</span><span>(</span>
+                <span>{</span>
+                    <span>"role"</span><span>:</span> <span>role</span><span>,</span>
+                    <span>"content"</span><span>:</span> <span>entry_text</span><span>,</span>
+                <span>}</span>
+            <span>)</span>
+        <span>message</span><span>:</span> <span>Message</span> <span>=</span> <span>self</span><span>.</span><span>client</span><span>.</span><span>messages</span><span>.</span><span>create</span><span>(</span>
+            <span>max_tokens</span><span>=</span><span>512</span><span>,</span>
+            <span>model</span><span>=</span><span>MODEL</span><span>,</span>
+            <span>system</span><span>=</span><span>system</span><span>,</span>
+            <span>messages</span><span>=</span><span>messages</span><span>,</span>
+        <span>)</span>
+        <span>log</span><span>(</span><span>f</span><span>"Tokens: </span><span>{</span><span>message</span><span>.</span><span>usage</span><span>.</span><span>input_tokens</span><span>}</span><span>"</span><span>)</span>
+        <span>response</span><span>:</span> <span>str</span> <span>=</span> <span>message</span><span>.</span><span>content</span><span>[</span><span>0</span><span>].</span><span>text</span>
+        <span>log_claude</span><span>(</span><span>response</span><span>)</span>
+        <span>lines</span><span>:</span> <span>list</span><span>[</span><span>str</span><span>]</span> <span>=</span> <span>[</span><span>line</span> <span>for</span> <span>line</span> <span>in</span> <span>response</span><span>.</span><span>split</span><span>(</span><span>"</span><span>\n</span><span>"</span><span>)</span> <span>if</span> <span>line</span><span>]</span>
+        <span>cmd</span><span>:</span> <span>str</span> <span>=</span> <span>[</span><span>line</span> <span>for</span> <span>line</span> <span>in</span> <span>lines</span> <span>if</span> <span>line</span><span>.</span><span>startswith</span><span>(</span><span>"&gt;"</span><span>)][</span><span>0</span><span>][</span><span>1</span><span>:]</span>
+        <span>self</span><span>.</span><span>history</span><span>.</span><span>append</span><span>((</span><span>EntryType</span><span>.</span><span>COMMAND</span><span>,</span> <span>response</span><span>))</span>
+        <span>return</span> <span>cmd</span>
 </code></pre>
   </div>
 </div>
@@ -248,7 +248,7 @@ task state, and starts confabulating, going in circles, etc.</p>
 credits. By the time you get to day two, each turn costs tens of thousands of
 input tokens. No good! We need a way to save money.</p>
 
-<h1 id="memory">Memory</h1>
+<h1>Memory</h1>
 
 <p>Ok, let’s try something that’s easier on my Claude credits. We’ll show Claude
 the most recent five turns (this is the perceptual working memory), and give it
@@ -276,16 +276,16 @@ house. And then it spends hundreds of turns just wandering in circles around the
 town, accumulating redundant memories, and hits the turn limit before even
 finding the house.</p>
 
-<h1 id="aside-small-worlds">Aside: Small Worlds</h1>
+<h1>Aside: Small Worlds</h1>
 
 <p><em>Anchorhead</em> is a long, broad game, and from the very beginning you can forget
 the plot and wander about most of the town. It takes a long time to see if a run
 with an agent goes anywhere. So I thought: I need something smaller.</p>
 
-<p>Unsurprisingly, Claude can make its own games. The <a href="https://ganelson.github.io/inform-website/">Inform 7</a> package for
-NixOS was broken (though <a href="https://github.com/mbrock">Mikael</a> has <a href="https://github.com/mbrock/inform7-nix">fixed this</a> recently) so I had
-to use <a href="https://www.inform-fiction.org/">Inform 6</a>. I started with a trivial escape-the-room type game, which
-was less than 100 lines of <code class="language-plaintext highlighter-rouge">.inf</code> code and any Claude could beat it less than 10
+<p>Unsurprisingly, Claude can make its own games. The <a href="https://ganelson.github.io/inform-website/" target="_blank" rel="noopener noreferrer">Inform 7</a> package for
+NixOS was broken (though <a href="https://github.com/mbrock" target="_blank" rel="noopener noreferrer">Mikael</a> has <a href="https://github.com/mbrock/inform7-nix" target="_blank" rel="noopener noreferrer">fixed this</a> recently) so I had
+to use <a href="https://www.inform-fiction.org/" target="_blank" rel="noopener noreferrer">Inform 6</a>. I started with a trivial escape-the-room type game, which
+was less than 100 lines of <code>.inf</code> code and any Claude could beat it less than 10
 turns. Then I asked for a larger, multi-room heist game.</p>
 
 <p>This one was more fun. It’s short enough that Claude can win with just the
@@ -312,7 +312,7 @@ what puzzles and obstacles they would have written.</p>
 stylized, linear, and uninteresting. <em>Anchorhead</em> is more unwieldy, but more
 natural.</p>
 
-<h1 id="future-work">Future Work</h1>
+<h1>Future Work</h1>
 
 <p>I have a bunch of ideas I want to test, to better learn how harness
 implementations affect performance. But I’m short on time, so I’m cutting it
@@ -329,11 +329,11 @@ in the context. This saves Claude having to note those things manually using a
 tool.</li>
   <li><strong>Manual Geography:</strong> the automatic geography approach has a few
 drawbacks. Without integration into the Z-machine interpreter, it requires
-some work to implement (parsing the currente location from the <code class="language-plaintext highlighter-rouge">dfrotz</code>
+some work to implement (parsing the currente location from the <code>dfrotz</code>
 output, keeping track of the command history to find standard travel commands
-e.g. <code class="language-plaintext highlighter-rouge">go south</code>) but isn’t 100% deterministic, so that mazes and dynamic rooms
+e.g. <code>go south</code>) but isn’t 100% deterministic, so that mazes and dynamic rooms
 (e.g. elevators) will confuse the system. So, instead of doing it manually, we
-could give Claude a tool like <code class="language-plaintext highlighter-rouge">link(room, direction, other_room)</code>.</li>
+could give Claude a tool like <code>link(room, direction, other_room)</code>.</li>
   <li><strong>Episodic Memory:</strong> this feels like cheating, but, at the end of a run, you
 can show Claude the session transcript and ask it to summarize: what it
 accomplished and how, where it failed and why. Including a short walkthrough
@@ -341,9 +341,9 @@ for how to get to the “last successful state”. This allows future runs to sa
 time in getting up to speed.</li>
 </ul>
 
-<h1 id="code">Code</h1>
+<h1>Code</h1>
 
-<p>The repository is <a href="https://github.com/eudoxia0/claude-plays-anchorhead">here</a>.</p>
+<p>The repository is <a href="https://github.com/eudoxia0/claude-plays-anchorhead" target="_blank" rel="noopener noreferrer">here</a>.</p>
 
 </div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://borretti.me/article/letting-claude-play-text-adventures" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
 阅读原文 ↗

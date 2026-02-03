@@ -28,14 +28,14 @@ AstroBlog
               重试
             </button>
           </div>
-        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Self-hosting my photos with Immich</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://michael.stapelberg.ch" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>michael.stapelberg.ch</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2025年11月29日</time> </div> </header> <!-- Render HTML content from RSS feed --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>For every cloud service I use, I want to have a local copy of my data for backup
-purposes and independence. Unfortunately, the <code>gphotos-sync</code> tool <a href="https://github.com/gilesknap/gphotos-sync-discussion/discussions/1">stopped
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Self-hosting my photos with Immich</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://michael.stapelberg.ch" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>michael.stapelberg.ch</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2025年11月29日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>For every cloud service I use, I want to have a local copy of my data for backup
+purposes and independence. Unfortunately, the <code>gphotos-sync</code> tool <a href="https://github.com/gilesknap/gphotos-sync-discussion/discussions/1" target="_blank" rel="noopener noreferrer">stopped
 working in March
 2025</a> when
 Google restricted the OAuth scopes, so I needed an alternative for my existing
 Google Photos setup. In this post, I describe how I have set up
-<a href="https://immich.app/">Immich</a>, a self-hostable photo manager.</p>
-<p>Here is the end result: a few (live) photos from <a href="/posts/2025-09-21-nixcon-2025-trip-report/">NixCon
+<a href="https://immich.app/" target="_blank" rel="noopener noreferrer">Immich</a>, a self-hostable photo manager.</p>
+<p>Here is the end result: a few (live) photos from <a href="/posts/2025-09-21-nixcon-2025-trip-report/" target="_blank" rel="noopener noreferrer">NixCon
 2025</a>:</p>
 
 
@@ -52,81 +52,69 @@ Google Photos setup. In this post, I describe how I have set up
 
 
 
-<a href="https://michael.stapelberg.ch/posts/2025-11-29-self-hosting-photos-with-immich/2025-11-19-immich-screenshot-featured.jpg"><img
-  srcset="https://michael.stapelberg.ch/posts/2025-11-29-self-hosting-photos-with-immich/2025-11-19-immich-screenshot-featured_hu_6928fc2a893484f1.jpg 2x,https://michael.stapelberg.ch/posts/2025-11-29-self-hosting-photos-with-immich/2025-11-19-immich-screenshot-featured_hu_7c70567581178dd5.jpg 3x"
-  src="https://michael.stapelberg.ch/posts/2025-11-29-self-hosting-photos-with-immich/2025-11-19-immich-screenshot-featured_hu_744c6f048556917c.jpg"
-  alt="screenshot of Immich in a web browser" title="screenshot of Immich in a web browser"
-  width="600"
-  height="504"
-  style="
-
-border: 1px solid #000;
-
-"
-  
-  loading="lazy"></a>
+<a href="https://michael.stapelberg.ch/posts/2025-11-29-self-hosting-photos-with-immich/2025-11-19-immich-screenshot-featured.jpg" target="_blank" rel="noopener noreferrer"><img src="https://michael.stapelberg.ch/posts/2025-11-29-self-hosting-photos-with-immich/2025-11-19-immich-screenshot-featured_hu_744c6f048556917c.jpg" alt="screenshot of Immich in a web browser" title="screenshot of Immich in a web browser" width="600" height="504" /></a>
 
 
 
-<h2 id="step-1-hardware">Step 1. Hardware</h2>
-<p>I am running Immich on my <a href="/posts/2024-07-02-ryzen-7-mini-pc-low-power-proxmox-hypervisor/">Ryzen 7 Mini PC (ASRock DeskMini
+<h2>Step 1. Hardware</h2>
+<p>I am running Immich on my <a href="/posts/2024-07-02-ryzen-7-mini-pc-low-power-proxmox-hypervisor/" target="_blank" rel="noopener noreferrer">Ryzen 7 Mini PC (ASRock DeskMini
 X600)</a>, which
 consumes less than 10 W of power in idle and has plenty of resources for VMs (64
 GB RAM, 1 TB disk). You can read more about it in my blog post from July 2024:</p>
 
 
 
-  <div class="postlink">
+  <div>
       <div>
-	<a href="https://michael.stapelberg.ch/posts/2024-07-02-ryzen-7-mini-pc-low-power-proxmox-hypervisor/"><h3>Ryzen 7 Mini-PC makes a power-efficient VM host</h3></a>
+	<a href="https://michael.stapelberg.ch/posts/2024-07-02-ryzen-7-mini-pc-low-power-proxmox-hypervisor/" target="_blank" rel="noopener noreferrer"><h3>Ryzen 7 Mini-PC makes a power-efficient VM host</h3></a>
       </div>
-      <div class="summary">
+      <div>
 	
 	
 	
 	
 	
-	<a href="https://michael.stapelberg.ch/posts/2024-07-02-ryzen-7-mini-pc-low-power-proxmox-hypervisor/" style="min-width: 200px; margin-right: 1.5rem; margin-bottom: 1.5rem"><img src="https://michael.stapelberg.ch/posts/2024-07-02-ryzen-7-mini-pc-low-power-proxmox-hypervisor/240630-server-featured_hu_6c2736729d115f81.jpg" width="200" height="134"/></a>
+	<a href="https://michael.stapelberg.ch/posts/2024-07-02-ryzen-7-mini-pc-low-power-proxmox-hypervisor/" target="_blank" rel="noopener noreferrer"><img src="https://michael.stapelberg.ch/posts/2024-07-02-ryzen-7-mini-pc-low-power-proxmox-hypervisor/240630-server-featured_hu_6c2736729d115f81.jpg" width="200" height="134" /></a>
 	
 	<p>
-	  <a href="https://michael.stapelberg.ch/posts/2024-07-02-ryzen-7-mini-pc-low-power-proxmox-hypervisor/">
+	  <a href="https://michael.stapelberg.ch/posts/2024-07-02-ryzen-7-mini-pc-low-power-proxmox-hypervisor/" target="_blank" rel="noopener noreferrer">
 	  When I saw the first reviews of the ASRock DeskMini X600 barebone, I was immediately interested in building a home-lab hypervisor (VM host) with it. Apparently, the DeskMini X600 uses less than 10W of power but supports latest-generation AMD CPUs like the Ryzen 7 8700G!
 
-	  <span class="readmore"><a href="https://michael.stapelberg.ch/posts/2024-07-02-ryzen-7-mini-pc-low-power-proxmox-hypervisor/">Read more →</a></span>
+	  <span><a href="https://michael.stapelberg.ch/posts/2024-07-02-ryzen-7-mini-pc-low-power-proxmox-hypervisor/" target="_blank" rel="noopener noreferrer">Read more →</a></span>
 	  </a>
 	</p>
       </div>
   </div>
 
 
-<p>I installed <a href="https://proxmox.com/en/">Proxmox</a>, an Open Source virtualization
+<p>I installed <a href="https://proxmox.com/en/" target="_blank" rel="noopener noreferrer">Proxmox</a>, an Open Source virtualization
 platform, to divide this mini server into VMs, but you could of course also
 install Immich directly on any server.</p>
-<h2 id="step-2-install-immich">Step 2. Install Immich</h2>
+<h2>Step 2. Install Immich</h2>
 <p>I created a VM (named “photos”) with 500 GB of disk space, 4 CPU cores and 4 GB of RAM.</p>
 <p>For the initial import, you could assign more CPU and RAM, but for normal usage, that’s enough.</p>
-<p>I <a href="/posts/2025-06-01-nixos-installation-declarative/">(declaratively) installed
+<p>I <a href="/posts/2025-06-01-nixos-installation-declarative/" target="_blank" rel="noopener noreferrer">(declaratively) installed
 NixOS</a> on that VM as described in this blog post:</p>
 
 
 
-  <div class="postlink">
+  <div>
       <div>
-	<a href="https://michael.stapelberg.ch/posts/2025-06-01-nixos-installation-declarative/"><h3>How I like to install NixOS (declaratively)</h3></a>
+	<a href="https://michael.stapelberg.ch/posts/2025-06-01-nixos-installation-declarative/" target="_blank" rel="noopener noreferrer"><h3>How I like to install NixOS (declaratively)</h3></a>
       </div>
-      <div class="summary">
+      <div>
 	
 	
 	
 	
 	
-	<a href="https://michael.stapelberg.ch/posts/2025-06-01-nixos-installation-declarative/" style="min-width: 200px; margin-right: 1.5rem; margin-bottom: 1.5rem"><img src="https://michael.stapelberg.ch/posts/2025-06-01-nixos-installation-declarative/nix-snowflake-rainbow-featured_hu_2c3edabdd6900fed.png" width="200" height="200"/></a>
+	<a href="https://michael.stapelberg.ch/posts/2025-06-01-nixos-installation-declarative/" target="_blank" rel="noopener noreferrer"><img src="https://michael.stapelberg.ch/posts/2025-06-01-nixos-installation-declarative/nix-snowflake-rainbow-featured_hu_2c3edabdd6900fed.png" width="200" height="200" /></a>
 	
 	<p>
-	  <a href="https://michael.stapelberg.ch/posts/2025-06-01-nixos-installation-declarative/">
+	  <a href="https://michael.stapelberg.ch/posts/2025-06-01-nixos-installation-declarative/" target="_blank" rel="noopener noreferrer">
 	  For one of my network storage PC builds, I was looking for an alternative to Flatcar Container Linux and tried out NixOS again (after an almost 10 year break). There are many ways to install NixOS, and in this article I will outline how I like to install NixOS on physical hardware or virtual machines: over the network and fully declaratively.
 
-	  <span class="readmore"><a href="https://michael.stapelberg.ch/posts/2025-06-01-nixos-installation-declarative/">Read more →</a></span>
+	  <span><a href="https://michael.stapelberg.ch/posts/2025-06-01-nixos-installation-declarative/" target="_blank" rel="noopener noreferrer">Read more →</a></span>
 	  </a>
 	</p>
       </div>
@@ -134,22 +122,22 @@ NixOS</a> on that VM as described in this blog post:</p>
 
 
 <p>Afterwards, I enabled Immich, with this exact configuration:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nix" data-lang="nix"><span style="display:flex;"><span>services<span style="color:#666">.</span>immich <span style="color:#666">=</span> {
-</span></span><span style="display:flex;"><span>  enable <span style="color:#666">=</span> <span style="color:#60add5">true</span>;
-</span></span><span style="display:flex;"><span>};
+<div><pre><code><span><span>services<span>.</span>immich <span>=</span> {
+</span></span><span><span>  enable <span>=</span> <span>true</span>;
+</span></span><span><span>};
 </span></span></code></pre></div><p>At this point, Immich is available on <code>localhost</code>, but not over the network,
 because NixOS enables a firewall by default. I could enable the
 <code>services.immich.openFirewall</code> option, but I actually want Immich to only be
 available via my Tailscale VPN, for which I don’t need to open firewall access —
 instead, I use <code>tailscale serve</code> to forward traffic to <code>localhost:2283</code>:</p>
-<pre tabindex="0"><code>photos# tailscale serve --bg http://localhost:2283
-</code></pre><p>Because I have <a href="https://tailscale.com/kb/1081/magicdns">Tailscale’s MagicDNS</a>
-and <a href="https://tailscale.com/kb/1153/enabling-https">TLS certificate provisioning</a>
-enabled, that means I can now open <a href="https://photos.example.ts.net">https://photos.example.ts.net</a> in my browser
+<pre><code>photos# tailscale serve --bg http://localhost:2283
+</code></pre><p>Because I have <a href="https://tailscale.com/kb/1081/magicdns" target="_blank" rel="noopener noreferrer">Tailscale’s MagicDNS</a>
+and <a href="https://tailscale.com/kb/1153/enabling-https" target="_blank" rel="noopener noreferrer">TLS certificate provisioning</a>
+enabled, that means I can now open <a href="https://photos.example.ts.net" target="_blank" rel="noopener noreferrer">https://photos.example.ts.net</a> in my browser
 on my PC, laptop or phone.</p>
-<h2 id="step-2-initial-photos-import">Step 2. Initial photos import</h2>
+<h2>Step 2. Initial photos import</h2>
 <p>At first, I tried importing my photos using the official Immich CLI:</p>
-<pre tabindex="0"><code>% nix run nixpkgs#immich-cli -- login https://photos.example.ts.net secret
+<pre><code>% nix run nixpkgs#immich-cli -- login https://photos.example.ts.net secret
 % nix run nixpkgs#immich-cli -- upload --recursive /home/michael/lib/photo/gphotos-takeout
 </code></pre><p>Unfortunately, the upload was not running reliably and had to be restarted
 manually a few times after running into a timeout. Later I realized that this
@@ -174,36 +162,24 @@ to the original image files:</p>
 
 
 
-<a href="https://michael.stapelberg.ch/posts/2025-11-29-self-hosting-photos-with-immich/2025-11-19-google-photos-takeout.jpg"><img
-  srcset="https://michael.stapelberg.ch/posts/2025-11-29-self-hosting-photos-with-immich/2025-11-19-google-photos-takeout_hu_c2ca8fd1cf90122a.jpg 2x,https://michael.stapelberg.ch/posts/2025-11-29-self-hosting-photos-with-immich/2025-11-19-google-photos-takeout_hu_7169d5fe6b33d18d.jpg 3x"
-  src="https://michael.stapelberg.ch/posts/2025-11-29-self-hosting-photos-with-immich/2025-11-19-google-photos-takeout_hu_8ac7b224e95d405d.jpg"
-  alt="Takeout: Google Photos formats" title="Takeout: Google Photos formats"
-  width="600"
-  height="720"
-  style="
-
-border: 1px solid #000;
-
-"
-  
-  loading="lazy"></a>
+<a href="https://michael.stapelberg.ch/posts/2025-11-29-self-hosting-photos-with-immich/2025-11-19-google-photos-takeout.jpg" target="_blank" rel="noopener noreferrer"><img src="https://michael.stapelberg.ch/posts/2025-11-29-self-hosting-photos-with-immich/2025-11-19-google-photos-takeout_hu_8ac7b224e95d405d.jpg" alt="Takeout: Google Photos formats" title="Takeout: Google Photos formats" width="600" height="720" /></a>
 
 
 
 <p>Unfortunately, these files are not considered by <code>immich-cli</code>.</p>
 <p>Luckily, there is a great third-party tool called
-<a href="https://github.com/simulot/immich-go">immich-go</a>, which solves both of these
+<a href="https://github.com/simulot/immich-go" target="_blank" rel="noopener noreferrer">immich-go</a>, which solves both of these
 issues! It pauses background tasks before uploading and restarts them
 afterwards, which works much better, and it does its best to understand Google
 Takeout archives.</p>
 <p>I ran <code>immich-go</code> as follows and it worked beautifully:</p>
-<pre tabindex="0"><code>% immich-go \
+<pre><code>% immich-go \
   upload \
   from-google-photos \
   --server=https://photos.example.ts.net \
   --api-key=secret \
   ~/Downloads/takeout-*.zip
-</code></pre><h2 id="step-3-install-the-immich-iphone-app">Step 3. Install the Immich iPhone App</h2>
+</code></pre><h2>Step 3. Install the Immich iPhone App</h2>
 <p>My main source of new photos is my phone, so I installed the Immich app on my
 iPhone, logged into my Immich server via its Tailscale URL and enabled automatic
 backup of new photos via the icon at the top right.</p>
@@ -225,25 +201,13 @@ photos generally go into Live Photos, and Recent should cover other files…?!</
 
 
 
-<a href="https://michael.stapelberg.ch/posts/2025-11-29-self-hosting-photos-with-immich/IMG_5893.PNG"><img
-  srcset="https://michael.stapelberg.ch/posts/2025-11-29-self-hosting-photos-with-immich/IMG_5893_hu_a062fb5b5187dc76.PNG 2x,https://michael.stapelberg.ch/posts/2025-11-29-self-hosting-photos-with-immich/IMG_5893_hu_9575452ad065a609.PNG 3x"
-  src="https://michael.stapelberg.ch/posts/2025-11-29-self-hosting-photos-with-immich/IMG_5893_hu_8ba00d1bf6088e0a.PNG"
-  
-  width="600"
-  height="1304"
-  style="
-
-border: 1px solid #000;
-
-"
-  
-  loading="lazy"></a>
+<a href="https://michael.stapelberg.ch/posts/2025-11-29-self-hosting-photos-with-immich/IMG_5893.PNG" target="_blank" rel="noopener noreferrer"><img src="https://michael.stapelberg.ch/posts/2025-11-29-self-hosting-photos-with-immich/IMG_5893_hu_8ba00d1bf6088e0a.PNG" width="600" height="1304" /></a>
 
 
 
 <p>I also strongly recommend to disable notifications for Immich, because otherwise
 you get notifications whenever it uploads images in the background. These
-notifications are not required for background upload to work, as <a href="https://www.reddit.com/r/immich/comments/1nnk8i9/comment/nfoffbb/">an Immich
+notifications are not required for background upload to work, as <a href="https://www.reddit.com/r/immich/comments/1nnk8i9/comment/nfoffbb/" target="_blank" rel="noopener noreferrer">an Immich
 developer confirmed on
 Reddit</a>. Open
 <em>Settings</em> → <em>Apps</em> → <em>Immich</em> → <em>Notifications</em> and un-tick the permission checkbox:</p>
@@ -262,40 +226,28 @@ Reddit</a>. Open
 
 
 
-<a href="https://michael.stapelberg.ch/posts/2025-11-29-self-hosting-photos-with-immich/IMG_5894.PNG"><img
-  srcset="https://michael.stapelberg.ch/posts/2025-11-29-self-hosting-photos-with-immich/IMG_5894_hu_eae3457253ed621d.PNG 2x,https://michael.stapelberg.ch/posts/2025-11-29-self-hosting-photos-with-immich/IMG_5894_hu_b720b6d63d234471.PNG 3x"
-  src="https://michael.stapelberg.ch/posts/2025-11-29-self-hosting-photos-with-immich/IMG_5894_hu_3ee31e31d3c5d235.PNG"
-  
-  width="600"
-  height="667"
-  style="
-
-border: 1px solid #000;
-
-"
-  
-  loading="lazy"></a>
+<a href="https://michael.stapelberg.ch/posts/2025-11-29-self-hosting-photos-with-immich/IMG_5894.PNG" target="_blank" rel="noopener noreferrer"><img src="https://michael.stapelberg.ch/posts/2025-11-29-self-hosting-photos-with-immich/IMG_5894_hu_3ee31e31d3c5d235.PNG" width="600" height="667" /></a>
 
 
 
-<h2 id="step-4-backup">Step 4. Backup</h2>
-<p><a href="https://docs.immich.app/administration/backup-and-restore">Immich’s documentation on
+<h2>Step 4. Backup</h2>
+<p><a href="https://docs.immich.app/administration/backup-and-restore" target="_blank" rel="noopener noreferrer">Immich’s documentation on
 backups</a> contains
 some good recommendations. The Immich developers recommend backing up the entire
 contents of <code>UPLOAD_LOCATION</code>, which is <code>/var/lib/immich</code> on NixOS. The
 <code>backups</code> subdirectory contains SQL dumps, whereas the 3 directories <code>upload</code>,
 <code>library</code> and <code>profile</code> contain all user-uploaded data.</p>
 <p>Hence, I have set up a systemd timer that runs <code>rsync</code> to copy <code>/var/lib/immich</code>
-onto my PC, which is enrolled in a <a href="https://www.backblaze.com/blog/the-3-2-1-backup-strategy/">3-2-1 backup
+onto my PC, which is enrolled in a <a href="https://www.backblaze.com/blog/the-3-2-1-backup-strategy/" target="_blank" rel="noopener noreferrer">3-2-1 backup
 scheme</a>.</p>
-<h2 id="whats-missing">What’s missing?</h2>
+<h2>What’s missing?</h2>
 <p>Immich (currently?) does not contain photo editing features, so to rotate or
-crop an image, I download the image and use <a href="https://www.gimp.org/">GIMP</a>.</p>
+crop an image, I download the image and use <a href="https://www.gimp.org/" target="_blank" rel="noopener noreferrer">GIMP</a>.</p>
 <p>To share images, I still upload them to Google Photos (depending on who I share
 them with).</p>
-<h2 id="why-immich-instead-of">Why Immich instead of…?</h2>
+<h2>Why Immich instead of…?</h2>
 <p>The two most promising options in the space of self-hosted image management
-tools seem to be <a href="https://immich.app/">Immich</a> and <a href="http://ente.io/">Ente</a>.</p>
+tools seem to be <a href="https://immich.app/" target="_blank" rel="noopener noreferrer">Immich</a> and <a href="http://ente.io/" target="_blank" rel="noopener noreferrer">Ente</a>.</p>
 <p>I got the impression that Immich is more popular in my bubble, and Ente made the
 impression on me that its scope is far larger than what I am looking for:</p>
 <blockquote>
@@ -307,7 +259,7 @@ alternative to the deprecated Authy).</p>
 </blockquote>
 <p>I don’t need an end-to-end encrypted platform. I already have encryption on the
 transit layer (Tailscale) and disk layer (LUKS), no need for more complexity.</p>
-<h2 id="conclusion">Conclusion</h2>
+<h2>Conclusion</h2>
 <p>Immich is a delightful app! It’s very fast and generally seems to work well.</p>
 <p>The initial import is smooth, but only if you use the right tool. Ideally, the
 official <code>immich-cli</code> could be improved. Or maybe <code>immich-go</code> could be made the

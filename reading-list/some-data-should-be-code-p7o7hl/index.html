@@ -16,56 +16,56 @@ AstroBlog
               重试
             </button>
           </div>
-        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Some Data Should Be Code</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://borretti.me" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>borretti.me</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年1月31日</time> </div> </header> <!-- Render HTML content from RSS feed --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>I write a lot of <a href="https://en.wikipedia.org/wiki/Make_(software)">Makefiles</a>. I use it not as a command runner but as an ad-hoc build system for small projects, typically for compiling Markdown documents and their dependencies. Like so:</p>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Some Data Should Be Code</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://borretti.me" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>borretti.me</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年1月31日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>I write a lot of <a href="https://en.wikipedia.org/wiki/Make_(software)" target="_blank" rel="noopener noreferrer">Makefiles</a>. I use it not as a command runner but as an ad-hoc build system for small projects, typically for compiling Markdown documents and their dependencies. Like so:</p>
 
-<p><img style="margin-left: auto; margin-right: auto; width: 300px;" src="/assets/content/some-data-should-be-code/graph.png" alt="A build graph for a document. A central node `doc.md` represents the Markdown source. Two outgoing arrows point to `doc.html` and `doc.pdf`, representing the output format. A chain through `graph.dot`, `graph.png`, and `doc.md` represets how a Graphviz .dot file can be rendered to PNG. A chain through `data.csv`, `plot.py`, `plot.png`, and `doc.md` represents using a Python script to make a plot from a CSV file." /></p>
+<p><img src="/assets/content/some-data-should-be-code/graph.png" alt="A build graph for a document. A central node `doc.md` represents the Markdown source. Two outgoing arrows point to `doc.html` and `doc.pdf`, representing the output format. A chain through `graph.dot`, `graph.png`, and `doc.md` represets how a Graphviz .dot file can be rendered to PNG. A chain through `data.csv`, `plot.py`, `plot.png`, and `doc.md` represents using a Python script to make a plot from a CSV file." /></p>
 
 <p>And the above graph was generated by this very simple Makefile:</p>
 
-<div class="language-makefile highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code><span class="nl">graph.png</span><span class="o">:</span> <span class="nf">graph.dot</span>
-    <span class="err">dot</span> <span class="err">-Tpng</span> <span class="err">$&lt;</span> <span class="err">-o</span> <span class="err">$@</span>
+<div>
+  <div>
+    <pre><code><span>graph.png</span><span>:</span> <span>graph.dot</span>
+    <span>dot</span> <span>-Tpng</span> <span>$&lt;</span> <span>-o</span> <span>$@</span>
 
-<span class="nl">clean</span><span class="o">:</span>
-    <span class="err">rm</span> <span class="err">-f</span> <span class="err">graph.png</span>
+<span>clean</span><span>:</span>
+    <span>rm</span> <span>-f</span> <span>graph.png</span>
 </code></pre>
   </div>
 </div>
 
-<p>(I could never remember the <a href="https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html">automatic variable</a> syntax until I made <a href="https://github.com/eudoxia0/flashcards/blob/aefae3ed874627201dbcedec045095779691d323/Cards/make.md">flashcards</a> for them.)</p>
+<p>(I could never remember the <a href="https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html" target="_blank" rel="noopener noreferrer">automatic variable</a> syntax until I made <a href="https://github.com/eudoxia0/flashcards/blob/aefae3ed874627201dbcedec045095779691d323/Cards/make.md" target="_blank" rel="noopener noreferrer">flashcards</a> for them.)</p>
 
 <p>It works for simple projects, when you can mostly hand-write the rules. But the abstraction ceiling is very low. If you have a bunch of almost identical rules, e.g.:</p>
 
-<div class="language-makefile highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code><span class="nl">a.png</span><span class="o">:</span> <span class="nf">a.csv plot.py</span>
-    <span class="err">python</span> <span class="err">plot.py</span> <span class="err">$&lt;</span> <span class="err">$@</span>
+<div>
+  <div>
+    <pre><code><span>a.png</span><span>:</span> <span>a.csv plot.py</span>
+    <span>python</span> <span>plot.py</span> <span>$&lt;</span> <span>$@</span>
 
-<span class="nl">b.png</span><span class="o">:</span> <span class="nf">b.csv plot.py</span>
-    <span class="err">python</span> <span class="err">plot.py</span> <span class="err">$&lt;</span> <span class="err">$@</span>
+<span>b.png</span><span>:</span> <span>b.csv plot.py</span>
+    <span>python</span> <span>plot.py</span> <span>$&lt;</span> <span>$@</span>
 
-<span class="nl">c.png</span><span class="o">:</span> <span class="nf">c.csv plot.py</span>
-    <span class="err">python</span> <span class="err">plot.py</span> <span class="err">$&lt;</span> <span class="err">$@</span>
+<span>c.png</span><span>:</span> <span>c.csv plot.py</span>
+    <span>python</span> <span>plot.py</span> <span>$&lt;</span> <span>$@</span>
 </code></pre>
   </div>
 </div>
 
 <p>You can use pattern-matching to them into a “rule schema”, by analogy to axiom schemata:</p>
 
-<div class="language-makefile highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code><span class="nl">%.png</span><span class="o">:</span> <span class="nf">%.csv plot.py</span>
-    <span class="err">python</span> <span class="err">plot.py</span> <span class="err">$&lt;</span> <span class="err">$@</span>
+<div>
+  <div>
+    <pre><code><span>%.png</span><span>:</span> <span>%.csv plot.py</span>
+    <span>python</span> <span>plot.py</span> <span>$&lt;</span> <span>$@</span>
 </code></pre>
   </div>
 </div>
 
-<p>Which works backwards: when something in the build graph depends on a target matching <code class="language-plaintext highlighter-rouge">%.png</code>, Make synthesizes a rule instance with a dependency on the corresponding <code class="language-plaintext highlighter-rouge">.csv</code> file.</p>
+<p>Which works backwards: when something in the build graph depends on a target matching <code>%.png</code>, Make synthesizes a rule instance with a dependency on the corresponding <code>.csv</code> file.</p>
 
-<p>But pattern matching is still very limited. Lately I’ve been building my own <a href="https://plaintextaccounting.org/">plain-text accounting</a> solution using some Python scripts. One of the tasks is to read a CSV of bank transactions from 2019–2024 and split it into TOML files for each year-month, to make subsequent processing parallelizable. So the rules might be something like:</p>
+<p>But pattern matching is still very limited. Lately I’ve been building my own <a href="https://plaintextaccounting.org/" target="_blank" rel="noopener noreferrer">plain-text accounting</a> solution using some Python scripts. One of the tasks is to read a CSV of bank transactions from 2019–2024 and split it into TOML files for each year-month, to make subsequent processing parallelizable. So the rules might be something like:</p>
 
-<pre><code class="language-makefile:">ledger/2019-08.toml: inputs/checkbook_pro_export.csv
+<pre><code>ledger/2019-08.toml: inputs/checkbook_pro_export.csv
     uv run import_from_checkbook.py --year=2019 --month=8
 
 ledger/2019-09.toml: inputs/checkbook_pro_export.csv
@@ -76,74 +76,74 @@ ledger/2019-09.toml: inputs/checkbook_pro_export.csv
 
 <p>I had to write a Python script to generate the complete Makefile. Makefiles look like code, but are data: they are a container format for tiny fragments of shell that are run on-demand by the Make engine. And because Make doesn’t scale, for complex tasks you have to bring out a real programming language to generate the Makefile.</p>
 
-<p>I wish I could, instead, write a <code class="language-plaintext highlighter-rouge">make.py</code> file with something like this:</p>
+<p>I wish I could, instead, write a <code>make.py</code> file with something like this:</p>
 
-<div class="language-python highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code><span class="kn">from</span> <span class="nn">whatever</span> <span class="kn">import</span> <span class="o">*</span>
+<div>
+  <div>
+    <pre><code><span>from</span> <span>whatever</span> <span>import</span> <span>*</span>
 
-<span class="n">g</span> <span class="o">=</span> <span class="n">BuildGraph</span><span class="p">()</span>
+<span>g</span> <span>=</span> <span>BuildGraph</span><span>()</span>
 
-<span class="n">EXPORT</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s">"inputs/checkbook_pro_export.csv"</span>
+<span>EXPORT</span><span>:</span> <span>str</span> <span>=</span> <span>"inputs/checkbook_pro_export.csv"</span>
 
-<span class="c1"># The (year, month) pairs I have bank transaction CSVs for.
-</span><span class="n">year_months</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">2026</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span>
-<span class="p">]</span>
+<span># The (year, month) pairs I have bank transaction CSVs for.
+</span><span>year_months</span><span>:</span> <span>list</span><span>[</span><span>tuple</span><span>[</span><span>int</span><span>,</span> <span>int</span><span>]]</span> <span>=</span> <span>[</span>
+    <span>(</span><span>y</span><span>,</span> <span>m</span><span>)</span> <span>for</span> <span>y</span> <span>in</span> <span>range</span><span>(</span><span>2019</span><span>,</span> <span>2026</span><span>)</span> <span>for</span> <span>m</span> <span>in</span> <span>range</span><span>(</span><span>1</span><span>,</span> <span>13</span><span>)</span>
+<span>]</span>
 
-<span class="c1"># Import transactions for each year-month into a separate ledger.
-</span><span class="k">for</span> <span class="n">year</span><span class="p">,</span> <span class="n">month</span> <span class="ow">in</span> <span class="n">year_months</span><span class="p">:</span>
-    <span class="n">ledger_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">f</span><span class="s">"ledger/</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s">_</span><span class="si">{</span><span class="n">month</span><span class="si">:</span><span class="mi">02</span><span class="n">d</span><span class="si">}</span><span class="s">.toml"</span>
-    <span class="n">g</span><span class="p">.</span><span class="n">rule</span><span class="p">(</span>
-        <span class="n">targets</span><span class="o">=</span><span class="p">[</span><span class="n">ledger_path</span><span class="p">],</span>
-        <span class="n">deps</span><span class="o">=</span><span class="p">[</span><span class="n">EXPORT</span><span class="p">],</span>
-        <span class="n">fn</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">import_from_checkbook</span><span class="p">(</span><span class="n">ledger_path</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">),</span>
-    <span class="p">)</span>
+<span># Import transactions for each year-month into a separate ledger.
+</span><span>for</span> <span>year</span><span>,</span> <span>month</span> <span>in</span> <span>year_months</span><span>:</span>
+    <span>ledger_path</span><span>:</span> <span>str</span> <span>=</span> <span>f</span><span>"ledger/</span><span>{</span><span>year</span><span>}</span><span>_</span><span>{</span><span>month</span><span>:</span><span>02</span><span>d</span><span>}</span><span>.toml"</span>
+    <span>g</span><span>.</span><span>rule</span><span>(</span>
+        <span>targets</span><span>=</span><span>[</span><span>ledger_path</span><span>],</span>
+        <span>deps</span><span>=</span><span>[</span><span>EXPORT</span><span>],</span>
+        <span>fn</span><span>=</span><span>lambda</span><span>:</span> <span>import_from_checkbook</span><span>(</span><span>ledger_path</span><span>,</span> <span>year</span><span>,</span> <span>month</span><span>),</span>
+    <span>)</span>
 </code></pre>
   </div>
 </div>
 
-<p>Fortunately this exists: it’s called <a href="https://pydoit.org/">doit</a>, but it’s not widely known.</p>
+<p>Fortunately this exists: it’s called <a href="https://pydoit.org/" target="_blank" rel="noopener noreferrer">doit</a>, but it’s not widely known.</p>
 
 <hr />
 
 <p>A lot of things are like Makefiles: data that should be lifted one level up to become code.</p>
 
-<p>Consider <a href="https://en.wikipedia.org/wiki/AWS_CloudFormation">CloudFormation</a>. Nobody likes writing those massive YAML files by hand, so AWS introduced <a href="https://en.wikipedia.org/wiki/AWS_Cloud_Development_Kit">CDK</a>, which is literally just a library<sup id="fnref:fn1" role="doc-noteref"><a href="#fn:fn1" class="footnote" rel="footnote">1</a></sup> of classes that represent AWS resources. Running a CDK program emits CloudFormation YAML as though it were an assembly language for infrastructure. And so you get type safety, modularity, abstraction, conditionals and loops, all for free.</p>
+<p>Consider <a href="https://en.wikipedia.org/wiki/AWS_CloudFormation" target="_blank" rel="noopener noreferrer">CloudFormation</a>. Nobody likes writing those massive YAML files by hand, so AWS introduced <a href="https://en.wikipedia.org/wiki/AWS_Cloud_Development_Kit" target="_blank" rel="noopener noreferrer">CDK</a>, which is literally just a library<sup><a href="#fn:fn1" rel="noopener noreferrer" target="_blank">1</a></sup> of classes that represent AWS resources. Running a CDK program emits CloudFormation YAML as though it were an assembly language for infrastructure. And so you get type safety, modularity, abstraction, conditionals and loops, all for free.</p>
 
-<p>Consider <a href="https://docs.github.com/en/actions">GitHub Actions</a>. How much better off would we be if, instead of writing the workflow-job-step tree by hand, we could just have a single Python script, executed on push, whose output is the GitHub Actions YAML-as-assembly? So you might write:</p>
+<p>Consider <a href="https://docs.github.com/en/actions" target="_blank" rel="noopener noreferrer">GitHub Actions</a>. How much better off would we be if, instead of writing the workflow-job-step tree by hand, we could just have a single Python script, executed on push, whose output is the GitHub Actions YAML-as-assembly? So you might write:</p>
 
-<div class="language-python highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code><span class="kn">from</span> <span class="nn">ga</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">checkout_action</span> <span class="kn">import</span> <span class="n">CheckoutAction</span>
-<span class="kn">from</span> <span class="nn">rust_action</span> <span class="kn">import</span> <span class="n">RustSetupAction</span>
+<div>
+  <div>
+    <pre><code><span>from</span> <span>ga</span> <span>import</span> <span>*</span>
+<span>from</span> <span>checkout_action</span> <span>import</span> <span>CheckoutAction</span>
+<span>from</span> <span>rust_action</span> <span>import</span> <span>RustSetupAction</span>
 
-<span class="c1"># Define the workflow that runs on each commit.
-</span><span class="n">commit_workflow</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s">"commit"</span><span class="p">,</span>
-    <span class="n">test</span><span class="o">=</span><span class="k">lambda</span> <span class="n">ev</span><span class="p">:</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ev</span><span class="p">,</span> <span class="n">CommitEvent</span><span class="p">),</span>
-    <span class="n">jobs</span><span class="o">=</span><span class="p">[</span>
-        <span class="c1"># The lint job.
-</span>        <span class="n">Job</span><span class="p">(</span>
-            <span class="n">name</span><span class="o">=</span><span class="s">"lint"</span><span class="p">,</span>
-            <span class="n">steps</span><span class="o">=</span><span class="p">[</span>
-                <span class="n">Step</span><span class="p">(</span>
-                    <span class="n">name</span><span class="o">=</span><span class="s">"check out"</span><span class="p">,</span>
-                    <span class="n">run</span><span class="o">=</span><span class="n">CheckoutAction</span><span class="p">(),</span>
-                <span class="p">),</span>
-                <span class="n">Step</span><span class="p">(</span>
-                    <span class="n">name</span><span class="o">=</span><span class="s">"set up Rust and Cargo"</span><span class="p">,</span>
-                    <span class="n">run</span><span class="o">=</span><span class="n">RustSetupAction</span><span class="p">(),</span>
-                <span class="p">),</span>
-                <span class="n">Step</span><span class="p">(</span>
-                    <span class="n">name</span><span class="o">=</span><span class="s">"run cargo fmt"</span><span class="p">,</span>
-                    <span class="n">run</span><span class="o">=</span><span class="n">Shell</span><span class="p">([</span><span class="s">"cargo"</span><span class="p">,</span> <span class="s">"fmt"</span><span class="p">,</span> <span class="s">"--check"</span><span class="p">])</span>
-                <span class="p">)</span>
-            <span class="p">]</span>
-        <span class="p">)</span>
-    <span class="p">]</span>
-<span class="p">)</span>
+<span># Define the workflow that runs on each commit.
+</span><span>commit_workflow</span> <span>=</span> <span>Workflow</span><span>(</span>
+    <span>name</span><span>=</span><span>"commit"</span><span>,</span>
+    <span>test</span><span>=</span><span>lambda</span> <span>ev</span><span>:</span> <span>isinstance</span><span>(</span><span>ev</span><span>,</span> <span>CommitEvent</span><span>),</span>
+    <span>jobs</span><span>=</span><span>[</span>
+        <span># The lint job.
+</span>        <span>Job</span><span>(</span>
+            <span>name</span><span>=</span><span>"lint"</span><span>,</span>
+            <span>steps</span><span>=</span><span>[</span>
+                <span>Step</span><span>(</span>
+                    <span>name</span><span>=</span><span>"check out"</span><span>,</span>
+                    <span>run</span><span>=</span><span>CheckoutAction</span><span>(),</span>
+                <span>),</span>
+                <span>Step</span><span>(</span>
+                    <span>name</span><span>=</span><span>"set up Rust and Cargo"</span><span>,</span>
+                    <span>run</span><span>=</span><span>RustSetupAction</span><span>(),</span>
+                <span>),</span>
+                <span>Step</span><span>(</span>
+                    <span>name</span><span>=</span><span>"run cargo fmt"</span><span>,</span>
+                    <span>run</span><span>=</span><span>Shell</span><span>([</span><span>"cargo"</span><span>,</span> <span>"fmt"</span><span>,</span> <span>"--check"</span><span>])</span>
+                <span>)</span>
+            <span>]</span>
+        <span>)</span>
+    <span>]</span>
+<span>)</span>
 </code></pre>
   </div>
 </div>
@@ -154,13 +154,13 @@ ledger/2019-09.toml: inputs/checkbook_pro_export.csv
 
 <p>If you’re building a new CI system/IaC platform/Make replacement: please just let me write code to dynamically create the workflow/infrastructure/build graph.</p>
 
-<h1 id="footnotes">Footnotes</h1>
+<h1>Footnotes</h1>
 
-<div class="footnotes" role="doc-endnotes">
+<div>
   <ol>
-    <li id="fn:fn1" role="doc-endnote">
+    <li>
 
-      <p>Or rather, a polyglot collection of libraries, one per language, like <a href="https://en.wikipedia.org/wiki/Pulumi">Pulumi</a>. <a href="#fnref:fn1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+      <p>Or rather, a polyglot collection of libraries, one per language, like <a href="https://en.wikipedia.org/wiki/Pulumi" target="_blank" rel="noopener noreferrer">Pulumi</a>. <a href="#fnref:fn1" target="_blank" rel="noopener noreferrer">↩</a></p>
     </li>
   </ol>
 </div>
