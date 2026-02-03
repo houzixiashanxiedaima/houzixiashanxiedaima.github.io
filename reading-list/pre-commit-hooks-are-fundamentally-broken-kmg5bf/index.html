@@ -1,0 +1,290 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.16.1"><meta name="description" content="Let's start a new Rust project.
+$ mkdir best-fizzbuzz-ever
+$ cd best-fizzbuzz-ever
+$ cat  main.rs
+fn main() { for i in 0.. {
+    println (&#34;fizzbuzz&#34;);
+}}
+EOF
+$ git init
+Initialized empty Git repositor"><link rel="canonical" href="https://blog.yuyins.com/reading-list/pre-commit-hooks-are-fundamentally-broken-kmg5bf/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/pre-commit-hooks-are-fundamentally-broken-kmg5bf/"><meta property="og:title" content="pre-commit hooks are fundamentally broken"><meta property="og:description" content="Let's start a new Rust project.
+$ mkdir best-fizzbuzz-ever
+$ cd best-fizzbuzz-ever
+$ cat  main.rs
+fn main() { for i in 0.. {
+    println (&#34;fizzbuzz&#34;);
+}}
+EOF
+$ git init
+Initialized empty Git repositor"><meta property="og:image" content="https://blog.yuyins.com/favicon.svg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/pre-commit-hooks-are-fundamentally-broken-kmg5bf/"><meta property="twitter:title" content="pre-commit hooks are fundamentally broken"><meta property="twitter:description" content="Let's start a new Rust project.
+$ mkdir best-fizzbuzz-ever
+$ cd best-fizzbuzz-ever
+$ cat  main.rs
+fn main() { for i in 0.. {
+    println (&#34;fizzbuzz&#34;);
+}}
+EOF
+$ git init
+Initialized empty Git repositor"><meta property="twitter:image" content="https://blog.yuyins.com/favicon.svg"><title>pre-commit hooks are fundamentally broken</title><!-- Theme and color scheme script (runs before page loads to prevent flash) --><script>
+			// 初始化配色方案 - 默认使用 stone-amber
+			const colorScheme = localStorage.getItem('colorScheme') || 'stone-amber';
+			document.documentElement.setAttribute('data-color', colorScheme);
+
+			// 强制使用浅色主题
+			document.documentElement.setAttribute('data-theme', 'light');
+		</script><link rel="stylesheet" href="/_astro/_slug_.C-G01a-E.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.source-tag[data-astro-cid-wrgicudb]{background-color:var(--muted);color:var(--foreground);padding:.125rem .5rem;border-radius:9999px;font-weight:500;font-size:.75rem;text-decoration:none;transition:opacity .2s}.source-tag[data-astro-cid-wrgicudb]:hover{opacity:.8}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;color:var(--muted-foreground);font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.875rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--foreground)}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2>
+AstroBlog
+</a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-modal" data-astro-cid-otpdt6jm> <div class="modal-content" data-astro-cid-otpdt6jm> <div class="modal-header" data-astro-cid-otpdt6jm> <h2 class="modal-title" data-astro-cid-otpdt6jm>搜索文章</h2> <button id="close-search" class="close-button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-otpdt6jm></path> </svg> </button> </div> <div id="pagefind-ui" data-astro-cid-otpdt6jm></div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(t=0){if(sessionStorage.getItem(c)==="true")return g(),!0;const r=document.getElementById("pagefind-ui");if(!r)return!1;r.innerHTML='<div style="padding: 2rem; text-align: center; color: var(--muted-foreground);">加载中...</div>';try{return await new Promise((o,s)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=o,a.onerror=s,document.head.appendChild(a)}),g(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),t<2?(console.log(`Retrying search load... (${t+1}/2)`),await new Promise(o=>setTimeout(o,1e3)),l(t+1)):(r&&(r.innerHTML=`
+          <div style="padding: 2rem; text-align: center;">
+            <p style="color: var(--muted-foreground); margin-bottom: 1rem;">搜索功能加载失败</p>
+            <button id="retry-search" style="padding: 0.5rem 1rem; background: var(--accent); color: var(--accent-foreground); border: none; border-radius: 0.375rem; cursor: pointer;">
+              重试
+            </button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>pre-commit hooks are fundamentally broken</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://jyn.dev" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>jyn.dev</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2025年12月26日</time> </div> </header> <!-- Render HTML content from RSS feed --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>Let's start a new Rust project.</p>
+<pre data-lang="console" class="language-console z-code"><code class="language-console" data-lang="console"><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">mkdir</span></span><span class="z-meta z-function-call z-arguments z-shell"> best-fizzbuzz-ever</span>
+</span><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-support z-function z-cd z-shell">cd</span></span><span class="z-meta z-function-call z-arguments z-shell"> best-fizzbuzz-ever</span>
+</span><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">cat</span></span><span class="z-meta z-function-call z-arguments z-shell"> <span class="z-string z-unquoted z-heredoc z-shell"><span class="z-keyword z-operator z-assignment z-redirection z-shell">&lt;&lt;</span> <span class="z-keyword z-control z-heredoc-token z-shell">EOF</span></span> <span class="z-meta z-function-call z-arguments z-shell"><span class="z-keyword z-operator z-assignment z-redirection z-shell">&gt;</span> main.rs</span><span class="z-string z-unquoted z-heredoc z-shell">
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">fn main() { for i in 0.. {
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">    println (&quot;fizzbuzz&quot;);
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">}}
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell"><span class="z-keyword z-control z-heredoc-token z-shell">EOF</span></span></span>
+</span><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> init</span>
+</span><span class="z-source z-shell z-console">Initialized empty Git repository in /home/jyn/src/third-website/best-fizzbuzz-ever/.git/
+</span><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> add main.rs</span>
+</span><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> commit<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> --</span>message</span> fizzbuzz</span>
+</span><span class="z-source z-shell z-console">[main (root-commit) 661dc28] fizzbuzz
+</span><span class="z-source z-shell z-console"> 1 file changed, 4 insertions(+)
+</span><span class="z-source z-shell z-console"> create mode 100644 main.rs
+</span></code></pre>
+<p>Neat. Now let's say I add this to some list of fizzbuzz projects in different languages.
+Maybe .... <a href="https://github.com/joshkunz/fizzbuzz">this one</a>.
+They tell me I need to have "proper formatting" and "use consistent style".
+How rude.</p>
+<p>Maybe I can write a pre-commit hook that checks that for me?</p>
+<pre data-lang="console" class="language-console z-code"><code class="language-console" data-lang="console"><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">cat</span></span><span class="z-meta z-function-call z-arguments z-shell"> <span class="z-string z-unquoted z-heredoc z-shell"><span class="z-keyword z-operator z-assignment z-redirection z-shell">&lt;&lt;</span> <span class="z-punctuation z-definition z-string z-begin z-shell">&#39;</span><span class="z-keyword z-control z-heredoc-token z-shell">EOF</span><span class="z-punctuation z-definition z-string z-end z-shell">&#39;</span></span> <span class="z-meta z-function-call z-arguments z-shell"><span class="z-keyword z-operator z-assignment z-redirection z-shell">&gt;</span> pre-commit</span><span class="z-string z-unquoted z-heredoc z-shell">
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">#!/bin/sh
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">set -eu
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">for f in *.rs; do
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">  rustfmt --check &quot;$f&quot;
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">done
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell"><span class="z-keyword z-control z-heredoc-token z-shell">EOF</span></span></span>
+</span><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">chmod</span></span><span class="z-meta z-function-call z-arguments z-shell"> +x pre-commit</span>
+</span><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">ln</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>s</span> ../../pre-commit .git/hooks/pre-commit</span>
+</span><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> add pre-commit</span>
+</span><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> commit<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> --</span>message</span> <span class="z-string z-quoted z-double z-shell"><span class="z-punctuation z-definition z-string z-begin z-shell">&quot;</span>add pre-commit hook<span class="z-punctuation z-definition z-string z-end z-shell">&quot;</span></span></span>
+</span><span class="z-source z-shell z-console">Diff in /home/jyn/src/third-website/best-fizzbuzz-ever/src/main.rs:1:
+</span><span class="z-source z-shell z-console">-fn main() { for i in 0.. {
+</span><span class="z-source z-shell z-console">-    println (&quot;fizzbuzz&quot;);
+</span><span class="z-source z-shell z-console">-}}
+</span><span class="z-source z-shell z-console">+fn main() {
+</span><span class="z-source z-shell z-console">+    for i in 0.. {
+</span><span class="z-source z-shell z-console">+        println(&quot;fizzbuzz&quot;);
+</span><span class="z-source z-shell z-console">+    }
+</span><span class="z-source z-shell z-console">+}
+</span></code></pre>
+<p>Neat! Let's commit that change.</p>
+<pre data-lang="console" class="language-console z-code"><code class="language-console" data-lang="console"><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">rustfmt</span></span><span class="z-meta z-function-call z-arguments z-shell"> main.rs</span>
+</span><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> commit<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> --</span>message</span> <span class="z-string z-quoted z-double z-shell"><span class="z-punctuation z-definition z-string z-begin z-shell">&quot;</span>add pre-commit hook<span class="z-punctuation z-definition z-string z-end z-shell">&quot;</span></span></span>
+</span><span class="z-source z-shell z-console">[main 3be7b87] add pre-commit hook
+</span><span class="z-source z-shell z-console"> 1 file changed, 4 insertions(+)
+</span><span class="z-source z-shell z-console"> create mode 100755 pre-commit
+</span><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> status</span>
+</span><span class="z-source z-shell z-console">On branch main
+</span><span class="z-source z-shell z-console">Changes not staged for commit:
+</span><span class="z-source z-shell z-console">  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+</span><span class="z-source z-shell z-console">  (use &quot;git restore &lt;file&gt;...&quot; to discard changes in working directory)
+</span><span class="z-source z-shell z-console">	modified:   main.rs
+</span></code></pre>
+<p>Oh ... We fixed the formatting, but we didn't actually stage the changes.
+The pre-commit hook runs on the <em>working tree</em>, not on the <em>index</em>, so it didn't catch the issue.
+We can see that the version tracked by git still has the wrong formatting:</p>
+<pre data-lang="console" class="language-console z-code"><code class="language-console" data-lang="console"><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> show HEAD:main.rs</span>
+</span><span class="z-source z-shell z-console">fn main() { for i in 0.. {
+</span><span class="z-source z-shell z-console">    println (&quot;fizzbuzz&quot;);
+</span><span class="z-source z-shell z-console">}}
+</span></code></pre>
+<p>Maybe we can make the script smarter?
+Let's checkout all the files in the index into a temporary directory and run our pre-commit hook there. <sup class="footnote-reference" id="fr-4-1"><a href="#fn-4">1</a></sup></p>
+<pre data-lang="console" class="language-console z-code"><code class="language-console" data-lang="console"><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">cat</span></span><span class="z-meta z-function-call z-arguments z-shell"> <span class="z-string z-unquoted z-heredoc z-shell"><span class="z-keyword z-operator z-assignment z-redirection z-shell">&lt;&lt;</span> <span class="z-punctuation z-definition z-string z-begin z-shell">&#39;</span><span class="z-keyword z-control z-heredoc-token z-shell">EOF</span><span class="z-punctuation z-definition z-string z-end z-shell">&#39;</span></span> <span class="z-meta z-function-call z-arguments z-shell"><span class="z-keyword z-operator z-assignment z-redirection z-shell">&gt;</span> pre-commit</span><span class="z-string z-unquoted z-heredoc z-shell">
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">#!/bin/sh
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">set -eu
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">tmpdir=$(mktemp -d --tmpdir &quot;$(basename &quot;$(realpath .)&quot;)-pre-commit.XXXX&quot;)
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">trap &#39;rm -r &quot;$tmpdir&quot;&#39; EXIT
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">git checkout-index --all --prefix=&quot;$tmpdir/&quot;
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">for f in $tmpdir/*.rs; do
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">  rustfmt --check &quot;$f&quot;
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">done
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell"><span class="z-keyword z-control z-heredoc-token z-shell">EOF</span></span></span>
+</span><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> add pre-commit</span>
+</span><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> commit<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> --</span>message</span> <span class="z-string z-quoted z-double z-shell"><span class="z-punctuation z-definition z-string z-begin z-shell">&quot;</span>make pre-commit hook smarter<span class="z-punctuation z-definition z-string z-end z-shell">&quot;</span></span></span>
+</span><span class="z-source z-shell z-console">Diff in /tmp/best-fizzbuzz-ever-pre-commit.ZNyw/main.rs:1:
+</span><span class="z-source z-shell z-console">-fn main() { for i in 0.. {
+</span><span class="z-source z-shell z-console">-    println (&quot;fizzbuzz&quot;);
+</span><span class="z-source z-shell z-console">-}}
+</span><span class="z-source z-shell z-console">+fn main() {
+</span><span class="z-source z-shell z-console">+    for i in 0.. {
+</span><span class="z-source z-shell z-console">+        println(&quot;fizzbuzz&quot;);
+</span><span class="z-source z-shell z-console">+    }
+</span><span class="z-source z-shell z-console">+}
+</span><span class="z-source z-shell z-console">
+</span></code></pre>
+<p>Yay! That caught the issue.
+Now let's add our rust program to that collection of fizzbuzz programs.</p>
+<pre data-lang="console" class="language-console z-code"><code class="language-console" data-lang="console"><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> add main.rs</span>
+</span><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> commit<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> --</span>message</span> <span class="z-string z-quoted z-double z-shell"><span class="z-punctuation z-definition z-string z-begin z-shell">&quot;</span>make pre-commit hook smarter<span class="z-punctuation z-definition z-string z-end z-shell">&quot;</span></span></span>
+</span><span class="z-source z-shell z-console">[main 3cb40f6] make pre-commit hook smarter
+</span><span class="z-source z-shell z-console"> 2 files changed, 11 insertions(+), 4 deletions(-)
+</span><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> remote add upstream https://github.com/joshkunz/fizzbuzz</span>
+</span><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> fetch upstream</span>
+</span><span class="z-source z-shell z-console">remote: Enumerating objects: 222, done.
+</span><span class="z-source z-shell z-console">remote: Total 222 (delta 0), reused 0 (delta 0), pack-reused 222 (from 1)
+</span><span class="z-source z-shell z-console">Receiving objects: 100% (222/222), 29.08 KiB | 29.08 MiB/s, done.
+</span><span class="z-source z-shell z-console">Resolving deltas: 100% (117/117), done.
+</span><span class="z-source z-shell z-console">From https://github.com/joshkunz/fizzbuzz
+</span><span class="z-source z-shell z-console"> * [new branch]      master     -&gt; upstream/master
+</span><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> rebase upstream</span>
+</span><span class="z-source z-shell z-console">Successfully rebased and updated refs/heads/main.
+</span></code></pre>
+<p>Maybe we'll make one last tweak...</p>
+<pre data-lang="console" class="language-console z-code"><code class="language-console" data-lang="console"><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">sed</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>i</span> <span class="z-string z-quoted z-single z-shell"><span class="z-punctuation z-definition z-string z-begin z-shell">&#39;</span>1i // Written by jyn<span class="z-punctuation z-definition z-string z-end z-shell">&#39;</span></span> main.rs</span>
+</span><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> commit main.rs<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> --</span>message</span> <span class="z-string z-quoted z-double z-shell"><span class="z-punctuation z-definition z-string z-begin z-shell">&quot;</span>mark who wrote fizzbuzz<span class="z-punctuation z-definition z-string z-end z-shell">&quot;</span></span></span>
+</span><span class="z-source z-shell z-console">Diff in /tmp/best-fizzbuzz-ever-pre-commit.n1Pj/fizzbuzz-traits.rs:4:
+</span><span class="z-source z-shell z-console"> use std::iter;
+</span><span class="z-source z-shell z-console">
+</span><span class="z-source z-shell z-console"> struct FizzBuzz {
+</span><span class="z-source z-shell z-console">-    from : i32
+</span><span class="z-source z-shell z-console">-  , to : i32
+</span><span class="z-source z-shell z-console">+    from: i32,
+</span><span class="z-source z-shell z-console">+    to: i32,
+</span><span class="z-source z-shell z-console"> }
+</span><span class="z-source z-shell z-console">
+</span><span class="z-source z-shell z-console"> impl FizzBuzz {
+</span></code></pre>
+<p>Uh. Huh. Right.
+The code that was already here wasn't formatted according to rustfmt.
+Our script is running on every file in the git repo, so it won't let us commit.</p>
+<p>Maybe we can change it to only run on modified files?</p>
+<pre data-lang="console" class="language-console z-code"><code class="language-console" data-lang="console"><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">cat</span></span><span class="z-meta z-function-call z-arguments z-shell"> <span class="z-string z-unquoted z-heredoc z-shell"><span class="z-keyword z-operator z-assignment z-redirection z-shell">&lt;&lt;</span> <span class="z-punctuation z-definition z-string z-begin z-shell">&#39;</span><span class="z-keyword z-control z-heredoc-token z-shell">EOF</span><span class="z-punctuation z-definition z-string z-end z-shell">&#39;</span></span> <span class="z-meta z-function-call z-arguments z-shell"><span class="z-keyword z-operator z-assignment z-redirection z-shell">&gt;</span> pre-commit</span><span class="z-string z-unquoted z-heredoc z-shell">
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">#!/bin/sh
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">set -eu
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">files=$(git diff --name-only --cached --no-ext-diff --diff-filter=d)
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">tmpdir=$(mktemp -d --tmpdir &quot;$(basename &quot;$(realpath .)&quot;)-pre-commit.XXXX&quot;)
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">trap &#39;rm -r &quot;$tmpdir&quot;&#39; EXIT
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">printf %s &quot;$files&quot; | tr &#39;\n&#39; &#39;\0&#39; | xargs -0 git checkout-index --prefix=&quot;$tmpdir/&quot;
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">for f in $tmpdir/*.rs; do
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">  rustfmt --check &quot;$f&quot;
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell">done
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-string z-unquoted z-heredoc z-shell"><span class="z-keyword z-control z-heredoc-token z-shell">EOF</span></span></span>
+</span><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> commit main.rs pre-commit <span class="z-punctuation z-separator z-continuation z-line z-shell">\
+</span></span></span><span class="z-source z-shell z-console"><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell">  --</span>message</span> <span class="z-string z-quoted z-double z-shell"><span class="z-punctuation z-definition z-string z-begin z-shell">&quot;</span>update main.rs; make pre-commit even smarter<span class="z-punctuation z-definition z-string z-end z-shell">&quot;</span></span></span>
+</span><span class="z-source z-shell z-console">[main f2925bc] update main.rs; make pre-commit even smarter
+</span><span class="z-source z-shell z-console"> 2 files changed, 5 insertions(+), 1 deletion(-)
+</span></code></pre>
+<p>Alright. Cool.</p>
+<p>Let's do one last thing.
+Let's say we had an existing PR to this repo and we need to rebase it.
+Maybe it had a merge conflict, or maybe there was a fix on main that we need in order to implement our solution.</p>
+<pre data-lang="console" class="language-console z-code"><code class="language-console" data-lang="console"><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> checkout upstream/HEAD  <span class="z-comment z-line z-number-sign z-shell"><span class="z-punctuation z-definition z-comment z-begin z-shell">#</span></span><span class="z-comment z-line z-number-sign z-shell"> Simulate an old PR by checking out an old commit</span></span>
+</span><span class="z-source z-shell z-console">HEAD is now at 56bf3ab Adds E to the README
+</span><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-support z-function z-echo z-shell">echo</span></span><span class="z-meta z-function-call z-arguments z-shell"> <span class="z-string z-quoted z-single z-shell"><span class="z-punctuation z-definition z-string z-begin z-shell">&#39;</span>fn main() { println!(&quot;this counts as fizzbuzz, right?&quot;); }<span class="z-punctuation z-definition z-string z-end z-shell">&#39;</span></span> <span class="z-keyword z-operator z-assignment z-redirection z-shell">&gt;</span> print.rs</span>
+</span><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> add print.rs</span>
+</span><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> commit<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> --</span>message</span> <span class="z-string z-quoted z-double z-shell"><span class="z-punctuation z-definition z-string z-begin z-shell">&quot;</span>Add print.rs<span class="z-punctuation z-definition z-string z-end z-shell">&quot;</span></span></span>
+</span><span class="z-source z-shell z-console">[detached HEAD 3d1bbf7] Add print.rs
+</span><span class="z-source z-shell z-console"> 1 file changed, 1 insertion(+)
+</span><span class="z-source z-shell z-console"> create mode 100644 print.rs
+</span></code></pre>
+<p>And let's also say that we want to edit the commit message.</p>
+<pre data-lang="console" class="language-console z-code"><code class="language-console" data-lang="console"><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">$</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> rebase<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>i</span> main  <span class="z-comment z-line z-number-sign z-shell"><span class="z-punctuation z-definition z-comment z-begin z-shell">#</span></span><span class="z-comment z-line z-number-sign z-shell"> Rebase this whole branch over our main branch</span></span>
+</span><span class="z-source z-shell z-console">reword 3d1bbf7 Add print.rs
+</span><span class="z-source z-shell z-console"><span class="z-keyword z-operator z-assignment z-redirection z-process z-shell">#</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">Rebase</span></span><span class="z-meta z-function-call z-arguments z-shell"> f2925bc..3d1bbf7 onto f2925bc (1 command</span><span class="z-meta z-function-call z-shell"></span>)
+</span></code></pre>
+<h2 id="now-we-really-have-a-problem">Now, we <em>really</em> have a problem.<a class="zola-anchor" href="#now-we-really-have-a-problem" aria-label="Anchor link for: now-we-really-have-a-problem"></a>
+</h2>
+<pre class="z-code"><code><span class="z-text z-plain">Error: file `/tmp/best-fizzbuzz-ever-pre-commit.p3az/*.rs` does not exist
+</span><span class="z-text z-plain">Could not apply 3d1bbf7... Add print.rs
+</span></code></pre>
+<p>Two things went wrong here:</p>
+<ol>
+<li>Our pre-commit hook can't handle commits that don't have any Rust files.</li>
+<li>Our pre-commit hook <em>ran on a branch we were rebasing</em>. <sup class="footnote-reference" id="fr-2-1"><a href="#fn-2">2</a></sup></li>
+</ol>
+<p>Fixing the first thing doesn't really help us, because we don't control other people's branches.
+They might have used <code>git commit --no-verify</code>.
+They might not even have a pre-commit hook installed.
+They might have had a branch that passed the hook when they originally wrote it, but not after a rebase (e.g. if your hook is <code>cargo check</code> or something like that).
+They might have had a branch that used an old version of the hook that didn't have as many checks as a later version.</p>
+<p>Our only real choice here is to pass <code>--no-verify</code> to <code>git rebase</code> every time we run it, and to <code>git commit</code> for every commit in the rebase we modify,
+and possibly even to every <code>git merge</code> we run outside of a rebase.</p>
+<p>This is because pre-commit hooks are a <em>fundamentally broken idea</em>.
+Code does not exist in isolation.
+Commits that are local to a developer machine do not ever go through CI.
+Commits don't even necessarily mean that that the code is ready to publish—pre-commit hooks don't run on <code>git stash</code> for a reason!
+I don't use <code>git stash</code>, I use <code>git commit</code> so that my stashes are tied to a branch, and hooks completely break this workflow.</p>
+<p>More than that, pre-commit hooks are <em>preventing you from saving your work</em>.
+There should be a <em>really, really good reason</em> to prevent you from saving your work, and IMO "doesn't pass the test suite" is not that.
+I have similar feelings about format-on-save hooks.</p>
+<p>There are a <a href="https://blog.plover.com/prog/git/hook-disaster.html">bunch</a>
+of <a href="https://dev.to/afl_ext/are-pre-commit-git-hooks-a-good-idea-i-dont-think-so-38j6">other</a> <a href="https://github.com/rust-lang/rust/issues/77620">footguns</a> with pre-commit hooks.
+This doesn't even count the fact that nearly all pre-commit hooks are implemented in a broken way and just blindly run on the worktree, and are slow or unreliable or both.
+Don't get me started on pre-commit hooks that try to add things to the commit you're about to make, or projects that try to automatically install a hook when you run the test suite.</p>
+<aside role=note class=note-container><div class=note-content>
+<p>The <a href="https://pre-commit.com/"><code>pre-commit</code></a> framework (or its cousin, <a href="https://github.com/lint-staged/lint-staged">lint-staged</a>) does <em>not</em> fix this.
+It fixes the issues about running on the index by stashing your changes with
+<a href="https://git-scm.com/docs/git-stash#Documentation/git-stash.txt---keep-index"><code>--keep-index</code></a>,
+which works but modifies your git state.
+It doesn't fix the issues about running during a rebase, nor does it prevent hooks from trying to add things to the current commit. <sup class="footnote-reference" id="fr-lint-staged-1"><a href="#fn-lint-staged">3</a></sup></p>
+<p>"Just don't write bad hooks" doesn't work if I'm working on someone else's project where I don't control the hook.</p>
+</div></aside>
+<p>Please just don't use <code>pre-commit</code> hooks. Use <code>pre-push</code> instead. <sup class="footnote-reference" id="fr-1-1"><a href="#fn-1">4</a></sup>
+<code>pre-push</code> hooks nearly avoid all of these issues.</p>
+<p>The only use case where I think pre-commit hooks are a good idea is for things that must <em>never</em> committed, that are worth interrupting a complicated rebase to prevent; namely: credentials.
+Once credentials are committed they're quite difficult to get out, and even harder to be sure you haven't missed them.</p>
+<h2 id="tips-for-writing-a-pre-push-hook">Tips for writing a <code>pre-push</code> hook<a class="zola-anchor" href="#tips-for-writing-a-pre-push-hook" aria-label="Anchor link for: tips-for-writing-a-pre-push-hook"></a>
+</h2>
+<ul>
+<li>Run on the index, not the working tree, as described above. <sup class="footnote-reference" id="fr-3-1"><a href="#fn-3">5</a></sup></li>
+<li>Only add checks that are fast and reliable. Checks that touch the network should never go in a hook. Checks that are slow and require an up-to-date build cache should never go in a hook. Checks that require credentials or a running local service should never go in a hook.</li>
+<li>Be as quiet as possible. This hook is running buried inside a bunch of other commands, often without the developer knowing that the hook is going to run. Don't hide other important output behind a wall of progress messages.</li>
+<li>Don't set the hook up automatically. Whatever tool you use that promises to make this reliable is wrong. There is not a way to do this reliably, and the number of times it's broken on me is more than I can count. Please just add docs for how to set it up manually, prominantly featured in your CONTRIBUTING docs. (You do have contributing docs, right?)</li>
+</ul>
+<aside role=note class=note-container><div class=note-content>
+<p>If the hook does fail, and the changes affect an older commit than the most recent,
+you can use a combination of <a href="https://github.com/tummychow/git-absorb"><code>git-absorb</code></a>, <a href="https://git-revise.readthedocs.io/en/latest/man.html"><code>git-revise</code></a>,
+and <a href="https://git-scm.com/docs/git-rebase#Documentation/git-rebase.txt---execcmd"><code>git rebase -X ours --exec</code></a>
+to put them in the appropriate commit before pushing again.</p>
+</div></aside>
+<p>And don't write <code>pre-commit</code> hooks!</p>
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn-4">
+<p>This is really quite slow on large enough repos, but there's not any real alternative. <code>git stash --keep-index</code> messes with git index state and also with your stashes. The only VCS that exposes a FUSE filesystem of its commits is <a href="https://github.com/facebook/sapling/blob/main/eden/fs/docs/Overview.md">Sapling</a>, which is poorly supported outside Facebook. The best you can do is give up on looking at the whole working copy and only write hooks that read a single file at a time. <a href="#fr-4-1">↩</a></p>
+</li>
+<li id="fn-2">
+<p>By default this doesn't happen when running bare <code>rebase</code>, but the second you add <code>--interactive</code>, nearly anything you do runs a hook. Hooks will also run when you attempt to resolve merge conflicts. <a href="#fr-2-1">↩</a></p>
+</li>
+<li id="fn-lint-staged">
+<p><code>lint-staged</code> does actually have a <code>--fail-on-changes</code> flag which aborts the commit, but that still modifies the working tree, and it's not on by default. <a href="#fr-lint-staged-1">↩</a></p>
+</li>
+<li id="fn-1">
+<p>For more info about the difference, and a full list of possible hooks, see <a href="https://git-scm.com/docs/githooks"><code>man 5 githooks</code></a>. <a href="#fr-1-1">↩</a></p>
+</li>
+<li id="fn-3">
+<p>Notice that I don't say "only run on changed files". That's because it's <a href="https://lore.kernel.org/git/CAHnEOG2o784dk+OpkGt-1qjRJb34=sFMJvh-JRJ3v+GNBxFywQ@mail.gmail.com/">not actually possible to reliably determine which branch the current commit is based on</a>, the best you can do is pick a random branch that looks likely. <a href="#fr-3-1">↩</a></p>
+</li>
+</ol>
+</section>
+</div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://jyn.dev/pre-commit-hooks-are-fundamentally-broken/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text" data-astro-cid-sz7xmlte>
+&copy; 2026 AstroBlog
+</p> <p class="footer-text" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer>  </body></html> 

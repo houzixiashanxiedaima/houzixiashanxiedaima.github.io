@@ -1,0 +1,320 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.16.1"><meta name="description" content="This post is on the first part of chapter 7 of
+Sebastian Raschka's book
+&#34;Build a Large Language Model (from Scratch)&#34;,
+which covers instruction fine-tuning.
+In my last post, I went
+through a technique"><link rel="canonical" href="https://blog.yuyins.com/reading-list/writing-an-llm-from-scratch-part-25----instruction-ao8j8z/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/writing-an-llm-from-scratch-part-25----instruction-ao8j8z/"><meta property="og:title" content="Writing an LLM from scratch, part 25 -- instruction fine-tuning"><meta property="og:description" content="This post is on the first part of chapter 7 of
+Sebastian Raschka's book
+&#34;Build a Large Language Model (from Scratch)&#34;,
+which covers instruction fine-tuning.
+In my last post, I went
+through a technique"><meta property="og:image" content="https://blog.yuyins.com/favicon.svg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/writing-an-llm-from-scratch-part-25----instruction-ao8j8z/"><meta property="twitter:title" content="Writing an LLM from scratch, part 25 -- instruction fine-tuning"><meta property="twitter:description" content="This post is on the first part of chapter 7 of
+Sebastian Raschka's book
+&#34;Build a Large Language Model (from Scratch)&#34;,
+which covers instruction fine-tuning.
+In my last post, I went
+through a technique"><meta property="twitter:image" content="https://blog.yuyins.com/favicon.svg"><title>Writing an LLM from scratch, part 25 -- instruction fine-tuning</title><!-- Theme and color scheme script (runs before page loads to prevent flash) --><script>
+			// 初始化配色方案 - 默认使用 stone-amber
+			const colorScheme = localStorage.getItem('colorScheme') || 'stone-amber';
+			document.documentElement.setAttribute('data-color', colorScheme);
+
+			// 强制使用浅色主题
+			document.documentElement.setAttribute('data-theme', 'light');
+		</script><link rel="stylesheet" href="/_astro/_slug_.C-G01a-E.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.source-tag[data-astro-cid-wrgicudb]{background-color:var(--muted);color:var(--foreground);padding:.125rem .5rem;border-radius:9999px;font-weight:500;font-size:.75rem;text-decoration:none;transition:opacity .2s}.source-tag[data-astro-cid-wrgicudb]:hover{opacity:.8}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;color:var(--muted-foreground);font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.875rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--foreground)}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2>
+AstroBlog
+</a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-modal" data-astro-cid-otpdt6jm> <div class="modal-content" data-astro-cid-otpdt6jm> <div class="modal-header" data-astro-cid-otpdt6jm> <h2 class="modal-title" data-astro-cid-otpdt6jm>搜索文章</h2> <button id="close-search" class="close-button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-otpdt6jm></path> </svg> </button> </div> <div id="pagefind-ui" data-astro-cid-otpdt6jm></div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(t=0){if(sessionStorage.getItem(c)==="true")return g(),!0;const r=document.getElementById("pagefind-ui");if(!r)return!1;r.innerHTML='<div style="padding: 2rem; text-align: center; color: var(--muted-foreground);">加载中...</div>';try{return await new Promise((o,s)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=o,a.onerror=s,document.head.appendChild(a)}),g(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),t<2?(console.log(`Retrying search load... (${t+1}/2)`),await new Promise(o=>setTimeout(o,1e3)),l(t+1)):(r&&(r.innerHTML=`
+          <div style="padding: 2rem; text-align: center;">
+            <p style="color: var(--muted-foreground); margin-bottom: 1rem;">搜索功能加载失败</p>
+            <button id="retry-search" style="padding: 0.5rem 1rem; background: var(--accent); color: var(--accent-foreground); border: none; border-radius: 0.375rem; cursor: pointer;">
+              重试
+            </button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Writing an LLM from scratch, part 25 -- instruction fine-tuning</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://gilesthomas.com" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>gilesthomas.com</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2025年10月29日</time> </div> </header> <!-- Render HTML content from RSS feed --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>This post is on the first part of chapter 7 of
+<a href="https://sebastianraschka.com/">Sebastian Raschka</a>'s book
+"<a href="https://www.manning.com/books/build-a-large-language-model-from-scratch">Build a Large Language Model (from Scratch)</a>",
+which covers instruction fine-tuning.</p>
+
+<p>In my <a href="/2025/10/llm-from-scratch-24-the-transcript-hack">last post</a>, I went
+through a technique which I'd found could sometimes make it possible to turn
+non-fine-tuned models into reasonable chatbots; perhaps unsurprisingly, the GPT-2
+model isn't powerful enough to work that way.</p>
+
+<p>So, with that proven, it was time to do the work :-)  This post covers the first
+half of the chapter, where we actually do the fine-tuning; I'll post later about the
+second part, where we start evaluating the model that we get.</p>
+
+<p>Just as with the <a href="/2025/10/llm-from-scratch-23-fine-tuning-classification">last chapter</a>,
+what we're doing here is essentially plugging together the various things we've built
+so far, and Raschka's explanation is very clear, so I don't have that much in the
+way of notes -- but here are the bits that made me pause.</p>
+<h3 id="the-model">The model</h3>
+
+<p>For this part of the book, we use the "medium" variant of the GPT-2 open weights
+rather than the "small" ones that we've been using so far.  I have to assume that
+this is because the small really isn't very very good at this kind of thing.</p>
+
+<p>[Update: it isn't!  See the metrics from my mammoth post on
+<a href="/2025/11/llm-from-scratch-28-training-a-base-mode-from-scratch">training an LLM completely from scratch</a>.]</p>
+
+<h3 id="the-input-format">The input format</h3>
+
+<p>This was quite interesting.  In the past, all of the templates I've seen
+for instruction following have been designed for chatbots -- that's what we
+tend to use LLMs for, after all.  There's a system prompt and then a format for
+"message from user", and another for "message from bot".</p>
+
+<p>In my series on <a href="/fine-tuning">fine-tuning</a>, where I learned how to fine-tune an 8B-parameter
+Llama 3 base model to work as a chatbot, I used the format for <a href="https://www.reddit.com/r/LocalLLaMA/comments/155po2p/get_llama_2_prompt_format_right/">Llama 2</a>,
+which is not dissimilar to the Phi3 one that's given as an example in the book.
+The <a href="https://crfm.stanford.edu/2023/03/13/alpaca.html">Alpaca</a>-style one is quite different; it is designed for more of a one-shot interaction
+than it is for chat:</p>
+
+<pre><code>Below is an instruction that describes a task.  Write a response that
+appropriately completes the request.
+
+### Instruction:
+
+&lt;some instructions&gt;
+
+
+### Input:
+
+&lt;optional, some input&gt;
+
+### Response:
+</code></pre>
+
+<p>Now, Alpaca dates from early 2023, and it looks like they used that prompt following
+a paper "<a href="https://arxiv.org/abs/2212.10560">Self-Instruct: Aligning Language Models with Self-Generated Instructions</a>".</p>
+
+<p>I had to think a bit about why one would use that, and I think the core is that this
+was early days (all of two years ago!) and LLMs had very short context lengths and
+weren't very smart.  Chat uses a <em>lot</em> of tokens!  You need the system prompt,
+and then every conversational turn so far.  With our GPT-2 model we have just 1024
+tokens to play with -- and Alpaca wasn't much better, as it was built as a fine-tune
+of <a href="https://ai.meta.com/blog/large-language-model-llama-meta-ai/">Meta's original Llama model</a>,
+which (according to <a href="https://github.com/meta-llama/llama/blob/main/MODEL_CARD.md">the model card</a>)
+had a context length of 4096 tokens.</p>
+
+<p>Chat is a good way to interact with a model, as the multiple conversational turns
+allow you to build up large amounts of context for the model to play with, meaning
+that (hopefully) it will be able to give good answers.  But if that context doesn't
+fit into the context length, then it's not so good.  Early chatbots, I believe,
+worked around this by replacing the "transcript" with a summary, but there's only
+so much you can fit into a 4k-token one. <sup class="footnote-ref" id="fnref-1"><a href="#fn-1">1</a></sup>  Maybe modern ones do this too, but
+with GPT-5 having a <a href="https://platform.openai.com/docs/models/gpt-5">400,000-token context window</a>
+it's not so important.</p>
+
+<p>So, in Alpaca times, people were thinking in terms of one-shot interactions with LLMs,
+and the pattern they chose was targeted at that, so that you could get all of the interesting
+information and a reply into one sequence.</p>
+
+<p>An interesting bit of history!
+(Again, two years ago is history.  Cripes.)</p>
+
+<h3 id="the-custom-collation">The custom collation</h3>
+
+<p>This was explained well in the book, but it's an interesting enough point that I thought
+it was worth going over.</p>
+
+<p>Last time around we had a bunch of text messages as our inputs to the model.  We found
+the longest one, and then padded them all out to the same length with end-of-sequence tokens,
+which meant that we could construct batches -- naturally, every input in a batch has
+to be the same size.</p>
+
+<p>This time around we're being a bit smarter.  Although every item in a given batch
+needs to be the same length, batches themselves can be of different lengths -- that is,
+if our batch size was 8, and the longest sequence in our first batch was 73 tokens
+long, then we would make our first batch <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mn>8</mn><mi>&#x000D7;</mi><mn>73</mn></mrow></math> -- but then, if the longest
+sequence in our second batch was only 60 tokens long, then the second batch could
+be <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mn>8</mn><mi>&#x000D7;</mi><mn>60</mn></mrow></math>.  We only need to pad out sequences to match the longest sequence
+in their batch, and that saves us time when running the model.</p>
+
+<p>That got me thinking about inference at scale -- the kind of thing that LLM
+providers like OpenAI or Anthropic do.  They're going to be receiving very large
+numbers of sequences to complete, and of course they are going to be running them
+through in batches.  But padding tokens are kind of a waste of inference GPU cycles.</p>
+
+<p>They'll have a bunch of different instances of their models running on different
+machines to handle all of these requests, and they almost certainly have some kind of code to try to route
+sequences of similar length to the same instances.  To take a toy
+example, if you had a batch size of two and received six sequences, with lengths
+of 2, 9, 100, 11, 3 and 120, then you'd want to route them so that one instance
+received the (2, 3) pair, another the (9, 11), and another
+(100, 120) -- that minimises the amount of padding required and saves wasted cycles.</p>
+
+<p>Following on from that, it looks like we could actually improve the book's code by
+doing something similar here, grouping similarly-sized inputs together.  That would
+be quite complicated, though, so probably not worth it in an educational context
+like this.</p>
+
+<p>Anyway, our collator needs to handle the variable-length batches, and through various drafts we converge on
+one that does it, with one tweak.</p>
+
+<h3 id="masking-out-padding-tokens-for-loss">Masking out padding tokens for loss</h3>
+
+<p>This was a really important and interesting bit.  Let's say that we're feeding in
+a 20-token input, in a batch where the longest of the other sequences is 30 tokens
+long.  That means that we have ten padding tokens at the end.  Let's represent that
+input sequence like this:</p>
+
+<pre><code>01234567890123456789xxxxxxxxxx
+</code></pre>
+
+<p>The numbers are our token IDs, and I've used <code>x</code> to represent the end-of-sequence
+token that we use for padding.</p>
+
+<p>Now, we need our target sequence to predict for that.  The first version that we
+come up with in the book looks like this:</p>
+
+<pre><code>1234567890123456789xxxxxxxxxxx
+</code></pre>
+
+<p>So, we've just done the normal trick of shifting left by one character, and we've
+added an extra end-of-sequence token at the end to make the lengths match.</p>
+
+<p>But as the next step, we replace all of the padding tokens, apart from the one right
+at the end of the "real" part of the sequence, with an invalid token ID,  <code>-100</code>.
+Using <code>I</code> to represent that, we have:</p>
+
+<pre><code>1234567890123456789xIIIIIIIIII
+</code></pre>
+
+<p>The core thing to remember here is that we honestly don't care what the model generates
+after it's done the real, unpadded sequence, plus an end-of-sequence token.  It
+could generate random junk and it wouldn't matter, because it's already done the important
+part of predicting next tokens for all of the input sequence.</p>
+
+<p>The <code>-100</code> is a magic number that PyTorch's <a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.functional.cross_entropy.html">cross_entropy</a>
+function uses in target sequences to say "ignore this position".  I must admit that
+as a software engineer, it gives me a bit of an "ick" -- magic numbers are never nice --
+but it does make sense.  Negative numbers are invalid targets when you're comparing
+predictions across tokens -- which have indexes from zero up.  In general, if you're
+predicting categories -- which essentially we are with tokens -- then the "minus one'th"
+token doesn't make sense.  You could use any other negative number, but -1 might
+cause confusion (being used heavily in ML code to get the last element of a sequence)
+and if you're going to use any other negative number it might as well be <code>-100</code>.</p>
+
+<p>"Purer" solutions would be hard, anyway.  We're working with a PyTorch tensor here,
+so it has to be a number -- which rules out using something like <code>None</code> or some kind
+of special object.  You could keep an "ignore after this index" number, but you'd
+need as many of them as you have items in the batch and it would be just another thing
+to keep track of.  You could even keep a tensor of boolean "ignore these tokens"
+of the same size as your batch -- a mask -- but that would have the same problem of
+being something to pass around in your code.</p>
+
+<p>As I understand it, those last two solutions are actually used in some systems --
+imagine that your outputs were not logits to create a probability distribution across
+categories or tokens, but were meaningful numbers in and of themselves.  Pretty much
+any number you picked might be a valid output from the model.  You wouldn't be using cross entropy loss in
+those cases anyway, of course, but you'd need to keep some record of where the
+padding starts so that you can ignore it.</p>
+
+<p>One final thing that is worth noting that we only add the <code>-100</code>s on to the targets.  This makes sense,
+as all of the inputs will be fed into the LLM, so things that aren't valid tokens are
+going to make the embedding layer very unhappy.  That also explains why we firstly add
+them on to the sequence as regular padding and then convert them to -100 for the targets:
+it allows us to add on the padding, then get the input sequence as all but the last token, then get
+the targets as tokens 1 up to the end.  After that's done we run the code to replace all
+but the first end-of-sequence padding tokens with -100 on the targets.</p>
+
+<h3 id="randomness-revisited">Randomness revisited</h3>
+
+<p>As with the last chapter, I got different results to the ones in the book; something
+different about the order of execution in my version of the code when compared to
+Raschka's meant that despite all of the careful use of <code>torch.random_seed</code>, the numbers
+didn't quite match up.  But, again as before, they were close and the trends in --
+for example -- loss were the same, so the right things were happening.</p>
+
+<h3 id="training">Training</h3>
+
+<p>When I finally ran the train on my RTX 3090, it took 48 seconds; I watched it in <code>nvtop</code>
+and saw that it was using 9GiB VRAM.  Due to the usual differences in randomness,
+I got slightly different results to the book -- but similar enough to not be any
+cause for concern:</p>
+
+<p><img src="/post-assets/llm-from-scratch-25-instruction-fine-tuning/instruction-fine-tune-2-epochs-losses-plot.png" alt="Loss over time training for two epochs" title="Loss over time training for two epochs" /></p>
+
+<p>Also, due to a typo, I accidentally ran it with five epochs -- that took two minutes.
+I noticed that validation loss started rising fairly steadily
+after epoch 2, with train loss dropping -- clearly overfitting.</p>
+
+<p><img src="/post-assets/llm-from-scratch-25-instruction-fine-tuning/instruction-fine-tune-5-epochs-losses-plot.png" alt="Loss over time training for five epochs" title="Loss over time training for five epochs" /></p>
+
+<p>Presumably Raschka chose two epochs for exactly that reason :-)</p>
+
+<h3 id="nits">Nits</h3>
+
+<p>A couple of things that I noticed while working through the code; when I first
+ran the download script, I got <code>module 'urllib' has no attribute 'request'</code>.
+That's because of a typo in the import at the start -- instead of</p>
+
+<div class="codehilite">
+<pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">urllib</span>
+</code></pre>
+</div>
+
+<p>...it should be:</p>
+
+<div class="codehilite">
+<pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span>
+</code></pre>
+</div>
+
+<p>The other thing that tripped me up was the original <code>custom_collate_draft_1</code>.
+We add on a padding token, then pad out
+the sequence with more padding tokens, then remove the last one.  I found that confusing --
+why not just add on the required number in the first place rather than adding on an extra
+one and then deleting it?</p>
+
+<p>It became clear later on; it's to make it mirror the next function, which adds on an extra end-of-sequence token for
+our targets, but having this anticipatory code in there with no explanation in the first draft made
+me start doubting my sanity for a little while...</p>
+
+<p>Minor points, though.</p>
+
+<h3 id="wrapping-up">Wrapping up</h3>
+
+<p>So, that was it for the first half of chapter 7 in the book.  The next bit looks
+like fun -- we're going to use a smart model to evaluate our relatively dumb one on
+how well it follows instructions.  Definitely looking forward to that :-)</p>
+
+<p><a href="/2025/11/llm-from-scratch-26-evaluating-the-fine-tuned-model">Here's a link to the next post in this series</a>.</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn-1">
+<p>I <a href="https://x.com/gpjt/status/1632097030188277763">experimented with ChatGPT 3.5</a> at
+around the time Alpaca came out and came to the conclusion that it had a similar
+context length, of about 4k tokens.   It looked like it worked around it by, when the transcript started reaching
+the context length, spinning off a separate instance to summarise it into a "story
+so far" kind of thing, which was then injected in to the start of the chat instead
+of the full context.</p>
+
+<p>My experiment was to say "my favourite colour is green, please
+remember that", then to send a quote of about 4,000 words from "Moby Dick", prefacing
+that with either "this is unimportant, please ignore" or "this is important,
+please remember".  Next, I'd ask what my favourite colour was again.</p>
+
+<p>If I told it that the quote
+was unimportant, then it would remember, but if I told it that it was important,
+it would think my favourite colour was blue.</p>
+
+<p>Asking it for transcripts of the
+conversation so far would give a reasonable one, skipping the quote, if the quote
+was tagged as unimportant, but would give a completely hallucinated one if the
+quote was tagged important.&#160;<a href="#fnref-1" class="footnoteBackLink" title="Jump back to footnote 1 in the text.">&#8617;</a></p>
+</li>
+</ol>
+</div>
+</div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://www.gilesthomas.com/2025/10/llm-from-scratch-25-instruction-fine-tuning" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text" data-astro-cid-sz7xmlte>
+&copy; 2026 AstroBlog
+</p> <p class="footer-text" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer>  </body></html> 
