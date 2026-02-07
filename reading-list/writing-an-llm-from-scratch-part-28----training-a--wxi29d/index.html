@@ -1,0 +1,2084 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.17.1"><meta name="description" content="在完成了Sebastian Raschka的《从头开始构建大语言模型》书中的主要内容后，我想试验一下：是否可以在我自己的RTX 3090上构建并训练一个自己的基础模型？"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data:;"><link rel="canonical" href="https://blog.yuyins.com/reading-list/writing-an-llm-from-scratch-part-28----training-a--wxi29d/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/writing-an-llm-from-scratch-part-28----training-a--wxi29d/"><meta property="og:title" content="从零开始编写LLM，第28部分——在RTX 3090上从头开始训练基础模型"><meta property="og:description" content="在完成了Sebastian Raschka的《从头开始构建大语言模型》书中的主要内容后，我想试验一下：是否可以在我自己的RTX 3090上构建并训练一个自己的基础模型？"><meta property="og:image" content="https://blog.yuyins.com/favicon.svg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/writing-an-llm-from-scratch-part-28----training-a--wxi29d/"><meta property="twitter:title" content="从零开始编写LLM，第28部分——在RTX 3090上从头开始训练基础模型"><meta property="twitter:description" content="在完成了Sebastian Raschka的《从头开始构建大语言模型》书中的主要内容后，我想试验一下：是否可以在我自己的RTX 3090上构建并训练一个自己的基础模型？"><meta property="twitter:image" content="https://blog.yuyins.com/favicon.svg"><title>从零开始编写LLM，第28部分——在RTX 3090上从头开始训练基础模型</title><!-- Theme and color scheme script (runs before page loads to prevent flash) --><script>
+			// 初始化配色方案 - 默认使用 stone-amber
+			const colorScheme = localStorage.getItem('colorScheme') || 'stone-amber';
+			document.documentElement.setAttribute('data-color', colorScheme);
+
+			// 强制使用浅色主题
+			document.documentElement.setAttribute('data-theme', 'light');
+		</script><link rel="stylesheet" href="/_astro/_slug_.C4gYYCY9.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.source-tag[data-astro-cid-wrgicudb]{background-color:var(--muted);color:var(--foreground);padding:.125rem .5rem;border-radius:9999px;font-weight:500;font-size:.75rem;text-decoration:none;transition:opacity .2s}.source-tag[data-astro-cid-wrgicudb]:hover{opacity:.8}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;color:var(--muted-foreground);font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.875rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--foreground)}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2>
+AstroBlog
+</a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-modal" data-astro-cid-otpdt6jm> <div class="modal-content" data-astro-cid-otpdt6jm> <div class="modal-header" data-astro-cid-otpdt6jm> <h2 class="modal-title" data-astro-cid-otpdt6jm>搜索文章</h2> <button id="close-search" class="close-button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-otpdt6jm></path> </svg> </button> </div> <div id="pagefind-ui" data-astro-cid-otpdt6jm></div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(t=0){if(sessionStorage.getItem(c)==="true")return g(),!0;const r=document.getElementById("pagefind-ui");if(!r)return!1;r.innerHTML='<div style="padding: 2rem; text-align: center; color: var(--muted-foreground);">加载中...</div>';try{return await new Promise((o,s)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=o,a.onerror=s,document.head.appendChild(a)}),g(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),t<2?(console.log(`Retrying search load... (${t+1}/2)`),await new Promise(o=>setTimeout(o,1e3)),l(t+1)):(r&&(r.innerHTML=`
+          <div style="padding: 2rem; text-align: center;">
+            <p style="color: var(--muted-foreground); margin-bottom: 1rem;">搜索功能加载失败</p>
+            <button id="retry-search" style="padding: 0.5rem 1rem; background: var(--accent); color: var(--accent-foreground); border: none; border-radius: 0.375rem; cursor: pointer;">
+              重试
+            </button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>从零开始编写LLM，第28部分——在RTX 3090上从头开始训练基础模型</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://gilesthomas.com" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>gilesthomas.com</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2025年12月2日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>Having worked through the main body of <a href="https://sebastianraschka.com/" target="_blank" rel="noopener noreferrer">Sebastian Raschka</a>'s book
+"<a href="https://www.manning.com/books/build-a-large-language-model-from-scratch" target="_blank" rel="noopener noreferrer">Build a Large Language Model (from Scratch)</a>",
+I wanted to try an experiment: is it possible to train a base model of my
+own, on my own hardware?</p>
+
+<p>The book shows you how to train your LLM, does a basic training run
+on a small dataset, and then we switch to downloading the "pre-cooked" weights
+from OpenAI.  That makes sense given that not every reader will have access to enough
+hardware to really train from scratch.  And right back at
+<a href="/2024/12/llm-from-scratch-1" target="_blank" rel="noopener noreferrer">the start of this series</a>, I did some naive scaling of
+numbers I'd got when fine-tuning LLMs and came to the conclusion that it would be
+impossible in a reasonable time.</p>
+
+<p>But the speed I got with my RTX 3090 on the book's small training run made me
+think that perhaps --
+just perhaps! -- it might actually be possible to train a model of this size -- about
+163M parameters -- on my own hardware.  Not, perhaps, on a small laptop, but at least on
+a reasonably high-end "gaming" PC.</p>
+
+<p>Additionally, Andrej Karpathy recently announced <a href="https://github.com/karpathy/nanochat" target="_blank" rel="noopener noreferrer">nanochat</a>,
+"the best ChatGPT that $100 can buy".  He mentions on the main page that he's trained
+a model called <code>d32</code>, with 32 Transformer layers, which has 1.9B parameters, for about $800.
+His smaller 20-layer <code>d20</code> model, with 561M parameters, he says should be trainable
+in about four hours on an 8x H100 GPU node, which costs about $24/hour -- hence the
+$100 total price.</p>
+
+<p>What's even more interesting about nanochat is that it's built with PyTorch; initially
+I'd got the impression that it was based on his pure C/CUDA <a href="https://github.com/karpathy/llm.c" target="_blank" rel="noopener noreferrer"><code>llm.c</code></a>,
+which I would imagine would give a huge speedup.  But no -- he's using the same stack
+as I have been in this series!</p>
+
+<p>Karpathy's models are both larger than 163M parameters, so it definitely sounded like this might be doable.  Obviously, I'm nowhere near as experienced an AI developer,
+and he's using a larger machine (8 GPUs and each of them has &gt; 3x more VRAM than mine),
+but he's also including the time to train a tokeniser and instruction fine-tune
+into that four hours -- and his smaller model is more than three times larger than mine.  So that should all
+help.</p>
+
+<p>This post is a little less structured than the others in my LLM from scratch series,
+as it's essentially a tidied version of the notes I kept as I worked through the
+project.</p>
+
+<p>But so as not to bury the lede: using the Hugging Face FineWeb-series datasets,
+I was able to train a GPT-2 small sized
+base model to a level where it was almost as good as the original in just over 48
+hours on my own hardware!  Base models: not just for the big AI labs.</p>
+
+<p>Here's the full story.</p>
+<h3>The model</h3>
+
+<p>For this project, I want to use the exact same model code as Raschka presented in the
+LLM from scratch book -- <a href="https://github.com/gpjt/llm-from-scratch/blob/main/gpt.py" target="_blank" rel="noopener noreferrer">my copy here</a>.
+There have been <a href="https://magazine.sebastianraschka.com/p/from-gpt-2-to-gpt-oss-analyzing-the" target="_blank" rel="noopener noreferrer">a number of architectural improvements</a>
+to LLMs since GPT-2, but for now it's best to keep things simple.</p>
+
+<p>But there are still some settings to decide on.  The config dictionary for the
+models we've been using has these parameters:</p>
+
+<ul>
+<li><code>vocab_size</code>.  This is determined by the tokenizer, and I want to use the GPT-2 one, so
+it will need to be <code>50257</code>.</li>
+<li><code>context_length</code>.  GPT-2 has a 1,024-token context length, so I'll stick with that.</li>
+<li><code>emb_dim</code>, <code>n_heads</code>, <code>n_layers</code> --- these define which of the different GPT-2 model
+classes we're training, and I want to stick to the smallest <code>gpt2-small</code> one, so
+they will be <code>768</code>, <code>12</code> and <code>12</code> respectively</li>
+<li><code>drop_rate</code>.  One of the most surprising things to me in the "architectural improvements" post
+linked above was that dropout is no longer used so much.  However, this appears to be
+tied in to the one-epoch training that has taken off since GPT-2, so I think it
+would be best to stick to <code>0.1</code> here.</li>
+<li><code>qkv_bias</code>.  From what Raschka says in the book, this doesn't add on much value, even though
+the original GPT-2 used it, so let's set it to <code>False</code>.</li>
+</ul>
+
+<p>There's also the aspect of weight-tying -- the original GPT-2 reused its embedding
+matrix as the weights for the linear layer that <a href="/2025/05/llm-from-scratch-15-from-context-vectors-to-logits" target="_blank" rel="noopener noreferrer">projects the context vectors from
+the last Transformers layer into vocab space to get the logits</a>.</p>
+
+<p>There's nothing in the code we've been working with to enforce that, though -- when
+we do our small train in the book, we're using independent weights for each of those
+steps.  The only time it is "enforced" is when we download the pretrained weights
+from OpenAI, where we put the same values into both the embedding matrix and the final
+output head.</p>
+
+<p>Given that Raschka says that it's in general better to avoid weight-tying, and actually doing
+it would be harder than not doing it, then it seems a no-brainer to not do it.</p>
+
+<p>So, what does that mean about our model?</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>1</span><span>]:</span> <span>big_train_params</span> <span>=</span> <span>{</span>
+   <span>...</span><span>:</span>     <span>"vocab_size"</span><span>:</span> <span>50257</span><span>,</span>
+   <span>...</span><span>:</span>     <span>"context_length"</span><span>:</span> <span>1024</span><span>,</span>
+   <span>...</span><span>:</span>     <span>"emb_dim"</span><span>:</span> <span>768</span><span>,</span>
+   <span>...</span><span>:</span>     <span>"n_heads"</span><span>:</span> <span>12</span><span>,</span>
+   <span>...</span><span>:</span>     <span>"n_layers"</span><span>:</span> <span>12</span><span>,</span>
+   <span>...</span><span>:</span>     <span>"drop_rate"</span><span>:</span> <span>0.1</span><span>,</span>
+   <span>...</span><span>:</span>     <span>"qkv_bias"</span><span>:</span> <span>False</span>
+   <span>...</span><span>:</span> <span>}</span>
+
+<span>In</span> <span>[</span><span>2</span><span>]:</span> <span>from</span><span> </span><span>gpt</span><span> </span><span>import</span> <span>GPTModel</span>
+
+<span>In</span> <span>[</span><span>3</span><span>]:</span> <span>model</span> <span>=</span> <span>GPTModel</span><span>(</span><span>big_train_params</span><span>)</span>
+
+<span>In</span> <span>[</span><span>4</span><span>]:</span> <span>sum</span><span>(</span><span>p</span><span>.</span><span>numel</span><span>()</span> <span>for</span> <span>p</span> <span>in</span> <span>model</span><span>.</span><span>parameters</span><span>())</span>
+<span>Out</span><span>[</span><span>4</span><span>]:</span> <span>163009536</span>
+</code></pre>
+</div>
+
+<p>That matches what we got when working through the book; 163M parameters.  Can we train it?</p>
+
+<h3>The data</h3>
+
+<p>It seems like every AI project starts with the question "what data can we use?"</p>
+
+<p>The original report on GPT-2,
+"<a href="https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf" target="_blank" rel="noopener noreferrer">Language Models are Unsupervised Multitask Learners</a>",
+is frustratingly lacking in details.  However, it does say that they trained it on
+"8 million documents for a total of 40 GB of text".  Now, <a href="https://platform.openai.com/tokenizer" target="_blank" rel="noopener noreferrer">according to OpenAI</a>,
+it's reasonable to assume roughly four characters per token for typical English
+text.  So 40 GB of text is ~10 billion tokens.  That data was essentially gathered
+by scraping pages linked from Reddit that had more than three upvotes there, so was
+reasonably high quality.  Can we get something similar?</p>
+
+<p>Conveniently, Hugging Face host a big dataset called <a href="https://huggingface.co/datasets/HuggingFaceFW/fineweb" target="_blank" rel="noopener noreferrer">FineWeb</a>,
+and that has a 10 billion token "sample" dataset, randomly selected from the full
+18.5 <em>trillion</em> tokens.  So the sample feels like it's order-of-magnitude right.  And
+while reading more about Karpathy's nanochat, I spotted that it uses <a href="https://huggingface.co/datasets/HuggingFaceFW/fineweb-edu" target="_blank" rel="noopener noreferrer">FineWeb-Edu</a>,
+which is a version of FineWeb that contains "only the most educational web pages".</p>
+
+<p>I wrote <a href="https://github.com/gpjt/llm-from-scratch/blob/main/download-fineweb-10b.py" target="_blank" rel="noopener noreferrer">a script to download both of those</a>,
+and kicked it off.  It took about 20 minutes
+for each one (slow wifi in my study, I was getting &lt; 5MB/s); FineWeb's 10B sample took
+up about 29 GiB, and FineWeb-Edu's about 27 GiB.</p>
+
+<p>Time to take a look at them.  The Hugging Face <a href="https://pypi.org/project/datasets/" target="_blank" rel="noopener noreferrer"><code>datasets</code></a> <code>load_dataset</code> function loads up all of the files
+you provide, and you can tell it how to split them up into train/validation/test sets.
+This command just loads up the whole FineWeb one and says "treat it all as the train split",
+which is good enough for now:</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>1</span><span>]:</span> <span>from</span><span> </span><span>datasets</span><span> </span><span>import</span> <span>load_dataset</span>
+
+<span>In</span> <span>[</span><span>2</span><span>]:</span> <span>fw</span> <span>=</span> <span>load_dataset</span><span>(</span>
+   <span>...</span><span>:</span>     <span>"parquet"</span><span>,</span>
+   <span>...</span><span>:</span>     <span>data_files</span><span>=</span><span>"./fineweb/sample/10BT/*.parquet"</span><span>,</span>
+   <span>...</span><span>:</span>     <span>split</span><span>=</span><span>"train"</span>
+   <span>...</span><span>:</span> <span>)</span>
+<span>Generating</span> <span>train</span> <span>split</span><span>:</span> <span>14868862</span> <span>examples</span> <span>[</span><span>01</span><span>:</span><span>53</span><span>,</span> <span>130852.34</span> <span>examples</span><span>/</span><span>s</span><span>]</span>
+<span>Loading</span> <span>dataset</span> <span>shards</span><span>:</span> <span>100</span><span>%|</span><span>███████████████████████████████████████████████████████████████████████████████████████████████████████████</span><span>|</span> <span>102</span><span>/</span><span>102</span> <span>[</span><span>00</span><span>:</span><span>03</span><span>&lt;</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>31.90</span><span>it</span><span>/</span><span>s</span><span>]</span>
+</code></pre>
+</div>
+
+<p>Yikes.  It took 1 minute, 53 seconds to generate the train split.  However, that appears
+to be a one-off cost -- when I accessed it again later using the same code in a different
+Python session, it just did the second "Loading dataset shards" portion, taking three seconds,
+not the generation of the split.  Presumably it caches it.</p>
+
+<p>Anyway, let's see what's in it:</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>3</span><span>]:</span> <span>print</span><span>(</span><span>fw</span><span>)</span>
+<span>Dataset</span><span>({</span>
+    <span>features</span><span>:</span> <span>[</span><span>'text'</span><span>,</span> <span>'id'</span><span>,</span> <span>'dump'</span><span>,</span> <span>'url'</span><span>,</span> <span>'date'</span><span>,</span> <span>'file_path'</span><span>,</span> <span>'language'</span><span>,</span> <span>'language_score'</span><span>,</span> <span>'token_count'</span><span>],</span>
+    <span>num_rows</span><span>:</span> <span>14868862</span>
+<span>})</span>
+</code></pre>
+</div>
+
+<p>Great, so we have 14,868,862 rows, each of which has various bits of information.  Checking the first one's text:</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>7</span><span>]:</span> <span>print</span><span>(</span><span>fw</span><span>[</span><span>0</span><span>][</span><span>"text"</span><span>][:</span><span>500</span><span>])</span>
+<span>|</span><span>Viewing</span> <span>Single</span> <span>Post</span> <span>From</span><span>:</span> <span>Spoilers</span> <span>for</span> <span>the</span> <span>Week</span> <span>of</span> <span>February</span> <span>11</span><span>th</span><span>|</span>
+<span>|</span><span>Lil</span><span>||</span><span>Feb</span> <span>1</span> <span>2013</span><span>,</span> <span>09</span><span>:</span><span>58</span> <span>AM</span><span>|</span>
+<span>Don</span><span>'t care about Chloe/Taniel/Jen-Jen. Don'</span><span>t</span> <span>care</span> <span>about</span> <span>Sami</span><span>,</span> <span>really</span><span>,</span> <span>but</span> <span>hoping</span>
+<span>that</span> <span>we</span> <span>get</span> <span>some</span> <span>good</span> <span>"SAMANTHA GENE!!"</span> <span>Marlena</span> <span>Death</span><span>-</span><span>Stares</span> <span>out</span> <span>of</span> <span>it</span><span>.</span> <span>And</span>
+<span>"newfound"</span> <span>feelings</span><span>.</span> <span>Please</span><span>.</span> <span>If</span> <span>only</span><span>.</span>
+<span>STEFANO</span><span>!!</span> <span>STEFANO</span><span>,</span> <span>STEFANO</span><span>,</span> <span>STEFANO</span><span>!!!!</span> <span>:</span><span>cheer</span><span>:</span>
+<span>|</span><span>Spoilers</span> <span>for</span> <span>the</span> <span>Week</span> <span>of</span> <span>February</span> <span>11</span><span>th</span> <span>·</span> <span>DAYS</span><span>:</span> <span>News</span><span>,</span> <span>Spoilers</span> <span>&amp;</span> <span>Discussion</span><span>|</span>
+</code></pre>
+</div>
+
+<p>Well, for FineWeb, that doesn't look particularly "fine", but I guess it's better than the
+stuff that Karpathy talked about in
+<a href="https://www.dwarkesh.com/p/andrej-karpathy" target="_blank" rel="noopener noreferrer">his recent interview with Dwarkesh Patel</a>:</p>
+
+<blockquote>
+  <p>When you’re looking at a pre-training dataset in the frontier lab and you
+  look at a random internet document, it’s total garbage. I don't even know how
+  this works at all. It’s [stuff] like stock tickers, symbols, it's a huge amount
+  of slop and garbage from like all the corners of the internet</p>
+</blockquote>
+
+<p>Let's take a look at FineWeb-Edu.</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>8</span><span>]:</span> <span>fw_edu</span> <span>=</span> <span>load_dataset</span><span>(</span>
+   <span>...</span><span>:</span>     <span>"parquet"</span><span>,</span>
+   <span>...</span><span>:</span>     <span>data_files</span><span>=</span><span>"./fineweb-edu/sample/10BT/*.parquet"</span><span>,</span>
+   <span>...</span><span>:</span>     <span>split</span><span>=</span><span>"train"</span>
+   <span>...</span><span>:</span> <span>)</span>
+<span>Generating</span> <span>train</span> <span>split</span><span>:</span> <span>9672101</span> <span>examples</span> <span>[</span><span>01</span><span>:</span><span>32</span><span>,</span> <span>104057.34</span> <span>examples</span><span>/</span><span>s</span><span>]</span>
+<span>Loading</span> <span>dataset</span> <span>shards</span><span>:</span> <span>100</span><span>%|</span><span>█████████████████████████████████████████████████████████████████████████████████████████████████████████████</span><span>|</span> <span>98</span><span>/</span><span>98</span> <span>[</span><span>00</span><span>:</span><span>02</span><span>&lt;</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>48.62</span><span>it</span><span>/</span><span>s</span><span>]</span>
+
+<span>In</span> <span>[</span><span>9</span><span>]:</span> <span>print</span><span>(</span><span>fw_edu</span><span>[</span><span>0</span><span>][</span><span>"text"</span><span>][:</span><span>500</span><span>])</span>
+<span>The</span> <span>Independent</span> <span>Jane</span>
+<span>For</span> <span>all</span> <span>the</span> <span>love</span><span>,</span> <span>romance</span> <span>and</span> <span>scandal</span> <span>in</span> <span>Jane</span> <span>Austen</span><span>’</span><span>s</span> <span>books</span><span>,</span> <span>what</span> <span>they</span> <span>are</span>
+<span>really</span> <span>about</span> <span>is</span> <span>freedom</span> <span>and</span> <span>independence</span><span>.</span> <span>Independence</span> <span>of</span> <span>thought</span> <span>and</span> <span>the</span>
+<span>freedom</span> <span>to</span> <span>choose</span><span>.</span>
+<span>Elizabeth</span><span>’</span><span>s</span> <span>refusal</span> <span>of</span> <span>Mr</span><span>.</span> <span>Collins</span> <span>offer</span> <span>of</span> <span>marriage</span> <span>showed</span> <span>an</span> <span>independence</span>
+<span>seldom</span> <span>seen</span> <span>in</span> <span>heroines</span> <span>of</span> <span>the</span> <span>day</span><span>.</span> <span>Her</span> <span>refusal</span> <span>of</span> <span>Mr</span><span>.</span> <span>Darcy</span> <span>while</span> <span>triggered</span> <span>by</span>
+<span>anger</span> <span>showed</span> <span>a</span> <span>level</span> <span>of</span> <span>independence</span> <span>that</span> <span>left</span> <span>him</span> <span>shocked</span> <span>and</span> <span>stunned</span><span>.</span>
+<span>The</span> <span>freedom</span> <span>she</span> <span>exhibited</span> <span>in</span> <span>finally</span> <span>accepting</span> <span>him</span> <span>in</span> <span>direct</span> <span>defiance</span> <span>of</span> <span>Lady</span> <span>Cath</span>
+</code></pre>
+</div>
+
+<p>That looks a lot better!</p>
+
+<p>Now let's take a look at the document lengths in terms of tokens.  There's a
+<code>token_count</code> column, but I don't know which tokeniser that's for, so to be safe we'll
+calculate it ourselves.</p>
+
+<p>How long would
+it take to tokenise every row in FineWeb 10B to check?  Let's tokenise the first
+10,000 of the 14,868,862 that we have, and see how long that would take -- then we
+can work out the estimated time for the whole thing.</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>25</span><span>]:</span> <span>import</span><span> </span><span>tiktoken</span>
+
+<span>In</span> <span>[</span><span>26</span><span>]:</span> <span>import</span><span> </span><span>time</span>
+
+<span>In</span> <span>[</span><span>27</span><span>]:</span> <span>tokenizer</span> <span>=</span> <span>tiktoken</span><span>.</span><span>get_encoding</span><span>(</span><span>"gpt2"</span><span>)</span>
+
+<span>In</span> <span>[</span><span>28</span><span>]:</span> <span>start</span> <span>=</span> <span>time</span><span>.</span><span>time</span><span>()</span>
+    <span>...</span><span>:</span> <span>for</span> <span>entry</span> <span>in</span> <span>fw</span><span>.</span><span>select</span><span>(</span><span>range</span><span>(</span><span>10_000</span><span>)):</span>
+    <span>...</span><span>:</span>     <span>tokenizer</span><span>.</span><span>encode</span><span>(</span><span>entry</span><span>[</span><span>"text"</span><span>])</span>
+    <span>...</span><span>:</span> <span>end</span> <span>=</span> <span>time</span><span>.</span><span>time</span><span>()</span>
+
+<span>In</span> <span>[</span><span>29</span><span>]:</span> <span>end</span> <span>-</span> <span>start</span>
+<span>Out</span><span>[</span><span>29</span><span>]:</span> <span>1.4528205394744873</span>
+
+<span>In</span> <span>[</span><span>30</span><span>]:</span> <span>fw</span>
+<span>Out</span><span>[</span><span>30</span><span>]:</span>
+<span>Dataset</span><span>({</span>
+    <span>features</span><span>:</span> <span>[</span><span>'text'</span><span>,</span> <span>'id'</span><span>,</span> <span>'dump'</span><span>,</span> <span>'url'</span><span>,</span> <span>'date'</span><span>,</span> <span>'file_path'</span><span>,</span> <span>'language'</span><span>,</span> <span>'language_score'</span><span>,</span> <span>'token_count'</span><span>],</span>
+    <span>num_rows</span><span>:</span> <span>14868862</span>
+<span>})</span>
+
+<span>In</span> <span>[</span><span>31</span><span>]:</span> <span>(</span><span>14868862</span> <span>/</span> <span>10_000</span><span>)</span> <span>*</span> <span>1.4528205394744873</span>
+<span>Out</span><span>[</span><span>31</span><span>]:</span> <span>2160.1788112211702</span>
+</code></pre>
+</div>
+
+<p>2,160 seconds or about 36 minutes.  Yikes!</p>
+
+<p>After a bit of digging, though, I found that <code>tiktoken</code> tokenisers can handle batches
+(poorly documented, but it's there <a href="https://github.com/openai/tiktoken/blob/97e49cb/tiktoken/core.py#L175#L175" target="_blank" rel="noopener noreferrer">in the source</a>):</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>45</span><span>]:</span> <span>text_batch</span> <span>=</span> <span>[</span><span>"a"</span><span>,</span> <span>"b"</span><span>,</span> <span>"c"</span><span>]</span>
+
+<span>In</span> <span>[</span><span>46</span><span>]:</span> <span>tokenizer</span><span>.</span><span>encode_batch</span><span>(</span><span>text_batch</span><span>)</span>
+<span>Out</span><span>[</span><span>46</span><span>]:</span> <span>[[</span><span>64</span><span>],</span> <span>[</span><span>65</span><span>],</span> <span>[</span><span>66</span><span>]]</span>
+</code></pre>
+</div>
+
+<p>Also, we can map a function over an entire HF dataset, and that can be made to run
+with multiple processes.  So, we can combine the two:</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>47</span><span>]:</span> <span>import</span><span> </span><span>os</span>
+
+<span>In</span> <span>[</span><span>53</span><span>]:</span> <span>def</span><span> </span><span>add_len</span><span>(</span><span>examples</span><span>):</span>
+    <span>...</span><span>:</span>     <span>texts</span> <span>=</span> <span>[</span><span>t</span> <span>or</span> <span>""</span> <span>for</span> <span>t</span> <span>in</span> <span>examples</span><span>[</span><span>"text"</span><span>]]</span>
+    <span>...</span><span>:</span>     <span>tokens</span> <span>=</span> <span>tokenizer</span><span>.</span><span>encode_batch</span><span>(</span><span>texts</span><span>,</span> <span>disallowed_special</span><span>=</span><span>())</span>
+    <span>...</span><span>:</span>     <span>return</span> <span>{</span><span>"tok_len"</span><span>:</span> <span>[</span><span>len</span><span>(</span><span>t</span><span>)</span> <span>for</span> <span>t</span> <span>in</span> <span>tokens</span><span>]}</span>
+    <span>...</span><span>:</span>
+
+<span>In</span> <span>[</span><span>54</span><span>]:</span> <span>start</span> <span>=</span> <span>time</span><span>.</span><span>time</span><span>()</span>
+    <span>...</span><span>:</span> <span>fw_with_len</span> <span>=</span> <span>fw</span><span>.</span><span>map</span><span>(</span>
+    <span>...</span><span>:</span>     <span>add_len</span><span>,</span>
+    <span>...</span><span>:</span>     <span>batched</span><span>=</span><span>True</span><span>,</span>
+    <span>...</span><span>:</span>     <span>batch_size</span><span>=</span><span>1024</span><span>,</span>
+    <span>...</span><span>:</span>     <span>num_proc</span><span>=</span><span>os</span><span>.</span><span>cpu_count</span><span>(),</span>
+    <span>...</span><span>:</span> <span>)</span>
+    <span>...</span><span>:</span> <span>end</span> <span>=</span> <span>time</span><span>.</span><span>time</span><span>()</span>
+<span>Map</span> <span>(</span><span>num_proc</span><span>=</span><span>24</span><span>):</span> <span>100</span><span>%|</span><span>████████████████████████████████████████████████████████████████████████████████████████████</span><span>|</span> <span>14868862</span><span>/</span><span>14868862</span> <span>[</span><span>03</span><span>:</span><span>15</span><span>&lt;</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>75869.33</span> <span>examples</span><span>/</span><span>s</span><span>]</span>
+</code></pre>
+</div>
+
+<p>Just over three minutes, not too bad!  (The reason the command count
+above jumps from 47 to 53 was that in the first run I didn't have the
+<code>disallowed_special=()</code> in there -- one of the rows in the dataset had <code>&lt;|endoftext|&gt;</code> in
+it, and the tokenizer rejected it.  I'm going to play fast and loose and ignore that for now.)</p>
+
+<p>Now let's see how it added it:</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>56</span><span>]:</span> <span>fw_with_len</span><span>[</span><span>0</span><span>]</span><span>.</span><span>keys</span><span>()</span>
+<span>Out</span><span>[</span><span>56</span><span>]:</span> <span>dict_keys</span><span>([</span><span>'text'</span><span>,</span> <span>'id'</span><span>,</span> <span>'dump'</span><span>,</span> <span>'url'</span><span>,</span> <span>'date'</span><span>,</span> <span>'file_path'</span><span>,</span> <span>'language'</span><span>,</span> <span>'language_score'</span><span>,</span> <span>'token_count'</span><span>,</span> <span>'tok_len'</span><span>])</span>
+
+<span>In</span> <span>[</span><span>57</span><span>]:</span> <span>fw_with_len</span><span>[</span><span>0</span><span>][</span><span>"tok_len"</span><span>]</span>
+<span>Out</span><span>[</span><span>57</span><span>]:</span> <span>142</span>
+
+<span>In</span> <span>[</span><span>58</span><span>]:</span> <span>len</span><span>(</span><span>fw_with_len</span><span>[</span><span>"tok_len"</span><span>])</span>
+<span>Out</span><span>[</span><span>58</span><span>]:</span> <span>14868862</span>
+
+<span>In</span> <span>[</span><span>59</span><span>]:</span> <span>fw_with_len</span><span>[</span><span>"tok_len"</span><span>][</span><span>0</span><span>]</span>
+<span>Out</span><span>[</span><span>59</span><span>]:</span> <span>142</span>
+</code></pre>
+</div>
+
+<p>Cool!  We've added a <code>tok_len</code> column with the number of GPT-2 tokens for each row, and we
+can extract what amounts to a list of those values.  Let's plot them as a histogram.</p>
+
+<p>Trying to do it directly -- that is, just doing</p>
+
+<div>
+<pre><span></span><code><span>ax</span><span>.</span><span>hist</span><span>(</span><span>fw_with_len</span><span>[</span><span>"tok_len"</span><span>],</span> <span>bins</span><span>=</span><span>bins</span><span>)</span>
+</code></pre>
+</div>
+
+<p>...seems to make MatPlotLib very unhappy, and my interpreter crashed with an OOM -- I think it might be trying to load all
+of the dataset -- text, IDs, etc -- into RAM in one go.</p>
+
+<p>So I started a fresh one and did the stuff to load it and annotate it with token lengths
+again -- weirdly, this time the mapping only took 10 seconds or so!  That was strange,
+I'll need to look into that.  Perhaps the earlier command added the <code>tok_len</code> column to the files on
+disk?</p>
+
+<p>To work around the memory issue, I converted the <code>tok_len</code> column from the dataset to an actual list:</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>11</span><span>]:</span> <span>lengths</span> <span>=</span> <span>[</span><span>n</span> <span>for</span> <span>n</span> <span>in</span> <span>fw_with_len</span><span>[</span><span>"tok_len"</span><span>]]</span>
+</code></pre>
+</div>
+
+<p>That took ten or twenty seconds.  Let's then try the plot again (full code this time):</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>19</span><span>]:</span> <span>import</span><span> </span><span>numpy</span><span> </span><span>as</span><span> </span><span>np</span>
+    <span>...</span><span>:</span> <span>import</span><span> </span><span>matplotlib.pyplot</span><span> </span><span>as</span><span> </span><span>plt</span>
+    <span>...</span><span>:</span>
+    <span>...</span><span>:</span> <span>bins</span> <span>=</span> <span>np</span><span>.</span><span>arange</span><span>(</span><span>0</span><span>,</span> <span>2048</span> <span>+</span> <span>16</span><span>,</span> <span>16</span><span>)</span>
+    <span>...</span><span>:</span>
+    <span>...</span><span>:</span> <span>plt</span><span>.</span><span>xkcd</span><span>()</span>
+    <span>...</span><span>:</span> <span>plt</span><span>.</span><span>rcParams</span><span>[</span><span>'font.family'</span><span>]</span> <span>=</span> <span>"xkcd"</span>
+    <span>...</span><span>:</span> <span>fig</span> <span>=</span> <span>plt</span><span>.</span><span>figure</span><span>(</span><span>figsize</span><span>=</span><span>(</span><span>10</span><span>,</span> <span>6</span><span>))</span>
+    <span>...</span><span>:</span> <span>ax</span> <span>=</span> <span>plt</span><span>.</span><span>gca</span><span>()</span>
+    <span>...</span><span>:</span>
+    <span>...</span><span>:</span> <span>ax</span><span>.</span><span>hist</span><span>(</span><span>lengths</span><span>,</span> <span>bins</span><span>=</span><span>bins</span><span>)</span>
+    <span>...</span><span>:</span> <span>ax</span><span>.</span><span>set_xlabel</span><span>(</span><span>"TOKENIZED LENGTH (GPT-2 TOKENS)"</span><span>)</span>
+    <span>...</span><span>:</span> <span>ax</span><span>.</span><span>set_ylabel</span><span>(</span><span>"COUNT"</span><span>)</span>
+    <span>...</span><span>:</span> <span>ax</span><span>.</span><span>set_title</span><span>(</span><span>"FINEWEB DISTRIBUTION OF TOKENIZED LENGTHS"</span><span>)</span>
+    <span>...</span><span>:</span>
+    <span>...</span><span>:</span> <span>mean_len</span> <span>=</span> <span>float</span><span>(</span><span>np</span><span>.</span><span>mean</span><span>(</span><span>lengths</span><span>))</span>
+    <span>...</span><span>:</span> <span>median_len</span> <span>=</span> <span>float</span><span>(</span><span>np</span><span>.</span><span>median</span><span>(</span><span>lengths</span><span>))</span>
+    <span>...</span><span>:</span> <span>h_mean</span> <span>=</span> <span>ax</span><span>.</span><span>axvline</span><span>(</span><span>mean_len</span><span>,</span> <span>linestyle</span><span>=</span><span>"--"</span><span>,</span> <span>label</span><span>=</span><span>f</span><span>"MEAN = </span><span>{</span><span>mean_len</span><span>:</span><span>.1f</span><span>}</span><span>"</span><span>)</span>
+    <span>...</span><span>:</span> <span>h_med</span>  <span>=</span> <span>ax</span><span>.</span><span>axvline</span><span>(</span><span>median_len</span><span>,</span> <span>linestyle</span><span>=</span><span>":"</span><span>,</span>  <span>label</span><span>=</span><span>f</span><span>"MEDIAN = </span><span>{</span><span>median_len</span><span>:</span><span>.1f</span><span>}</span><span>"</span><span>)</span>
+    <span>...</span><span>:</span> <span>ax</span><span>.</span><span>legend</span><span>(</span><span>handles</span><span>=</span><span>[</span><span>h_mean</span><span>,</span> <span>h_med</span><span>])</span>
+    <span>...</span><span>:</span>
+    <span>...</span><span>:</span> <span>ax</span><span>.</span><span>grid</span><span>(</span><span>True</span><span>,</span> <span>axis</span><span>=</span><span>"y"</span><span>,</span> <span>alpha</span><span>=</span><span>0.3</span><span>)</span>
+    <span>...</span><span>:</span> <span>plt</span><span>.</span><span>tight_layout</span><span>()</span>
+    <span>...</span><span>:</span> <span>plt</span><span>.</span><span>savefig</span><span>(</span><span>"fineweb-token-length-distribution.png"</span><span>)</span>
+</code></pre>
+</div>
+
+<p>That took about 11s to run, and the result is this:</p>
+
+<p><img src="/post-assets/llm-from-scratch-28-training-a-base-model-from-scratch/fineweb-token-length-distribution.png" alt="Histogram of GPT-2 token count across FineWeb samples" title="Histogram of GPT-2 token count across FineWeb samples" /></p>
+
+<p>That's really promising!  The bulk of them are less than our 1,024 token sequence length. <sup><a href="#fn-1" target="_blank" rel="noopener noreferrer">1</a></sup>
+If we present each row in the dataset as a stand-alone training sample, cropping them
+when necessary, perhaps we won't lose too much data?  Let's see.</p>
+
+<p>First step, how many tokens are there in total?</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>20</span><span>]:</span> <span>sum</span><span>(</span><span>lengths</span><span>)</span>
+<span>Out</span><span>[</span><span>20</span><span>]:</span> <span>10336315397</span>
+</code></pre>
+</div>
+
+<p>Nice, about 10B, as expected.  How many tokens would we have if we cropped them to the default GPT-2 context length
+of 1,024?</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>21</span><span>]:</span> <span>sum</span><span>(</span><span>l</span> <span>if</span> <span>l</span> <span>&lt;</span> <span>1024</span> <span>else</span> <span>1024</span> <span>for</span> <span>l</span> <span>in</span> <span>lengths</span><span>)</span>
+<span>Out</span><span>[</span><span>21</span><span>]:</span> <span>7354541756</span>
+</code></pre>
+</div>
+
+<p>Ouch, 7.3B. That's quite a reduction:</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>22</span><span>]:</span> <span>7354541756</span> <span>/</span> <span>10336315397</span>
+<span>Out</span><span>[</span><span>22</span><span>]:</span> <span>0.7115245107685639</span>
+</code></pre>
+</div>
+
+<p>So we're losing 29% of our tokens by that cropping.  That's from curtailing just
+16% of the sequences:</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>26</span><span>]:</span> <span>len</span><span>([</span><span>l</span> <span>for</span> <span>l</span> <span>in</span> <span>lengths</span> <span>if</span> <span>l</span> <span>&gt;</span> <span>1024</span><span>])</span>
+<span>Out</span><span>[</span><span>26</span><span>]:</span> <span>2438899</span>
+
+<span>In</span> <span>[</span><span>27</span><span>]:</span> <span>len</span><span>(</span><span>lengths</span><span>)</span>
+<span>Out</span><span>[</span><span>27</span><span>]:</span> <span>14868862</span>
+
+<span>In</span> <span>[</span><span>28</span><span>]:</span> <span>2438899</span> <span>/</span> <span>14868862</span>
+<span>Out</span><span>[</span><span>28</span><span>]:</span> <span>0.1640272806351959</span>
+</code></pre>
+</div>
+
+<p>That's not great.</p>
+
+<p>I feel that we have two options here:</p>
+
+<ol>
+<li>Crop all of the input sequences -- that is, each row in the dataset -- so that
+each one is no more than our 1,024 sequence length.  Then we can pad them out
+with end-of-sequence tokens (as is the standard) so that they're all 1,024.  This
+will lose us quite a lot of tokens, but has the big benefit of being easy.</li>
+<li>Treat the corpus as, essentially, one long document, with end-of-sequence delimiters
+between each row, then split that up into 1,024-token sequences.
+Doing it this way would mean we'd
+use all of our training data.  But it would be more complicated, especially
+if we hit memory constraints.</li>
+</ol>
+
+<p>At this point in the experiment, I'm going to keep both options open.  I'm inclined
+towards the latter (I believe it's closer to what the real GPT-2 train did), but
+I'm not sure.</p>
+
+<p>Anyway, we're scoping things out here, so let's move on.</p>
+
+<h3>Epochs</h3>
+
+<p>After looking at the data, I've thought a bit more about this.  I'd previously been thinking
+in terms of training across all of the tokens in the dataset; we'd work our way through the 10B
+tokens, and then we'd be done.</p>
+
+<p>But when training a model, you do multiple epochs, normally -- you run through the
+dataset once, updating your gradients as you go, then run through it again likewise,
+and eventually you stop when your validation loss starts rising.</p>
+
+<p>I think that because I'd read that LLMs are normally trained on just one epoch
+these days, I'd kind of internalised that we only need to do one.  But it wasn't the
+case in 2019 when GPT-2
+came out.  They had less data -- just 10B tokens or so, compared to insanely huge
+datasets like the full FineWeb (not the 10B one we've been looking at -- the 18.5T full one), so they
+would have trained it for some number of epochs.</p>
+
+<p>How many?  That's another case where the GPT-2 paper is annoyingly light.
+<a href="https://wandb.ai/bkkaggle/lm-finetuning/reports/Pretraining-a-124-M-Parameter-GPT-2-Language-Model--VmlldzoyMjg4NzA" target="_blank" rel="noopener noreferrer">This report</a>
+says in the "Replicating GPT-2" section that OpenAI trained it for 800k iterations with a batch size of 512.  Plugging
+in a sequence length of 1024, that gives us this many tokens:</p>
+
+800,000×512×1,024=419,430,400,000
+
+<p>Over 419B tokens!</p>
+
+<p>Now, if we believe that their dataset was 10B tokens, then we can work out how many epochs
+that came to:</p>
+
+419,430,400,000/10,000,000,000=41.94
+
+<p>The same report says that they -- as in, the report authors -- make that "around a total of 60 epochs through the training set" --
+I believe that the training set they're talking about could well be slightly shorter than
+the original GPT-2 one -- the GPT-2 authors didn't release their own, which is called "WebText", so the report's
+author is using a different one that tries to replicate it, <a href="https://skylion007.github.io/OpenWebTextCorpus/" target="_blank" rel="noopener noreferrer">OpenWebText</a>.</p>
+
+<p>That sounds expensive; even without knowing how many tokens per second we can train
+for, 40-odd epochs of 10B tokens each sounds like it would take a long time.  Are there
+any other comparison points that might tell us how long to train for?</p>
+
+<p>Well, there's a "Chinchilla heuristic" that I've heard of, which says that you should train on about 20 tokens
+per model parameter.  I spent some time reading into where that comes from; originally
+it's in "<a href="https://arxiv.org/abs/2203.15556" target="_blank" rel="noopener noreferrer">Training Compute-Optimal Large Language Models</a>"
+from Google DeepMind, and it's an interesting paper, and is surprisingly easy to read,
+with a few bits of maths that get a bit hairy (but aren't required to get a good-enough
+feel for what they're saying).  I recommend you take a look.</p>
+
+<p>It was written in 2022, and the authors felt that people were scaling up models
+a lot, but weren't increasing the number of tokens that they used for training enough.
+So, they trained a huge number of models, trying to answer the question: "given a
+particular budget in training FLOPs, what is the optimal balance of training tokens
+versus parameters to make sure you're using those FLOPs most efficiently?".  They
+were arguing against the method taken in a particular paper, where another team had trained a model (called Gopher)
+on significantly fewer tokens than they thought optimal.</p>
+
+<p>The number of FLOPs used to train a model is linear with both the number of parameters
+and the number of tokens you train it on, so if you get 2x the number of FLOPs that
+you had before, you can either train the same model on twice as many tokens, or
+you can double its size.  Which is better?  Their conclusion was that you should
+actually scale both parameters and tokens up by the same amount -- that is, in the 2x
+case you'd want to have 2 times both the parameters and tokens, which
+would double your FLOPs and get you better performance.</p>
+
+<p>As you can probably see, by doing this they indirectly
+worked out an optimal number of tokens to train a particular size of model for.
+They don't state the "20x" heuristic themselves, but it's pretty clear in table 3
+in the paper, where they give a number of model sizes and the optimal number of tokens
+for each.</p>
+
+<p>Now, this number is not the number of tokens you need to train for to get the <em>best</em>
+model you can for a particular number of parameters; a model of a given size
+can always be trained more and will (hopefully) get better.  But it tells you when you've
+trained on enough tokens that you could get better results by training a larger model
+than you have right now.</p>
+
+<p>They're implicitly assuming
+that models can get as large as you want, which of course is not the case -- in reality,
+you're going to be targeting a particular model size, the size that can fit on your
+training hardware (or more likely with production models, the size that can fit on
+your planned inference hardware).</p>
+
+<p>But interestingly, looking at the <a href="https://github.com/karpathy/nanochat/blob/master/README.md" target="_blank" rel="noopener noreferrer">README.md for Karpathy's nanochat</a>
+project, he trained his 1.9B "d32" model on 38B tokens -- exactly 20x.  And
+if you look at the <a href="https://github.com/karpathy/nanochat/blob/master/speedrun.sh" target="_blank" rel="noopener noreferrer"><code>speedrun.sh</code></a>
+script in the same repo, he explicitly says that he's training for 20x parameters
+for the smaller <code>d20</code> model:</p>
+
+<div>
+<pre><span></span><code><span># The d20 model is 561M parameters.</span>
+<span># Chinchilla says #tokens = 20X #params, so we need 561e6 * 20 = 11.2B tokens.</span>
+</code></pre>
+</div>
+
+<p>If Andrej Karpathy thinks that training for Chinchilla-optimality is the right way
+to go, then who am I to disagree?  ;-)</p>
+
+<p>More seriously, perhaps the better quality of the dataset makes this a reasonable
+thing to do.  From the GPT-2 paper, their description of how they got the data:</p>
+
+<blockquote>
+  <p>...we created a new web scrape which emphasizes
+  document quality. To do this we only scraped web pages
+  which have been curated/filtered by humans. Manually
+  filtering a full web scrape would be exceptionally expensive
+  so as a starting point, we scraped all outbound links from
+  Reddit, a social media platform, which received at least 3
+  karma. This can be thought of as a heuristic indicator for
+  whether other users found the link interesting, educational,
+  or just funny.</p>
+</blockquote>
+
+<p>That's a clever trick, but I believe that FineWeb is much more carefully filtered and improved
+than the WebText dataset they got from that.  Back in 2019, they had to do everything from scratch -- find appropriate
+ways to get data, filter it, and so on.  Now we can just download stuff from Hugging Face.
+So maybe Chinchilla-optimal is enough.</p>
+
+<p>Anyway, we have 163,009,536 parameters, so on that basis, let's train for:</p>
+
+163,009,536×20=3,260,190,720
+
+<p>...tokens.  (I'll just use 3.2B from now on, but that's the actual number I mean.)</p>
+
+<p>That's pretty cool!  We have more than that number of tokens already in our
+FineWeb 10B sample, so we can do a single-epoch training run.</p>
+
+<p>So the question is -- is that even doable on my hardware?</p>
+
+<h3>Tokens per second</h3>
+
+<p>It all hinges on how many tokens per second we can train at.  A good way to check this is to write a throwaway "trainer".  We can use that to
+work out what our maximum batch size on the RTX 3090's 24 GiB of VRAM, then run a bunch
+of batches through -- a forward and backward pass for each -- and see how many
+we get.</p>
+
+<p>This won't estimate how much time we'll spend validating the model, of course.  But
+my gut is telling me that we should spend no more than 5% of our training time running
+validations, so we can later on do a similar test, eval mode, forward pass only with no gradient
+tracking, and use that to work out how many tokens should be in the validation set.</p>
+
+<p>So, let's estimate training speed.  <a href="https://github.com/gpjt/llm-from-scratch/blob/36196755f850adeba348d15e2f4f81e87ad4d14f/measure-tokens-per-second.py" target="_blank" rel="noopener noreferrer">This code</a>
+gets an estimate of tokens/second at different batch sizes.
+Hopefully it's clear enough to not need an in-depth explanation.  An outline:</p>
+
+<ul>
+<li>We load enough GPT-2 tokens from FineWeb for <code>NUM_BATCHES</code> batches of <code>MAX_BATCH_SIZE</code> sequences each,
+every one of those sequences being <code>SEQ_LENGTH</code> long (plus one extra token for the targets we're
+comparing them to).  Note that we're not bothering to separate them with anything
+for this test.</li>
+<li>We then loop over batch sizes from <code>1</code> to <code>MAX_BATCH_SIZE</code>.</li>
+<li>Then we create our model and put it on the CUDA device.  We do this for each
+batch size rather than creating one and then using it for all of them so that they're all
+starting from the same point -- the <code>torch.manual_seed</code> should make sure that they're
+identical.</li>
+<li>For each batch size, we create input and output batches as tensors -- note that
+we're not putting these on CUDA yet, I wanted to do that in the training loop to
+mirror what a real training loop will have to do.  When we're training with
+3.2B tokens then having them all on CUDA will be a waste of VRAM, so we'll be
+pushing a batch there for each iteration.</li>
+<li>We do a stripped-down training loop -- for each batch, put the inputs and outputs
+onto CUDA, then a forward pass, work out the loss, backward pass, and optimiser
+step.  We do the same <code>NUM_BATCHES</code> iterations per batch size.</li>
+<li>Finally, we print out the number of tokens we trained on for this batch size, how long it took, and the
+number of tokens per second.</li>
+</ul>
+
+<p>Here's what it prints out:</p>
+
+<div>
+<pre><span></span><code><span>Loading dataset shards: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████| 102/102 [00:00&lt;00:00, 362.71it/s]</span>
+<span>Testing with batch size 1</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:10&lt;00:00,  9.77it/s]</span>
+<span>Done, trained on 102,400 tokens in 10.2348s.</span>
+<span>Tokens per second: 10,005</span>
+
+<span>Testing with batch size 2</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:17&lt;00:00,  5.60it/s]</span>
+<span>Done, trained on 204,800 tokens in 17.8631s.</span>
+<span>Tokens per second: 11,464</span>
+
+<span>Testing with batch size 3</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:25&lt;00:00,  3.93it/s]</span>
+<span>Done, trained on 307,200 tokens in 25.4152s.</span>
+<span>Tokens per second: 12,087</span>
+
+<span>Testing with batch size 4</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:33&lt;00:00,  3.02it/s]</span>
+<span>Done, trained on 409,600 tokens in 33.1185s.</span>
+<span>Tokens per second: 12,367</span>
+
+<span>Testing with batch size 5</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:40&lt;00:00,  2.46it/s]</span>
+<span>Done, trained on 512,000 tokens in 40.6351s.</span>
+<span>Tokens per second: 12,599</span>
+
+<span>Testing with batch size 6</span>
+<span>  0%|                                                                                                                                             | 0/100 [00:00&lt;?, ?it/s]</span>
+<span>Traceback (most recent call last):</span>
+<span>  File "/home/giles/Dev/llm-from-scratch/measure-tokens-per-second.py", line 89, in &lt;module&gt;</span>
+<span>    main()</span>
+<span>    ~~~~^^</span>
+<span>...</span>
+<span>torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.15 GiB. GPU 0 has a total capacity of 23.56 GiB of which 269.19 MiB is free. Including non-PyTorch memory, this process has 20.99 GiB memory in use. Of the allocated memory 18.67 GiB is allocated by PyTorch, and 2.02 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)</span>
+</code></pre>
+</div>
+
+<p>So we can see that it gets faster as we increase the batch size, which makes sense
+because we're handling sequences in parallel, but it does flatten off a bit, which
+makes sense because there's a limit to how much parallelism we can do, even on a GPU.</p>
+
+<p>Let's see how that fits in with the different training sizes we looked at above:</p>
+
+<ul>
+<li>Chinchilla heuristic, 20x parameters -- 3.2B tokens: 247,850 seconds, which is just less than three days</li>
+<li>Estimated GPT-2 train, 419B tokens: 32,452,947 seconds, which is just over a year.</li>
+</ul>
+
+<p>OK.  We're definitely not going to be able to train this thing the GPT-2 way!  I
+expected that to be the case, but now we have a solid proof of that.</p>
+
+<p>But the three-day Chinchilla-optimal train actually sounds doable!  I'm heading to London
+to visit family soon, so won't be using my home PC.  With a bit of help from
+<a href="https://tailscale.com/" target="_blank" rel="noopener noreferrer">Tailscale</a> I'll be able to log into it from my laptop, though,
+so I can potentially nurse a run through.</p>
+
+<p>Can we make it any faster?</p>
+
+<p>Now, when doing the fine-tuning work, I found that you could generally speed things
+up by doing everything in 16-bit rather than 32-bit.  Intuitively that makes sense --
+lower-precision numbers, fewer bits, means less work for the GPU doing the various
+multiplications and additions that are involved in our train.</p>
+
+<p>Working with ChatGPT, I found a couple of ways to take advantage of that.  Firstly,
+using TF32.</p>
+
+<p>The normal float32 format uses 8 bits for the exponent, and 23 for the mantissa.  If
+you haven't looked into how floats are represented in memory (or if you've forgotten),
+that means that, using m to mean the mantissa and x the exponent, the numbers are represented
+in memory as</p>
+
+m×2x
+
+<p>TF32 is messier; it has the same exponent size -- and thus the same range -- as float32, but it essentially ignores
+the lower 13 bits of the mantissa.  So it takes up the same amount of memory, but is lower-precision,
+which means that calculations can be faster.  Most importantly, cards like the RTX 3090
+have dedicated "tensor cores" -- as opposed to the normal CUDA cores that do normal
+matrix multiplications -- and they operate in TF32.  Unsurprisingly, "TF32" is
+"tensor float 32-bit".</p>
+
+<p>The PyTorch <a href="https://docs.pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html" target="_blank" rel="noopener noreferrer"><code>set_float32_matmul_precision</code></a>
+allows you to tell it what precision to use for matrix multiplications; the default is
+<code>"highest"</code>, which means "use float32 all of the time", so you're stuck using just the
+CUDA cores.  If, instead, you set it to
+<code>"high"</code>, then it will use TF32 if the hardware supports it and it has the appropriate
+kernels available.  So that will let us use the tensor cores.</p>
+
+<p>I added this to the code above just above the loop over the different batch sizes:</p>
+
+<pre><code>torch.set_float32_matmul_precision("high")
+</code></pre>
+
+<p>Let it run, and:</p>
+
+<div>
+<pre><span></span><code><span>Testing with batch size 1</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:08&lt;00:00, 11.66it/s]</span>
+<span>Done, trained on 102,400 tokens in 8.5799s.</span>
+<span>Tokens per second: 11,934</span>
+
+<span>Testing with batch size 2</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:15&lt;00:00,  6.65it/s]</span>
+<span>Done, trained on 204,800 tokens in 15.0287s.</span>
+<span>Tokens per second: 13,627</span>
+
+<span>Testing with batch size 3</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:20&lt;00:00,  4.85it/s]</span>
+<span>Done, trained on 307,200 tokens in 20.6374s.</span>
+<span>Tokens per second: 14,885</span>
+
+<span>Testing with batch size 4</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:27&lt;00:00,  3.61it/s]</span>
+<span>Done, trained on 409,600 tokens in 27.7148s.</span>
+<span>Tokens per second: 14,779</span>
+
+<span>Testing with batch size 5</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:33&lt;00:00,  3.01it/s]</span>
+<span>Done, trained on 512,000 tokens in 33.2420s.</span>
+<span>Tokens per second: 15,402</span>
+</code></pre>
+</div>
+
+<p>That's a 22% speedup!  Of course, the precision of the training isn't as good.  But
+given that many modern models are trained at 16-bit (I've seen suggestions that
+some are even trained as low as 4-bit) then that shouldn't matter.</p>
+
+<p>Let's see whether we can train in 16-bit instead.  PyTorch has a smart mode where
+you can tell it "use 16-bit where it makes sense, otherwise use 32-bit" -- AMP, which
+stands for "Automatic Mixed Precision".  <a href="https://docs.pytorch.org/tutorials/recipes/recipes/amp_recipe.html" target="_blank" rel="noopener noreferrer">There's a great recipe for how to use it in the docs</a>,
+so let's use that.  We need to create a <code>Scaler</code> object to handle scaling parameters
+from 16-bit to 32-bit as needed -- we can re-use that across all batch sizes
+so we can create it just before the loop:</p>
+
+<div>
+<pre><span></span><code>    <span>scaler</span> <span>=</span> <span>torch</span><span>.</span><span>amp</span><span>.</span><span>GradScaler</span><span>()</span>
+</code></pre>
+</div>
+
+<p>...then we need to replace this core part of our training loop:</p>
+
+<div>
+<pre><span></span><code>            <span>logits</span> <span>=</span> <span>model</span><span>(</span><span>inputs</span><span>)</span>
+            <span>loss</span> <span>=</span> <span>torch</span><span>.</span><span>nn</span><span>.</span><span>functional</span><span>.</span><span>cross_entropy</span><span>(</span>
+                <span>logits</span><span>.</span><span>flatten</span><span>(</span><span>0</span><span>,</span> <span>1</span><span>),</span> <span>outputs</span><span>.</span><span>flatten</span><span>()</span>
+            <span>)</span>
+            <span>loss</span><span>.</span><span>backward</span><span>()</span>
+            <span>optimizer</span><span>.</span><span>step</span><span>()</span>
+</code></pre>
+</div>
+
+<p>...with some code to use AMP and that scaler -- basically we use a context manager
+to switch it on when we're doing the forward pass and work out the loss, and then use the scaler
+to manage the backward pass and the optimiser's step:</p>
+
+<div>
+<pre><span></span><code>            <span>with</span> <span>torch</span><span>.</span><span>amp</span><span>.</span><span>autocast</span><span>(</span><span>device_type</span><span>=</span><span>device</span><span>.</span><span>type</span><span>,</span> <span>dtype</span><span>=</span><span>torch</span><span>.</span><span>float16</span><span>):</span>
+                <span>logits</span> <span>=</span> <span>model</span><span>(</span><span>inputs</span><span>)</span>
+                <span>loss</span> <span>=</span> <span>torch</span><span>.</span><span>nn</span><span>.</span><span>functional</span><span>.</span><span>cross_entropy</span><span>(</span>
+                    <span>logits</span><span>.</span><span>flatten</span><span>(</span><span>0</span><span>,</span> <span>1</span><span>),</span> <span>outputs</span><span>.</span><span>flatten</span><span>()</span>
+                <span>)</span>
+            <span>scaler</span><span>.</span><span>scale</span><span>(</span><span>loss</span><span>)</span><span>.</span><span>backward</span><span>()</span>
+            <span>scaler</span><span>.</span><span>step</span><span>(</span><span>optimizer</span><span>)</span>
+            <span>scaler</span><span>.</span><span>update</span><span>()</span>
+</code></pre>
+</div>
+
+<p>Running that gives us these results:</p>
+
+<div>
+<pre><span></span><code><span>(llm-from-scratch)</span> <span>giles@perry:~/Dev/llm-from-scratch (main)$ </span>python<span> </span>measure-tokens-per-second.py
+<span>Loading dataset shards: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████| 102/102 [00:00&lt;00:00, 340.25it/s]</span>
+<span>Testing with batch size 1</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:07&lt;00:00, 13.38it/s]</span>
+<span>Done, trained on 102,400 tokens in 7.4764s.</span>
+<span>Tokens per second: 13,696</span>
+
+<span>Testing with batch size 2</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:12&lt;00:00,  8.11it/s]</span>
+<span>Done, trained on 204,800 tokens in 12.3286s.</span>
+<span>Tokens per second: 16,611</span>
+
+<span>Testing with batch size 3</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:16&lt;00:00,  6.02it/s]</span>
+<span>Done, trained on 307,200 tokens in 16.6238s.</span>
+<span>Tokens per second: 18,479</span>
+
+<span>Testing with batch size 4</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:21&lt;00:00,  4.67it/s]</span>
+<span>Done, trained on 409,600 tokens in 21.3936s.</span>
+<span>Tokens per second: 19,145</span>
+
+<span>Testing with batch size 5</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:25&lt;00:00,  3.87it/s]</span>
+<span>Done, trained on 512,000 tokens in 25.8624s.</span>
+<span>Tokens per second: 19,797</span>
+
+<span>Testing with batch size 6</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:30&lt;00:00,  3.25it/s]</span>
+<span>Done, trained on 614,400 tokens in 30.7239s.</span>
+<span>Tokens per second: 19,997</span>
+
+<span>Testing with batch size 7</span>
+<span>  0%|                                                                                                                                             | 0/100 [00:00&lt;?, ?it/s]</span>
+<span>Traceback (most recent call last):</span>
+<span>  File "/home/giles/Dev/llm-from-scratch/measure-tokens-per-second.py", line 94, in &lt;module&gt;</span>
+<span>    main()</span>
+</code></pre>
+</div>
+
+<p>Wow!  With that we can train on 3.2B tokens in about 160,000 seconds, which is 44 hours.
+That's definitely doable.</p>
+
+<p>Now, what happens if we remove the</p>
+
+<div>
+<pre><span></span><code><span>torch</span><span>.</span><span>set_float32_matmul_precision</span><span>(</span><span>"high"</span><span>)</span>
+</code></pre>
+</div>
+
+<p>...so that we're using AMP, but not the tensor cores?</p>
+
+<div>
+<pre><span></span><code><span>(llm-from-scratch)</span> <span>giles@perry:~/Dev/llm-from-scratch (main)$ </span>python<span> </span>measure-tokens-per-second.py
+<span>Loading dataset shards: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████| 102/102 [00:00&lt;00:00, 365.94it/s]</span>
+<span>Testing with batch size 1</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:07&lt;00:00, 13.03it/s]</span>
+<span>Done, trained on 102,400 tokens in 7.6736s.</span>
+<span>Tokens per second: 13,344</span>
+
+<span>Testing with batch size 2</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:12&lt;00:00,  8.04it/s]</span>
+<span>Done, trained on 204,800 tokens in 12.4383s.</span>
+<span>Tokens per second: 16,465</span>
+
+<span>Testing with batch size 3</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:16&lt;00:00,  5.96it/s]</span>
+<span>Done, trained on 307,200 tokens in 16.7851s.</span>
+<span>Tokens per second: 18,301</span>
+
+<span>Testing with batch size 4</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:21&lt;00:00,  4.64it/s]</span>
+<span>Done, trained on 409,600 tokens in 21.5571s.</span>
+<span>Tokens per second: 19,000</span>
+
+<span>Testing with batch size 5</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:25&lt;00:00,  3.85it/s]</span>
+<span>Done, trained on 512,000 tokens in 25.9610s.</span>
+<span>Tokens per second: 19,721</span>
+
+<span>Testing with batch size 6</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:30&lt;00:00,  3.24it/s]</span>
+<span>Done, trained on 614,400 tokens in 30.8405s.</span>
+<span>Tokens per second: 19,921</span>
+
+<span>Testing with batch size 7</span>
+<span>  0%|                                                                                                                                             | 0/100 [00:00&lt;?, ?it/s]</span>
+<span>Traceback (most recent call last):</span>
+<span>  File "/home/giles/Dev/llm-from-scratch/measure-tokens-per-second.py", line 93, in &lt;module&gt;</span>
+<span>    main()</span>
+<span>    ~~~~^^</span>
+<span>  File "/home/giles/Dev/llm-from-scratch/measure-tokens-per-second.py", line 81, in main</span>
+</code></pre>
+</div>
+
+<p>It's basically the same.  300tps slower at the start, down to 70 at the end.
+Still, it looks better to keep the "high" precision in place, rather than the "highest".</p>
+
+<p>Right.  We have the beginnings of a training loop that <em>should</em> be able to let us
+run a Chinchilla-optimal train on a GPT-2 small sized model in 44 hours, and I have the
+time to do it.  And it looks like a batch size of six is what we can fit into the
+RTX 3090's 24 GiB of VRAM.</p>
+
+<p>What else are we going to need to build something to do this?</p>
+
+<h3>Checkpointing</h3>
+
+<p>If I want to do a long training run, then stuff might go wrong -- it might crash for
+some reason.
+So we're going to need to save checkpoints as we go and be able to restart training
+from those checkpoints.</p>
+
+<p>In those, we're going to need to save the model and the
+optimiser's state, plus some kind of info about how far through the dataset we are.
+We should keep training and validation losses too, so that we can easily chart and
+recover our progress, and according to <a href="https://discuss.pytorch.org/t/do-i-need-to-save-the-state-dict-oof-gradscaler/95718/4" target="_blank" rel="noopener noreferrer">this forum post</a>
+we're going to need to save the scaler (which makes me think that it actually has state in
+it, so we probably should have used a fresh scaler for each batch size in the
+above -- let's hope that doesn't prove to be a problem [note from later: it wasn't]).</p>
+
+<p>I wrote a <a href="https://github.com/gpjt/llm-from-scratch/blob/main/test-checkpointing.py" target="_blank" rel="noopener noreferrer">script</a> to create a model, train it for a bit, and then dump out all of that
+apart from the metadata (which I reckon is going to be less than 1kB).  I wanted to
+use the <a href="https://huggingface.co/docs/safetensors/en/index" target="_blank" rel="noopener noreferrer">safetensors</a> format for
+all of it, but unfortunately I couldn't get it to work for the optimiser or the scaler,
+so had to use <code>torch.save</code> for those (which I don't like because it uses <a href="https://docs.python.org/3/library/pickle.html" target="_blank" rel="noopener noreferrer">pickle</a>,
+which introduces serious problems if you ever want to move files from machine to machine,
+as the Python and library versions need to match perfectly).  Ah well.  Here's what
+the test checkpoint looks like:</p>
+
+<div>
+<pre><span></span><code><span>(llm-from-scratch)</span> <span>giles@perry:~/Dev/llm-from-scratch (main)$ </span>du<span> </span>-sh<span> </span>test-checkpoint
+<span>1.9G    test-checkpoint</span>
+<span>(llm-from-scratch)</span> <span>giles@perry:~/Dev/llm-from-scratch (main)$ </span>ls<span> </span>-lh<span> </span>test-checkpoint
+<span>total 1.9G</span>
+<span>-rw-r--r-- 1 giles giles 670M Nov 11 15:21 model.safetensors</span>
+<span>-rw-r--r-- 1 giles giles 1.3G Nov 11 15:21 optimizer.pt</span>
+<span>-rw-r--r-- 1 giles giles 1.4K Nov 11 15:21 scaler.pt</span>
+</code></pre>
+</div>
+
+<p>That's huge!  And it's almost all the optimiser.  From what I read, that stores two numbers per parameter, so
+it makes sense that it's double the size of the model weights.  And at 32-bit,
+4 bytes per param, then 670MiB for the model is sane.</p>
+
+<p>Timing-wise, it takes about a second to save, the same to load, so that's fine.</p>
+
+<p>So that sounds reasonable in terms of timing, and disk space is pretty high, but not
+so huge that it can't be managed with careful planning -- don't checkpoint so much that
+we run out of disk during the train (I have a 2TiB disk, but it's far from empty).</p>
+
+<p>It's probably worth double-checking that it works, though!  Because my checkpoint
+test already did some training, I changed it so that it does this:</p>
+
+<ul>
+<li>Create a model, optimiser and scaler.</li>
+<li>Train the model for a bit.</li>
+<li>Work out the loss.</li>
+<li>Save a checkpoint.</li>
+<li>Create a new model, optimiser, and scaler, and then restore the checkpoint into them.</li>
+<li>Work out the loss</li>
+<li>Train for a bit more to check that the optimiser and scaler still work.</li>
+</ul>
+
+<div>
+<pre><span></span><code><span>(llm-from-scratch)</span> <span>giles@perry:~/Dev/llm-from-scratch (main)$ </span>python<span> </span>test-checkpointing.py
+<span>Loading dataset shards: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████| 102/102 [00:00&lt;00:00, 387.76it/s]</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:30&lt;00:00,  3.30it/s]</span>
+<span>Loss prior to checkpoint: 7.0519</span>
+<span>Checkpoint saved in 0.96s</span>
+<span>Checkpoint loaded in 0.89s</span>
+<span>Loss after checkpoint load: 7.0519</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:30&lt;00:00,  3.27it/s]</span>
+<span>Loss after further training: 6.8996</span>
+</code></pre>
+</div>
+
+<p>Looks sane!  The numbers for loss are the same before and after, so I think it's vanishingly
+implausible that the checkpoint we restored is different from the one we saved.  And
+the continued training seems to be working -- at least, loss is going down -- so that
+sounds reasonable too.</p>
+
+<p>OK, so, again, the time taken to checkpoint is negligible, but the disk space isn't.  I
+reckon we can comfortably do 100 checkpoints over the train.  That's roughly one every
+half-hour over 44 hours.</p>
+
+<p>We're going to want to do a validation run each time we checkpoint, so let's think about that next.</p>
+
+<h3>Validation</h3>
+
+<p>How big should our validation set be?
+Let's say we only want to spend 5m per checkpoint period doing validation.  How many
+batches can we get through in that time?</p>
+
+<p>I wrote a simple script to run a model (after a few hundred training steps) in eval
+mode on different numbers of iterations to see how long each one
+took.  It used the same <code>autocast</code> trick as the
+training loop above in order to use mixed precision, and I ran it with <code>torch.inference_mode</code> instead
+of the <code>torch.no_grad</code> that I've used in the past (ChatGPT tells me it's a little faster).
+I also put in some calls to <code>torch.cuda.synchronize</code> around the loop that I was timing,
+which should apparently help make sure that the numbers are precise.  The code is
+<a href="https://github.com/gpjt/llm-from-scratch/blob/main/measure-validation-timing.py" target="_blank" rel="noopener noreferrer">here</a> if
+you'd like to take a look.</p>
+
+<p>After some fiddling with the min/max numbers at the top:</p>
+
+<div>
+<pre><span></span><code><span>(llm-from-scratch)</span> <span>giles@perry:~/Dev/llm-from-scratch (main)$ </span>python<span> </span>measure-validation-timing.py
+<span>Loading dataset shards: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████| 102/102 [00:00&lt;00:00, 352.52it/s]</span>
+<span>Doing initial train</span>
+<span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:30&lt;00:00,  3.25it/s]</span>
+<span>Timing validation batch size 2900</span>
+<span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2900/2900 [04:29&lt;00:00, 10.76it/s]</span>
+<span>Got loss 7.3029 in 269.5059s</span>
+<span>Timing validation batch size 3000</span>
+<span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3000/3000 [04:39&lt;00:00, 10.73it/s]</span>
+<span>Got loss 7.3044 in 279.4869s</span>
+<span>Timing validation batch size 3100</span>
+<span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3100/3100 [04:46&lt;00:00, 10.81it/s]</span>
+<span>Got loss 7.3042 in 286.6812s</span>
+<span>Timing validation batch size 3200</span>
+<span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3200/3200 [04:55&lt;00:00, 10.82it/s]</span>
+<span>Got loss 7.3043 in 295.7016s</span>
+<span>Timing validation batch size 3300</span>
+<span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3300/3300 [05:04&lt;00:00, 10.82it/s]</span>
+<span>Got loss 7.3065 in 304.9547s</span>
+<span>Timing validation batch size 3400</span>
+<span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3400/3400 [05:14&lt;00:00, 10.82it/s]</span>
+<span>Got loss 7.3060 in 314.3070s</span>
+<span>Timing validation batch size 3500</span>
+<span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3500/3500 [05:25&lt;00:00, 10.76it/s]</span>
+<span>Got loss 7.3062 in 325.1689s</span>
+<span>Timing validation batch size 3600</span>
+<span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3600/3600 [05:35&lt;00:00, 10.73it/s]</span>
+<span>Got loss 7.3064 in 335.6270s</span>
+<span>Timing validation batch size 3700</span>
+<span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3700/3700 [05:44&lt;00:00, 10.73it/s]</span>
+<span>Got loss 7.3083 in 344.8765s</span>
+<span>Timing validation batch size 3800</span>
+<span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3800/3800 [05:54&lt;00:00, 10.73it/s]</span>
+<span>Got loss 7.3111 in 354.3010s</span>
+<span>Timing validation batch size 3900</span>
+<span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3900/3900 [06:03&lt;00:00, 10.72it/s]</span>
+<span>Got loss 7.3104 in 363.6413s</span>
+<span>Timing validation batch size 4000</span>
+<span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 4000/4000 [06:11&lt;00:00, 10.76it/s]</span>
+<span>Got loss 7.3110 in 371.8712s</span>
+</code></pre>
+</div>
+
+<p>OK, so let's call it 3200.  That's 3200 * 6 * 1024 tokens = 19,660,800 tokens.</p>
+
+<p>That's about 0.006144 of our training set.  Pretty low, but we're talking about such
+a large training set that I think we're OK.  And practically we can't do more --
+we're already talking about 5 mins every half-hour, so we're bumping up our train time
+by 88 * 5 = 440 minutes, which is seven hours.</p>
+
+<p>Now let's start thinking about the datasets.</p>
+
+<h3>Datasets</h3>
+
+<p>We can split the HF thing into train and validation sets.  I'm thinking
+it might be useful to load all of our training and validation data into RAM for the train loop.  3.2B tokens
+with four bytes per token should be about 13 GiB, after all, and I have 64 GiB RAM on the
+machine.</p>
+
+<p>...but wait, int64 is the default for PyTorch for long ints -- that's what our token lists are in the original,
+and it's twice the size, so we're talking 26 GiB.
+I believe that PyTorch expects that format for the cross entropy loss.</p>
+
+<p>That's not the end of
+the world, though -- we can store the data as int32 in RAM (with 50,257 as our vocab size we
+could even use int16 if we wanted to) and then we'll need to make them
+the right type just before using them.  We can do that when splatting them onto the
+GPU, eg.</p>
+
+<div>
+<pre><span></span><code><span>x</span> <span>=</span> <span>x_int32</span><span>.</span><span>to</span><span>(</span><span>device</span><span>)</span><span>.</span><span>to</span><span>(</span><span>torch</span><span>.</span><span>long</span><span>)</span>
+</code></pre>
+</div>
+
+<p>First thought, can we store them as a Python list?  Turns out they're not all that memory-efficient, though:</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>2</span><span>]:</span> <span>list</span><span>(</span><span>range</span><span>(</span><span>3_200_000_000</span><span>))</span>
+<span>Killed</span>                     <span>ipython</span>
+</code></pre>
+</div>
+
+<p>How about PyTorch tensors?</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>3</span><span>]:</span> <span>torch</span><span>.</span><span>rand</span><span>((</span><span>3_200_000_000</span><span>))</span>
+<span>Out</span><span>[</span><span>3</span><span>]:</span> <span>tensor</span><span>([</span><span>0.6668</span><span>,</span> <span>0.1471</span><span>,</span> <span>0.9428</span><span>,</span>  <span>...</span><span>,</span> <span>0.3548</span><span>,</span> <span>0.5738</span><span>,</span> <span>0.5723</span><span>])</span>
+</code></pre>
+</div>
+
+<p>Promising!  (Though ChatGPT pointed out when reviewing a draft of this post that
+I was using the default <code>float32</code> rather than an <code>int32</code> type here.  Still, it's
+the same size.)</p>
+
+<p>Let's measure memory usage in a new interpreter.</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>1</span><span>]:</span> <span>import</span><span> </span><span>psutil</span>
+
+<span>In</span> <span>[</span><span>2</span><span>]:</span> <span>import</span><span> </span><span>torch</span>
+
+<span>In</span> <span>[</span><span>3</span><span>]:</span> <span>import</span><span> </span><span>os</span>
+
+<span>In</span> <span>[</span><span>4</span><span>]:</span> <span>rss_before</span> <span>=</span> <span>psutil</span><span>.</span><span>Process</span><span>(</span><span>os</span><span>.</span><span>getpid</span><span>())</span><span>.</span><span>memory_info</span><span>()</span><span>.</span><span>rss</span>
+
+<span>In</span> <span>[</span><span>5</span><span>]:</span> <span>t</span> <span>=</span> <span>torch</span><span>.</span><span>rand</span><span>((</span><span>3_200_000_000</span><span>))</span>
+
+<span>In</span> <span>[</span><span>6</span><span>]:</span> <span>rss_after</span> <span>=</span> <span>psutil</span><span>.</span><span>Process</span><span>(</span><span>os</span><span>.</span><span>getpid</span><span>())</span><span>.</span><span>memory_info</span><span>()</span><span>.</span><span>rss</span>
+
+<span>In</span> <span>[</span><span>7</span><span>]:</span> <span>rss_after</span> <span>-</span> <span>rss_before</span>
+<span>Out</span><span>[</span><span>7</span><span>]:</span> <span>12801474560</span>
+</code></pre>
+</div>
+
+<p>Yup, 12,801,474,560, so about 12 GiB.  Can we save it?</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>8</span><span>]:</span> <span>from</span><span> </span><span>safetensors.torch</span><span> </span><span>import</span> <span>save_file</span>
+
+<span>In</span> <span>[</span><span>9</span><span>]:</span> <span>save_file</span><span>({</span><span>"tokens"</span><span>:</span> <span>t</span><span>},</span> <span>"xxx"</span><span>)</span>
+</code></pre>
+</div>
+
+<div>
+<pre><span></span><code><span>(</span>llm-from-scratch<span>)</span><span> </span>giles@perry:~/Dev/llm-from-scratch<span> </span><span>(</span>main<span>)</span>$<span> </span>ls<span> </span>-l<span> </span>xxx
+-rw-r--r--<span> </span><span>1</span><span> </span>giles<span> </span>giles<span> </span><span>12800000088</span><span> </span>Nov<span> </span><span>11</span><span> </span><span>20</span>:43<span> </span>xxx
+<span>(</span>llm-from-scratch<span>)</span><span> </span>giles@perry:~/Dev/llm-from-scratch<span> </span><span>(</span>main<span>)</span>$<span> </span>ls<span> </span>-lh<span> </span>xxx
+-rw-r--r--<span> </span><span>1</span><span> </span>giles<span> </span>giles<span> </span>12G<span> </span>Nov<span> </span><span>11</span><span> </span><span>20</span>:43<span> </span>xxx
+</code></pre>
+</div>
+
+<p>OK, let's try reloading it in a fresh session:</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>1</span><span>]:</span> <span>from</span><span> </span><span>safetensors.torch</span><span> </span><span>import</span> <span>load_file</span>
+
+<span>In</span> <span>[</span><span>2</span><span>]:</span> <span>t</span> <span>=</span> <span>load_file</span><span>(</span><span>"xxx"</span><span>)[</span><span>"tokens"</span><span>]</span>
+
+<span>In</span> <span>[</span><span>3</span><span>]:</span> <span>t</span>
+<span>Out</span><span>[</span><span>3</span><span>]:</span> <span>tensor</span><span>([</span><span>0.5421</span><span>,</span> <span>0.1613</span><span>,</span> <span>0.8055</span><span>,</span>  <span>...</span><span>,</span> <span>0.7002</span><span>,</span> <span>0.7609</span><span>,</span> <span>0.5629</span><span>])</span>
+</code></pre>
+</div>
+
+<p>Nice.  So, I think we can write a quick script that splits our incoming dataset
+into say 99/1% train and validation, grabs the first 3.2B tokens from the training set,
+glomming them together into one big tensor with EOSes between them, and saves them, and then does likewise
+for the first 19,660,800 tokens from the validation set.  We'll use FineWeb, with
+the possibility of switching to FineWeb-Edu later on.  Doing it that way means that
+we're actually using the second of the two options I considered earlier:</p>
+
+<blockquote>
+  <p>Treat the corpus as, essentially, one long document, with end-of-sequence delimiters
+  between each row, then split that up into 1,024-token sequences.</p>
+</blockquote>
+
+<p>I thought it would be harder than concatenating/padding rows, but it actually turns out to be simple enough.</p>
+
+<p>Let's give it a go.  <a href="https://github.com/gpjt/llm-from-scratch/blob/843da6e19927ef1235b7989032e00c31d6c4396b/big-train-prepare-datasets.py" target="_blank" rel="noopener noreferrer">Here's the code</a>.
+I wanted to have an round number of 6-sequence batches of 1,024 tokens each, so the
+the number of training tokens worked out at</p>
+
+534,200×6×1,024=3,282,124,800
+
+<p>...rather than the strict Chinchilla-optimal 3,260,190,720, but that's no biggie.</p>
+
+<p>Running it takes 5m55s, and then:</p>
+
+<div>
+<pre><span></span><code><span>(</span>llm-from-scratch<span>)</span><span> </span>giles@perry:~/Dev/llm-from-scratch<span> </span><span>(</span>main<span>)</span>$<span> </span>ls<span> </span>-lh<span> </span>big-train-datasets/
+total<span> </span>13G
+-rw-r--r--<span> </span><span>1</span><span> </span>giles<span> </span>giles<span> </span>13G<span> </span>Nov<span> </span><span>11</span><span> </span><span>23</span>:08<span> </span>train.safetensors
+-rw-r--r--<span> </span><span>1</span><span> </span>giles<span> </span>giles<span> </span>76M<span> </span>Nov<span> </span><span>11</span><span> </span><span>23</span>:02<span> </span>validation.safetensors
+</code></pre>
+</div>
+
+<p>Looks about the right size -- 19M * 4 for val, 3.2B * 4 for train.</p>
+
+<p>Cool!  Let's finally write our training script.</p>
+
+<h3>Finally training an LLM!</h3>
+
+<p>You can see <a href="https://github.com/gpjt/llm-from-scratch/blob/main/big_train.py" target="_blank" rel="noopener noreferrer">the full training script here</a> -- note
+that this is the final version from the repo, so isn't exactly what I'm running
+at this point in the post.  The checkpointing code is (sensibly enough) in a separate file,
+<a href="https://github.com/gpjt/llm-from-scratch/blob/main/checkpointing.py" target="_blank" rel="noopener noreferrer"><code>checkpointing.py</code></a>.</p>
+
+<p>It took two days to run, and...</p>
+
+<p><img src="/post-assets/llm-from-scratch-28-training-a-base-model-from-scratch/big-training-run-chart-fineweb.png" alt="Training and validation loss over two days, FineWeb" title="Training and validation loss over two days, FineWeb" /></p>
+
+<p>Both train and validation losses fall nicely!  Training loss is a bit choppy, but that's because I erroneously
+only plotted the most recent iteration's training loss rather than an average over all iterations
+between the last and current validation run; the validation loss is correct because I
+did average all of the validation numbers. (The version of the code linked above fixes that
+error.)</p>
+
+<p>The best epoch for val loss is not the last one but it was close.  Looking at the last 5 iterations,
+their val losses were:</p>
+
+<div>
+<pre><span></span><code><span>3.991096583977342</span>
+<span>3.940103444904089  &lt;-- best</span>
+<span>3.9403586230427026</span>
+<span>3.9464842446893456</span>
+<span>3.9469190353155135 &lt;-- latest</span>
+</code></pre>
+</div>
+
+<p>It's time to do some evals</p>
+
+<h3>Evals</h3>
+
+<p>Firstly, let's try the smoke test that we do in the book.  What does our model
+think should come after the text "Every effort moves you"?</p>
+
+<p>With uninitialised weights we get gibberish, as expected</p>
+
+<pre><code>Every effort moves youワISIS Keectar handling holistic Supply query prolongidation Joey flaw camerasIdent formula
+</code></pre>
+
+<p>But with our best checkpoint we get this:</p>
+
+<pre><code>Every effort moves you towards a sustainable and holistic diet of water, protein, vitamins, and protein
+</code></pre>
+
+<p>Nice!  The multiple mentions of protein is actually the kind of repetition that small
+models tend to do, so that's not bad news.</p>
+
+<p>Let's try with the last iteration's checkpoint:</p>
+
+<pre><code>Every effort moves you towards a new level of success, and you’re likely to continue
+</code></pre>
+
+<p>Also very nice, perhaps better!</p>
+
+<p>I think that both of those are qualitatively as good as the result we got when
+we <a href="/2025/10/llm-from-scratch-22-finally-training-our-llm" target="_blank" rel="noopener noreferrer">loaded the pre-trained weights from OpenAI</a>,
+which was:</p>
+
+<pre><code>Every effort moves you as far as the hand can go until the end of your turn unless something interrupts your control flow. As you may observe I
+</code></pre>
+
+<p>That's very reassuring.  But is there something a bit more quantitative that we can do?</p>
+
+<p>Firstly, can we compare it to anything in the GPT-2 paper?  In figure 4 they give
+their perplexity against their train and test sets for the different model sizes;
+for the small one it's a bit over 16,  Let's assume that they're basing that on natural logarithms,
+so they mean that they have a loss of ln16.  That's <code>2.77</code>, which is much lower than our
+best loss of 3.9401.</p>
+
+<p>However, that is across different datasets, so while it makes me suspect that their
+model is better than ours, we can't really say for sure either way.</p>
+
+<p>The cool thing is, though, that we <em>have</em> their model -- so we can actually run it against
+our dataset.  I wrote a script called <a href="https://github.com/gpjt/llm-from-scratch/blob/main/test_openai_weights_against_our_val_dataset.py" target="_blank" rel="noopener noreferrer"><code>test_openai_weights_against_our_val_dataset.py</code></a>,
+and running it gives us this:</p>
+
+<div>
+<pre><span></span><code><span>Loss against our validation dataset: 3.4987249702960255</span>
+</code></pre>
+</div>
+
+<p>Still better than ours :-(</p>
+
+<p>I considered doing the same thing against Qwen to see whether that was also better,
+but with a different tokeniser we couldn't really treat it as comparable.  Loss and
+perplexity are both over next-token predictions, and if the meaning of "token" changes,
+then the numbers will change. <sup><a href="#fn-2" target="_blank" rel="noopener noreferrer">2</a></sup></p>
+
+<p>OK, so we have a model, but it's not as good as the original GPT-2 small.  Our
+loss on our validation set is roughly 3.94, while the original weights get about 3.50.  Expressing
+that in terms of perplexity gives our own model about 51.4, while the original
+has 33.1.  That's actually still higher than the 16 that they had in the paper, which
+is interesting -- presumably it's related to the fact that they're validating over
+their own WebText test set rather than ours; they're both samples of web content,
+but there must be differences.</p>
+
+<p>At this point, my guess is that this shows that all of that extra training that the OpenAI team did beyond
+the Chinchilla-optimal number of tokens did have a real benefit -- and that's not
+suprising.  Remember that the Chinchilla paper is about the best way to spend a FLOPs
+budget.  They're not saying that you can't drive down loss by continuing to train
+your model further -- of course you can.  They're saying that when you pass the
+optimal number of tokens, you should increase the model parameters and the tokens
+by the same ratio, and by doing that you'll get the best balance.</p>
+
+<p>But still, a Chinchilla-optimal model of 163M parameters might still be useful.
+What happens if we instruction fine-tune it <a href="/2025/10/llm-from-scratch-25-instruction-fine-tuning" target="_blank" rel="noopener noreferrer">like we did the original model in
+Chapter 7 of the book</a>?  In that
+post and its <a href="/2025/11/llm-from-scratch-26-evaluating-the-fine-tuned-model" target="_blank" rel="noopener noreferrer">followup</a>,
+we used some training samples using the "Alpaca" one-shot
+question-answering format:</p>
+
+<pre><code>Below is an instruction that describes a task.  Write a response that
+appropriately completes the request.
+
+### Instruction:
+
+&lt;some instructions&gt;
+
+
+### Input:
+
+&lt;optional, some input&gt;
+
+### Response:
+</code></pre>
+
+<p>...to get a model that we then provided a test set of questions in the same format,
+then used the Llama 3 7B model to judge the results on a scale of 0 to 100.  We then
+averaged the results and got a plausible-looking indicator of how useful the model was,
+as compared to the more narrowly technical loss number.</p>
+
+<p>One problem with that is that we ran those tests on the OpenAI weights for the medium-sized 355M-parameter
+GPT-2 model.  If we don't want to be comparing apples to oranges, we'll need to re-run it on
+their weights for the small model.  Let's see how we do.</p>
+
+<p>First, let's run it for five epochs just to see when/if it starts overfitting:</p>
+
+<p><img src="/post-assets/llm-from-scratch-28-training-a-base-model-from-scratch/instruction-fine-tune-5-epochs-losses-plot-original-weights.png" alt="Loss over five epochs training GPT-2 original weights on Alpaca" title="Loss over five epochs training GPT-2 original weights on Alpaca" /></p>
+
+<p>OK, so two epochs looks like the right amount, just as it was with the medium model.
+So we can train for that (because I'm using the original code I wrote when working
+through the chapter, I didn't checkpoint during training -- but it takes less than a
+minute to run the whole thing, so no biggie).  Here's the loss chart:</p>
+
+<p><img src="/post-assets/llm-from-scratch-28-training-a-base-model-from-scratch/instruction-fine-tune-2-epochs-losses-plot-original-weights.png" alt="Loss over two epochs training GPT-2 original weights on Alpaca" title="Loss over two epochs training GPT-2 original weights on Alpaca" /></p>
+
+<p>Validation loss at the end is 0.733, noticeably above the 0.649 that I got with the
+medium-sized model.  And the sample outputs shown at the end aren't as good, either.
+With the medium-sized model, I got these:</p>
+
+<div>
+<pre><span></span><code><span>Below is an instruction that describes a task. Write a response that appropriately completes the request.</span>
+
+<span>#</span><span>## Instruction:</span>
+<span>Rewrite the sentence using a simile.</span>
+
+<span>#</span><span>## Input</span>
+<span>The car is very fast.</span>
+
+<span>Correct response:</span>
+<span>&gt;&gt; The car is as fast as lightning.</span>
+
+<span>Model response:</span>
+<span>&gt;&gt; The car is as fast as a bullet.</span>
+<span>Below is an instruction that describes a task. Write a response that appropriately completes the request.</span>
+
+<span>#</span><span>## Instruction:</span>
+<span>What type of cloud is typically associated with thunderstorms?</span>
+
+<span>Correct response:</span>
+<span>&gt;&gt; The type of cloud typically associated with thunderstorms is cumulonimbus.</span>
+
+<span>Model response:</span>
+<span>&gt;&gt; The type of cloud typically associated with thunderstorms is a cumulus cloud.</span>
+<span>Below is an instruction that describes a task. Write a response that appropriately completes the request.</span>
+
+<span>#</span><span>## Instruction:</span>
+<span>Name the author of 'Pride and Prejudice'.</span>
+
+<span>Correct response:</span>
+<span>&gt;&gt; Jane Austen.</span>
+
+<span>Model response:</span>
+<span>&gt;&gt; The author of 'Pride and Prejudice' is Jane Austen.</span>
+</code></pre>
+</div>
+
+<p>...but with the small model (remember, this is with OpenAI's original weights) I get this:</p>
+
+<div>
+<pre><span></span><code><span>Below is an instruction that describes a task. Write a response that appropriately completes the request.</span>
+
+<span>#</span><span>## Instruction:</span>
+<span>Rewrite the sentence using a simile.</span>
+
+<span>#</span><span>## Input</span>
+<span>The car is very fast.</span>
+
+<span>Correct response:</span>
+<span>&gt;&gt; The car is as fast as lightning.</span>
+
+<span>Model response:</span>
+<span>&gt;&gt; The car is as fast as a horse.</span>
+<span>Below is an instruction that describes a task. Write a response that appropriately completes the request.</span>
+
+<span>#</span><span>## Instruction:</span>
+<span>What type of cloud is typically associated with thunderstorms?</span>
+
+<span>Correct response:</span>
+<span>&gt;&gt; The type of cloud typically associated with thunderstorms is cumulonimbus.</span>
+
+<span>Model response:</span>
+<span>&gt;&gt; A type of cloud typically associated with thunderstorms is the active layer.</span>
+<span>Below is an instruction that describes a task. Write a response that appropriately completes the request.</span>
+
+<span>#</span><span>## Instruction:</span>
+<span>Name the author of 'Pride and Prejudice'.</span>
+
+<span>Correct response:</span>
+<span>&gt;&gt; Jane Austen.</span>
+
+<span>Model response:</span>
+<span>&gt;&gt; The author of 'Pride and Prejudice' is Robert Frost.</span>
+</code></pre>
+</div>
+
+<p>Definitely worse, especially the last one!  Let's see what Llama 3 thinks of it,
+again using the code from the book:</p>
+
+<div>
+<pre><span></span><code><span>Number of scores: 110 of 110</span>
+<span>Average score: 35.50</span>
+</code></pre>
+</div>
+
+<p>The medium model got an average of 50, so the OpenAI small model is definitely much worse, as the examples
+suggested.  Makes sense.</p>
+
+<p>Let's see how our own base model performs when fine-tuned on the same data.
+After a bit of fiddling I found that validation loss settled down at the end of epoch
+10:</p>
+
+<p><img src="/post-assets/llm-from-scratch-28-training-a-base-model-from-scratch/instruction-fine-tune-10-epochs-losses-plot-our-model-fineweb.png" alt="Loss over ten epochs training our FineWeb base model on Alpaca" title="Loss over ten epochs training our FineWeb base model on Alpaca" /></p>
+
+<p>(It's hard to see from the chart, but validation loss was actually very slowly
+dropping even after epoch 5.)</p>
+
+<p>It's interesting that our own model took longer to train here, but it does make sense
+in terms of it being that little bit dumber.</p>
+
+<p>The samples it printed out at the end are also interesting:</p>
+
+<div>
+<pre><span></span><code><span>Below is an instruction that describes a task. Write a response that appropriately completes the request.</span>
+
+<span>#</span><span>## Instruction:</span>
+<span>Rewrite the sentence using a simile.</span>
+
+<span>#</span><span>## Input</span>
+<span>The car is very fast.</span>
+
+<span>Correct response:</span>
+<span>&gt;&gt; The car is as fast as lightning.</span>
+
+<span>Model response:</span>
+<span>&gt;&gt; The car is as fast as a cheetah.</span>
+<span>Below is an instruction that describes a task. Write a response that appropriately completes the request.</span>
+
+<span>#</span><span>## Instruction:</span>
+<span>What type of cloud is typically associated with thunderstorms?</span>
+
+<span>Correct response:</span>
+<span>&gt;&gt; The type of cloud typically associated with thunderstorms is cumulonimbus.</span>
+
+<span>Model response:</span>
+<span>&gt;&gt; A thunder storm is a type of thunder.</span>
+<span>Below is an instruction that describes a task. Write a response that appropriately completes the request.</span>
+
+<span>#</span><span>## Instruction:</span>
+<span>Name the author of 'Pride and Prejudice'.</span>
+
+<span>Correct response:</span>
+<span>&gt;&gt; Jane Austen.</span>
+
+<span>Model response:</span>
+<span>&gt;&gt; The author of 'Pride and Prejudice' is Robert Frost.</span>
+</code></pre>
+</div>
+
+<p>The simile is pretty good, I think better than the OpenAI original weights' one,
+but the storm clouds one is dreadful.  It's fascinating that they both chose the same
+wrong answer for "Pride and Prejudice" -- my guess is that it's because the training
+set contained this question:</p>
+
+<pre><code>Identify the tone used in the poem 'The Road Not Taken' by Robert Frost.
+</code></pre>
+
+<p>...so both models picked up on Robert Frost being a useful author to reference in
+answers.</p>
+
+<p>Anyway, what does Llama 3 think of the output?</p>
+
+<div>
+<pre><span></span><code><span>Number of scores: 110 of 110</span>
+<span>Average score: 29.35</span>
+</code></pre>
+</div>
+
+<p>Yup, it's dumber than the original weights -- but, at least to my mind, closer to
+the original weights' score than you might have thought based on that loss/perplexity
+number alone.</p>
+
+<p>But, on the other hand, I'm not convinced that Llama 3 7B is smart enough to be
+doing a good job.  In the stuff the eval script printed out, we have this:</p>
+
+<div>
+<pre><span></span><code><span>Dataset response:</span>
+<span>&gt;&gt; The type of cloud typically associated with thunderstorms is cumulonimbus.</span>
+
+<span>Model response:</span>
+<span>&gt;&gt; The type of cloud is typically associated with thunderstorms.</span>
+
+<span>Score:</span>
+<span>&gt;&gt; I'd score this model response a 40 out of 100.</span>
+
+<span>Here's why:</span>
+
+<span>* The response partially answers the question by mentioning that cumulonimbus clouds are associated with thunderstorms.</span>
+<span>* However, it lacks specific details and doesn't provide a clear answer to the question.</span>
+<span>* A good response should provide a complete and accurate answer, which this one does not.</span>
+
+<span>A better response would be something like: "The type of cloud typically associated with thunderstorms is cumulonimbus." This response provides a clear and accurate answer to the question.</span>
+</code></pre>
+</div>
+
+<p>This is clearly completely wrong, the mention of cumulonimbus is coming from the
+dataset response, not the model response.  Llama 3 7B is tripping up over what
+came from where, which is pretty normal for a small model.</p>
+
+<p>Of course, it's possible that the scores for the OpenAI GPT-2 small weights also have
+been given a higher rating than they deserve -- or, indeed, that there were right
+answers that were incorrectly judged wrong.  Conceivably it averages out.  But there's
+no reason to assume it would, so it's essentially noise and is making the results less
+useful.</p>
+
+<p>Let's try using a much smarter LLM as a judge and run both of the models responses
+through it -- the just-released OpenAI GPT-5.1 model.  The code is <a href="https://github.com/gpjt/llm-from-scratch/blob/main/evaluate-with-openai.py" target="_blank" rel="noopener noreferrer">here</a>.</p>
+
+<p>Running that against our own model's answers:</p>
+
+<div>
+<pre><span></span><code><span>Number of scores: 110 of 110</span>
+<span>Average score: 16.14</span>
+</code></pre>
+</div>
+
+<p>...and against the model fine-tuned from the small OpenAI weights:</p>
+
+<div>
+<pre><span></span><code><span>Number of scores: 110 of 110</span>
+<span>Average score: 20.39</span>
+</code></pre>
+</div>
+
+<p>...and, of course, it didn't make the mistake of confusing the dataset response with
+the model's in any of the cases printed out.  ChatGPT 5.1 in the chat interface is
+very smart, I expect these results are much closer to a reasonable ground truth.</p>
+
+<p>Out of interest, what does it make of the model based on the GPT-2 <strong>medium</strong> weights that we train as part of the book?</p>
+
+<div>
+<pre><span></span><code><span>Number of scores: 110 of 110</span>
+<span>Average score: 38.41</span>
+</code></pre>
+</div>
+
+<p>That's as compared to an average of about 50 from Llama 3 7B.  It seems like GPT 5.1
+is a tougher judge than the small local model -- and my guess is that that is because
+it's more accurate. <sup><a href="#fn-3" target="_blank" rel="noopener noreferrer">3</a></sup></p>
+
+<p>Anyway, the ranking remains the same; after fine-tuning on the same Alpaca dataset,
+GPT-2 medium &gt; GPT-2 small &gt; our model.  But it's still a relatively close-run thing
+between our model and GPT-2 small.  Can we close the gap without vast amounts of
+extra training?</p>
+
+<h3>FineWeb-Edu</h3>
+
+<p>The results so far were from using 3.2B tokens of the FineWeb 10B corpus.  Now, as
+I noted at the start of this post, Andrej Karpathy's nanochat project uses FineWeb-Edu,
+a separate corpus designed to be really informative.  Indeed, back at the start when
+we were looking at the two datasets, the first row in the Edu dataset was about
+Jane Austen, so maybe we would wind up with a model that at least got that question right!</p>
+
+<p>That's going to take another two days to train, but that's no big deal.  We first
+need to change our script that generates the train/validation splits to regenerate
+them using the Edu dataset; we'll move the old ones to one side, though -- it will
+be interesting to see what loss we get on the non-edu validation data with the new model.</p>
+
+<p>(Note to self: work out some way to split out different datasets and training runs for
+future experiments like this.  The setup I had in my <a href="/2025/10/retro-language-models-rebuilding-karpathys-rnn-in-pytorch" target="_blank" rel="noopener noreferrer">recent post on RNNs</a>
+worked quite well.  Throughout the remainder of this post I'm juggling directories of
+checkpoints and datasets, and I'm sure I got it right, but it was an error-prone process.)</p>
+
+<p>That being done, it's time to move the checkpoints we already have to one side, and
+to kick off the train!</p>
+
+<p>Here's what we have after two days on that -- oops, I forgot to add the code to average
+training loss across all of the batches, so again it's a bit spiky.</p>
+
+<p><img src="/post-assets/llm-from-scratch-28-training-a-base-model-from-scratch/big-training-run-chart-fineweb-edu.png" alt="Training and validation loss over two days, FineWeb-Edu" title="Training and validation loss over two days, FineWeb-Edu" /></p>
+
+<p>But we got to
+a final eval loss of about 3.693 this time.  Of course, that's on its own validation
+set, so it's not comparable with the numbers from before; loss is specific to a particular
+dataset.  Let's see what it makes
+of the original run's validation set.  Juggle some directories around (my messy file
+structure means that there is just one "datasets" directory and one "checkpoints" one,
+so I'm moving them around to make sure I'm using the right combination):</p>
+
+<div>
+<pre><span></span><code><span>(llm-from-scratch)</span> <span>giles@perry:~/Dev/llm-from-scratch (main)$ </span>python<span> </span>test_our_weights_against_our_dataset.py
+<span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3200/3200 [04:52&lt;00:00, 10.92it/s]</span>
+<span>Loss against our validation dataset: 4.164705707877874</span>
+</code></pre>
+</div>
+
+<p>We get 4.16!  That's truly terrible, worse than both the original base model that
+we trained on FineWeb's non-edu dataset, and than the OpenAI GPT-2 small weights.</p>
+
+<p>Let's see what we get from the closer-to-real-world instruction fine-tuning test.
+Five epochs turns out to be best:</p>
+
+<p><img src="/post-assets/llm-from-scratch-28-training-a-base-model-from-scratch/instruction-fine-tune-5-epochs-losses-plot-our-model-fineweb-edu.png" alt="Loss over five epochs training our FineWeb-Edu base model on Alpaca" title="Loss over five epochs training our FineWeb-Edu base model on Alpaca" /></p>
+
+<p>I won't bother running it past Llama 3 7B, as that's proven unhelpful, so we'll go
+straight to GPT-5.1.</p>
+
+<pre><code>Number of scores: 110 of 110
+Average score: 15.18
+</code></pre>
+
+<p>Gosh!  So it's judged slightly worse than our weights based on FineWeb.
+That does surprise me a bit.  I was definitely expecting the Edu version of the
+dataset to give us a better model.</p>
+
+<p>So: OpenAI medium &gt; OpenAI small &gt; our FineWeb base model &gt; our FineWeb-Edu base model.
+That last pairing does surprise me a bit.  Handwaving wildly, perhaps the more "regular" nature of
+the Edu dataset meant that the model saw less variation in its training set, and
+that actually made it learn less?</p>
+
+<p>I think there's one more experiment I want to do before bringing this (<em>very</em>
+lengthy) post to a close.  We've shown that Chinchilla-optimal training of models
+produces worse results than OpenAI's original, we think longer, train.</p>
+
+<p>What would happen if we continued training for another two days?</p>
+
+<h3>Continuing training</h3>
+
+<p>As I have it easily to hand, I want to use the FineWeb-Edu model for this.  I want
+to start with the best checkpoint (which happens to be the last one), and train
+it on another 3.2B tokens from FineWeb-Edu.  Let's see what we get.</p>
+
+<p>Getting a dataset is going to be a bit messy, as our existing script to generate the
+safetensors datasets
+just grabs tokens from the original dataset until it gets 534,200 batches of 6 sequences, each
+of 1024 tokens (3,282,124,800 total).</p>
+
+<p>Might as well hack it (and note that this is something worth improving for any
+later experiments).  I'll just loop round the code to do that twice, throwing
+away the first set of 3.2B tokens.</p>
+
+<p>I was pretty sure that the ordering of the datasets I'm
+getting is fixed, but perhaps not -- it spent time regenerating the train/val split
+at the start of the script, so there's no guarantee we have different data this time.
+That feels like a note-to-self about data pipeline hygiene -- if the train/val split
+is randomised by the infra I'm using, I should persist the raw data in case I need to
+use more data than I though I would need to.</p>
+
+<p>Still, for this experiment, we can play relatively fast and loose.  After all, GPT-2
+small -- the original OpenAI weights -- was trained on multiple epochs, so it saw tokens
+multiple times.  What we're trying to see here is what happens if you train for longer;
+a more scientific experiment can happen later (if at all...).</p>
+
+<p>Anyway, we have 3.2B tokens that should at least be reasonably different from the original 3.2B.</p>
+
+<p>Right, let's clean up some disk space so that we have enough for the new train (deleted
+some old optimiser checkpoints, keeping the metadata and the weights).</p>
+
+<p>Now, we create a new checkpoints directory, and we can copy the last/best checkpoint
+from the original FineWeb-Edu train there.  Hack the <code>train_ds_offset</code> in there to
+zero, create <code>best</code> and <code>latest</code> symlinks, and then we can "restart" from that checkpoint.
+Due to the way the restart-from-checkpoint code works in the training script, that means that it will start with an offset of 1 into the dataset, so we're
+dropping one of about 530,000 iterations, but that's not exactly the end of the
+world.</p>
+
+<p><img src="/post-assets/llm-from-scratch-28-training-a-base-model-from-scratch/big-training-run-chart-fineweb-edu-2x.png" alt="Training and validation loss over a second period of two days, FineWeb-Edu" title="Training and validation loss over a second period of two days, FineWeb-Edu" /></p>
+
+<p>There are some interesting spikes on validation loss in there -- in particular that one
+at around iteration 300,000 where it goes up from 3.6 or so to 7.5 for two validation
+periods (which, remember, happen every ~30 minutes, or every 7020 iterations).</p>
+
+<p>My guess
+is that we got some kind of gradient spike prior to those, which led to a bad update
+to the parameters.  However, it looks like the loss recovered really quickly after it,
+so while gradient clipping (that is, limiting the size of the gradients so that one-off
+spikes don't cause massive updates) might have prevented them, I don't think it would
+have improved matters much -- we might have "lost" an hour so of training, but out
+of a 44-hour train (48 hours including breaks for validation), it's not the end
+of the world.</p>
+
+<p>But, looking at the raw numbers, after our second two days of training on a fresh
+sample from FineWeb-Edu 10B, we've managed to get the loss on our validation set down from
+3.693 to... drumroll... 3.661.  And that's on the "best" measurement, which was an hour
+before the end.  The last validation number was 3.663.</p>
+
+<p>By spending twice the time, we've managed to get our loss down by 0.032, which is
+a touch less than 1%.  Even measured in terms of perplexity (which, being an exponential,
+is more sensitive to this kind of change), we've gone from 40.2 to 38.9, which is
+hardly show-stopping.</p>
+
+<p>Let's see how this one measures up against the non-edu FineWeb validation dataset that we
+originally used to calibrate our first training run.  Run it, and:</p>
+
+<div>
+<pre><span></span><code><span>(llm-from-scratch)</span> <span>giles@perry:~/Dev/llm-from-scratch (main)$ </span>python<span> </span>test_our_weights_against_our_dataset.py
+<span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3200/3200 [04:53&lt;00:00, 10.89it/s]</span>
+<span>Loss against our validation dataset: 4.134009174928069</span>
+</code></pre>
+</div>
+
+<p>...we get 4.13 -- that's opposed to 4.16 on the last model, trained on half as much data.</p>
+
+<p>Well, maybe it's a much better base model for instruction fine-tuning?  Let's give that
+a go, again with the Alpaca training set from the book.  8 epochs turns out to be
+the right number:</p>
+
+<p><img src="/post-assets/llm-from-scratch-28-training-a-base-model-from-scratch/instruction-fine-tune-8-epochs-losses-plot-our-model-fineweb-edu-2x.png" alt="Loss over eight epochs training our &quot;double-trained&quot; FineWeb-Edu base model on Alpaca" title="Loss over eight epochs training our &quot;double-trained&quot; FineWeb-Edu base model on Alpaca" /></p>
+
+<div>
+<pre><span></span><code><span>Number of scores: 110 of 110</span>
+<span>Average score: 16.62</span>
+</code></pre>
+</div>
+
+<p>Certainly better than the 15.18 that we got on our Chinchilla-optimal FineWeb-Edu model,
+and a bit better than the 16.14 we got on the Chinchilla-optimal FineWeb one.
+So by training for double the time on twice the data, we've definitely got a better
+model.  It's just not <em>that much</em> better.</p>
+
+<p>I think that's more -- significantly more -- than enough experimentation for one blog post, so let's do some
+analysis.</p>
+
+<h3>FLOPs</h3>
+
+<p>I want to sanity-check the number of FLOPs spent on this train, just to make sure
+that I hadn't messed up.  Feel free to <a href="#but-why-is-our-model-worse-than-openais" target="_blank" rel="noopener noreferrer">skip this</a> if you want to jump straight to the
+conclusion :-)</p>
+
+<p>In appendix F, the Chinchilla paper mentions a common approximation for how many FLOPs, C, you
+spend training a model with N parameters over D tokens:</p>
+
+C=6DN
+
+<p>So based on that, each of those training runs cost us (using the exact numbers for N and D) this many FLOPs:</p>
+
+C=6×3,282,124,800×163,009,536=3,210,105,844,452,556,800=3.21×1018FLOPS
+
+<p>They also give a more carefully-worked out calculation; it doesn't look all that
+difficult -- it's just a case of plugging in the numbers from our architecture and
+pulling out a result <sup><a href="#fn-4" target="_blank" rel="noopener noreferrer">4</a></sup> -- but the numbers they get from that are generally within
+10% of the simpler calculations, so we may as well stick with the above. <sup><a href="#fn-5" target="_blank" rel="noopener noreferrer">5</a></sup></p>
+
+<p>Now, in terms of how many FLOPs we actually spent... well, manufacturers' datasheets
+for hardware are based on carefully-selected benchmarks and won't really be comparable
+to the code we were running (especially given that it's my crappy code based on top
+of a huge stack of PyTorch, CUDA kernels, CUDA itself, and so on), but we can do a
+<a href="https://en.wikipedia.org/wiki/Fermi_problem" target="_blank" rel="noopener noreferrer">Fermi estimate</a>.</p>
+
+<p>From Wikipedia, the <a href="https://en.wikipedia.org/wiki/List_of_Nvidia_graphics_processing_units#RTX_30_series" target="_blank" rel="noopener noreferrer">RTX 3090</a> has
+35.58 TFLOPS performance on FP32.  Way back earlier in this post, when I was
+measuring how many tokens per second I could get locally, the first experiment
+capped out at 12,599 tokens/second with FP32.  <code>nvtop</code> showed the GPU usage at 100%,
+so let's say (again, this is very approximate) that we were getting about 35.58 TFLOPs
+and that enabled 12,599 tokens/second.</p>
+
+<p>We wound up training at about 19,921 tokens/second
+after adding in mixed precision and using the tensor cores.  So, hand-wavingly
+we can say that we were getting</p>
+
+19,92112,599×35.58=56.26TFLOPs
+
+<p>Now, we trained for 44 hours (48 including validation), so the total number of training FLOPs
+should have been the number of seconds in that times the total FLOPS <sup><a href="#fn-6" target="_blank" rel="noopener noreferrer">6</a></sup>
+of 56.27×1012</p>
+
+44×60×60×56.27×1012=8.91×1018
+
+<p>That's pleasingly close to the 3.19×1018 above!  I can easily imagine that the stack we're using could
+somewhat-more-than-halve performance from the theoretically optimal, or that we're running at 50% of
+the GPU's theoretical capacity, or some combination of the two.  We're in the same
+order of magnitude, and for a Fermi approximation, that's what matters.</p>
+
+<p>Now, looking at figure 3 in the Chinchilla paper, their IsoFLOP curves (each one showing the loss they got
+on their training set for models of a particular size, using the same number of
+FLOPs for each curve), we can see that the top one, which is
+training runs of 6×1018 FLOPs, the lowest point is pretty much bang-on
+the 168M point on the X axis.</p>
+
+<p>So that is at least reassuring that we did do a proper Chinchilla-optimal train here.
+(Their loss on that chart is showing 3, but they're using a different dataset, so I don't think
+it's comparable.)</p>
+
+<h3>But why is our model worse than OpenAI's?</h3>
+
+<p>Apart from the obvious answer of "skill issue", let's see if there are any obvious
+reasons why the base model I've trained (and retrained) in this post is worse than
+the original OpenAI GPT-2 small.  Let's review the results first:</p>
+
+<table>
+<thead>
+<tr>
+  <th></th>
+  <th>FineWeb train</th>
+  <th>FineWeb-Edu train</th>
+  <th>FineWeb-Edu extended train</th>
+  <th>OpenAI weights</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Val loss on own dataset</td>
+  <td>3.94</td>
+  <td>3.693</td>
+  <td>3.661</td>
+  <td>2.80 <sup><a href="#fn-7" target="_blank" rel="noopener noreferrer">7</a></sup></td>
+</tr>
+<tr>
+  <td>Val loss on FineWeb dataset</td>
+  <td>3.94</td>
+  <td>4.16</td>
+  <td>4.13</td>
+  <td>3.50</td>
+</tr>
+<tr>
+  <td>Alpaca answers judged by GPT-5.1</td>
+  <td>16.14</td>
+  <td>15.18</td>
+  <td>16.62</td>
+  <td>20.39</td>
+</tr>
+</tbody>
+</table>
+
+<p>The first row is not super-interesting, it's the second and third that matter.</p>
+
+<ul>
+<li>On <em>our own</em> validation set from FineWeb, our we have OpenAI &gt; our FineWeb train &gt; our FineWeb-Edu extended train &gt; our FineWeb-Edu train</li>
+<li>On the answers judged by GPT-5.1 after instruction fine-tuning, we have OpenAI &gt; our FineWeb-Edu extended train &gt; our FineWeb train &gt; our FineWeb-Edu train</li>
+</ul>
+
+<p>OpenAI is clearly winning by quite some margin!  Earlier on I assumed that the difference
+was that they trained on more data, but let's be a bit more systematic here.</p>
+
+<p>What specific differences do we
+have to the original train?  Again, the amount of data in the paper is frustratingly
+limited, but:</p>
+
+<h4>Amount of training data</h4>
+
+<p>Right at the start, I estimated that the WebText dataset they trained on was about 10B
+tokens.  We've trained on 3.2B tokens for two of our models, and 6.4B tokens for the extended
+train one.</p>
+
+<p>That could well have an effect.  There's more information in their larger dataset,
+both in terms of raw facts like "Jane Austen wrote Pride and Prejudice", and in terms of
+information about the structure of language.</p>
+
+<p>On the other hand, their dataset is, as they say, comprised of the contents of web pages that
+were linked from Reddit posts with more than three upvotes.  FineWeb (and even more FineWeb-Edu) is
+a much more curated dataset, so you would expect it has more facts, and better structure
+-- less of the slop and junk that Andrej Karpathy talked about in his interview with Dwarkesh
+Patel.</p>
+
+<p>So I'm not sure that this is it, but it's worth keeping in mind.</p>
+
+<h4>Number of epochs</h4>
+
+<p>Again, we don't know how many epochs they trained on, but the report I linked to
+right at the start of this post estimated that they trained for 60, while I calculated based
+on their numbers that it would be 41 epochs with WebText.</p>
+
+<p>It certainly makes sense that grinding along, epoch after epoch, will get your loss
+down, at least on the training set!  And there's also a phenomenon with certain kinds
+of neural networks where if keep training past the point where you're overfitting
+(that is, validation loss starts rising while training loss continues to fall),
+suddenly the model can have an "aha" moment and <a href="https://arxiv.org/abs/2201.02177" target="_blank" rel="noopener noreferrer">start generalising again</a>. <sup><a href="#fn-8" target="_blank" rel="noopener noreferrer">8</a></sup></p>
+
+<p>It's not quite comparable, because it was not a second epoch, but rather continued training
+with more data, but we were able to eke out an extra reduction of 0.032 in loss by
+training our FineWeb-Edu model for twice as long.  If we'd trained it for 40 times
+as long, then we presumably would have managed to grind it down even further.  I
+have no idea how much further we could get it, but I'd guess that it's going to be
+worse than linear (that is, each extra two days gets you less loss reduction than
+the previous) -- so we can bound the loss reduction at a <em>maximum</em>
+of 39×0.032=1.248.</p>
+
+<p>So... maybe?  It would be a dull experiment to run, though, taking 78 days.  If
+I want to do that, it would be better to find a way to do it quickly, so that I can get
+a better feedback loop going.  The reason this post has taken so long has in part been
+because each training run has taken so long (as well as trips to London and other life
+stuff).</p>
+
+<h4>Architectural differences</h4>
+
+<p>The original GPT-2 model from OpenAI had bias on the Wq, Wk and Wv projections -- that is,
+they were normal NN biased linear layers rather than simple matrices, so they did
+a projection into their respective spaces followed by a translation.  In the book,
+Raschka says that this is not normally done these days, which is why I didn't do it
+for this base model train.</p>
+
+<p>But perhaps it actually is valuable with this architecture or size?  Modern models
+presumably differ in multiple ways, and perhaps the bias would have been useful for
+this old design.</p>
+
+<p>Likewise, weight-tying -- the original GPT-2 re-used its embedding matrix to do the
+final projection from embedding space to vocab space, rather than having a separate one.
+That seems intuitively clever but not necessarily "right", given that it gives the
+model less flexibility in what it can output from the last layer.  But perhaps with
+this size and architecture, it's the right thing to do?</p>
+
+<h4>Dropout</h4>
+
+<p>Contrariwise, having made those two changes to GPT-2 because I believed that modern
+models don't work that way, there was one "modern" change that I didn't make.  In his post on the
+architectural changes since GPT-2, Raschka mentioned that dropout is normally not used nowadays.
+This looked to me like it was due to the move to single-epoch training.  But
+single-epoch training was exactly what we were doing in this post!  Perhaps I was
+holding myself back by keeping dropout in place.</p>
+
+<h4>The learning rate</h4>
+
+<p>I don't have a good intuition as to what the right level is for this at the moment.
+My code blindly uses the optimiser setup from the book:</p>
+
+<div>
+<pre><span></span><code>    <span>optimizer</span> <span>=</span> <span>torch</span><span>.</span><span>optim</span><span>.</span><span>AdamW</span><span>(</span>
+        <span>model</span><span>.</span><span>parameters</span><span>(),</span>
+        <span>lr</span><span>=</span><span>0.0004</span><span>,</span> <span>weight_decay</span><span>=</span><span>0.1</span>
+    <span>)</span>
+</code></pre>
+</div>
+
+<p>I have at best a vague understanding of how those work, at least when using an
+optimiser (LR for simple gradient descent isn't too hard to understand, although it's
+hard to work out an intuition for what the right value might be in any given case).
+Additionally, in the Chinchilla paper, they talk about using a cosine
+function to vary the learning rate, which is something I'm completely unfamiliar
+with.</p>
+
+<h4>The precision</h4>
+
+<p>I gained about a day in training time by using AMP and the TF32 tensor cores; however,
+I lost precision.  I don't know for sure, but I suspect that the original weights
+were trained with pure full-fat FP32.  Perhaps reducing precision lost something?  I know that
+modern models are often trained with lower precisions, but perhaps that's balanced
+out by something else?</p>
+
+<h4>The batch size</h4>
+
+<p>This is the one that I think it least likely, but it's worth mentioning.  The post that
+I linked to estimating the size of the training run for GPT-2 small mentioned that they
+used a batch size of 512, which (of course) is completely impossible on consumer hardware
+like mine.  Indeed, I think you'd be lucky to get 512 onto a single 8-GPU node -- we're
+talking serious cluster training scale here.  Larger batches lead to more stable
+updates to the gradients.  So maybe that helped for OpenAI when they did their train?  I suspect it did, but I'm pretty much
+certain that it's not a large part of the difference.</p>
+
+<p>(Counterpoint: Gemini thinks that this might actually be a big part of the problem!
+It recommends using gradient accumulation -- that is, not stepping the optimiser every
+iteration, but instead giving gradients time to build up -- as a way of getting
+a larger batch effective batch size.)</p>
+
+<h4>Exploding gradients</h4>
+
+<p>While it doesn't look like we had any issues with these on the original FineWeb
+and FineWeb-Edu trains, they definitely did kick in on the extended Edu train.
+The code to clip them is easy enough, and I think it's likely that the original
+GPT-2 trains would have had it.  I doubt this was a major part of the difference,
+but it probably would have helped, at least a bit.</p>
+
+<hr />
+
+<p>Anyway, I think that's it in terms of differences that I can see between my train and OpenAI's
+(as always, comments welcome -- let me know if you spot any others!),
+so it's time to (finally) wrap this post up.</p>
+
+<h3>Conclusion</h3>
+
+<p>At the start of this (ridiculously long) post, I asked the question: can we train
+a GPT-2 style base model at home on a single RTX 3090.  The answer is a resounding
+"yes we can", which is great!  Training base models: not just for the GPU-rich.  If
+you have a couple of days and a decent graphics card, you can train a Chinchilla-optimal GPT-2 pretty easily.</p>
+
+<p>But the model itself isn't quite as good as the original GPT-2 small one, and I have some ideas
+about why that might be.  Testing any of those would take quite a long time,
+given that each training run takes two days.</p>
+
+<p>Now, my next planned step was to see whether I could work out how to move this up to
+the cloud and train the same model on an 8x A100 or similar machine on Lambda Labs.
+This still sounds like an excellent plan!  With his <code>nanochat</code> project, Karpathy trains
+a larger model on more tokens in four hours; if we could get the experiment time
+down to one hour (plausible if training time is linear in both tokens and parameters)
+then it would be much easier to check out those hypotheses above. <sup><a href="#fn-9" target="_blank" rel="noopener noreferrer">9</a></sup></p>
+
+<p>So, I think that's still the right way to go: after training a base model at home
+for free (if you ignore the electricity costs -- and it's cold enough in Lisbon
+right now that the heat from the PC was probably saving me money on my home heating bill -- and the
+cost of having bought the RTX 3090 in the first place),
+the next step is to see how cheaply we can train it in the cloud.</p>
+
+<p>Stay tuned :-)</p>
+
+<p><a href="/2026/01/llm-from-scratch-29-ddp-training-a-base-model-in-the-cloud" target="_blank" rel="noopener noreferrer">Here's a link to the next post in this series</a>.</p>
+
+<div>
+<hr />
+<ol>
+<li>
+<p>It's useful here, but it does make me wonder how good FineWeb would be for training a base model
+with a longer context length, however. <a href="#fnref-1" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>There are ways to get comparable numbers even with a different tokeniser, using a
+bits-per-byte or nats-per-byte measure.  Let's say we're using the normal
+cross entropy loss with the natural logarithm; that means that loss is expressed
+in nats.  So you add up all of the per-token
+losses and divide it by the number of bytes across all of the inputs you've
+seen, and that would give you nats-per-byte.  Likewise, if you used log2 for
+cross entropy, you'd get bits-per-byte.  The latter is used in the Chinchilla
+paper (eg. table A5) as a way to compare their
+model with the Gopher model.  I did consider digging into this a bit, but I
+think it's a bit of a side quest for now. <a href="#fnref-2" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>Those evals cost me $0.09 in API credits, which is actually a little more than
+I was expecting -- there were some responses which took quite a while to come back,
+though, and I believe that the GPT 5.1 model spends time thinking when it seems
+appropriate, so perhaps I spent a bit on thinking tokens. <a href="#fnref-3" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>Apart from a reference to a "dense layer", which I'm unsure about -- I believe
+it's the linear feed-forward layer after the attention calculations, though, as
+that doesn't appear elsewhere, and the calculation looks right.  I also noticed
+that they don't have any terms in there for things like normalisation, which
+seems odd for such a carefully-worked-out formula; I assume they are small enough
+to vanish into the noise. <a href="#fnref-4" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>If you want a more careful calculation of the numbers -- and indeed a really nice
+explanation of some of the details of the Chinchilla paper, I recommend
+<a href="https://tomekkorbak.com/2022/10/10/compute-optimal-gpt2/" target="_blank" rel="noopener noreferrer">this blog post from Tomek Korbak</a>. <a href="#fnref-5" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>I hate that we appear to have settled on FLOPs with a lower-case "s" for "floating-point operations"
+when "FLOPS" (and equivalently MFLOPS, GFLOPS, TFLOPS) with an upper-case "S" already
+meant "floating-point operations per second" because the difference in capitalisation
+should really not change the units.  But here we are. <a href="#fnref-6" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>I estimated the OpenAI weights loss on their own dataset by taking the perplexity
+number for the small model from figure 4, which is about 16.5, and then taking its
+natural log. <a href="#fnref-7" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>The authors of the paper call it "grokking", which is a great name, but is so
+overloaded in the context of LLMs (even if you disregard xAI's <a href="https://x.ai/grok" target="_blank" rel="noopener noreferrer">Grok</a>)
+that I'm slightly loath to use it here.  This phenomenon also looks somewhat
+more limited in scope than I thought -- I'd been under the impression that it happens
+a lot with LLMs, but it looks like it's more a thing that happens with small models
+trained on very structured datasets. <a href="#fnref-8" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>It would also be interesting to see how easy it is to offload the optimiser to the CPU:
+in my old fine-tuning experiments I found that freed up a ton of VRAM, so we could benefit
+from that and maybe get the batch size up to something closer to the 512 that OpenAI
+apparently trained with. <a href="#fnref-9" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+</ol>
+</div>
+</div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://www.gilesthomas.com/2025/12/llm-from-scratch-28-training-a-base-model-from-scratch" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text" data-astro-cid-sz7xmlte>
+&copy; 2026 AstroBlog
+</p> <p class="footer-text" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer>  </body></html> 
