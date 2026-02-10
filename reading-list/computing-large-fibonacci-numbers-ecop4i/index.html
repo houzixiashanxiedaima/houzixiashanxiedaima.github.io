@@ -5,7 +5,7 @@
 
 			// 强制使用浅色主题
 			document.documentElement.setAttribute('data-theme', 'light');
-		</script><link rel="stylesheet" href="/_astro/_slug_.Da6PdEKR.css">
+		</script><link rel="stylesheet" href="/_astro/_slug_.AC5XNt97.css">
 <style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.source-tag[data-astro-cid-wrgicudb]{background-color:var(--muted);color:var(--foreground);padding:.125rem .5rem;border-radius:9999px;font-weight:500;font-size:.75rem;text-decoration:none;transition:opacity .2s}.source-tag[data-astro-cid-wrgicudb]:hover{opacity:.8}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;color:var(--muted-foreground);font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.875rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--foreground)}
 </style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2>
 AstroBlog
@@ -22,7 +22,7 @@ AstroBlog
 <p>The second approach is to use Binet’s formula</p>
 <p><em>F</em><sub><em>n</em></sub> = round( φ<sup><em>n</em></sup> / √ 5 )</p>
 <p>where φ is the golden ratio.</p>
-<p>It’s not clear which approach is more efficient. You could say that the iterative approach has run time <em>O</em>(<em>n</em>) while Binet’s formula is <em>O</em>(1). That doesn’t take into account how much work goes into each step, but it does suggest that eventually Binet wins.</p>
+<p>It’s not clear which approach is more efficient. You might naively say that the iterative approach has run time <em>O</em>(<em>n</em>) while Binet’s formula is <em>O</em>(1). That doesn’t take into account how much work goes into each step, but it does suggest that eventually Binet wins.</p>
 <p>The relative efficiency of each algorithm depends on how it is implemented. In this post I will compare using Python’s integer arithmetic and the <code>mpmath</code> library for floating point. Here’s my code for both methods.</p>
 <pre>from math import log10
 import mpmath as mp
@@ -76,21 +76,19 @@ def fib_mpmath(n, guard_digits=30):
 0.002145750000181579
 </pre>
 <p>For larger <em>n</em>, the efficiency advantage of Binet’s formula becomes more apparent.</p>
-<pre>
-&gt;&gt;&gt; compare(1_000_000)
+<pre>&gt;&gt;&gt; compare(1_000_000)
 11.169050417000108
 2.0719056249999994
 </pre>
 <h2>Guard digits and correctness</h2>
-<p>There is one unsettling problem with the function <code>fib_mpmath</code> above: how many guard digits do you need? To compute a number correctly to 100 significant figures, for example, requires more than 100 digits of working precision. How many more? It depends on the calculation. What about our calculation? </p>
+<p>There is one unsettling problem with the function <code>fib_mpmath</code> above: how many guard digits do you need? To compute a number correctly to 100 significant figures, for example, requires more than 100 digits of working precision. How many more? It depends on the calculation. What about our calculation?</p>
 <p>If we compute the 10,000th Fibonacci number using <code>fib_mpmath(10_000, 2)</code>, i.e. with 2 guard digits, we get a result that is incorrect in the last digit. To compute the 1,000,000th Fibonacci number correctly, we need 5 guard digits.</p>
-<p>We don’t need many guard digits, but we’re guessing at how many we need. How might we test whether we’ve guessed correctly? One way would be to compute the result using <code>fib_iterate</code> and compare results, but that defeats the purpose of using the more efficient <code>fib_mpmath</code>. </p>
-<p>If floating point calculations produce an incorrect result, the error is likely to be in the least significant digits. If we knew that the last digit was correct, that would give us more confidence that all the digits are correct. More generally, we could test the result mod <em>m</em>. I discussed Fibonacci numbers mod <em>m</em> in <a href="https://www.johndcook.com/blog/2017/11/24/distribution-of-fibonacci-numbers-mod-m/" target="_blank" rel="noopener noreferrer">this post</a>. </p>
+<p>We don’t need many guard digits, but we’re guessing at how many we need. How might we test whether we’ve guessed correctly? One way would be to compute the result using <code>fib_iterate</code> and compare results, but that defeats the purpose of using the more efficient <code>fib_mpmath</code>.</p>
+<p>If floating point calculations produce an incorrect result, the error is likely to be in the least significant digits. If we knew that the last digit was correct, that would give us more confidence that all the digits are correct. More generally, we could test the result mod <em>m</em>. I discussed Fibonacci numbers mod <em>m</em> in <a href="https://www.johndcook.com/blog/2017/11/24/distribution-of-fibonacci-numbers-mod-m/" target="_blank" rel="noopener noreferrer">this post</a>.</p>
 <p>When <em>m</em> = 10, the last digits of the Fibonacci numbers have a cycle of 60. So the Fibonacci numbers with index <em>n</em> and with index <em>n</em> mod 60 should be the same.</p>
 <p>The post I just mentioned links to a paper by Niederreiter that says the Fibonacci numbers ore evenly distributed mod <em>m</em> if and only if <em>m</em> is a power of 5, in which case the cycle length is 4<em>m</em>.</p>
 <p>The following code could be used as a sanity check on the result of <code>fig_mpmath</code>.</p>
-<pre>
-def mod_check(n, Fn):
+<pre>def mod_check(n, Fn):
     k = 3
     base = 5**k
     period = 4*base
