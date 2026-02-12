@@ -41,14 +41,14 @@ performs better than baseline? I need an eval, a task.</p>
 <p>Math problems? Too one-shottable. A chatbot? Too interactive, I want something
 hands-off and long-horizon. A coding agent? That’s too freeform and requires too
 much tool use. And then I thought: <a href="https://en.wikipedia.org/wiki/Interactive_fiction" target="_blank" rel="noopener noreferrer">text adventures</a>! You have a stylized,
-hierarchically-structured world accessible entirely tthrough text, long-term
+hierarchically-structured world accessible entirely through text, long-term
 goals, puzzles, physical exploration and discovery of the environment. Even the
 data model of text adventures resembles <a href="https://en.wikipedia.org/wiki/Frame_(artificial_intelligence)" target="_blank" rel="noopener noreferrer">frame-based</a> knowledge
 representation systems. And there’s a <a href="https://ifdb.org/" target="_blank" rel="noopener noreferrer">vast collection</a> of games available
 online.</p>
 
 <p><a href="https://en.wikipedia.org/wiki/Anchorhead" target="_blank" rel="noopener noreferrer"><em>Anchorhead</em></a>, which I played years ago, is a Lovecraft-inspired text
-adventure by Michael S. Gentry. It takes on the order of hundrds of turns to win
+adventure by Michael S. Gentry. It takes on the order of hundreds of turns to win
 across multiple in-game days. And the game world is huge and very open. In other
 words: a perfect long-horizon task.</p>
 
@@ -191,7 +191,7 @@ Have fun! 😊
 
 <span>class</span> <span>SimplePlayer</span><span>(</span><span>Player</span><span>):</span>
     <span>"""
-    The simplest game-playing agent: keep the entire game histoyr in-context.
+    The simplest game-playing agent: keep the entire game history in-context.
     """</span>
 
     <span>client</span><span>:</span> <span>Anthropic</span>
@@ -329,7 +329,7 @@ in the context. This saves Claude having to note those things manually using a
 tool.</li>
   <li><strong>Manual Geography:</strong> the automatic geography approach has a few
 drawbacks. Without integration into the Z-machine interpreter, it requires
-some work to implement (parsing the currente location from the <code>dfrotz</code>
+some work to implement (parsing the current location from the <code>dfrotz</code>
 output, keeping track of the command history to find standard travel commands
 e.g. <code>go south</code>) but isn’t 100% deterministic, so that mazes and dynamic rooms
 (e.g. elevators) will confuse the system. So, instead of doing it manually, we
