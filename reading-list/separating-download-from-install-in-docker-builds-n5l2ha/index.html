@@ -1,0 +1,189 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.17.1"><meta name="description" content="Docker layer caching works best when each layer’s inputs are narrow, and a layer that only depends on a lockfile can survive most builds untouched because you’re usually changing application code, not"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data:;"><link rel="canonical" href="https://blog.yuyins.com/reading-list/separating-download-from-install-in-docker-builds-n5l2ha/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/separating-download-from-install-in-docker-builds-n5l2ha/"><meta property="og:title" content="Separating Download from Install in Docker Builds"><meta property="og:description" content="Docker layer caching works best when each layer’s inputs are narrow, and a layer that only depends on a lockfile can survive most builds untouched because you’re usually changing application code, not"><meta property="og:image" content="https://blog.yuyins.com/favicon.svg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/separating-download-from-install-in-docker-builds-n5l2ha/"><meta property="twitter:title" content="Separating Download from Install in Docker Builds"><meta property="twitter:description" content="Docker layer caching works best when each layer’s inputs are narrow, and a layer that only depends on a lockfile can survive most builds untouched because you’re usually changing application code, not"><meta property="twitter:image" content="https://blog.yuyins.com/favicon.svg"><title>Separating Download from Install in Docker Builds</title><!-- Theme and color scheme script (runs before page loads to prevent flash) --><script>
+			// 初始化配色方案 - 默认使用 stone-amber
+			const colorScheme = localStorage.getItem('colorScheme') || 'stone-amber';
+			document.documentElement.setAttribute('data-color', colorScheme);
+
+			// 强制使用浅色主题
+			document.documentElement.setAttribute('data-theme', 'light');
+		</script><link rel="stylesheet" href="/_astro/_slug_.BK6BiV5P.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.source-tag[data-astro-cid-wrgicudb]{background-color:var(--muted);color:var(--foreground);padding:.125rem .5rem;border-radius:9999px;font-weight:500;font-size:.75rem;text-decoration:none;transition:opacity .2s}.source-tag[data-astro-cid-wrgicudb]:hover{opacity:.8}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;color:var(--muted-foreground);font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.875rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--foreground)}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2>
+AstroBlog
+</a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-modal" data-astro-cid-otpdt6jm> <div class="modal-content" data-astro-cid-otpdt6jm> <div class="modal-header" data-astro-cid-otpdt6jm> <h2 class="modal-title" data-astro-cid-otpdt6jm>搜索文章</h2> <button id="close-search" class="close-button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-otpdt6jm></path> </svg> </button> </div> <div id="pagefind-ui" data-astro-cid-otpdt6jm></div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(t=0){if(sessionStorage.getItem(c)==="true")return g(),!0;const r=document.getElementById("pagefind-ui");if(!r)return!1;r.innerHTML='<div style="padding: 2rem; text-align: center; color: var(--muted-foreground);">加载中...</div>';try{return await new Promise((o,s)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=o,a.onerror=s,document.head.appendChild(a)}),g(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),t<2?(console.log(`Retrying search load... (${t+1}/2)`),await new Promise(o=>setTimeout(o,1e3)),l(t+1)):(r&&(r.innerHTML=`
+          <div style="padding: 2rem; text-align: center;">
+            <p style="color: var(--muted-foreground); margin-bottom: 1rem;">搜索功能加载失败</p>
+            <button id="retry-search" style="padding: 0.5rem 1rem; background: var(--accent); color: var(--accent-foreground); border: none; border-radius: 0.375rem; cursor: pointer;">
+              重试
+            </button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Separating Download from Install in Docker Builds</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://nesbitt.io" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>nesbitt.io</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年2月15日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>Docker layer caching works best when each layer’s inputs are narrow, and a layer that only depends on a lockfile can survive most builds untouched because you’re usually changing application code, not dependencies. Most package managers combine downloading and installing into a single command though, so the layer that fetches from the registry also depends on source files, and any source change invalidates the layer and forces every dependency to re-download even when the lockfile is identical to last time.</p>
+
+<p>That costs more than build time. crates.io, rubygems.org, and pypi.org all run on bandwidth donated by Fastly, and every redundant download in a Docker build is a cost someone else is volunteering to cover. npm is backed by Microsoft and Go’s module proxy by Google, so they can absorb it, but for the community-funded registries it adds up. It feels instant from the developer’s side, a few seconds of progress bars, so nobody thinks about the hundreds of HTTP requests firing against those services on every build where the lockfile has changed by even one line, or when you’re debugging a failed install and rebuilding the same image over and over.</p>
+
+<p>If package managers exposed a <code>download</code> that populates the local cache from the lockfile and an <code>install</code> that works offline from that cache, Docker layer caching would handle the rest:</p>
+
+<div><div><pre><code><span>COPY</span><span> lockfile .</span>
+<span>RUN </span>pkg download
+<span>COPY</span><span> . .</span>
+<span>RUN </span>pkg <span>install</span> <span>--offline</span>
+</code></pre></div></div>
+
+<h3>go mod download</h3>
+
+<p>Go modules shipped with Go 1.11 in August 2018, and the community figured out the Docker pattern <a href="https://blog.container-solutions.com/faster-builds-in-docker-with-go-1-11" target="_blank" rel="noopener noreferrer">within weeks</a>. It’s now the canonical Go Dockerfile pattern, recommended by <a href="https://docs.docker.com/guides/golang/build-images/" target="_blank" rel="noopener noreferrer">Docker’s own documentation</a>:</p>
+
+<div><div><pre><code><span>COPY</span><span> go.mod go.sum ./</span>
+<span>RUN </span>go mod download
+<span>COPY</span><span> . .</span>
+<span>RUN </span><span>CGO_ENABLED</span><span>=</span>0 go build <span>-o</span> /app .
+</code></pre></div></div>
+
+<p><code>go mod download</code> reads <code>go.mod</code> and <code>go.sum</code> and fetches everything without doing any resolution or building, and the layer caches when those two files haven’t changed.</p>
+
+<p>Before Go 1.11, <code>GOPATH</code>-based dependency management didn’t have a clean two-file manifest that could be separated from source code for layer caching, and the design of <code>go.mod</code> and <code>go.sum</code> as small standalone files made this Docker pattern fall out naturally once modules landed.</p>
+
+<p><code>go build</code> can still contact the checksum database (<code>sum.golang.org</code>) after <code>go mod download</code> to verify modules not yet in <code>go.sum</code>. Setting <code>GOFLAGS=-mod=readonly</code> after the download step prevents any network access during the build.</p>
+
+<h3>pnpm fetch</h3>
+
+<p>pnpm is the only JavaScript package manager with a download-only command, and <a href="https://pnpm.io/cli/fetch" target="_blank" rel="noopener noreferrer"><code>pnpm fetch</code></a> was designed specifically for Docker. It reads <code>pnpm-lock.yaml</code> and downloads all packages into pnpm’s content-addressable store without reading <code>package.json</code> at all:</p>
+
+<div><div><pre><code><span>COPY</span><span> pnpm-lock.yaml pnpm-workspace.yaml ./</span>
+<span>RUN </span>pnpm fetch <span>--prod</span>
+<span>COPY</span><span> . .</span>
+<span>RUN </span>pnpm <span>install</span> <span>-r</span> <span>--offline</span> <span>--prod</span>
+</code></pre></div></div>
+
+<p>The download layer only depends on the lockfile, and the install step uses <code>--offline</code> so it never touches the network. In monorepos this is particularly useful because you don’t need to copy every workspace’s <code>package.json</code> before the download step, and pnpm’s authors thinking about container builds when they designed the CLI is the same kind of design awareness that made <code>go mod download</code> standard in Go.</p>
+
+<h3>cargo fetch</h3>
+
+<p><a href="https://doc.rust-lang.org/cargo/commands/cargo-fetch.html" target="_blank" rel="noopener noreferrer"><code>cargo fetch</code></a> reads <code>Cargo.lock</code> and downloads all crate source into the registry cache. After fetching, <code>--frozen</code> (which combines <code>--locked</code> and <code>--offline</code>) prevents any network access during the build:</p>
+
+<div><div><pre><code><span>COPY</span><span> Cargo.toml Cargo.lock ./</span>
+<span>RUN </span><span>mkdir </span>src <span>&amp;&amp;</span> <span>touch </span>src/main.rs
+<span>RUN </span>cargo fetch <span>--locked</span>
+<span>COPY</span><span> . .</span>
+<span>RUN </span>cargo build <span>--release</span> <span>--frozen</span>
+</code></pre></div></div>
+
+<p>The dummy <code>src/main.rs</code> is needed because <code>cargo fetch</code> requires a valid project structure even though it’s only reading the lockfile, and there’s been an <a href="https://github.com/rust-lang/cargo/issues/2644" target="_blank" rel="noopener noreferrer">open issue</a> about removing that requirement since 2016.</p>
+
+<p>Almost nobody uses <code>cargo fetch</code> in Dockerfiles. The Rust community skipped straight to caching compilation with <a href="https://github.com/LukeMathWalker/cargo-chef" target="_blank" rel="noopener noreferrer">cargo-chef</a>, because compiling hundreds of crates is where builds spend most of their wall-clock time and downloads feel cheap by comparison. But every <code>cargo build</code> without a prior <code>cargo fetch</code> is still hitting crates.io for every crate whenever the layer rebuilds, and Fastly is absorbing that traffic whether it takes three seconds or thirty.</p>
+
+<h3>pip wheel</h3>
+
+<p><a href="https://pip.pypa.io/en/stable/cli/pip_wheel/" target="_blank" rel="noopener noreferrer"><code>pip wheel</code></a> builds wheels for all dependencies into a directory, and <code>pip install --no-index --find-links</code> installs from that directory offline:</p>
+
+<div><div><pre><code><span>COPY</span><span> requirements.txt .</span>
+<span>RUN </span>pip wheel <span>-r</span> requirements.txt <span>-w</span> /tmp/wheels
+<span>COPY</span><span> . .</span>
+<span>RUN </span>pip <span>install</span> <span>--no-index</span> <span>--find-links</span> /tmp/wheels <span>-r</span> requirements.txt
+</code></pre></div></div>
+
+<p><code>pip download</code> also exists but has a <a href="https://github.com/pypa/pip/issues/7863" target="_blank" rel="noopener noreferrer">known bug</a> where build dependencies like setuptools aren’t included, so packages that ship as source distributions can fail during the offline install. <code>pip wheel</code> avoids this by compiling everything into wheels up front, so the install step never needs a build backend.</p>
+
+<p>Neither Poetry nor uv have download-only commands. Poetry has had an <a href="https://github.com/python-poetry/poetry/issues/2184" target="_blank" rel="noopener noreferrer">open issue</a> since 2020, and uv has <a href="https://github.com/astral-sh/uv/issues/3163" target="_blank" rel="noopener noreferrer">one</a> with over a hundred upvotes. Both suggest exporting to <code>requirements.txt</code> and falling back to pip.</p>
+
+<h3>bundle cache</h3>
+
+<p>Bundler has <code>bundle cache --no-install</code>, which fetches <code>.gem</code> files into <code>vendor/cache</code> without installing them, and <code>bundle install --local</code> installs from that cache without hitting the network:</p>
+
+<div><div><pre><code><span>COPY</span><span> Gemfile Gemfile.lock ./</span>
+<span>RUN </span>bundle cache <span>--no-install</span>
+<span>COPY</span><span> . .</span>
+<span>RUN </span>bundle <span>install</span> <span>--local</span>
+</code></pre></div></div>
+
+<p>In practice this has enough rough edges that it rarely gets used in Dockerfiles. Git-sourced gems <a href="https://github.com/ruby/rubygems/issues/6499" target="_blank" rel="noopener noreferrer">still try to reach the remote</a> even with <code>--local</code>, and platform-specific gems need <code>--all-platforms</code> plus <code>bundle lock --add-platform</code> to work across macOS development and Linux containers. The command was designed for vendoring gems into your repository rather than for Docker layer caching.</p>
+
+<h3>npm and yarn</h3>
+
+<p>npm has no download-only command. <code>npm ci</code> reads the lockfile and skips resolution, but downloads and installs as one atomic operation with no way to separate them, and there’s no <code>--download-only</code> flag or RFC proposing one.</p>
+
+<p>Yarn Classic has an offline mirror that saves tarballs as a side effect of install, but no standalone download command. Yarn Berry has no fetch command either, despite <a href="https://github.com/yarnpkg/berry/issues/4529" target="_blank" rel="noopener noreferrer">multiple</a> <a href="https://github.com/yarnpkg/berry/issues/5998" target="_blank" rel="noopener noreferrer">open</a> issues requesting one.</p>
+
+<p>The standard JavaScript Docker pattern is still:</p>
+
+<div><div><pre><code><span>COPY</span><span> package.json package-lock.json ./</span>
+<span>RUN </span>npm ci
+<span>COPY</span><span> . .</span>
+</code></pre></div></div>
+
+<p>When the lockfile hasn’t changed the layer caches and nothing gets downloaded, but when it has changed every package re-downloads from the registry, and pnpm is the only JavaScript package manager where you can avoid that.</p>
+
+<h3>BuildKit cache mounts</h3>
+
+<p>Docker BuildKit has <code>--mount=type=cache</code>, which persists a cache directory across builds so package managers can reuse previously downloaded packages even when the layer invalidates:</p>
+
+<div><div><pre><code><span>RUN </span><span>--mount</span><span>=</span><span>type</span><span>=</span>cache,target<span>=</span>/root/.npm npm ci
+</code></pre></div></div>
+
+<p>Cache mounts solve the problem from the wrong end. The package manager has the lockfile and knows the cache format, but Docker doesn’t know any of that, which is why the Dockerfile author has to specify internal cache paths that vary between tools and sometimes between versions of the same tool. Not every build system supports BuildKit cache mounts either, and not every CI environment preserves them between builds, so a download command in the package manager itself would be more broadly useful.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Registry</th>
+      <th>Funding</th>
+      <th>Download command</th>
+      <th>Offline install</th>
+      <th>Used in practice?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Go module proxy</td>
+      <td>Google</td>
+      <td><code>go mod download</code></td>
+      <td>implicit</td>
+      <td>Yes, canonical</td>
+    </tr>
+    <tr>
+      <td>npm registry</td>
+      <td>Microsoft</td>
+      <td><code>pnpm fetch</code> (pnpm only; npm and yarn have nothing)</td>
+      <td><code>--offline</code></td>
+      <td>pnpm yes, others no</td>
+    </tr>
+    <tr>
+      <td>crates.io</td>
+      <td>Fastly (donated)</td>
+      <td><code>cargo fetch</code></td>
+      <td><code>--frozen</code></td>
+      <td>Rarely</td>
+    </tr>
+    <tr>
+      <td>PyPI</td>
+      <td>Fastly (donated)</td>
+      <td><code>pip wheel</code> (pip only)</td>
+      <td><code>--no-index --find-links</code></td>
+      <td>Rarely</td>
+    </tr>
+    <tr>
+      <td>rubygems.org</td>
+      <td>Fastly (donated)</td>
+      <td><code>bundle cache --no-install</code></td>
+      <td><code>--local</code></td>
+      <td>Rarely</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Most package managers were designed around a persistent local cache on a developer’s laptop, <code>~/.cache</code> or <code>~/.gem</code> or <code>~/.npm</code>, that warms up over time and stays warm. Ephemeral build environments start clean every time, and Docker layers are the only caching mechanism available, which means the network-dependent part of a build needs to be isolated from the rest for caching to work.</p>
+
+<p>Opportunities:</p>
+
+<ul>
+  <li>npm could add an <code>npm fetch</code> that reads <code>package-lock.json</code> and populates the cache without installing</li>
+  <li>Poetry has had an <a href="https://github.com/python-poetry/poetry/issues/2184" target="_blank" rel="noopener noreferrer">open issue</a> requesting a download command since 2020, and uv has <a href="https://github.com/astral-sh/uv/issues/3163" target="_blank" rel="noopener noreferrer">one</a> with strong community interest</li>
+  <li>Bundler’s <code>bundle cache --no-install</code> would work if it handled git gems and cross-platform builds more reliably</li>
+  <li>Cargo’s <code>cargo fetch</code> shouldn’t need a dummy source file to run a command that only reads the lockfile</li>
+</ul></div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://nesbitt.io/2026/02/15/separating-download-from-install-in-docker-builds.html" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text" data-astro-cid-sz7xmlte>
+&copy; 2026 AstroBlog
+</p> <p class="footer-text" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer>  </body></html> 
