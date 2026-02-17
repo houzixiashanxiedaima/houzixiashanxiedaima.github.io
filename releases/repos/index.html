@@ -15,44 +15,53 @@ AstroBlog
             </button>
           </div>
         `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--default" data-astro-cid-sckkx6r4> <h1 id="-github-releases-监控列表">📦 GitHub Releases 监控列表</h1>
-<p>当前系统监控 <strong>6</strong> 个开源项目，每日自动抓取最新版本并生成 AI 摘要。</p>
-<p>最后更新: 2026-02-15</p>
+<p>当前系统监控 <strong>7</strong> 个开源项目，每日自动抓取最新版本并生成 AI 摘要。</p>
+<p>最后更新: 2026-02-16</p>
 <hr>
-<h2 id="python-1">Python (1)</h2>
+<h2 id="go-1">Go (1)</h2>
 <ul>
-<li><strong><a href="https://github.com/Guovin/iptv-api" rel="noopener noreferrer" target="_blank">Guovin/iptv-api</a></strong> ⭐ 22.4k
-⚡️IPTV 直播源自动更新平台『🤖全自动采集、筛选、测速、生成🚀』：自定义获取频道；IPv4/IPv6；接口验效；推流；多平台支持；工作流、Docker、命令行、GUI 多端部署 | IPTV live streaming source automatic update platform
-<em>最后更新: 2026-02-15</em></li>
+<li><strong><a href="https://github.com/SagerNet/sing-box" rel="noopener noreferrer" target="_blank">SagerNet/sing-box</a></strong> ⭐ 30.6k
+The universal proxy platform
+<em>最后更新: 2026-02-16</em></li>
 </ul>
 <hr>
 <h2 id="rust-1">Rust (1)</h2>
 <ul>
-<li><strong><a href="https://github.com/openai/codex" rel="noopener noreferrer" target="_blank">openai/codex</a></strong> ⭐ 60.4k
-Lightweight coding agent that runs in your terminal
-<em>最后更新: 2026-02-15</em></li>
+<li><strong><a href="https://github.com/jdx/mise" rel="noopener noreferrer" target="_blank">jdx/mise</a></strong> ⭐ 24.6k
+dev tools, env vars, task runner
+<em>最后更新: 2026-02-16</em></li>
 </ul>
 <hr>
-<h2 id="typescript-4">TypeScript (4)</h2>
+<h2 id="swift-2">Swift (2)</h2>
 <ul>
 <li>
-<p><strong><a href="https://github.com/anomalyco/opencode" rel="noopener noreferrer" target="_blank">anomalyco/opencode</a></strong> ⭐ 104.7k
+<p><strong><a href="https://github.com/exelban/stats" rel="noopener noreferrer" target="_blank">exelban/stats</a></strong> ⭐ 36.5k
+macOS system monitor in your menu bar
+<em>最后更新: 2026-02-16</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/nguyenphutrong/quotio" rel="noopener noreferrer" target="_blank">nguyenphutrong/quotio</a></strong> ⭐ 3.6k
+Stop juggling AI accounts. Quotio is a beautiful native macOS menu bar app that unifies your Claude, Gemini, OpenAI, Qwen, and Antigravity subscriptions – with real-time quota tracking and smart auto-failover for AI coding tools like Claude Code, OpenCode, and Droid.
+<em>最后更新: 2026-02-16</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="typescript-3">TypeScript (3)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/anomalyco/opencode" rel="noopener noreferrer" target="_blank">anomalyco/opencode</a></strong> ⭐ 105.1k
 The open source coding agent.
-<em>最后更新: 2026-02-15</em></p>
+<em>最后更新: 2026-02-16</em></p>
 </li>
 <li>
-<p><strong><a href="https://github.com/tldraw/tldraw" rel="noopener noreferrer" target="_blank">tldraw/tldraw</a></strong> ⭐ 45.2k
-very good whiteboard infinite canvas SDK
-<em>最后更新: 2026-02-15</em></p>
+<p><strong><a href="https://github.com/code-yeongyu/oh-my-opencode" rel="noopener noreferrer" target="_blank">code-yeongyu/oh-my-opencode</a></strong> ⭐ 31.6k
+the best agent harness
+<em>最后更新: 2026-02-16</em></p>
 </li>
 <li>
-<p><strong><a href="https://github.com/CherryHQ/cherry-studio" rel="noopener noreferrer" target="_blank">CherryHQ/cherry-studio</a></strong> ⭐ 39.8k
-AI productivity studio with smart chat, autonomous agents, and 300+ assistants. Unified access to frontier LLMs
-<em>最后更新: 2026-02-15</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/getmaxun/maxun" rel="noopener noreferrer" target="_blank">getmaxun/maxun</a></strong> ⭐ 14.9k
-✨ The open-source no-code platform for web scraping, crawling, search and AI data extraction • Turn websites into structured APIs in minutes ✨
-<em>最后更新: 2026-02-15</em></p>
+<p><strong><a href="https://github.com/nexmoe/VidBee" rel="noopener noreferrer" target="_blank">nexmoe/VidBee</a></strong> ⭐ 6.3k
+Download videos from almost any website worldwide
+<em>最后更新: 2026-02-16</em></p>
 </li>
 </ul>
 <hr>
