@@ -1,0 +1,280 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.17.1"><meta name="description" content="询问十个生态系统当前运行平台会得到十个不同的答案。例如，在M1 Mac上编译库时，LLVM中标记为aarch64-apple-darwin，RubyGems中标记为arm64-darwin，而darwin/arm64则标记为t..."><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data:;"><link rel="canonical" href="https://blog.yuyins.com/reading-list/platform-strings-rouotz/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/platform-strings-rouotz/"><meta property="og:title" content="平台标识符"><meta property="og:description" content="询问十个生态系统当前运行平台会得到十个不同的答案。例如，在M1 Mac上编译库时，LLVM中标记为aarch64-apple-darwin，RubyGems中标记为arm64-darwin，而darwin/arm64则标记为t..."><meta property="og:image" content="https://blog.yuyins.com/favicon.svg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/platform-strings-rouotz/"><meta property="twitter:title" content="平台标识符"><meta property="twitter:description" content="询问十个生态系统当前运行平台会得到十个不同的答案。例如，在M1 Mac上编译库时，LLVM中标记为aarch64-apple-darwin，RubyGems中标记为arm64-darwin，而darwin/arm64则标记为t..."><meta property="twitter:image" content="https://blog.yuyins.com/favicon.svg"><title>平台标识符</title><!-- Theme and color scheme script (runs before page loads to prevent flash) --><script>
+			// 初始化配色方案 - 默认使用 stone-amber
+			const colorScheme = localStorage.getItem('colorScheme') || 'stone-amber';
+			document.documentElement.setAttribute('data-color', colorScheme);
+
+			// 强制使用浅色主题
+			document.documentElement.setAttribute('data-theme', 'light');
+		</script><link rel="stylesheet" href="/_astro/_slug_.BK6BiV5P.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.source-tag[data-astro-cid-wrgicudb]{background-color:var(--muted);color:var(--foreground);padding:.125rem .5rem;border-radius:9999px;font-weight:500;font-size:.75rem;text-decoration:none;transition:opacity .2s}.source-tag[data-astro-cid-wrgicudb]:hover{opacity:.8}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;color:var(--muted-foreground);font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.875rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--foreground)}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2>
+AstroBlog
+</a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-modal" data-astro-cid-otpdt6jm> <div class="modal-content" data-astro-cid-otpdt6jm> <div class="modal-header" data-astro-cid-otpdt6jm> <h2 class="modal-title" data-astro-cid-otpdt6jm>搜索文章</h2> <button id="close-search" class="close-button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-otpdt6jm></path> </svg> </button> </div> <div id="pagefind-ui" data-astro-cid-otpdt6jm></div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(t=0){if(sessionStorage.getItem(c)==="true")return g(),!0;const r=document.getElementById("pagefind-ui");if(!r)return!1;r.innerHTML='<div style="padding: 2rem; text-align: center; color: var(--muted-foreground);">加载中...</div>';try{return await new Promise((o,s)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=o,a.onerror=s,document.head.appendChild(a)}),g(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),t<2?(console.log(`Retrying search load... (${t+1}/2)`),await new Promise(o=>setTimeout(o,1e3)),l(t+1)):(r&&(r.innerHTML=`
+          <div style="padding: 2rem; text-align: center;">
+            <p style="color: var(--muted-foreground); margin-bottom: 1rem;">搜索功能加载失败</p>
+            <button id="retry-search" style="padding: 0.5rem 1rem; background: var(--accent); color: var(--accent-foreground); border: none; border-radius: 0.375rem; cursor: pointer;">
+              重试
+            </button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>平台标识符</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://nesbitt.io" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>nesbitt.io</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年2月17日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>Ask a dozen ecosystems what platform you’re running on and you’ll get a dozen different answers. An M1 Mac compiling a library is <code>aarch64-apple-darwin</code> to LLVM, <code>arm64-darwin</code> to RubyGems, <code>darwin/arm64</code> to Go, <code>macosx_11_0_arm64</code> to Python wheels, and <code>darwin-arm64</code> to npm, all describing the same chip on the same OS. Each naming scheme was designed for its own context with its own constraints, and every tool that needs to work across ecosystems ends up maintaining a translation table between them.</p>
+
+<h3>GNU target triples</h3>
+
+<p>The format <code>cpu-vendor-os</code> dates to the early 1990s GNU autoconf toolchain. Per Bothner wrote <a href="https://www.gnu.org/software/autoconf/manual/autoconf-2.68/html_node/Specifying-Target-Triplets.html" target="_blank" rel="noopener noreferrer"><code>config.guess</code></a> in 1992 to detect the build system’s architecture. <a href="https://gcc.gnu.org/install/configure.html" target="_blank" rel="noopener noreferrer"><code>config.sub</code></a> normalized the output using a long list of known CPUs and operating systems. The “triple” described three things: what CPU, what vendor made the hardware, and what OS it runs.<sup><a href="#fn:triple" rel="noopener noreferrer" target="_blank">1</a></sup></p>
+
+<p>GCC adopted this for <a href="https://gcc.gnu.org/onlinedocs/gccint/Configure-Terms.html" target="_blank" rel="noopener noreferrer">cross-compilation</a>, where the build machine, host machine, and target machine might all differ. The vendor field (<code>pc</code>, <code>apple</code>, <code>unknown</code>) is mostly decorative for the compiler itself but serves as a namespace to avoid collisions when the same arch-os pair needs different behavior. LLVM inherited the format through <a href="https://clang.llvm.org/docs/CrossCompilation.html" target="_blank" rel="noopener noreferrer">Clang’s cross-compilation support</a>, using <code>&lt;arch&gt;&lt;sub&gt;-&lt;vendor&gt;-&lt;sys&gt;-&lt;env&gt;</code> with the fourth field encoding ABI details like <code>gnu</code>, <code>musl</code>, or <code>msvc</code>.</p>
+
+<p>ARM naming has been a persistent source of confusion. The architecture ARM calls “AArch64” is what Apple calls “arm64” and what LLVM accepts as both. A <a href="https://groups.google.com/g/llvm-dev/c/PIBNR1EE9R0" target="_blank" rel="noopener noreferrer">Clang bug</a> meant <code>--target=aarch64-apple-ios</code> and <code>--target=arm64-apple-ios</code> produced different results. ARM itself used both names at different times before settling on AArch64 as the official designation, and the ambiguity persists everywhere downstream.</p>
+
+<h3>Go</h3>
+
+<p>Go uses two environment variables rather than a combined string: <code>GOOS=darwin GOARCH=arm64</code> or <code>GOOS=linux GOARCH=amd64</code>, with no vendor or ABI field. The <a href="https://go.dev/doc/install/source" target="_blank" rel="noopener noreferrer">canonical values</a> are maintained in the Go source tree in <a href="https://github.com/golang/go/blob/master/internal/platform/syslist_test.go" target="_blank" rel="noopener noreferrer"><code>syslist.go</code></a>.</p>
+
+<p>This design traces back to Plan 9, where the <code>$objtype</code> environment variable selected the target architecture and <code>mk</code> used it to pick the right compiler. Go’s creators (Rob Pike and Ken Thompson, both Plan 9 veterans) carried forward the idea that <a href="https://9p.io/sys/doc/comp.html" target="_blank" rel="noopener noreferrer">a single environment variable should select the build target</a>. The early Go compilers even used Plan 9’s letter-based naming: <code>8g</code> for the x86 compiler, <code>6g</code> for amd64, <code>5g</code> for ARM.</p>
+
+<p>Go can afford two flat variables because it statically links everything. It doesn’t need to express which vendor made the hardware or which C library the system uses, because <a href="https://eli.thegreenplace.net/2024/building-static-binaries-with-go-on-linux/" target="_blank" rel="noopener noreferrer">Go programs don’t link against a C library by default</a>. CGo changes this, and when it does, cross-compilation gets harder. That’s the tradeoff: the simple model works because Go opted out of the C ecosystem.</p>
+
+<p>Go chose <code>amd64</code> over <code>x86_64</code> following Debian and Plan 9 conventions. This caused confusion early on, with users on Intel hardware wondering if <code>amd64</code> downloads would work for them. The Go team eventually <a href="https://github.com/golang/go/issues/3125" target="_blank" rel="noopener noreferrer">relabeled downloads</a> as “x86 64-bit” while keeping the internal <code>amd64</code> naming.</p>
+
+<h3>Node.js</h3>
+
+<p>Node exposes <code>process.platform</code> and <code>process.arch</code>, with platform values like <code>darwin</code>, <code>linux</code>, <code>win32</code>, and <code>freebsd</code>, and architecture values like <code>x64</code>, <code>arm64</code>, <code>ia32</code>, and <code>arm</code>.</p>
+
+<p><code>win32</code> for Windows and <code>x64</code> for 64-bit x86 both come from existing conventions that Node inherited rather than chose. <code>win32</code> is the Windows API subsystem name, used even on 64-bit Windows because the Win32 API kept its name, so <code>process.platform</code> returns <code>win32</code> on a machine that hasn’t been 32-bit for a decade. <code>x64</code> is the name Microsoft and <a href="https://v8.dev/" target="_blank" rel="noopener noreferrer">V8</a> use for the architecture, following the Windows SDK convention rather than the Linux <code>x86_64</code> or Debian <code>amd64</code> convention.</p>
+
+<p>npm’s <a href="https://docs.npmjs.com/cli/v7/configuring-npm/package-json/" target="_blank" rel="noopener noreferrer"><code>package.json</code></a> has <code>os</code> and <code>cpu</code> fields (<code>{"os": ["darwin", "linux"], "cpu": ["x64", "arm64"]}</code>) that filter which platforms a package can install on, but npm itself has no built-in binary distribution mechanism, so the community invented one. Tools like <a href="https://github.com/evanw/esbuild/blob/main/lib/npm/node-platform.ts" target="_blank" rel="noopener noreferrer">esbuild</a> publish platform-specific binaries as scoped packages (<code>@esbuild/darwin-arm64</code>, <code>@esbuild/linux-x64</code>) listed as <code>optionalDependencies</code> of a wrapper package, with <code>os</code> and <code>cpu</code> fields on each so npm silently skips the ones that don’t match. The wrapper package then uses <code>process.platform</code> and <code>process.arch</code> at runtime to <code>require()</code> the right one. This pattern, popularized by esbuild and adopted by SWC and others, works but it’s a convention built on top of npm’s dependency resolution, not a feature npm designed for the purpose.</p>
+
+<p>The Node scheme has no way to express libc version, OS version, or ABI, which is fine for most of the JavaScript ecosystem where packages are pure JavaScript. The cost shows up at the edges: native addons that need different builds for glibc vs musl Linux have to encode that information outside the platform string, and the <code>optionalDependencies</code> pattern offers no help there.</p>
+
+<h3>Python wheels</h3>
+
+<p>Python’s <a href="https://peps.python.org/pep-0425/" target="_blank" rel="noopener noreferrer">wheel platform tags</a> encode the most information of any ecosystem. A wheel filename like <code>numpy-1.26.0-cp312-cp312-manylinux_2_17_x86_64.whl</code> contains the Python version (<code>cp312</code>), the ABI tag (<code>cp312</code>), and the platform tag (<code>manylinux_2_17_x86_64</code>).</p>
+
+<p>The platform tag comes from <a href="https://docs.python.org/3/library/sysconfig.html" target="_blank" rel="noopener noreferrer"><code>sysconfig.get_platform()</code></a> with hyphens and periods replaced by underscores. On macOS it encodes the minimum OS version: <code>macosx_11_0_arm64</code> means “macOS 11 or later on arm64.” On Windows it’s <code>win_amd64</code>. On Linux it encodes the glibc version.</p>
+
+<p>The manylinux story is its own saga. <a href="https://peps.python.org/pep-0513/" target="_blank" rel="noopener noreferrer">PEP 513</a> introduced <code>manylinux1</code> (glibc 2.5) so that compiled wheels could run on most Linux distributions. Then came <a href="https://peps.python.org/pep-0571/" target="_blank" rel="noopener noreferrer">PEP 571</a> for <code>manylinux2010</code> (glibc 2.12), then <a href="https://peps.python.org/pep-0599/" target="_blank" rel="noopener noreferrer">PEP 599</a> for <code>manylinux2014</code> (glibc 2.17). Each required a new PEP. <a href="https://peps.python.org/pep-0600/" target="_blank" rel="noopener noreferrer">PEP 600</a> finally created a pattern, <code>manylinux_${GLIBCMAJOR}_${GLIBCMINOR}_${ARCH}</code>, so future glibc versions don’t need new PEPs. The old names became aliases: <code>manylinux1_x86_64</code> is <code>manylinux_2_5_x86_64</code>.</p>
+
+<p>Python needs all this because wheels contain compiled C extensions that link against system libraries. A wheel built on a system with glibc 2.34 may call functions that don’t exist on a system with glibc 2.17. The tag encodes the minimum compatible glibc version so pip can select the right wheel. <a href="https://peps.python.org/pep-0656/" target="_blank" rel="noopener noreferrer">PEP 656</a> added <code>musllinux</code> tags for Alpine Linux and other musl-based distributions, which most web developers encounter when they try to <code>pip install</code> a compiled package inside an Alpine Docker container and discover that <code>manylinux</code> wheels won’t work there. The architecture field uses the <code>uname</code> convention (<code>x86_64</code>, <code>aarch64</code>, <code>i686</code>), which means no <code>amd64</code>, no <code>arm64</code>, and no <code>x64</code>.</p>
+
+<h3>RubyGems</h3>
+
+<p>RubyGems uses <code>cpu-os</code> pairs: <code>x86_64-linux</code>, <code>arm64-darwin</code>, <code>x86_64-linux-musl</code>. The format comes from <a href="https://docs.ruby-lang.org/en/master/Gem/Platform.html" target="_blank" rel="noopener noreferrer"><code>Gem::Platform</code></a>, which parses the string into cpu, os, and version components.</p>
+
+<p>For years the Linux version field was unused. Then the musl libc question arrived. Alpine Linux uses musl instead of glibc, and a native extension compiled against glibc won’t run on musl. RubyGems <a href="https://github.com/rubygems/rubygems/pull/5852" target="_blank" rel="noopener noreferrer">added <code>linux-musl</code> and <code>linux-gnu</code> platform variants</a> starting in RubyGems 3.3.22. The matching logic has a special case: on Linux, “no version” defaults to <code>gnu</code>, but when matching a gem platform against the runtime platform, it acts as a wildcard.</p>
+
+<p><a href="https://github.com/rake-compiler/rake-compiler" target="_blank" rel="noopener noreferrer">rake-compiler-dock</a> handles cross-compilation of native gems, and its platform naming has its own conventions. <code>x64-mingw-ucrt</code> targets Ruby 3.1+ on Windows (which switched to the UCRT runtime), while <code>x64-mingw32</code> targets Ruby 3.0 and earlier. Platform names ending in <code>-linux</code> are <a href="https://github.com/rake-compiler/rake-compiler-dock/issues/117" target="_blank" rel="noopener noreferrer">treated as aliases for <code>-linux-gnu</code></a>.</p>
+
+<p>RubyGems is now working on a more expressive system inspired by Python’s wheels. Samuel Giddins has been building <a href="https://blog.rubygems.org/2025/08/21/july-rubygems-updates.html" target="_blank" rel="noopener noreferrer">experimental support for tag-based platform matching</a>, using a filename format of <code>{gem_name}-{version}-{ruby tag}-{abi tag}-{platform tag}.gem2</code>. The proposed dimensions for platform matching are Ruby ABI, OS, OS version, CPU architecture, libc implementation, and libc version. This is <a href="https://traveling.engineer/posts/goals-for-binary-gems/" target="_blank" rel="noopener noreferrer">almost exactly the same set of dimensions</a> that Python’s wheel tags evolved to cover, arrived at independently.</p>
+
+<h3>Debian multiarch tuples</h3>
+
+<p>Debian uses <a href="https://wiki.debian.org/Multiarch/Tuples" target="_blank" rel="noopener noreferrer">multiarch tuples</a> as directory names for architecture-specific library paths. <code>/usr/lib/x86_64-linux-gnu/</code> holds 64-bit x86 libraries, <code>/usr/lib/aarch64-linux-gnu/</code> holds ARM64 libraries. The format is based on normalized GNU triplets but Debian chose its own canonical forms.</p>
+
+<p>The Debian architecture name <code>amd64</code> maps to the multiarch tuple <code>x86_64-linux-gnu</code>. The architecture name <code>arm64</code> maps to <code>aarch64-linux-gnu</code>. <code>armhf</code> maps to <code>arm-linux-gnueabihf</code>. That last one is notable: the hard-float/soft-float distinction was originally supposed to go in the vendor field, which is what <a href="https://wiki.debian.org/ArmHardFloatPort" target="_blank" rel="noopener noreferrer">GCC developers recommended</a>. But the vendor field is semantically private, not meant for cross-distribution use, so Debian instead appended <code>hf</code> to the ABI component: <code>gnueabihf</code> vs <code>gnueabi</code>. The naming was argued over for months.</p>
+
+<p>Multiarch exists to solve co-installation: running 32-bit and 64-bit libraries side by side on the same system. The tuple goes into the filesystem path, so it has to be a valid directory name, stable across releases, and unique per ABI. This is a different set of constraints than a compiler target triple. GCC and Debian independently developed tuple formats that look similar but diverge in the details, because they’re optimizing for different things.</p>
+
+<h3>Rust</h3>
+
+<p>Rust uses target triples that look like LLVM triples but are <a href="https://doc.rust-lang.org/rustc/platform-support.html" target="_blank" rel="noopener noreferrer">curated and normalized</a>. <code>x86_64-unknown-linux-gnu</code>, <code>aarch64-apple-darwin</code>, <code>x86_64-pc-windows-msvc</code>. Where LLVM’s triples are sprawling and sometimes inconsistent, Rust maintains an explicit list organized into <a href="https://doc.rust-lang.org/rustc/target-tier-policy.html" target="_blank" rel="noopener noreferrer">tiers</a>.</p>
+
+<p>Tier 1 targets are “guaranteed to work” with automated testing on every commit. As of 2025, <a href="https://blog.rust-lang.org/2025/10/30/Rust-1.91.0/" target="_blank" rel="noopener noreferrer">aarch64-apple-darwin reached Tier 1</a> while x86_64-apple-darwin dropped to Tier 2, reflecting Apple Silicon’s dominance. Tier 2 targets build but may not pass all tests. Tier 3 targets are community-maintained.</p>
+
+<p><a href="https://rust-lang.github.io/rfcs/0131-target-specification.html" target="_blank" rel="noopener noreferrer">RFC 0131</a> established that Rust target triples map to but aren’t identical to LLVM triples. A Rust target specification is a JSON file with an <code>llvm-target</code> field that can differ from the Rust-facing name. This lets Rust present clean, consistent names to users while translating to whatever LLVM expects internally. The <a href="https://github.com/bytecodealliance/target-lexicon" target="_blank" rel="noopener noreferrer">target-lexicon</a> crate from the Bytecode Alliance provides parsing and matching for these triples.</p>
+
+<h3>Zig</h3>
+
+<p>Zig inherited LLVM’s target triples but is actively redesigning them. An <a href="https://github.com/ziglang/zig/issues/20690" target="_blank" rel="noopener noreferrer">accepted proposal</a> by Alex Ronne Petersen would turn triples into quadruples, splitting the C library choice (API) from the ABI into separate components: <code>&lt;arch&gt;-&lt;os&gt;-&lt;api&gt;-&lt;abi&gt;</code>.</p>
+
+<p>The proposal includes what it calls “a fairly exhaustive survey of the ISA and ABI landscape,” and the scale of the problem becomes clear quickly. RISC-V alone defines eight distinct ABIs (ilp32, ilp32f, ilp32d, ilp32e, lp64, lp64f, lp64d, lp64q). PowerPC has multiple ABIs (SVR4, EABI, Apple, ELFv1, ELFv2, AIX) plus variations in <code>long double</code> representation. LoongArch is “the only architecture I’m aware of to have done the sane thing” and put the ABI information into the ABI component from the start; the current triple format can’t express most of these combinations cleanly.</p>
+
+<p>Under the proposed scheme, <code>aarch64-linux-gnu</code> becomes <code>aarch64-linux-gnu-lp64</code> and <code>powerpc64le-linux-musl</code> becomes <code>powerpc64le-linux-musl-elfv2+ldbl64</code>, with the <code>+</code> syntax letting ABI options compose like feature flags. The proposal quotes <a href="https://ziglang.org/learn/overview/" target="_blank" rel="noopener noreferrer">Zig’s design philosophy</a>: “Edge cases matter” and “Avoid local maximums,” arguing that just because GNU triples are ubiquitous doesn’t mean they’re good. It’s the same lesson Python learned from the other direction: it took four PEPs across five years to get manylinux right, discovering at each step that the problem space was bigger than the previous design assumed. Zig is trying to get it right from the compiler side before the package ecosystem calcifies around a format that can’t express what it needs to.</p>
+
+<h3>Conan and vcpkg</h3>
+
+<p>C and C++ have <a href="/2026/01/27/the-c-shaped-hole-in-package-management.html" target="_blank" rel="noopener noreferrer">no canonical package registry</a>, so the two main C/C++ package managers each invented their own platform identification from scratch.</p>
+
+<p><a href="https://conan.io/" target="_blank" rel="noopener noreferrer">Conan</a> doesn’t use platform strings at all. It uses <a href="https://docs.conan.io/2/reference/config_files/settings.html" target="_blank" rel="noopener noreferrer">hierarchical settings</a>: <code>os=Macos</code>, <code>arch=armv8</code>, <code>compiler=apple-clang</code>, <code>compiler.version=15</code>. The settings are separate key-value pairs rather than a combined string, which means Conan never had to decide on a separator or field order. It also means Conan calls ARM64 <code>armv8</code>, adding a fourth name for the architecture alongside <code>aarch64</code>, <code>arm64</code>, and <code>x64</code>. For cross-compilation, Conan 2 uses <a href="https://docs.conan.io/2/tutorial/consuming_packages/cross_building_with_conan.html" target="_blank" rel="noopener noreferrer">dual profiles</a> (<code>--profile:build</code> and <code>--profile:host</code>) rather than encoding build and target in a single string.</p>
+
+<p><a href="https://vcpkg.io/" target="_blank" rel="noopener noreferrer">vcpkg</a> borrowed the word “triplet” but simplified the format to <a href="https://learn.microsoft.com/en-us/vcpkg/concepts/triplets" target="_blank" rel="noopener noreferrer"><code>arch-os</code></a> with optional suffixes: <code>x64-windows</code>, <code>arm64-osx</code>, <code>x64-linux</code>, <code>x64-windows-static</code>. There’s no vendor or ABI field, and vcpkg uses <code>x64</code> (the Windows SDK convention) and <code>osx</code> rather than <code>darwin</code> or <code>macos</code>. The <a href="https://learn.microsoft.com/en-us/vcpkg/users/triplets" target="_blank" rel="noopener noreferrer">documentation</a> cites the Android NDK’s naming as inspiration for custom triplets, which is itself a variation on GNU triples with an API level suffix like <code>aarch64-linux-android21</code>.</p>
+
+<h3>.NET</h3>
+
+<p>.NET has <a href="https://learn.microsoft.com/en-us/dotnet/core/rid-catalog" target="_blank" rel="noopener noreferrer">Runtime Identifiers</a> (RIDs) that follow an <code>os[-version]-arch</code> pattern: <code>linux-x64</code>, <code>win-arm64</code>, <code>osx-arm64</code>, <code>linux-musl-x64</code>. The format puts OS first, which is the opposite of most other schemes. Starting with .NET 8, Microsoft <a href="https://learn.microsoft.com/en-us/dotnet/core/compatibility/deployment/8.0/rid-asset-list" target="_blank" rel="noopener noreferrer">strongly recommends</a> portable RIDs without version numbers, but version-specific RIDs like <code>win10-x64</code> and <code>osx.13-arm64</code> still exist for backward compatibility. The RID system includes a compatibility fallback graph: <code>osx-arm64</code> falls back to <code>osx</code> which falls back to <code>unix</code> which falls back to <code>any</code>. NuGet uses these RIDs to select platform-specific assets from packages.</p>
+
+<h3>Others</h3>
+
+<p><a href="https://swiftinit.org/docs/swift-package-manager/basics/triple" target="_blank" rel="noopener noreferrer">Swift Package Manager</a> uses LLVM target triples directly (<code>arm64-apple-macosx15.0</code>, <code>x86_64-unknown-linux-gnu</code>), inheriting both the format and its quirks without adding new ones. <a href="https://kotlinlang.org/docs/native-target-support.html" target="_blank" rel="noopener noreferrer">Kotlin Multiplatform</a> wraps LLVM triples in camelCase Gradle target names (<code>linuxX64</code>, <code>macosArm64</code>, <code>iosSimulatorArm64</code>) that are friendlier to type but map one-to-one to underlying triples.</p>
+
+<p>Java doesn’t have a standard platform string format because most Java code doesn’t need one. When it does, the <a href="https://github.com/trustin/os-maven-plugin" target="_blank" rel="noopener noreferrer">os-maven-plugin</a> normalizes platform detection into a classifier string like <code>linux-x86_64</code> or <code>osx-aarch_64</code>, adding an underscore to <code>aarch_64</code> that no other ecosystem uses.</p>
+
+<p><a href="https://docs.brew.sh/Bottles" target="_blank" rel="noopener noreferrer">Homebrew</a> names its bottle builds using macOS marketing names: <code>arm64_sonoma</code>, <code>arm64_ventura</code>, <code>ventura</code> (Intel implied). On Linux it’s <code>x86_64_linux</code>. This makes Homebrew the only package manager that encodes the OS release name rather than a version number, though bottles built for older versions work fine on newer macOS releases.</p>
+
+<p><a href="https://nixos.org/" target="_blank" rel="noopener noreferrer">Nix</a> uses simple <code>arch-os</code> pairs like <code>x86_64-linux</code> and <code>aarch64-darwin</code>, clean and minimal but unable to distinguish between glibc and musl Linux in the system string.</p>
+
+<h3>Comparison</h3>
+
+<p>The same four platforms, named by each ecosystem:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>64-bit x86 Linux</th>
+      <th>ARM64 macOS</th>
+      <th>64-bit x86 Windows</th>
+      <th>ARM64 Linux</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GCC/LLVM</td>
+      <td>x86_64-pc-linux-gnu</td>
+      <td>aarch64-apple-darwin</td>
+      <td>x86_64-pc-windows-msvc</td>
+      <td>aarch64-unknown-linux-gnu</td>
+    </tr>
+    <tr>
+      <td>Go</td>
+      <td>linux/amd64</td>
+      <td>darwin/arm64</td>
+      <td>windows/amd64</td>
+      <td>linux/arm64</td>
+    </tr>
+    <tr>
+      <td>Node.js</td>
+      <td>linux-x64</td>
+      <td>darwin-arm64</td>
+      <td>win32-x64</td>
+      <td>linux-arm64</td>
+    </tr>
+    <tr>
+      <td>Python wheels</td>
+      <td>manylinux_2_17_x86_64</td>
+      <td>macosx_11_0_arm64</td>
+      <td>win_amd64</td>
+      <td>manylinux_2_17_aarch64</td>
+    </tr>
+    <tr>
+      <td>RubyGems</td>
+      <td>x86_64-linux</td>
+      <td>arm64-darwin</td>
+      <td>x64-mingw-ucrt</td>
+      <td>aarch64-linux</td>
+    </tr>
+    <tr>
+      <td>Debian</td>
+      <td>x86_64-linux-gnu</td>
+      <td>(N/A)</td>
+      <td>(N/A)</td>
+      <td>aarch64-linux-gnu</td>
+    </tr>
+    <tr>
+      <td>Rust</td>
+      <td>x86_64-unknown-linux-gnu</td>
+      <td>aarch64-apple-darwin</td>
+      <td>x86_64-pc-windows-msvc</td>
+      <td>aarch64-unknown-linux-gnu</td>
+    </tr>
+    <tr>
+      <td>Zig (current)</td>
+      <td>x86_64-linux-gnu</td>
+      <td>aarch64-macos-none</td>
+      <td>x86_64-windows-msvc</td>
+      <td>aarch64-linux-gnu</td>
+    </tr>
+    <tr>
+      <td>Conan</td>
+      <td>os=Linux, arch=x86_64</td>
+      <td>os=Macos, arch=armv8</td>
+      <td>os=Windows, arch=x86_64</td>
+      <td>os=Linux, arch=armv8</td>
+    </tr>
+    <tr>
+      <td>vcpkg</td>
+      <td>x64-linux</td>
+      <td>arm64-osx</td>
+      <td>x64-windows</td>
+      <td>arm64-linux</td>
+    </tr>
+    <tr>
+      <td>.NET</td>
+      <td>linux-x64</td>
+      <td>osx-arm64</td>
+      <td>win-x64</td>
+      <td>linux-arm64</td>
+    </tr>
+    <tr>
+      <td>Nix</td>
+      <td>x86_64-linux</td>
+      <td>aarch64-darwin</td>
+      <td>(N/A)</td>
+      <td>aarch64-linux</td>
+    </tr>
+    <tr>
+      <td>Homebrew</td>
+      <td>x86_64_linux</td>
+      <td>arm64_sonoma</td>
+      <td>(N/A)</td>
+      <td>(N/A)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The same four platforms yield three names for 64-bit x86 (<code>x86_64</code>, <code>amd64</code>, <code>x64</code>), at least five for ARM64 (<code>aarch64</code>, <code>arm64</code>, <code>armv8</code>, Maven’s <code>aarch_64</code>, and Homebrew’s <code>arm64</code> with an underscore separator), three for macOS (<code>darwin</code>, <code>macos</code>/<code>osx</code>, <code>macosx</code>, plus Homebrew’s version-specific names), and two for Windows (<code>win32</code>, <code>windows</code>/<code>win</code>). RubyGems is interesting here because it uses both ARM64 names: <code>arm64-darwin</code> on macOS (following Apple’s convention) but <code>aarch64-linux</code> on Linux (following the kernel’s convention). Two different names for the same architecture within a single ecosystem, while Conan sidesteps the entire format question by not using strings at all.</p>
+
+<h3>Why everything diverges</h3>
+
+<p>The architecture naming splits trace back to who each ecosystem inherited from. Go took <code>amd64</code> from Plan 9 and Debian, both of which used AMD’s name since AMD designed the 64-bit extension to x86. Node got <code>x64</code> from V8, which followed the Windows SDK convention. Python’s <code>x86_64</code> comes straight from <code>uname -m</code> on Linux via <code>sysconfig.get_platform()</code>. Debian itself uses <code>amd64</code> as the architecture name but <code>x86_64-linux-gnu</code> as the multiarch tuple, because the two serve different purposes.</p>
+
+<p>The structural differences run deeper and trace to what each ecosystem actually ships. Go statically links by default, so it never needed a vendor or ABI field, while Python wheels contain compiled C extensions that link against system libraries and ended up encoding the glibc version out of necessity. Most npm packages are pure JavaScript, which is why Node’s platform strings never grew libc or OS version fields. Rust curates its triple list with a tier system because it wants to guarantee that specific targets work with specific levels of CI coverage. Conan gave up on strings entirely in favor of structured key-value settings, avoiding the parsing and separator problems but making it harder to use where a single identifier is expected, like a filename or URL path. .NET’s RIDs put OS first (<code>linux-x64</code> rather than <code>x64-linux</code>) because the runtime’s fallback graph cares more about OS compatibility than architecture when selecting assets.</p>
+
+<h3>Dimensions</h3>
+
+<p>A platform identifier that fully describes a compilation target seems to need at least five dimensions: CPU architecture (x86_64, aarch64, riscv64), operating system (linux, darwin, windows), OS version (macOS 11+, sometimes implicit), ABI or calling convention (gnu, musl, msvc, eabihf), and libc implementation and version (glibc 2.17, musl 1.2, Linux-specific but critical for binary compatibility). Five is a lower bound. Zig’s ABI survey suggests the real number is higher once you start cataloguing calling convention variations across architectures, and none of these dimensions account for CPU feature levels (AVX2, SSE4.2) that matter for optimized builds.</p>
+
+<p>Different ecosystems cover different subsets depending on what problems they need to solve. Go and Node get by with just arch and OS, while Python needs four dimensions because wheels contain compiled C extensions that care about OS version and glibc compatibility. Conan’s structured settings cover four or five dimensions depending on how you count compiler metadata, and Rust sits somewhere in between with three or four. The GNU/LLVM triple format has slots for all five but doesn’t enforce consistency in how they’re filled. Zig’s quadruple proposal is the most explicit attempt I’ve seen, with the fourth component separating the libc choice (API) from the calling convention (ABI), though the RISC-V and PowerPC examples in the proposal suggest that even this may not be enough without the <code>+feature</code> extension syntax.</p>
+
+<h3>Prior art</h3>
+
+<p><a href="https://github.com/archspec/archspec" target="_blank" rel="noopener noreferrer">archspec</a>, extracted from <a href="https://spack.io/" target="_blank" rel="noopener noreferrer">Spack</a>, models CPU microarchitecture naming as a directed acyclic graph. Its <a href="https://github.com/archspec/archspec-json/blob/master/cpu/microarchitectures.json" target="_blank" rel="noopener noreferrer">JSON database</a> tracks which microarchitectures are compatible with which, including feature sets like AVX2 and SSE4.2 and x86-64 microarchitecture levels (v2, v3, v4). It’s probably the most rigorous treatment of the “which CPU can run binaries compiled for which other CPU” question, but it’s silent on OS, libc, and ABI.</p>
+
+<p>Python’s manylinux system (<a href="https://peps.python.org/pep-0513/" target="_blank" rel="noopener noreferrer">PEP 513</a>, <a href="https://peps.python.org/pep-0600/" target="_blank" rel="noopener noreferrer">PEP 600</a>) took a different slice of the problem, encoding glibc version into wheel platform tags. Four PEPs across five years to get from <code>manylinux1</code> to the general <code>manylinux_x_y</code> pattern. Ruby’s <a href="https://traveling.engineer/posts/goals-for-binary-gems/" target="_blank" rel="noopener noreferrer">binary gems RFC</a> arrived at nearly the same set of dimensions: Ruby ABI, OS, OS version, CPU architecture, libc implementation, libc version. The proposed <code>.gem2</code> filename format mirrors Python’s wheel naming, and I haven’t found evidence that either project drew directly from the other. Independent convergence on the same dimensions is arguably stronger evidence that those dimensions are the right ones than if one had simply copied the other’s homework.</p>
+
+<p>Zig’s <a href="https://github.com/ziglang/zig/issues/20690" target="_blank" rel="noopener noreferrer">target quadruple proposal</a> goes deeper on ABI enumeration than anything else I’ve found, cataloging calling convention variations across RISC-V, PowerPC, MIPS, and LoongArch. It’s focused on compiler targets rather than package management, so it doesn’t touch the libc version compatibility question that Python and Ruby spent years on. The Bytecode Alliance’s <a href="https://crates.io/crates/target-lexicon" target="_blank" rel="noopener noreferrer">target-lexicon</a> crate parses and matches Rust/LLVM triples specifically, and the <a href="https://crates.io/crates/platforms" target="_blank" rel="noopener noreferrer">platforms</a> crate maintains the tier list, but neither attempts to generalize across ecosystems.</p>
+
+<h3>User agents</h3>
+
+<p>Platform strings remind me of browser user agent strings, which went through a similar process of rational local decisions producing global incoherence. <a href="https://www.rfc-editor.org/rfc/rfc1945" target="_blank" rel="noopener noreferrer">RFC 1945</a> defined the User-Agent header in 1996 with a simple grammar: product name, slash, version. NCSA Mosaic sent <code>NCSA_Mosaic/2.0 (Windows 3.1)</code>. Netscape Navigator, codenamed <a href="https://en.wikipedia.org/wiki/Mozilla_(mascot)" target="_blank" rel="noopener noreferrer">“Mozilla”</a> (a portmanteau of “Mosaic” and “Godzilla”), sent <code>Mozilla/1.0 (Win3.1)</code>. Netscape supported frames; Mosaic didn’t. Web developers started checking for “Mozilla” in the user agent and sending frames-based pages only to browsers that matched.</p>
+
+<p>When Internet Explorer 3 shipped with frame support, it couldn’t get the frames-based pages because it wasn’t Mozilla. Microsoft’s solution was to declare IE “<a href="https://webaim.org/blog/user-agent-string-history/" target="_blank" rel="noopener noreferrer">Mozilla compatible</a>”: <code>Mozilla/2.0 (compatible; MSIE 3.02; Windows 95)</code>. Since most sniffers only checked the prefix, IE passed and got the right pages. Then Konqueror’s KHTML engine was being blocked by sites that sniffed for Gecko, so it added <code>(KHTML, like Gecko)</code> to its string. Apple forked KHTML to make WebKit and Safari needed to pass checks for both Gecko and KHTML, so Safari’s user agent claimed to be Mozilla, said its engine was “like Gecko,” and referenced KHTML. When Chrome shipped in 2008 using WebKit, it inherited all of this and <a href="https://humanwhocodes.com/blog/2010/01/12/history-of-the-user-agent-string/" target="_blank" rel="noopener noreferrer">added its own token</a>:</p>
+
+<div><div><pre><code>Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.13
+    (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13
+</code></pre></div></div>
+
+<p>Every token except <code>Chrome</code> is a compatibility claim. It’s not Mozilla, not Safari, and its engine descends from KHTML but is no longer KHTML. Chrome has since <a href="https://www.chromium.org/updates/ua-reduction/" target="_blank" rel="noopener noreferrer">frozen most of the string</a> to reduce fingerprinting, replacing it with structured <a href="https://wicg.github.io/ua-client-hints/" target="_blank" rel="noopener noreferrer">Client Hints</a> that servers can request individually. But the old string persists because too much code parses it.</p>
+
+<p>Platform strings aren’t adversarial in the same way, but they share the path-dependency. Every tool that works across ecosystems maintains its own mapping between formats. <a href="https://github.com/evanw/esbuild/blob/main/lib/npm/node-platform.ts" target="_blank" rel="noopener noreferrer">esbuild</a> maps Node’s <code>process.platform</code>/<code>process.arch</code> to package names, <a href="https://cibuildwheel.pypa.io/" target="_blank" rel="noopener noreferrer">cibuildwheel</a> maps Python platform tags to CI matrix entries, and <a href="https://github.com/rake-compiler/rake-compiler" target="_blank" rel="noopener noreferrer">rake-compiler-dock</a> maps RubyGems platforms to GCC cross-compilation targets. These mappings are maintained independently, and discrepancies between them surface as bugs in specific platform combinations.</p>
+
+<p>In the spirit of <a href="https://xkcd.com/927/" target="_blank" rel="noopener noreferrer">XKCD 927</a>, I’ve started building <a href="https://github.com/git-pkgs/platforms" target="_blank" rel="noopener noreferrer">git-pkgs/platforms</a> as an attempt at a shared translation layer. The <a href="https://github.com/git-pkgs/platforms/blob/main/SPEC.md" target="_blank" rel="noopener noreferrer">spec</a> defines canonical names and parse/format rules, and the <a href="https://github.com/git-pkgs/platforms/tree/main/data" target="_blank" rel="noopener noreferrer">mapping data</a> lives in three JSON files (<code>arches.json</code>, <code>oses.json</code>, <code>platforms.json</code>) that could be consumed by any language without taking a Go dependency. Writing the mapping data has been a good way to discover just how many special cases exist: RubyGems using <code>arm64</code> on macOS but <code>aarch64</code> on Linux, Rust calling RISC-V <code>riscv64gc</code> while everyone else uses <code>riscv64</code>, Debian spelling little-endian MIPS as <code>mipsel</code> while Go uses <code>mipsle</code>.</p>
+
+<h3>Alignment</h3>
+
+<p>The same platform identification problem keeps getting solved because the answers don’t seem to travel well. Python’s manylinux and Ruby’s binary gems RFC converge on the same dimensions but use different names, Zig’s ABI research seems directly relevant to Rust’s target specification work but lives in a different issue tracker, and archspec’s microarchitecture DAG could probably inform platform matching beyond Spack but as far as I can tell nobody else uses it.</p>
+
+<p>Even <a href="https://github.com/package-url/purl-spec" target="_blank" rel="noopener noreferrer">PURL</a>, which solved the “which package” identity problem across ecosystems, punts on platform. Each PURL type defines its own qualifiers: <code>pkg:deb</code> uses <code>arch</code>, <code>pkg:gem</code> uses <code>platform</code>, <code>pkg:conda</code> uses <code>subdir</code>, and <code>pkg:npm</code> has no platform qualifier at all. The values use whatever conventions each ecosystem already has, with no normalization. There’s been <a href="https://github.com/package-url/purl-spec/issues/186" target="_blank" rel="noopener noreferrer">ongoing pressure</a> from the security community to standardize <code>arch</code> and <code>platform</code> qualifiers across types so that vulnerability scanners don’t need the massive mapping files that tools like <code>cibuildwheel</code> currently maintain, but the discussions have been open since 2022 without resolution. The one standard that was supposed to unify package identity across ecosystems left platform identification as an exercise for each type definition.</p>
+<div>
+  <ol>
+    <li>
+      <p>The name “triple” stuck even after a fourth field got added. <code>x86_64-pc-linux-gnu</code> has four components but everyone still calls it a triple. See <a href="https://mcyoung.xyz/2025/04/14/target-triples/" target="_blank" rel="noopener noreferrer">“What the Hell Is a Target Triple?”</a> for more on this naming. <a href="#fnref:triple" target="_blank" rel="noopener noreferrer">↩</a></p>
+    </li>
+  </ol>
+</div></div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://nesbitt.io/2026/02/17/platform-strings.html" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text" data-astro-cid-sz7xmlte>
+&copy; 2026 AstroBlog
+</p> <p class="footer-text" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer>  </body></html> 

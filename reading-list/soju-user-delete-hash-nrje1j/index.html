@@ -37,8 +37,7 @@ sudo sojuctl user run soju network create -name bnc1 -addr irc.libera.chat -nick
   The above commands installs and configures Soju 0.9.0 on Debian
   13.2.  Note that YOUR_SOJU_PASSWORD is a placeholder for a new
   password you must choose for your Soju user.  Then, on your IRC
-  client, you can connect to Soju and connect to IRC networks via it.
-  For example, here's how we can connect to Soju from Irssi:
+  client, you can connect to Soju as follows:
 </p>
 <pre><code>/network add -nick YOUR_NICK -user soju/bnc1 net1
 /server add -tls -network bnc1 YOUR_SOJU_HOST 6697 YOUR_SOJU_PASSWORD
@@ -64,10 +63,9 @@ To confirm user deletion, send "user delete soju 4664cd"
 $ <kbd>sudo sojuctl user delete soju 4664cd</kbd>
 deleted user "soju"</samp></pre>
 <p>
-  That confirmation token <code>4664cd</code> for a user never
-  changes, no matter how many times we create or delete it.  The
-  confirmation token is not saved in the Soju database, as can be
-  confirmed here:
+  That confirmation token for a specific user never changes, no matter
+  how many times we create or delete it.  The confirmation token is
+  not saved in the Soju database, as can be confirmed here:
 </p>
 <pre><samp>$ <kbd>sudo sqlite3 -table /var/lib/soju/main.db 'SELECT * FROM User'</kbd>
 +----+----------+--------------------------------------------------------------+-------+----------+------+--------------------------+---------+--------------------------+--------------+
@@ -77,8 +75,9 @@ deleted user "soju"</samp></pre>
 +----+----------+--------------------------------------------------------------+-------+----------+------+--------------------------+---------+--------------------------+--------------+</samp></pre>
 <p>
   Surely, then, the confirmation token is derived from the user
-  definition?  Yes, indeed it is.  As can be confirmed from the
-  <a href="https://codeberg.org/emersion/soju/src/commit/v0.10.1/service.go#L1185-L1203" target="_blank" rel="noopener noreferrer">source code here</a>.  Quoting the most relevant part from the source code:
+  definition?  Yes, indeed it is.  This can be confirmed at the
+  <a href="https://codeberg.org/emersion/soju/src/commit/v0.10.1/service.go#L1185-L1203" target="_blank" rel="noopener noreferrer">source
+  code here</a>.  Quoting the most relevant part from the source code:
 </p>
 <pre><code>hashBytes := sha1.Sum([]byte(username))
 hash := fmt.Sprintf("%x", hashBytes[0:3])</code></pre>
@@ -89,7 +88,7 @@ hash := fmt.Sprintf("%x", hashBytes[0:3])</code></pre>
 4664cd</samp></pre>
 <p>
   This allows us to automate the two step Soju user deletion process
-  into a single command:
+  in a single command:
 </p>
 <pre><code>sudo sojuctl user delete soju "$(printf soju | sha1sum | head -c6)"</code></pre>
 <p>
