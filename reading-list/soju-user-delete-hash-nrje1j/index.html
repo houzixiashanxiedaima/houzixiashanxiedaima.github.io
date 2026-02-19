@@ -19,44 +19,10 @@ AstroBlog
         `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Soju 用户删除哈希</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://susam.net" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>susam.net</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年2月14日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb>
 
 <p>
-  I have recently switched from ZNC to Soju as my IRC bouncer.  I
-  already like it quite a bit.  No more manually maintaining a
-  configuration file for my various IRC connections.
-</p>
-<p>
-  On Debian 13 (trixie), it is quite straightforward the setup is.
-  Here are some example commands that show how straightforward it is
-  to set it up.
-</p>
-<pre><code>sudo apt-get update
-sudo apt-get -y install soju
-sudo sojuctl user create -username soju -password YOUR_SOJU_PASSWORD
-sudo sojuctl user run soju network create -name bnc1 -addr irc.libera.chat -nick YOUR_NICK -pass YOUR_NICK_PASSWORD</code>
-</pre>
-<p>
-  The above commands installs and configures Soju 0.9.0 on Debian
-  13.2.  Note that YOUR_SOJU_PASSWORD is a placeholder for a new
-  password you must choose for your Soju user.  Then, on your IRC
-  client, you can connect to Soju as follows:
-</p>
-<pre><code>/network add -nick YOUR_NICK -user soju/bnc1 net1
-/server add -tls -network bnc1 YOUR_SOJU_HOST 6697 YOUR_SOJU_PASSWORD
-/connect net1
-</code></pre>
-<p>
-  You can also set up multiple connections to IRC networks via the
-  same instance of Soju.  All you need to do is repeat the Soju
-  commands above to create new networks
-  say <code>bnc2</code>, <code>bnc3</code>, etc. and then repeat the
-  configuration for your IRC client with new network names,
-  say, <code>net2</code>, <code>net3</code>.  These network names are
-  completely user-defined names, so you could name them anything you
-  want.  The names <code>bnc2</code>, <code>net2</code>, etc. here are
-  only examples.
-</p>
-<p>
-  One thing that caught my attention while creating and deleting Soju
-  users was that the delete command asks for a confirmation, like so:
+  In <a href="from-znc-to-soju.html" target="_blank" rel="noopener noreferrer">my last post</a>, I talked about
+  switching from ZNC to Soju as my IRC bouncer.  One thing that caught
+  my attention while creating and deleting Soju users was that the
+  delete command asks for a confirmation, like so:
 </p>
 <pre><samp>$ <kbd>sudo sojuctl user delete soju</kbd>
 To confirm user deletion, send "user delete soju 4664cd"
@@ -103,7 +69,9 @@ hash := fmt.Sprintf("%x", hashBytes[0:3])</code></pre>
 <p>
   <a href="https://susam.net/soju-user-delete-hash.html" target="_blank" rel="noopener noreferrer">Read on website</a> |
   <a href="https://susam.net/tag/shell.html" target="_blank" rel="noopener noreferrer">#shell</a> |
-  <a href="https://susam.net/tag/irc.html" target="_blank" rel="noopener noreferrer">#irc</a>
+  <a href="https://susam.net/tag/irc.html" target="_blank" rel="noopener noreferrer">#irc</a> |
+  <a href="https://susam.net/tag/technology.html" target="_blank" rel="noopener noreferrer">#technology</a> |
+  <a href="https://susam.net/tag/how-to.html" target="_blank" rel="noopener noreferrer">#how-to</a>
 </p>
 
 </div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://susam.net/soju-user-delete-hash.html" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
