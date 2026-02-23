@@ -15,66 +15,96 @@ AstroBlog
             </button>
           </div>
         `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--default" data-astro-cid-sckkx6r4> <h1 id="-github-releases-监控列表">📦 GitHub Releases 监控列表</h1>
-<p>当前系统监控 <strong>9</strong> 个开源项目，每日自动抓取最新版本并生成 AI 摘要。</p>
-<p>最后更新: 2026-02-22</p>
+<p>当前系统监控 <strong>13</strong> 个开源项目，每日自动抓取最新版本并生成 AI 摘要。</p>
+<p>最后更新: 2026-02-23</p>
 <hr>
-<h2 id="c-1">C# (1)</h2>
+<h2 id="go-1">Go (1)</h2>
 <ul>
-<li><strong><a href="https://github.com/srwi/EverythingToolbar" rel="noopener noreferrer" target="_blank">srwi/EverythingToolbar</a></strong> ⭐ 13.5k
-Everything integration for the Windows taskbar.
-<em>最后更新: 2026-02-22</em></li>
-</ul>
-<hr>
-<h2 id="go-2">Go (2)</h2>
-<ul>
-<li>
-<p><strong><a href="https://github.com/SagerNet/sing-box" rel="noopener noreferrer" target="_blank">SagerNet/sing-box</a></strong> ⭐ 30.7k
-The universal proxy platform
-<em>最后更新: 2026-02-22</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/JanDeDobbeleer/oh-my-posh" rel="noopener noreferrer" target="_blank">JanDeDobbeleer/oh-my-posh</a></strong> ⭐ 21.6k
+<li><strong><a href="https://github.com/JanDeDobbeleer/oh-my-posh" rel="noopener noreferrer" target="_blank">JanDeDobbeleer/oh-my-posh</a></strong> ⭐ 21.6k
 The most customisable and low-latency cross platform/shell prompt renderer
+<em>最后更新: 2026-02-23</em></li>
+</ul>
+<hr>
+<h2 id="javascript-1">JavaScript (1)</h2>
+<ul>
+<li><strong><a href="https://github.com/QuantumNous/new-api" rel="noopener noreferrer" target="_blank">QuantumNous/new-api</a></strong> ⭐ 18.0k
+A unified AI model hub for aggregation &#x26; distribution. It supports cross-converting various LLMs into OpenAI-compatible, Claude-compatible, or Gemini-compatible formats. A centralized gateway for personal and enterprise model management. 🍥
+<em>最后更新: 2026-02-23</em></li>
+</ul>
+<hr>
+<h2 id="kotlin-2">Kotlin (2)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/2dust/v2rayNG" rel="noopener noreferrer" target="_blank">2dust/v2rayNG</a></strong> ⭐ 51.3k
+A V2Ray client for Android, support Xray core and v2fly core
+<em>最后更新: 2026-02-23</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/irgaly/android-remove-unused-resources-plugin" rel="noopener noreferrer" target="_blank">irgaly/android-remove-unused-resources-plugin</a></strong> ⭐ 0.1k
+A gradle plugin to remove unused android resources by Android Lint results xml file.
 <em>最后更新: 2026-02-22</em></p>
 </li>
 </ul>
 <hr>
-<h2 id="kotlin-1">Kotlin (1)</h2>
+<h2 id="objective-c-1">Objective-C (1)</h2>
 <ul>
-<li><strong><a href="https://github.com/MetaCubeX/ClashMetaForAndroid" rel="noopener noreferrer" target="_blank">MetaCubeX/ClashMetaForAndroid</a></strong> ⭐ 34.3k
-A rule-based tunnel for Android.
+<li><strong><a href="https://github.com/ViennaRSS/vienna-rss" rel="noopener noreferrer" target="_blank">ViennaRSS/vienna-rss</a></strong> ⭐ 1.9k
+Vienna is a free and open-source RSS/Atom/JSON feed newsreader for macOS.
 <em>最后更新: 2026-02-22</em></li>
 </ul>
 <hr>
-<h2 id="rust-4">Rust (4)</h2>
+<h2 id="python-1">Python (1)</h2>
+<ul>
+<li><strong><a href="https://github.com/OthmanAdi/planning-with-files" rel="noopener noreferrer" target="_blank">OthmanAdi/planning-with-files</a></strong> ⭐ 14.3k
+Claude Code skill implementing Manus-style persistent markdown planning — the workflow pattern behind the $2B acquisition.
+<em>最后更新: 2026-02-23</em></li>
+</ul>
+<hr>
+<h2 id="rust-2">Rust (2)</h2>
 <ul>
 <li>
-<p><strong><a href="https://github.com/zed-industries/zed" rel="noopener noreferrer" target="_blank">zed-industries/zed</a></strong> ⭐ 75.7k
-Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter.
-<em>最后更新: 2026-02-22</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/openai/codex" rel="noopener noreferrer" target="_blank">openai/codex</a></strong> ⭐ 61.4k
+<p><strong><a href="https://github.com/openai/codex" rel="noopener noreferrer" target="_blank">openai/codex</a></strong> ⭐ 61.5k
 Lightweight coding agent that runs in your terminal
-<em>最后更新: 2026-02-22</em></p>
+<em>最后更新: 2026-02-23</em></p>
 </li>
 <li>
-<p><strong><a href="https://github.com/tw93/Pake" rel="noopener noreferrer" target="_blank">tw93/Pake</a></strong> ⭐ 45.9k
-🤱🏻 Turn any webpage into a desktop app with one command.
-<em>最后更新: 2026-02-22</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/jdx/mise" rel="noopener noreferrer" target="_blank">jdx/mise</a></strong> ⭐ 24.8k
+<p><strong><a href="https://github.com/jdx/mise" rel="noopener noreferrer" target="_blank">jdx/mise</a></strong> ⭐ 24.9k
 dev tools, env vars, task runner
-<em>最后更新: 2026-02-22</em></p>
+<em>最后更新: 2026-02-23</em></p>
 </li>
 </ul>
 <hr>
-<h2 id="typescript-1">TypeScript (1)</h2>
+<h2 id="swift-2">Swift (2)</h2>
 <ul>
-<li><strong><a href="https://github.com/code-yeongyu/oh-my-opencode" rel="noopener noreferrer" target="_blank">code-yeongyu/oh-my-opencode</a></strong> ⭐ 32.9k
+<li>
+<p><strong><a href="https://github.com/exelban/stats" rel="noopener noreferrer" target="_blank">exelban/stats</a></strong> ⭐ 36.6k
+macOS system monitor in your menu bar
+<em>最后更新: 2026-02-23</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/nguyenphutrong/quotio" rel="noopener noreferrer" target="_blank">nguyenphutrong/quotio</a></strong> ⭐ 3.6k
+Stop juggling AI accounts. Quotio is a beautiful native macOS menu bar app that unifies your Claude, Gemini, OpenAI, Qwen, and Antigravity subscriptions – with real-time quota tracking and smart auto-failover for AI coding tools like Claude Code, OpenCode, and Droid.
+<em>最后更新: 2026-02-23</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="typescript-3">TypeScript (3)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/google-gemini/gemini-cli" rel="noopener noreferrer" target="_blank">google-gemini/gemini-cli</a></strong> ⭐ 95.3k
+An open-source AI agent that brings the power of Gemini directly into your terminal.
+<em>最后更新: 2026-02-23</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/code-yeongyu/oh-my-opencode" rel="noopener noreferrer" target="_blank">code-yeongyu/oh-my-opencode</a></strong> ⭐ 33.2k
 the best agent harness
-<em>最后更新: 2026-02-22</em></li>
+<em>最后更新: 2026-02-23</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/karakeep-app/karakeep" rel="noopener noreferrer" target="_blank">karakeep-app/karakeep</a></strong> ⭐ 23.6k
+A self-hostable bookmark-everything app (links, notes and images) with AI-based automatic tagging and full text search
+<em>最后更新: 2026-02-23</em></p>
+</li>
 </ul>
 <hr>
 <h2 id="-说明">📖 说明</h2>
