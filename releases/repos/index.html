@@ -15,95 +15,278 @@ AstroBlog
             </button>
           </div>
         `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--default" data-astro-cid-sckkx6r4> <h1 id="-github-releases-监控列表">📦 GitHub Releases 监控列表</h1>
-<p>当前系统监控 <strong>13</strong> 个开源项目，每日自动抓取最新版本并生成 AI 摘要。</p>
-<p>最后更新: 2026-02-23</p>
+<p>当前系统监控 <strong>46</strong> 个开源项目，每日自动抓取最新版本并生成 AI 摘要。</p>
+<p>最后更新: 2026-03-01</p>
 <hr>
-<h2 id="go-1">Go (1)</h2>
+<h2 id="c-1">C# (1)</h2>
 <ul>
-<li><strong><a href="https://github.com/JanDeDobbeleer/oh-my-posh" rel="noopener noreferrer" target="_blank">JanDeDobbeleer/oh-my-posh</a></strong> ⭐ 21.6k
+<li><strong><a href="https://github.com/2dust/v2rayN" rel="noopener noreferrer" target="_blank">2dust/v2rayN</a></strong> ⭐ 97.6k
+A GUI client for Windows, Linux and macOS, support Xray and sing-box and others
+<em>最后更新: 2026-03-01</em></li>
+</ul>
+<hr>
+<h2 id="c-1-1">C++ (1)</h2>
+<ul>
+<li><strong><a href="https://github.com/M2Team/NanaZip" rel="noopener noreferrer" target="_blank">M2Team/NanaZip</a></strong> ⭐ 13.4k
+The 7-Zip derivative intended for the modern Windows experience
+<em>最后更新: 2026-02-28</em></li>
+</ul>
+<hr>
+<h2 id="dart-1">Dart (1)</h2>
+<ul>
+<li><strong><a href="https://github.com/KRTirtho/spotube" rel="noopener noreferrer" target="_blank">KRTirtho/spotube</a></strong> ⭐ 44.6k
+🎧 Open source music streaming app! Available for both desktop &#x26; mobile!
+<em>最后更新: 2026-03-01</em></li>
+</ul>
+<hr>
+<h2 id="go-7">Go (7)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/caddyserver/caddy" rel="noopener noreferrer" target="_blank">caddyserver/caddy</a></strong> ⭐ 70.5k
+Fast and extensible multi-platform HTTP/1-2-3 web server with automatic HTTPS
+<em>最后更新: 2026-03-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/1Panel-dev/1Panel" rel="noopener noreferrer" target="_blank">1Panel-dev/1Panel</a></strong> ⭐ 33.7k
+🔥 Take full control of your VPS with 1Panel. Deploy OpenClaw in one click.
+<em>最后更新: 2026-03-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/SagerNet/sing-box" rel="noopener noreferrer" target="_blank">SagerNet/sing-box</a></strong> ⭐ 31.0k
+The universal proxy platform
+<em>最后更新: 2026-03-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/JanDeDobbeleer/oh-my-posh" rel="noopener noreferrer" target="_blank">JanDeDobbeleer/oh-my-posh</a></strong> ⭐ 21.6k
 The most customisable and low-latency cross platform/shell prompt renderer
-<em>最后更新: 2026-02-23</em></li>
+<em>最后更新: 2026-02-28</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/apernet/hysteria" rel="noopener noreferrer" target="_blank">apernet/hysteria</a></strong> ⭐ 19.0k
+Hysteria is a powerful, lightning fast and censorship resistant proxy.
+<em>最后更新: 2026-03-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/QuantumNous/new-api" rel="noopener noreferrer" target="_blank">QuantumNous/new-api</a></strong> ⭐ 18.6k
+A unified AI model hub for aggregation &#x26; distribution. It supports cross-converting various LLMs into OpenAI-compatible, Claude-compatible, or Gemini-compatible formats. A centralized gateway for personal and enterprise model management. 🍥
+<em>最后更新: 2026-03-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/wavetermdev/waveterm" rel="noopener noreferrer" target="_blank">wavetermdev/waveterm</a></strong> ⭐ 17.6k
+An open-source, cross-platform terminal for seamless workflows
+<em>最后更新: 2026-03-01</em></p>
+</li>
 </ul>
 <hr>
 <h2 id="javascript-1">JavaScript (1)</h2>
 <ul>
-<li><strong><a href="https://github.com/QuantumNous/new-api" rel="noopener noreferrer" target="_blank">QuantumNous/new-api</a></strong> ⭐ 18.0k
-A unified AI model hub for aggregation &#x26; distribution. It supports cross-converting various LLMs into OpenAI-compatible, Claude-compatible, or Gemini-compatible formats. A centralized gateway for personal and enterprise model management. 🍥
-<em>最后更新: 2026-02-23</em></li>
+<li><strong><a href="https://github.com/alyssaxuu/screenity" rel="noopener noreferrer" target="_blank">alyssaxuu/screenity</a></strong> ⭐ 18.0k
+The free and privacy-friendly screen recorder with no limits 🎥
+<em>最后更新: 2026-02-28</em></li>
 </ul>
 <hr>
-<h2 id="kotlin-2">Kotlin (2)</h2>
+<h2 id="kotlin-6">Kotlin (6)</h2>
 <ul>
 <li>
-<p><strong><a href="https://github.com/2dust/v2rayNG" rel="noopener noreferrer" target="_blank">2dust/v2rayNG</a></strong> ⭐ 51.3k
+<p><strong><a href="https://github.com/2dust/v2rayNG" rel="noopener noreferrer" target="_blank">2dust/v2rayNG</a></strong> ⭐ 51.5k
 A V2Ray client for Android, support Xray core and v2fly core
-<em>最后更新: 2026-02-23</em></p>
+<em>最后更新: 2026-03-01</em></p>
 </li>
 <li>
-<p><strong><a href="https://github.com/irgaly/android-remove-unused-resources-plugin" rel="noopener noreferrer" target="_blank">irgaly/android-remove-unused-resources-plugin</a></strong> ⭐ 0.1k
-A gradle plugin to remove unused android resources by Android Lint results xml file.
-<em>最后更新: 2026-02-22</em></p>
+<p><strong><a href="https://github.com/mihonapp/mihon" rel="noopener noreferrer" target="_blank">mihonapp/mihon</a></strong> ⭐ 18.8k
+Free and open source manga reader for Android
+<em>最后更新: 2026-03-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/d4rken-org/sdmaid-se" rel="noopener noreferrer" target="_blank">d4rken-org/sdmaid-se</a></strong> ⭐ 6.2k
+SD Maid 2/SE is Android’s most thorough cleaning tool.
+<em>最后更新: 2026-03-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/rikkahub/rikkahub" rel="noopener noreferrer" target="_blank">rikkahub/rikkahub</a></strong> ⭐ 3.3k
+RikkaHub is an Android APP that supports for multiple LLM providers.
+<em>最后更新: 2026-03-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/AChep/keyguard-app" rel="noopener noreferrer" target="_blank">AChep/keyguard-app</a></strong> ⭐ 2.5k
+Alternative client for the Bitwarden® platform &#x26; KeePass (KDBX), created to provide the best user experience possible.
+<em>最后更新: 2026-03-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/xchacha20-poly1305/husi" rel="noopener noreferrer" target="_blank">xchacha20-poly1305/husi</a></strong> ⭐ 1.6k
+Husi (虎兕) is a non-professional and recreational proxy tool integration for the weird beliefs and free software spirit!
+<em>最后更新: 2026-03-01</em></p>
 </li>
 </ul>
 <hr>
 <h2 id="objective-c-1">Objective-C (1)</h2>
 <ul>
-<li><strong><a href="https://github.com/ViennaRSS/vienna-rss" rel="noopener noreferrer" target="_blank">ViennaRSS/vienna-rss</a></strong> ⭐ 1.9k
+<li><strong><a href="https://github.com/ViennaRSS/vienna-rss" rel="noopener noreferrer" target="_blank">ViennaRSS/vienna-rss</a></strong> ⭐ 2.0k
 Vienna is a free and open-source RSS/Atom/JSON feed newsreader for macOS.
-<em>最后更新: 2026-02-22</em></li>
+<em>最后更新: 2026-02-28</em></li>
 </ul>
 <hr>
-<h2 id="python-1">Python (1)</h2>
+<h2 id="powershell-1">PowerShell (1)</h2>
 <ul>
-<li><strong><a href="https://github.com/OthmanAdi/planning-with-files" rel="noopener noreferrer" target="_blank">OthmanAdi/planning-with-files</a></strong> ⭐ 14.3k
+<li><strong><a href="https://github.com/ChrisTitusTech/winutil" rel="noopener noreferrer" target="_blank">ChrisTitusTech/winutil</a></strong> ⭐ 48.3k
+Chris Titus Tech’s Windows Utility - Install Programs, Tweaks, Fixes, and Updates
+<em>最后更新: 2026-03-01</em></li>
+</ul>
+<hr>
+<h2 id="python-3">Python (3)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/Huanshere/VideoLingo" rel="noopener noreferrer" target="_blank">Huanshere/VideoLingo</a></strong> ⭐ 16.0k
+Netflix-level subtitle cutting, translation, alignment, and even dubbing - one-click fully automated AI video subtitle team | Netflix 级字幕切割、翻译、对齐、甚至加上配音，一键全自动视频搬运 AI 字幕组
+<em>最后更新: 2026-03-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/OthmanAdi/planning-with-files" rel="noopener noreferrer" target="_blank">OthmanAdi/planning-with-files</a></strong> ⭐ 14.8k
 Claude Code skill implementing Manus-style persistent markdown planning — the workflow pattern behind the $2B acquisition.
-<em>最后更新: 2026-02-23</em></li>
+<em>最后更新: 2026-03-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/jxxghp/MoviePilot" rel="noopener noreferrer" target="_blank">jxxghp/MoviePilot</a></strong> ⭐ 10.6k
+NAS 媒体库自动化管理工具
+<em>最后更新: 2026-02-28</em></p>
+</li>
 </ul>
 <hr>
-<h2 id="rust-2">Rust (2)</h2>
+<h2 id="ruby-1">Ruby (1)</h2>
+<ul>
+<li><strong><a href="https://github.com/Homebrew/brew" rel="noopener noreferrer" target="_blank">Homebrew/brew</a></strong> ⭐ 46.8k
+🍺 The missing package manager for macOS (or Linux)
+<em>最后更新: 2026-03-01</em></li>
+</ul>
+<hr>
+<h2 id="rust-6">Rust (6)</h2>
 <ul>
 <li>
-<p><strong><a href="https://github.com/openai/codex" rel="noopener noreferrer" target="_blank">openai/codex</a></strong> ⭐ 61.5k
+<p><strong><a href="https://github.com/zed-industries/zed" rel="noopener noreferrer" target="_blank">zed-industries/zed</a></strong> ⭐ 76.1k
+Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter.
+<em>最后更新: 2026-03-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/openai/codex" rel="noopener noreferrer" target="_blank">openai/codex</a></strong> ⭐ 62.4k
 Lightweight coding agent that runs in your terminal
-<em>最后更新: 2026-02-23</em></p>
+<em>最后更新: 2026-03-01</em></p>
 </li>
 <li>
-<p><strong><a href="https://github.com/jdx/mise" rel="noopener noreferrer" target="_blank">jdx/mise</a></strong> ⭐ 24.9k
+<p><strong><a href="https://github.com/dani-garcia/vaultwarden" rel="noopener noreferrer" target="_blank">dani-garcia/vaultwarden</a></strong> ⭐ 56.1k
+Unofficial Bitwarden compatible server written in Rust, formerly known as bitwarden_rs
+<em>最后更新: 2026-03-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/tw93/Pake" rel="noopener noreferrer" target="_blank">tw93/Pake</a></strong> ⭐ 46.0k
+🤱🏻 Turn any webpage into a desktop app with one command.
+<em>最后更新: 2026-03-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/jdx/mise" rel="noopener noreferrer" target="_blank">jdx/mise</a></strong> ⭐ 25.1k
 dev tools, env vars, task runner
-<em>最后更新: 2026-02-23</em></p>
+<em>最后更新: 2026-03-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/sdkman/sdkman-cli-native" rel="noopener noreferrer" target="_blank">sdkman/sdkman-cli-native</a></strong> ⭐ 0.3k
+The next generation of SDKMAN! CLI commands, written in Rust
+<em>最后更新: 2026-02-28</em></p>
 </li>
 </ul>
 <hr>
-<h2 id="swift-2">Swift (2)</h2>
+<h2 id="swift-4">Swift (4)</h2>
 <ul>
 <li>
-<p><strong><a href="https://github.com/exelban/stats" rel="noopener noreferrer" target="_blank">exelban/stats</a></strong> ⭐ 36.6k
-macOS system monitor in your menu bar
-<em>最后更新: 2026-02-23</em></p>
+<p><strong><a href="https://github.com/rxhanson/Rectangle" rel="noopener noreferrer" target="_blank">rxhanson/Rectangle</a></strong> ⭐ 28.5k
+Move and resize windows on macOS with keyboard shortcuts and snap areas
+<em>最后更新: 2026-03-01</em></p>
 </li>
 <li>
-<p><strong><a href="https://github.com/nguyenphutrong/quotio" rel="noopener noreferrer" target="_blank">nguyenphutrong/quotio</a></strong> ⭐ 3.6k
-Stop juggling AI accounts. Quotio is a beautiful native macOS menu bar app that unifies your Claude, Gemini, OpenAI, Qwen, and Antigravity subscriptions – with real-time quota tracking and smart auto-failover for AI coding tools like Claude Code, OpenCode, and Droid.
-<em>最后更新: 2026-02-23</em></p>
+<p><strong><a href="https://github.com/lwouis/alt-tab-macos" rel="noopener noreferrer" target="_blank">lwouis/alt-tab-macos</a></strong> ⭐ 14.9k
+Windows alt-tab on macOS
+<em>最后更新: 2026-02-28</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/Ranchero-Software/NetNewsWire" rel="noopener noreferrer" target="_blank">Ranchero-Software/NetNewsWire</a></strong> ⭐ 9.8k
+RSS reader for macOS and iOS.
+<em>最后更新: 2026-03-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/tw93/MiaoYan" rel="noopener noreferrer" target="_blank">tw93/MiaoYan</a></strong> ⭐ 7.6k
+⛷ Lightweight Markdown app to help you write great sentences.
+<em>最后更新: 2026-02-28</em></p>
 </li>
 </ul>
 <hr>
-<h2 id="typescript-3">TypeScript (3)</h2>
+<h2 id="typescript-11">TypeScript (11)</h2>
 <ul>
 <li>
-<p><strong><a href="https://github.com/google-gemini/gemini-cli" rel="noopener noreferrer" target="_blank">google-gemini/gemini-cli</a></strong> ⭐ 95.3k
+<p><strong><a href="https://github.com/anomalyco/opencode" rel="noopener noreferrer" target="_blank">anomalyco/opencode</a></strong> ⭐ 113.1k
+The open source coding agent.
+<em>最后更新: 2026-03-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/google-gemini/gemini-cli" rel="noopener noreferrer" target="_blank">google-gemini/gemini-cli</a></strong> ⭐ 96.0k
 An open-source AI agent that brings the power of Gemini directly into your terminal.
-<em>最后更新: 2026-02-23</em></p>
+<em>最后更新: 2026-03-01</em></p>
 </li>
 <li>
-<p><strong><a href="https://github.com/code-yeongyu/oh-my-opencode" rel="noopener noreferrer" target="_blank">code-yeongyu/oh-my-opencode</a></strong> ⭐ 33.2k
+<p><strong><a href="https://github.com/Stirling-Tools/Stirling-PDF" rel="noopener noreferrer" target="_blank">Stirling-Tools/Stirling-PDF</a></strong> ⭐ 74.7k
+#1 PDF Application on GitHub that lets you edit PDFs on any device anywhere
+<em>最后更新: 2026-03-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/laurent22/joplin" rel="noopener noreferrer" target="_blank">laurent22/joplin</a></strong> ⭐ 53.7k
+Joplin - the privacy-focused note taking app with sync capabilities for Windows, macOS, Linux, Android and iOS.
+<em>最后更新: 2026-03-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/code-yeongyu/oh-my-opencode" rel="noopener noreferrer" target="_blank">code-yeongyu/oh-my-opencode</a></strong> ⭐ 35.6k
 the best agent harness
-<em>最后更新: 2026-02-23</em></p>
+<em>最后更新: 2026-03-01</em></p>
 </li>
 <li>
-<p><strong><a href="https://github.com/karakeep-app/karakeep" rel="noopener noreferrer" target="_blank">karakeep-app/karakeep</a></strong> ⭐ 23.6k
-A self-hostable bookmark-everything app (links, notes and images) with AI-based automatic tagging and full text search
-<em>最后更新: 2026-02-23</em></p>
+<p><strong><a href="https://github.com/getmaxun/maxun" rel="noopener noreferrer" target="_blank">getmaxun/maxun</a></strong> ⭐ 15.2k
+🔥 The open-source no-code platform for web scraping, crawling, search and AI data extraction • Turn websites into structured APIs in minutes 🔥
+<em>最后更新: 2026-03-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/ryoppippi/ccusage" rel="noopener noreferrer" target="_blank">ryoppippi/ccusage</a></strong> ⭐ 11.1k
+A CLI tool for analyzing Claude Code/Codex CLI usage from local JSONL files.
+<em>最后更新: 2026-03-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/microsoft/vscode-copilot-chat" rel="noopener noreferrer" target="_blank">microsoft/vscode-copilot-chat</a></strong> ⭐ 9.5k
+Copilot Chat extension for VS Code
+<em>最后更新: 2026-02-28</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/NoeFabris/opencode-antigravity-auth" rel="noopener noreferrer" target="_blank">NoeFabris/opencode-antigravity-auth</a></strong> ⭐ 9.0k
+Enable Opencode to authenticate against Antigravity (Google’s IDE) via OAuth so you can use Antigravity rate limits and access models like gemini-3-pro and claude-opus-4-5-thinking with your Google credentials.
+<em>最后更新: 2026-03-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/xishang0128/sparkle" rel="noopener noreferrer" target="_blank">xishang0128/sparkle</a></strong> ⭐ 6.4k
+:electron: Another Mihomo GUI. (🛠building…)
+<em>最后更新: 2026-03-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/GtxFury/FlyClash" rel="noopener noreferrer" target="_blank">GtxFury/FlyClash</a></strong> ⭐ 1.1k
+简洁美观的代理工具
+<em>最后更新: 2026-03-01</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="vue-2">Vue (2)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/Zephyruso/zashboard" rel="noopener noreferrer" target="_blank">Zephyruso/zashboard</a></strong> ⭐ 2.3k
+(无描述)
+<em>最后更新: 2026-02-28</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/anghunk/linuxdo-scripts" rel="noopener noreferrer" target="_blank">anghunk/linuxdo-scripts</a></strong> ⭐ 2.2k
+LinuxDo Scripts 扩展，功能持续更新，欢迎提出新想法！已上架 Chrome Web Store 和 Firefox 商店！文档地址：<a href="https://linuxdo-scripts.zishu.me" rel="noopener noreferrer" target="_blank">https://linuxdo-scripts.zishu.me</a>
+<em>最后更新: 2026-02-28</em></p>
 </li>
 </ul>
 <hr>
