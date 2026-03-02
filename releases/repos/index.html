@@ -15,67 +15,46 @@ AstroBlog
             </button>
           </div>
         `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--default" data-astro-cid-sckkx6r4> <h1 id="-github-releases-监控列表">📦 GitHub Releases 监控列表</h1>
-<p>当前系统监控 <strong>14</strong> 个开源项目，每日自动抓取最新版本并生成 AI 摘要。</p>
+<p>当前系统监控 <strong>13</strong> 个开源项目，每日自动抓取最新版本并生成 AI 摘要。</p>
 <p>最后更新: 2026-03-02</p>
 <hr>
-<h2 id="c-1">C# (1)</h2>
+<h2 id="go-2">Go (2)</h2>
 <ul>
-<li><strong><a href="https://github.com/2dust/v2rayN" rel="noopener noreferrer" target="_blank">2dust/v2rayN</a></strong> ⭐ 97.7k
-A GUI client for Windows, Linux and macOS, support Xray and sing-box and others
-<em>最后更新: 2026-03-02</em></li>
-</ul>
-<hr>
-<h2 id="dart-1">Dart (1)</h2>
-<ul>
-<li><strong><a href="https://github.com/wanghongenpin/proxypin" rel="noopener noreferrer" target="_blank">wanghongenpin/proxypin</a></strong> ⭐ 12.5k
-Open source free capture HTTP(S) traffic  software ProxyPin, supporting full platform systems
-<em>最后更新: 2026-03-02</em></li>
-</ul>
-<hr>
-<h2 id="gherkin-1">Gherkin (1)</h2>
-<ul>
-<li><strong><a href="https://github.com/sdkman/sdkman-cli" rel="noopener noreferrer" target="_blank">sdkman/sdkman-cli</a></strong> ⭐ 6.7k
-The SDKMAN! Command Line Interface
-<em>最后更新: 2026-03-02</em></li>
-</ul>
-<hr>
-<h2 id="go-1">Go (1)</h2>
-<ul>
-<li><strong><a href="https://github.com/QuantumNous/new-api" rel="noopener noreferrer" target="_blank">QuantumNous/new-api</a></strong> ⭐ 18.7k
+<li>
+<p><strong><a href="https://github.com/SagerNet/sing-box" rel="noopener noreferrer" target="_blank">SagerNet/sing-box</a></strong> ⭐ 31.0k
+The universal proxy platform
+<em>最后更新: 2026-03-02</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/QuantumNous/new-api" rel="noopener noreferrer" target="_blank">QuantumNous/new-api</a></strong> ⭐ 18.8k
 A unified AI model hub for aggregation &#x26; distribution. It supports cross-converting various LLMs into OpenAI-compatible, Claude-compatible, or Gemini-compatible formats. A centralized gateway for personal and enterprise model management. 🍥
+<em>最后更新: 2026-03-02</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="javascript-1">JavaScript (1)</h2>
+<ul>
+<li><strong><a href="https://github.com/nikkinikki-org/OpenWrt-nikki" rel="noopener noreferrer" target="_blank">nikkinikki-org/OpenWrt-nikki</a></strong> ⭐ 4.4k
+Transparent Proxy with Mihomo on OpenWrt.
 <em>最后更新: 2026-03-02</em></li>
 </ul>
 <hr>
-<h2 id="kotlin-2">Kotlin (2)</h2>
+<h2 id="ruby-1">Ruby (1)</h2>
 <ul>
-<li>
-<p><strong><a href="https://github.com/rikkahub/rikkahub" rel="noopener noreferrer" target="_blank">rikkahub/rikkahub</a></strong> ⭐ 3.3k
-RikkaHub is an Android APP that supports for multiple LLM providers.
-<em>最后更新: 2026-03-02</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/xchacha20-poly1305/husi" rel="noopener noreferrer" target="_blank">xchacha20-poly1305/husi</a></strong> ⭐ 1.6k
-Husi (虎兕) is a non-professional and recreational proxy tool integration for the weird beliefs and free software spirit!
-<em>最后更新: 2026-03-02</em></p>
-</li>
-</ul>
-<hr>
-<h2 id="python-1">Python (1)</h2>
-<ul>
-<li><strong><a href="https://github.com/jxxghp/MoviePilot" rel="noopener noreferrer" target="_blank">jxxghp/MoviePilot</a></strong> ⭐ 10.6k
-NAS 媒体库自动化管理工具
+<li><strong><a href="https://github.com/Homebrew/brew" rel="noopener noreferrer" target="_blank">Homebrew/brew</a></strong> ⭐ 46.8k
+🍺 The missing package manager for macOS (or Linux)
 <em>最后更新: 2026-03-02</em></li>
 </ul>
 <hr>
 <h2 id="rust-2">Rust (2)</h2>
 <ul>
 <li>
-<p><strong><a href="https://github.com/openai/codex" rel="noopener noreferrer" target="_blank">openai/codex</a></strong> ⭐ 62.6k
+<p><strong><a href="https://github.com/openai/codex" rel="noopener noreferrer" target="_blank">openai/codex</a></strong> ⭐ 62.7k
 Lightweight coding agent that runs in your terminal
 <em>最后更新: 2026-03-02</em></p>
 </li>
 <li>
-<p><strong><a href="https://github.com/jdx/mise" rel="noopener noreferrer" target="_blank">jdx/mise</a></strong> ⭐ 25.1k
+<p><strong><a href="https://github.com/jdx/mise" rel="noopener noreferrer" target="_blank">jdx/mise</a></strong> ⭐ 25.2k
 dev tools, env vars, task runner
 <em>最后更新: 2026-03-02</em></p>
 </li>
@@ -83,36 +62,42 @@ dev tools, env vars, task runner
 <hr>
 <h2 id="shell-1">Shell (1)</h2>
 <ul>
-<li><strong><a href="https://github.com/233boy/sing-box" rel="noopener noreferrer" target="_blank">233boy/sing-box</a></strong> ⭐ 3.0k
-最好用的 sing-box 一键安装脚本 &#x26; 管理脚本，自动创建 REALITY 协议；支持 TUIC，Trojan，Hysteria2 等所有常见的协议
+<li><strong><a href="https://github.com/lxgw/LxgwWenKai" rel="noopener noreferrer" target="_blank">lxgw/LxgwWenKai</a></strong> ⭐ 23.3k
+An unprofessional open-source Chinese font derived from Fontworks’ Klee One. 一款非专业的开源中文字体，基于 FONTWORKS 出品字体 Klee One 衍生。<br>
 <em>最后更新: 2026-03-02</em></li>
 </ul>
 <hr>
-<h2 id="swift-1">Swift (1)</h2>
-<ul>
-<li><strong><a href="https://github.com/exelban/stats" rel="noopener noreferrer" target="_blank">exelban/stats</a></strong> ⭐ 36.7k
-macOS system monitor in your menu bar
-<em>最后更新: 2026-03-02</em></li>
-</ul>
-<hr>
-<h2 id="typescript-1">TypeScript (1)</h2>
-<ul>
-<li><strong><a href="https://github.com/TriliumNext/Trilium" rel="noopener noreferrer" target="_blank">TriliumNext/Trilium</a></strong> ⭐ 34.8k
-Build your personal knowledge base with Trilium Notes
-<em>最后更新: 2026-03-02</em></li>
-</ul>
-<hr>
-<h2 id="vue-2">Vue (2)</h2>
+<h2 id="typescript-6">TypeScript (6)</h2>
 <ul>
 <li>
-<p><strong><a href="https://github.com/miantiao-me/Sink" rel="noopener noreferrer" target="_blank">miantiao-me/Sink</a></strong> ⭐ 6.4k
-⚡ A Simple / Speedy / Secure Link Shortener with Analytics, 100% run on Cloudflare.
-<em>最后更新: 2026-03-01</em></p>
+<p><strong><a href="https://github.com/openclaw/openclaw" rel="noopener noreferrer" target="_blank">openclaw/openclaw</a></strong> ⭐ 247.3k
+Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞
+<em>最后更新: 2026-03-02</em></p>
 </li>
 <li>
-<p><strong><a href="https://github.com/Zephyruso/zashboard" rel="noopener noreferrer" target="_blank">Zephyruso/zashboard</a></strong> ⭐ 2.3k
-(无描述)
-<em>最后更新: 2026-03-01</em></p>
+<p><strong><a href="https://github.com/laurent22/joplin" rel="noopener noreferrer" target="_blank">laurent22/joplin</a></strong> ⭐ 53.7k
+Joplin - the privacy-focused note taking app with sync capabilities for Windows, macOS, Linux, Android and iOS.
+<em>最后更新: 2026-03-02</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/CherryHQ/cherry-studio" rel="noopener noreferrer" target="_blank">CherryHQ/cherry-studio</a></strong> ⭐ 40.5k
+AI productivity studio with smart chat, autonomous agents, and 300+ assistants. Unified access to frontier LLMs
+<em>最后更新: 2026-03-02</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/code-yeongyu/oh-my-opencode" rel="noopener noreferrer" target="_blank">code-yeongyu/oh-my-opencode</a></strong> ⭐ 36.2k
+the best agent harness
+<em>最后更新: 2026-03-02</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/mihomo-party-org/clash-party" rel="noopener noreferrer" target="_blank">mihomo-party-org/clash-party</a></strong> ⭐ 21.2k
+:electron: Another Mihomo GUI.
+<em>最后更新: 2026-03-02</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/microsoft/vscode-copilot-chat" rel="noopener noreferrer" target="_blank">microsoft/vscode-copilot-chat</a></strong> ⭐ 9.5k
+Copilot Chat extension for VS Code
+<em>最后更新: 2026-03-02</em></p>
 </li>
 </ul>
 <hr>
