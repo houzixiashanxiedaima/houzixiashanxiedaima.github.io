@@ -1,0 +1,267 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.17.1"><meta name="description" content="We’ll be working with the set P_n(\mathbb{R}), real polynomials
+of degree \leq n. Such polynomials can be expressed using
+n+1 scalar coefficients a_i as follows:
+\[p(x)=a_0+a_1 x + a_2 x^2 + \cdots + "><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data:;"><link rel="canonical" href="https://blog.yuyins.com/reading-list/notes-on-linear-algebra-for-polynomials-dyduca/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/notes-on-linear-algebra-for-polynomials-dyduca/"><meta property="og:title" content="Notes on Linear Algebra for Polynomials"><meta property="og:description" content="We’ll be working with the set P_n(\mathbb{R}), real polynomials
+of degree \leq n. Such polynomials can be expressed using
+n+1 scalar coefficients a_i as follows:
+\[p(x)=a_0+a_1 x + a_2 x^2 + \cdots + "><meta property="og:image" content="https://blog.yuyins.com/favicon.svg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/notes-on-linear-algebra-for-polynomials-dyduca/"><meta property="twitter:title" content="Notes on Linear Algebra for Polynomials"><meta property="twitter:description" content="We’ll be working with the set P_n(\mathbb{R}), real polynomials
+of degree \leq n. Such polynomials can be expressed using
+n+1 scalar coefficients a_i as follows:
+\[p(x)=a_0+a_1 x + a_2 x^2 + \cdots + "><meta property="twitter:image" content="https://blog.yuyins.com/favicon.svg"><title>Notes on Linear Algebra for Polynomials</title><!-- Theme and color scheme script (runs before page loads to prevent flash) --><script>
+			// 初始化配色方案 - 默认使用 stone-amber
+			const colorScheme = localStorage.getItem('colorScheme') || 'stone-amber';
+			document.documentElement.setAttribute('data-color', colorScheme);
+
+			// 强制使用浅色主题
+			document.documentElement.setAttribute('data-theme', 'light');
+		</script><link rel="stylesheet" href="/_astro/_slug_.VIcLNeN6.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.source-tag[data-astro-cid-wrgicudb]{background-color:var(--muted);color:var(--foreground);padding:.125rem .5rem;border-radius:9999px;font-weight:500;font-size:.75rem;text-decoration:none;transition:opacity .2s}.source-tag[data-astro-cid-wrgicudb]:hover{opacity:.8}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;color:var(--muted-foreground);font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.875rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--foreground)}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2>
+AstroBlog
+</a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-modal" data-astro-cid-otpdt6jm> <div class="modal-content" data-astro-cid-otpdt6jm> <div class="modal-header" data-astro-cid-otpdt6jm> <h2 class="modal-title" data-astro-cid-otpdt6jm>搜索文章</h2> <button id="close-search" class="close-button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-otpdt6jm></path> </svg> </button> </div> <div id="pagefind-ui" data-astro-cid-otpdt6jm></div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(t=0){if(sessionStorage.getItem(c)==="true")return g(),!0;const r=document.getElementById("pagefind-ui");if(!r)return!1;r.innerHTML='<div style="padding: 2rem; text-align: center; color: var(--muted-foreground);">加载中...</div>';try{return await new Promise((o,s)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=o,a.onerror=s,document.head.appendChild(a)}),g(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),t<2?(console.log(`Retrying search load... (${t+1}/2)`),await new Promise(o=>setTimeout(o,1e3)),l(t+1)):(r&&(r.innerHTML=`
+          <div style="padding: 2rem; text-align: center;">
+            <p style="color: var(--muted-foreground); margin-bottom: 1rem;">搜索功能加载失败</p>
+            <button id="retry-search" style="padding: 0.5rem 1rem; background: var(--accent); color: var(--accent-foreground); border: none; border-radius: 0.375rem; cursor: pointer;">
+              重试
+            </button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Notes on Linear Algebra for Polynomials</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://eli.thegreenplace.net" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>eli.thegreenplace.net</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年2月26日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>We’ll be working with the set P_n(\mathbb{R}), real polynomials
+of degree \leq n. Such polynomials can be expressed using
+n+1 scalar coefficients a_i as follows:</p>
+\[p(x)=a_0+a_1 x + a_2 x^2 + \cdots + a_n x^n\]
+<div>
+<h2>Vector space</h2>
+<p>The set P_n(\mathbb{R}), along with addition of polynomials and
+scalar multiplication form a <em>vector space</em>. As a proof, let’s review
+how the vector space axioms are satisfied. We’ll use p(x),
+q(x) and r(x) as arbitrary polynomials from the set
+P_n(\mathbb{R}) for the demonstration. Similarly, a and
+b are arbitrary scalars in <img alt="\mathbb{R}" src="https://eli.thegreenplace.net/images/math/0ed839b111fe0e3ca2b2f618b940893eaea88a57.png" />.</p>
+<p><strong>Associativity of vector addition</strong>:</p>
+\[p(x)+[q(x)+r(x)]=p(x)+q(x)+r(x)=[p(x)+q(x)]+r(x)\]
+<p>This is trivial because addition of polynomials is associative  <a href="#footnote-1" target="_blank" rel="noopener noreferrer">[1]</a>.
+Commutativity is similarly trivial, for the same reason:</p>
+<p><strong>Commutativity of vector addition</strong>:</p>
+\[p(x)+q(x)=q(x)+p(x)\]
+<p><strong>Identity element of vector addition</strong>:</p>
+<p>The zero polynomial 0 serves as an identity element.
+\forall p(x)\in P_n(\mathbb{R}), we have
+0 + p(x) = p(x).</p>
+<p><strong>Inverse element of vector addition</strong>:</p>
+<p>For each p(x), we can use q(x)=-p(x) as the additive
+inverse, because p(x)+q(x)=0.</p>
+<p><strong>Identity element of scalar multiplication</strong></p>
+<p>The scalar 1 serves as an identity element for scalar multiplication.
+For each p(x), it’s true that 1\cdot p(x)=p(x).</p>
+<p><strong>Associativity of scalar multiplication</strong>:</p>
+<p>For any two scalars a and b:</p>
+\[a[b\cdot p(x)]=ab\cdot p(x)=[ab]\cdot p(x)\]
+<p><strong>Distributivity of scalar multiplication over vector addition</strong>:</p>
+<p>For any p(x), q(x) and scalar a:</p>
+\[a\cdot[p(x)+q(x)]=a\cdot p(x)+a\cdot q(x)\]
+<p><strong>Distributivity of scalar multiplication over scalar addition</strong>:</p>
+<p>For any scalars a and b and polynomial p(x):</p>
+\[[a+b]\cdot p(x)=a\cdot p(x) + b\cdot p(x)\]
+</div>
+<div>
+<h2>Linear independence, span and basis</h2>
+<p>Since we’ve shown that polynomials in P_n(\mathbb{R}) form a
+vector space, we can now build additional linear algebraic definitions
+on top of that.</p>
+<p>A set of k polynomials p_k(x)\in P_n(\mathbb{R}) is said
+to be <em>linearly independent</em> if</p>
+\[\sum_{i=1}^{k}a_i p_i(x)=0\]
+<p>implies a_i=0 \quad \forall i. In words, the only linear
+combination resulting in the zero vector is when all coefficients are 0.</p>
+<p>As an example, let’s discuss the fundamental building blocks of
+polynomials in P_n(\mathbb{R}): the set
+\{1, x, x^2, \dots x^n\}. These are linearly independent
+because:</p>
+\[a_0 + a_1 x + a_2 x^2 + \cdots a_n x^n=0\]
+<p>is true only for zero polynomial, in which all the coefficients
+a_i=0. This comes from the very definition of polynomials.
+Moreover, this set <em>spans</em> the entire P_n(\mathbb{R}) because
+every polynomial can be (by definition) expressed as a linear combination of
+\{1, x, x^2, \dots x^n\}.</p>
+<p>Since we’ve shown these basic polynomials are linearly independent and
+span the entire vector space, they are a <em>basis</em> for the space. In fact,
+this set has a special name: the <em>monomial basis</em> (because a monomial is
+a polynomial with a single term).</p>
+</div>
+<div>
+<h2>Checking if an arbitrary set of polynomials is a basis</h2>
+<p>Suppose we have some set polynomials, and we want to know if these form
+a basis for P_n(\mathbb{R}). How do we go about it?</p>
+<p>The idea is using linear algebra the same way we do for any other vector
+space. Let’s use a concrete example to demonstrate:</p>
+\[Q=\{1-x, x, 2x+x^2\}\]
+<p>Is the set Q a basis for P_n(\mathbb{R})? We’ll start by
+checking whether the members of Q are linearly independent.
+Write:</p>
+\[a_0(1-x)+a_1 x + a_2(2x+x^2)=0\]
+<p>By regrouping, we can turn this into:</p>
+\[a_0 + (a_1-a_0+2a_2)x+a_2 x^2=0\]
+<p>For this to be true, the coefficient of each monomial has to be zero;
+mathematically:</p>
+\[\begin{aligned}
+    a_0&amp;=0\\
+    a_1-a_0+2a_2&amp;=0\\
+    a2&amp;=0\\
+\end{aligned}\]
+<p>In matrix form:</p>
+\[\begin{bmatrix}
+    1 &amp; 0 &amp; 0\\
+    -1 &amp; 1 &amp; 2\\
+    0 &amp; 0 &amp; 1\\
+\end{bmatrix}
+\begin{bmatrix}a_0\\ a_1\\ a_2\end{bmatrix}
+=\begin{bmatrix}0\\ 0\\ 0\end{bmatrix}\]
+<p>We know how to solve this, by reducing the matrix into <a href="https://en.wikipedia.org/wiki/Row_echelon_form" target="_blank" rel="noopener noreferrer">row-echelon
+form</a>. It’s easy to
+see that the reduced row-echelon form of this specific matrix is
+I, the identity matrix. Therefore, this set of equations has a
+single solution: a_i=0 \quad \forall i  <a href="#footnote-2" target="_blank" rel="noopener noreferrer">[2]</a>.</p>
+<p>We’ve shown that the set Q is linearly independent. Now let’s
+show that it <em>spans</em> the space P_n(\mathbb{R}). We want to
+analyze:</p>
+\[a_0(1-x)+a_1 x + a_2(2x+x^2)=\alpha +\beta x + \gamma x^2\]
+<p>And find the coefficients a_i that satisfy this for any
+arbitrary <img alt="\alpha" src="https://eli.thegreenplace.net/images/math/f7c665b45932a814215e979bc2611080b4948e68.png" />, <img alt="\beta" src="https://eli.thegreenplace.net/images/math/6499d503bfc00cadae1440b191c52a8632e2f8c4.png" /> and \gamma. We proceed
+just as before, by regrouping on the left side:</p>
+\[a_0 + (a_1-a_0+2a_2)x+a_2 x^2=\alpha +\beta x + \gamma x^2\]
+<p>and equating the coefficient of each power of <img alt="x" src="https://eli.thegreenplace.net/images/math/11f6ad8ec52a2984abaafd7c3b516503785c2072.png" /> separately:</p>
+\[\begin{aligned}
+    a_0&amp;=\alpha\\
+    a_1-a_0+2a_2&amp;=\beta\\
+    a2&amp;=\gamma\\
+\end{aligned}\]
+<p>If we turn this into matrix form, the matrix of coefficients is exactly
+the same as before. So we know there’s a single solution, and by
+rearranging the matrix into I, the solution will appear on the
+right hand side. It doesn’t matter for the moment what the actual
+solution is, as long as it exists and is unique. We’ve shown that
+Q spans the space!</p>
+<p>Since the set Q is linearly independent and spans
+P_n(\mathbb{R}), it is a <em>basis</em> for the space.</p>
+</div>
+<div>
+<h2>Inner product</h2>
+<p>I’ve discussed inner products for functions in <a href="https://eli.thegreenplace.net/2025/hilbert-space-treating-functions-as-vectors/" target="_blank" rel="noopener noreferrer">the post about Hilbert
+space</a>.
+Well, <em>polynomials are functions</em>, so we can define an inner product
+using integrals as follows <a href="#footnote-3" target="_blank" rel="noopener noreferrer">[3]</a>:</p>
+\[\langle p, q \rangle = \int_{a}^{b} p(x) q(x) w(x) \, dx\]
+<p>Where the bounds a and b are arbitrary, and could be
+infinite. Whenever we deal with integrals we worry about convergence; in
+my post on Hilbert spaces, we only talked about L^2 - the square
+integrable functions. Most polynomials are not square integrable,
+however. Therefore, we can restrict this using either:</p>
+<ol>
+<li>A special <em>weight function</em> w(x) to make sure the inner
+product integral converges</li>
+<li>Set finite bounds on the integral, and then we can just set
+w(x)=1.</li>
+</ol>
+<p>Let’s use the latter, and restrict the bounds into the range
+[-1,1], setting w(x)=1. We have the following inner
+product:</p>
+\[\langle p, q \rangle = \int_{-1}^{1} p(x) q(x) \, dx\]
+<p>Let’s check that this satisfies the inner product space conditions.</p>
+<p><strong>Conjugate symmetry</strong>:</p>
+<p>Since real multiplication is commutative, we can write:</p>
+\[\langle p, q \rangle = \int_{-1}^{1} p(x) q(x) \, dx =\int_{-1}^{1} q(x) p(x) \, dx=\langle q, p \rangle\]
+<p>We deal in the reals here, so we can safely ignore complex conjugation.</p>
+<p><strong>Linearity in the first argument</strong>:</p>
+<p>Let p_1,p_2,q\in P_n(\mathbb{R}) and a,b\in \mathbb{R}.
+We want to show that</p>
+\[\langle ap_1+bp_2,q \rangle = a\langle p_1,q\rangle +b\langle p_2,q\rangle\]
+<p>Expand the left-hand side using our definition of inner product:</p>
+\[\begin{aligned}
+    \langle ap_1+bp_2,q \rangle&amp;=\int_{-1}^{1} (a p_1(x)+b p_2(x)) q(x) \, dx\\
+    &amp;=a\int_{-1}^{1} p_1(x) q(x) \, dx+b\int_{-1}^{1} p_2(x) q(x) \, dx
+\end{aligned}\]
+<p>The result is equivalent to
+a\langle p_1,q\rangle +b\langle p_2,q\rangle.</p>
+<p><strong>Positive-definiteness</strong>:</p>
+<p>We want to show that for nonzero p\in P_n(\mathbb{R}), we have
+\langle p, p\rangle &gt; 0. First of all, since p(x)^2\geq0
+for all <img alt="x" src="https://eli.thegreenplace.net/images/math/11f6ad8ec52a2984abaafd7c3b516503785c2072.png" />, it’s true that:</p>
+\[\langle p, p\rangle=\int_{-1}^{1}p(x)^2\, dx\geq 0\]
+<p>What about the result 0 though? Well, let’s say that</p>
+\[\int_{-1}^{1}p(x)^2\, dx=0\]
+<p>Since p(x)^2 is a non-negative function, this means that the
+integral of a non-negative function ends up being 0. But p(x) is
+a polynomial, so it’s <em>continuous</em>, and so is p(x)^2. If the
+integral of a continuous non-negative function is 0, it means the
+function itself is 0. Had it been non-zero in any place, the integral
+would necessarily have to be positive as well.</p>
+<p>We’ve proven that \langle p, p\rangle=0 only when p is
+the zero polynomial. The positive-definiteness condition is satisfied.</p>
+<p>In conclusion, P_n(\mathbb{R}) along with the inner product
+we’ve defined forms an <em>inner product space</em>.</p>
+</div>
+<div>
+<h2>Orthogonality</h2>
+<p>Now that we have an inner product, we can define orthogonality on
+polynomials: two polynomials p,q are <em>orthogonal</em> (w.r.t. our
+inner product) iff</p>
+\[\langle p,q\rangle=\int_{-1}^{1}p(x)q(x)\, dx=0\]
+<p>Contrary to expectation  <a href="#footnote-4" target="_blank" rel="noopener noreferrer">[4]</a>, the monomial basis polynomials are <em>not</em>
+orthogonal using our definition of inner product.</p>
+<p>For example, calculating the inner product for 1 and
+x^2:</p>
+\[\langle 1,x^2\rangle=\int_{-1}^{1}x^2\, dx=\frac{x^3}{3}\biggr|_{-1}^{1}=\frac{2}{3}\]
+<p>There are other sets of polynomials that <em>are</em> orthogonal using our
+inner product. For example, the <a href="https://en.wikipedia.org/wiki/Legendre_polynomials" target="_blank" rel="noopener noreferrer">Legendre
+polynomials</a>; but
+this is a topic for another post.</p>
+<hr />
+<table>
+<colgroup><col></col><col></col></colgroup>
+<tbody>
+<tr><td><a href="#footnote-reference-1" target="_blank" rel="noopener noreferrer">[1]</a></td><td>There’s a level of basic algebra below which we won’t descend in
+these notes. We could break this statement further down by saying
+that something like a_i x^i + a_j x^j can be added to
+b_i x^i + b_j x^j by adding each power of <img alt="x" src="https://eli.thegreenplace.net/images/math/11f6ad8ec52a2984abaafd7c3b516503785c2072.png" />
+separately for any <img alt="i" src="https://eli.thegreenplace.net/images/math/042dc4512fa3d391c5170cf3aa61e6a638f84342.png" /> and j, but let’s just take it
+for granted.</td></tr>
+</tbody>
+</table>
+<table>
+<colgroup><col></col><col></col></colgroup>
+<tbody>
+<tr><td><a href="#footnote-reference-2" target="_blank" rel="noopener noreferrer">[2]</a></td><td>Obviously, this specific set of equations is quite trivial to solve
+without matrices; I just want to demonstrate the more general
+approach. Once we have a system of linear equations, the whole
+toolbox of linear algebra is at our disposal. For example, we could
+also have checked the determinant and seen it’s non-zero, which means
+that a square matrix is invertible, and in this case has a single
+solution of zeroes.</td></tr>
+</tbody>
+</table>
+<table>
+<colgroup><col></col><col></col></colgroup>
+<tbody>
+<tr><td><a href="#footnote-reference-3" target="_blank" rel="noopener noreferrer">[3]</a></td><td>And actually with this (or any valid) inner product,
+P_n(\mathbb{R}) indeed forms a Hilbert space, because it’s
+finite-dimensional, and every finite-dimensional inner product space
+is complete.</td></tr>
+</tbody>
+</table>
+<table>
+<colgroup><col></col><col></col></colgroup>
+<tbody>
+<tr><td><a href="#footnote-reference-4" target="_blank" rel="noopener noreferrer">[4]</a></td><td>Because of how naturally this set spans P_n(\mathbb{R}). And
+indeed, we can define alternative inner products using which
+monomials are orthogonal.</td></tr>
+</tbody>
+</table>
+</div>
+</div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://eli.thegreenplace.net/2026/notes-on-linear-algebra-for-polynomials/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text" data-astro-cid-sz7xmlte>
+&copy; 2026 AstroBlog
+</p> <p class="footer-text" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer>  </body></html> 

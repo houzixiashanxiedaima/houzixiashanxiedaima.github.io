@@ -1,0 +1,263 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.17.1"><meta name="description" content="Against Query Based Compilers
+Feb 25, 2026
+
+Query based compilers are all the rage
+these days, so it feels only appropriate to chart some treacherous shoals in those waters.
+A query-based compiler is "><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data:;"><link rel="canonical" href="https://blog.yuyins.com/reading-list/against-query-based-compilers-e04cyj/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/against-query-based-compilers-e04cyj/"><meta property="og:title" content="Against Query Based Compilers"><meta property="og:description" content="Against Query Based Compilers
+Feb 25, 2026
+
+Query based compilers are all the rage
+these days, so it feels only appropriate to chart some treacherous shoals in those waters.
+A query-based compiler is "><meta property="og:image" content="https://blog.yuyins.com/favicon.svg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/against-query-based-compilers-e04cyj/"><meta property="twitter:title" content="Against Query Based Compilers"><meta property="twitter:description" content="Against Query Based Compilers
+Feb 25, 2026
+
+Query based compilers are all the rage
+these days, so it feels only appropriate to chart some treacherous shoals in those waters.
+A query-based compiler is "><meta property="twitter:image" content="https://blog.yuyins.com/favicon.svg"><title>Against Query Based Compilers</title><!-- Theme and color scheme script (runs before page loads to prevent flash) --><script>
+			// 初始化配色方案 - 默认使用 stone-amber
+			const colorScheme = localStorage.getItem('colorScheme') || 'stone-amber';
+			document.documentElement.setAttribute('data-color', colorScheme);
+
+			// 强制使用浅色主题
+			document.documentElement.setAttribute('data-theme', 'light');
+		</script><link rel="stylesheet" href="/_astro/_slug_.VIcLNeN6.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.source-tag[data-astro-cid-wrgicudb]{background-color:var(--muted);color:var(--foreground);padding:.125rem .5rem;border-radius:9999px;font-weight:500;font-size:.75rem;text-decoration:none;transition:opacity .2s}.source-tag[data-astro-cid-wrgicudb]:hover{opacity:.8}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;color:var(--muted-foreground);font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.875rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--foreground)}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2>
+AstroBlog
+</a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-modal" data-astro-cid-otpdt6jm> <div class="modal-content" data-astro-cid-otpdt6jm> <div class="modal-header" data-astro-cid-otpdt6jm> <h2 class="modal-title" data-astro-cid-otpdt6jm>搜索文章</h2> <button id="close-search" class="close-button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-otpdt6jm></path> </svg> </button> </div> <div id="pagefind-ui" data-astro-cid-otpdt6jm></div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(t=0){if(sessionStorage.getItem(c)==="true")return g(),!0;const r=document.getElementById("pagefind-ui");if(!r)return!1;r.innerHTML='<div style="padding: 2rem; text-align: center; color: var(--muted-foreground);">加载中...</div>';try{return await new Promise((o,s)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=o,a.onerror=s,document.head.appendChild(a)}),g(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),t<2?(console.log(`Retrying search load... (${t+1}/2)`),await new Promise(o=>setTimeout(o,1e3)),l(t+1)):(r&&(r.innerHTML=`
+          <div style="padding: 2rem; text-align: center;">
+            <p style="color: var(--muted-foreground); margin-bottom: 1rem;">搜索功能加载失败</p>
+            <button id="retry-search" style="padding: 0.5rem 1rem; background: var(--accent); color: var(--accent-foreground); border: none; border-radius: 0.375rem; cursor: pointer;">
+              重试
+            </button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Against Query Based Compilers</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://matklad.github.io" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>matklad.github.io</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年2月25日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb>
+<header>
+  <h1>Against Query Based Compilers</h1>
+  <time>Feb 25, 2026</time>
+</header>
+<p><a href="https://thunderseethe.dev/posts/compiler-education-deserves-a-revoluation/" target="_blank" rel="noopener noreferrer">Query based compilers are all the rage</a>
+these days, so it feels only appropriate to chart some treacherous shoals in those waters.</p>
+<p>A query-based compiler is a straightforward application of the idea of incremental computations to,
+you guessed it, compiling. A compiler is just a simple text transformation program, implemented as a
+lot of functions. You could visualize a <em>run</em> of a compiler on a particular input source code as a
+graph of function calls:</p>
+
+<figure>
+
+<img alt="" src="/assets/2026-02-25-against-query-based-compilers/1.svg" />
+</figure>
+<p>Here, schematically, squares are inputs like file text or compiler’s command line arguments, <code>g</code> is
+an intermediate function (e.g, type checking), which is called twice, with different arguments, and
+<code>f</code> and <code>h</code> are top-level functions (compile executable, or compute completions for LSP).</p>
+<p>Looking at this picture, it’s obvious how to make our compiler “incremental” — if an input changes,
+it’s enough to re-compute only the results on path from the changed input to the root “query”:</p>
+
+<figure>
+
+<img alt="" src="/assets/2026-02-25-against-query-based-compilers/2.svg" />
+</figure>
+<p>A little more thinking, and you can derive “early cutoff” optimization:</p>
+
+<figure>
+
+<img alt="" src="/assets/2026-02-25-against-query-based-compilers/3.svg" />
+</figure>
+<p>If an input to the function changes, but its result doesn’t (e.g, function type is not affected by
+whitespace change), you can stop change propagation early.</p>
+<p>And that’s … basically it. The beauty of the scheme is its silvery-bullety hue — it can be
+applied without thinking to any computation, and, with a touch of meta programming, you won’t even
+have to change code of the compiler significantly.</p>
+<p><a href="https://simon.peytonjones.org/assets/pdfs/build-systems-jfp.pdf" target="_blank" rel="noopener noreferrer"><em>Build Systems à la Carte</em></a> is the
+canonical paper to read here. In a build system, a query is an opaque process whose inputs and
+outputs are file. In a query-based compiler, queries are just functions.</p>
+<hr />
+<p>The reason why we want this in the first place is incremental compilation — in IDE context
+specifically, the compiler needs to react to a stream of tiny edits, and its time budget is about
+100ms. Big-O thinking is useful here: the time to react to the change should be proportional to the
+size of the change, and not the overall size of the codebase. O(1) change leads to O(1) update
+of the O(N) codebase.</p>
+<p>Similar big-O thinking also demonstrates the principal limitation of the scheme — the update work
+can’t be smaller than the change in the result.</p>
+<p>An example. Suppose our “compiler” makes a phrase upper-case:</p>
+
+<figure>
+
+
+<pre><code><span>compile("hello world") == "HELLO WORLD"</span></code></pre>
+
+</figure>
+<p>This is easy to incrementalize, as changing a few letters in the input changes only a few letters in
+the output:</p>
+
+<figure>
+
+
+<pre><code><span>compile("hallo world") == "HALLO WORLD"</span></code></pre>
+
+</figure>
+<p>But suppose now our “compiler” is a hashing or encryption function:</p>
+
+<figure>
+
+
+<pre><code><span>compile("hello world") == "a948904f2f0"</span>
+<span>compile("hallo world") == "a7336983eca"</span></code></pre>
+
+</figure>
+<p>This is provably impossible to make usefully incremental. The encryption <em>can</em> be implemented
+as a graph of function calls, and you <em>can</em> apply the general incremental recipe to it. It just
+won’t be very fast.</p>
+<p>The reason for that is the avalanche property — for good encryption, a change in any bit of input
+should flip roughly half of the bits of the output. So just the work of changing the output
+(completely ignoring the work to compute what needs to be changed) is O(N), not O(1).</p>
+
+<figure>
+<blockquote><p>The effectiveness of query-based compiler is limited by
+the dependency structure of the source language.</p>
+</blockquote>
+
+</figure>
+<p>A particularly nasty effect here is that even if you have only <em>potential</em> avalanche, where a
+certain kind of change <em>could</em> affect large fraction of the output, even if it usually doesn’t, your
+incremental engine likely will spend some CPU time or memory to confirm the absence of dependency.</p>
+<hr />
+<p>In my</p>
+<p><span><a href="https://rust-analyzer.github.io/blog/2020/07/20/three-architectures-for-responsive-ide.html" target="_blank" rel="noopener noreferrer"><em>Three Architectures For Responsive IDE</em></a>,</span>
+query-based compilation is presented as a third, fall-back option. I still think that that’s
+basically true: as a language designer, I think it’s worth listening to your inner
+<a href="https://grugbrain.dev" target="_blank" rel="noopener noreferrer">Grug</a> and push the need for queries as far down the compilation pipeline as
+possible, sticking to more direct approaches. <em>Not</em> doing queries is simpler, faster, and simpler to
+make faster (profiling a query-based compiler is a special genre of hurdle racing).</p>
+<p>Zig and Rust provide for a nice comparison. In Zig, every file can be parsed completely in
+isolation, so compilation starts by parsing all files independently and in parallel. Because in Zig
+every name needs to be explicitly declared (there’s no <code>use *</code>), name resolution also can run on a
+per-file basis, without queries. Zig goes even further, and directly converts untyped AST into IR,
+emitting a whole bunch of errors in the process (e.g, “<code>var</code> doesn’t need to be mutable”). See
+<span><a href="https://mitchellh.com/zig/astgen" target="_blank" rel="noopener noreferrer"><em>Zig AstGen: AST =&gt; ZIR</em></a></span>
+for details. By the time compiler gets to tracked queries, the data it has to work with is already
+pretty far from the raw source code, but only because Zig <em>language</em> is carefully designed to allow
+this.</p>
+<p>In contrast, you can’t really parse a file in Rust. Rust macros generate new source code, so parsing
+can’t be finished until all the macros are expanded. Expanding macros requires name resolution,
+which, in Rust, is a crate-wide, rather than a file-wide operation. Its a fundamental property of
+the language that typing something in <code>a.rs</code> can change parsing results for <code>b.rs</code>, and that forces
+fine-grained dependency tracking and invalidation to the very beginning of the front-end.</p>
+<p>Similarly, the nature of the trait system is such that <code>impl</code> blocks relevant to a particular method
+call can be found almost anywhere. For every trait method call, you get a dependency on the <code>impl</code>
+block that supplies the implementation, but you <em>also</em> get a dependency on non-existence of
+conflicting <code>impl</code>s in every other file!</p>
+<p>Again, refer to the
+<a href="https://rust-analyzer.github.io/blog/2020/07/20/three-architectures-for-responsive-ide.html" target="_blank" rel="noopener noreferrer"><em>Three Architectures</em></a>
+for positive ideas, but the general trick is to leverage language semantics to manually cut the
+compilation tasks into somewhat coarse-grained chunks which are independent by definition (of the
+source language). Grug builds an incremental map-reduce compiler for his language:</p>
+<ul>
+<li>
+<p>Recursive directory walk finds all files to be compiled.</p>
+</li>
+<li>
+<p>In parallel, independently, each file is parsed, name-resolved, and lowered. As much as possible,
+language features (and errors) are syntax driven and not type driven, and can be processed at this
+stage.</p>
+</li>
+<li>
+<p>In parallel, a “summary” is extracted from each file, which is essentially just a list of types
+and signatures, with function bodies empty.</p>
+</li>
+<li>
+<p>Sequentially, a “signature evaluation” phase is run on this set of summaries, which turns type
+references in signatures into actual types, dealing with mutual dependencies between files. This
+phase is re-run whenever a summary of a file changes. Conversely, changes to the body of any
+function do not invalidate resolved signatures.</p>
+</li>
+<li>
+<p>In parallel, every function’s body is type-checked, and lowered to type-and-layout resolved IR,
+applying function-local optimizations.</p>
+</li>
+<li>
+<p>Sequentially, a thin-lto style set of analyses are run on compiled functions, making inlining
+decisions and computing call-graph dependent attributes like function purity.</p>
+</li>
+<li>
+<p>In parallel, each function is codegened to machine code with unresolved references to other
+functions (relocations).</p>
+</li>
+<li>
+<p>Sequentially, functions are concatenated into an executable file, receiving an address.</p>
+</li>
+<li>
+<p>In parallel, all relocations are resolved to now known addresses.</p>
+</li>
+</ul>
+<p>The above scheme works only if the language has a property that changing the body of function <code>foo</code>
+(not touching its signature) can’t introduce type errors into an unrelated function <code>bar</code>.</p>
+<hr />
+<p>Another trick that becomes less available if you blindly apply queries are in-place updates.
+Consider a language with package declarations and fully qualified names, like Kotlin:</p>
+
+<figure>
+
+
+<pre><code><span><span>package</span> org.example</span>
+<span></span>
+<span><span><span>fun</span> <span>printMessage</span><span>()</span></span> { <span>/*...*/</span> }</span>
+<span><span>class</span> <span>Message</span> { <span>/*...*/</span> }</span></code></pre>
+
+</figure>
+<p>A compiler for this language probably wants to maintain a map of all public declarations, where the
+keys are fully qualified names, and values are declarations themselves. If you approach the problem
+of computing this map with query eyes, you might have a base per-file query that returns a map of
+file’s declarations, and then a recursive per-directory query. And you’ll probably have some kind of
+structural sharing of the maps, such that changing a single file updates only the “spine”, without
+actually copying most of the other entries.</p>
+<p>But there’s a more direct way to make this sort of structure responsive to changes. You need only
+two “queries” — per file, and global. When a file changes, you look at the <em>previous</em> version of
+the map for this file, compute a diff of added or removed declarations, and then apply this diff to
+the global map.</p>
+<p>Zig is planning to use a similar approach to incrementalize linking — rather than producing a new
+binary gluing mostly unchanged chunks of machine code, the idea is to in-place patch the previous
+binary.</p>
+<hr />
+<p>If you like this article, you might be interested in some other adjacent stuff I’ve written over the
+years, roughly in the order of importance:</p>
+<ul>
+<li>
+<a href="https://rust-analyzer.github.io/blog/2020/07/20/three-architectures-for-responsive-ide.html" target="_blank" rel="noopener noreferrer">Three Architectures for a Responsive IDE</a>
+</li>
+<li>
+<a href="https://rust-analyzer.github.io/blog/2023/07/24/durable-incrementality.html" target="_blank" rel="noopener noreferrer">Durable Incrementality</a>
+</li>
+<li>
+<a href="https://matklad.github.io/2023/05/06/zig-language-server-and-cancellation.html" target="_blank" rel="noopener noreferrer">Zig Language Server And Cancellation</a>
+</li>
+<li>
+<a href="https://matklad.github.io/2023/05/21/resilient-ll-parsing-tutorial.html" target="_blank" rel="noopener noreferrer">Resilient LL Parsing Tutorial</a>
+</li>
+<li>
+<a href="https://rust-analyzer.github.io/blog/2019/11/13/find-usages.html" target="_blank" rel="noopener noreferrer">Find Usages</a>
+</li>
+<li>
+<a href="https://rust-analyzer.github.io/blog/2023/12/26/the-heart-of-a-language-server.html" target="_blank" rel="noopener noreferrer">The Heart of a Language Server</a>
+</li>
+<li>
+<a href="https://rust-analyzer.github.io/blog/2020/09/28/how-to-make-a-light-bulb.html" target="_blank" rel="noopener noreferrer">How to Make a 💡?</a>
+</li>
+<li>
+<a href="https://matklad.github.io/2023/10/12/lsp-could-have-been-better.html" target="_blank" rel="noopener noreferrer">LSP could have been better</a>
+</li>
+<li>
+<a href="https://matklad.github.io/2023/08/01/on-modularity-of-lexical-analysis.html" target="_blank" rel="noopener noreferrer">On Modularity of Lexical Analysis</a>
+</li>
+<li>
+<a href="https://matklad.github.io/2020/11/11/yde.html" target="_blank" rel="noopener noreferrer">Why an IDE?</a>
+</li>
+</ul>
+</div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://matklad.github.io/2026/02/25/against-query-based-compilers.html" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text" data-astro-cid-sz7xmlte>
+&copy; 2026 AstroBlog
+</p> <p class="footer-text" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer>  </body></html> 
