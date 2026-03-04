@@ -11,7 +11,7 @@ In fact, what you get is usually a worse versi"><meta property="twitter:image" c
 
 			// 强制使用浅色主题
 			document.documentElement.setAttribute('data-theme', 'light');
-		</script><link rel="stylesheet" href="/_astro/_slug_.BeuyMDuS.css">
+		</script><link rel="stylesheet" href="/_astro/_slug_.BIXdge-S.css">
 <style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.source-tag[data-astro-cid-wrgicudb]{background-color:var(--muted);color:var(--foreground);padding:.125rem .5rem;border-radius:9999px;font-weight:500;font-size:.75rem;text-decoration:none;transition:opacity .2s}.source-tag[data-astro-cid-wrgicudb]:hover{opacity:.8}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;color:var(--muted-foreground);font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.875rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--foreground)}
 </style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2>
 AstroBlog
@@ -81,8 +81,10 @@ These languages have all these nice features for manipulating data in memory, bu
 In memory, you get dynamically sized strings and vectors, enumerated types, objects, etc, etc.
 On disk, you get... a bunch of bytes. 
 </p><p>
-Considering that most already support custom allocators and the such, adding a better way to access files seems very doable —
-but (as far as I'm aware) C is the only language that lets you specify a binary format and just use it.
+Considering that most already support custom allocators and the such, adding a better way to access files seems very doable, but no one's actually done it. 
+It's very weird to me that C —
+a language known for being unergonomic —
+actually does this the best. 
 </p><p>
 C's implementation isn't even very good:
 Memory mapping comes some overhead (page faults, TLB flushes) and C does nothing to handle endianness or errors...
@@ -90,13 +92,8 @@ but it doesn't take much to beat nothing.
 </p><p>
 <em>Sure, you might want to do some parsing and validation</em>, but it shouldn't be required every time data leaves the disk. 
 RAM is much smaller then the disk, so it's often impossible to just parse everything into memory.
-Being able to easily offload data without complicating the code is very useful.
 </p><p>
-Just look at Python's pickle:
-it's a completely insecure serialization format.
-Loading a file can cause code execution even if you just wanted some numbers...
-but still very widely used because it fits the mix-code-and-data model of python.
-</p><p>
+
 A lot of files are not untrusted data. 
 </p><p>
 In the case of binary files, parsing is usually redundant. 
