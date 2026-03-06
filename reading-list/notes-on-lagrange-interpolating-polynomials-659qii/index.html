@@ -327,7 +327,6 @@ common factor out. Same for the common factor x_2-x_0 of the
 second row, and so on. Overall, we can write:</p>
 \[\det(W)=(x_1-x_0)(x_2-x_0)\cdots(x_n-x_0)\cdot \det
 {\renewcommand{\arraystretch}{1.5}\begin{bmatrix}
-        1 &amp; x_0 &amp; x_0^2 &amp; \dots &amp; x_0^{n-1}\\
         1 &amp; x_1 &amp; x_1^2 &amp; \dots &amp; x_1^{n-1}\\
         1 &amp; x_2 &amp; x_2^2 &amp; \dots &amp; x_2^{n-1}\\
         \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp;\vdots \\
@@ -335,7 +334,7 @@ second row, and so on. Overall, we can write:</p>
     \end{bmatrix}
 }\]
 <p>But the smaller matrix is just the Vandermonde matrix for
-\{x_0 \dots x_{n-1}\}. If we continue this process by induction,
+\{x_1 \dots x_{n}\}. If we continue this process by induction,
 we’ll get:</p>
 \[\det(V) = \prod_{0 \le i &lt; j \le n} (x_j - x_i)\]
 <p>If you’re interested, the <a href="https://en.wikipedia.org/wiki/Vandermonde_matrix" target="_blank" rel="noopener noreferrer">Wikipedia page for the Vandermonde matrix</a> has a couple of additional
