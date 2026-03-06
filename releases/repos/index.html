@@ -15,125 +15,133 @@ AstroBlog
             </button>
           </div>
         `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet">  </div> </div> </nav> </header>  <main id="main-content" data-pagefind-body class="main-content main-content--default" data-astro-cid-sckkx6r4> <h1 id="-github-releases-监控列表">📦 GitHub Releases 监控列表</h1>
-<p>当前系统监控 <strong>18</strong> 个开源项目，每日自动抓取最新版本并生成 AI 摘要。</p>
-<p>最后更新: 2026-03-05</p>
+<p>当前系统监控 <strong>20</strong> 个开源项目，每日自动抓取最新版本并生成 AI 摘要。</p>
+<p>最后更新: 2026-03-06</p>
 <hr>
 <h2 id="c-1">C# (1)</h2>
 <ul>
-<li><strong><a href="https://github.com/2dust/v2rayN" rel="noopener noreferrer" target="_blank">2dust/v2rayN</a></strong> ⭐ 98.0k
-A GUI client for Windows, Linux and macOS, support Xray and sing-box and others
-<em>最后更新: 2026-03-05</em></li>
+<li><strong><a href="https://github.com/Klocman/Bulk-Crap-Uninstaller" rel="noopener noreferrer" target="_blank">Klocman/Bulk-Crap-Uninstaller</a></strong> ⭐ 17.7k
+Remove large amounts of unwanted applications quickly.
+<em>最后更新: 2026-03-06</em></li>
 </ul>
 <hr>
-<h2 id="dart-1">Dart (1)</h2>
-<ul>
-<li><strong><a href="https://github.com/hiddify/hiddify-app" rel="noopener noreferrer" target="_blank">hiddify/hiddify-app</a></strong> ⭐ 27.0k
-Multi-platform auto-proxy client, supporting Sing-box, X-ray, TUIC, Hysteria, Reality, Trojan, SSH etc. It’s an open-source, secure and ad-free.
-<em>最后更新: 2026-03-05</em></li>
-</ul>
-<hr>
-<h2 id="go-2">Go (2)</h2>
+<h2 id="c-2">C++ (2)</h2>
 <ul>
 <li>
-<p><strong><a href="https://github.com/SagerNet/sing-box" rel="noopener noreferrer" target="_blank">SagerNet/sing-box</a></strong> ⭐ 31.1k
-The universal proxy platform
-<em>最后更新: 2026-03-05</em></p>
+<p><strong><a href="https://github.com/rime/weasel" rel="noopener noreferrer" target="_blank">rime/weasel</a></strong> ⭐ 6.8k
+【小狼毫】Rime for Windows
+<em>最后更新: 2026-03-06</em></p>
 </li>
 <li>
-<p><strong><a href="https://github.com/JanDeDobbeleer/oh-my-posh" rel="noopener noreferrer" target="_blank">JanDeDobbeleer/oh-my-posh</a></strong> ⭐ 21.7k
-The most customisable and low-latency cross platform/shell prompt renderer
-<em>最后更新: 2026-03-05</em></p>
+<p><strong><a href="https://github.com/std-microblock/breeze-shell" rel="noopener noreferrer" target="_blank">std-microblock/breeze-shell</a></strong> ⭐ 3.1k
+An alternative Windows context menu, and more.
+<em>最后更新: 2026-03-06</em></p>
 </li>
 </ul>
 <hr>
-<h2 id="javascript-1">JavaScript (1)</h2>
-<ul>
-<li><strong><a href="https://github.com/louislam/uptime-kuma" rel="noopener noreferrer" target="_blank">louislam/uptime-kuma</a></strong> ⭐ 83.6k
-A fancy self-hosted monitoring tool
-<em>最后更新: 2026-03-05</em></li>
-</ul>
-<hr>
-<h2 id="kotlin-2">Kotlin (2)</h2>
+<h2 id="go-3">Go (3)</h2>
 <ul>
 <li>
-<p><strong><a href="https://github.com/rikkahub/rikkahub" rel="noopener noreferrer" target="_blank">rikkahub/rikkahub</a></strong> ⭐ 3.4k
-RikkaHub is an Android APP that supports for multiple LLM providers.
-<em>最后更新: 2026-03-05</em></p>
+<p><strong><a href="https://github.com/caddyserver/caddy" rel="noopener noreferrer" target="_blank">caddyserver/caddy</a></strong> ⭐ 70.6k
+Fast and extensible multi-platform HTTP/1-2-3 web server with automatic HTTPS
+<em>最后更新: 2026-03-06</em></p>
 </li>
 <li>
-<p><strong><a href="https://github.com/JLLeitschuh/ktlint-gradle" rel="noopener noreferrer" target="_blank">JLLeitschuh/ktlint-gradle</a></strong> ⭐ 1.7k
-A ktlint gradle plugin
-<em>最后更新: 2026-03-05</em></p>
+<p><strong><a href="https://github.com/1Panel-dev/1Panel" rel="noopener noreferrer" target="_blank">1Panel-dev/1Panel</a></strong> ⭐ 34.1k
+🔥 Take full control of your VPS with 1Panel. Deploy OpenClaw in one click.
+<em>最后更新: 2026-03-06</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/QuantumNous/new-api" rel="noopener noreferrer" target="_blank">QuantumNous/new-api</a></strong> ⭐ 19.4k
+A unified AI model hub for aggregation &#x26; distribution. It supports cross-converting various LLMs into OpenAI-compatible, Claude-compatible, or Gemini-compatible formats. A centralized gateway for personal and enterprise model management. 🍥
+<em>最后更新: 2026-03-06</em></p>
 </li>
 </ul>
 <hr>
-<h2 id="powershell-1">PowerShell (1)</h2>
+<h2 id="kotlin-1">Kotlin (1)</h2>
 <ul>
-<li><strong><a href="https://github.com/ChrisTitusTech/winutil" rel="noopener noreferrer" target="_blank">ChrisTitusTech/winutil</a></strong> ⭐ 48.6k
-Chris Titus Tech’s Windows Utility - Install Programs, Tweaks, Fixes, and Updates
-<em>最后更新: 2026-03-05</em></li>
+<li><strong><a href="https://github.com/MetaCubeX/ClashMetaForAndroid" rel="noopener noreferrer" target="_blank">MetaCubeX/ClashMetaForAndroid</a></strong> ⭐ 34.9k
+A rule-based tunnel for Android.
+<em>最后更新: 2026-03-06</em></li>
+</ul>
+<hr>
+<h2 id="php-1">PHP (1)</h2>
+<ul>
+<li><strong><a href="https://github.com/ellite/Wallos" rel="noopener noreferrer" target="_blank">ellite/Wallos</a></strong> ⭐ 7.5k
+Wallos: Open-source, self-hostable personal subscription tracker. Visualize your recurring expenses, manage your budget, and save money.
+<em>最后更新: 2026-03-06</em></li>
 </ul>
 <hr>
 <h2 id="python-1">Python (1)</h2>
 <ul>
-<li><strong><a href="https://github.com/OthmanAdi/planning-with-files" rel="noopener noreferrer" target="_blank">OthmanAdi/planning-with-files</a></strong> ⭐ 15.3k
+<li><strong><a href="https://github.com/OthmanAdi/planning-with-files" rel="noopener noreferrer" target="_blank">OthmanAdi/planning-with-files</a></strong> ⭐ 15.4k
 Claude Code skill implementing Manus-style persistent markdown planning — the workflow pattern behind the $2B acquisition.
-<em>最后更新: 2026-03-05</em></li>
+<em>最后更新: 2026-03-06</em></li>
 </ul>
 <hr>
 <h2 id="rust-3">Rust (3)</h2>
 <ul>
 <li>
-<p><strong><a href="https://github.com/rustdesk/rustdesk" rel="noopener noreferrer" target="_blank">rustdesk/rustdesk</a></strong> ⭐ 108.7k
-An open-source remote desktop application designed for self-hosting, as an alternative to TeamViewer.
-<em>最后更新: 2026-03-05</em></p>
+<p><strong><a href="https://github.com/zed-industries/zed" rel="noopener noreferrer" target="_blank">zed-industries/zed</a></strong> ⭐ 76.5k
+Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter.
+<em>最后更新: 2026-03-06</em></p>
 </li>
 <li>
-<p><strong><a href="https://github.com/openai/codex" rel="noopener noreferrer" target="_blank">openai/codex</a></strong> ⭐ 63.3k
+<p><strong><a href="https://github.com/openai/codex" rel="noopener noreferrer" target="_blank">openai/codex</a></strong> ⭐ 63.5k
 Lightweight coding agent that runs in your terminal
-<em>最后更新: 2026-03-05</em></p>
+<em>最后更新: 2026-03-06</em></p>
 </li>
 <li>
-<p><strong><a href="https://github.com/jdx/mise" rel="noopener noreferrer" target="_blank">jdx/mise</a></strong> ⭐ 25.3k
-dev tools, env vars, task runner
-<em>最后更新: 2026-03-05</em></p>
+<p><strong><a href="https://github.com/Schniz/fnm" rel="noopener noreferrer" target="_blank">Schniz/fnm</a></strong> ⭐ 24.3k
+🚀 Fast and simple Node.js version manager, built in Rust
+<em>最后更新: 2026-03-06</em></p>
 </li>
 </ul>
 <hr>
-<h2 id="swift-1">Swift (1)</h2>
-<ul>
-<li><strong><a href="https://github.com/Ranchero-Software/NetNewsWire" rel="noopener noreferrer" target="_blank">Ranchero-Software/NetNewsWire</a></strong> ⭐ 9.8k
-RSS reader for macOS and iOS.
-<em>最后更新: 2026-03-05</em></li>
-</ul>
-<hr>
-<h2 id="typescript-5">TypeScript (5)</h2>
+<h2 id="typescript-7">TypeScript (7)</h2>
 <ul>
 <li>
-<p><strong><a href="https://github.com/anomalyco/opencode" rel="noopener noreferrer" target="_blank">anomalyco/opencode</a></strong> ⭐ 116.5k
+<p><strong><a href="https://github.com/anomalyco/opencode" rel="noopener noreferrer" target="_blank">anomalyco/opencode</a></strong> ⭐ 117.3k
 The open source coding agent.
-<em>最后更新: 2026-03-05</em></p>
+<em>最后更新: 2026-03-06</em></p>
 </li>
 <li>
-<p><strong><a href="https://github.com/google-gemini/gemini-cli" rel="noopener noreferrer" target="_blank">google-gemini/gemini-cli</a></strong> ⭐ 96.6k
+<p><strong><a href="https://github.com/google-gemini/gemini-cli" rel="noopener noreferrer" target="_blank">google-gemini/gemini-cli</a></strong> ⭐ 96.7k
 An open-source AI agent that brings the power of Gemini directly into your terminal.
-<em>最后更新: 2026-03-05</em></p>
+<em>最后更新: 2026-03-06</em></p>
 </li>
 <li>
-<p><strong><a href="https://github.com/CherryHQ/cherry-studio" rel="noopener noreferrer" target="_blank">CherryHQ/cherry-studio</a></strong> ⭐ 40.8k
-AI productivity studio with smart chat, autonomous agents, and 300+ assistants. Unified access to frontier LLMs
-<em>最后更新: 2026-03-05</em></p>
+<p><strong><a href="https://github.com/Stirling-Tools/Stirling-PDF" rel="noopener noreferrer" target="_blank">Stirling-Tools/Stirling-PDF</a></strong> ⭐ 75.0k
+#1 PDF Application on GitHub that lets you edit PDFs on any device anywhere
+<em>最后更新: 2026-03-06</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/Molunerfinn/PicGo" rel="noopener noreferrer" target="_blank">Molunerfinn/PicGo</a></strong> ⭐ 26.4k
+:rocket: The Ultimate Image Uploader for Efficient Creators. Supports Obsidian, Typora, VS Code etc. and 60+ image hosting services  (S3, GitHub, Cloudflare R2, Imgur, Aliyun OSS…). Paste, upload, done.
+<em>最后更新: 2026-03-06</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/ryoppippi/ccusage" rel="noopener noreferrer" target="_blank">ryoppippi/ccusage</a></strong> ⭐ 11.3k
+A CLI tool for analyzing Claude Code/Codex CLI usage from local JSONL files.
+<em>最后更新: 2026-03-06</em></p>
 </li>
 <li>
 <p><strong><a href="https://github.com/microsoft/vscode-copilot-chat" rel="noopener noreferrer" target="_blank">microsoft/vscode-copilot-chat</a></strong> ⭐ 9.6k
 Copilot Chat extension for VS Code
-<em>最后更新: 2026-03-05</em></p>
+<em>最后更新: 2026-03-06</em></p>
 </li>
 <li>
-<p><strong><a href="https://github.com/kepano/defuddle" rel="noopener noreferrer" target="_blank">kepano/defuddle</a></strong> ⭐ 3.7k
+<p><strong><a href="https://github.com/kepano/defuddle" rel="noopener noreferrer" target="_blank">kepano/defuddle</a></strong> ⭐ 3.8k
 Extract the main content from web pages.
-<em>最后更新: 2026-03-05</em></p>
+<em>最后更新: 2026-03-06</em></p>
 </li>
+</ul>
+<hr>
+<h2 id="vue-1">Vue (1)</h2>
+<ul>
+<li><strong><a href="https://github.com/anghunk/linuxdo-scripts" rel="noopener noreferrer" target="_blank">anghunk/linuxdo-scripts</a></strong> ⭐ 2.2k
+LinuxDo Scripts 扩展，功能持续更新，欢迎提出新想法！已上架 Chrome Web Store 和 Firefox 商店！文档地址：<a href="https://linuxdo-scripts.zishu.me" rel="noopener noreferrer" target="_blank">https://linuxdo-scripts.zishu.me</a>
+<em>最后更新: 2026-03-06</em></li>
 </ul>
 <hr>
 <h2 id="-说明">📖 说明</h2>
