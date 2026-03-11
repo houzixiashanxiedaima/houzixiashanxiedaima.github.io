@@ -1,0 +1,117 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.0.2"><meta name="description" content="今天跑 Rust 编译器测试的时候又发现非常地慢，CPU 资源根本无法利用起来，我记得几年前碰到过这个问题，当时我写了篇文章分享出来，并发现很多人都有同样的困扰。
+而我今天碰到的这个问题虽然现象一样，但解决方法又不同了。我不确定是 macOS 系统更新，亦或是我更新了 VS Code 造成的。
+问题
+复现脚本很简单，循环创建随机命名的 shell 脚本，然后对比首次和再次执行的耗时：
+#!/bin"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data:;"><link rel="canonical" href="https://blog.yuyins.com/reading-list/macos--fnv93p/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/macos--fnv93p/"><meta property="og:title" content="macOS 奇怪的安全扫码机制"><meta property="og:description" content="今天跑 Rust 编译器测试的时候又发现非常地慢，CPU 资源根本无法利用起来，我记得几年前碰到过这个问题，当时我写了篇文章分享出来，并发现很多人都有同样的困扰。
+而我今天碰到的这个问题虽然现象一样，但解决方法又不同了。我不确定是 macOS 系统更新，亦或是我更新了 VS Code 造成的。
+问题
+复现脚本很简单，循环创建随机命名的 shell 脚本，然后对比首次和再次执行的耗时：
+#!/bin"><meta property="og:image" content="https://blog.yuyins.com/favicon.svg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/macos--fnv93p/"><meta property="twitter:title" content="macOS 奇怪的安全扫码机制"><meta property="twitter:description" content="今天跑 Rust 编译器测试的时候又发现非常地慢，CPU 资源根本无法利用起来，我记得几年前碰到过这个问题，当时我写了篇文章分享出来，并发现很多人都有同样的困扰。
+而我今天碰到的这个问题虽然现象一样，但解决方法又不同了。我不确定是 macOS 系统更新，亦或是我更新了 VS Code 造成的。
+问题
+复现脚本很简单，循环创建随机命名的 shell 脚本，然后对比首次和再次执行的耗时：
+#!/bin"><meta property="twitter:image" content="https://blog.yuyins.com/favicon.svg"><title>macOS 奇怪的安全扫码机制</title><!-- Theme and color scheme script (runs before page loads to prevent flash) --><script>
+			// 初始化配色方案 - 默认使用 stone-amber
+			const colorScheme = localStorage.getItem('colorScheme') || 'stone-amber';
+			document.documentElement.setAttribute('data-color', colorScheme);
+
+			// 强制使用浅色主题
+			document.documentElement.setAttribute('data-theme', 'light');
+		</script><link rel="stylesheet" href="/_astro/Layout.DDUwWOEp.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.source-tag[data-astro-cid-wrgicudb]{background-color:var(--muted);color:var(--foreground);padding:.125rem .5rem;border-radius:9999px;font-weight:500;font-size:.75rem;text-decoration:none;transition:opacity .2s}.source-tag[data-astro-cid-wrgicudb]:hover{opacity:.8}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;color:var(--muted-foreground);font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.875rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--foreground)}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2> 雅俗共赏 </a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-modal" data-astro-cid-otpdt6jm> <div class="modal-content" data-astro-cid-otpdt6jm> <div class="modal-header" data-astro-cid-otpdt6jm> <h2 class="modal-title" data-astro-cid-otpdt6jm>搜索文章</h2> <button id="close-search" class="close-button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-otpdt6jm></path> </svg> </button> </div> <div id="pagefind-ui" data-astro-cid-otpdt6jm></div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(t=0){if(sessionStorage.getItem(c)==="true")return g(),!0;const r=document.getElementById("pagefind-ui");if(!r)return!1;r.innerHTML='<div style="padding: 2rem; text-align: center; color: var(--muted-foreground);">加载中...</div>';try{return await new Promise((o,s)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=o,a.onerror=s,document.head.appendChild(a)}),g(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),t<2?(console.log(`Retrying search load... (${t+1}/2)`),await new Promise(o=>setTimeout(o,1e3)),l(t+1)):(r&&(r.innerHTML=`
+          <div style="padding: 2rem; text-align: center;">
+            <p style="color: var(--muted-foreground); margin-bottom: 1rem;">搜索功能加载失败</p>
+            <button id="retry-search" style="padding: 0.5rem 1rem; background: var(--accent); color: var(--accent-foreground); border: none; border-radius: 0.375rem; cursor: pointer;">
+              重试
+            </button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function g(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100))}function u(){if(d)return;d=!0;const t=document.getElementById("search-button"),n=document.getElementById("search-dialog"),r=document.getElementById("close-search");if(!t||!n||!r)return;let i=sessionStorage.getItem(c)==="true";const o=async()=>{n.showModal(),document.body.style.overflow="hidden",i?setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100):await l()&&(i=!0)},s=()=>{n.close(),document.body.style.overflow=""},a=e=>{e.target===n&&s()},m=e=>{e.key==="Escape"&&n.open&&s()},f=e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),n.open?s():o())};t.addEventListener("click",o),r.addEventListener("click",s),n.addEventListener("click",a),document.addEventListener("keydown",m),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{t.removeEventListener("click",o),r.removeEventListener("click",s),n.removeEventListener("click",a),document.removeEventListener("keydown",m),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>macOS 奇怪的安全扫码机制</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="http://catcoding.me/atom.xml" target="_blank" rel="noopener noreferrer" class="source-tag" data-astro-cid-wrgicudb>程序员的喵</a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年2月12日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>今天跑 Rust 编译器测试的时候又发现非常地慢，CPU 资源根本无法利用起来，我记得几年前碰到过这个问题，当时我写了篇<a target="_blank" rel="noopener noreferrer" href="https://catcoding.me/p/apple-perf/">文章</a>分享出来，并发现很多人都有同样的困扰。</p>
+<p>而我今天碰到的这个问题虽然现象一样，但解决方法又不同了。我不确定是 macOS 系统更新，亦或是我更新了 VS Code 造成的。</p>
+<h2><a href="#问题" target="_blank" rel="noopener noreferrer"></a>问题</h2>
+<p>复现脚本很简单，循环创建随机命名的 shell 脚本，然后对比首次和再次执行的耗时：</p>
+<pre><code><span><span><span>#</span></span><span>!/bin/bash</span><span>
+</span><span><span>rm</span></span><span><span><span> -</span>rf</span> /tmp/speed_test</span>
+<span><span>mkdir</span></span><span><span><span> -</span>p</span> /tmp/speed_test</span>
+
+<span>for</span><span> i <span>in</span> <span><span>{</span>1..10<span>}</span></span></span><span>;</span> <span>do</span>
+    <span>FILENAME</span><span>=</span><span><span><span>$</span><span>(</span><span><span>openssl</span></span><span> rand<span><span> -</span>hex</span> 10</span><span>)</span></span></span>
+    <span><span>echo</span></span><span> <span><span>$'</span>#!/bin/sh<span>\n</span>echo Hello<span>'</span></span> <span>&gt;</span> <span><span>"</span>/tmp/speed_test/<span><span>$</span><span>FILENAME</span></span>.sh<span>"</span></span></span>
+    <span><span>chmod</span></span><span> a+x <span><span>"</span>/tmp/speed_test/<span><span>$</span><span>FILENAME</span></span>.sh<span>"</span></span></span>
+    <span>FILE</span><span>=</span><span><span><span>"</span>/tmp/speed_test/<span><span>$</span><span>FILENAME</span></span>.sh<span>"</span></span></span>
+
+    <span>first</span><span>=</span><span><span><span>$</span><span>(</span><span><span>TIMEFORMAT</span></span><span>=<span><span>"</span>%R<span>"</span></span></span><span>;</span> <span>(</span><span><span>time</span></span><span> <span><span>$</span><span>FILE</span></span> <span>&gt;</span> /dev/null</span><span>)</span><span> <span>2</span><span>&gt;&amp;</span><span>1</span></span><span>)</span></span></span>
+    <span>second</span><span>=</span><span><span><span>$</span><span>(</span><span><span>TIMEFORMAT</span></span><span>=<span><span>"</span>%R<span>"</span></span></span><span>;</span> <span>(</span><span><span>time</span></span><span> <span><span>$</span><span>FILE</span></span> <span>&gt;</span> /dev/null</span><span>)</span><span> <span>2</span><span>&gt;&amp;</span><span>1</span></span><span>)</span></span></span>
+    <span><span>echo</span></span><span> <span><span>"</span>第一次: <span><span>$</span><span>first</span></span>  第二次: <span><span>$</span><span>second</span></span><span>"</span></span></span>
+<span>done</span>
+</span></code></pre>
+<p>在 VS Code 终端的输出：</p>
+<pre><code>第一次: 0.525  第二次: 0.007
+第一次: 0.290  第二次: 0.009
+第一次: 0.280  第二次: 0.007
+第一次: 0.272  第二次: 0.008
+第一次: 0.307  第二次: 0.008
+...
+</code></pre>
+<p>差距大概 30-50 倍。换到 Warp 终端跑同一个脚本，两次都在 0.006s 左右。</p>
+<h2><a href="#定位：syspolicyd" target="_blank" rel="noopener noreferrer"></a>定位：syspolicyd</h2>
+<p>应该不是我上篇文章提到的 SIP 问题，我确定 <strong>System Settings → Privacy &amp; Security → Developer Tools</strong> 中已经加入了 VS Code。</p>
+<p>看起来也不像是文件系统缓存的原因，因为 0.2-0.5 秒远超磁盘缓存的量级。用 <code>log show</code> 看了下系统日志：</p>
+<pre><code><span><span><span>log</span></span><span> show<span><span> --</span>predicate</span> <span><span>'</span>subsystem == "com.apple.syspolicy.exec"<span>'</span></span><span><span> --</span>last</span> 2m<span><span> --</span>style</span> compact</span>
+</span></code></pre>
+<p>输出大量这样的记录：</p>
+<pre><code>GK performScan: PST: (path: 8d0e4c2de41c3e77), (team: (null)), (id: (null)), (bundle_id: (null))
+Error Domain=NSOSStatusErrorDomain Code=-67062
+GK evaluateScanResult: 2, PST: (path: 8d0e4c2de41c3e77), ... (bundle_id: NOT_A_BUNDLE), 0, 0, 1, 0, 7, 7, 0
+</code></pre>
+<p>从日志上看每次执行新文件 <code>syspolicyd</code> 都会做一次 <code>GK performScan</code>。这就是 macOS 的 Gatekeeper 安全扫描——对首次执行的新可执行文件做代码签名验证和恶意软件检查。扫描结果会被缓存，所以同一个文件第二次执行就快了。</p>
+<p>进一步验证：我们把测试脚本里改成 <code>(time /bin/sh $FILE &gt; /dev/null) 2&gt;&amp;1</code>，这样就是直接通过 sh 来执行：</p>
+<pre><code>直接执行 ./script.sh  → 0.248s (触发 execve → Gatekeeper 扫描)
+/bin/sh ./script.sh   → 0.006s (只是让 /bin/sh 读取文件，不触发安全扫描)
+</code></pre>
+<p>原因确认了。当用 <code>./script.sh</code> 执行时，内核的 <code>execve</code> 系统调用会触发 <code>AppleSystemPolicy.kext</code> 中的 MACF hook (<code>mpo_proc_notify_exec_complete</code>)，通知 <code>syspolicyd</code> 进行评估。而 <code>/bin/sh script.sh</code> 只是让已受信的 <code>/bin/sh</code> 进程读取文件内容来解释执行，不触发 <code>execve</code> 的安全检查路径。</p>
+<h2><a href="#Full-Disk-Access-有效" target="_blank" rel="noopener noreferrer"></a>Full Disk Access 有效</h2>
+<p>接着试了 <strong>System Settings → Privacy &amp; Security → Full Disk Access</strong>，给 VS Code 完全磁盘访问权限。重启 VS Code，再跑脚本：</p>
+<pre><code>第一次: 0.005  第二次: 0.005
+第一次: 0.005  第二次: 0.005
+第一次: 0.006  第二次: 0.006
+...
+</code></pre>
+<p>问题消失了。<code>syspolicyd</code> 日志中的 <code>performScan</code> 也不再出现。</p>
+<h2><a href="#为什么-Full-Disk-Access-有效" target="_blank" rel="noopener noreferrer"></a>为什么 Full Disk Access 有效</h2>
+<p>Full Disk Access (FDA) 在 macOS 的 TCC (Transparency, Consent, and Control) 框架中对应的是 <code>kTCCServiceSystemPolicyAllFiles</code> 权限。这个权限的含义远超“磁盘访问“——它实际上是 TCC 框架中最高级别的信任授权。</p>
+<p>macOS 会追踪每个进程的 <strong>responsible process</strong>（负责进程）。在 VS Code 终端中敲的命令，它的 responsible process 是 VS Code 本身。当 <code>AppleSystemPolicy.kext</code> 的 MACF hook 拦截到 <code>execve</code> 后，会检查 responsible process 的信任级别。拥有 FDA 授权的进程被识别为高信任来源，<code>syspolicyd</code> 会走快速路径，跳过完整的 Gatekeeper 扫描。</p>
+<p>而 Warp 这些原生终端，因为我已经加入系统默认信任的开发工具列表，所以它们派生的子进程一开始就不会触发完整扫描。</p>
+<p>需要说明：Apple 没有公开文档化这个具体流程。上面的描述来自实验推断和社区逆向分析，不是官方说法。</p>
+<h2><a href="#一个有趣的细节：信任会被“记住“" target="_blank" rel="noopener noreferrer"></a>一个有趣的细节：信任会被“记住“</h2>
+<p>发现 FDA 有效之后，我尝试反向验证：把 VS Code 从 FDA 列表中移除，重启 VS Code，再跑脚本。</p>
+<p>结果：仍然很快。问题没有复现。</p>
+<p><code>syspolicyd</code> 的扫描评估结果存储在 <code>/var/db/SystemPolicyConfiguration/ExecPolicy</code> 这个 SQLite 数据库中（35MB），同时 <code>AppleSystemPolicy.kext</code> 在内核中维护了一个运行时缓存：</p>
+<pre><code><span><span><span>$</span></span><span> sysctl security.mac.asp.stats.cache_entry_count</span>
+<span><span>security.mac.asp.stats.cache_entry_count:</span></span><span> 4700</span>
+</span></code></pre>
+<p>也就是说，当 VS Code 拥有 FDA 时，它被评估为可信 responsible process，这个信任结果被持久化了。移除 FDA 后，历史记录并不会被清除。macOS 的安全评估系统是“学习型“的——它记住过去的信任决策。</p>
+<p>要彻底重现原来的问题，可能需要重启 Mac 清除内核缓存，或者更极端地清理 ExecPolicy 数据库。</p>
+<h2><a href="#总结" target="_blank" rel="noopener noreferrer"></a>总结</h2>
+<p>如果你也遇到类似的问题——新编译的程序、新创建的脚本首次执行莫名其妙地慢，可以检查一下是不是 Gatekeeper 的锅：</p>
+<pre><code><span><span><span>#</span></span><span> 查看最近的 syspolicyd 扫描记录</span><span>
+</span><span><span>log</span></span><span> show<span><span> --</span>predicate</span> <span><span>'</span>subsystem == "com.apple.syspolicy.exec"<span>'</span></span><span><span> --</span>last</span> 5m<span><span> --</span>style</span> compact</span> <span>|</span> <span><span>grep</span></span><span> performScan</span>
+</span></code></pre>
+<p>解决方案按排序：</p>
+<ol>
+<li>给你的程序加如到 Developer Tools 列表</li>
+<li>给你的程序加 Full Disk Access</li>
+</ol>
+<h2><a href="#参考" target="_blank" rel="noopener noreferrer"></a>参考</h2>
+<ul>
+<li><a target="_blank" rel="noopener noreferrer" href="https://support.apple.com/guide/security/gatekeeper-and-runtime-protection-sec5599b66df/web">Apple Platform Security - Gatekeeper and runtime protection</a></li>
+<li><a target="_blank" rel="noopener noreferrer" href="https://knight.sc/reverse%20engineering/2019/02/20/syspolicyd-internals.html">Scott Knight - syspolicyd internals</a>（对 syspolicyd 内部机制的详细逆向分析，包括 ExecManager、AppleSystemPolicy.kext 的 MACF hook 等）</li>
+<li><a target="_blank" rel="noopener noreferrer" href="https://eclecticlight.co">Howard Oakley - eclecticlight.co</a>（大量关于 macOS 安全扫描机制变化的独立研究）</li>
+</ul>
+</div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="http://catcoding.me/p/apple-gatekeeper-scan/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <div class="footer-brand" data-astro-cid-sz7xmlte> <p class="footer-text footer-text--strong" data-astro-cid-sz7xmlte>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-sz7xmlte>记录技术、阅读与开源更新</p> </div> <p class="footer-text" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer></body></html>
