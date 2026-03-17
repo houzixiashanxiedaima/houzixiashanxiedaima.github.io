@@ -1,0 +1,167 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.0.2"><meta name="description" content="I couple of years ago, I developed ActivityBot - the simplest way to build Mastodon Bots. It is a single PHP file which can run an entire ActivityPub server and it is less than 80KB.  It works! You ca"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><link rel="canonical" href="https://blog.yuyins.com/reading-list/some-updates-to-activitybot-m8igx9/"><!-- Web Font: Noto Sans SC (Source Han Sans, Chinese + Latin) --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;0,7..72,700;1,7..72,400&family=Noto+Serif+SC:wght@400;500;600;700&display=swap"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/some-updates-to-activitybot-m8igx9/"><meta property="og:title" content="Some updates to ActivityBot"><meta property="og:description" content="I couple of years ago, I developed ActivityBot - the simplest way to build Mastodon Bots. It is a single PHP file which can run an entire ActivityPub server and it is less than 80KB.  It works! You ca"><meta property="og:image" content="https://blog.yuyins.com/favicon.svg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/some-updates-to-activitybot-m8igx9/"><meta property="twitter:title" content="Some updates to ActivityBot"><meta property="twitter:description" content="I couple of years ago, I developed ActivityBot - the simplest way to build Mastodon Bots. It is a single PHP file which can run an entire ActivityPub server and it is less than 80KB.  It works! You ca"><meta property="twitter:image" content="https://blog.yuyins.com/favicon.svg"><title>Some updates to ActivityBot</title><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-b4zvghpy]{display:inline-flex;align-items:center;gap:.45rem;border-radius:9999px;border:1px solid transparent;background:var(--muted);color:var(--foreground);font-weight:500;line-height:1.4;text-decoration:none;white-space:nowrap}.chip--sm[data-astro-cid-b4zvghpy]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-b4zvghpy]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-b4zvghpy]{cursor:pointer;transition:background-color .2s ease,color .2s ease,opacity .2s ease}.chip--interactive[data-astro-cid-b4zvghpy]:hover{background-color:color-mix(in srgb,var(--accent) 10%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 68%,var(--foreground))}.chip--active[data-astro-cid-b4zvghpy],.chip[data-astro-cid-b4zvghpy].active{background-color:color-mix(in srgb,var(--accent) 18%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 82%,var(--foreground));border-color:transparent;box-shadow:none;font-weight:600}.chip--dashed[data-astro-cid-b4zvghpy]{border-style:dashed;border-color:color-mix(in srgb,var(--accent) 22%,var(--border));background:color-mix(in srgb,var(--background) 70%,var(--muted))}.chip[data-astro-cid-b4zvghpy]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+<link rel="stylesheet" href="/_astro/Layout.oGGPdmbM.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0;animation:fadeIn .3s ease-out}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;color:var(--muted-foreground);font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.8125rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--accent)}.back-link--top[data-astro-cid-wrgicudb]{display:inline-block;margin-bottom:1rem}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2> 雅俗共赏 </a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-otpdt6jm> <div class="search-dialog-card" data-astro-cid-otpdt6jm> <div class="search-dialog-bar" data-astro-cid-otpdt6jm> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="8" data-astro-cid-otpdt6jm></circle><path d="m21 21-4.3-4.3" data-astro-cid-otpdt6jm></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-otpdt6jm></div> <kbd class="search-kbd" data-astro-cid-otpdt6jm>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-otpdt6jm> <path d="M18 6 6 18" data-astro-cid-otpdt6jm></path><path d="m6 6 12 12" data-astro-cid-otpdt6jm></path> </svg> </button> </div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(e=0){if(sessionStorage.getItem(c)==="true")return m(),!0;const s=document.getElementById("pagefind-ui");if(!s)return!1;s.innerHTML='<div class="search-loading">加载中...</div>';try{return await new Promise((r,o)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=r,a.onerror=o,document.head.appendChild(a)}),m(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),e<2?(console.log(`Retrying search load... (${e+1}/2)`),await new Promise(r=>setTimeout(r,1e3)),l(e+1)):(s&&(s.innerHTML=`
+          <div class="search-loading">
+            <p>搜索功能加载失败</p>
+            <button id="retry-search" class="search-retry-btn">重试</button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Some updates to ActivityBot</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://shkspr.mobi" target="_blank" rel="noopener noreferrer" data-astro-cid-wrgicudb="true" data-astro-cid-b4zvghpy="true" class="chip chip--sm chip--interactive source-tag"> shkspr.mobi </a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年3月16日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>I couple of years ago, I developed <a href="https://shkspr.mobi/blog/2024/11/introducing-activitybot-the-simplest-way-to-build-mastodon-bots/" target="_blank" rel="noopener noreferrer">ActivityBot - the simplest way to build Mastodon Bots</a>. It is a <em>single</em> PHP file which can run an entire ActivityPub server and it is less than 80KB.</p>
+
+<p>It works! You can follow <code>@openbenches@bot.openbenches.org</code> to see the latest entries on OpenBenches.org, and <code>@colours@colours.bots.edent.tel</code> for a slice of colour in your day, and <code>@solar@solar.bots.edent.tel</code> to see what my solar panels are up to.</p>
+
+<p>This is <em>so</em> easy to use. Copy the PHP file (and a <code>.env</code> and <code>.htaccess</code>) to literally any web host running PHP 8.5 and you have a fully-fledged bot which can post to Mastodon.</p>
+
+<p><a href="https://gitlab.com/edent/activity-bot/" target="_blank" rel="noopener noreferrer">Grab the code and start today</a>!</p>
+
+<h2><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#features" target="_blank" rel="noopener noreferrer">Features</a></h2>
+
+<p>Over the years I've added a few more features to it, so I thought I'd run through what they are. Note, this is all hand-written. No sycophantic plagiarism machines were involved in this code or blog post. I just really like emoji, OK⁉️</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%94%8d-be-discovered-on-the-fediverse" target="_blank" rel="noopener noreferrer">🔍 Be discovered on the Fediverse</a></h3>
+
+<p>This is the big one, you can find <code>@example@example.viii.fi</code> on your favourite Fediverse client.  This is thanks to its WebFinger support.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%91%89-be-followed-by-other-accounts" target="_blank" rel="noopener noreferrer">👉 Be followed by other accounts</a></h3>
+
+<p>No point being discovered if you can't be followed. This accepts follow requests and sends back a signed accept.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%9a%ab-be-unfollowed-by-accounts" target="_blank" rel="noopener noreferrer">🚫 Be unfollowed by accounts</a></h3>
+
+<p>Sometimes people want to unfollow. Too bad, so sad. Again, this will accept the undo request and delete the unfollowing user's information.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%93%a9-send-messages-to-the-fediverse" target="_blank" rel="noopener noreferrer">📩 Send messages to the Fediverse</a></h3>
+
+<p>If a bot can be followed, but never posts, does it make a sound? This sends a post to all of your followers' (shared) inboxes. Includes some HTML formatting.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%92%8c-send-direct-messages-to-users" target="_blank" rel="noopener noreferrer">💌 Send direct messages to users</a></h3>
+
+<p>Not every message is for the wider public. If you want a bot which sends you a private message, this'll set the visibility correctly.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%93%b7-attach-images-alt-text-to-a-message-%f0%9f%86%95%f0%9f%86%95" target="_blank" rel="noopener noreferrer">📷 Attach images &amp; alt text to a message 🆕🆕</a></h3>
+
+<p>A picture is worth a thousand words. But those pictures are meaningless without alt text. Attach as many images as you like. Note, most Mastodon services only accept a maximum of four.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%8d%bf-video-upload-%f0%9f%86%95%f0%9f%86%95" target="_blank" rel="noopener noreferrer">🍿 Video Upload 🆕🆕</a></h3>
+
+<p>No transcoding or anything fancy. Upload a video and it'll be sent to your followers.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%94%8a-audio-upload-%f0%9f%86%95%f0%9f%86%95" target="_blank" rel="noopener noreferrer">🔊 Audio Upload 🆕🆕</a></h3>
+
+<p>Same as video. Raw audio posted to your followers' feeds.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%95%b8%ef%b8%8f-autolink-urls-hashtags-and-mentions" target="_blank" rel="noopener noreferrer">🕸️ Autolink URls, hashtags, and @ mentions</a></h3>
+
+<p>Including URls, tags, and mentions are <em>mostly</em> autolinked correctly. There's a lot of fuzziness in how it works.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%a7%b5-threads" target="_blank" rel="noopener noreferrer">🧵 Threads</a></h3>
+
+<p>You can reply to specific messages in order to create a thread.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%91%88-follow-unfollow-block-and-unblock-other-accounts" target="_blank" rel="noopener noreferrer">👈 Follow, Unfollow, Block, and Unblock other accounts</a></h3>
+
+<p>It might be useful for you to remove followers or follow specific accounts.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%97%91%ef%b8%8f-delete-posted-messages-and-their-attachments-%f0%9f%86%95%f0%9f%86%95" target="_blank" rel="noopener noreferrer">🗑️ Delete posted messages and their attachments 🆕🆕</a></h3>
+
+<p>We all make mistakes. This will delete your post along with any attachments and send that delete message to everyone. Note, because of the federated nature of the Fediverse, you cannot guarantee that a remote server will delete anything.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%e2%9c%8f%ef%b8%8f-edit-posts-%f0%9f%86%95%f0%9f%86%95" target="_blank" rel="noopener noreferrer">✏️ Edit Posts 🆕🆕</a></h3>
+
+<p>If you don't want to delete and re-post, you can edit your existing posts.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%a6%8b-bridge-to-bluesky-with-your-domain-name-via-bridgy-fed" target="_blank" rel="noopener noreferrer">🦋 Bridge to BlueSky with your domain name via Bridgy Fed</a></h3>
+
+<p>Not everyone is on the Fediverse. If you want to bridge to BlueSky, you can use the <a href="https://fed.brid.gy/" target="_blank" rel="noopener noreferrer">Bridgy Fed service</a>.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%9a%9a-move-followers-from-an-old-account-and-to-a-new-account-%f0%9f%86%95%f0%9f%86%95" target="_blank" rel="noopener noreferrer">🚚 Move followers from an old account and to a new account 🆕🆕</a></h3>
+
+<p>Perhaps you started as <code>@electric@sex.pants</code> but now you want to become <code>@chaste@nunslife.biz</code> - no worries! You can tell followers you've moved and what your new name is.</p>
+
+<p>Similarly, if ActivityBot is no longer right for you, it's simple to tell your existing follower to move to your new account.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%97%a8%ef%b8%8f-allow-quote-posts-%f0%9f%86%95%f0%9f%86%95" target="_blank" rel="noopener noreferrer">🗨️ Allow quote posts 🆕🆕</a></h3>
+
+<p>Rather than just reposting your message, this sets the quote policy to allow people to share your message and attach some commentary of your own.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%91%80-show-followers" target="_blank" rel="noopener noreferrer">👀 Show followers</a></h3>
+
+<p>Your follower count isn't just a number, it is a living list of <em>who</em> chooses to follow you.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%e2%9a%a0%ef%b8%8f-content-warnings-%f0%9f%86%95%f0%9f%86%95" target="_blank" rel="noopener noreferrer">⚠️ Content Warnings 🆕🆕</a></h3>
+
+<p>Perhaps you want to hide a bit of what you're saying. Add a content warning to hide part of your message.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%94%8f-verify-cryptographic-signatures" target="_blank" rel="noopener noreferrer">🔏 Verify cryptographic signatures</a></h3>
+
+<p><a href="https://shkspr.mobi/blog/2024/03/i-made-a-mistake-in-verifying-http-message-signatures/" target="_blank" rel="noopener noreferrer">HTTP Message Signatures is <em>hard</em></a>. I think I've mostly got it sorted.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%aa%b5-log-sent-messages-and-errors" target="_blank" rel="noopener noreferrer">🪵 Log sent messages and errors</a></h3>
+
+<p>This is primarily a learning aide, so have a rummage through the logs and see what's going on.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%9a%ae-clear-logs-when-there-are-too-many" target="_blank" rel="noopener noreferrer">🚮 Clear logs when there are too many</a></h3>
+
+<p>ActivityPub is a <em>chatty</em> protocol. Your server can easily fill up with hundreds of thousands of messages from others. This regularly prunes down to something more manageable.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%ef%b8%8f%e2%83%a3-hashed-passwords-for-posting-%f0%9f%86%95%f0%9f%86%95" target="_blank" rel="noopener noreferrer">#️⃣ Hashed passwords for posting 🆕🆕</a></h3>
+
+<p>Bit of a guilty moment here. I was originally storing the password in plaintext. Naughty! Passwords are now salted and hashed.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%92%bb-basic-website-for-showing-posts" target="_blank" rel="noopener noreferrer">💻 Basic website for showing posts</a></h3>
+
+<p>A nice-enough looking front end if people want to view the posts directly on your domain.</p>
+
+<h2><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#some-deficiencies" target="_blank" rel="noopener noreferrer">Some Deficiencies</a></h2>
+
+<p>Not every piece of software is perfect. ActivityBot is less perfect than most things. Here are some of the things it can't do and, perhaps, will never do.  If you'd like to help tackle any of these, <a href="https://gitlab.com/edent/activity-bot/" target="_blank" rel="noopener noreferrer">fork the code from my git repo</a>!</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%e2%8f%b3-retry-failed-messages" target="_blank" rel="noopener noreferrer">⏳ Retry Failed Messages</a></h3>
+
+<p>A <em>proper</em> Mastodon server will keep trying to send messages to unresponsive hosts. ActivityBot is one-and-done. If a remote server didn't respond in time, or was offline, or something else went wrong - it may not get the message.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%94%84-reposts-announce-quote" target="_blank" rel="noopener noreferrer">🔄 Reposts / Announce / Quote</a></h3>
+
+<p>You cannot boost other posts, or even your own. Nor can you send quote posts.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%a4%96-act-on-instructions" target="_blank" rel="noopener noreferrer">🤖 Act On Instructions</a></h3>
+
+<p>This is a basic bot. It contains no logic. If you send it a message asking it to take action, it will not. You will need to build something else to make it truly interactive.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%93%a5-receive-messages" target="_blank" rel="noopener noreferrer">📥 Receive Messages</a></h3>
+
+<p>In fact, other than the follow / unfollow stuff, the bot can't receive any messages from the Fediverse. It doesn't know when a post has been replied to, liked, or reposted.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%98%8e-set-post-visibility" target="_blank" rel="noopener noreferrer">😎 Set Post Visibility</a></h3>
+
+<p>Your posts are either public or a DM. There's no support for things like quiet followers.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%93%8a-create-polls" target="_blank" rel="noopener noreferrer">📊 Create Polls</a></h3>
+
+<p>Everyone loves to vote on meaningless polls - but this is quite a hard problem for ActivityBot. It would need to keep track of votes, prevent double voting, and probably some other difficult stuff.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%97%a8%ef%b8%8f-change-quote-post-visibility" target="_blank" rel="noopener noreferrer">🗨️ Change Quote Post Visibility</a></h3>
+
+<p>As quote posts are still quite new to Mastodon, I'm not sure how best to implement this.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%94%97-proper-html-markdown-support" target="_blank" rel="noopener noreferrer">🔗 Proper HTML / Markdown Support</a></h3>
+
+<p>Autolinking names, hashtags, and links just about works - but not very reliably. In theory the bot <em>could</em> parse Markdown and create richly formatted HTML from it. But that may require an external library which would bloat the size. Perhaps posting raw HTML could work?</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%f0%9f%96%bc%ef%b8%8f-focus-points-for-images" target="_blank" rel="noopener noreferrer">🖼️ Focus Points for Images</a></h3>
+
+<p>Perhaps of less use now, but still of interest to people?</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/#%e2%9d%93-other-stuff" target="_blank" rel="noopener noreferrer">❓ Other Stuff</a></h3>
+
+<p>I don't know what I don't know. Maybe some stuff is total broken? Maybe it is wildly out of spec? If you spot something dodgy, please let me know or <a href="https://gitlab.com/edent/activity-bot/" target="_blank" rel="noopener noreferrer">raise a Pull Request</a>.</p>
+</div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://shkspr.mobi/blog/2026/03/some-updates-to-activitybot/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text footer-text--strong" data-astro-cid-sz7xmlte>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-sz7xmlte>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-wlspcwf4> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-wlspcwf4> <path d="M18 15l-6-6-6 6" data-astro-cid-wlspcwf4></path> </svg> </button> <script type="module">function o(){const e=document.getElementById("back-to-top");if(!e)return;const s=300;let t=!1;const n=()=>{const i=window.scrollY>s;e.hidden=!i,t=!1},d=()=>{t||(requestAnimationFrame(n),t=!0)};e.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"})}),window.addEventListener("scroll",d,{passive:!0}),n(),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",d)},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",o):o();document.addEventListener("astro:page-load",o);</script></body></html>
