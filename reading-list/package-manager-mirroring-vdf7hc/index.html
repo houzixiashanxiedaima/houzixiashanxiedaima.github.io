@@ -1,0 +1,173 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.0.2"><meta name="description" content="Mike Fiedler from PyPI asked me recently: which package ecosystems have mirroring tools and what protocols do they use? Here’s what I found.
+This post primarily covers mirroring: tools and protocols f"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><link rel="canonical" href="https://blog.yuyins.com/reading-list/package-manager-mirroring-vdf7hc/"><!-- Web Font: Noto Sans SC (Source Han Sans, Chinese + Latin) --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;0,7..72,700;1,7..72,400&family=Noto+Serif+SC:wght@400;500;600;700&display=swap"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/package-manager-mirroring-vdf7hc/"><meta property="og:title" content="Package Manager Mirroring"><meta property="og:description" content="Mike Fiedler from PyPI asked me recently: which package ecosystems have mirroring tools and what protocols do they use? Here’s what I found.
+This post primarily covers mirroring: tools and protocols f"><meta property="og:image" content="https://blog.yuyins.com/favicon.svg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/package-manager-mirroring-vdf7hc/"><meta property="twitter:title" content="Package Manager Mirroring"><meta property="twitter:description" content="Mike Fiedler from PyPI asked me recently: which package ecosystems have mirroring tools and what protocols do they use? Here’s what I found.
+This post primarily covers mirroring: tools and protocols f"><meta property="twitter:image" content="https://blog.yuyins.com/favicon.svg"><title>Package Manager Mirroring</title><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-b4zvghpy]{display:inline-flex;align-items:center;gap:.45rem;border-radius:9999px;border:1px solid transparent;background:var(--muted);color:var(--foreground);font-weight:500;line-height:1.4;text-decoration:none;white-space:nowrap}.chip--sm[data-astro-cid-b4zvghpy]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-b4zvghpy]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-b4zvghpy]{cursor:pointer;transition:background-color .2s ease,color .2s ease,opacity .2s ease}.chip--interactive[data-astro-cid-b4zvghpy]:hover{background-color:color-mix(in srgb,var(--accent) 10%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 68%,var(--foreground))}.chip--active[data-astro-cid-b4zvghpy],.chip[data-astro-cid-b4zvghpy].active{background-color:color-mix(in srgb,var(--accent) 18%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 82%,var(--foreground));border-color:transparent;box-shadow:none;font-weight:600}.chip--dashed[data-astro-cid-b4zvghpy]{border-style:dashed;border-color:color-mix(in srgb,var(--accent) 22%,var(--border));background:color-mix(in srgb,var(--background) 70%,var(--muted))}.chip[data-astro-cid-b4zvghpy]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+<link rel="stylesheet" href="/_astro/Layout.oGGPdmbM.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0;animation:fadeIn .3s ease-out}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;color:var(--muted-foreground);font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.8125rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--accent)}.back-link--top[data-astro-cid-wrgicudb]{display:inline-block;margin-bottom:1rem}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2> 雅俗共赏 </a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-otpdt6jm> <div class="search-dialog-card" data-astro-cid-otpdt6jm> <div class="search-dialog-bar" data-astro-cid-otpdt6jm> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="8" data-astro-cid-otpdt6jm></circle><path d="m21 21-4.3-4.3" data-astro-cid-otpdt6jm></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-otpdt6jm></div> <kbd class="search-kbd" data-astro-cid-otpdt6jm>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-otpdt6jm> <path d="M18 6 6 18" data-astro-cid-otpdt6jm></path><path d="m6 6 12 12" data-astro-cid-otpdt6jm></path> </svg> </button> </div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(e=0){if(sessionStorage.getItem(c)==="true")return m(),!0;const s=document.getElementById("pagefind-ui");if(!s)return!1;s.innerHTML='<div class="search-loading">加载中...</div>';try{return await new Promise((r,o)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=r,a.onerror=o,document.head.appendChild(a)}),m(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),e<2?(console.log(`Retrying search load... (${e+1}/2)`),await new Promise(r=>setTimeout(r,1e3)),l(e+1)):(s&&(s.innerHTML=`
+          <div class="search-loading">
+            <p>搜索功能加载失败</p>
+            <button id="retry-search" class="search-retry-btn">重试</button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Package Manager Mirroring</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://nesbitt.io" target="_blank" rel="noopener noreferrer" data-astro-cid-wrgicudb="true" data-astro-cid-b4zvghpy="true" class="chip chip--sm chip--interactive source-tag"> nesbitt.io </a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年3月20日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p><a href="https://www.linkedin.com/in/mikefiedler/" target="_blank" rel="noopener noreferrer">Mike Fiedler</a> from PyPI asked me recently: which package ecosystems have mirroring tools and what protocols do they use? Here’s what I found.</p>
+
+<p>This post primarily covers mirroring: tools and protocols for creating and maintaining copies of package registries. It doesn’t cover private registries, artifact storage, or dependency proxying except where those tools also support mirroring.</p>
+
+<h2>Ecosystems with mirroring tools</h2>
+
+<h3>apt/deb (Debian, Ubuntu)</h3>
+
+<p>The most mature mirroring ecosystem, with several tools at different levels of complexity.</p>
+
+<p><a href="https://salsa.debian.org/mirror-team/archvsync" target="_blank" rel="noopener noreferrer">ftpsync</a> is the official tool. It runs a two-stage rsync: first syncing package files, then metadata (<code>Packages</code>, <code>Release</code>, <code>InRelease</code>). This ordering matters because it prevents apt clients from seeing references to packages that haven’t arrived yet. Upstream mirrors can trigger syncs over SSH rather than waiting for a cron schedule.</p>
+
+<p><a href="https://wiki.debian.org/debmirror" target="_blank" rel="noopener noreferrer">debmirror</a> supports HTTP, HTTPS, FTP, and rsync as transport. It verifies GPG signatures on <code>Release</code> files by default using gpgv, and checks downloaded file checksums (MD5, SHA1, SHA256) against what the Release file claims. It also supports pdiffs for incremental metadata updates, downloading diffs to <code>Packages</code>/<code>Sources</code> files rather than re-fetching them entirely.</p>
+
+<p><a href="https://github.com/apt-mirror/apt-mirror" target="_blank" rel="noopener noreferrer">apt-mirror</a> is simpler: it downloads via wget over HTTP/HTTPS/FTP, does a full scan each run comparing against upstream package listings, and doesn’t verify GPG signatures itself (leaving that to apt on the client side).</p>
+
+<p><a href="https://www.aptly.info/" target="_blank" rel="noopener noreferrer">aptly</a> adds a layer on top. It verifies upstream GPG signatures on sync, then re-signs the published repository with the operator’s own GPG key. Its snapshot model lets you capture point-in-time states of a mirror and atomically swap what’s published, which is useful if you want to control exactly when updates roll out.</p>
+
+<p>The underlying format ties it all together: <code>Packages</code> files list available packages with checksums, <code>Release</code> files are signed with GPG, and <code>InRelease</code> combines the release metadata and signature into a single file. Clients verify these signatures before trusting any mirror’s content, so mirrors don’t need to be trusted.</p>
+
+<h3>rpm/yum/dnf (Fedora, RHEL, CentOS)</h3>
+
+<p><code>reposync</code> downloads RPMs from a channel over HTTP/HTTPS using yum/dnf internals. <code>createrepo_c</code> generates the repository metadata: <code>repomd.xml</code> as the root index, plus <code>primary.xml.gz</code>, <code>filelists.xml.gz</code>, <code>other.xml.gz</code>, and <code>comps.xml</code> for group metadata. Each entry in <code>repomd.xml</code> includes SHA256 checksums and sizes for the corresponding metadata files. RPM packages are individually GPG-signed, and <code>repomd.xml</code> itself can carry a detached <code>.asc</code> signature. <code>reposync</code> requires the system to be subscribed to the channel it syncs, which is a licensing constraint.</p>
+
+<p><a href="https://theforeman.org/" target="_blank" rel="noopener noreferrer">Foreman</a>/<a href="https://theforeman.org/plugins/katello/" target="_blank" rel="noopener noreferrer">Katello</a> (backed by Pulp) adds configurable download policies: Immediate downloads everything on sync, On Demand downloads metadata only and fetches packages when clients request them, and Background syncs metadata first then downloads packages asynchronously. It handles RPM, Deb, OCI, Ansible, and Python content types, each with their own metadata format.</p>
+
+<p>On the client side, package managers support both mirrorlist URLs (a plain list of mirror URLs) and metalink URLs (an XML document per RFC 5854 with multiple download sources and checksums). The metalink approach gives the client integrity information and multiple mirrors in a single response, so it can retry against a different source without another round trip.</p>
+
+<h3>CPAN (Perl)</h3>
+
+<p><a href="https://metacpan.org/pod/File::Rsync::Mirror::Recent" target="_blank" rel="noopener noreferrer">File::Rsync::Mirror::Recent</a> uses a clever protocol on top of rsync. The upstream publishes cascading YAML files at multiple time intervals: <code>RECENT-1h.yaml</code>, <code>RECENT-6h.yaml</code>, <code>RECENT-1d.yaml</code>, up through <code>RECENT-1Y.yaml</code>. Each file lists recently changed paths with timestamps. A mirror client reads the shortest interval file first, syncs those files over rsync, and only falls back to longer interval files when the overlap between adjacent files disappears. Because new entries are prepended to an ordered list, the bulk of each file stays constant between runs, which makes rsync’s delta algorithm very efficient. A <code>dirtymark</code> mechanism handles consistency: if the upstream breaks its ordering promise, it updates the dirtymark and all downstream mirrors discard their cached state and re-sync.</p>
+
+<h3>CRAN (R)</h3>
+
+<p>Mirrors sync via rsync (SSH recommended). No dedicated tooling beyond rsync itself.</p>
+
+<h3>PyPI (Python)</h3>
+
+<p><a href="https://peps.python.org/pep-0381/" target="_blank" rel="noopener noreferrer">PEP 381</a> defined a mirroring protocol, implemented by <a href="https://github.com/pypa/bandersnatch" target="_blank" rel="noopener noreferrer">bandersnatch</a>. Bandersnatch syncs over HTTPS and generates both HTML index pages (<a href="https://peps.python.org/pep-0503/" target="_blank" rel="noopener noreferrer">PEP 503</a> Simple Repository API) and JSON index pages (<a href="https://peps.python.org/pep-0691/" target="_blank" rel="noopener noreferrer">PEP 691</a>). Each package link includes a SHA256 hash for verification. The <code>bandersnatch verify</code> command crawls the local mirror and checks every file against PyPI’s metadata, fixing missed files and removing anything unowned. Because the output is static files, a mirror doesn’t need to run any registry software, just a web server. Supports filtering by package name, platform, and regex.</p>
+
+<p>The PyPI ecosystem doesn’t use GPG signing, relying on HTTPS transport and hash verification for integrity.</p>
+
+<h3>npm</h3>
+
+<p>The npm registry started as a CouchDB app, and CouchDB’s native <code>_changes</code> feed made mirroring straightforward: connect, receive a stream of changes, stay connected. The whole “follower” pattern that mirror tools depended on was built on this. As the registry grew, the backend moved to PostgreSQL behind an API that maintained CouchDB compatibility, but the streaming behavior was increasingly difficult to sustain.</p>
+
+<p>In February 2025, GitHub <a href="https://github.blog/changelog/2025-02-26-changes-and-deprecation-notice-for-npm-replication-apis/" target="_blank" rel="noopener noreferrer">announced deprecation</a> of the CouchDB-style replication APIs. The streaming modes (<code>feed=longpoll</code>, <code>feed=continuous</code>, <code>feed=eventsource</code>) and <code>include_docs</code> were all dropped, replaced by a paginated JSON API with a default limit of 1,000 and max of 10,000, using <code>startkey</code> for pagination. The <a href="https://github.com/orgs/community/discussions/152515" target="_blank" rel="noopener noreferrer">rollout was rough</a>: sequence number gaps of around 20 million, 503 and 401 errors, broken <code>startkey</code> pagination, and thousands of packages missing from the feed despite existing in the registry.</p>
+
+<h3>RubyGems</h3>
+
+<p>The <a href="https://github.com/rubygems/rubygems-mirror" target="_blank" rel="noopener noreferrer">rubygems-mirror</a> gem downloads the full specs index (<code>specs.4.8.gz</code>, serialized in Ruby Marshal format) over HTTP, then fetches <code>.gem</code> files and gemspec files for anything missing locally. It’s a full-scan approach with no incremental changelog mechanism and no checksum verification during sync. Bundler has explicit mirror support built in (<code>bundle config mirror.https://rubygems.org https://my-mirror.example.com</code>).</p>
+
+<p><a href="https://github.com/geminabox/geminabox" target="_blank" rel="noopener noreferrer">Geminabox</a> is more of a caching proxy than a mirror. With <code>Geminabox.rubygems_proxy = true</code>, it serves gems from rubygems.org on demand and caches them locally. It implements the Gemcutter push API and the RubyGems/Bundler dependency API, so <code>gem push</code> and <code>gem install</code> work against it without configuration changes.</p>
+
+<h3>Maven Central (Java)</h3>
+
+<p>The repository format is a directory structure over HTTP with SHA-1 and MD5 checksums alongside each artifact, so any HTTP server or rsync can mirror it. Mirror configuration is built into Maven via <code>~/.m2/settings.xml</code>. The format is simple enough that rsync or wget does the job without dedicated tooling.</p>
+
+<h3>Cargo/crates.io (Rust)</h3>
+
+<p><a href="https://github.com/panamax-rs/panamax" target="_blank" rel="noopener noreferrer">Panamax</a> mirrors both the crate registry and rustup artifacts. The crates.io registry index is a Git repository where each crate has a JSON file listing versions, dependencies, and SHA256 checksums. Panamax syncs the index via <code>git pull</code> and downloads crate files over HTTPS for anything not already present locally. Rustup artifacts use TOML-based channel manifests with per-target SHA256 hashes. Panamax includes a built-in HTTP server for serving the mirror.</p>
+
+<h3>Docker/OCI</h3>
+
+<p><a href="https://goharbor.io/" target="_blank" rel="noopener noreferrer">Harbor</a> implements the OCI Distribution Specification over HTTPS. All content is stored by SHA256 digest (content-addressable), so integrity verification is built into the storage model. Harbor supports both push and pull replication policies between registries, filtered by repository name, tag, and label, triggered on schedule or on push events. It handles Cosign (Sigstore) and Notation (CNCF Notary Project) signatures, storing them as OCI artifacts alongside the images they sign and replicating them together. Replication targets include other Harbor instances, Docker Hub, AWS ECR, GCR, Azure ACR, and any OCI-compliant registry.</p>
+
+<h3>Homebrew</h3>
+
+<p><code>HOMEBREW_ARTIFACT_DOMAIN</code> points at alternative bottle sources. Pre-built bottles are distributed as OCI artifacts through GitHub Container Registry, so mirroring means replicating an OCI registry. The formulae/tap repo (git) needs mirroring separately from bottles.</p>
+
+<h3>Conda</h3>
+
+<p><a href="https://github.com/conda-tools/conda-mirror" target="_blank" rel="noopener noreferrer">conda-mirror</a> syncs over HTTPS, reading <code>repodata.json</code> per platform subdirectory (e.g., <code>linux-64/repodata.json</code>). Each package entry includes md5 and sha256 checksums. Supports blacklist/whitelist filtering with glob patterns against any field in repodata.json, and platform selection. Incremental on subsequent runs by skipping files already present locally. The newer sharded repodata format (<a href="https://conda.org/learn/ceps/cep-0016/" target="_blank" rel="noopener noreferrer">CEP 16</a>) uses content-addressable zstandard-compressed msgpack shards.</p>
+
+<h3>Packagist (PHP/Composer)</h3>
+
+<p><a href="https://github.com/composer/mirror/" target="_blank" rel="noopener noreferrer">composer/mirror</a> syncs package metadata over https by polling the <a href="https://github.com/composer/composer/blob/9d18266945b42009057694ddedd7b159badd5eff/res/composer-repository-schema.json#L52" target="_blank" rel="noopener noreferrer">metadata-changes-url</a> endpoint — a URL advertised in the repository’s packages.json that returns a list of recently changed package metadata files, allowing the mirror to fetch only what has changed rather than rescanning everything.</p>
+
+<h2>Protocols and standards for mirroring</h2>
+
+<h3>Rsync</h3>
+
+<p>How most mirror networks were built. A mirror operator runs rsync against the upstream on a schedule, gets an exact copy, and serves it locally. Debian, CPAN, CRAN, and Fedora all use this. Efficient for incremental syncs because it only transfers changed blocks, but it requires the upstream to run an rsync daemon or allow SSH access, and it doesn’t work over plain HTTP. For a registry the size of PyPI or npm, a full rsync mirror means storing and syncing terabytes of packages that most mirrors will never serve.</p>
+
+<h3>Metalink (RFC 5854)</h3>
+
+<p>An XML format listing multiple download URLs for the same file along with checksums, geographic hints, and priority ordering. A client fetching a metalink document gets enough information to pick the nearest mirror, verify the download, and fall back to another source on failure, all in a single round trip. Fedora’s dnf uses metalink URLs. Adoption is mostly limited to Linux distros. The core idea of bundling mirror URLs with integrity information in one response could be done more simply with JSON.</p>
+
+<h3>PEP 381 (Python mirroring protocol)</h3>
+
+<p>Specifies how to create and maintain a full mirror of PyPI using bandersnatch. The mirror syncs the Simple Repository API (PEP 503/691), which is static HTML or JSON listing packages with download URLs and hashes. Because the API produces static files, a mirror doesn’t need to run any registry software. This is the only ecosystem-specific mirroring protocol that’s been formally specified as a standard.</p>
+
+<h3>Debian repository format</h3>
+
+<p>The most tightly specified mirror format. Signed <code>Release</code>/<code>InRelease</code> files mean mirrors don’t need to be trusted. ftpsync’s two-stage sync and metadata ordering prevent clients from seeing inconsistent state. debmirror’s pdiff support and aptly’s snapshot model show two different approaches to keeping mirrors efficient and controlled.</p>
+
+<h3>OCI Distribution Specification</h3>
+
+<p>Content-addressable storage by SHA256 digest, with manifests describing image layers and their relationships. Replication between registries uses the same HTTP API that clients use for pull/push, so any OCI-compliant registry can be a replication target. Artifact signing (Cosign, Notation) travels with the content as linked OCI artifacts rather than requiring a separate trust infrastructure.</p>
+
+<h3>RPM repository metadata (repomd)</h3>
+
+<p><code>repomd.xml</code> serves as a root index pointing to compressed XML metadata files, each with checksums and sizes. Individual RPMs carry their own GPG signatures. The format is straightforward enough that <code>createrepo_c</code> can regenerate metadata from a directory of RPM files, making it easy to build custom mirrors from arbitrary package sets.</p>
+
+<h2>Pull-through caches</h2>
+
+<p>These are reactive only, fetching and caching packages on first client request with no proactive sync:</p>
+
+<ul>
+  <li><a href="https://github.com/sonatype/nexus-public" target="_blank" rel="noopener noreferrer">Sonatype Nexus OSS</a> - Maven, npm, Docker, PyPI, NuGet, RubyGems, Helm, Go, and others (proactive sync is Pro-only)</li>
+  <li><a href="https://jfrog.com/artifactory/" target="_blank" rel="noopener noreferrer">JFrog Artifactory OSS</a> - Maven, Gradle, Ivy, SBT only in the free edition (broader format support requires Pro)</li>
+  <li><a href="https://github.com/verdaccio/verdaccio" target="_blank" rel="noopener noreferrer">Verdaccio</a> - npm</li>
+  <li><a href="https://github.com/gomods/athens" target="_blank" rel="noopener noreferrer">Athens</a> - Go modules</li>
+  <li><a href="https://github.com/devpi/devpi" target="_blank" rel="noopener noreferrer">devpi</a> - Python</li>
+</ul>
+
+<p><a href="https://pulpproject.org/" target="_blank" rel="noopener noreferrer">Pulp</a> is the exception. It supports RPM, Deb, Python, npm, Container, Ansible, Maven, Gem, and others through content plugins, and it can proactively sync from upstream rather than waiting for client requests.</p>
+
+<p>Each remote has a download policy:</p>
+
+<ul>
+  <li><code>immediate</code> - downloads all artifacts during sync</li>
+  <li><code>on_demand</code> - downloads metadata only, fetches artifacts when clients request them</li>
+  <li><code>streamed</code> - proxies without caching</li>
+</ul>
+
+<p>Combined with sync policies:</p>
+
+<ul>
+  <li><code>additive</code> - keeps existing content, adds new from upstream</li>
+  <li><code>mirror_content_only</code> - makes local repo match upstream exactly</li>
+  <li><code>mirror_complete</code> - bit-for-bit copy including metadata signatures</li>
+</ul>
+
+<p><code>immediate</code> + <code>mirror_complete</code> gives you a true proactive mirror rather than a pull-through cache.</p>
+
+<p>Each plugin supports filtering to mirror a subset rather than an entire upstream registry:</p>
+
+<ul>
+  <li>RPM - include/exclude by package name, architecture, version</li>
+  <li>Python - filter by package type (sdist, wheel), platform, keep only N latest versions</li>
+  <li>Container - tag include/exclude with wildcards</li>
+  <li>Deb - handles partial upstream mirrors</li>
+  <li>OSTree - wildcard include/exclude on commits</li>
+</ul>
+
+<p>The sync itself is an explicit command (<code>pulp rpm repository sync --name foo --sync-policy mirror_complete</code>), scheduled externally via cron or through <a href="https://theforeman.org/" target="_blank" rel="noopener noreferrer">Foreman</a>/<a href="https://theforeman.org/plugins/katello/" target="_blank" rel="noopener noreferrer">Katello</a> sync plans since Pulp doesn’t include a built-in scheduler.</p>
+
+<p>I’ve been quietly building <a href="https://github.com/git-pkgs/proxy" target="_blank" rel="noopener noreferrer">git-pkgs/proxy</a> as a side project. It’s a caching proxy written in Go that supports 15 ecosystems (npm, Cargo, RubyGems, Go, PyPI, Maven, NuGet, Composer, Hex, pub.dev, Conan, Conda, CRAN, OCI/Docker, Debian, and RPM) through a single binary. It rewrites upstream metadata to point artifact URLs back through the proxy, then caches artifacts on first request. It also has a version cooldown feature that quarantines newly published versions for a configurable period before serving them, which helps with supply chain attacks that rely on fast consumption of malicious releases.</p>
+
+<p>It shares a lot of code with <a href="https://github.com/git-pkgs" target="_blank" rel="noopener noreferrer">git-pkgs</a> and its various modules, and I’m hoping to integrate it into <a href="https://forgejo.org/" target="_blank" rel="noopener noreferrer">Forgejo</a> in the future. Right now it’s a pull-through cache. This research is feeding directly into what I build next: selective proactive mirroring, so you can tell the proxy to go fetch specific packages or ecosystems on a schedule rather than waiting for client requests.</p>
+
+<p>If I’ve missed an ecosystem or got something wrong, reach out on <a href="https://mastodon.social/@andrewnez" target="_blank" rel="noopener noreferrer">Mastodon</a> or submit a pull request on <a href="https://github.com/andrew/nesbitt.io/blob/master/_posts/2026-03-20-package-manager-mirroring.md" target="_blank" rel="noopener noreferrer">GitHub</a>.</p></div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://nesbitt.io/2026/03/20/package-manager-mirroring.html" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text footer-text--strong" data-astro-cid-sz7xmlte>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-sz7xmlte>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-wlspcwf4> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-wlspcwf4> <path d="M18 15l-6-6-6 6" data-astro-cid-wlspcwf4></path> </svg> </button> <script type="module">function o(){const e=document.getElementById("back-to-top");if(!e)return;const s=300;let t=!1;const n=()=>{const i=window.scrollY>s;e.hidden=!i,t=!1},d=()=>{t||(requestAnimationFrame(n),t=!0)};e.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"})}),window.addEventListener("scroll",d,{passive:!0}),n(),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",d)},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",o):o();document.addEventListener("astro:page-load",o);</script></body></html>
