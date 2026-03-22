@@ -1,4 +1,7 @@
-<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.0.2"><meta name="description" content="A guide on how to set up Time Machine inside a FreeBSD jail."><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><link rel="canonical" href="https://blog.yuyins.com/reading-list/time-machine-inside-a-freebsd-jail-rrj3e1/"><!-- Web Font: Noto Sans SC (Source Han Sans, Chinese + Latin) --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;0,7..72,700;1,7..72,400&family=Noto+Serif+SC:wght@400;500;600;700&display=swap"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/time-machine-inside-a-freebsd-jail-rrj3e1/"><meta property="og:title" content="Time Machine inside a FreeBSD jail"><meta property="og:description" content="A guide on how to set up Time Machine inside a FreeBSD jail."><meta property="og:image" content="https://blog.yuyins.com/favicon.svg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/time-machine-inside-a-freebsd-jail-rrj3e1/"><meta property="twitter:title" content="Time Machine inside a FreeBSD jail"><meta property="twitter:description" content="A guide on how to set up Time Machine inside a FreeBSD jail."><meta property="twitter:image" content="https://blog.yuyins.com/favicon.svg"><title>Time Machine inside a FreeBSD jail</title><!-- 初始化配色方案 --><script>
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.0.2"><meta name="description" content="Many of my clients do not use Microsoft systems on their desktops; they use Linux-based systems or, in some cases, FreeBSD. Many use Apple systems - macOS - and are generally satisfied with them.
+Whil"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><link rel="canonical" href="https://blog.yuyins.com/reading-list/time-machine-inside-a-freebsd-jail-rrj3e1/"><!-- Web Font: Noto Sans SC (Source Han Sans, Chinese + Latin) --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;0,7..72,700;1,7..72,400&family=Noto+Serif+SC:wght@400;500;600;700&display=swap"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/time-machine-inside-a-freebsd-jail-rrj3e1/"><meta property="og:title" content="Time Machine inside a FreeBSD jail"><meta property="og:description" content="Many of my clients do not use Microsoft systems on their desktops; they use Linux-based systems or, in some cases, FreeBSD. Many use Apple systems - macOS - and are generally satisfied with them.
+Whil"><meta property="og:image" content="https://blog.yuyins.com/favicon.svg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/time-machine-inside-a-freebsd-jail-rrj3e1/"><meta property="twitter:title" content="Time Machine inside a FreeBSD jail"><meta property="twitter:description" content="Many of my clients do not use Microsoft systems on their desktops; they use Linux-based systems or, in some cases, FreeBSD. Many use Apple systems - macOS - and are generally satisfied with them.
+Whil"><meta property="twitter:image" content="https://blog.yuyins.com/favicon.svg"><title>Time Machine inside a FreeBSD jail</title><!-- 初始化配色方案 --><script>
 			document.documentElement.setAttribute('data-color', 'stone-amber');
 		</script><style>.chip[data-astro-cid-b4zvghpy]{display:inline-flex;align-items:center;gap:.45rem;border-radius:9999px;border:1px solid transparent;background:var(--muted);color:var(--foreground);font-weight:500;line-height:1.4;text-decoration:none;white-space:nowrap}.chip--sm[data-astro-cid-b4zvghpy]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-b4zvghpy]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-b4zvghpy]{cursor:pointer;transition:background-color .2s ease,color .2s ease,opacity .2s ease}.chip--interactive[data-astro-cid-b4zvghpy]:hover{background-color:color-mix(in srgb,var(--accent) 10%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 68%,var(--foreground))}.chip--active[data-astro-cid-b4zvghpy],.chip[data-astro-cid-b4zvghpy].active{background-color:color-mix(in srgb,var(--accent) 18%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 82%,var(--foreground));border-color:transparent;box-shadow:none;font-weight:600}.chip--dashed[data-astro-cid-b4zvghpy]{border-style:dashed;border-color:color-mix(in srgb,var(--accent) 22%,var(--border));background:color-mix(in srgb,var(--background) 70%,var(--muted))}.chip[data-astro-cid-b4zvghpy]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 </style>
@@ -9,7 +12,124 @@
             <p>搜索功能加载失败</p>
             <button id="retry-search" class="search-retry-btn">重试</button>
           </div>
-        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Time Machine inside a FreeBSD jail</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://it-notes.dragas.net" target="_blank" rel="noopener noreferrer" data-astro-cid-wrgicudb="true" data-astro-cid-b4zvghpy="true" class="chip chip--sm chip--interactive source-tag"> it-notes.dragas.net </a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年1月28日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb>A guide on how to set up Time Machine inside a FreeBSD jail.</div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://it-notes.dragas.net/2026/01/28/time-machine-freebsd-jail/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Time Machine inside a FreeBSD jail</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://it-notes.dragas.net" target="_blank" rel="noopener noreferrer" data-astro-cid-wrgicudb="true" data-astro-cid-b4zvghpy="true" class="chip chip--sm chip--interactive source-tag"> it-notes.dragas.net </a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年1月28日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p><img src="https://unsplash.com/photos/W32yvc0JJjw/download?force=true&amp;w=640" alt="Time Machine inside a FreeBSD jail" /></p><p>Many of my clients do not use Microsoft systems on their desktops; they use Linux-based systems or, in some cases, FreeBSD. Many use Apple systems - macOS - and are generally satisfied with them.
+While I wash my hands of it when it comes to Microsoft systems (telling them they have to manage their desktops autonomously), I am often able to lend a hand with macOS. And one of the main requests they make is to manage the backups of their individual workstations.</p>
+<p>macOS, thanks to its Unix base, offers good native tools. Time Machine is transparent and effective, allowing a certain freedom of management. APFS, Apple's current file system, supports snapshots, so the backup will be effectively made on a snapshot. It also supports multiple receiving devices, so you can even have a certain redundancy of the backup itself.</p>
+<p>Having many FreeBSD servers, I am often asked to use their resources and storage. To build, in practice, a Time Machine inside one of the servers. And it is a simple and practical operation, quick and "painless". There are many guides, including the excellent one by <a href="https://freebsdfoundation.org/our-work/journal/browser-based-edition/storage-and-filesystems/samba-based-time-machine-backups/" target="_blank" rel="noopener noreferrer">Benedict Reuschling</a> from which I took inspiration for this one, and I will describe the steps I usually follow to set it all up in just a few minutes.</p>
+<p>I usually use <a href="https://bastillebsd.org" target="_blank" rel="noopener noreferrer">BastilleBSD</a> to manage my jails, so the first step is to create a new jail dedicated to the purpose. Here you have to decide on the approach: I suggest using a VNET jail or an "inherit" jail - meaning one that attaches to the host's network stack. On one hand, the inherit approach is less secure but, as often happens, it depends on the complexity of the situation. If, for example, we are using a Raspberry PI dedicated to the purpose, there is no reason to complicate things with bridges, etc., but we can attach directly to the network card with a creation command like:</p>
+<pre><code>bastille create tmjail 15.0-RELEASE inherit igb0
+</code></pre>
+
+<p>Where <code>igb0</code> is the network interface we want to attach to.</p>
+<p>In case we want to attach to the interface but in the form of a bridge, we should use this syntax:</p>
+<pre><code>bastille create -V tmjail 15.0-RELEASE 192.168.0.42/24 igb0
+</code></pre>
+
+<p>Or, if our server already has a bridge (in this case it's <code>bridge0</code>, but yours might be named differently):</p>
+<pre><code>bastille create -B tmjail 15.0-RELEASE 192.168.0.42/24 bridge0
+</code></pre>
+
+<p>At this point, you can choose: do we want to keep the backups inside the jail or in a separate dataset - which can even be on another pool? In some cases, this can be extremely useful: often I have jails running on fast disks (SSD or NVMe) but abundant storage on slower devices. In this example, therefore, I will create an external dataset for the backups (directly from the host) and mount it in the jail. You could also delegate the entire management of the dataset to the jail, which is a different approach.</p>
+<p>Let's create a space of 600 GB - already reserved - on the chosen pool. 600 GB is a small space, but it's ok for an example:</p>
+<pre><code>zfs create -o quota=600G -o reservation=600G bigpool/tmdata
+</code></pre>
+
+<p>We can also create separate datasets inside for each user and assign a specific space:</p>
+<pre><code>zfs create -o refquota=500g -o refreservation=500g bigpool/tmdata/stefano
+</code></pre>
+
+<p>We can enter the jail and install what we need, remembering also to create the "mountpoint" for the dataset we just created:</p>
+<pre><code>bastille console tmjail 
+
+pkg install -y samba419
+mkdir /tmdata
+</code></pre>
+
+<p>Exit the jail and instruct Bastille to mount the dataset inside the jail every time it is launched:</p>
+<pre><code>exit
+bastille mount tmjail /bigpool/tmdata /tmdata nullfs rw 0 0
+</code></pre>
+
+<p>Let's go back into the jail and start with the actual configuration. First, for each Time Machine user, we will create a system user. In my example, I will create the user "stefano", giving him <code>/var/empty</code> as the home directory - this will give an error since we created a Bastille thin jail, but it's not a problem. It happens because in a thin jail some system paths are read-only or not manageable as they are on a full base system, but the user is only needed for ownership and Samba login.</p>
+<pre><code>root@tmjail:~ # adduser
+Username: stefano
+Full name: Stefano
+Uid (Leave empty for default):
+Login group [stefano]:
+Login group is stefano. Invite stefano into other groups? []:
+Login class [default]:
+Shell (sh csh tcsh nologin) [sh]: nologin
+Home directory [/home/stefano]: /var/empty
+Home directory permissions (Leave empty for default):
+Use password-based authentication? [yes]: no
+Lock out the account after creation? [no]:
+Username    : stefano
+Password    : &lt;disabled&gt;
+Full Name   : Stefano
+Uid         : 1001
+Class       :
+Groups      : stefano
+Home        : /var/empty
+Home Mode   :
+Shell       : /usr/sbin/nologin
+Locked      : no
+OK? (yes/no) [yes]: yes
+pw: chmod(var/empty): Operation not permitted
+pw: chown(var/empty): Operation not permitted
+adduser: INFO: Successfully added (stefano) to the user database.
+Add another user? (yes/no) [no]: no
+Goodbye!
+</code></pre>
+
+<p>Give the correct permissions to the user:</p>
+<pre><code># If you've not created specific datasets for the users, you'd better create their home directories now
+mkdir /tmdata/stefano
+chown -R stefano /tmdata/stefano/
+</code></pre>
+
+<p>Now we configure Samba for Time Machine. The file to create/modify is <code>/usr/local/etc/smb4.conf</code>:</p>
+<pre><code>[global]
+workgroup = WORKGROUP
+security = user
+passdb backend = tdbsam
+fruit:aapl = yes
+fruit:model = MacSamba
+fruit:advertise_fullsync = true
+fruit:metadata = stream
+fruit:veto_appledouble = no
+fruit:nfs_aces = no
+fruit:wipe_intentionally_left_blank_rfork = yes
+fruit:delete_empty_adfiles = yes
+
+[TimeMachine]
+path = /tmdata/%U
+valid users = %U
+browseable = yes
+writeable = yes
+vfs objects = catia fruit streams_xattr zfsacl
+fruit:time machine = yes
+create mask = 0600
+directory mask = 0700
+</code></pre>
+
+<p>We have set up Time Machine to support all the necessary features of macOS and to show itself as "Time Machine". Having set <code>path = /tmdata/%U</code>, each user will only see their own path.</p>
+<p>At this point, we create the Samba user (meaning the one we will have to type on macOS when we configure the Time Machine):</p>
+<pre><code>smbpasswd -a stefano
+</code></pre>
+
+<p>The Time Machine is seen by macOS because it announces itself via mDNS on the network. This type of service is performed by Avahi, which we are now going to configure. Although not strictly necessary (we can always find the Time Machine by connecting directly to its IP and macOS will remember everything), seeing it announced will help other non-expert users and ourselves when we have to configure another Mac in the future.</p>
+<p>Recent Samba releases won't need any specific avahi configuration, so we can skip this step.</p>
+<p>We are now ready to enable everything.</p>
+<pre><code>service dbus enable
+service dbus start
+service avahi-daemon enable
+service avahi-daemon start
+service samba_server enable
+service samba_server start
+</code></pre>
+
+<p>Et voilà. If everything went according to plan, the Time Machine will announce itself on your network (if you have different networks, remember to configure the mDNS proxy on your router) and you will be able to log in (with the smb user you created) and start your first backup.</p>
+<p>I suggest encrypting the backups for maximum security and observing, from time to time, your Mac as it silently makes its backups to your trusted FreeBSD server.</p></div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://it-notes.dragas.net/2026/01/28/time-machine-freebsd-jail/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
 阅读原文 ↗
 </a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text footer-text--strong" data-astro-cid-sz7xmlte>
 &copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-sz7xmlte>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-sz7xmlte>

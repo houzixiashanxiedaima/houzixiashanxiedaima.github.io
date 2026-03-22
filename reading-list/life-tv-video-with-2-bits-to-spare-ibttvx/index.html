@@ -71,7 +71,7 @@ The easiest way to do this is with two resistors:
 </p><p>
 <img src="/projects/lifetv/sch.png" alt="Schematic showing a 100 ohm resistor between pin PA1 and the antenna, and a 50 ohm resistor between PA2 and the antenna." />
 </p><p>
-Code: <a href="/projects/lifetv/tv.c" target="_blank" rel="noopener noreferrer">source</a>, <a href="/projects/lifetv/tv.elf" target="_blank" rel="noopener noreferrer">binary</a>
+Code: <a href="/projects/lifetv/tv.tar.gz" target="_blank" rel="noopener noreferrer">source</a>, <a href="/projects/lifetv/tv.elf" target="_blank" rel="noopener noreferrer">binary</a>
 </p><p>
 By changing which pins have the 6 MHz square wave and which ones are grounded, the MCU can produce 4 different RF powers:
 </p>
@@ -91,7 +91,6 @@ During these gaps, the CPU doesn't have any transmitting to do, so I decided to 
   [Video. See web or files directory: life.mp4]
   
 
-Not FCC approved
 </p><p>
 <em>It isn't a game in the conventional sense.</em>
 It has a grid of square cells which can have one of two states: "dead" or "alive".
@@ -109,7 +108,7 @@ To fix this, I added a small keypad which can be used to draw patterns:
   
 
 </p><p>
-<em>The image is surprisingly good for how hacky the transmitter is</em>, and can be received several meters away —
+<em>The image is surprisingly good for how hacky the transmitter is</em>, and can be received ten meters away —
 a testament as to just how noisy digital electronics are.
 </p><p>
 The switching frequency doesn't matter: what's important is the signal's rise time.
@@ -130,6 +129,10 @@ You might have to adjust the timings in the code.
 <em>... it also has continuous tuning</em>:
 If your doesn't (tuning dial clicks), you will have to mess around with the OSCHFTUNE register to make it work.
 A spectrum analyzer would be very helpful.
+</p><p>
+</p><h1><em>Similar:</em></h1>
+<p></p><p>
+Suprisingly clean video generation using a 32-bit processor: <a href="https://slyka.net/blog/2026/tinyvision/" target="_blank" rel="noopener noreferrer">Slyka's Videothing</a>
 </p>
 
 				</div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://maurycyz.com/projects/lifetv/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
