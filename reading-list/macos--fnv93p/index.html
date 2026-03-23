@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.0.2"><meta name="description" content="今天跑 Rust 编译器测试的时候又发现非常地慢，CPU 资源根本无法利用起来，我记得几年前碰到过这个问题，当时我写了篇文章分享出来，并发现很多人都有同样的困扰。
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.0.8"><meta name="description" content="今天跑 Rust 编译器测试的时候又发现非常地慢，CPU 资源根本无法利用起来，我记得几年前碰到过这个问题，当时我写了篇文章分享出来，并发现很多人都有同样的困扰。
 而我今天碰到的这个问题虽然现象一样，但解决方法又不同了。我不确定是 macOS 系统更新，亦或是我更新了 VS Code 造成的。
 问题
 复现脚本很简单，循环创建随机命名的 shell 脚本，然后对比首次和再次执行的耗时：
