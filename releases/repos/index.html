@@ -6,69 +6,9 @@
             <button id="retry-search" class="search-retry-btn">重试</button>
           </div>
         `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--default" data-astro-cid-sckkx6r4> <h1 id="-github-releases-监控列表">📦 GitHub Releases 监控列表</h1>
-<p>当前系统监控 <strong>9</strong> 个开源项目，每日自动抓取最新版本并生成 AI 摘要。</p>
+<p>当前系统监控 <strong>0</strong> 个开源项目，每日自动抓取最新版本并生成 AI 摘要。</p>
 <p>最后更新: 2026-03-24</p>
 <hr>
-<h2 id="go-1">Go (1)</h2>
-<ul>
-<li><strong><a href="https://github.com/rclone/rclone" rel="noopener noreferrer" target="_blank">rclone/rclone</a></strong> ⭐ 56.2k
-“rsync for cloud storage” - Google Drive, S3, Dropbox, Backblaze B2, One Drive, Swift, Hubic, Wasabi, Google Cloud Storage, Azure Blob, Azure Files, Yandex Files
-<em>最后更新: 2026-03-24</em></li>
-</ul>
-<hr>
-<h2 id="kotlin-1">Kotlin (1)</h2>
-<ul>
-<li><strong><a href="https://github.com/mihonapp/mihon" rel="noopener noreferrer" target="_blank">mihonapp/mihon</a></strong> ⭐ 19.3k
-Free and open source manga reader for Android
-<em>最后更新: 2026-03-24</em></li>
-</ul>
-<hr>
-<h2 id="rust-2">Rust (2)</h2>
-<ul>
-<li>
-<p><strong><a href="https://github.com/openai/codex" rel="noopener noreferrer" target="_blank">openai/codex</a></strong> ⭐ 67.2k
-Lightweight coding agent that runs in your terminal
-<em>最后更新: 2026-03-24</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/sdkman/sdkman-cli-native" rel="noopener noreferrer" target="_blank">sdkman/sdkman-cli-native</a></strong> ⭐ 0.3k
-The next generation of SDKMAN! CLI commands, written in Rust
-<em>最后更新: 2026-03-24</em></p>
-</li>
-</ul>
-<hr>
-<h2 id="shell-1">Shell (1)</h2>
-<ul>
-<li><strong><a href="https://github.com/sdkman/sdkman-cli" rel="noopener noreferrer" target="_blank">sdkman/sdkman-cli</a></strong> ⭐ 6.7k
-The SDKMAN! Command Line Interface
-<em>最后更新: 2026-03-23</em></li>
-</ul>
-<hr>
-<h2 id="swift-1">Swift (1)</h2>
-<ul>
-<li><strong><a href="https://github.com/steipete/CodexBar" rel="noopener noreferrer" target="_blank">steipete/CodexBar</a></strong> ⭐ 9.1k
-Show usage stats for OpenAI Codex and Claude Code, without having to login.
-<em>最后更新: 2026-03-24</em></li>
-</ul>
-<hr>
-<h2 id="typescript-3">TypeScript (3)</h2>
-<ul>
-<li>
-<p><strong><a href="https://github.com/openclaw/openclaw" rel="noopener noreferrer" target="_blank">openclaw/openclaw</a></strong> ⭐ 333.2k
-Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞
-<em>最后更新: 2026-03-24</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/google-gemini/gemini-cli" rel="noopener noreferrer" target="_blank">google-gemini/gemini-cli</a></strong> ⭐ 98.9k
-An open-source AI agent that brings the power of Gemini directly into your terminal.
-<em>最后更新: 2026-03-24</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/mihomo-party-org/clash-party" rel="noopener noreferrer" target="_blank">mihomo-party-org/clash-party</a></strong> ⭐ 21.9k
-:electron: Another Mihomo GUI.
-<em>最后更新: 2026-03-24</em></p>
-</li>
-</ul>
 <hr>
 <h2 id="-说明">📖 说明</h2>
 <ul>
