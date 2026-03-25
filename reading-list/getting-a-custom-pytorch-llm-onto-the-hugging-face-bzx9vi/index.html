@@ -1,0 +1,1344 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.0.8"><meta name="description" content="I spent some time recently getting some models uploaded onto the Hugging Face Hub.  I'd trained
+a bunch of GPT-2 small sized base models from scratch as part of my
+LLM from scratch series, and wanted "><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><link rel="canonical" href="https://blog.yuyins.com/reading-list/getting-a-custom-pytorch-llm-onto-the-hugging-face-bzx9vi/"><!-- Web Font: Noto Sans SC (Source Han Sans, Chinese + Latin) --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;0,7..72,700;1,7..72,400&family=Noto+Serif+SC:wght@400;500;600;700&display=swap"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/getting-a-custom-pytorch-llm-onto-the-hugging-face-bzx9vi/"><meta property="og:title" content="Getting a custom PyTorch LLM onto the Hugging Face Hub (Transformers: AutoModel, pipeline, and Trainer)"><meta property="og:description" content="I spent some time recently getting some models uploaded onto the Hugging Face Hub.  I'd trained
+a bunch of GPT-2 small sized base models from scratch as part of my
+LLM from scratch series, and wanted "><meta property="og:image" content="https://blog.yuyins.com/favicon.svg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/getting-a-custom-pytorch-llm-onto-the-hugging-face-bzx9vi/"><meta property="twitter:title" content="Getting a custom PyTorch LLM onto the Hugging Face Hub (Transformers: AutoModel, pipeline, and Trainer)"><meta property="twitter:description" content="I spent some time recently getting some models uploaded onto the Hugging Face Hub.  I'd trained
+a bunch of GPT-2 small sized base models from scratch as part of my
+LLM from scratch series, and wanted "><meta property="twitter:image" content="https://blog.yuyins.com/favicon.svg"><title>Getting a custom PyTorch LLM onto the Hugging Face Hub (Transformers: AutoModel, pipeline, and Trainer)</title><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-b4zvghpy]{display:inline-flex;align-items:center;gap:.45rem;border-radius:9999px;border:1px solid transparent;background:var(--muted);color:var(--foreground);font-weight:500;line-height:1.4;text-decoration:none;white-space:nowrap}.chip--sm[data-astro-cid-b4zvghpy]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-b4zvghpy]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-b4zvghpy]{cursor:pointer;transition:background-color .2s ease,color .2s ease,opacity .2s ease}.chip--interactive[data-astro-cid-b4zvghpy]:hover{background-color:color-mix(in srgb,var(--accent) 10%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 68%,var(--foreground))}.chip--active[data-astro-cid-b4zvghpy],.chip[data-astro-cid-b4zvghpy].active{background-color:color-mix(in srgb,var(--accent) 18%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 82%,var(--foreground));border-color:transparent;box-shadow:none;font-weight:600}.chip--dashed[data-astro-cid-b4zvghpy]{border-style:dashed;border-color:color-mix(in srgb,var(--accent) 22%,var(--border));background:color-mix(in srgb,var(--background) 70%,var(--muted))}.chip[data-astro-cid-b4zvghpy]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+<link rel="stylesheet" href="/_astro/Layout.oGGPdmbM.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0;animation:fadeIn .3s ease-out}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;color:var(--muted-foreground);font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.8125rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--accent)}.back-link--top[data-astro-cid-wrgicudb]{display:inline-block;margin-bottom:1rem}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2> 雅俗共赏 </a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-otpdt6jm> <div class="search-dialog-card" data-astro-cid-otpdt6jm> <div class="search-dialog-bar" data-astro-cid-otpdt6jm> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="8" data-astro-cid-otpdt6jm></circle><path d="m21 21-4.3-4.3" data-astro-cid-otpdt6jm></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-otpdt6jm></div> <kbd class="search-kbd" data-astro-cid-otpdt6jm>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-otpdt6jm> <path d="M18 6 6 18" data-astro-cid-otpdt6jm></path><path d="m6 6 12 12" data-astro-cid-otpdt6jm></path> </svg> </button> </div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(e=0){if(sessionStorage.getItem(c)==="true")return m(),!0;const s=document.getElementById("pagefind-ui");if(!s)return!1;s.innerHTML='<div class="search-loading">加载中...</div>';try{return await new Promise((r,o)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=r,a.onerror=o,document.head.appendChild(a)}),m(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),e<2?(console.log(`Retrying search load... (${e+1}/2)`),await new Promise(r=>setTimeout(r,1e3)),l(e+1)):(s&&(s.innerHTML=`
+          <div class="search-loading">
+            <p>搜索功能加载失败</p>
+            <button id="retry-search" class="search-retry-btn">重试</button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Getting a custom PyTorch LLM onto the Hugging Face Hub (Transformers: AutoModel, pipeline, and Trainer)</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://gilesthomas.com" target="_blank" rel="noopener noreferrer" data-astro-cid-wrgicudb="true" data-astro-cid-b4zvghpy="true" class="chip chip--sm chip--interactive source-tag"> gilesthomas.com </a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年1月28日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>I spent some time recently getting some models uploaded onto the Hugging Face Hub.  I'd trained
+a bunch of GPT-2 small sized base models from scratch as part of my
+<a href="/llm-from-scratch" target="_blank" rel="noopener noreferrer">LLM from scratch series</a>, and wanted to share them with anyone
+that was interested.  I managed to <a href="/2026/01/llm-from-scratch-31-models-on-hugging-face" target="_blank" rel="noopener noreferrer">get it done</a>,
+but it was kind of tricky to get right.</p>
+
+<p>The Hugging Face documentation is great if you're using the built-in models, but
+the coverage of custom architectures is... not quite as comprehensive.  There are scattered
+examples, but they're all a bit vague and there's nothing really bringing them all
+together.  But with what I could find, plus a lot of running things repeatedly, seeing how
+they failed, tweaking changes, banging my head against obscure stacktraces,
+and talking to various LLMs, I got there in the end.</p>
+
+<p>This post is the <a href="/2025/02/20250223-til-deep-dive-posts" target="_blank" rel="noopener noreferrer">tutorial I wish I'd found before I started</a>, and I hope it's useful
+for people in a similar position.  The one warning I'd give is that I did not
+dig into tokenisers in any depth.  My own models use the standard GPT-2 one, and
+so I could just use the version that is built into Transformers.  The setup you
+need to do with custom tokenisers doesn't look all that different to what you
+need do to for custom models, but as I haven't spent lots of time looking into it,
+I won't try to write a tutorial for something I've not done :-)</p>
+
+<p>Firstly, why would you want to upload a model you've trained to Hugging Face?  Well,
+let's say you've written and trained your own LLM -- you're learning how they work,
+or you've got a brilliant idea about how to tweak transformers to get that one step closer to AGI using
+the old gaming PC in your basement.  You have some PyTorch code and
+a bunch of weights.  How do you share it?</p>
+
+<p>You could, of course, just dump the code on GitHub and share the weights somewhere.
+If people want to play with your model, they just need to download everything,
+install the dependencies, and then write code to load the weights and talk to your LLM -- run
+inference, fine-tune it, and so on.</p>
+
+<p>That's quite a big "just", though.  Not everyone who is going to want to look at
+your model will have the relatively deep knowledge required to do all of that.
+Speaking for myself, I spent quite some time <a href="/fine-tuning" target="_blank" rel="noopener noreferrer">fine-tuning and running inference on models</a>
+long before I knew how the internals worked.  I was able to do this because of the
+easy-to-use abstraction layer in Hugging Face's <a href="https://huggingface.co/docs/transformers/en/index" target="_blank" rel="noopener noreferrer">Transformers library</a>,
+using models that had been uploaded to their <a href="https://huggingface.co/" target="_blank" rel="noopener noreferrer">hub</a>.</p>
+
+<p>What it would be nice to do is share the model within the Hugging Face ecosystem
+in a way that works smoothly.  Let people run inference on it like this:</p>
+
+<div>
+<pre><span></span><code><span>from</span><span> </span><span>transformers</span><span> </span><span>import</span> <span>pipeline</span>
+<span>pipe</span> <span>=</span> <span>pipeline</span><span>(</span><span>task</span><span>=</span><span>"text-generation"</span><span>,</span> <span>model</span><span>=</span><span>"some-hf-user/some-model-name"</span><span>,</span> <span>trust_remote_code</span><span>=</span><span>True</span><span>)</span>
+<span>out</span> <span>=</span> <span>pipe</span><span>(</span>
+    <span>"Every effort moves you"</span><span>,</span>
+    <span>max_new_tokens</span><span>=</span><span>20</span><span>,</span>
+    <span>do_sample</span><span>=</span><span>True</span><span>,</span>
+    <span>temperature</span><span>=</span><span>1.4</span><span>,</span>
+    <span>top_k</span><span>=</span><span>25</span><span>,</span>
+<span>)</span>
+<span>print</span><span>(</span><span>out</span><span>[</span><span>0</span><span>][</span><span>"generated_text"</span><span>])</span>
+</code></pre>
+</div>
+
+<p>...rather than something daunting like <a href="https://github.com/gpjt/ddp-base-model-from-scratch/blob/main/test_smoke.py" target="_blank" rel="noopener noreferrer">this code</a>
+with its 24 lines just to sample a few tokens from the model.
+Or to train it using code like what you see in <a href="https://github.com/gpjt/ddp-base-model-from-scratch/blob/main/hf_train.ipynb" target="_blank" rel="noopener noreferrer">this notebook</a>
+-- a bit of config then <code>trainer.train</code> --
+rather than like <a href="https://github.com/gpjt/ddp-base-model-from-scratch/blob/main/ddp_train.py" target="_blank" rel="noopener noreferrer">this</a>,
+with its &gt;100-line <code>train</code> function.</p>
+
+<p>Here's what I had to do to get it working.</p>
+<h3>The baseline</h3>
+
+<p>To make it easier to follow along with this post, I've created
+<a href="https://github.com/gpjt/hf-tutorial-post" target="_blank" rel="noopener noreferrer">a GitHub repo</a>.  As a starting point,
+I recommend you clone that, and then check out the <code>baseline</code> tag:</p>
+
+<div>
+<pre><span></span><code>giles@perry:~/Dev<span> </span>$<span> </span>git<span> </span>clone<span> </span>https://github.com/gpjt/hf-tutorial-post.git
+Cloning<span> </span>into<span> </span><span>'hf-tutorial-post'</span>...
+remote:<span> </span>Enumerating<span> </span>objects:<span> </span><span>24</span>,<span> </span><span>done</span>.
+remote:<span> </span>Counting<span> </span>objects:<span> </span><span>100</span>%<span> </span><span>(</span><span>24</span>/24<span>)</span>,<span> </span><span>done</span>.
+remote:<span> </span>Compressing<span> </span>objects:<span> </span><span>100</span>%<span> </span><span>(</span><span>19</span>/19<span>)</span>,<span> </span><span>done</span>.
+remote:<span> </span>Total<span> </span><span>24</span><span> </span><span>(</span>delta<span> </span><span>5</span><span>)</span>,<span> </span>reused<span> </span><span>19</span><span> </span><span>(</span>delta<span> </span><span>2</span><span>)</span>,<span> </span>pack-reused<span> </span><span>0</span><span> </span><span>(</span>from<span> </span><span>0</span><span>)</span>
+Receiving<span> </span>objects:<span> </span><span>100</span>%<span> </span><span>(</span><span>24</span>/24<span>)</span>,<span> </span><span>37</span>.23<span> </span>KiB<span> </span><span>|</span><span> </span><span>866</span>.00<span> </span>KiB/s,<span> </span><span>done</span>.
+Resolving<span> </span>deltas:<span> </span><span>100</span>%<span> </span><span>(</span><span>5</span>/5<span>)</span>,<span> </span><span>done</span>.
+giles@perry:~/Dev<span> </span>$<span> </span><span>cd</span><span> </span>hf-tutorial-post/
+giles@perry:~/Dev/hf-tutorial-post<span> </span><span>(</span>main<span>)</span>$<span> </span>git<span> </span>checkout<span> </span>baseline
+Note:<span> </span>switching<span> </span>to<span> </span><span>'baseline'</span>.
+
+You<span> </span>are<span> </span><span>in</span><span> </span><span>'detached HEAD'</span><span> </span>state.<span> </span>You<span> </span>can<span> </span>look<span> </span>around,<span> </span>make<span> </span>experimental
+...rest<span> </span>of<span> </span>warning<span> </span>skipped...
+Turn<span> </span>off<span> </span>this<span> </span>advice<span> </span>by<span> </span>setting<span> </span>config<span> </span>variable<span> </span>advice.detachedHead<span> </span>to<span> </span><span>false</span>
+
+HEAD<span> </span>is<span> </span>now<span> </span>at<span> </span>4047a91<span> </span>Added<span> </span>baseline<span> </span>code
+giles@perry:~/Dev/hf-tutorial-post<span> </span>$
+</code></pre>
+</div>
+
+<p>You'll see that there's a <code>gpt.py</code> file, which contains my version of the GPT-2 style LLM code from
+<a href="https://sebastianraschka.com/" target="_blank" rel="noopener noreferrer">Sebastian Raschka</a>'s book
+"<a href="https://www.manning.com/books/build-a-large-language-model-from-scratch" target="_blank" rel="noopener noreferrer">Build a Large Language Model (from Scratch)</a>".
+There's also a script called <code>inference_run.py</code>, which is some code to run a model
+and get it to predict the 20 next words after the string <code>Every effort moves you</code>,
+and a config file for the LLM code called <code>model.json</code>, which tells it the number
+of layers, attention heads, and so on.</p>
+
+<p>If you want to use it
+and see what it comes up with, you can download the <a href="https://github.com/gpjt/hf-tutorial-post/releases/download/baseline/model.safetensors" target="_blank" rel="noopener noreferrer">model weights</a>
+from one of my trains, and install the dependencies with <code>uv sync</code> (recommended)
+or by running it in a Python environment with the libraries listed in <code>pyproject.toml</code>
+installed.</p>
+
+<p>You'll get something like this:</p>
+
+<div>
+<pre><span></span><code>giles@perry:~/Dev/hf-tutorial-post<span> </span>$<span> </span>uv<span> </span>run<span> </span>inference_run.py<span> </span>./model.json<span> </span>./model.safetensors
+Every<span> </span>effort<span> </span>moves<span> </span>you<span> </span>through<span> </span>the<span> </span>process<span> </span>to<span> </span>make<span> </span>it<span> </span>happen.<span> </span>But<span> </span>we<span> </span>still<span> </span>want<span> </span>to<span> </span>bring<span> </span>it<span> </span>to<span> </span>all<span> </span>of<span> </span>your<span> </span>dreams
+</code></pre>
+</div>
+
+<p>Your output will probably vary (for this and the later examples), as you'd expect from sampled
+LLM output, but it should at least be reasonably coherent.</p>
+
+<p>So: let's get it on Hugging Face!</p>
+
+<h3>The <code>from_pretrained</code> methods</h3>
+
+<p>Our goal of being able to run inference with Transformers' <code>pipeline</code> system relies on
+a couple of deeper levels of abstraction.</p>
+
+<p>The <code>pipeline</code> requires that the model be available for download -- complete with
+all of its code and weights -- using code like this:</p>
+
+<div>
+<pre><span></span><code><span>from</span><span> </span><span>transformers</span><span> </span><span>import</span> <span>AutoModelForCausalLM</span>
+<span>model</span> <span>=</span> <span>AutoModelForCausalLM</span><span>.</span><span>from_pretrained</span><span>(</span><span>"some-hf-user/some-model-name"</span><span>,</span> <span>trust_remote_code</span><span>=</span><span>True</span><span>)</span>
+</code></pre>
+</div>
+
+<p><code>AutoModelForCausalLM</code> is the HF abstraction for models that generate text.</p>
+
+<p>If that <code>trust_remote_code</code> flag is concerning you, it is indeed a bit scary-looking.  But
+remember that our goal here is to share a model on HF that has its own code, and
+that means that anyone that downloads it will have to opt in to downloading and running
+the code -- the flag is how they do that opt-in.  So it is, unfortunately, necessary.</p>
+
+<p>Now, that model will need a tokeniser in order to run.  Perhaps not surprisingly,
+the HF system expects to be able to download that with similar code:</p>
+
+<div>
+<pre><span></span><code><span>from</span><span> </span><span>transformers</span><span> </span><span>import</span> <span>AutoTokenizer</span>
+<span>tokenizer</span> <span>=</span> <span>AutoTokenizer</span><span>.</span><span>from_pretrained</span><span>(</span><span>"some-hf-user/some-model-name"</span><span>)</span>
+</code></pre>
+</div>
+
+<p>With both of those working, appropriate code for our pretrained models, and a bit
+(well, to be fair, quite a lot of) configuration, we'll be all set.</p>
+
+<p>But that's quite a big jump.  There is a more general <code>Auto</code> class called <code>AutoModel</code>;
+it's much simpler, just wrapping a generic model that might be doing anything.
+If we support it, we'll still need to use all of that clunky inference code, but
+the model's code and weights will be on Hugging Face Hub, and can be downloaded and
+instantiated easily.</p>
+
+<p>So let's get that working first, just to work out the bugs and get the basic process
+down pat.</p>
+
+<h3><code>AutoModel.from_pretrained</code></h3>
+
+<p>Our goal is to be able to run this in a Python environment where we just have
+<code>transformers</code> and <code>torch</code> installed:</p>
+
+<div>
+<pre><span></span><code><span>from</span><span> </span><span>transformers</span><span> </span><span>import</span> <span>AutoModel</span>
+<span>model</span> <span>=</span> <span>AutoModel</span><span>.</span><span>from_pretrained</span><span>(</span><span>"some-hf-user/some-model-name"</span><span>,</span> <span>trust_remote_code</span><span>=</span><span>True</span><span>)</span>
+</code></pre>
+</div>
+
+<p>...and then have a model that we can run inference on, just like the code in
+<a href="https://github.com/gpjt/hf-tutorial-post/blob/baseline/inference_run.py" target="_blank" rel="noopener noreferrer">our repo</a>,
+but without the hassle of having to download the weights ourselves.  Definitely
+a QoL improvement, even if it's not the endgame.</p>
+
+<p>If you're following along with the git repo, the tag to check out for this section is <code>automodel</code>.
+In this version, you'll see a new subdirectory to contain our HF wrapper code (which I've imaginatively
+called <code>hf_wrapper</code>); you'll see why we need that later.</p>
+
+<p>In there, I've added
+a symlink to the model code <code>gpt.py</code> itself (also to be explained later), an empty <code>__init__.py</code> file to make
+the directory a Python module, and two files with some Transformers code:</p>
+
+<ol>
+<li><code>configuration_gpjtgpt2.py</code></li>
+<li><code>modeling_gpjtgpt2.py</code></li>
+</ol>
+
+<p>Let's dig into what's going on in those two.</p>
+
+<p>The first thing to understand is that whole <code>gpjtgpt2</code> thing in the filenames.  Transformers is designed
+to handle all kinds of different models -- for example, Meta's Llama models and
+Qwen's models have their own codebases.  These widely-used public models have code
+that is already built in to the library, with "model types" like <code>llama4</code> and
+or <code>qwen3_vl-moe</code> respectively -- but we don't have that advantage.  Our code is
+not built in to the library.</p>
+
+<p>So we need a distinct name for our type of model, which will let the library know
+that it has its own code and it shouldn't try to rely on built-in stuff.  I chose
+<code>gpjtgpt2</code> because my Hugging Face username is my initials, <code>gpjt</code> <sup><a href="#fn-1" target="_blank" rel="noopener noreferrer">1</a></sup>, and this model
+is the implementation of the GPT-2 architecture I'm playing with.  That feels like
+a solid pattern to me -- it's unlikely to clash with anything built in.  But the format appears to be fairly
+free-form, so you can choose pretty much anything so long as you're consistent throughout
+your code, and so long as it doesn't clash with any of the built-ins.</p>
+
+<p>So, you need two files with those specific names: <code>configuration_</code><em>your-model-type</em><code>.py</code>,
+and <code>modeling_</code><em>your-model-type</em><code>.py</code>.  Let's look at them now.  They're really simple
+at this stage; here's the configuration one:</p>
+
+<div>
+<pre><span></span><code><span>from</span><span> </span><span>transformers</span><span> </span><span>import</span> <span>PretrainedConfig</span>
+
+
+<span>class</span><span> </span><span>GPJTGPT2Config</span><span>(</span><span>PretrainedConfig</span><span>):</span>
+
+    <span>model_type</span> <span>=</span> <span>"gpjtgpt2"</span>
+
+    <span>def</span><span> </span><span>__init__</span><span>(</span><span>self</span><span>,</span> <span>cfg</span><span>=</span><span>None</span><span>,</span> <span>**</span><span>kwargs</span><span>):</span>
+        <span>self</span><span>.</span><span>cfg</span> <span>=</span> <span>cfg</span>
+
+        <span>super</span><span>()</span><span>.</span><span>__init__</span><span>(</span><span>**</span><span>kwargs</span><span>)</span>
+</code></pre>
+</div>
+
+<p>Now, when Transformers is loading a model with <code>AutoModel.from_pretrained</code>, it's
+going to need to know how to configure it.  At the very least, it will need to know
+what to pass into the <code>__init__</code>.  If you look at <a href="https://github.com/gpjt/hf-tutorial-post/blob/baseline/gpt.py" target="_blank" rel="noopener noreferrer">the <code>gpt.py</code> code</a>,
+it's taking a config dictionary with stuff like the number of layers, the number
+of attention heads, and what-have-you.  That's going to be required to instantiate
+the model with the right setup so that it can load the weights that we're providing.
+There's other config stuff that will come there later, but that's all we have for now.</p>
+
+<p>It does this using the same pattern as the various <code>from_pretrained</code> methods we
+were looking at earlier:</p>
+
+<div>
+<pre><span></span><code><span>from</span><span> </span><span>transformers</span><span> </span><span>import</span> <span>AutoConfig</span>
+<span>model</span> <span>=</span> <span>AutoConfig</span><span>.</span><span>from_pretrained</span><span>(</span><span>"some-hf-user/some-model-name"</span><span>)</span>
+</code></pre>
+</div>
+
+<p>All we're doing here is defining what kind of thing that method will return when it's all set
+up properly.</p>
+
+<p>You can see that we're inheriting from a <code>PretrainedConfig</code> class -- this provides
+all of the infrastructure we're going to need to push things to HF.  I don't <em>think</em>
+that the name of the config class technically matters, but it definitely seems like
+best practice to name it based on the model name -- so, we're using <code>GPJTGPT2Config</code>
+for our <code>gpjtgpt2</code> model.  However, the <code>model_type</code> is important -- it <em>has</em> to
+match the model type that we've chosen and used for our filenames.</p>
+
+<p>Apart from that, we're stashing away the config that we're
+provided on a <code>cfg</code> field, and then calling our superclass <code>__init__</code>, forwarding
+on any kwargs we got in our own <code>__init__</code>.</p>
+
+<p>Now let's look at <code>modeling_gpjtgpt2.py</code>:</p>
+
+<div>
+<pre><span></span><code><span>from</span><span> </span><span>transformers</span><span> </span><span>import</span> <span>PreTrainedModel</span>
+
+<span>from</span><span> </span><span>.configuration_gpjtgpt2</span><span> </span><span>import</span> <span>GPJTGPT2Config</span>
+<span>from</span><span> </span><span>.gpt</span><span> </span><span>import</span> <span>GPTModel</span>
+
+
+<span>class</span><span> </span><span>GPJTGPT2Model</span><span>(</span><span>PreTrainedModel</span><span>):</span>
+
+    <span>config_class</span> <span>=</span> <span>GPJTGPT2Config</span>
+
+
+    <span>def</span><span> </span><span>__init__</span><span>(</span><span>self</span><span>,</span> <span>config</span><span>):</span>
+        <span>super</span><span>()</span><span>.</span><span>__init__</span><span>(</span><span>config</span><span>)</span>
+        <span>self</span><span>.</span><span>model</span> <span>=</span> <span>GPTModel</span><span>(</span><span>config</span><span>.</span><span>cfg</span><span>)</span>
+        <span>self</span><span>.</span><span>post_init</span><span>()</span>
+
+
+    <span>def</span><span> </span><span>forward</span><span>(</span><span>self</span><span>,</span> <span>input_ids</span><span>,</span> <span>**</span><span>kwargs</span><span>):</span>
+        <span>return</span> <span>self</span><span>.</span><span>model</span><span>.</span><span>forward</span><span>(</span><span>input_ids</span><span>)</span>
+</code></pre>
+</div>
+
+<p>Just as with the config, there's <code>PreTrainedModel</code> for us to inherit from <sup><a href="#fn-2" target="_blank" rel="noopener noreferrer">2</a></sup>.
+We're defining the thing that <code>AutoModel.from_pretrained</code> will return when it's all
+set up properly.</p>
+
+<p>We tell
+transformers that this should be configured with the <code>GPJTGPT2Config</code> that we just
+defined using that <code>config_class</code> class variable, but apart from that, we're basically
+just wrapping the <code>GPTModel</code> that is defined in <code>gpt.py</code> <sup><a href="#fn-3" target="_blank" rel="noopener noreferrer">3</a></sup>.  That is imported using
+a relative import using <code>from .gpt</code> rather than <code>from gpt</code>:</p>
+
+<div>
+<pre><span></span><code><span>from</span><span> </span><span>.gpt</span><span> </span><span>import</span> <span>GPTModel</span>
+</code></pre>
+</div>
+
+<p>This is important -- it has to be that way, as we'll discover later.  But for now: that's why
+we had to create the <code>hf_wrapper</code> subdirectory and the symlink to <code>gpt.py</code> -- a relative
+import in Python can only happen if you're not in the "root" module, so we would not
+have been able to do that kind of import if the files were at the top of our repo.</p>
+
+<p>Now, let's take a look at the <code>__init__</code>.  We're calling the superclass <code>__init__</code>,
+as you'd expect, then we're creating an underlying wrapped <code>GPTModel</code>.  We're
+expecting a <code>GPJTGPT2Config</code> parameter, which has the underlying model's configuration
+stashed away in its <code>cfg</code> field by its own <code>__init__</code>, so we can pass that down
+to the wrapped model.</p>
+
+<p>Finally, we call this special <code>self.post_init()</code> function; that does some extra configuration,
+and prior to Transformers 5.0.0 you could get away without calling it, but now it's
+100% necessary, as otherwise it will not initialise its internal fields relating to
+whether or not the model uses weight tying.</p>
+
+<p>Now let's take a look at how we actually use those to upload the model.  That's
+back at the root of the repo, in the file <a href="https://github.com/gpjt/hf-tutorial-post/blob/automodel/upload_model.py" target="_blank" rel="noopener noreferrer"><code>upload_model.py</code></a>.
+Before looking at the code, try running it:</p>
+
+<div>
+<pre><span></span><code>giles@perry:~/Dev/hf-tutorial-post<span> </span>$<span> </span>uv<span> </span>run<span> </span>upload_model.py<span> </span>--help
+Usage:<span> </span>upload_model.py<span> </span><span>[</span>OPTIONS<span>]</span><span> </span>MODEL_CONFIG_PATH<span> </span>MODEL_SAFETENSORS_PATH
+<span>                       </span>HF_MODEL_NAME
+
+Options:
+<span>  </span>--help<span>  </span>Show<span> </span>this<span> </span>message<span> </span>and<span> </span>exit.
+</code></pre>
+</div>
+
+<p>So, it takes a model config path -- that <code>model.json</code> file we have to set the number
+of layers and so on -- and the path of a safetensors file containing the weights.  It
+will then try to upload our HF-friendly wrapped version of the model -- code, weights
+and config -- to the Hub.</p>
+
+<p>Let's see how it works.</p>
+
+<div>
+<pre><span></span><code><span>import</span><span> </span><span>json</span>
+<span>from</span><span> </span><span>pathlib</span><span> </span><span>import</span> <span>Path</span>
+
+<span>import</span><span> </span><span>click</span>
+
+<span>from</span><span> </span><span>safetensors.torch</span><span> </span><span>import</span> <span>load_file</span>
+
+<span>from</span><span> </span><span>hf_wrapper.configuration_gpjtgpt2</span><span> </span><span>import</span> <span>GPJTGPT2Config</span>
+<span>from</span><span> </span><span>hf_wrapper.modeling_gpjtgpt2</span><span> </span><span>import</span> <span>GPJTGPT2Model</span>
+</code></pre>
+</div>
+
+<p>We do some boilerplate imports, and then import our config and our model classes
+-- importantly, via the <code>hf_wrapper</code> submodule.  Don't worry, we're getting close
+to the explanation of why that is :-)</p>
+
+<p>Next:</p>
+
+<div>
+<pre><span></span><code><span>@click</span><span>.</span><span>command</span><span>()</span>
+<span>@click</span><span>.</span><span>argument</span><span>(</span><span>"model_config_path"</span><span>)</span>
+<span>@click</span><span>.</span><span>argument</span><span>(</span><span>"model_safetensors_path"</span><span>)</span>
+<span>@click</span><span>.</span><span>argument</span><span>(</span><span>"hf_model_name"</span><span>)</span>
+<span>def</span><span> </span><span>main</span><span>(</span><span>model_config_path</span><span>,</span> <span>model_safetensors_path</span><span>,</span> <span>hf_model_name</span><span>):</span>
+    <span>if</span> <span>not</span> <span>Path</span><span>(</span><span>model_config_path</span><span>)</span><span>.</span><span>is_file</span><span>():</span>
+        <span>raise</span> <span>Exception</span><span>(</span><span>f</span><span>"Could not find model config at </span><span>{</span><span>model_config_path</span><span>}</span><span>"</span><span>)</span>
+    <span>with</span> <span>open</span><span>(</span><span>model_config_path</span><span>,</span> <span>"r"</span><span>)</span> <span>as</span> <span>f</span><span>:</span>
+        <span>model_config</span> <span>=</span> <span>json</span><span>.</span><span>load</span><span>(</span><span>f</span><span>)</span>
+
+    <span>if</span> <span>not</span> <span>Path</span><span>(</span><span>model_safetensors_path</span><span>)</span><span>.</span><span>is_file</span><span>():</span>
+        <span>raise</span> <span>Exception</span><span>(</span><span>f</span><span>"Could not find model safetensors at </span><span>{</span><span>model_safetensors_path</span><span>}</span><span>"</span><span>)</span>
+</code></pre>
+</div>
+
+<p>A bit of argument-validating boilerplate and the loading of the model config file into
+a dictionary so that we can use it, and now we get to the meat of it:</p>
+
+<div>
+<pre><span></span><code>    <span>GPJTGPT2Config</span><span>.</span><span>register_for_auto_class</span><span>()</span>
+</code></pre>
+</div>
+
+<p>What this is doing is telling our <code>GPJTGPT2Config</code> to register itself so that it is a thing that
+will be returned by the <code>AutoConfig.from_pretrained</code> call.  This only applies locally for
+now, but by setting things up locally we're telling the library what it will need to
+push up to the hub later.  Next:</p>
+
+<div>
+<pre><span></span><code>    <span>GPJTGPT2Model</span><span>.</span><span>register_for_auto_class</span><span>(</span><span>"AutoModel"</span><span>)</span>
+</code></pre>
+</div>
+
+<p>We're doing exactly the same for our model, saying that it should be returned from
+<code>AutoModel.from_pretrained</code>.  We need to be explicit about which of the various
+model classes we want to register it for -- the config class can only be loaded
+from <code>AutoConfig.from_pretrained</code>, whereas the model might be something we'd want to
+have returned from <code>AutoModelForCausalLM.from_pretrained</code>, or if it was a different
+kind of model, perhaps <code>AutoModelForImageTextToText.from_pretrained</code>, or something
+else entirely.</p>
+
+<p>What we want to do here is expose the basic model using <code>AutoModel</code>, so that's what we do.</p>
+
+<p>Next:</p>
+
+<div>
+<pre><span></span><code>    <span>config</span> <span>=</span> <span>GPJTGPT2Config</span><span>(</span><span>model_config</span><span>)</span>
+</code></pre>
+</div>
+
+<p>We're creating our config class, passing in that model configuration that we loaded
+from the <code>model.json</code> file earlier, so that it will stash it on its <code>cfg</code> field, then:</p>
+
+<div>
+<pre><span></span><code>    <span>model</span> <span>=</span> <span>GPJTGPT2Model</span><span>(</span><span>config</span><span>)</span>
+</code></pre>
+</div>
+
+<p>...we create our model wrapper using that config.  We now have an instance of our
+custom model, but with uninitialised weights.  So:</p>
+
+<div>
+<pre><span></span><code>    <span>model</span><span>.</span><span>model</span><span>.</span><span>load_state_dict</span><span>(</span><span>load_file</span><span>(</span><span>model_safetensors_path</span><span>))</span>
+</code></pre>
+</div>
+
+<p>...we load in the weights that were specified on the command line.  Note that we have
+to load them into the wrapped model.  The <code>model.safetensors</code> file we have is specifically
+for the custom <code>GPTModel</code> that we want to publish, not for the wrapped <code>GPJTGPT2Model</code>
+one.  But that's easily done by using the <code>model.model</code> field.</p>
+
+<p>Finally, the magic:</p>
+
+<div>
+<pre><span></span><code>    <span>model</span><span>.</span><span>push_to_hub</span><span>(</span><span>hf_model_name</span><span>)</span>
+</code></pre>
+</div>
+
+<p>This is where the Transformers library really shows its strength.  It will push the
+model, which means it needs to push the weights that we loaded into its wrapped <code>GPTModel</code>.
+Then it will look at the class <code>GPJTGPT2Model</code> that defines the model, and will push the <code>modeling_gpjtgpt2.py</code>
+file that has the source for that class.  It will see that it also has a dependency on
+<code>GPJTGPT2Config</code>, and will push that and its source <code>configuration_gpjtgpt2.py</code>.</p>
+
+<p>It will also spot the setup we did with our two calls to
+the different <code>register_for_auto_class</code> methods above to register them for the
+<code>AutoConfig.from_pretrained</code> and <code>AutoModel.from_pretrained</code> and push that too.</p>
+
+<p>And when it's pushing the source, it will try to push the source of any dependencies too.
+This is where we get the final explanation of why we had to put it in a submodule, and
+have a symlink to <code>gpt.py</code>.  The <code>push_to_hub</code> code doesn't want to upload loads of
+extra stuff -- for example, any libraries you're using.  It wants to be sure that it's
+only uploading your model code.</p>
+
+<p>The logic it uses for deciding whether or not something
+is part of the uploadable set of files is "was it imported <em>relatively</em> from the <code>modeling_</code> or the
+<code>configuration_</code> file" -- that is, with
+a dot at the start of the module name,
+<code>from .something import SomethingElse</code> rather than <code>from something import SomethingElse</code>.</p>
+
+<p>In order to do that kind of import, we needed to create a submodule.  And in order to access
+our <code>gpt.py</code> file we need a copy of it inside the submodule.  I didn't want to have two
+actual copies of the file -- too easy to let them get out of sync -- so a symlink sorts that out.</p>
+
+<p>Hopefully that clears up any mystery about this slightly-strange file layout.</p>
+
+<p>Let's give it a go and see what it creates!  In order to upload a model to the HF Hub, you'll need an
+account, of course, so create one if you don't have one.  Next, create an
+access token with write access -- the option is in the "Access Tokens" section of the "Settings".</p>
+
+<p>Then you need to authorize your local machine to access the hub using that token;
+if you're using <code>uv</code>, then you can just run:</p>
+
+<div>
+<pre><span></span><code>uvx<span> </span>hf<span> </span>auth<span> </span>login
+</code></pre>
+</div>
+
+<p>If you're not, you'll need to <a href="https://huggingface.co/docs/huggingface_hub/en/guides/cli" target="_blank" rel="noopener noreferrer">download and install the HF CLI</a> and
+then run</p>
+
+<div>
+<pre><span></span><code>hf<span> </span>auth<span> </span>login
+</code></pre>
+</div>
+
+<p>That will store stuff on your machine so that you don't need to log in again in the
+future -- if you're concerned about security, there's an <code>hf auth logout</code> you can
+call, and you can completely trash the session by deleting the associated token from
+the HF website.</p>
+
+<p>Now, let's run our upload script!</p>
+
+<div>
+<pre><span></span><code><span>giles</span><span>@perry</span><span>:</span><span>~/</span><span>Dev</span><span>/</span><span>hf</span><span>-</span><span>tutorial</span><span>-</span><span>post</span> <span>$</span> <span>uv</span> <span>run</span> <span>upload_model</span><span>.</span><span>py</span> <span>model</span><span>.</span><span>json</span> <span>model</span><span>.</span><span>safetensors</span> <span>gpjt</span><span>/</span><span>test1</span>
+<span>Processing</span> <span>Files</span> <span>(</span><span>1</span> <span>/</span> <span>1</span><span>)</span>      <span>:</span> <span>100</span><span>%|</span><span>████████████████████████████████████████████████████████████████████████████████████████████████████████</span><span>|</span>  <span>702</span><span>MB</span> <span>/</span>  <span>702</span><span>MB</span><span>,</span>  <span>270</span><span>MB</span><span>/</span><span>s</span>
+<span>New</span> <span>Data</span> <span>Upload</span>               <span>:</span> <span>|</span>                                                                                                            <span>|</span>  <span>0.00</span><span>B</span> <span>/</span>  <span>0.00</span><span>B</span><span>,</span>  <span>0.00</span><span>B</span><span>/</span><span>s</span>
+  <span>...</span><span>_ehrlvi</span><span>/</span><span>model</span><span>.</span><span>safetensors</span><span>:</span> <span>100</span><span>%|</span><span>████████████████████████████████████████████████████████████████████████████████████████████████████████</span><span>|</span>  <span>702</span><span>MB</span> <span>/</span>  <span>702</span><span>MB</span>
+</code></pre>
+</div>
+
+<p>You'll need to change the target HF model name at the end of the command to one with
+your username before the slash, of course.</p>
+
+<p>Once you've done that, take a look at the model on Hugging Face.  You'll see a rather
+ugly default model card, but let's ignore that for now and take a look at the "Files and
+versions" tab.</p>
+
+<p>You should see the following files:</p>
+
+<ul>
+<li><code>.gitattributes</code> -- a file telling git (which is used to manage the models
+on the hub) which file types should use the Large File Support plugin.  Big binary
+files don't play nicely with git, so it uses LFS for them.  We don't need to pay
+much more attention to that for our purposes.</li>
+<li><code>README.md</code> -- that ugly model card.  Updating that is useful, but out of scope for
+this post.</li>
+<li><code>config.json</code>.  We'll come back to that one in a moment.</li>
+<li><code>configuration_gpjtgpt2.py</code> -- a copy of the file we created locally with our <code>GPJTGPT2Config</code>
+class.</li>
+<li><code>gpt.py</code> -- again, the same file as the local one, uploaded due to that clever
+dependency-finding stuff.</li>
+<li><code>model.safetensors</code> -- our weights.  There should be an icon next to it to say that it's
+stored using the LFS system.</li>
+<li><code>modeling_gpjtgpt2.py</code> -- once more, a file that was just copied up from our local filesystem.</li>
+</ul>
+
+<p>Now, let's look into that <code>config.json</code>.  It will look like this:</p>
+
+<div>
+<pre><span></span><code><span>{</span>
+<span>  </span><span>"architectures"</span><span>:</span><span> </span><span>[</span>
+<span>    </span><span>"GPJTGPT2Model"</span>
+<span>  </span><span>],</span>
+<span>  </span><span>"auto_map"</span><span>:</span><span> </span><span>{</span>
+<span>    </span><span>"AutoConfig"</span><span>:</span><span> </span><span>"configuration_gpjtgpt2.GPJTGPT2Config"</span><span>,</span>
+<span>    </span><span>"AutoModel"</span><span>:</span><span> </span><span>"modeling_gpjtgpt2.GPJTGPT2Model"</span>
+<span>  </span><span>},</span>
+<span>  </span><span>"cfg"</span><span>:</span><span> </span><span>{</span>
+<span>    </span><span>"context_length"</span><span>:</span><span> </span><span>1024</span><span>,</span>
+<span>    </span><span>"drop_rate"</span><span>:</span><span> </span><span>0.1</span><span>,</span>
+<span>    </span><span>"emb_dim"</span><span>:</span><span> </span><span>768</span><span>,</span>
+<span>    </span><span>"n_heads"</span><span>:</span><span> </span><span>12</span><span>,</span>
+<span>    </span><span>"n_layers"</span><span>:</span><span> </span><span>12</span><span>,</span>
+<span>    </span><span>"qkv_bias"</span><span>:</span><span> </span><span>false</span><span>,</span>
+<span>    </span><span>"vocab_size"</span><span>:</span><span> </span><span>50257</span>
+<span>  </span><span>},</span>
+<span>  </span><span>"dtype"</span><span>:</span><span> </span><span>"float32"</span><span>,</span>
+<span>  </span><span>"model_type"</span><span>:</span><span> </span><span>"gpjtgpt2"</span><span>,</span>
+<span>  </span><span>"transformers_version"</span><span>:</span><span> </span><span>"4.57.6"</span>
+<span>}</span>
+</code></pre>
+</div>
+
+<p>The <code>architectures</code> bit is just showing the name of the class that was
+used in the <code>push_to_hub</code> call.  This will become useful later when we get onto
+the pipeline code, but doesn't matter right now -- the next one is more important.</p>
+
+<p>The <code>auto_map</code> is essentially saying, if someone does
+<code>AutoConfig.from_pretrained</code> on this model, then use the <code>configuration_gpjtgpt2.GPJTGPT2Config</code>
+class from here, and likewise for <code>AutoModel.from_pretrained</code> should use
+<code>modeling_gpjtgpt2.GPJTGPT2Model</code>.  It's what that <code>register_for_auto_class</code> stuff
+we did in the upload script set up.</p>
+
+<p>The <code>cfg</code> is just the parameters that we're threading down to our underlying custom
+<code>GPTModel</code> class; nothing exciting there.</p>
+
+<p>The <code>dtype</code> is, of course, the floating point type we're using for the model, and the
+<code>model_type</code> is our unique name for this particular architecture.  And the
+<code>transformers_version</code> is the version of the library used to upload it, presumably
+used to determine compatibility when downloading models with earlier or later versions.</p>
+
+<p>So, it looks like there's enough information across those files on the hub to instantiate and use our model!
+Let's give that a go.</p>
+
+<p>The best way to check it out thoroughly is to create a completely fresh directory,
+away from our existing ones, and a fresh environment:</p>
+
+<div>
+<pre><span></span><code>giles@perry:~/Dev/hf-tutorial-post<span> </span>$<span> </span>mkdir<span> </span>/tmp/test1
+giles@perry:~/Dev/hf-tutorial-post<span> </span>$<span> </span><span>cd</span><span> </span>/tmp/test1
+giles@perry:/tmp/test1<span> </span>$<span> </span>uv<span> </span>init
+Initialized<span> </span>project<span> </span><span>``</span>test1<span>``</span>
+giles@perry:/tmp/test1<span> </span>$<span> </span>uv<span> </span>add<span> </span>transformers<span> </span>torch<span> </span>accelerate<span> </span>tiktoken<span> </span>ipython
+Using<span> </span>CPython<span> </span><span>3</span>.14.2<span> </span>interpreter<span> </span>at:<span> </span>/usr/bin/python3.14
+Creating<span> </span>virtual<span> </span>environment<span> </span>at:<span> </span>.venv
+Resolved<span> </span><span>64</span><span> </span>packages<span> </span><span>in</span><span> </span>109ms
+...junk<span> </span>skipped...
+<span> </span>+<span> </span>typing-extensions<span>==</span><span>4</span>.15.0
+<span> </span>+<span> </span><span>urllib3</span><span>==</span><span>2</span>.6.3
+<span> </span>+<span> </span><span>wcwidth</span><span>==</span><span>0</span>.3.1
+giles@perry:/tmp/test1<span> </span>$<span> </span>uv<span> </span>run<span> </span>ipython
+</code></pre>
+</div>
+
+<p>and then to try to use the model:</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>1</span><span>]:</span> <span>from</span><span> </span><span>transformers</span><span> </span><span>import</span> <span>AutoModel</span>
+
+<span>In</span> <span>[</span><span>2</span><span>]:</span> <span>model</span> <span>=</span> <span>AutoModel</span><span>.</span><span>from_pretrained</span><span>(</span><span>"gpjt/test1"</span><span>,</span> <span>trust_remote_code</span><span>=</span><span>True</span><span>)</span>
+<span>config</span><span>.</span><span>json</span><span>:</span> <span>100</span><span>%|</span><span>███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████</span><span>|</span> <span>438</span><span>/</span><span>438</span> <span>[</span><span>00</span><span>:</span><span>00</span><span>&lt;</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>1.52</span><span>MB</span><span>/</span><span>s</span><span>]</span>
+<span>configuration_gpjtgpt2</span><span>.</span><span>py</span><span>:</span> <span>100</span><span>%|</span><span>██████████████████████████████████████████████████████████████████████████████████████████████████████████</span><span>|</span> <span>217</span><span>/</span><span>217</span> <span>[</span><span>00</span><span>:</span><span>00</span><span>&lt;</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>889</span><span>kB</span><span>/</span><span>s</span><span>]</span>
+<span>A</span> <span>new</span> <span>version</span> <span>of</span> <span>the</span> <span>following</span> <span>files</span> <span>was</span> <span>downloaded</span> <span>from</span><span> </span><span>https</span><span>:</span><span>//</span><span>huggingface</span><span>.</span><span>co</span><span>/</span><span>gpjt</span><span>/</span><span>test1</span><span>:</span>
+<span>-</span> <span>configuration_gpjtgpt2</span><span>.</span><span>py</span>
+<span>.</span> <span>Make</span> <span>sure</span> <span>to</span> <span>double</span><span>-</span><span>check</span> <span>they</span> <span>do</span> <span>not</span> <span>contain</span> <span>any</span> <span>added</span> <span>malicious</span> <span>code</span><span>.</span> <span>To</span> <span>avoid</span> <span>downloading</span> <span>new</span> <span>versions</span> <span>of</span> <span>the</span> <span>code</span> <span>file</span><span>,</span> <span>you</span> <span>can</span> <span>pin</span> <span>a</span> <span>revision</span><span>.</span>
+<span>modeling_gpjtgpt2</span><span>.</span><span>py</span><span>:</span> <span>100</span><span>%|</span><span>██████████████████████████████████████████████████████████████████████████████████████████████████████████████</span><span>|</span> <span>394</span><span>/</span><span>394</span> <span>[</span><span>00</span><span>:</span><span>00</span><span>&lt;</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>1.99</span><span>MB</span><span>/</span><span>s</span><span>]</span>
+<span>gpt</span><span>.</span><span>py</span><span>:</span> <span>5.07</span><span>kB</span> <span>[</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>12.4</span><span>MB</span><span>/</span><span>s</span><span>]</span>
+<span>A</span> <span>new</span> <span>version</span> <span>of</span> <span>the</span> <span>following</span> <span>files</span> <span>was</span> <span>downloaded</span> <span>from</span><span> </span><span>https</span><span>:</span><span>//</span><span>huggingface</span><span>.</span><span>co</span><span>/</span><span>gpjt</span><span>/</span><span>test1</span><span>:</span>
+<span>-</span> <span>gpt</span><span>.</span><span>py</span>
+<span>.</span> <span>Make</span> <span>sure</span> <span>to</span> <span>double</span><span>-</span><span>check</span> <span>they</span> <span>do</span> <span>not</span> <span>contain</span> <span>any</span> <span>added</span> <span>malicious</span> <span>code</span><span>.</span> <span>To</span> <span>avoid</span> <span>downloading</span> <span>new</span> <span>versions</span> <span>of</span> <span>the</span> <span>code</span> <span>file</span><span>,</span> <span>you</span> <span>can</span> <span>pin</span> <span>a</span> <span>revision</span><span>.</span>
+<span>A</span> <span>new</span> <span>version</span> <span>of</span> <span>the</span> <span>following</span> <span>files</span> <span>was</span> <span>downloaded</span> <span>from</span><span> </span><span>https</span><span>:</span><span>//</span><span>huggingface</span><span>.</span><span>co</span><span>/</span><span>gpjt</span><span>/</span><span>test1</span><span>:</span>
+<span>-</span> <span>modeling_gpjtgpt2</span><span>.</span><span>py</span>
+<span>-</span> <span>gpt</span><span>.</span><span>py</span>
+<span>.</span> <span>Make</span> <span>sure</span> <span>to</span> <span>double</span><span>-</span><span>check</span> <span>they</span> <span>do</span> <span>not</span> <span>contain</span> <span>any</span> <span>added</span> <span>malicious</span> <span>code</span><span>.</span> <span>To</span> <span>avoid</span> <span>downloading</span> <span>new</span> <span>versions</span> <span>of</span> <span>the</span> <span>code</span> <span>file</span><span>,</span> <span>you</span> <span>can</span> <span>pin</span> <span>a</span> <span>revision</span><span>.</span>
+<span>model</span><span>.</span><span>safetensors</span><span>:</span> <span>100</span><span>%|</span><span>███████████████████████████████████████████████████████████████████████████████████████████████████████████████</span><span>|</span> <span>702</span><span>M</span><span>/</span><span>702</span><span>M</span> <span>[</span><span>00</span><span>:</span><span>09</span><span>&lt;</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>71.6</span><span>MB</span><span>/</span><span>s</span><span>]</span>
+
+<span>In</span> <span>[</span><span>3</span><span>]:</span> <span>type</span><span>(</span><span>model</span><span>)</span>
+<span>Out</span><span>[</span><span>3</span><span>]:</span> <span>transformers_modules</span><span>.</span><span>gpjt</span><span>.</span><span>test1</span><span>.</span><span>b936caf64b6776917478339cbcf9f95bdca7dda9</span><span>.</span><span>modeling_gpjtgpt2</span><span>.</span><span>GPJTGPT2Model</span>
+</code></pre>
+</div>
+
+<p>So we can see where Transformers has put the downloaded code, inside a submodule
+that appears to have a GUID-like name.  Now let's try to run some inference on it:</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>4</span><span>]:</span> <span>import</span><span> </span><span>math</span>
+   <span>...</span><span>:</span> <span>import</span><span> </span><span>tiktoken</span>
+   <span>...</span><span>:</span> <span>import</span><span> </span><span>torch</span>
+   <span>...</span><span>:</span>
+   <span>...</span><span>:</span> <span>tokenizer</span> <span>=</span> <span>tiktoken</span><span>.</span><span>get_encoding</span><span>(</span><span>"gpt2"</span><span>)</span>
+   <span>...</span><span>:</span>
+   <span>...</span><span>:</span> <span>input_text</span> <span>=</span> <span>"Every effort moves you"</span>
+   <span>...</span><span>:</span> <span>tokens</span> <span>=</span> <span>tokenizer</span><span>.</span><span>encode</span><span>(</span><span>input_text</span><span>)</span>
+   <span>...</span><span>:</span>
+   <span>...</span><span>:</span> <span>num_tokens</span> <span>=</span> <span>20</span>
+   <span>...</span><span>:</span> <span>temperature</span> <span>=</span> <span>1.4</span>
+   <span>...</span><span>:</span> <span>top_k</span> <span>=</span> <span>25</span>
+   <span>...</span><span>:</span> <span>with</span> <span>torch</span><span>.</span><span>no_grad</span><span>():</span>
+   <span>...</span><span>:</span>     <span>for</span> <span>ix</span> <span>in</span> <span>range</span><span>(</span><span>num_tokens</span><span>):</span>
+   <span>...</span><span>:</span>         <span>input_tensor</span> <span>=</span> <span>torch</span><span>.</span><span>tensor</span><span>(</span>
+   <span>...</span><span>:</span>             <span>tokens</span><span>,</span> <span>dtype</span><span>=</span><span>torch</span><span>.</span><span>long</span>
+   <span>...</span><span>:</span>         <span>)</span><span>.</span><span>unsqueeze</span><span>(</span><span>0</span><span>)</span>
+   <span>...</span><span>:</span>         <span>output_tensor</span> <span>=</span> <span>model</span><span>(</span><span>input_tensor</span><span>)</span>
+   <span>...</span><span>:</span>         <span>logits</span> <span>=</span> <span>output_tensor</span><span>[:,</span> <span>-</span><span>1</span><span>,</span> <span>:]</span>
+   <span>...</span><span>:</span>         <span>top_logits</span><span>,</span> <span>_</span> <span>=</span> <span>torch</span><span>.</span><span>topk</span><span>(</span><span>logits</span><span>,</span> <span>top_k</span><span>)</span>
+   <span>...</span><span>:</span>         <span>min_val</span> <span>=</span> <span>top_logits</span><span>[:,</span> <span>-</span><span>1</span><span>]</span>
+   <span>...</span><span>:</span>         <span>logits</span> <span>=</span> <span>torch</span><span>.</span><span>where</span><span>(</span>
+   <span>...</span><span>:</span>             <span>logits</span> <span>&lt;</span> <span>min_val</span><span>,</span>
+   <span>...</span><span>:</span>             <span>torch</span><span>.</span><span>tensor</span><span>(</span><span>-</span><span>math</span><span>.</span><span>inf</span><span>)</span><span>.</span><span>to</span><span>(</span><span>logits</span><span>.</span><span>device</span><span>),</span>
+   <span>...</span><span>:</span>             <span>logits</span>
+   <span>...</span><span>:</span>         <span>)</span>
+   <span>...</span><span>:</span>         <span>logits</span> <span>/=</span> <span>temperature</span>
+   <span>...</span><span>:</span>         <span>probs</span> <span>=</span> <span>torch</span><span>.</span><span>softmax</span><span>(</span><span>logits</span><span>,</span> <span>dim</span><span>=-</span><span>1</span><span>)</span>
+   <span>...</span><span>:</span>         <span>next_token</span> <span>=</span> <span>torch</span><span>.</span><span>multinomial</span><span>(</span><span>probs</span><span>,</span> <span>num_samples</span><span>=</span><span>1</span><span>)</span><span>.</span><span>item</span><span>()</span>
+   <span>...</span><span>:</span>         <span>tokens</span><span>.</span><span>append</span><span>(</span><span>next_token</span><span>)</span>
+   <span>...</span><span>:</span>
+   <span>...</span><span>:</span> <span>print</span><span>(</span><span>tokenizer</span><span>.</span><span>decode</span><span>(</span><span>tokens</span><span>))</span>
+<span>Every</span> <span>effort</span> <span>moves</span> <span>you</span> <span>to</span> <span>take</span> <span>on</span> <span>what</span><span>’</span><span>s</span> <span>coming</span><span>—</span><span>from</span><span> </span><span>developing</span> <span>you</span> <span>the</span> <span>skills</span> <span>you</span> <span>need</span> <span>to</span> <span>build</span> <span>an</span> <span>online</span>
+</code></pre>
+</div>
+
+<p>So there we go!  We've gone from a situation where we would have to publish the
+code and the safetensors in some way and tell people how to combine them, to a
+neatly-packaged model that we can download, fully set up, with just one line:</p>
+
+<div>
+<pre><span></span><code><span>model</span> <span>=</span> <span>AutoModel</span><span>.</span><span>from_pretrained</span><span>(</span><span>"gpjt/test1"</span><span>,</span> <span>trust_remote_code</span><span>=</span><span>True</span><span>)</span>
+</code></pre>
+</div>
+
+<p>But that inference loop is still a pig; if you've been working with LLM code then it's
+not too bad -- a basic bit of autoregression with top-k and temperature -- but it's
+definitely holding us back.  What next?</p>
+
+<h3><code>AutoTokenizer.from_pretrained</code></h3>
+
+<p>One obvious issue with the code above is that we still have that dependency on
+<code>tiktoken</code>.  If we're going to run inference using the simple HF <code>pipeline</code> object,
+it's going to need to know how to encode the input and decode the outputs.  And
+if you have your own tokeniser (which, if you have a truly custom model, you probably
+do) then you won't have the luxury of being able to just install it into the target
+runtime env -- you would still need to copy file around.</p>
+
+<p>Now, as I said at the start, I'm not going to go into this in as much detail, because
+my use case was really simple -- although I was using <code>tiktoken</code>,
+the specific tokeniser I was using from that library was the standard GPT-2 one.
+Transformers has its own version of that installed. So here I'll explain how you do things for models that use a built-in
+Transformers tokeniser.  After that I'll give some pointers that you might find useful
+if you're using something more custom.</p>
+
+<p>The good news if you're using a "standard" tokeniser that is already built into
+the Transformers library is that you can tell your model to use it.  The downside
+is that you can't do it by using the <code>register_for_auto_class</code> trick that we did
+above -- that is, you can't just import it:</p>
+
+<div>
+<pre><span></span><code><span>from</span><span> </span><span>transformers</span><span> </span><span>import</span> <span>GPT2Tokenizer</span>
+</code></pre>
+</div>
+
+<p>...and then add this below our previous calls to register the model and config
+as auto classes:</p>
+
+<div>
+<pre><span></span><code><span>GPT2Tokenizer</span><span>.</span><span>register_for_auto_class</span><span>(</span><span>"AutoTokenizer"</span><span>)</span>
+</code></pre>
+</div>
+
+<p>That will essentially do nothing.</p>
+
+<p>However, tokenisers do have their own <code>push_to_hub</code> method, and the target that you
+specify can be your model.  So, for my own models, I'm using this:</p>
+
+<div>
+<pre><span></span><code>    <span>tokenizer</span> <span>=</span> <span>AutoTokenizer</span><span>.</span><span>from_pretrained</span><span>(</span><span>"gpt2"</span><span>,</span> <span>use_fast</span><span>=</span><span>True</span><span>)</span>
+    <span>tokenizer</span><span>.</span><span>pad_token</span> <span>=</span> <span>tokenizer</span><span>.</span><span>eos_token</span>
+    <span>tokenizer</span><span>.</span><span>push_to_hub</span><span>(</span><span>hf_model_name</span><span>)</span>
+</code></pre>
+</div>
+
+<p>That is, we get the tokeniser for the built-in GPT-2 implementation (specifically
+the "fast" one, written in Rust), set the padding token to the end-of-sequence one
+for tidiness (not sure why that's not the case by default), and then push it to the model.</p>
+
+<p>If you're following along with the code, you can check out the <code>autotokenizer-gpt-2</code>
+tag to see that.  The code goes immediately after we've pushed the model itself to
+the hub.</p>
+
+<p>So, run the upload again:</p>
+
+<div>
+<pre><span></span><code>giles@perry:~/Dev/hf-tutorial-post<span> </span><span>((</span>HEAD<span> </span>detached<span> </span>at<span> </span>autotokenizer-gpt-2<span>))</span>$<span> </span>uv<span> </span>run<span> </span>upload_model.py<span> </span>model.json<span> </span>model.safetensors<span> </span>gpjt/test2
+Processing<span> </span>Files<span> </span><span>(</span><span>1</span><span> </span>/<span> </span><span>1</span><span>)</span><span>      </span>:<span> </span><span>100</span>%<span>|</span>████████████████████████████████████████████████████████████████████████████████████████████████████████<span>|</span><span>  </span>702MB<span> </span>/<span>  </span>702MB,<span>  </span>339MB/s
+New<span> </span>Data<span> </span>Upload<span>               </span>:<span> </span><span>|</span><span>                                                                                                            </span><span>|</span><span>  </span><span>0</span>.00B<span> </span>/<span>  </span><span>0</span>.00B,<span>  </span><span>0</span>.00B/s
+<span>  </span>...w05qhqd/model.safetensors:<span> </span><span>100</span>%<span>|</span>████████████████████████████████████████████████████████████████████████████████████████████████████████<span>|</span><span>  </span>702MB<span> </span>/<span>  </span>702MB
+</code></pre>
+</div>
+
+<p>And now we can do a completely fresh env without tiktoken:</p>
+
+<pre><code>giles@perry:~/Dev/hf-tutorial-post $ mkdir /tmp/test2
+giles@perry:~/Dev/hf-tutorial-post $ cd /tmp/test2
+giles@perry:/tmp/test2 $ uv init
+Initialized project &lt;!--CODE_BLOCK_8744--&gt;
+giles@perry:/tmp/test2 $ uv add transformers torch accelerate ipython
+Using CPython 3.14.2 interpreter at: /usr/bin/python3.14
+Creating virtual environment at: .venv
+Resolved 63 packages in 113ms
+░░░░░░░░░░░░░░░░░░░░ [0/61] Installing wheels...                                                                                                                          warning: Failed to hardlink files; falling back to full copy. This may lead to degraded performance.
+         If the cache and target directories are on different filesystems, hardlinking may not be supported.
+         If this is intentional, set &lt;!--CODE_BLOCK_8745--&gt; or use &lt;!--CODE_BLOCK_8746--&gt; to suppress this warning.
+Installed 61 packages in 585ms
+ + accelerate==1.12.0
+...junk skipped...
+ + wcwidth==0.3.1
+giles@perry:/tmp/test2 $ uv run ipython
+</code></pre>
+
+<p>In there, we can see that <code>AutoTokenizer.from_pretrained</code> works:</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>1</span><span>]:</span> <span>from</span><span> </span><span>transformers</span><span> </span><span>import</span> <span>AutoTokenizer</span>
+
+<span>In</span> <span>[</span><span>2</span><span>]:</span> <span>tokenizer</span> <span>=</span> <span>AutoTokenizer</span><span>.</span><span>from_pretrained</span><span>(</span><span>"gpjt/test2"</span><span>,</span> <span>trust_remote_code</span><span>=</span><span>True</span><span>)</span>
+<span>configuration_gpjtgpt2</span><span>.</span><span>py</span><span>:</span> <span>100</span><span>%|</span><span>██████████████████████████████████████████████████████████████████████████████████████████████████████████</span><span>|</span> <span>217</span><span>/</span><span>217</span> <span>[</span><span>00</span><span>:</span><span>00</span><span>&lt;</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>591</span><span>kB</span><span>/</span><span>s</span><span>]</span>
+<span>A</span> <span>new</span> <span>version</span> <span>of</span> <span>the</span> <span>following</span> <span>files</span> <span>was</span> <span>downloaded</span> <span>from</span><span> </span><span>https</span><span>:</span><span>//</span><span>huggingface</span><span>.</span><span>co</span><span>/</span><span>gpjt</span><span>/</span><span>test2</span><span>:</span>
+<span>-</span> <span>configuration_gpjtgpt2</span><span>.</span><span>py</span>
+<span>.</span> <span>Make</span> <span>sure</span> <span>to</span> <span>double</span><span>-</span><span>check</span> <span>they</span> <span>do</span> <span>not</span> <span>contain</span> <span>any</span> <span>added</span> <span>malicious</span> <span>code</span><span>.</span> <span>To</span> <span>avoid</span> <span>downloading</span> <span>new</span> <span>versions</span> <span>of</span> <span>the</span> <span>code</span> <span>file</span><span>,</span> <span>you</span> <span>can</span> <span>pin</span> <span>a</span> <span>revision</span><span>.</span>
+<span>tokenizer_config</span><span>.</span><span>json</span><span>:</span> <span>100</span><span>%|</span><span>█████████████████████████████████████████████████████████████████████████████████████████████████████████████</span><span>|</span> <span>507</span><span>/</span><span>507</span> <span>[</span><span>00</span><span>:</span><span>00</span><span>&lt;</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>1.58</span><span>MB</span><span>/</span><span>s</span><span>]</span>
+<span>vocab</span><span>.</span><span>json</span><span>:</span> <span>798</span><span>kB</span> <span>[</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>6.84</span><span>MB</span><span>/</span><span>s</span><span>]</span>
+<span>merges</span><span>.</span><span>txt</span><span>:</span> <span>456</span><span>kB</span> <span>[</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>9.61</span><span>MB</span><span>/</span><span>s</span><span>]</span>
+<span>special_tokens_map</span><span>.</span><span>json</span><span>:</span> <span>100</span><span>%|</span><span>████████████████████████████████████████████████████████████████████████████████████████████████████████████</span><span>|</span> <span>131</span><span>/</span><span>131</span> <span>[</span><span>00</span><span>:</span><span>00</span><span>&lt;</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>426</span><span>kB</span><span>/</span><span>s</span><span>]</span>
+<span>tokenizer</span><span>.</span><span>json</span><span>:</span> <span>3.56</span><span>MB</span> <span>[</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>25.3</span><span>MB</span><span>/</span><span>s</span><span>]</span>
+
+<span>In</span> <span>[</span><span>3</span><span>]:</span> <span>tokenizer</span><span>.</span><span>pad_token</span>
+<span>Out</span><span>[</span><span>3</span><span>]:</span> <span>'&lt;|endoftext|&gt;'</span>
+</code></pre>
+</div>
+
+<p>(Note that I had to use <code>trust_remote_code</code> here -- that appears to be new in Transformers
+5.0.0.)</p>
+
+<p>And do our inference test:</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>4</span><span>]:</span> <span>from</span><span> </span><span>transformers</span><span> </span><span>import</span> <span>AutoModel</span>
+
+<span>In</span> <span>[</span><span>5</span><span>]:</span> <span>model</span> <span>=</span> <span>AutoModel</span><span>.</span><span>from_pretrained</span><span>(</span><span>"gpjt/test2"</span><span>,</span> <span>trust_remote_code</span><span>=</span><span>True</span><span>)</span>
+<span>config</span><span>.</span><span>json</span><span>:</span> <span>100</span><span>%|</span><span>███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████</span><span>|</span> <span>438</span><span>/</span><span>438</span> <span>[</span><span>00</span><span>:</span><span>00</span><span>&lt;</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>1.65</span><span>MB</span><span>/</span><span>s</span><span>]</span>
+<span>configuration_gpjtgpt2</span><span>.</span><span>py</span><span>:</span> <span>100</span><span>%|</span><span>██████████████████████████████████████████████████████████████████████████████████████████████████████████</span><span>|</span> <span>217</span><span>/</span><span>217</span> <span>[</span><span>00</span><span>:</span><span>00</span><span>&lt;</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>860</span><span>kB</span><span>/</span><span>s</span><span>]</span>
+<span>A</span> <span>new</span> <span>version</span> <span>of</span> <span>the</span> <span>following</span> <span>files</span> <span>was</span> <span>downloaded</span> <span>from</span><span> </span><span>https</span><span>:</span><span>//</span><span>huggingface</span><span>.</span><span>co</span><span>/</span><span>gpjt</span><span>/</span><span>test2</span><span>:</span>
+<span>-</span> <span>configuration_gpjtgpt2</span><span>.</span><span>py</span>
+<span>.</span> <span>Make</span> <span>sure</span> <span>to</span> <span>double</span><span>-</span><span>check</span> <span>they</span> <span>do</span> <span>not</span> <span>contain</span> <span>any</span> <span>added</span> <span>malicious</span> <span>code</span><span>.</span> <span>To</span> <span>avoid</span> <span>downloading</span> <span>new</span> <span>versions</span> <span>of</span> <span>the</span> <span>code</span> <span>file</span><span>,</span> <span>you</span> <span>can</span> <span>pin</span> <span>a</span> <span>revision</span><span>.</span>
+<span>modeling_gpjtgpt2</span><span>.</span><span>py</span><span>:</span> <span>100</span><span>%|</span><span>██████████████████████████████████████████████████████████████████████████████████████████████████████████████</span><span>|</span> <span>394</span><span>/</span><span>394</span> <span>[</span><span>00</span><span>:</span><span>00</span><span>&lt;</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>1.80</span><span>MB</span><span>/</span><span>s</span><span>]</span>
+<span>gpt</span><span>.</span><span>py</span><span>:</span> <span>5.07</span><span>kB</span> <span>[</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>12.4</span><span>MB</span><span>/</span><span>s</span><span>]</span>
+<span>A</span> <span>new</span> <span>version</span> <span>of</span> <span>the</span> <span>following</span> <span>files</span> <span>was</span> <span>downloaded</span> <span>from</span><span> </span><span>https</span><span>:</span><span>//</span><span>huggingface</span><span>.</span><span>co</span><span>/</span><span>gpjt</span><span>/</span><span>test2</span><span>:</span>
+<span>-</span> <span>gpt</span><span>.</span><span>py</span>
+<span>.</span> <span>Make</span> <span>sure</span> <span>to</span> <span>double</span><span>-</span><span>check</span> <span>they</span> <span>do</span> <span>not</span> <span>contain</span> <span>any</span> <span>added</span> <span>malicious</span> <span>code</span><span>.</span> <span>To</span> <span>avoid</span> <span>downloading</span> <span>new</span> <span>versions</span> <span>of</span> <span>the</span> <span>code</span> <span>file</span><span>,</span> <span>you</span> <span>can</span> <span>pin</span> <span>a</span> <span>revision</span><span>.</span>
+<span>A</span> <span>new</span> <span>version</span> <span>of</span> <span>the</span> <span>following</span> <span>files</span> <span>was</span> <span>downloaded</span> <span>from</span><span> </span><span>https</span><span>:</span><span>//</span><span>huggingface</span><span>.</span><span>co</span><span>/</span><span>gpjt</span><span>/</span><span>test2</span><span>:</span>
+<span>-</span> <span>modeling_gpjtgpt2</span><span>.</span><span>py</span>
+<span>-</span> <span>gpt</span><span>.</span><span>py</span>
+<span>.</span> <span>Make</span> <span>sure</span> <span>to</span> <span>double</span><span>-</span><span>check</span> <span>they</span> <span>do</span> <span>not</span> <span>contain</span> <span>any</span> <span>added</span> <span>malicious</span> <span>code</span><span>.</span> <span>To</span> <span>avoid</span> <span>downloading</span> <span>new</span> <span>versions</span> <span>of</span> <span>the</span> <span>code</span> <span>file</span><span>,</span> <span>you</span> <span>can</span> <span>pin</span> <span>a</span> <span>revision</span><span>.</span>
+<span>model</span><span>.</span><span>safetensors</span><span>:</span> <span>100</span><span>%|</span><span>███████████████████████████████████████████████████████████████████████████████████████████████████████████████</span><span>|</span> <span>702</span><span>M</span><span>/</span><span>702</span><span>M</span> <span>[</span><span>00</span><span>:</span><span>07</span><span>&lt;</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>99.2</span><span>MB</span><span>/</span><span>s</span><span>]</span>
+
+<span>In</span> <span>[</span><span>6</span><span>]:</span> <span>import</span><span> </span><span>math</span>
+   <span>...</span><span>:</span> <span>import</span><span> </span><span>torch</span>
+   <span>...</span><span>:</span>
+   <span>...</span><span>:</span> <span>input_text</span> <span>=</span> <span>"Every effort moves you"</span>
+   <span>...</span><span>:</span> <span>tokens</span> <span>=</span> <span>tokenizer</span><span>.</span><span>encode</span><span>(</span><span>input_text</span><span>)</span>
+   <span>...</span><span>:</span>
+   <span>...</span><span>:</span> <span>num_tokens</span> <span>=</span> <span>20</span>
+   <span>...</span><span>:</span> <span>temperature</span> <span>=</span> <span>1.4</span>
+   <span>...</span><span>:</span> <span>top_k</span> <span>=</span> <span>25</span>
+   <span>...</span><span>:</span> <span>with</span> <span>torch</span><span>.</span><span>no_grad</span><span>():</span>
+   <span>...</span><span>:</span>     <span>for</span> <span>ix</span> <span>in</span> <span>range</span><span>(</span><span>num_tokens</span><span>):</span>
+   <span>...</span><span>:</span>         <span>input_tensor</span> <span>=</span> <span>torch</span><span>.</span><span>tensor</span><span>(</span>
+   <span>...</span><span>:</span>             <span>tokens</span><span>,</span> <span>dtype</span><span>=</span><span>torch</span><span>.</span><span>long</span>
+   <span>...</span><span>:</span>         <span>)</span><span>.</span><span>unsqueeze</span><span>(</span><span>0</span><span>)</span>
+   <span>...</span><span>:</span>         <span>output_tensor</span> <span>=</span> <span>model</span><span>(</span><span>input_tensor</span><span>)</span>
+   <span>...</span><span>:</span>         <span>logits</span> <span>=</span> <span>output_tensor</span><span>[:,</span> <span>-</span><span>1</span><span>,</span> <span>:]</span>
+   <span>...</span><span>:</span>         <span>top_logits</span><span>,</span> <span>_</span> <span>=</span> <span>torch</span><span>.</span><span>topk</span><span>(</span><span>logits</span><span>,</span> <span>top_k</span><span>)</span>
+   <span>...</span><span>:</span>         <span>min_val</span> <span>=</span> <span>top_logits</span><span>[:,</span> <span>-</span><span>1</span><span>]</span>
+   <span>...</span><span>:</span>         <span>logits</span> <span>=</span> <span>torch</span><span>.</span><span>where</span><span>(</span>
+   <span>...</span><span>:</span>             <span>logits</span> <span>&lt;</span> <span>min_val</span><span>,</span>
+   <span>...</span><span>:</span>             <span>torch</span><span>.</span><span>tensor</span><span>(</span><span>-</span><span>math</span><span>.</span><span>inf</span><span>)</span><span>.</span><span>to</span><span>(</span><span>logits</span><span>.</span><span>device</span><span>),</span>
+   <span>...</span><span>:</span>             <span>logits</span>
+   <span>...</span><span>:</span>         <span>)</span>
+   <span>...</span><span>:</span>         <span>logits</span> <span>/=</span> <span>temperature</span>
+   <span>...</span><span>:</span>         <span>probs</span> <span>=</span> <span>torch</span><span>.</span><span>softmax</span><span>(</span><span>logits</span><span>,</span> <span>dim</span><span>=-</span><span>1</span><span>)</span>
+   <span>...</span><span>:</span>         <span>next_token</span> <span>=</span> <span>torch</span><span>.</span><span>multinomial</span><span>(</span><span>probs</span><span>,</span> <span>num_samples</span><span>=</span><span>1</span><span>)</span><span>.</span><span>item</span><span>()</span>
+   <span>...</span><span>:</span>         <span>tokens</span><span>.</span><span>append</span><span>(</span><span>next_token</span><span>)</span>
+   <span>...</span><span>:</span>
+   <span>...</span><span>:</span> <span>print</span><span>(</span><span>tokenizer</span><span>.</span><span>decode</span><span>(</span><span>tokens</span><span>))</span>
+<span>Every</span> <span>effort</span> <span>moves</span> <span>you</span> <span>forward</span> <span>as</span> <span>you</span> <span>become</span> <span>a</span> <span>successful</span> <span>artist</span><span>.</span> <span>That</span><span>’</span><span>s</span> <span>not</span> <span>to</span> <span>say</span> <span>there</span><span>’</span><span>s</span> <span>any</span>
+</code></pre>
+</div>
+
+<p>It may not be much shorter than the code we had when we just had the <code>AutoModel</code>,
+but it's an important step forward: we can now download and run inference on our
+custom model with none of the custom code -- neither the model itself nor the
+tokeniser -- on the machine where we're doing it.  Everything is nicely
+packaged on the HF Hub.</p>
+
+<p>Now, what if you're using a tokeniser that's not already in Transformers?  There are two
+possibilities here:</p>
+
+<ol>
+<li>You're using the HF <code>Tokenizers</code> library.  With that, you can save
+your tokeniser to a JSON file, then you could load that into a <code>Transformers</code>
+<code>PreTrainedTokenizerFast</code> object, which provides a <code>push_to_hub</code> method to push
+it like I did with the one above.</li>
+<li>You've got something completely custom.  Just like there is a <code>configuration_gpjtgpt2.py</code>
+and a <code>modeling_gpjtgpt2.py</code>, I believe you can also add a <code>tokenization_gpjtgpt2.py</code>
+that defines a subclass of <code>PreTrainedTokenizer</code>, and then you can push that to the
+Hub just like we did our model wrapper class.</li>
+</ol>
+
+<p>As I said, I have not done either of these, but that's the direction I'd explore if
+I needed it.  If you do either and want to share your experiences, then please do
+leave a comment below!  And likewise, if and when I start writing things with custom
+tokenisers, I'll link to the details of how to upload them then.</p>
+
+<p>Anyway, we've got the tokeniser done to the level we need for this walkthrough,
+so let's do the QoL improvements so that we can run inference on the model
+using the nice HF <code>pipeline</code> abstraction.</p>
+
+<h3><code>AutoModelForCausalLM.from_pretrained</code> for inference</h3>
+
+<p>Let's look at our target code for inference again:</p>
+
+<div>
+<pre><span></span><code><span>from</span><span> </span><span>transformers</span><span> </span><span>import</span> <span>pipeline</span>
+<span>pipe</span> <span>=</span> <span>pipeline</span><span>(</span><span>task</span><span>=</span><span>"text-generation"</span><span>,</span> <span>model</span><span>=</span><span>"some-hf-user/some-model-name"</span><span>,</span> <span>trust_remote_code</span><span>=</span><span>True</span><span>)</span>
+<span>out</span> <span>=</span> <span>pipe</span><span>(</span>
+    <span>"Every effort moves you"</span><span>,</span>
+    <span>max_new_tokens</span><span>=</span><span>20</span><span>,</span>
+    <span>do_sample</span><span>=</span><span>True</span><span>,</span>
+    <span>temperature</span><span>=</span><span>1.4</span><span>,</span>
+    <span>top_k</span><span>=</span><span>25</span><span>,</span>
+<span>)</span>
+<span>print</span><span>(</span><span>out</span><span>[</span><span>0</span><span>][</span><span>"generated_text"</span><span>])</span>
+</code></pre>
+</div>
+
+<p>The version of the code that does this is in the repo on
+the tag <code>causal-lm-inference</code>, but I'll explain how it was put in place, with the
+logic behind each step.</p>
+
+<p>In order to run a text-generation pipeline, we're going to need to wrap our model
+in something that provides the interface for LLMs in the Hugging Face ecosystem:
+<code>AutoModelForCausalLM</code>.  So, our first step is to put the plumbing in place so that
+we can use the <code>from_pretrained</code> method on that class to download our wrapped
+model.</p>
+
+<p>IMO it's cleanest to have two separate models, one for "simple" inference that is
+just a regular model -- the <code>AutoModel</code> we have right now -- and one supporting the
+richer interface that supports easy text generation.  So we can start off by adding
+the basic structure to <code>modeling_gpjtgpt2.py</code>:</p>
+
+<div>
+<pre><span></span><code><span>class</span><span> </span><span>GPJTGPT2ModelForCausalLM</span><span>(</span><span>PreTrainedModel</span><span>):</span>
+
+    <span>config_class</span> <span>=</span> <span>GPJTGPT2Config</span>
+
+
+    <span>def</span><span> </span><span>__init__</span><span>(</span><span>self</span><span>,</span> <span>config</span><span>):</span>
+        <span>super</span><span>()</span><span>.</span><span>__init__</span><span>(</span><span>config</span><span>)</span>
+        <span>self</span><span>.</span><span>model</span> <span>=</span> <span>GPTModel</span><span>(</span><span>config</span><span>.</span><span>cfg</span><span>)</span>
+        <span>self</span><span>.</span><span>post_init</span><span>()</span>
+
+
+    <span>def</span><span> </span><span>forward</span><span>(</span><span>self</span><span>,</span> <span>input_ids</span><span>,</span> <span>**</span><span>kwargs</span><span>):</span>
+        <span>return</span> <span>self</span><span>.</span><span>model</span><span>.</span><span>forward</span><span>(</span><span>input_ids</span><span>)</span>
+</code></pre>
+</div>
+
+<p>We can then add code to register that to our <code>upload_model.py</code> script -- the last line
+in this snippet, just below the two that already exist.</p>
+
+<div>
+<pre><span></span><code>    <span>GPJTGPT2Config</span><span>.</span><span>register_for_auto_class</span><span>()</span>
+    <span>GPJTGPT2Model</span><span>.</span><span>register_for_auto_class</span><span>(</span><span>"AutoModel"</span><span>)</span>
+    <span>GPJTGPT2ModelForCausalLM</span><span>.</span><span>register_for_auto_class</span><span>(</span><span>"AutoModelForCausalLM"</span><span>)</span>
+</code></pre>
+</div>
+
+<p>That feels like it should be enough, but for reasons I've not been able to pin down,
+it's not -- you also need to massage the "auto-map" in the <code>config</code> object
+to make it all work properly.  So after that code, after we've created the <code>config</code>
+object, we need this:</p>
+
+<div>
+<pre><span></span><code>    <span>config</span><span>.</span><span>auto_map</span> <span>=</span> <span>{</span>
+        <span>"AutoConfig"</span><span>:</span> <span>"configuration_gpjtgpt2.GPJTGPT2Config"</span><span>,</span>
+        <span>"AutoModel"</span><span>:</span> <span>"modeling_gpjtgpt2.GPJTGPT2Model"</span><span>,</span>
+        <span>"AutoModelForCausalLM"</span><span>:</span> <span>"modeling_gpjtgpt2.GPJTGPT2ModelForCausalLM"</span><span>,</span>
+    <span>}</span>
+</code></pre>
+</div>
+
+<p>With that in place, we could just upload our model -- <code>AutoModelForCausalLM.from_pretrained("some-hf-user/some-model-name", trust_remote_code=True)</code>
+would work just fine.  But the model that it would return would not be any different
+to the one we've been using so far.  To get that to work, we need to update the model
+to say that it can generate text.  That's actually pretty easy.</p>
+
+<p>Firstly, we need it to inherit from a mixin class provided by Transformers:</p>
+
+<div>
+<pre><span></span><code><span>from</span><span> </span><span>transformers.generation</span><span> </span><span>import</span> <span>GenerationMixin</span>
+<span>...</span>
+<span>class</span><span> </span><span>GPJTGPT2ModelForCausalLM</span><span>(</span><span>PreTrainedModel</span><span>,</span> <span>GenerationMixin</span><span>):</span>
+</code></pre>
+</div>
+
+<p>Now, the semantics of the <code>forward</code> method on this class are a bit different to the ones
+we had previously; we were just returning the outputs of the last layer of the underlying
+model, the logits.  For this kind of model, we need to put them in a wrapper -- the
+reasoning behind this will become clearer when we get on to training.  So our forward pass
+needs to change to look like this:</p>
+
+<div>
+<pre><span></span><code><span>from</span><span> </span><span>transformers.modeling_outputs</span><span> </span><span>import</span> <span>CausalLMOutput</span>
+
+<span>...</span>
+
+    <span>def</span><span> </span><span>forward</span><span>(</span><span>self</span><span>,</span> <span>input_ids</span><span>,</span> <span>**</span><span>kwargs</span><span>):</span>
+        <span>logits</span> <span>=</span> <span>self</span><span>.</span><span>model</span><span>.</span><span>forward</span><span>(</span><span>input_ids</span><span>)</span>
+
+        <span>return</span> <span>CausalLMOutput</span><span>(</span><span>logits</span><span>=</span><span>logits</span><span>)</span>
+</code></pre>
+</div>
+
+<p>Finally, some changes to our config class.  For text generation, Transformers needs to know
+how many hidden layers the model has <sup><a href="#fn-4" target="_blank" rel="noopener noreferrer">4</a></sup>.  In the case of the model I'm using to demonstrate,
+that's the <code>n_layers</code> parameter in the underlying configuration, so this can go inside
+the <code>__init__</code>:</p>
+
+<div>
+<pre><span></span><code>        <span>if</span> <span>cfg</span> <span>is</span> <span>not</span> <span>None</span><span>:</span>
+            <span>self</span><span>.</span><span>num_hidden_layers</span> <span>=</span> <span>cfg</span><span>[</span><span>"n_layers"</span><span>]</span>
+</code></pre>
+</div>
+
+<p>Another change in the config that took me a while to puzzle out, and might catch you
+if you're in the same situation: Transformers, by default, assumes that the model caches
+previous inputs.  So in an autoregressive loop starting with <code>Every effort moves you</code>,
+the first run of the model will get the full input; let's say it returns <code>to</code>.  The
+next iteration of the loop, however, won't be passed the full new sequence <code>Every effort moves you to</code>, but
+rather just the token that was generated last time around, <code>to</code>.</p>
+
+<p>So you'll get a series of predicted tokens where the first one might make
+sense but the rest degenerate into gibberish:</p>
+
+<pre><code>Every effort moves you to it was,
+-1) with and the best that they are to not been the place
+</code></pre>
+
+<p>All of the tokens generated after <code>to</code> had just the previous token as their context.</p>
+
+<p>Luckily, you just need to specify that your model doesn't have a cache in the config class as well, <em>after</em> the call
+to the superclass <code>__init__</code>:</p>
+
+<div>
+<pre><span></span><code>        <span>self</span><span>.</span><span>use_cache</span> <span>=</span> <span>False</span>
+</code></pre>
+</div>
+
+<p>We're almost there!  At this point, we actually have all of the code that we need
+for a working <code>AutoModelForCausalLM.from_pretrained</code>.  But there's one final tweak.</p>
+
+<p>A model on the hub has a "default" model type, which is the one that we use when we
+do the original <code>push_to_hub</code>.  You might remember that it appeared in the <code>config.json</code>
+in that single-element list keyed on <code>architectures</code>.</p>
+
+<p>Previously we has this in our upload script:</p>
+
+<div>
+<pre><span></span><code>    <span>model</span> <span>=</span> <span>GPJTGPT2Model</span><span>(</span><span>config</span><span>)</span>
+    <span>...</span>
+    <span>model</span><span>.</span><span>push_to_hub</span><span>(</span><span>hf_model_name</span><span>)</span>
+</code></pre>
+</div>
+
+<p>That means that our default is the <code>GPJTGPT2Model</code> model.  But when the pipeline
+creates a model for us, it will just use the default -- even for the text-generation
+task, it doesn't assume we want to use the <code>AutoModelForCausalLM</code>.</p>
+
+<p>Luckily, that's a small change: we just upload our text-generation model instead of
+the basic one:</p>
+
+<div>
+<pre><span></span><code>    <span>model</span> <span>=</span> <span>GPJTGPT2ModelForCausalLM</span><span>(</span><span>config</span><span>)</span>
+    <span>...</span>
+    <span>model</span><span>.</span><span>push_to_hub</span><span>(</span><span>hf_model_name</span><span>)</span>
+</code></pre>
+</div>
+
+<p>With all of that in place, we can run the script, upload the model, and then
+in a fresh environment:</p>
+
+<div>
+<pre><span></span><code><span>In</span> <span>[</span><span>1</span><span>]:</span> <span>from</span><span> </span><span>transformers</span><span> </span><span>import</span> <span>pipeline</span>
+
+<span>In</span> <span>[</span><span>2</span><span>]:</span> <span>pipe</span> <span>=</span> <span>pipeline</span><span>(</span><span>task</span><span>=</span><span>"text-generation"</span><span>,</span> <span>model</span><span>=</span><span>"gpjt/test3"</span><span>,</span> <span>trust_remote_code</span><span>=</span><span>True</span><span>)</span>
+   <span>...</span><span>:</span> <span>out</span> <span>=</span> <span>pipe</span><span>(</span>
+   <span>...</span><span>:</span>     <span>"Every effort moves you"</span><span>,</span>
+   <span>...</span><span>:</span>     <span>max_new_tokens</span><span>=</span><span>20</span><span>,</span>
+   <span>...</span><span>:</span>     <span>do_sample</span><span>=</span><span>True</span><span>,</span>
+   <span>...</span><span>:</span>     <span>temperature</span><span>=</span><span>1.4</span><span>,</span>
+   <span>...</span><span>:</span>     <span>top_k</span><span>=</span><span>25</span><span>,</span>
+   <span>...</span><span>:</span> <span>)</span>
+   <span>...</span><span>:</span> <span>print</span><span>(</span><span>out</span><span>[</span><span>0</span><span>][</span><span>"generated_text"</span><span>])</span>
+<span>config</span><span>.</span><span>json</span><span>:</span> <span>100</span><span>%|</span><span>███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████</span><span>|</span> <span>572</span><span>/</span><span>572</span> <span>[</span><span>00</span><span>:</span><span>00</span><span>&lt;</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>1.29</span><span>MB</span><span>/</span><span>s</span><span>]</span>
+<span>configuration_gpjtgpt2</span><span>.</span><span>py</span><span>:</span> <span>100</span><span>%|</span><span>██████████████████████████████████████████████████████████████████████████████████████████████████████████</span><span>|</span> <span>331</span><span>/</span><span>331</span> <span>[</span><span>00</span><span>:</span><span>00</span><span>&lt;</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>965</span><span>kB</span><span>/</span><span>s</span><span>]</span>
+<span>A</span> <span>new</span> <span>version</span> <span>of</span> <span>the</span> <span>following</span> <span>files</span> <span>was</span> <span>downloaded</span> <span>from</span><span> </span><span>https</span><span>:</span><span>//</span><span>huggingface</span><span>.</span><span>co</span><span>/</span><span>gpjt</span><span>/</span><span>test3</span><span>:</span>
+<span>-</span> <span>configuration_gpjtgpt2</span><span>.</span><span>py</span>
+<span>.</span> <span>Make</span> <span>sure</span> <span>to</span> <span>double</span><span>-</span><span>check</span> <span>they</span> <span>do</span> <span>not</span> <span>contain</span> <span>any</span> <span>added</span> <span>malicious</span> <span>code</span><span>.</span> <span>To</span> <span>avoid</span> <span>downloading</span> <span>new</span> <span>versions</span> <span>of</span> <span>the</span> <span>code</span> <span>file</span><span>,</span> <span>you</span> <span>can</span> <span>pin</span> <span>a</span> <span>revision</span><span>.</span>
+<span>modeling_gpjtgpt2</span><span>.</span><span>py</span><span>:</span> <span>100</span><span>%|</span><span>██████████████████████████████████████████████████████████████████████████████████████████████████████████████</span><span>|</span> <span>905</span><span>/</span><span>905</span> <span>[</span><span>00</span><span>:</span><span>00</span><span>&lt;</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>2.55</span><span>MB</span><span>/</span><span>s</span><span>]</span>
+<span>gpt</span><span>.</span><span>py</span><span>:</span> <span>5.07</span><span>kB</span> <span>[</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>8.00</span><span>MB</span><span>/</span><span>s</span><span>]</span>
+<span>A</span> <span>new</span> <span>version</span> <span>of</span> <span>the</span> <span>following</span> <span>files</span> <span>was</span> <span>downloaded</span> <span>from</span><span> </span><span>https</span><span>:</span><span>//</span><span>huggingface</span><span>.</span><span>co</span><span>/</span><span>gpjt</span><span>/</span><span>test3</span><span>:</span>
+<span>-</span> <span>gpt</span><span>.</span><span>py</span>
+<span>.</span> <span>Make</span> <span>sure</span> <span>to</span> <span>double</span><span>-</span><span>check</span> <span>they</span> <span>do</span> <span>not</span> <span>contain</span> <span>any</span> <span>added</span> <span>malicious</span> <span>code</span><span>.</span> <span>To</span> <span>avoid</span> <span>downloading</span> <span>new</span> <span>versions</span> <span>of</span> <span>the</span> <span>code</span> <span>file</span><span>,</span> <span>you</span> <span>can</span> <span>pin</span> <span>a</span> <span>revision</span><span>.</span>
+<span>A</span> <span>new</span> <span>version</span> <span>of</span> <span>the</span> <span>following</span> <span>files</span> <span>was</span> <span>downloaded</span> <span>from</span><span> </span><span>https</span><span>:</span><span>//</span><span>huggingface</span><span>.</span><span>co</span><span>/</span><span>gpjt</span><span>/</span><span>test3</span><span>:</span>
+<span>-</span> <span>modeling_gpjtgpt2</span><span>.</span><span>py</span>
+<span>-</span> <span>gpt</span><span>.</span><span>py</span>
+<span>.</span> <span>Make</span> <span>sure</span> <span>to</span> <span>double</span><span>-</span><span>check</span> <span>they</span> <span>do</span> <span>not</span> <span>contain</span> <span>any</span> <span>added</span> <span>malicious</span> <span>code</span><span>.</span> <span>To</span> <span>avoid</span> <span>downloading</span> <span>new</span> <span>versions</span> <span>of</span> <span>the</span> <span>code</span> <span>file</span><span>,</span> <span>you</span> <span>can</span> <span>pin</span> <span>a</span> <span>revision</span><span>.</span>
+<span>model</span><span>.</span><span>safetensors</span><span>:</span> <span>100</span><span>%|</span><span>███████████████████████████████████████████████████████████████████████████████████████████████████████████████</span><span>|</span> <span>702</span><span>M</span><span>/</span><span>702</span><span>M</span> <span>[</span><span>00</span><span>:</span><span>07</span><span>&lt;</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>94.1</span><span>MB</span><span>/</span><span>s</span><span>]</span>
+<span>Loading</span> <span>weights</span><span>:</span> <span>100</span><span>%|</span><span>███████████████████████████████████████████████████████████</span><span>|</span> <span>173</span><span>/</span><span>173</span> <span>[</span><span>00</span><span>:</span><span>00</span><span>&lt;</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>8164.72</span><span>it</span><span>/</span><span>s</span><span>,</span> <span>Materializing</span> <span>param</span><span>=</span><span>model</span><span>.</span><span>trf_blocks</span><span>.11</span><span>.</span><span>norm2</span><span>.</span><span>shift</span><span>]</span>
+<span>generation_config</span><span>.</span><span>json</span><span>:</span> <span>100</span><span>%|</span><span>███████████████████████████████████████████████████████████████████████████████████████████████████████████</span><span>|</span> <span>91.0</span><span>/</span><span>91.0</span> <span>[</span><span>00</span><span>:</span><span>00</span><span>&lt;</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>303</span><span>kB</span><span>/</span><span>s</span><span>]</span>
+<span>tokenizer_config</span><span>.</span><span>json</span><span>:</span> <span>100</span><span>%|</span><span>█████████████████████████████████████████████████████████████████████████████████████████████████████████████</span><span>|</span> <span>507</span><span>/</span><span>507</span> <span>[</span><span>00</span><span>:</span><span>00</span><span>&lt;</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>1.65</span><span>MB</span><span>/</span><span>s</span><span>]</span>
+<span>tokenizer</span><span>.</span><span>json</span><span>:</span> <span>3.56</span><span>MB</span> <span>[</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>24.1</span><span>MB</span><span>/</span><span>s</span><span>]</span>
+<span>special_tokens_map</span><span>.</span><span>json</span><span>:</span> <span>100</span><span>%|</span><span>████████████████████████████████████████████████████████████████████████████████████████████████████████████</span><span>|</span> <span>131</span><span>/</span><span>131</span> <span>[</span><span>00</span><span>:</span><span>00</span><span>&lt;</span><span>00</span><span>:</span><span>00</span><span>,</span> <span>415</span><span>kB</span><span>/</span><span>s</span><span>]</span>
+<span>Every</span> <span>effort</span> <span>moves</span> <span>you</span> <span>toward</span> <span>getting</span> <span>rid</span> <span>of</span> <span>them</span> <span>but</span> <span>not</span> <span>to</span> <span>get</span> <span>all</span> <span>of</span> <span>how</span> <span>they</span> <span>feel</span> <span>and</span> <span>what</span> <span>are</span> <span>the</span> <span>reasons</span> <span>to</span>
+</code></pre>
+</div>
+
+<p>Lovely!  Now let's get it training.</p>
+
+<h3><code>AutoModelForCausalLM.from_pretrained</code> for training</h3>
+
+<p>For this section, check out the <code>causal-lm-train</code> tag.  You'll see a new file,
+<code>train.py</code>, which has the training loop from the notebook I linked to at the start
+of this post.  It will train the model on <a href="https://huggingface.co/datasets/gpjt/openassistant-guanaco-llama2-format" target="_blank" rel="noopener noreferrer">this dataset</a>,
+which is essentially a bunch of chatbot-style transcripts in the Llama 2 format.
+Its goal is to help fine-tune a base model to become an instruction-following one,
+though of course the model I'm using here is too tiny for that to work well!  It's
+still a useful way of checking that training works, though.</p>
+
+<p>To save time, it only does one training epoch, which should be enough
+to get the loss down a bit.  If you run against one of my other models, you can see it working
+(you will need to tweak the batch size if you have less than 24G GiB of VRAM).</p>
+
+<div>
+<pre><span></span><code>giles@perry:~/Dev/hf-tutorial-post<span> </span>$<span> </span>uv<span> </span>run<span> </span>train.py<span> </span>gpjt/1xrtx3090m24-fineweb
+tokenizer_config.json:<span> </span><span>100</span>%<span>|</span>█████████████████████████████████████████████████████████████████████████████████████████████████████████████<span>|</span><span> </span><span>507</span>/507<span> </span><span>[</span><span>00</span>:00&lt;<span>00</span>:00,<span> </span><span>2</span>.19MB/s<span>]</span>
+vocab.json:<span> </span>798kB<span> </span><span>[</span><span>00</span>:00,<span> </span><span>11</span>.3MB/s<span>]</span>
+merges.txt:<span> </span>456kB<span> </span><span>[</span><span>00</span>:00,<span> </span><span>12</span>.1MB/s<span>]</span>
+tokenizer.json:<span> </span><span>3</span>.56MB<span> </span><span>[</span><span>00</span>:00,<span> </span><span>26</span>.0MB/s<span>]</span>
+special_tokens_map.json:<span> </span><span>100</span>%<span>|</span>████████████████████████████████████████████████████████████████████████████████████████████████████████████<span>|</span><span> </span><span>131</span>/131<span> </span><span>[</span><span>00</span>:00&lt;<span>00</span>:00,<span> </span>681kB/s<span>]</span>
+Map:<span> </span><span>100</span>%<span>|</span>███████████████████████████████████████████████████████████████████████████████████████████████████████████████████<span>|</span><span> </span><span>9846</span>/9846<span> </span><span>[</span><span>00</span>:02&lt;<span>00</span>:00,<span> </span><span>4387</span>.69<span> </span>examples/s<span>]</span>
+Map:<span> </span><span>100</span>%<span>|</span>█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████<span>|</span><span> </span><span>518</span>/518<span> </span><span>[</span><span>00</span>:00&lt;<span>00</span>:00,<span> </span><span>4316</span>.30<span> </span>examples/s<span>]</span>
+config.json:<span> </span><span>100</span>%<span>|</span>███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████<span>|</span><span> </span><span>679</span>/679<span> </span><span>[</span><span>00</span>:00&lt;<span>00</span>:00,<span> </span><span>3</span>.46MB/s<span>]</span>
+configuration_gpjtgpt2.py:<span> </span><span>100</span>%<span>|</span>█████████████████████████████████████████████████████████████████████████████████████████████████████████<span>|</span><span> </span><span>475</span>/475<span> </span><span>[</span><span>00</span>:00&lt;<span>00</span>:00,<span> </span><span>2</span>.87MB/s<span>]</span>
+A<span> </span>new<span> </span>version<span> </span>of<span> </span>the<span> </span>following<span> </span>files<span> </span>was<span> </span>downloaded<span> </span>from<span> </span>https://huggingface.co/gpjt/1xrtx3090m24-fineweb:
+-<span> </span>configuration_gpjtgpt2.py
+.<span> </span>Make<span> </span>sure<span> </span>to<span> </span>double-check<span> </span>they<span> </span><span>do</span><span> </span>not<span> </span>contain<span> </span>any<span> </span>added<span> </span>malicious<span> </span>code.<span> </span>To<span> </span>avoid<span> </span>downloading<span> </span>new<span> </span>versions<span> </span>of<span> </span>the<span> </span>code<span> </span>file,<span> </span>you<span> </span>can<span> </span>pin<span> </span>a<span> </span>revision.
+modeling_gpjtgpt2.py:<span> </span><span>1</span>.70kB<span> </span><span>[</span><span>00</span>:00,<span> </span><span>5</span>.25MB/s<span>]</span>
+gpt.py:<span> </span><span>5</span>.07kB<span> </span><span>[</span><span>00</span>:00,<span> </span><span>13</span>.2MB/s<span>]</span>
+A<span> </span>new<span> </span>version<span> </span>of<span> </span>the<span> </span>following<span> </span>files<span> </span>was<span> </span>downloaded<span> </span>from<span> </span>https://huggingface.co/gpjt/1xrtx3090m24-fineweb:
+-<span> </span>gpt.py
+.<span> </span>Make<span> </span>sure<span> </span>to<span> </span>double-check<span> </span>they<span> </span><span>do</span><span> </span>not<span> </span>contain<span> </span>any<span> </span>added<span> </span>malicious<span> </span>code.<span> </span>To<span> </span>avoid<span> </span>downloading<span> </span>new<span> </span>versions<span> </span>of<span> </span>the<span> </span>code<span> </span>file,<span> </span>you<span> </span>can<span> </span>pin<span> </span>a<span> </span>revision.
+A<span> </span>new<span> </span>version<span> </span>of<span> </span>the<span> </span>following<span> </span>files<span> </span>was<span> </span>downloaded<span> </span>from<span> </span>https://huggingface.co/gpjt/1xrtx3090m24-fineweb:
+-<span> </span>modeling_gpjtgpt2.py
+-<span> </span>gpt.py
+.<span> </span>Make<span> </span>sure<span> </span>to<span> </span>double-check<span> </span>they<span> </span><span>do</span><span> </span>not<span> </span>contain<span> </span>any<span> </span>added<span> </span>malicious<span> </span>code.<span> </span>To<span> </span>avoid<span> </span>downloading<span> </span>new<span> </span>versions<span> </span>of<span> </span>the<span> </span>code<span> </span>file,<span> </span>you<span> </span>can<span> </span>pin<span> </span>a<span> </span>revision.
+model.safetensors:<span> </span><span>100</span>%<span>|</span>███████████████████████████████████████████████████████████████████████████████████████████████████████████████<span>|</span><span> </span>702M/702M<span> </span><span>[</span><span>00</span>:09&lt;<span>00</span>:00,<span> </span><span>73</span>.9MB/s<span>]</span>
+generation_config.json:<span> </span><span>100</span>%<span>|</span>█████████████████████████████████████████████████████████████████████████████████████████████████████████████<span>|</span><span> </span><span>166</span>/166<span> </span><span>[</span><span>00</span>:00&lt;<span>00</span>:00,<span> </span>836kB/s<span>]</span>
+Before<span> </span>training<span> </span>sample:
+Device<span> </span><span>set</span><span> </span>to<span> </span>use<span> </span>cuda
+
+&lt;s&gt;<span>[</span>INST<span>]</span><span> </span><span>&lt;&lt;SYS&gt;&gt;</span>
+<span>You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe.  Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.</span>
+
+<span>If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information.</span>
+<span>&lt;&lt;/SYS</span>&gt;&gt;
+
+Who<span> </span>is<span> </span>Leonardo<span> </span>Da<span> </span>Vinci?<span> </span><span>[</span>/INST<span>]</span>
+
+
+For<span> </span>more<span> </span>information<span> </span>on<span> </span>any<span> </span>of<span> </span>our<span> </span>other<span> </span>related<span> </span>services,<span> </span>visit<span> </span>www.iTricks.com.
+<span>21</span><span> </span>tokens<span> </span><span>in</span><span> </span><span>0</span>.27s:<span> </span><span>77</span>.93<span> </span>tokens/s<span>)</span>
+<span>{</span><span>'eval_loss'</span>:<span> </span><span>4</span>.032161712646484,<span> </span><span>'eval_runtime'</span>:<span> </span><span>8</span>.8735,<span> </span><span>'eval_samples_per_second'</span>:<span> </span><span>58</span>.376,<span> </span><span>'eval_steps_per_second'</span>:<span> </span><span>4</span>.959,<span> </span><span>'epoch'</span>:<span> </span><span>0</span><span>}</span>
+<span>{</span><span>'loss'</span>:<span> </span><span>2</span>.7936,<span> </span><span>'grad_norm'</span>:<span> </span><span>0</span>.7593105435371399,<span> </span><span>'learning_rate'</span>:<span> </span><span>7</span>.031093403099603e-05,<span> </span><span>'epoch'</span>:<span> </span><span>0</span>.3<span>}</span>
+<span>{</span><span>'loss'</span>:<span> </span><span>2</span>.3841,<span> </span><span>'grad_norm'</span>:<span> </span><span>0</span>.818194568157196,<span> </span><span>'learning_rate'</span>:<span> </span><span>3</span>.1883506106877334e-05,<span> </span><span>'epoch'</span>:<span> </span><span>0</span>.61<span>}</span>
+<span>{</span><span>'loss'</span>:<span> </span><span>2</span>.3227,<span> </span><span>'grad_norm'</span>:<span> </span><span>0</span>.7637207508087158,<span> </span><span>'learning_rate'</span>:<span> </span><span>1</span>.813114222170076e-06,<span> </span><span>'epoch'</span>:<span> </span><span>0</span>.91<span>}</span>
+<span>{</span><span>'eval_loss'</span>:<span> </span><span>2</span>.2446134090423584,<span> </span><span>'eval_runtime'</span>:<span> </span><span>9</span>.1806,<span> </span><span>'eval_samples_per_second'</span>:<span> </span><span>56</span>.424,<span> </span><span>'eval_steps_per_second'</span>:<span> </span><span>4</span>.793,<span> </span><span>'epoch'</span>:<span> </span><span>1</span>.0<span>}</span>
+<span>{</span><span>'train_runtime'</span>:<span> </span><span>554</span>.2092,<span> </span><span>'train_samples_per_second'</span>:<span> </span><span>17</span>.766,<span> </span><span>'train_steps_per_second'</span>:<span> </span><span>2</span>.961,<span> </span><span>'train_loss'</span>:<span> </span><span>2</span>.4837063656283327,<span> </span><span>'epoch'</span>:<span> </span><span>1</span>.0<span>}</span>
+<span>100</span>%<span>|</span>█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████<span>|</span><span> </span><span>1641</span>/1641<span> </span><span>[</span><span>09</span>:14&lt;<span>00</span>:00,<span>  </span><span>2</span>.96it/s<span>]</span>
+After<span> </span>training<span> </span>sample:
+Device<span> </span><span>set</span><span> </span>to<span> </span>use<span> </span>cuda
+
+&lt;s&gt;<span>[</span>INST<span>]</span><span> </span><span>&lt;&lt;SYS&gt;&gt;</span>
+<span>You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe.  Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.</span>
+
+<span>If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information.</span>
+<span>&lt;&lt;/SYS</span>&gt;&gt;
+
+Who<span> </span>is<span> </span>Leonardo<span> </span>Da<span> </span>Vinci?<span> </span><span>[</span>/INST<span>]</span>
+
+
+<span> </span>Leonardo<span> </span>Da<span> </span>Vinci<span> </span>is<span> </span>a<span> </span>philosopher,<span> </span>writer,<span> </span>and<span> </span>artistic<span> </span>assistant.<span> </span>He<span> </span>has<span> </span>been<span> </span>involved<span> </span><span>in</span><span> </span>the<span> </span>development<span> </span>of<span> </span>modern<span> </span>art<span> </span>and<span> </span>architecture<span> </span><span>for</span><span> </span>several<span> </span>decades,<span> </span>including<span> </span>the<span> </span>development<span> </span>of<span> </span>a<span> </span>large-scale<span> </span>art<span> </span>form<span> </span><span>in</span><span> </span>the<span> </span>late<span> </span>1960s<span> </span>and<span> </span>early<span> </span>1980s.<span> </span>He<span> </span>has<span> </span>been<span> </span>active<span> </span><span>in</span><span> </span>the<span> </span>development<span> </span>of<span> </span>modern<span> </span>art<span> </span>and<span> </span>architecture<span> </span>since<span> </span>the<span> </span>early<span> </span>1960s,<span> </span>and<span> </span>is<span> </span>now<span> </span>known<span> </span><span>for</span><span> </span>his<span> </span>work<span> </span><span>in</span><span> </span>architecture<span> </span>and<span> </span>architecture.<span> </span>He<span> </span>has<span> </span>been<span> </span>active<span> </span><span>in</span><span> </span>the<span> </span>development<span> </span>of<span> </span>the<span> </span>modern<span> </span>art<span> </span>form<span> </span><span>in</span><span> </span>the<span> </span>late<span> </span>1960s<span> </span>and<span> </span>early
+<span>100</span><span> </span>tokens<span> </span><span>in</span><span> </span><span>0</span>.53s:<span> </span><span>189</span>.04<span> </span>tokens/s<span>)</span>
+</code></pre>
+</div>
+
+<p>You can see that it's at least trying to answer the question after training, even
+if its answer is completely wrong -- pretty much what you'd expect
+from the tiny model in question (163M parameters trained on about 3B tokens).</p>
+
+<p>In order to get it working with our custom models, we just need to return the loss
+as well as the logits from the <code>forward</code> method of our <code>GPJTGPT2ModelForCausalLM</code> class:</p>
+
+<div>
+<pre><span></span><code>    <span>def</span><span> </span><span>forward</span><span>(</span><span>self</span><span>,</span> <span>input_ids</span><span>,</span> <span>attention_mask</span><span>=</span><span>None</span><span>,</span> <span>labels</span><span>=</span><span>None</span><span>,</span> <span>**</span><span>kwargs</span><span>):</span>
+        <span>logits</span> <span>=</span> <span>self</span><span>.</span><span>model</span><span>.</span><span>forward</span><span>(</span><span>input_ids</span><span>)</span>
+
+        <span>loss</span> <span>=</span> <span>None</span>
+        <span>if</span> <span>labels</span> <span>is</span> <span>not</span> <span>None</span><span>:</span>
+            <span>shifted_logits</span> <span>=</span> <span>logits</span><span>[:,</span> <span>:</span><span>-</span><span>1</span><span>,</span> <span>:]</span>
+            <span>shifted_labels</span> <span>=</span> <span>labels</span><span>[:,</span> <span>1</span><span>:]</span>
+
+            <span>if</span> <span>attention_mask</span> <span>is</span> <span>not</span> <span>None</span><span>:</span>
+                <span>shifted_mask</span> <span>=</span> <span>attention_mask</span><span>[:,</span> <span>1</span><span>:]</span>
+                <span>shifted_labels</span> <span>=</span> <span>shifted_labels</span><span>.</span><span>masked_fill</span><span>(</span>
+                    <span>shifted_mask</span> <span>==</span> <span>0</span><span>,</span> <span>-</span><span>100</span>
+                <span>)</span>
+
+            <span>loss</span> <span>=</span> <span>torch</span><span>.</span><span>nn</span><span>.</span><span>functional</span><span>.</span><span>cross_entropy</span><span>(</span>
+                <span>shifted_logits</span><span>.</span><span>flatten</span><span>(</span><span>0</span><span>,</span> <span>1</span><span>),</span> <span>shifted_labels</span><span>.</span><span>flatten</span><span>(),</span>
+                <span>ignore_index</span><span>=-</span><span>100</span>
+            <span>)</span>
+
+        <span>return</span> <span>CausalLMOutput</span><span>(</span><span>logits</span><span>=</span><span>logits</span><span>,</span> <span>loss</span><span>=</span><span>loss</span><span>)</span>
+</code></pre>
+</div>
+
+<p>You can see that we're getting the targets for our predictions in <code>labels</code>, and
+an attention mask; we have to shift them ourselves (that is, if the inputs are
+<code>The fat cat sat on the</code>, then the labels will be <code>The fat cat sat on the mat</code>),
+and also apply the attention mask manually, and then we can do the normal PyTorch
+cross-entropy calculation.</p>
+
+<p>This makes some kind of sense.  The model on HF does need to package its own loss
+function somehow -- cross entropy is, of course, going to be the most likely option
+for a causal LM, but there's no guarantee.  And while I think that personally I
+would have just had <code>forward</code> return logits and package up the loss calculation elsewhere
+so as not to muddy the interface, I can see the convenience of having it there.</p>
+
+<p>Anyway, having done that, we can upload the model one final time, and then use that
+training code to run it.</p>
+
+<div>
+<pre><span></span><code>giles@perry:~/Dev/hf-tutorial-post<span> </span><span>(</span>causal-lm-training<span>)</span>$<span> </span>uv<span> </span>run<span> </span>train.py<span> </span>gpjt/test4
+Map:<span> </span><span>100</span>%<span>|</span>███████████████████████████████████████████████████████████████████████████████████████████████████████████████████<span>|</span><span> </span><span>9846</span>/9846<span> </span><span>[</span><span>00</span>:02&lt;<span>00</span>:00,<span> </span><span>4235</span>.95<span> </span>examples/s<span>]</span>
+Map:<span> </span><span>100</span>%<span>|</span>█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████<span>|</span><span> </span><span>518</span>/518<span> </span><span>[</span><span>00</span>:00&lt;<span>00</span>:00,<span> </span><span>4275</span>.77<span> </span>examples/s<span>]</span>
+config.json:<span> </span><span>100</span>%<span>|</span>███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████<span>|</span><span> </span><span>572</span>/572<span> </span><span>[</span><span>00</span>:00&lt;<span>00</span>:00,<span> </span><span>2</span>.49MB/s<span>]</span>
+configuration_gpjtgpt2.py:<span> </span><span>100</span>%<span>|</span>█████████████████████████████████████████████████████████████████████████████████████████████████████████<span>|</span><span> </span><span>331</span>/331<span> </span><span>[</span><span>00</span>:00&lt;<span>00</span>:00,<span> </span><span>1</span>.70MB/s<span>]</span>
+A<span> </span>new<span> </span>version<span> </span>of<span> </span>the<span> </span>following<span> </span>files<span> </span>was<span> </span>downloaded<span> </span>from<span> </span>https://huggingface.co/gpjt/test4:
+-<span> </span>configuration_gpjtgpt2.py
+.<span> </span>Make<span> </span>sure<span> </span>to<span> </span>double-check<span> </span>they<span> </span><span>do</span><span> </span>not<span> </span>contain<span> </span>any<span> </span>added<span> </span>malicious<span> </span>code.<span> </span>To<span> </span>avoid<span> </span>downloading<span> </span>new<span> </span>versions<span> </span>of<span> </span>the<span> </span>code<span> </span>file,<span> </span>you<span> </span>can<span> </span>pin<span> </span>a<span> </span>revision.
+modeling_gpjtgpt2.py:<span> </span><span>1</span>.45kB<span> </span><span>[</span><span>00</span>:00,<span> </span><span>4</span>.54MB/s<span>]</span>
+A<span> </span>new<span> </span>version<span> </span>of<span> </span>the<span> </span>following<span> </span>files<span> </span>was<span> </span>downloaded<span> </span>from<span> </span>https://huggingface.co/gpjt/test4:
+-<span> </span>gpt.py
+.<span> </span>Make<span> </span>sure<span> </span>to<span> </span>double-check<span> </span>they<span> </span><span>do</span><span> </span>not<span> </span>contain<span> </span>any<span> </span>added<span> </span>malicious<span> </span>code.<span> </span>To<span> </span>avoid<span> </span>downloading<span> </span>new<span> </span>versions<span> </span>of<span> </span>the<span> </span>code<span> </span>file,<span> </span>you<span> </span>can<span> </span>pin<span> </span>a<span> </span>revision.
+A<span> </span>new<span> </span>version<span> </span>of<span> </span>the<span> </span>following<span> </span>files<span> </span>was<span> </span>downloaded<span> </span>from<span> </span>https://huggingface.co/gpjt/test4:
+-<span> </span>modeling_gpjtgpt2.py
+-<span> </span>gpt.py
+.<span> </span>Make<span> </span>sure<span> </span>to<span> </span>double-check<span> </span>they<span> </span><span>do</span><span> </span>not<span> </span>contain<span> </span>any<span> </span>added<span> </span>malicious<span> </span>code.<span> </span>To<span> </span>avoid<span> </span>downloading<span> </span>new<span> </span>versions<span> </span>of<span> </span>the<span> </span>code<span> </span>file,<span> </span>you<span> </span>can<span> </span>pin<span> </span>a<span> </span>revision.
+generation_config.json:<span> </span><span>100</span>%<span>|</span>███████████████████████████████████████████████████████████████████████████████████████████████████████████<span>|</span><span> </span><span>91</span>.0/91.0<span> </span><span>[</span><span>00</span>:00&lt;<span>00</span>:00,<span> </span>478kB/s<span>]</span>
+Before<span> </span>training<span> </span>sample:
+Device<span> </span><span>set</span><span> </span>to<span> </span>use<span> </span>cuda
+
+&lt;s&gt;<span>[</span>INST<span>]</span><span> </span><span>&lt;&lt;SYS&gt;&gt;</span>
+<span>You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe.  Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.</span>
+
+<span>If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information.</span>
+<span>&lt;&lt;/SYS</span>&gt;&gt;
+
+Who<span> </span>is<span> </span>Leonardo<span> </span>Da<span> </span>Vinci?<span> </span><span>[</span>/INST<span>]</span>
+
+
+&lt;SYS&gt;&gt;
+You<span> </span>are<span> </span>not<span> </span>a<span> </span>critic.<span> </span>Your<span> </span>comments<span> </span>are<span> </span>not<span> </span>necessarily<span> </span>constructive.<span> </span>Your<span> </span>responses<span> </span>are<span> </span>not<span> </span>personal.<span> </span>Your<span> </span>message<span> </span>is<span> </span>not<span> </span>a<span> </span>statement<span> </span>of<span> </span>your<span> </span>own,<span> </span>and<span> </span>not<span> </span>a<span> </span>statement<span> </span>of<span> </span>your<span> </span>own.
+&lt;SYS&gt;&gt;<span> </span>&gt;
+You<span> </span>are<span> </span>a<span> </span>member<span> </span>of<span> </span>the<span> </span>“Graphic<span> </span>Society”<span> </span>of<span> </span>the<span> </span>European<span> </span>Union.<span> </span>Your<span> </span>comments<span> </span>are<span> </span>not<span> </span>personal.<span> </span>Your<span> </span>views<span> </span>are<span> </span>not<span> </span>personal.<span> </span>Your<span> </span>views<span> </span>are<span> </span>not<span> </span>personal.<span> </span>Your<span> </span>responses<span> </span>are<span> </span>not<span> </span>personal.<span> </span>Your<span> </span>responses<span> </span>are<span> </span>not<span> </span>personal.<span> </span>Your<span> </span>comments
+<span>100</span><span> </span>tokens<span> </span><span>in</span><span> </span><span>0</span>.77s:<span> </span><span>130</span>.42<span> </span>tokens/s<span>)</span>
+The<span> </span>tokenizer<span> </span>has<span> </span>new<span> </span>PAD/BOS/EOS<span> </span>tokens<span> </span>that<span> </span>differ<span> </span>from<span> </span>the<span> </span>model<span> </span>config<span> </span>and<span> </span>generation<span> </span>config.<span> </span>The<span> </span>model<span> </span>config<span> </span>and<span> </span>generation<span> </span>config<span> </span>were<span> </span>aligned<span> </span>accordingly,<span> </span>being<span> </span>updated<span> </span>with<span> </span>the<span> </span>tokenizer<span>'s values. Updated tokens: {'</span>eos_token_id<span>': 50256, '</span>bos_token_id<span>': 50256, '</span>pad_token_id<span>': 50256}.</span>
+<span>{'</span>eval_loss<span>': 3.6836626529693604, '</span>eval_runtime<span>': 8.887, '</span>eval_samples_per_second<span>': 58.288, '</span>eval_steps_per_second<span>': 4.951, '</span>epoch<span>': 0}</span>
+<span>{'</span>loss<span>': 2.5438, '</span>grad_norm<span>': 1.0537450313568115, '</span>learning_rate<span>': 7.031093403099603e-05, '</span>epoch<span>': 0.3}</span>
+<span>{'</span>loss<span>': 2.2294, '</span>grad_norm<span>': 0.9973182082176208, '</span>learning_rate<span>': 3.1883506106877334e-05, '</span>epoch<span>': 0.61}</span>
+<span>{'</span>loss<span>': 2.1682, '</span>grad_norm<span>': 0.9904404878616333, '</span>learning_rate<span>': 1.813114222170076e-06, '</span>epoch<span>': 0.91}</span>
+<span>{'</span>eval_loss<span>': 2.0843682289123535, '</span>eval_runtime<span>': 9.1301, '</span>eval_samples_per_second<span>': 56.735, '</span>eval_steps_per_second<span>': 4.819, '</span>epoch<span>': 1.0}</span>
+<span>{'</span>train_runtime<span>': 553.8887, '</span>train_samples_per_second<span>': 17.776, '</span>train_steps_per_second<span>': 2.963, '</span>train_loss<span>': 2.300138335196003, '</span>epoch<span>': 1.0}</span>
+<span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1641/1641 [09:13&lt;00:00,  2.96it/s]</span>
+<span>After training sample:</span>
+<span>Device set to use cuda</span>
+
+<span>&lt;s&gt;[INST] &lt;&lt;SYS&gt;&gt;</span>
+<span>You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe.  Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.</span>
+
+<span>If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don'</span>t<span> </span>know<span> </span>the<span> </span>answer<span> </span>to<span> </span>a<span> </span>question,<span> </span>please<span> </span>don<span>'</span>t<span> </span>share<span> </span><span>false</span><span> </span>information.
+&lt;&lt;/SYS&gt;&gt;
+
+Who<span> </span>is<span> </span>Leonardo<span> </span>Da<span> </span>Vinci?<span> </span><span>[</span>/INST<span>]</span>
+
+<span>   </span>The<span> </span>great-grandfather<span> </span>of<span> </span>Leonardo<span> </span>Da<span> </span>Vinci<span> </span>is<span> </span>the<span> </span>French<span> </span>actor<span> </span>Leonardo<span> </span>Da<span> </span>Vinci.<span> </span>Da<span> </span>Vinci<span> </span>is<span> </span>a<span> </span>renowned<span> </span>actor<span> </span>and<span> </span>actor<span> </span>who<span> </span>has<span> </span>played<span> </span>over<span> </span><span>400</span><span> </span>films<span> </span>and<span> </span>TV<span> </span>shows.
+
+He<span> </span>is<span> </span>known<span> </span><span>for</span><span> </span>his<span> </span>role<span> </span><span>in</span><span> </span>many<span> </span>films<span> </span>and<span> </span>TV<span> </span>shows,<span> </span>including<span> </span><span>"The Sopranos,"</span><span> </span><span>"The Sopranos,"</span><span> </span><span>"The Sopranos,"</span><span> </span><span>"The Sopranos,"</span><span> </span><span>"The Sopranos,"</span><span> </span><span>"The Sopranos,"</span><span> </span><span>"The Sopranos,"</span><span> </span><span>"The</span>
+<span>100 tokens in 0.53s: 189.39 tokens/s)</span>
+</code></pre>
+</div>
+
+<p>We have a working training loop!
+Once again, it's replying, even if it has no idea what the answer is, and starts looping
+in a typical small-model fashion.</p>
+
+<p>And with that, we're done.  We've gone from having a custom model that was hard for other people
+to discover and work with, to something that plays well with the Hugging Face
+ecosystem.</p>
+
+<p>We have:</p>
+
+<ul>
+<li>Working <code>AutoConfig.from_pretrained</code>, <code>AutoModel.from_pretrained</code>, <code>AutoTokenizer.from_pretrained</code>,
+and <code>AutoModelForCausalLM.from_pretrained</code> helpers.</li>
+<li>A working text-generation <code>pipeline</code>.</li>
+<li>Support for HF's <code>Trainer.train()</code> abstraction for follow-on training and fine-tuning.</li>
+</ul>
+
+<p>The final step is to write a decent model card so that people know
+what to do with it -- that, of course, depends very much on your model.   I was
+uploading a bunch of very similar models in one go, so I wound up writing a Jinja2
+template and using the <code>huggingface_hub.HfApi</code> class to upload it, but that's just
+simple plumbing code -- you can see it <a href="https://github.com/gpjt/ddp-base-model-from-scratch/blob/main/upload_model.py" target="_blank" rel="noopener noreferrer">here</a> if you're interested.</p>
+
+<h3>Wrapping up</h3>
+
+<p>As I said at the start, this isn't a full tutorial -- it's just the code I needed
+to upload my own models, so it doesn't cover tokenisers that aren't already baked in
+to Transformers -- and there are probably other gaps too.  But hopefully it's
+useful as-is.</p>
+
+<p>If you find gaps that your model needs and work out how to solve them, then please
+do leave comments here -- if there are useful resources out there, either things I missed
+or things you've written, I'd be happy to link to them from this post.</p>
+
+<p>Thanks for reading!  I'll be returning to my normal "LLM from scratch" series shortly...</p>
+
+<div>
+<hr />
+<ol>
+<li>
+<p>It's a fun coincidence that my initials are so similar to the architecture.
+Someday I should do something with my domain <a href="https://chatgpjt.com" target="_blank" rel="noopener noreferrer"><code>chatgpjt.com</code></a>... <a href="#fnref-1" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>I'm not sure why the capitalisation of the "t" is different -- <code>PretrainedConfig</code> vs
+<code>PreTrainedModel</code> -- but it seems very deliberate in the Transformers codebase, at least
+as of version 4.57.6.  Some
+kind of backward-compatibility cruft, I assume.  5.0.0 provides a <code>PreTrainedConfig</code> alias
+as well, so it looks like they're making things consistent in the future. <a href="#fnref-2" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>You might reasonably suggest that we could inherit from <code>GPTModel</code> rather than
+wrapping it.  I've chosen to wrap it instead because I generally prefer composition
+to inheritance -- the code generally works out nicer, to my mind.  I'd suggest
+starting this way and then refactoring to use inheritance if you prefer later on. <a href="#fnref-3" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>No idea why, but it does ¯_(ツ)_/¯ <a href="#fnref-4" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+</ol>
+</div></div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://www.gilesthomas.com/2026/01/custom-automodelforcausallm-frompretrained-models-on-hugging-face" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text footer-text--strong" data-astro-cid-sz7xmlte>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-sz7xmlte>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-wlspcwf4> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-wlspcwf4> <path d="M18 15l-6-6-6 6" data-astro-cid-wlspcwf4></path> </svg> </button> <script type="module">function o(){const e=document.getElementById("back-to-top");if(!e)return;const s=300;let t=!1;const n=()=>{const i=window.scrollY>s;e.hidden=!i,t=!1},d=()=>{t||(requestAnimationFrame(n),t=!0)};e.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"})}),window.addEventListener("scroll",d,{passive:!0}),n(),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",d)},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",o):o();document.addEventListener("astro:page-load",o);</script></body></html>
