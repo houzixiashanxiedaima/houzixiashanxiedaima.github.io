@@ -1,0 +1,395 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.0.8"><meta name="description" content="Originally published on Rails At Scale.
+
+Look! A trace of slow events in a benchmark! Hover over the image to see it get bigger.
+
+
+img {
+    max-width: 100%;
+}
+img:hover {
+  transform: scale(2);
+  tra"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><link rel="canonical" href="https://blog.yuyins.com/reading-list/using-perfetto-in-zjit-hzk7ii/"><!-- Web Font: Noto Sans SC (Source Han Sans, Chinese + Latin) --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;0,7..72,700;1,7..72,400&family=Noto+Serif+SC:wght@400;500;600;700&display=swap"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/using-perfetto-in-zjit-hzk7ii/"><meta property="og:title" content="Using Perfetto in ZJIT"><meta property="og:description" content="Originally published on Rails At Scale.
+
+Look! A trace of slow events in a benchmark! Hover over the image to see it get bigger.
+
+
+img {
+    max-width: 100%;
+}
+img:hover {
+  transform: scale(2);
+  tra"><meta property="og:image" content="https://blog.yuyins.com/favicon.svg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/using-perfetto-in-zjit-hzk7ii/"><meta property="twitter:title" content="Using Perfetto in ZJIT"><meta property="twitter:description" content="Originally published on Rails At Scale.
+
+Look! A trace of slow events in a benchmark! Hover over the image to see it get bigger.
+
+
+img {
+    max-width: 100%;
+}
+img:hover {
+  transform: scale(2);
+  tra"><meta property="twitter:image" content="https://blog.yuyins.com/favicon.svg"><title>Using Perfetto in ZJIT</title><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-b4zvghpy]{display:inline-flex;align-items:center;gap:.45rem;border-radius:9999px;border:1px solid transparent;background:var(--muted);color:var(--foreground);font-weight:500;line-height:1.4;text-decoration:none;white-space:nowrap}.chip--sm[data-astro-cid-b4zvghpy]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-b4zvghpy]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-b4zvghpy]{cursor:pointer;transition:background-color .2s ease,color .2s ease,opacity .2s ease}.chip--interactive[data-astro-cid-b4zvghpy]:hover{background-color:color-mix(in srgb,var(--accent) 10%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 68%,var(--foreground))}.chip--active[data-astro-cid-b4zvghpy],.chip[data-astro-cid-b4zvghpy].active{background-color:color-mix(in srgb,var(--accent) 18%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 82%,var(--foreground));border-color:transparent;box-shadow:none;font-weight:600}.chip--dashed[data-astro-cid-b4zvghpy]{border-style:dashed;border-color:color-mix(in srgb,var(--accent) 22%,var(--border));background:color-mix(in srgb,var(--background) 70%,var(--muted))}.chip[data-astro-cid-b4zvghpy]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+<link rel="stylesheet" href="/_astro/Layout.oGGPdmbM.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0;animation:fadeIn .3s ease-out}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;color:var(--muted-foreground);font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.8125rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--accent)}.back-link--top[data-astro-cid-wrgicudb]{display:inline-block;margin-bottom:1rem}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2> 雅俗共赏 </a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-otpdt6jm> <div class="search-dialog-card" data-astro-cid-otpdt6jm> <div class="search-dialog-bar" data-astro-cid-otpdt6jm> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="8" data-astro-cid-otpdt6jm></circle><path d="m21 21-4.3-4.3" data-astro-cid-otpdt6jm></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-otpdt6jm></div> <kbd class="search-kbd" data-astro-cid-otpdt6jm>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-otpdt6jm> <path d="M18 6 6 18" data-astro-cid-otpdt6jm></path><path d="m6 6 12 12" data-astro-cid-otpdt6jm></path> </svg> </button> </div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(e=0){if(sessionStorage.getItem(c)==="true")return m(),!0;const s=document.getElementById("pagefind-ui");if(!s)return!1;s.innerHTML='<div class="search-loading">加载中...</div>';try{return await new Promise((r,o)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=r,a.onerror=o,document.head.appendChild(a)}),m(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),e<2?(console.log(`Retrying search load... (${e+1}/2)`),await new Promise(r=>setTimeout(r,1e3)),l(e+1)):(s&&(s.innerHTML=`
+          <div class="search-loading">
+            <p>搜索功能加载失败</p>
+            <button id="retry-search" class="search-retry-btn">重试</button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Using Perfetto in ZJIT</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://bernsteinbear.com" target="_blank" rel="noopener noreferrer" data-astro-cid-wrgicudb="true" data-astro-cid-b4zvghpy="true" class="chip chip--sm chip--interactive source-tag"> bernsteinbear.com </a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年3月27日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p><em>Originally published on <a href="https://railsatscale.com/2026-03-27-using-perfetto-in-zjit/" target="_blank" rel="noopener noreferrer">Rails At Scale</a>.</em></p>
+
+<p>Look! A trace of slow events in a benchmark! Hover over the image to see it get bigger.</p>
+
+
+
+<figure>
+
+  <p><img src="/assets/img/perfetto-demo.png" alt="" /></p>
+
+  <figcaption>
+A sneak preview of what the trace looks like.
+</figcaption>
+</figure>
+
+<p>Now read on to see what the slow events are and how we got this pretty picture.</p>
+
+<h2>The rules</h2>
+
+<p>The first rule of just-in-time compilers is: you stay in JIT code. The second
+rule of JIT is: you STAY in JIT code!</p>
+
+<p>When control leaves the compiled code to run in the interpreter—what the ZJIT
+team calls either a “side-exit” or a “deopt”, depending on who you talk
+to—things slow down. In a well-tuned system, this should happen pretty
+rarely. Right now, because we’re still bringing up the compiler and runtime
+system, it happens more than we would like.</p>
+
+<p>We’re reducing the number of exits over time.</p>
+
+<h2>Lies, damned lies, and statistics</h2>
+
+<p>We can track our side-exit reduction progress with <code>--zjit-stats</code>, which,
+on process exit, prints out a tidy summary of the counters for all of the bad
+stuff we track. It’s got side-exits. It’s got calls to C code. It’s got calls
+to slow-path runtime helpers. It’s got everything.</p>
+
+<p>Here is a chopped-up sample of stats output for the Lobsters benchmark,
+which is a large Rails app:</p>
+
+<div><div><pre><code>$ WARMUP_ITRS=0 MIN_BENCH_ITRS=20 MIN_BENCH_TIME=0 ruby --zjit-stats benchmarks/lobsters/benchmark.rb
+...
+***ZJIT: Printing ZJIT statistics on exit***
+...
+Top-20 side exit reasons (100.0% of total 12,549,876):
+                   guard_type_failure: 6,020,734 (48.0%)
+                  guard_shape_failure: 5,556,147 (44.3%)
+  block_param_proxy_not_iseq_or_ifunc:   445,358 ( 3.5%)
+                   unhandled_hir_insn:   215,168 ( 1.7%)
+                        compile_error:   181,474 ( 1.4%)
+...
+compiled_iseq_count:                               5,581
+failed_iseq_count:                                     2
+compile_time:                                    1,443ms
+...
+guard_type_count:                            133,425,094
+guard_type_exit_ratio:                              4.5%
+guard_shape_count:                            49,386,694
+guard_shape_exit_ratio:                            11.3%
+...
+code_region_bytes:                            31,571,968
+side_exit_size_ratio:                              33.1%
+zjit_alloc_bytes:                             19,329,659
+total_mem_bytes:                              50,901,627
+...
+ratio_in_zjit:                                     82.8%
+$
+</code></pre></div></div>
+
+<p>(I’ve cut out significant chunks of the stats output and replaced them with
+<code>...</code> because it’s overwhelming the first time you see it.)</p>
+
+<p>The first thing you might note is that the thing I just described as terrible
+for performance is happening <em>over twelve million times</em>. The second thing you
+might notice is that despite this, we’re staying in JIT code seemingly a high
+percentage of the time. Or are we? Is 80% high? Is a 4.5% class guard miss
+ratio high? What about 11% for shapes? It’s hard to say.</p>
+
+<p>The counters are great because they’re <em>quick</em> and they’re reasonably stable
+proxies for performance. There’s no substitute for painstaking measurements on
+a quiet machine but if the counter for Bad Slow Thing goes down (and others do
+not go up), we’re probably doing a good job.</p>
+
+<p>But they’re not great for building intuition. For intuition, we want more
+tangible feeling numbers. We want to see things.</p>
+
+<h2>Building intuition</h2>
+
+<p>The third thing is that you might ask yourself “self, where are these exits
+coming from?” Unfortunately, counters cannot tell you that. For that, we
+want stack traces. This lets us know where in the guest (Ruby) code triggers
+an exit.</p>
+
+<p>Ideally also we would want some notion of time: we would want to know not just
+where these events happen but also when. Are the exits happening early, at
+application boot? At warmup? Even during what should be steady state
+application time? Hard to say.</p>
+
+<p>So we need more tools. Thankfully, <a href="https://perfetto.dev/" target="_blank" rel="noopener noreferrer">Perfetto</a> exists.
+Perfetto is a system for visualizing and analyzing traces and profiles that your
+application generates. It has both a web UI and a command-line UI.</p>
+
+<p>We can emit traces for Perfetto and visualize them there.</p>
+
+<h2>A look at Perfetto</h2>
+
+<p>Take a look at this <a href="https://ui.perfetto.dev/#!/?url=https://bernsteinbear.comassets/misc/perfetto-36885.fxt" target="_blank" rel="noopener noreferrer">sample ZJIT Perfetto
+trace</a>
+generated by running Ruby with <code>--zjit-trace-exits</code><sup><a href="#fn:sampled" rel="noopener noreferrer" target="_blank">1</a></sup>. What do you see?</p>
+
+<p>I see a couple arrows on the left. Arrows indicate “instant” point-in-time
+events. Then I see a mess of purple to the right of that until the end of the
+trace.</p>
+
+<p>Hover over an arrow. Find out that each arrow is a side-exit. Scream silently.</p>
+
+<p>But it’s a friendly arrow. It tells you what the side-exit reason is. If you
+click it, it even tells you the stack trace in the pop-up panel on the bottom.
+If we click a couple of them, maybe we can learn more.</p>
+
+<p>We can also zoom by mousing over the track, holding Ctrl, and scrolling. That
+will get us look closer. But there are so many…</p>
+
+<p>Fortunately, Perfetto also provides a SQL interface to the traces. We can write
+a query to aggregate all of the side exit events from the <code>slice</code> table and
+line them up with the topmost method from the backtrace arguments in the <code>args</code>
+table:</p>
+
+<div><div><pre><code><span>SELECT</span>
+  <span>s</span><span>.</span><span>name</span> <span>AS</span> <span>reason</span><span>,</span>
+  <span>a</span><span>.</span><span>display_value</span> <span>AS</span> <span>method</span><span>,</span>
+  <span>COUNT</span><span>(</span><span>*</span><span>)</span> <span>AS</span> <span>count</span>
+<span>FROM</span> <span>slice</span> <span>s</span>
+<span>JOIN</span> <span>args</span> <span>a</span> <span>ON</span> <span>a</span><span>.</span><span>arg_set_id</span> <span>=</span> <span>s</span><span>.</span><span>arg_set_id</span> <span>AND</span> <span>a</span><span>.</span><span>key</span> <span>=</span> <span>'0'</span>
+<span>GROUP</span> <span>BY</span> <span>s</span><span>.</span><span>name</span><span>,</span> <span>a</span><span>.</span><span>display_value</span>
+<span>ORDER</span> <span>BY</span> <span>count</span> <span>DESC</span>
+</code></pre></div></div>
+
+<p>This pulls up a query box at the bottom showing us that there are a couple big
+hotspots:</p>
+
+<figure>
+
+  <p><img src="/assets/img/perfetto-method-query.png" alt="" /></p>
+
+  <figcaption>
+Query results showing in columns left to right: reason for side-exit, method
+that exited, and count. The top three are above 1k but it quickly falls off
+after that.
+</figcaption>
+
+</figure>
+
+<p>It even has a helpful option to export the results Markdown table so I can
+paste (an edited version) into this blog post:</p>
+
+<div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>reason</th>
+        <th>method</th>
+        <th>count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>GuardShape(ShapeId(2475))</td>
+        <td>ActiveModel::AttributeRegistration::ClassMethods#attribute_types</td>
+        <td>5119</td>
+      </tr>
+      <tr>
+        <td>GuardShape(ShapeId(2099268))</td>
+        <td>ActiveRecord::ConnectionAdapters::AbstractAdapter#extended_type_map_key</td>
+        <td>2295</td>
+      </tr>
+      <tr>
+        <td>GuardType(FalseClass)</td>
+        <td>ActiveModel::Type::Value#cast</td>
+        <td>1025</td>
+      </tr>
+      <tr>
+        <td>GuardShape(ShapeId(2099698))</td>
+        <td>ActiveRecord::Associations#association_instance_get</td>
+        <td>904</td>
+      </tr>
+      <tr>
+        <td>BlockParamProxyNotIseqOrIfunc</td>
+        <td>ActiveRecord::AttributeMethods::Read#_read_attribute</td>
+        <td>902</td>
+      </tr>
+      <tr>
+        <td>GuardShape(ShapeId(526450))</td>
+        <td>Rack::Request::Env#get_header</td>
+        <td>636</td>
+      </tr>
+      <tr>
+        <td>GuardType(Class[class_exact*:Class@VALUE(0x128c60100)])</td>
+        <td>ActiveRecord::Base._reflections</td>
+        <td>622</td>
+      </tr>
+      <tr>
+        <td>GuardType(ObjectSubclass[class_exact:Story])</td>
+        <td>ActiveRecord::Associations#association</td>
+        <td>565</td>
+      </tr>
+      <tr>
+        <td>GuardShape(ShapeId(2098982))</td>
+        <td>ActiveRecord::Reflection::AssociationReflection#polymorphic?</td>
+        <td>510</td>
+      </tr>
+      <tr>
+        <td>GuardType(StringSubclass[class_exact:ActiveSupport::SafeBuffer])</td>
+        <td>ActionView::OutputBuffer#&lt;&lt;</td>
+        <td>500</td>
+      </tr>
+      <tr>
+        <td>GuardShape(ShapeId(2475))</td>
+        <td>ActiveRecord::AttributeMethods::PrimaryKey::ClassMethods#primary_key</td>
+        <td>492</td>
+      </tr>
+      <tr>
+        <td>GuardType(ObjectSubclass[class_exact:ActiveModel::Type::String])</td>
+        <td>ActiveModel::Type::Value#deserialize</td>
+        <td>442</td>
+      </tr>
+      <tr>
+        <td>GuardShape(ShapeId(2098982))</td>
+        <td>ActiveRecord::Reflection::AssociationReflection#deprecated?</td>
+        <td>376</td>
+      </tr>
+      <tr>
+        <td>GuardType(ObjectSubclass[class_exact:Bundler::Dependency])</td>
+        <td>Gem::Dependency#matches_spec?</td>
+        <td>355</td>
+      </tr>
+      <tr>
+        <td>UnhandledHIRInvokeBuiltin</td>
+        <td>Time#initialize</td>
+        <td>346</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<p>Looks like we should figure out why we’re having shape misses so much and that will
+clear up a lot of exits. (Hint: it’s because once we make our first guess about
+what we think the object shape will be, we don’t re-assess… <strong>yet</strong>.)</p>
+
+<p>This has been a taste of Perfetto. There’s probably a lot more to explore.
+Please join the <a href="https://zjit.zulipchat.com" target="_blank" rel="noopener noreferrer">ZJIT Zulip</a> and let us know if you have any cool
+tracing or exploring tricks.</p>
+
+<p>Now I’ll explain how you too can use Perfetto from your system. Adding support
+to ZJIT was pretty straightforward.</p>
+
+<h2>Implementation</h2>
+
+<p>The first thing is that you’ll need some way to get trace data out of your
+system. We write to a file with a well-known location
+(<code>/tmp/perfetto-PID.fxt</code>), but you could do any number of things. Perhaps you
+can stream events over a socket to another process, or to a server that
+aggregates them, or store them internally and expose a webserver that serves
+them over the internet, or… anything, really.</p>
+
+<p>Once you have that, you need a couple lines of code to emit the data. Perfetto
+accepts a number of formats. For example, in his <a href="https://thume.ca/2023/12/02/tracing-methods/" target="_blank" rel="noopener noreferrer">excellent blog post</a>,
+Tristan Hume opens with such a simple snippet of code for logging Chromium
+Trace JSON-formatted events (lightly modified by me):</p>
+
+<div><div><pre><code><span>event_name</span> <span>=</span> <span>...</span>
+<span>timestamp</span> <span>=</span> <span>...</span>
+<span>duration</span> <span>=</span> <span>...</span>
+<span>f</span> <span>=</span> <span>open</span><span>(</span><span>'trace.json'</span><span>,</span><span>'a'</span><span>)</span>
+<span>f</span><span>.</span><span>print</span><span>(</span><span>"["</span><span>)</span>
+
+<span># ... emit some events here ...
+</span>
+<span># Log a single event
+</span><span>f</span><span>.</span><span>print</span><span>(</span><span>'{"name": "%s", "ts": %d, "dur": %d, "cat": "hi", "ph": "X", "pid": 1, "tid": 1, "args": {}},</span><span>\n</span><span>'</span> <span>%</span>
+  <span>(</span><span>event_name</span><span>,</span> <span>timestamp</span><span>,</span> <span>duration</span><span>))</span>
+
+<span># ... emit some events here ...
+</span>
+<span># ... at process exit, close the file ...
+</span><span>f</span><span>.</span><span>print</span><span>(</span><span>"]"</span><span>)</span> <span># this closing ] isn't actually required
+</span><span>f</span><span>.</span><span>close</span><span>()</span>
+</code></pre></div></div>
+
+<p>This snippet is great. It shows, end-to-end, writing a stream of one event. It
+is a <em>complete</em> (X) event, as opposed to either:</p>
+
+<ul>
+  <li>two discrete timestamped <em>begin</em> (B) and <em>end</em> (E) events that book-end
+something, or</li>
+  <li>an <em>instant</em> (i) event that has no duration, or</li>
+  <li>a couple other event types in the <a href="https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU/preview" target="_blank" rel="noopener noreferrer">Chromium Trace Event Format doc</a></li>
+</ul>
+
+<p>It was enough to get me started. Since it’s JSON, and we have a lot of side
+exits, the trace quickly ballooned to 8GB large for a several second benchmark.
+Not great. Now, part of this is our fault—we should side exit less—and part
+of it is just the verbosity of JSON.</p>
+
+<p>Thankfully, Perfetto ingests more compact binary formats, such as the <a href="https://fuchsia.dev/fuchsia-src/reference/tracing/trace-format" target="_blank" rel="noopener noreferrer">Fuchsia
+trace format</a>.
+In addition to being more compact, FXT even supports string interning. After
+modifying the tracer to emit FXT, we ended with closer to 100MB for the same
+benchmark.</p>
+
+<p>We can reduce further by <em>sampling</em>—not writing every exit to the trace, but
+instead every <em>K</em> exits (for some (probably prime) K). This is why we provide
+the <code>--zjit-trace-exits-sample-rate=K</code> option.</p>
+
+<p>Check out the <a href="https://github.com/ruby/ruby/blob/eb8051185122d4b7bc9c6a6df694a85f34ced681/zjit/src/stats.rs#L988" target="_blank" rel="noopener noreferrer">trace writer</a> implementation from the point this article
+was written.</p>
+
+<h2>Tracing more things</h2>
+
+<p>We could trace:</p>
+
+<ul>
+  <li>When methods get compiled</li>
+  <li>How big the generated code is</li>
+  <li>How long each compile phase takes</li>
+  <li>When (and where) invalidation events happen</li>
+  <li>When (and where) allocations happen from JITed code</li>
+  <li>Garbage collection events</li>
+  <li>and more!</li>
+</ul>
+
+<h2>Conclusion</h2>
+
+<p>Visualizations are awesome. Get your data in the right format so you can ask
+the right questions easily. Thanks for Perfetto!</p>
+
+<p>Also, looks like visualizations are now available in Perfetto canary. Time to
+go make some fun histograms…</p>
+<div>
+  <ol>
+    <li>
+      <p>This is also sampled/strobed, so not every exit is in there. This
+is just 1/K of them for some K that I don’t remember. <a href="#fnref:sampled" target="_blank" rel="noopener noreferrer">↩</a></p>
+    </li>
+  </ol>
+</div></div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://bernsteinbear.com/blog/zjit-perfetto/?utm_source=rss" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text footer-text--strong" data-astro-cid-sz7xmlte>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-sz7xmlte>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-wlspcwf4> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-wlspcwf4> <path d="M18 15l-6-6-6 6" data-astro-cid-wlspcwf4></path> </svg> </button> <script type="module">function o(){const e=document.getElementById("back-to-top");if(!e)return;const s=300;let t=!1;const n=()=>{const i=window.scrollY>s;e.hidden=!i,t=!1},d=()=>{t||(requestAnimationFrame(n),t=!0)};e.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"})}),window.addEventListener("scroll",d,{passive:!0}),n(),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",d)},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",o):o();document.addEventListener("astro:page-load",o);</script></body></html>
