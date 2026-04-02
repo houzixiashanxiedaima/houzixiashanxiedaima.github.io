@@ -315,18 +315,18 @@ Trace JSON-formatted events (lightly modified by me):</p>
 <span>timestamp</span> <span>=</span> <span>...</span>
 <span>duration</span> <span>=</span> <span>...</span>
 <span>f</span> <span>=</span> <span>open</span><span>(</span><span>'trace.json'</span><span>,</span><span>'a'</span><span>)</span>
-<span>f</span><span>.</span><span>print</span><span>(</span><span>"["</span><span>)</span>
+<span>f</span><span>.</span><span>write</span><span>(</span><span>"[</span><span>\n</span><span>"</span><span>)</span>
 
 <span># ... emit some events here ...
 </span>
 <span># Log a single event
-</span><span>f</span><span>.</span><span>print</span><span>(</span><span>'{"name": "%s", "ts": %d, "dur": %d, "cat": "hi", "ph": "X", "pid": 1, "tid": 1, "args": {}},</span><span>\n</span><span>'</span> <span>%</span>
+</span><span>f</span><span>.</span><span>write</span><span>(</span><span>'{"name": "%s", "ts": %d, "dur": %d, "cat": "hi", "ph": "X", "pid": 1, "tid": 1, "args": {}},</span><span>\n</span><span>'</span> <span>%</span>
   <span>(</span><span>event_name</span><span>,</span> <span>timestamp</span><span>,</span> <span>duration</span><span>))</span>
 
 <span># ... emit some events here ...
 </span>
 <span># ... at process exit, close the file ...
-</span><span>f</span><span>.</span><span>print</span><span>(</span><span>"]"</span><span>)</span> <span># this closing ] isn't actually required
+</span><span>f</span><span>.</span><span>write</span><span>(</span><span>"]"</span><span>)</span> <span># this closing ] isn't actually required
 </span><span>f</span><span>.</span><span>close</span><span>()</span>
 </code></pre></div></div>
 
