@@ -72,7 +72,8 @@ with <code>"high"</code> to let PyTorch choose to use the GPU's tensor cores, wh
 <a href="/2025/12/llm-from-scratch-28-training-a-base-model-from-scratch" target="_blank" rel="noopener noreferrer">post on the local train</a> for details).
 Those both (at least potentially) reduce the precision of
 the train below what you'd get if you trained with full-fat <code>float32</code>.  Would reverting
-that be worth the longer train time?  I should probably at least poke at that.</li>
+that be worth the longer train time?  I should probably at least poke at that.
+<a href="/2026/04/llm-from-scratch-32h-interventions-full-fat-float32" target="_blank" rel="noopener noreferrer">Here's the blog post about it</a>.</li>
 <li>The batch size.  I've already, in effect, tried playing with that.  The different
 cloud machines I played with had different amounts of per-GPU VRAM, so supported
 different per-GPU micro-batch sizes.  So I wound up trying batch sizes from
@@ -96,7 +97,7 @@ space can differ from the input one.  But who knows, perhaps with a small model
 like this, it might help? <a href="/2026/03/llm-from-scratch-32g-interventions-weight-tying" target="_blank" rel="noopener noreferrer">Here's the post</a>.</li>
 </ul>
 
-<p>I'm going to work through each of those apart from the first two and the batch size (and will retrospectively add links to
+<p>I've worked through each of those apart from the first two and the batch size (and have retrospectively added links to
 the list above when I do), trying a train with just that intervention and nothing else, on
 a cloud machine.  Once that's done, I'll bake all of the things that helped into
 the training loop, and do another local train -- with
