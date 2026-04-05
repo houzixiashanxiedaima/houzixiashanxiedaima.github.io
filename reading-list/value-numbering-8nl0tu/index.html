@@ -1,0 +1,633 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.0.8"><meta name="description" content="Welcome back to compiler land. Today we’re going to talk about value
+numbering, which is like SSA, but more.
+
+Static single assignment (SSA) gives names to values: every expression has a
+name, and eac"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><link rel="canonical" href="https://blog.yuyins.com/reading-list/value-numbering-8nl0tu/"><!-- Web Font: Noto Sans SC (Source Han Sans, Chinese + Latin) --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;0,7..72,700;1,7..72,400&family=Noto+Serif+SC:wght@400;500;600;700&display=swap"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/value-numbering-8nl0tu/"><meta property="og:title" content="Value numbering"><meta property="og:description" content="Welcome back to compiler land. Today we’re going to talk about value
+numbering, which is like SSA, but more.
+
+Static single assignment (SSA) gives names to values: every expression has a
+name, and eac"><meta property="og:image" content="https://blog.yuyins.com/favicon.svg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/value-numbering-8nl0tu/"><meta property="twitter:title" content="Value numbering"><meta property="twitter:description" content="Welcome back to compiler land. Today we’re going to talk about value
+numbering, which is like SSA, but more.
+
+Static single assignment (SSA) gives names to values: every expression has a
+name, and eac"><meta property="twitter:image" content="https://blog.yuyins.com/favicon.svg"><title>Value numbering</title><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-b4zvghpy]{display:inline-flex;align-items:center;gap:.45rem;border-radius:9999px;border:1px solid transparent;background:var(--muted);color:var(--foreground);font-weight:500;line-height:1.4;text-decoration:none;white-space:nowrap}.chip--sm[data-astro-cid-b4zvghpy]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-b4zvghpy]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-b4zvghpy]{cursor:pointer;transition:background-color .2s ease,color .2s ease,opacity .2s ease}.chip--interactive[data-astro-cid-b4zvghpy]:hover{background-color:color-mix(in srgb,var(--accent) 10%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 68%,var(--foreground))}.chip--active[data-astro-cid-b4zvghpy],.chip[data-astro-cid-b4zvghpy].active{background-color:color-mix(in srgb,var(--accent) 18%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 82%,var(--foreground));border-color:transparent;box-shadow:none;font-weight:600}.chip--dashed[data-astro-cid-b4zvghpy]{border-style:dashed;border-color:color-mix(in srgb,var(--accent) 22%,var(--border));background:color-mix(in srgb,var(--background) 70%,var(--muted))}.chip[data-astro-cid-b4zvghpy]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+<link rel="stylesheet" href="/_astro/Layout.BLHYtbcV.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0;animation:fadeIn .3s ease-out}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;color:var(--muted-foreground);font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.8125rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--accent)}.back-link--top[data-astro-cid-wrgicudb]{display:inline-block;margin-bottom:1rem}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2> 雅俗共赏 </a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-otpdt6jm> <div class="search-dialog-card" data-astro-cid-otpdt6jm> <div class="search-dialog-bar" data-astro-cid-otpdt6jm> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="8" data-astro-cid-otpdt6jm></circle><path d="m21 21-4.3-4.3" data-astro-cid-otpdt6jm></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-otpdt6jm></div> <kbd class="search-kbd" data-astro-cid-otpdt6jm>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-otpdt6jm> <path d="M18 6 6 18" data-astro-cid-otpdt6jm></path><path d="m6 6 12 12" data-astro-cid-otpdt6jm></path> </svg> </button> </div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(e=0){if(sessionStorage.getItem(c)==="true")return m(),!0;const s=document.getElementById("pagefind-ui");if(!s)return!1;s.innerHTML='<div class="search-loading">加载中...</div>';try{return await new Promise((r,o)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=r,a.onerror=o,document.head.appendChild(a)}),m(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),e<2?(console.log(`Retrying search load... (${e+1}/2)`),await new Promise(r=>setTimeout(r,1e3)),l(e+1)):(s&&(s.innerHTML=`
+          <div class="search-loading">
+            <p>搜索功能加载失败</p>
+            <button id="retry-search" class="search-retry-btn">重试</button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Value numbering</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://bernsteinbear.com" target="_blank" rel="noopener noreferrer" data-astro-cid-wrgicudb="true" data-astro-cid-b4zvghpy="true" class="chip chip--sm chip--interactive source-tag"> bernsteinbear.com </a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年4月4日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>Welcome back to compiler land. Today we’re going to talk about <em>value
+numbering</em>, which is like SSA, but more.</p>
+
+<p>Static single assignment (SSA) gives names to values: every expression has a
+name, and each name corresponds to exactly one expression. It transforms
+programs like this:</p>
+
+<div><div><pre><code><span>x</span> <span>=</span> <span>0</span>
+<span>x</span> <span>=</span> <span>x</span> <span>+</span> <span>1</span>
+<span>x</span> <span>=</span> <span>x</span> <span>+</span> <span>1</span>
+</code></pre></div></div>
+
+<p>where the variable <code>x</code> is assigned more than once in the program text, into
+programs like this:</p>
+
+<div><div><pre><code><span>v0</span> <span>=</span> <span>0</span>
+<span>v1</span> <span>=</span> <span>v0</span> <span>+</span> <span>1</span>
+<span>v2</span> <span>=</span> <span>v1</span> <span>+</span> <span>1</span>
+</code></pre></div></div>
+
+<p>where each assignment to <code>x</code> has been replaced with an assignment to a new
+fresh name.</p>
+
+<p>It’s great because it makes clear the differences between the two <code>x + 1</code>
+expressions. Though they textually look similar, they compute different values.
+The first computes 1 and the second computes 2. In this example, it is not
+possible to substitute in a variable and re-use the value of <code>x + 1</code>, because
+the <code>x</code>s are different.</p>
+
+<p>But what if we see two “textually” identical instructions in SSA? That sounds
+much more promising than non-SSA because the transformation into SSA form has
+removed (much of) the statefulness of it all. When can we re-use the result?</p>
+
+<p>Identifying instructions that are known at compile-time to always produce the
+same value at run-time is called <em>value numbering</em>. </p>
+
+<h2>Eliminating common subexpressions</h2>
+
+<p>To understand value numbering, let’s extend the above IR snippet with two more
+instructions, v3 and v4.</p>
+
+<div><div><pre><code><span>v0</span> <span>=</span> <span>0</span>
+<span>v1</span> <span>=</span> <span>v0</span> <span>+</span> <span>1</span>
+<span>v2</span> <span>=</span> <span>v1</span> <span>+</span> <span>1</span>
+<span>v3</span> <span>=</span> <span>v0</span> <span>+</span> <span>1</span>  <span># new
+</span><span>v4</span> <span>=</span> <span>do_something</span><span>(</span><span>v2</span><span>,</span> <span>v3</span><span>)</span>  <span># new
+</span></code></pre></div></div>
+
+<p>In this new snippet, v3 looks the same as v1: adding v0 and 1. Assuming our
+addition operation is some ideal mathematical addition, we can absolutely
+re-use v1; no need to compute the addition again. We can rewrite the IR to
+something like:</p>
+
+<div><div><pre><code><span>v0</span> <span>=</span> <span>0</span>
+<span>v1</span> <span>=</span> <span>v0</span> <span>+</span> <span>1</span>
+<span>v2</span> <span>=</span> <span>v1</span> <span>+</span> <span>1</span>
+<span>v3</span> <span>=</span> <span>v1</span>
+<span>v4</span> <span>=</span> <span>do_something</span><span>(</span><span>v2</span><span>,</span> <span>v3</span><span>)</span>
+</code></pre></div></div>
+
+<p>This is kind of similar to the destructive union-find representation that
+JavaScriptCore and a couple other compilers use, where the optimizer doesn’t
+eagerly re-write all uses but instead leaves a little breadcrumb
+<code>Identity</code>/<code>Assign</code> instruction<sup><a href="#fn:cinder" rel="noopener noreferrer" target="_blank">1</a></sup>.</p>
+
+<p>We could then run our copy propagation pass (“union-find cleanup”?) and get:</p>
+
+<div><div><pre><code><span>v0</span> <span>=</span> <span>0</span>
+<span>v1</span> <span>=</span> <span>v0</span> <span>+</span> <span>1</span>
+<span>v2</span> <span>=</span> <span>v1</span> <span>+</span> <span>1</span>
+<span>v4</span> <span>=</span> <span>do_something</span><span>(</span><span>v2</span><span>,</span> <span>v1</span><span>)</span>
+</code></pre></div></div>
+
+<p>Great. But how does this happen? How does an optimizer identify reusable
+instruction candidates that are “textually identical”? Generally, there is <a href="https://pointersgonewild.com/2011/10/07/optimizing-global-value-numbering/" target="_blank" rel="noopener noreferrer">no
+actual text in the
+IR</a>.</p>
+
+<p>One popular solution is to compute a hash of each instruction. Then any
+instructions with the same hash (that also compare equal, in case of
+collisions) are considered equivalent. This is called <em>hash-consing</em>.</p>
+
+<p>When trying to figure all this out, I read through a couple of different
+implementations. I particularly like the <a href="https://maxine-vm.readthedocs.io/en/stable/" target="_blank" rel="noopener noreferrer">Maxine VM</a> implementation.
+For example, here is the <code>valueNumber</code> (hashing) and <code>valueEqual</code>
+functions for most binary operations, slightly modified for clarity:</p>
+
+<div><div><pre><code><span>public</span> <span>abstract</span> <span>class</span> <span>Instruction</span> <span>extends</span> <span>Value</span> <span>{</span> <span>...</span> <span>}</span>
+
+<span>// The base class for binary operations</span>
+<span>public</span> <span>abstract</span> <span>class</span> <span>Op2</span> <span>extends</span> <span>Instruction</span> <span>{</span>
+    <span>// Each binary operation has an opcode and two opearands</span>
+    <span>public</span> <span>final</span> <span>int</span> <span>opcode</span><span>;</span>  <span>// (IMUL, IADD, ...)</span>
+    <span>Value</span> <span>x</span><span>;</span>
+    <span>Value</span> <span>y</span><span>;</span>
+
+    <span>@Override</span>
+    <span>public</span> <span>int</span> <span>valueNumber</span><span>()</span> <span>{</span>
+        <span>// There are other fields but only opcode, and operands get hashed.</span>
+        <span>// Always set at least one bit in case the hash wraps to zero.</span>
+        <span>return</span> <span>0x20000000</span>
+        <span>|</span> <span>(</span><span>opcode</span>
+           <span>+</span> <span>7</span>  <span>*</span> <span>System</span><span>.</span><span>identityHashCode</span><span>(</span><span>x</span><span>)</span>
+           <span>+</span> <span>11</span> <span>*</span> <span>System</span><span>.</span><span>identityHashCode</span><span>(</span><span>y</span><span>));</span>
+    <span>}</span>
+
+    <span>@Override</span>
+    <span>public</span> <span>boolean</span> <span>valueEqual</span><span>(</span><span>Instruction</span> <span>i</span><span>)</span> <span>{</span>
+        <span>if</span> <span>(</span><span>i</span> <span>instanceof</span> <span>Op2</span><span>)</span> <span>{</span>
+            <span>Op2</span> <span>o</span> <span>=</span> <span>(</span><span>Op2</span><span>)</span> <span>i</span><span>;</span>
+            <span>return</span> <span>opcode</span> <span>==</span> <span>o</span><span>.</span><span>opcode</span> <span>&amp;&amp;</span> <span>x</span> <span>==</span> <span>o</span><span>.</span><span>x</span> <span>&amp;&amp;</span> <span>y</span> <span>==</span> <span>o</span><span>.</span><span>y</span><span>;</span>
+        <span>}</span>
+        <span>return</span> <span>false</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre></div></div>
+
+<p>The rest of the value numbering implementation assumes that if a <code>valueNumber</code>
+function returns 0, it does not wish to be considered for value
+numbering. Why might an instruction opt-out of value numbering?</p>
+
+<h2>Pure vs impure</h2>
+
+<p>An instruction might opt out of value numbering if it is not “pure”.</p>
+
+<p>Some instructions are not pure. Purity is in the eye of the beholder, but in
+general it means that an instruction does not interact with the state of the
+outside world, except for trivial computation on its operands. (What does it
+mean to de-duplicate/cache/reuse <code>printf</code>?)</p>
+
+<p>A load from an array object is also not a pure operation<sup><a href="#fn:heap-ssa" rel="noopener noreferrer" target="_blank">2</a></sup>. The load operation
+implicitly relies on the state of the memory. Also, even if the array was
+known-constant, in some runtime
+systems, the load might raise an exception. Changing the source location where
+an exception is raised is generally frowned upon. Languages such as Java often
+have requirements about where exceptions are raised codified in their
+specifications.</p>
+
+<p>We’ll work only on pure operations for now, but we’ll come back to this later.
+We do often want to optimize impure operations as well!</p>
+
+<p>We’ll start off with the simplest form of value numbering, which operates only
+on linear sequences of instructions, like basic blocks or traces.</p>
+
+<h2>Local value numbering</h2>
+
+<p>Let’s build a small implementation of local value numbering (LVN). We’ll start with
+straight-line code—no branches or anything tricky.</p>
+
+<p>Most compiler optimizations on control-flow graphs (CFGs) iterate over the
+instructions “top to bottom”<sup><a href="#fn:order" rel="noopener noreferrer" target="_blank">3</a></sup> and it seems like we can do the same thing
+here too.</p>
+
+<p>From what we’ve seen so far optimizing our made-up IR snippet, we can do
+something like this:</p>
+
+<ul>
+  <li>initialize a map from instruction numbers to instruction pointers</li>
+  <li>for each instruction <code>i</code>
+    <ul>
+      <li>if <code>i</code> wants to participate in value numbering
+        <ul>
+          <li>if <code>i</code>’s value number is already in the map, replace all pointers to <code>i</code>
+in the rest of the program with the corresponding value from the map</li>
+          <li>otherwise, add <code>i</code> to the map</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>The find-and-replace, remember, is not a literal find-and-replace, but instead
+something like:</p>
+
+<div><div><pre><code><span>instr</span><span>.</span><span>opcode</span> <span>=</span> <span>"Assign"</span>
+<span>instr</span><span>.</span><span>operands</span><span>[</span><span>0</span><span>]</span> <span>=</span> <span>replacement</span>
+</code></pre></div></div>
+
+<p>or</p>
+
+<div><div><pre><code><span>instr</span><span>.</span><span>make_equal_to</span><span>(</span><span>replacement</span><span>)</span>
+</code></pre></div></div>
+
+<p>(if you have been following along with the <a href="https://pypy.org/categories/toy-optimizer.html" target="_blank" rel="noopener noreferrer">toy optimizer</a> series)</p>
+
+<p>This several-line function (as long as you already have a hash map and a
+union-find available to you) is enough to build local value numbering! And real
+compilers are built this way, too.</p>
+
+<p>If you don’t believe me, take a look at this slightly edited snippet from
+<a href="https://maxine-vm.readthedocs.io/en/stable/" target="_blank" rel="noopener noreferrer">Maxine’s</a> value numbering implementation. It has all of the components
+we just talked about: iterating over instructions, map lookup, and some
+substitution.</p>
+
+<div><div><pre><code><span>// Local value numbering</span>
+<span>BlockBegin</span> <span>block</span> <span>=</span> <span>...;</span>
+<span>ValueMap</span> <span>currentMap</span> <span>=</span> <span>new</span> <span>ValueMap</span><span>();</span>
+<span>InstructionSubstituter</span> <span>subst</span> <span>=</span> <span>new</span> <span>InstructionSubstituter</span><span>();</span>
+
+<span>// visit all instructions of this block</span>
+<span>for</span> <span>(</span><span>Instruction</span> <span>instr</span> <span>=</span> <span>block</span><span>.</span><span>next</span><span>();</span> <span>instr</span> <span>!=</span> <span>null</span><span>;</span> <span>instr</span> <span>=</span> <span>instr</span><span>.</span><span>next</span><span>())</span> <span>{</span>
+    <span>// attempt value numbering (uses valueNumber() and valueEqual())</span>
+    <span>//</span>
+    <span>// return a previous instruction if it exists in the map, or insert the</span>
+    <span>// current instruction into the map and return it</span>
+    <span>Instruction</span> <span>f</span> <span>=</span> <span>currentMap</span><span>.</span><span>findInsert</span><span>(</span><span>instr</span><span>);</span>
+    <span>if</span> <span>(</span><span>f</span> <span>!=</span> <span>instr</span><span>)</span> <span>{</span>
+        <span>// remember the replacement in the union-find</span>
+        <span>subst</span><span>.</span><span>setSubst</span><span>(</span><span>instr</span><span>,</span> <span>f</span><span>);</span>
+    <span>}</span>
+<span>}</span>
+</code></pre></div></div>
+
+<p>This alone will get you pretty far. Code generators of all shapes tend to leave
+messy repeated computations all over their generated code and this will make
+short work of them.</p>
+
+<p>Sometimes, though, your computations are spread across control flow—over
+multiple basic blocks. What do you do then?</p>
+
+
+
+<h2>Global value numbering</h2>
+
+<p>Computing value numbers for an entire function is called <em>global value
+numbering</em> (GVN) and it requires dealing with control flow (if, loops, etc). I
+don’t just mean that for an entire function, we run local value numbering
+block-by-block. Global value numbering implies that expressions can be
+de-duplicated and shared across blocks.</p>
+
+<p>Let’s tackle control flow case by case.</p>
+
+<p>First is the simple case from above: one block. In this case, we can go top to
+bottom with our value numbering and do alright.</p>
+
+<figure>
+  
+</figure>
+
+<p>The second case is also reasonable to handle: one block flowing into another. In this
+case, we can still go top to bottom. We just have to find a way to iterate over
+the blocks.</p>
+
+<p>If we’re not going to share value maps between blocks, the order doesn’t
+matter. But since the point of global value numbering is to share values, we
+have to iterate them in topological order (reverse post order (RPO)). This
+ensures that predecessors get visited before successors. If you have <code>bb0 -&gt;
+bb1</code>, we have to visit first <code>bb0</code> and then <code>bb1</code>.</p>
+
+<p>Because of how SSA works and how CFGs work, the second block can “look up” into
+the first block and use the values from it. To get global value numbering
+working, we have to copy <code>bb0</code>’s value map before we start processing <code>bb1</code> so
+we can re-use the instructions.</p>
+
+<figure>
+  
+</figure>
+
+<p>Maybe something like:</p>
+
+<div><div><pre><code><span>value_map</span> <span>=</span> <span>ValueMap</span><span>()</span>
+<span>for</span> <span>block</span> <span>in</span> <span>function</span><span>.</span><span>reverse_post_order</span><span>():</span>
+    <span>local_value_numbering</span><span>(</span><span>block</span><span>,</span> <span>value_map</span><span>)</span>
+</code></pre></div></div>
+
+<p>Then the expressions can accrue across blocks. <code>bb1</code> can re-use the
+already-computed <code>Add v0, 1</code> from <code>bb0</code> because it is still in the map.</p>
+
+<p>…but this breaks as soon as you have control-flow splits. Consider the
+following shape graph:</p>
+
+
+<figure>
+  
+</figure>
+
+<p>We’re going to iterate over that graph in one of two orders: A B C or A C B. In
+either case, we’re going to be adding all this stuff into the value map from
+one block (say, B) that is not actually available to its sibling block (say,
+C).</p>
+
+<p>When I say “not available”, I mean “would not have been computed before”. This
+is because we execute either A then B or A then C. There’s no world in which we
+execute B then C.</p>
+
+<p>But alright, look at a third case where there is such a world: a control-flow
+join. In this diagram, we have two predecessor blocks B and C each flowing into
+D. In this diagram, B <em>always</em> flows into D and also C <em>always</em> flows into D.
+So the iterator order is fine, right?</p>
+
+
+<figure>
+  
+</figure>
+
+<p>Well, still no. We have the same sibling problem as before. B and C still can’t
+share value maps.</p>
+
+<p>We also have a weird question when we enter D: where did we come from? If we
+came from B, we can re-use expressions from B. If we came from C, we can re-use
+expressions from C. But we cannot in general know which predecessor block we
+came from.</p>
+
+<p>The only block we know <em>for sure</em> that we executed before D is A. This means we
+can re-use A’s value map in D because we can guarantee that all execution paths
+that enter D have previously gone through A.</p>
+
+<p>This relationship is called a <em>dominator</em> relationship and this is the key to
+one style of global value numbering that we’re going to talk about in this
+post. A block can always use the value map from any other block that dominates
+it. For completeness’ sake, in the diamond diagram, A dominates each of B and
+C, too.</p>
+
+<p>We can compute dominators a couple of ways<sup><a href="#fn:compute-doms" rel="noopener noreferrer" target="_blank">4</a></sup>, but that’s a little
+bit out of scope for this blog post. If we assume that we have dominator
+information available in our CFG, we can use that for global value numbering.
+And that’s just what—you guessed it—Maxine VM does.</p>
+
+<p>It iterates over all blocks in reverse post-order, doing local value numbering,
+threading through value maps from dominator blocks. In this case, their method
+<code>dominator</code> gets the <em>immediate dominator</em>: the “closest” dominator block of
+all the blocks that dominate the current one.</p>
+
+<div><div><pre><code><span>public</span> <span>class</span> <span>GlobalValueNumberer</span> <span>{</span>
+    <span>final</span> <span>HashMap</span><span>&lt;</span><span>BlockBegin</span><span>,</span> <span>ValueMap</span><span>&gt;</span> <span>valueMaps</span><span>;</span>
+    <span>final</span> <span>InstructionSubstituter</span> <span>subst</span><span>;</span>
+    <span>ValueMap</span> <span>currentMap</span><span>;</span>
+
+    <span>public</span> <span>GlobalValueNumberer</span><span>(</span><span>IR</span> <span>ir</span><span>)</span> <span>{</span>
+        <span>this</span><span>.</span><span>subst</span> <span>=</span> <span>new</span> <span>InstructionSubstituter</span><span>(</span><span>ir</span><span>);</span>
+        <span>// reverse post-order</span>
+        <span>List</span><span>&lt;</span><span>BlockBegin</span><span>&gt;</span> <span>blocks</span> <span>=</span> <span>ir</span><span>.</span><span>linearScanOrder</span><span>();</span>
+        <span>valueMaps</span> <span>=</span> <span>new</span> <span>HashMap</span><span>&lt;</span><span>BlockBegin</span><span>,</span> <span>ValueMap</span><span>&gt;(</span><span>blocks</span><span>.</span><span>size</span><span>());</span>
+        <span>optimize</span><span>(</span><span>blocks</span><span>);</span>
+        <span>subst</span><span>.</span><span>finish</span><span>();</span>
+    <span>}</span>
+
+    <span>void</span> <span>optimize</span><span>(</span><span>List</span><span>&lt;</span><span>BlockBegin</span><span>&gt;</span> <span>blocks</span><span>)</span> <span>{</span>
+        <span>int</span> <span>numBlocks</span> <span>=</span> <span>blocks</span><span>.</span><span>size</span><span>();</span>
+        <span>BlockBegin</span> <span>startBlock</span> <span>=</span> <span>blocks</span><span>.</span><span>get</span><span>(</span><span>0</span><span>);</span>
+
+        <span>// initial value map, with nesting 0</span>
+        <span>valueMaps</span><span>.</span><span>put</span><span>(</span><span>startBlock</span><span>,</span> <span>new</span> <span>ValueMap</span><span>());</span>
+
+        <span>for</span> <span>(</span><span>int</span> <span>i</span> <span>=</span> <span>1</span><span>;</span> <span>i</span> <span>&lt;</span> <span>numBlocks</span><span>;</span> <span>i</span><span>++)</span> <span>{</span>
+            <span>// iterate through all the blocks</span>
+            <span>BlockBegin</span> <span>block</span> <span>=</span> <span>blocks</span><span>.</span><span>get</span><span>(</span><span>i</span><span>);</span>
+            <span>BlockBegin</span> <span>dominator</span> <span>=</span> <span>block</span><span>.</span><span>dominator</span><span>();</span>
+
+            <span>// create new value map with increased nesting</span>
+            <span>currentMap</span> <span>=</span> <span>new</span> <span>ValueMap</span><span>(</span><span>valueMaps</span><span>.</span><span>get</span><span>(</span><span>dominator</span><span>));</span>
+
+            <span>// &lt;&lt; INSERT LOCAL VALUE NUMBERING HERE &gt;&gt;</span>
+
+            <span>// remember value map for successors</span>
+            <span>valueMaps</span><span>.</span><span>put</span><span>(</span><span>block</span><span>,</span> <span>currentMap</span><span>);</span>
+        <span>}</span>
+    <span>}</span>
+<span>}</span>
+</code></pre></div></div>
+
+<p>And that’s it! That’s the core of Maxine’s <a href="https://github.com/beehive-lab/Maxine-VM/blob/e213a842f78983e2ba112ae46de8c64317bc206e/com.sun.c1x/src/com/sun/c1x/opt/GlobalValueNumberer.java" target="_blank" rel="noopener noreferrer">GVN implementation</a>. I
+love how short it is. For not very much code, you can remove a lot of duplicate
+pure SSA instructions.</p>
+
+<p>This does still work with loops, but with some caveats. From p7 of <a href="/assets/img/briggs-gvn.pdf" target="_blank" rel="noopener noreferrer">Briggs GVN</a>:</p>
+
+<blockquote>
+  <p>The φ-functions require special treatment. Before the compiler can analyze
+the φ-functions in a block, it must previously have assigned value numbers to
+all of the inputs. This is not possible in all cases; specifically, any
+φ-function input whose value flows along a back edge (with respect to the
+dominator tree) cannot have a value number. If any of the parameters of a
+φ-function have not been assigned a value number, then the compiler cannot
+analyze the φ-function, and it must assign a unique, new value number to the
+result.</p>
+</blockquote>
+
+<p>It also talks about eliminating useless phis, which is optional, but would
+the strengthen global value numbering pass: it makes more information
+transparent.</p>
+
+<p>But what if we want to handle impure instructions?</p>
+
+<h2>State management and invalidation</h2>
+
+<p>Languages such as Java allow for reading fields from the <code>this</code>/<code>self</code> object within
+methods as if the field were a variable name. This makes code like the
+following common:</p>
+
+<div><div><pre><code><span>class</span> <span>CPU</span> <span>{</span>
+    <span>private</span> <span>void</span> <span>exec_adc</span><span>()</span> <span>{</span>
+        <span>int</span> <span>result_int</span> <span>=</span> <span>regA</span> <span>+</span> <span>fetched_data</span> <span>+</span> <span>flagCARRY</span><span>;</span>
+        <span>byte</span> <span>result</span> <span>=</span> <span>(</span><span>byte</span><span>)</span> <span>result_int</span><span>;</span>
+        <span>// ...</span>
+        <span>int</span> <span>a</span> <span>=</span> <span>result_int</span> <span>^</span> <span>regA</span><span>;</span>
+        <span>int</span> <span>b</span> <span>=</span> <span>result_int</span> <span>^</span> <span>fetched_data</span><span>;</span>
+        <span>// ...</span>
+        <span>regA</span> <span>=</span> <span>result</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre></div></div>
+
+<p>Each of these reference to <code>regA</code> and <code>fetched_data</code> is an implicit reference
+to <code>this.regA</code> or <code>this.fetched_data</code>, which is semantically a field load off
+an object. You can see it in <a href="https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:java,selection:(endColumn:19,endLineNumber:14,positionColumn:19,positionLineNumber:14,selectionStartColumn:19,selectionStartLineNumber:14,startColumn:19,startLineNumber:14),source:'class+CPU+%7B%0A++++private+void+exec_adc()+%7B%0A++++++++int+result_int+%3D+regA+%2B+fetched_data+%2B+flagCARRY%3B%0A++++++++byte+result+%3D+(byte)+result_int%3B%0A++++++++//+...%0A++++++++int+a+%3D+result_int+%5E+regA%3B%0A++++++++int+b+%3D+result_int+%5E+fetched_data%3B%0A++++++++//+...%0A++++++++regA+%3D+result%3B%0A++++%7D%0A%0A++++int+regA%3B%0A++++int+fetched_data%3B%0A++++int+flagCARRY%3B%0A%7D%0A'),l:'5',n:'0',o:'Java+source+%231',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:compiler,i:(compiler:java2501,filters:(b:'0',binary:'1',binaryObject:'1',commentOnly:'0',debugCalls:'1',demangle:'0',directives:'0',execute:'1',intel:'0',libraryCode:'0',trim:'1',verboseDemangling:'0'),flagsViewOpen:'1',fontScale:14,fontUsePx:'0',j:1,lang:java,libs:!(),options:'',overrides:!(),selection:(endColumn:19,endLineNumber:40,positionColumn:1,positionLineNumber:1,selectionStartColumn:19,selectionStartLineNumber:40,startColumn:1,startLineNumber:1),source:1),l:'5',n:'0',o:'+jdk+25.0.1+(Editor+%231)',t:'0')),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4" target="_blank" rel="noopener noreferrer">the bytecode</a> (thanks, Matt Godbolt):</p>
+
+<div><div><pre><code>class CPU {
+  int regA;
+
+  int fetched_data;
+
+  int flagCARRY;
+
+  CPU();
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
+         4: return
+
+
+  private void exec_adc();
+         0: aload_0
+         1: getfield      #7                  // Field regA:I
+         4: aload_0
+         // ...
+        20: getfield      #7                  // Field regA:I
+        23: ixor
+        24: istore_3
+        25: iload_1
+        26: aload_0
+        27: getfield      #13                 // Field fetched_data:I
+        30: ixor
+        31: istore        4
+        33: aload_0
+        34: iload_2
+        35: putfield      #7                  // Field regA:I
+        38: return
+}
+</code></pre></div></div>
+
+<p>When straightforwardly building an SSA IR from the JVM bytecode for this
+method, you will end up with a bunch of IR that looks like this:</p>
+
+<div><div><pre><code>v0 = LoadField self, :regA
+v1 = LoadField self, :fetched_data
+v2 = LoadField self, :flagCARRY
+v3 = IntAdd v0, v1
+v4 = IntAdd v3, v2
+// ...
+v7 = LoadField self, :regA
+v8 = IntXor v4, v7
+v9 = LoadField self, :fetched_data
+v10 = IntXor v4, v9
+// ...
+StoreField self, :regA, ...
+</code></pre></div></div>
+
+<p>Pretty much the same as the bytecode. Even though no code in the middle could
+modify the field <code>regA</code> (which would require a re-load), we still have a
+duplicate load. Bummer.</p>
+
+<p>I don’t want to re-hash this too much but it’s possible to fold <a href="/blog/toy-load-store/" target="_blank" rel="noopener noreferrer">Load and store
+forwarding</a> into your GVN implementation by either:</p>
+
+<ul>
+  <li>doing load-store forwarding as part of local value numbering and clearing
+memory information from the value map at the end of each block, or</li>
+  <li>keeping track of effects across blocks</li>
+</ul>
+
+<p>See, there’s nothing fundamentally stopping you from tracking the state of your
+heap at compile-time across blocks. You just have to do a little more
+bookkeeping. In our dominator-based GVN implementation, for example, you can:</p>
+
+<ol>
+  <li>track heap write effects for each block</li>
+  <li>at the start of each block B, union all of the “kill” sets for every block
+back to its immediate dominator</li>
+  <li>finally, remove the stuff that got killed from the dominator’s value map</li>
+</ol>
+
+<p>Not so bad.</p>
+
+<p>Maxine doesn’t do global memory tracking, but they do a limited form of
+load-store forwarding while building their HIR from bytecode: see
+<a href="https://github.com/beehive-lab/Maxine-VM/blob/e213a842f78983e2ba112ae46de8c64317bc206e/com.sun.c1x/src/com/sun/c1x/graph/GraphBuilder.java#L871" target="_blank" rel="noopener noreferrer">GraphBuilder</a> which uses the <a href="https://github.com/beehive-lab/Maxine-VM/blob/e213a842f78983e2ba112ae46de8c64317bc206e/com.sun.c1x/src/com/sun/c1x/graph/MemoryMap.java" target="_blank" rel="noopener noreferrer">MemoryMap</a> to help track this stuff. At least
+they would not have the same duplicate <code>LoadField</code> instructions in the example
+above!</p>
+
+
+
+<p>We’ve now looked at one kind of value numbering and one implementation of it.
+What else is out there?</p>
+
+<h2>Out in the world</h2>
+
+<p>Apparently, you can get better results by having a unified hash table (p9 of
+<a href="/assets/img/briggs-gvn.pdf" target="_blank" rel="noopener noreferrer">Briggs GVN</a>) of expressions, not limiting the
+value map to dominator-available expressions. Not 100% on how this works yet.
+
+They note:</p>
+
+<blockquote>
+  <p>Using a unified hash-table has one important algorithmic consequence.
+Replacements cannot be performed on-line because the table no longer reflects
+availability.</p>
+</blockquote>
+
+<p>Which is the first time that it occurred to me that hash-based value numbering
+with dominators was an approximation of available expression analysis.</p>
+
+<p>There’s also a totally different kind of value numbering called value
+partitioning (p12 of <a href="/assets/img/briggs-gvn.pdf" target="_blank" rel="noopener noreferrer">Briggs GVN</a>). See also a nice
+blog post about this by Allen Wang from the <a href="https://www.cs.cornell.edu/courses/cs6120/2025sp/blog/global-value-numbering/" target="_blank" rel="noopener noreferrer">Cornell compiler
+course</a>.
+I think this mostly replaces the hashing bit, and you still need some other
+thing for the available expressions bit.</p>
+
+<p>Ben Titzer and Seth Goldstein have some good <a href="https://www.cs.cmu.edu/~411/slides/s25-24-gvn-inlining.pdf" target="_blank" rel="noopener noreferrer">slides from
+CMU</a>. Where they
+talk about the worklist dataflow approach. Apparently this is slower but gets
+you more available expressions than just looking to dominator blocks. I wonder
+how much it differs from dominator+unified hash table.</p>
+
+<p>While Maxine uses hash table cloning to copy value maps from dominator blocks,
+there are also compilers such as Cranelift that use
+<a href="https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/codegen/src/scoped_hash_map.rs" target="_blank" rel="noopener noreferrer">scoped hash maps</a>
+to track this information more efficiently. (Though <a href="https://github.com/bytecodealliance/wasmtime/issues/4371#issuecomment-1255956651" target="_blank" rel="noopener noreferrer">Amanieu
+notes</a> that you may
+not need a scoped hash map and instead can tag values in your value map with the
+block they came from, ignoring non-dominating values with a quick check. The
+dominance check makes sense but I haven’t internalized how this affects the set
+of available expressions yet.)</p>
+
+<p>You may be wondering if this kind of algorithm even helps at all in a dynamic
+language JIT context. Surely everything is too dynamic, right? Actually, no!
+The JIT hopes to eliminate a lot of method calls and dynamic behaviors,
+replacing them with guards, assumptions, and simpler operations. These strength
+reductions often leave behind a lot of repeated instructions. Just the other
+day, Kokubun filed a <a href="https://github.com/ruby/ruby/pull/16654" target="_blank" rel="noopener noreferrer">value-numbering-like
+PR</a> to clean up some of the waste.</p>
+
+<p>ART has a recent <a href="https://android-developers.googleblog.com/2025/12/18-faster-compiles-0-compromises.html" target="_blank" rel="noopener noreferrer">blog
+post</a>
+about speeding up GVN.</p>
+
+<h3>Implementations</h3>
+
+<ul>
+  <li><a href="https://android.googlesource.com/platform/art/+/refs/heads/main/compiler/optimizing/gvn.cc" target="_blank" rel="noopener noreferrer">ART</a></li>
+  <li><a href="https://github.com/tekknolagi/v8/blob/f030838700a83cde6992cb8ebcb3facc6a8fc1f1/src/crankshaft/hydrogen-gvn.cc" target="_blank" rel="noopener noreferrer">V8 Hydrogen</a></li>
+  <li><a href="https://github.com/facebook/hhvm/blob/1a885fae7421c759d70a8ed85aab1defcf5cc68f/hphp/runtime/vm/jit/gvn.cpp" target="_blank" rel="noopener noreferrer">HHVM</a></li>
+  <li><a href="https://github.com/openjdk/jdk/blob/f21e47db805b56d5bf183d7a2cfba076f380612a/src/hotspot/share/c1/c1_ValueMap.cpp#L517" target="_blank" rel="noopener noreferrer">HotSpot C1</a></li>
+</ul>
+
+<h2>Wrapping up; bits and bobbles</h2>
+
+<p>Go forth and give your values more numbers.</p>
+
+<p>There’s been an ongoing discussion with Phil Zucker on SSI, GVN, acyclic
+egraphs, and scoped union-find. TODO summarize</p>
+
+<h3>Acyclic e-graphs</h3>
+
+<p>Commutativity; canonicalization</p>
+
+<p>Seeding alternative representations into the GVN</p>
+
+<p>Aegraphs and union-find during GVN</p>
+
+<p>https://github.com/bytecodealliance/rfcs/blob/main/accepted/cranelift-egraph.md
+https://github.com/bytecodealliance/wasmtime/issues/9049
+https://github.com/bytecodealliance/wasmtime/issues/4371</p>
+
+<h3>Partial redundancy elimination</h3>
+<div>
+  <ol>
+    <li>
+      <p>Writing this post is roughly the time when I realized that the whole
+time I was wondering why Cinder did not use union-find for rewriting, it
+actually did! Optimizing instruction <code>X = A + 0</code> by replacing with <code>X =
+Assign A</code> followed by copy propagation is equivalent to union-find. <a href="#fnref:cinder" target="_blank" rel="noopener noreferrer">↩</a></p>
+    </li>
+    <li>
+      <p>In some forms of SSA, like heap-array SSA or sea of nodes, it’s
+possible to more easily de-duplicate loads because the memory
+representation has been folded into (modeled in) the IR. <a href="#fnref:heap-ssa" target="_blank" rel="noopener noreferrer">↩</a></p>
+    </li>
+    <li>
+      <p>The order is a little more complicated than that: <a href="https://stackoverflow.com/questions/36131500/what-is-the-reverse-postorder" target="_blank" rel="noopener noreferrer">reverse
+post-order</a>
+(RPO). And there’s a paper called “A Simple Algorithm for Global Data Flow
+Analysis Problems” that I don’t yet have a PDF for that claims that RPO is
+optimal for solving dataflow problems. <a href="#fnref:order" target="_blank" rel="noopener noreferrer">↩</a></p>
+    </li>
+    <li>
+      <p>There’s the iterative dataflow way (described in the <a href="/assets/img/dominators-engineered.pdf" target="_blank" rel="noopener noreferrer">Cooper
+paper</a> (PDF)),
+<a href="/assets/img/dominators-lengauer-tarjan.pdf" target="_blank" rel="noopener noreferrer">Lengauer-Tarjan</a> (PDF), the
+<a href="/assets/img/dominators-engineered.pdf" target="_blank" rel="noopener noreferrer">Engineered Algorithm</a> (PDF),
+<a href="/assets/img/dominators-practice.pdf" target="_blank" rel="noopener noreferrer">hybrid/Semi-NCA approach</a> (PDF), … <a href="#fnref:compute-doms" target="_blank" rel="noopener noreferrer">↩</a></p>
+    </li>
+  </ol>
+</div></div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://bernsteinbear.com/blog/value-numbering/?utm_source=rss" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text footer-text--strong" data-astro-cid-sz7xmlte>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-sz7xmlte>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-wlspcwf4> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-wlspcwf4> <path d="M18 15l-6-6-6 6" data-astro-cid-wlspcwf4></path> </svg> </button> <script type="module">function o(){const e=document.getElementById("back-to-top");if(!e)return;const s=300;let t=!1;const n=()=>{const i=window.scrollY>s;e.hidden=!i,t=!1},d=()=>{t||(requestAnimationFrame(n),t=!0)};e.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"})}),window.addEventListener("scroll",d,{passive:!0}),n(),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",d)},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",o):o();document.addEventListener("astro:page-load",o);</script></body></html>
