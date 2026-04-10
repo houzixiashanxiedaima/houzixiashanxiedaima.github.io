@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.0.8"><meta name="description" content="You can't, but you can cooperate with the other thread.
+The post How do you add or remove a handle from an active &#38;lt;CODE&#38;gt;Wait&#38;shy;For&#38;shy;Multiple&#38;shy;Objects&#38;lt;/CODE&#38;gt;? appeared first on The "><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><link rel="canonical" href="https://blog.yuyins.com/reading-list/how-do-you-add-or-remove-a-handle-from-an-active-w-u26jxq/"><!-- Web Font: Noto Sans SC (Source Han Sans, Chinese + Latin) --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;0,7..72,700;1,7..72,400&family=Noto+Serif+SC:wght@400;500;600;700&display=swap"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/how-do-you-add-or-remove-a-handle-from-an-active-w-u26jxq/"><meta property="og:title" content="How do you add or remove a handle from an active Wait­For­Multiple­Objects?"><meta property="og:description" content="You can't, but you can cooperate with the other thread.
+The post How do you add or remove a handle from an active &#38;lt;CODE&#38;gt;Wait&#38;shy;For&#38;shy;Multiple&#38;shy;Objects&#38;lt;/CODE&#38;gt;? appeared first on The "><meta property="og:image" content="https://blog.yuyins.com/favicon.svg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/how-do-you-add-or-remove-a-handle-from-an-active-w-u26jxq/"><meta property="twitter:title" content="How do you add or remove a handle from an active Wait­For­Multiple­Objects?"><meta property="twitter:description" content="You can't, but you can cooperate with the other thread.
+The post How do you add or remove a handle from an active &#38;lt;CODE&#38;gt;Wait&#38;shy;For&#38;shy;Multiple&#38;shy;Objects&#38;lt;/CODE&#38;gt;? appeared first on The "><meta property="twitter:image" content="https://blog.yuyins.com/favicon.svg"><title>How do you add or remove a handle from an active Wait­For­Multiple­Objects?</title><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-b4zvghpy]{display:inline-flex;align-items:center;gap:.45rem;border-radius:9999px;border:1px solid transparent;background:var(--muted);color:var(--foreground);font-weight:500;line-height:1.4;text-decoration:none;white-space:nowrap}.chip--sm[data-astro-cid-b4zvghpy]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-b4zvghpy]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-b4zvghpy]{cursor:pointer;transition:background-color .2s ease,color .2s ease,opacity .2s ease}.chip--interactive[data-astro-cid-b4zvghpy]:hover{background-color:color-mix(in srgb,var(--accent) 10%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 68%,var(--foreground))}.chip--active[data-astro-cid-b4zvghpy],.chip[data-astro-cid-b4zvghpy].active{background-color:color-mix(in srgb,var(--accent) 18%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 82%,var(--foreground));border-color:transparent;box-shadow:none;font-weight:600}.chip--dashed[data-astro-cid-b4zvghpy]{border-style:dashed;border-color:color-mix(in srgb,var(--accent) 22%,var(--border));background:color-mix(in srgb,var(--background) 70%,var(--muted))}.chip[data-astro-cid-b4zvghpy]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+<link rel="stylesheet" href="/_astro/Layout.DhKKU5oo.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0;animation:fadeIn .3s ease-out}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;color:var(--muted-foreground);font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.8125rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--accent)}.back-link--top[data-astro-cid-wrgicudb]{display:inline-block;margin-bottom:1rem}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2> 雅俗共赏 </a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-otpdt6jm> <div class="search-dialog-card" data-astro-cid-otpdt6jm> <div class="search-dialog-bar" data-astro-cid-otpdt6jm> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="8" data-astro-cid-otpdt6jm></circle><path d="m21 21-4.3-4.3" data-astro-cid-otpdt6jm></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-otpdt6jm></div> <kbd class="search-kbd" data-astro-cid-otpdt6jm>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-otpdt6jm> <path d="M18 6 6 18" data-astro-cid-otpdt6jm></path><path d="m6 6 12 12" data-astro-cid-otpdt6jm></path> </svg> </button> </div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(e=0){if(sessionStorage.getItem(c)==="true")return m(),!0;const s=document.getElementById("pagefind-ui");if(!s)return!1;s.innerHTML='<div class="search-loading">加载中...</div>';try{return await new Promise((r,o)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=r,a.onerror=o,document.head.appendChild(a)}),m(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),e<2?(console.log(`Retrying search load... (${e+1}/2)`),await new Promise(r=>setTimeout(r,1e3)),l(e+1)):(s&&(s.innerHTML=`
+          <div class="search-loading">
+            <p>搜索功能加载失败</p>
+            <button id="retry-search" class="search-retry-btn">重试</button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>How do you add or remove a handle from an active Wait­For­Multiple­Objects?</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://devblogs.microsoft.com/oldnewthing" target="_blank" rel="noopener noreferrer" data-astro-cid-wrgicudb="true" data-astro-cid-b4zvghpy="true" class="chip chip--sm chip--interactive source-tag"> devblogs.microsoft.com/oldnewthing </a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年4月9日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>Last time, we looked at <a href="https://devblogs.microsoft.com/oldnewthing/20260408-00/?p=112218" target="_blank" rel="noopener noreferrer"> adding or removing a handle from an active <code>Msg­Wait­For­Multiple­Objects</code></a>, and observed that we could send a message to both break out of the wait <i>and</i> update the list of handles. But what if the other thread is waiting in a <code>Wait­For­Multiple­Objects</code>? You can’t send a message since <code>Wait­For­Multiple­Objects</code> doesn’t wake for messages.</p>
+<p>You can fake it by using an event which means “I want to change the list of handles.” The background thread can add that handle to its list, and if the “I want to change the list of handles” event is signaled, it updates its list.</p>
+<p>One of the easier ways to represent the desired change is to maintain two lists, the “active” list (the one being waited on) and the “desired” list (the one you want to change it to). The background thread can make whatever changes to the “desired” list it wants, and then it signals the “changed” event. The waiting thread sees that the “changed” event is set and copies the “desired” list to the “active” list. This copying needs to be done with <code>Duplicate­Handle</code> because the background thread might close a handle in the “desired” list, and we can’t close a handle while it is being waited on.</p>
+<pre>wil::unique_handle duplicate_handle(HANDLE other)
+{
+    HANDLE result;
+    THROW_IF_WIN32_BOOL_FALSE(
+        DuplicateHandle(GetCurrentProcess(), other,
+            GetCurrentProcess(), &amp;result,
+            0, FALSE, DUPLICATE_SAME_ACCESS));
+    return wil::unique_handle(result);
+}
+</pre>
+<p>This helper function duplicates a raw <code>HANDLE</code> and returns it in a <code>wil::unique_handle</code>. The duplicate handle has its own lifetime separate from the original. The waiting thread operates on a copy of the handles, so that it is unaffected by changes to the original handles.</p>
+<pre>std::mutex desiredMutex;
+_Guarded_by_(desiredMutex) std::vector&lt;wil::unique_handle&gt; desiredHandles;
+_Guarded_by_(desiredMutex) std::vector&lt;std::function&lt;void()&gt;&gt; desiredActions;
+</pre>
+<p>The <code>desiredHandles</code> is a vector of handles we want to be waiting for, and the The <code>desiredActions</code> is a parallel vector of things to do for each of those handles.</p>
+<pre>// auto-reset, initially unsignaled
+wil::unique_handle changed(CreateEvent(nullptr, FALSE, FALSE, nullptr));
+
+void waiting_thread()
+{
+    while (true)
+    {
+        std::vector&lt;wil::unique_handle&gt; handles;
+        std::vector&lt;std::function&lt;void()&gt;&gt; actions;
+        {
+            std::lock_guard guard(desiredMutex);
+
+            handles.reserve(desiredHandles.size() + 1);
+            std::transform(desiredHandles.begin(), desiredHandles.end(),
+                std::back_inserter(handles),
+                [](auto&amp;&amp; h) { return duplicate_handle(h.get()); });
+            // Add the bonus "changed" handle
+            handles.emplace_back(duplicate_handle(changed.get()));
+
+            actions = desiredActions;
+        }
+
+        auto count = static_cast&lt;DWORD&gt;(handles.size());
+                        
+        auto result = WaitForMultipleObjects(count,
+                        handles.data()-&gt;addressof(), FALSE, INFINITE);
+        auto index = result - WAIT_OBJECT_0;
+        if (index == count - 1) {
+            // the list changed. Loop back to update.
+            continue;
+        } else if (index &lt; count - 1) {
+            actions[index]();
+        } else {
+            // deal with unexpected result
+            FAIL_FAST(); // (replace this with your favorite error recovery)
+        }
+    }
+}
+</pre>
+<p>The waiting thread makes a copy of the <code>desiredHandles</code> and <code>desiredActions</code>, and adds the <code>changed</code> handle to the end so we will wake up if somebody changes the list. We operate on the copy so that any changes to <code>desiredHandles</code> and <code>desiredActions</code> that occur while we are waiting won’t affect us. Note that the copy in <code>handles</code> is done via <code>Duplicate­Handle</code> so that it operates on a separate set of handles. That way, if another thread closes a handle in <code>desiredHandles</code>, it won’t affect us.</p>
+<pre>void change_handle_list()
+{
+    std::lock_guard guard(desiredMutex);
+    ⟦ make changes to desiredHandles and desiredActions ⟧
+    SetEvent(changed.get());
+}
+</pre>
+<p>Any time somebody wants to change the list of handles, they take the <code>desiredMutex</code> lock and can proceed to make whatever changes they want. These changes won’t affect the waiting thread because it is operating on duplicate handles. When finished, we set the <code>changed</code> event to wake up the waiting thread so it can pick up the new set of handles.</p>
+<p>Right now, the purpose of the <code>changed</code> event is to wake up the blocking call, but we could also use it as a way to know whether we should update our captured handles. This allows us to reuse the handle array if there were no changes.</p>
+<pre>void waiting_thread()
+{
+    <span>bool update = true;                        </span>
+    <span>std::vector&lt;wil::unique_handle&gt; handles;   </span>
+    <span>std::vector&lt;std::function&lt;void()&gt;&gt; actions;</span>
+
+    while (true)
+    {
+        <span>if (std::exchange(update, false))</span> {
+            std::lock_guard guard(desiredMutex);
+
+            <span>handles.clear();</span>
+            handles.reserve(desiredHandles.size() + 1);
+            std::transform(desiredHandles.begin(), desiredHandles.end(),
+                std::back_inserter(handles),
+                [](auto&amp;&amp; h) { return duplicate_handle(h.get()); });
+            // Add the bonus "changed" handle
+            handles.emplace_back(duplicate_handle(changed.get()));
+
+            actions = desiredActions;
+        }
+
+        auto count = static_cast&lt;DWORD&gt;(handles.size());
+                        
+        auto result = WaitForMultipleObjects(count,
+                        handles.data()-&gt;get(), FALSE, INFINITE);
+        auto index = result - WAIT_OBJECT_0;
+        if (index == count - 1) {
+            // the list changed. Loop back to update.
+            <span>update = true;</span>
+            continue;
+        } else if (index &lt; count - 1) {
+            actions[index]();
+        } else {
+            // deal with unexpected result
+            FAIL_FAST(); // (replace this with your favorite error recovery)
+        }
+    }
+}
+</pre>
+<p>In this design, changes to the handle list are asynchronous. They don’t take effect immediately, because the waiting thread might be busy running an action. Instead, they take effect when the waiting thread gets around to making another copy of the <code>desiredHandles</code> vector and call <code>Wait­For­Multiple­Objects</code> again. This could be a problem: You ask to remove a handle, and then clean up the things that the handle depended on. But before the worker thread can process the removal, the handle is signaled. The result is that the worker thread calls your callback after you thought had told it to stop!</p>
+<p>Next time, we’ll see what we can do to make the changes synchronous.</p>
+<p>The post <a href="https://devblogs.microsoft.com/oldnewthing/20260409-00/?p=112220" target="_blank" rel="noopener noreferrer">How do you add or remove a handle from an active &lt;CODE&gt;Wait­For­Multiple­Objects&lt;/CODE&gt;?</a> appeared first on <a href="https://devblogs.microsoft.com/oldnewthing" target="_blank" rel="noopener noreferrer">The Old New Thing</a>.</p>
+</div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://devblogs.microsoft.com/oldnewthing/20260409-00/?p=112220" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text footer-text--strong" data-astro-cid-sz7xmlte>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-sz7xmlte>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-wlspcwf4> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-wlspcwf4> <path d="M18 15l-6-6-6 6" data-astro-cid-wlspcwf4></path> </svg> </button> <script type="module">function o(){const e=document.getElementById("back-to-top");if(!e)return;const s=300;let t=!1;const n=()=>{const i=window.scrollY>s;e.hidden=!i,t=!1},d=()=>{t||(requestAnimationFrame(n),t=!0)};e.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"})}),window.addEventListener("scroll",d,{passive:!0}),n(),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",d)},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",o):o();document.addEventListener("astro:page-load",o);</script></body></html>
