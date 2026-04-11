@@ -17,7 +17,7 @@
 
 <h3>Disable install scripts by default</h3>
 
-<p>npm has <code>--ignore-scripts</code>, pip has <code>--no-build-isolation</code> discussions, but neither defaults to off. Agent platforms should ship with install scripts disabled and require explicit opt-in per package. The <code>postinstall</code> script is the single most common vector for malicious packages, and agents have no way to evaluate whether a script is legitimate. Bun already defaults to not running lifecycle scripts for installed dependencies.</p>
+<p>npm has <code>--ignore-scripts</code>, pip has <code>--only-binary :all:</code> to refuse sdists and force wheels, but neither defaults to off. Agent platforms should ship with install scripts disabled and require explicit opt-in per package. The <code>postinstall</code> script is the single most common vector for malicious packages, and agents have no way to evaluate whether a script is legitimate. Bun already defaults to not running lifecycle scripts for installed dependencies.</p>
 
 <h3>Dependency cooldown periods</h3>
 
