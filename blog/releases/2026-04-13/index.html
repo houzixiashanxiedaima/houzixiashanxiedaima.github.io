@@ -23,10 +23,10 @@
 #automation </a></div> </div> <div class="article-meta" data-astro-cid-bvzihdzo> <time datetime="2026-04-13T08:00:00.000Z" class="meta-item" data-astro-cid-bvzihdzo> 2026年4月13日 </time> <span class="meta-item" data-astro-cid-bvzihdzo>4 分钟阅读</span> </div> </div> </header> <!-- Content --> <div class="article-content app-prose" data-astro-cid-bvzihdzo>  <h1 id="2026-04-13-更新摘要">2026-04-13 更新摘要</h1>
 <p><strong>统计信息</strong></p>
 <ul>
-<li>由 Qwen3 8B (1), 本地降级 (9) 总结</li>
-<li>监控仓库: 13 个</li>
+<li>由 Qwen3 8B (9), GLM-4.7-Flash (1) 总结</li>
+<li>监控仓库: 6 个</li>
 <li>今日更新: 10 个项目 (10 个版本)</li>
-<li>生成时间: 2026-04-14 01:22:04 (北京时间)</li>
+<li>生成时间: 2026-04-14 11:00:30 (北京时间)</li>
 </ul>
 <h3 id="immich-appimmich-v275-qwen3-8b"><a href="https://github.com/immich-app/immich/releases/tag/v2.7.5" rel="noopener noreferrer" target="_blank">immich-app/immich v2.7.5</a> <sup>Qwen3 8B</sup></h3>
 <p><strong>新内容</strong></p>
@@ -37,65 +37,105 @@
 <ul>
 <li>修复服务器版本检查中的速率限制和去重问题</li>
 </ul>
-<h3 id="homebrewbrew-516-降级"><a href="https://github.com/Homebrew/brew/releases/tag/5.1.6" rel="noopener noreferrer" target="_blank">Homebrew/brew 5.1.6</a> <sup>降级</sup></h3>
-<p><strong>原始更新记录</strong></p>
+<h3 id="homebrewbrew-516-qwen3-8b"><a href="https://github.com/Homebrew/brew/releases/tag/5.1.6" rel="noopener noreferrer" target="_blank">Homebrew/brew 5.1.6</a> <sup>Qwen3 8B</sup></h3>
+<p><strong>新内容</strong></p>
 <ul>
-<li>cask/artifact: enable <code>typed: strict</code> across <code>Library/Homebrew/cask/artifact/</code> by @dduugg in</li>
-<li>source: retry PyPI API requests to avoid transient errors by @p-linnane in</li>
-<li>build(deps): bump addressable from 2.8.9 to 2.9.0 in /Library/Homebrew by @dependabot[bot] in</li>
-<li>build(deps): bump addressable from 2.8.9 to 2.9.0 in /docs by @dependabot[bot] in</li>
-<li>cask: upgrade <code>auto_updates</code> casks when bundle version is stale by @bevanjkay in</li>
+<li>优化 auto_updates 包更新机制</li>
+<li>新增 brew doctor 和 brew cleanup 功能</li>
+<li>重构：移除冗余代码</li>
+<li>添加’LANG’环境变量过滤支持</li>
 </ul>
-<h3 id="mack-av2ray-agent-v3513-降级"><a href="https://github.com/mack-a/v2ray-agent/releases/tag/v3.5.13" rel="noopener noreferrer" target="_blank">mack-a/v2ray-agent v3.5.13</a> <sup>降级</sup></h3>
-<p><em>本次更新暂无详细说明，请查看原始 Release Notes</em></p>
-<h3 id="openclawopenclaw-v2026412-降级"><a href="https://github.com/openclaw/openclaw/releases/tag/v2026.4.12" rel="noopener noreferrer" target="_blank">openclaw/openclaw v2026.4.12</a> <sup>降级</sup></h3>
-<p><strong>原始更新记录</strong></p>
+<p><strong>问题修复</strong></p>
 <ul>
-<li>QA/lab: add Convex-backed pooled Telegram credential leasing plus <code>openclaw qa credentials</code> admin commands and broker setup docs. (#65596) Thanks @joshavant.</li>
-<li>Memory/Active Memory: add a new optional Active Memory plugin that gives OpenClaw a dedicated memory sub-agent right before the main reply, so ongoing chats can automatically pull in relevant preferences, context, and past details without making users remember to manually say “remember this” or “search memory” first. Includes configurable message/recent/full context modes, live <code>/verbose</code> inspection, advanced prompt/thinking overrides for tuning, and opt-in transcript persistence for debugging. (#63286) Thanks @Takhoffman.</li>
-<li>macOS/Talk: add an experimental local MLX speech provider for Talk Mode, with explicit provider selection, local utterance playback, interruption handling, and system-voice fallback. (#63539) Thanks @ImLukeF.</li>
-<li>CLI/exec policy: add a local <code>openclaw exec-policy</code> command with <code>show</code>, <code>preset</code>, and <code>set</code> subcommands for synchronizing requested <code>tools.exec.*</code> config with the local exec approvals file, plus follow-up hardening for node-host rejection, rollback safety, and sync conflict detection. (#64050)</li>
-<li>Gateway: add a <code>commands.list</code> RPC so remote gateway clients can discover runtime-native, text, skill, and plugin commands with surface-aware naming and serialized argument metadata. (#62656) Thanks @samzong.</li>
+<li>重试 PyPI API 请求以避免瞬时错误</li>
+<li>修复过时的贪婪包处理逻辑</li>
+<li>修复不稳定的 run_actionlint! 测试</li>
+<li>修复不稳定的 conflicts_with brew spec 测试</li>
 </ul>
-<h3 id="jdxmise-v2026411-降级"><a href="https://github.com/jdx/mise/releases/tag/v2026.4.11" rel="noopener noreferrer" target="_blank">jdx/mise v2026.4.11</a> <sup>降级</sup></h3>
-<p><strong>原始更新记录</strong></p>
+<p><strong>Breaking Changes</strong></p>
 <ul>
-<li><strong>Task dependency templates now render without arguments</strong> — When a task declared dependencies using <code>{{usage.*}}</code> templates (e.g. <code>depends = ["child {{usage.app}}"]</code>), those templates were only rendered if the task received explicit CLI arguments. If the usage spec defined defaults but no args were passed, the templates were left unresolved and the dependencies were silently dropped, causing the task to run with no dependencies at all. The guard now checks whether dependencies contain usage references rather than whether args are non-empty. [#9062]( by @MatthiasGrandl</li>
-<li><strong>npm semver ranges in <code>devEngines</code></strong> — mise previously simplified <code>package.json</code> <code>devEngines</code> version fields by stripping range operators (<code>>=</code>, <code>^</code>, <code>~</code>) and trimming trailing <code>.0</code> segments to produce a prefix for fuzzy matching. This was lossy and incorrect in many cases (e.g. <code>^20.0.1</code> was simplified to <code>20</code>, matching <code>20.0.0</code>). mise now preserves the original range string and resolves it against available versions using proper npm semver semantics via the <code>nodejs-semver</code> crate. Compound ranges (<code>>=20 &#x3C;21 || >=22</code>), caret/tilde ranges, and wildcard segments all work correctly. [#9061]( by @risu729</li>
-<li><strong>Documentation typo in Go backend</strong> — The docs for Go build tags incorrectly showed <code>--tags</code> instead of the correct <code>-tags</code> flag. [#9065]( by @dolmen</li>
-<li>@dolmen made their first contribution in [#9065](</li>
-<li>@MatthiasGrandl made their first contribution in [#9062](</li>
+<li>弃用未使用的公共 API</li>
+<li>停止清理损坏的 Caskroom 目录</li>
 </ul>
-<h3 id="lwouisalt-tab-macos-v10120-降级"><a href="https://github.com/lwouis/alt-tab-macos/releases/tag/v10.12.0" rel="noopener noreferrer" target="_blank">lwouis/alt-tab-macos v10.12.0</a> <sup>降级</sup></h3>
-<p><strong>原始更新记录</strong></p>
+<h3 id="mack-av2ray-agent-v3513-glm-47-flash"><a href="https://github.com/mack-a/v2ray-agent/releases/tag/v3.5.13" rel="noopener noreferrer" target="_blank">mack-a/v2ray-agent v3.5.13</a> <sup>GLM-4.7-Flash</sup></h3>
+<p><strong>新内容</strong></p>
 <ul>
-<li>remove the need to add email in feedback form ([da9a46b](</li>
-<li>show usage stats in the about-window ([9c5b963](</li>
+<li>完善黑名单机制</li>
 </ul>
-<h3 id="quantumnousnew-api-v0129-降级"><a href="https://github.com/QuantumNous/new-api/releases/tag/v0.12.9" rel="noopener noreferrer" target="_blank">QuantumNous/new-api v0.12.9</a> <sup>降级</sup></h3>
-<p><strong>原始更新记录</strong></p>
+<h3 id="openclawopenclaw-v2026412-qwen3-8b"><a href="https://github.com/openclaw/openclaw/releases/tag/v2026.4.12" rel="noopener noreferrer" target="_blank">openclaw/openclaw v2026.4.12</a> <sup>Qwen3 8B</sup></h3>
+<p><strong>新内容</strong></p>
 <ul>
-<li>Subscription cards now show the next quota reset time, making it easier to see when usage limits will refresh (#4181).</li>
-<li>Claude requests are now more reliable by avoiding incompatible Top P settings when needed.</li>
-<li>Azure channels now correctly support the <code>/v1/responses/compact</code> route (#4149).</li>
-<li>Editing values in GroupTable no longer forces the cursor to jump to the end on each keystroke (#4208).</li>
-<li>Dashboard charts have been refined to present rankings and chart sizing more clearly for easier monitoring.</li>
+<li>新增本地模型选项，优化插件加载及内存管理，提升梦境可靠性，改善飞书集成流程</li>
 </ul>
-<h3 id="imfile-ioimfile-desktop-v205-降级"><a href="https://github.com/imfile-io/imfile-desktop/releases/tag/v2.0.5" rel="noopener noreferrer" target="_blank">imfile-io/imfile-desktop v2.0.5</a> <sup>降级</sup></h3>
-<p><em>本次更新暂无详细说明，请查看原始 Release Notes</em></p>
-<h3 id="zephyrusozashboard-v340-降级"><a href="https://github.com/Zephyruso/zashboard/releases/tag/v3.4.0" rel="noopener noreferrer" target="_blank">Zephyruso/zashboard v3.4.0</a> <sup>降级</sup></h3>
-<p><strong>原始更新记录</strong></p>
+<p><strong>问题修复</strong></p>
 <ul>
-<li><strong>backend:</strong> add success notification for flushing smart weights ([426491f](</li>
-<li><strong>proxies:</strong> add option to disable text selection on proxies page ([#631]( ([2db4168](</li>
-<li><strong>shortcuts:</strong> add backend switch shortcuts ([52f3686](</li>
-<li><strong>shortcuts:</strong> add configurable keyboard shortcuts ([c467b4f](</li>
-<li><strong>btn:</strong> primary btn style with background ([59324be](</li>
+<li>修复安全模块中 busybox/toybox 在解释器安全目录中的残留问题</li>
+<li>修复安全审批模块中空审批人列表导致的权限误授权问题</li>
+<li>增强 shell 包装器检测机制，阻止环境参数注入漏洞</li>
+<li>优化网关启动流程，延迟服务直至 sidecar 完成</li>
+<li>控制 UI 修复聊天历史加载重试机制</li>
+<li>CLI 更新修复插件刷新问题</li>
+<li>内存管理优化，确保记忆在通道解析时保留</li>
+<li>梦境模块改进，精确处理心跳事件并提升唤醒可靠性</li>
+<li>强化临时叙事清理机制，隔离工作区会话密钥</li>
+<li>修复 wiki 记忆中非 ASCII 标题的路径兼容问题</li>
+<li>优化短期记忆结构，支持嵌套日志笔记</li>
 </ul>
-<h3 id="dani-garciavaultwarden-1356-降级"><a href="https://github.com/dani-garcia/vaultwarden/releases/tag/1.35.6" rel="noopener noreferrer" target="_blank">dani-garcia/vaultwarden 1.35.6</a> <sup>降级</sup></h3>
-<p><strong>原始更新记录</strong></p>
+<h3 id="jdxmise-v2026411-qwen3-8b"><a href="https://github.com/jdx/mise/releases/tag/v2026.4.11" rel="noopener noreferrer" target="_blank">jdx/mise v2026.4.11</a> <sup>Qwen3 8B</sup></h3>
+<p><strong>问题修复</strong></p>
 <ul>
-<li>Fix MFA Remember by @BlackDex in</li>
+<li>修复任务依赖模板无参数解析问题</li>
+<li>npm semver 范围完整解析改进</li>
+<li>Go 后端文档拼写错误修正</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>devEngines 版本字段解析方式变更</li>
+</ul>
+<h3 id="lwouisalt-tab-macos-v10120-qwen3-8b"><a href="https://github.com/lwouis/alt-tab-macos/releases/tag/v10.12.0" rel="noopener noreferrer" target="_blank">lwouis/alt-tab-macos v10.12.0</a> <sup>Qwen3 8B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>移除反馈表单中添加邮箱的必要性</li>
+<li>在关于窗口中显示使用统计信息</li>
+</ul>
+<h3 id="quantumnousnew-api-v0129-qwen3-8b"><a href="https://github.com/QuantumNous/new-api/releases/tag/v0.12.9" rel="noopener noreferrer" target="_blank">QuantumNous/new-api v0.12.9</a> <sup>Qwen3 8B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>订阅卡新增下次配额重置时间显示功能</li>
+<li>仪表盘图表优化，排名及图表尺寸更清晰便于监控</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 Claude 请求中不兼容 Top P 设置导致的可靠性问题</li>
+<li>修复 Azure 渠道不支持 /v1/responses/compact 路径问题</li>
+<li>修复 GroupTable 编辑时光标跳转至末尾的问题</li>
+</ul>
+<h3 id="imfile-ioimfile-desktop-v205-qwen3-8b"><a href="https://github.com/imfile-io/imfile-desktop/releases/tag/v2.0.5" rel="noopener noreferrer" target="_blank">imfile-io/imfile-desktop v2.0.5</a> <sup>Qwen3 8B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>任务页新增搜索入口并修复 Tab 与路由同步</li>
+<li>BT 搜索支持分页翻页</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复高级设置保存无成功提示问题</li>
+</ul>
+<h3 id="zephyrusozashboard-v340-qwen3-8b"><a href="https://github.com/Zephyruso/zashboard/releases/tag/v3.4.0" rel="noopener noreferrer" target="_blank">Zephyruso/zashboard v3.4.0</a> <sup>Qwen3 8B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>后端新增刷新智能重量成功通知功能</li>
+<li>代理页面新增禁用文本选择选项</li>
+<li>后端新增切换快捷键功能</li>
+<li>新增可配置键盘快捷键功能</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复主按钮背景样式问题</li>
+</ul>
+<h3 id="dani-garciavaultwarden-1356-qwen3-8b"><a href="https://github.com/dani-garcia/vaultwarden/releases/tag/1.35.6" rel="noopener noreferrer" target="_blank">dani-garcia/vaultwarden 1.35.6</a> <sup>Qwen3 8B</sup></h3>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复双因素记住令牌和恢复令牌无法被接受的问题</li>
 </ul>
 <p><strong>帮助我们改进</strong></p>
 <p>对今日摘要质量有建议？欢迎反馈！</p>
@@ -103,7 +143,7 @@
 <li><a href="https://github.com/houzixiashanxiedaima/AstroBlog/issues/new" rel="noopener noreferrer" target="_blank">反馈摘要质量</a></li>
 <li><a href="https://github.com/houzixiashanxiedaima/AstroBlog/issues/new" rel="noopener noreferrer" target="_blank">评价今日日报</a></li>
 </ul>
-<p>您的反馈将帮助我们优化 AI Prompt, 提升摘要准确性</p>  </div> <!-- Footer navigation --> <footer class="article-footer" data-astro-cid-bvzihdzo> <nav class="post-navigation" aria-label="Article navigation" data-astro-cid-bvzihdzo> <div class="nav-prev" data-astro-cid-bvzihdzo> <a href="/blog/releases/2026-04-12" class="nav-link" data-astro-prefetch data-astro-cid-bvzihdzo> <span class="nav-label" data-astro-cid-bvzihdzo>上一篇</span> <span class="nav-title" data-astro-cid-bvzihdzo>GitHub Releases 日报 - 2026-04-12</span> </a> </div> <div class="nav-next" data-astro-cid-bvzihdzo>  </div> </nav> <div class="back-to-list" data-astro-cid-bvzihdzo> <a href="/" class="back-link" data-astro-prefetch data-astro-cid-bvzihdzo>← 返回文章列表</a> </div> </footer> </article> <!-- Table of Contents --> <aside class="toc-aside" data-astro-cid-bvzihdzo> <nav class="toc" aria-label="目录导航" data-astro-cid-xvrfupwn><ul class="toc-list" data-astro-cid-xvrfupwn><li class="toc-item toc-item-3" data-slug="immich-appimmich-v275-qwen3-8b" data-astro-cid-xvrfupwn><a href="#immich-appimmich-v275-qwen3-8b" class="toc-link" data-slug="immich-appimmich-v275-qwen3-8b" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>immich-app/immich v2.7.5 Qwen3 8B</span></a></li><li class="toc-item toc-item-3" data-slug="homebrewbrew-516-降级" data-astro-cid-xvrfupwn><a href="#homebrewbrew-516-降级" class="toc-link" data-slug="homebrewbrew-516-降级" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>Homebrew/brew 5.1.6 降级</span></a></li><li class="toc-item toc-item-3" data-slug="mack-av2ray-agent-v3513-降级" data-astro-cid-xvrfupwn><a href="#mack-av2ray-agent-v3513-降级" class="toc-link" data-slug="mack-av2ray-agent-v3513-降级" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>mack-a/v2ray-agent v3.5.13 降级</span></a></li><li class="toc-item toc-item-3" data-slug="openclawopenclaw-v2026412-降级" data-astro-cid-xvrfupwn><a href="#openclawopenclaw-v2026412-降级" class="toc-link" data-slug="openclawopenclaw-v2026412-降级" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>openclaw/openclaw v2026.4.12 降级</span></a></li><li class="toc-item toc-item-3" data-slug="jdxmise-v2026411-降级" data-astro-cid-xvrfupwn><a href="#jdxmise-v2026411-降级" class="toc-link" data-slug="jdxmise-v2026411-降级" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>jdx/mise v2026.4.11 降级</span></a></li><li class="toc-item toc-item-3" data-slug="lwouisalt-tab-macos-v10120-降级" data-astro-cid-xvrfupwn><a href="#lwouisalt-tab-macos-v10120-降级" class="toc-link" data-slug="lwouisalt-tab-macos-v10120-降级" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>lwouis/alt-tab-macos v10.12.0 降级</span></a></li><li class="toc-item toc-item-3" data-slug="quantumnousnew-api-v0129-降级" data-astro-cid-xvrfupwn><a href="#quantumnousnew-api-v0129-降级" class="toc-link" data-slug="quantumnousnew-api-v0129-降级" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>QuantumNous/new-api v0.12.9 降级</span></a></li><li class="toc-item toc-item-3" data-slug="imfile-ioimfile-desktop-v205-降级" data-astro-cid-xvrfupwn><a href="#imfile-ioimfile-desktop-v205-降级" class="toc-link" data-slug="imfile-ioimfile-desktop-v205-降级" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>imfile-io/imfile-desktop v2.0.5 降级</span></a></li><li class="toc-item toc-item-3" data-slug="zephyrusozashboard-v340-降级" data-astro-cid-xvrfupwn><a href="#zephyrusozashboard-v340-降级" class="toc-link" data-slug="zephyrusozashboard-v340-降级" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>Zephyruso/zashboard v3.4.0 降级</span></a></li><li class="toc-item toc-item-3" data-slug="dani-garciavaultwarden-1356-降级" data-astro-cid-xvrfupwn><a href="#dani-garciavaultwarden-1356-降级" class="toc-link" data-slug="dani-garciavaultwarden-1356-降级" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>dani-garcia/vaultwarden 1.35.6 降级</span></a></li></ul></nav><script type="module">let E=!1;function L(){const u=document.querySelector(".toc");if(!u||E)return;E=!0;const R=Array.from(document.querySelectorAll(".toc-item")),g=document.querySelectorAll(".article-content h2, .article-content h3, .article-content h4");if(g.length===0)return;let T=[];function P(){T=Array.from(g).map((t,i)=>{const r=t.getBoundingClientRect(),o=window.scrollY,n=r.top+o,c=g[i+1];let e;if(c)e=c.getBoundingClientRect().top+o;else{const s=document.querySelector(".article-content");s?e=s.getBoundingClientRect().bottom+o:e=document.documentElement.scrollHeight}return{id:t.id,element:t,top:n,bottom:e}})}const b=new Set;function m(){const t=window.scrollY,i=window.innerHeight,r=80,o=document.documentElement.scrollHeight,n=t+r,c=t+i>=o-50;R.forEach((e,s)=>{const l=e.getAttribute("data-slug");if(!l)return;const p=T.find(d=>d.id===l);if(!p)return;const C=e.querySelector(".toc-link"),H=e.querySelector(".toc-progress-bar");if(!C||!H)return;const a=p.top,w=p.bottom,v=s===R.length-1;n>=a&&b.add(l);const q=b.has(l)&&(n>=w||v&&c),x=n>=a&&n<w&&!(v&&c);if(e.classList.remove("is-read","is-reading","is-unread"),q)e.classList.add("is-read"),e.style.setProperty("--progress","100%");else if(x){e.classList.add("is-reading");const d=w-a,y=n-a;let S;if(v){const I=o-i-t;S=Math.min(Math.max(y/Math.min(d,y+I),0),1)}else S=Math.min(Math.max(y/d,0),1);e.style.setProperty("--progress",`${S*100}%`)}else e.classList.add("is-unread"),e.style.setProperty("--progress","0%")})}P(),m();let f=!1;const k=()=>{f||(requestAnimationFrame(()=>{m(),f=!1}),f=!0)};let h;const A=()=>{clearTimeout(h),h=setTimeout(()=>{P(),m()},100)};window.addEventListener("scroll",k,{passive:!0}),window.addEventListener("resize",A,{passive:!0});const B=t=>{const r=t.target.closest(".toc-link");if(!r)return;t.preventDefault();const o=r.getAttribute("data-slug"),n=o?document.getElementById(o):null;if(n){const s=n.getBoundingClientRect().top+window.scrollY-80;window.scrollTo({top:s,behavior:"smooth"})}};u.addEventListener("click",B),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",k),window.removeEventListener("resize",A),u.removeEventListener("click",B),clearTimeout(h),E=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",L):L();document.addEventListener("astro:page-load",L);</script> </aside> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text footer-text--strong" data-astro-cid-sz7xmlte>
+<p>您的反馈将帮助我们优化 AI Prompt, 提升摘要准确性</p>  </div> <!-- Footer navigation --> <footer class="article-footer" data-astro-cid-bvzihdzo> <nav class="post-navigation" aria-label="Article navigation" data-astro-cid-bvzihdzo> <div class="nav-prev" data-astro-cid-bvzihdzo> <a href="/blog/releases/2026-04-12" class="nav-link" data-astro-prefetch data-astro-cid-bvzihdzo> <span class="nav-label" data-astro-cid-bvzihdzo>上一篇</span> <span class="nav-title" data-astro-cid-bvzihdzo>GitHub Releases 日报 - 2026-04-12</span> </a> </div> <div class="nav-next" data-astro-cid-bvzihdzo>  </div> </nav> <div class="back-to-list" data-astro-cid-bvzihdzo> <a href="/" class="back-link" data-astro-prefetch data-astro-cid-bvzihdzo>← 返回文章列表</a> </div> </footer> </article> <!-- Table of Contents --> <aside class="toc-aside" data-astro-cid-bvzihdzo> <nav class="toc" aria-label="目录导航" data-astro-cid-xvrfupwn><ul class="toc-list" data-astro-cid-xvrfupwn><li class="toc-item toc-item-3" data-slug="immich-appimmich-v275-qwen3-8b" data-astro-cid-xvrfupwn><a href="#immich-appimmich-v275-qwen3-8b" class="toc-link" data-slug="immich-appimmich-v275-qwen3-8b" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>immich-app/immich v2.7.5 Qwen3 8B</span></a></li><li class="toc-item toc-item-3" data-slug="homebrewbrew-516-qwen3-8b" data-astro-cid-xvrfupwn><a href="#homebrewbrew-516-qwen3-8b" class="toc-link" data-slug="homebrewbrew-516-qwen3-8b" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>Homebrew/brew 5.1.6 Qwen3 8B</span></a></li><li class="toc-item toc-item-3" data-slug="mack-av2ray-agent-v3513-glm-47-flash" data-astro-cid-xvrfupwn><a href="#mack-av2ray-agent-v3513-glm-47-flash" class="toc-link" data-slug="mack-av2ray-agent-v3513-glm-47-flash" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>mack-a/v2ray-agent v3.5.13 GLM-4.7-Flash</span></a></li><li class="toc-item toc-item-3" data-slug="openclawopenclaw-v2026412-qwen3-8b" data-astro-cid-xvrfupwn><a href="#openclawopenclaw-v2026412-qwen3-8b" class="toc-link" data-slug="openclawopenclaw-v2026412-qwen3-8b" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>openclaw/openclaw v2026.4.12 Qwen3 8B</span></a></li><li class="toc-item toc-item-3" data-slug="jdxmise-v2026411-qwen3-8b" data-astro-cid-xvrfupwn><a href="#jdxmise-v2026411-qwen3-8b" class="toc-link" data-slug="jdxmise-v2026411-qwen3-8b" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>jdx/mise v2026.4.11 Qwen3 8B</span></a></li><li class="toc-item toc-item-3" data-slug="lwouisalt-tab-macos-v10120-qwen3-8b" data-astro-cid-xvrfupwn><a href="#lwouisalt-tab-macos-v10120-qwen3-8b" class="toc-link" data-slug="lwouisalt-tab-macos-v10120-qwen3-8b" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>lwouis/alt-tab-macos v10.12.0 Qwen3 8B</span></a></li><li class="toc-item toc-item-3" data-slug="quantumnousnew-api-v0129-qwen3-8b" data-astro-cid-xvrfupwn><a href="#quantumnousnew-api-v0129-qwen3-8b" class="toc-link" data-slug="quantumnousnew-api-v0129-qwen3-8b" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>QuantumNous/new-api v0.12.9 Qwen3 8B</span></a></li><li class="toc-item toc-item-3" data-slug="imfile-ioimfile-desktop-v205-qwen3-8b" data-astro-cid-xvrfupwn><a href="#imfile-ioimfile-desktop-v205-qwen3-8b" class="toc-link" data-slug="imfile-ioimfile-desktop-v205-qwen3-8b" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>imfile-io/imfile-desktop v2.0.5 Qwen3 8B</span></a></li><li class="toc-item toc-item-3" data-slug="zephyrusozashboard-v340-qwen3-8b" data-astro-cid-xvrfupwn><a href="#zephyrusozashboard-v340-qwen3-8b" class="toc-link" data-slug="zephyrusozashboard-v340-qwen3-8b" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>Zephyruso/zashboard v3.4.0 Qwen3 8B</span></a></li><li class="toc-item toc-item-3" data-slug="dani-garciavaultwarden-1356-qwen3-8b" data-astro-cid-xvrfupwn><a href="#dani-garciavaultwarden-1356-qwen3-8b" class="toc-link" data-slug="dani-garciavaultwarden-1356-qwen3-8b" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>dani-garcia/vaultwarden 1.35.6 Qwen3 8B</span></a></li></ul></nav><script type="module">let E=!1;function L(){const u=document.querySelector(".toc");if(!u||E)return;E=!0;const R=Array.from(document.querySelectorAll(".toc-item")),g=document.querySelectorAll(".article-content h2, .article-content h3, .article-content h4");if(g.length===0)return;let T=[];function P(){T=Array.from(g).map((t,i)=>{const r=t.getBoundingClientRect(),o=window.scrollY,n=r.top+o,c=g[i+1];let e;if(c)e=c.getBoundingClientRect().top+o;else{const s=document.querySelector(".article-content");s?e=s.getBoundingClientRect().bottom+o:e=document.documentElement.scrollHeight}return{id:t.id,element:t,top:n,bottom:e}})}const b=new Set;function m(){const t=window.scrollY,i=window.innerHeight,r=80,o=document.documentElement.scrollHeight,n=t+r,c=t+i>=o-50;R.forEach((e,s)=>{const l=e.getAttribute("data-slug");if(!l)return;const p=T.find(d=>d.id===l);if(!p)return;const C=e.querySelector(".toc-link"),H=e.querySelector(".toc-progress-bar");if(!C||!H)return;const a=p.top,w=p.bottom,v=s===R.length-1;n>=a&&b.add(l);const q=b.has(l)&&(n>=w||v&&c),x=n>=a&&n<w&&!(v&&c);if(e.classList.remove("is-read","is-reading","is-unread"),q)e.classList.add("is-read"),e.style.setProperty("--progress","100%");else if(x){e.classList.add("is-reading");const d=w-a,y=n-a;let S;if(v){const I=o-i-t;S=Math.min(Math.max(y/Math.min(d,y+I),0),1)}else S=Math.min(Math.max(y/d,0),1);e.style.setProperty("--progress",`${S*100}%`)}else e.classList.add("is-unread"),e.style.setProperty("--progress","0%")})}P(),m();let f=!1;const k=()=>{f||(requestAnimationFrame(()=>{m(),f=!1}),f=!0)};let h;const A=()=>{clearTimeout(h),h=setTimeout(()=>{P(),m()},100)};window.addEventListener("scroll",k,{passive:!0}),window.addEventListener("resize",A,{passive:!0});const B=t=>{const r=t.target.closest(".toc-link");if(!r)return;t.preventDefault();const o=r.getAttribute("data-slug"),n=o?document.getElementById(o):null;if(n){const s=n.getBoundingClientRect().top+window.scrollY-80;window.scrollTo({top:s,behavior:"smooth"})}};u.addEventListener("click",B),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",k),window.removeEventListener("resize",A),u.removeEventListener("click",B),clearTimeout(h),E=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",L):L();document.addEventListener("astro:page-load",L);</script> </aside> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text footer-text--strong" data-astro-cid-sz7xmlte>
 &copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-sz7xmlte>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-sz7xmlte>
 Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
 Astro
