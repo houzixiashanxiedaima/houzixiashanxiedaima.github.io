@@ -1,0 +1,897 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.0.8"><!-- Core SEO --><meta name="description" content="I'm still working on improving the test loss for a from-scratch GPT-2 small base model, trained on code based on
+Sebastian Raschka's book
+&#34;Build a Large Language Model (from Scratch)&#34;.
+
+In my training"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/writing-an-llm-from-scratch-part-32f----interventi-v3dm6r/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/writing-an-llm-from-scratch-part-32f----interventi-v3dm6r/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/writing-an-llm-from-scratch-part-32f----interventi-v3dm6r/"><meta property="og:title" content="Writing an LLM from scratch, part 32f -- Interventions: weight decay"><meta property="og:description" content="I'm still working on improving the test loss for a from-scratch GPT-2 small base model, trained on code based on
+Sebastian Raschka's book
+&#34;Build a Large Language Model (from Scratch)&#34;.
+
+In my training"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="I'm still working on improving the test loss for a from-scratch GPT-2 small base model, trained on code based on
+Sebastian Raschka's book
+&#34;Build a Large Language Model (from Scratch)&#34;.
+
+In my training"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/writing-an-llm-from-scratch-part-32f----interventi-v3dm6r/"><meta property="twitter:title" content="Writing an LLM from scratch, part 32f -- Interventions: weight decay"><meta property="twitter:description" content="I'm still working on improving the test loss for a from-scratch GPT-2 small base model, trained on code based on
+Sebastian Raschka's book
+&#34;Build a Large Language Model (from Scratch)&#34;.
+
+In my training"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Writing an LLM from scratch, part 32f -- Interventions: weight decay</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/","potentialAction":{"@type":"SearchAction","target":"https://blog.yuyins.com/search?q={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Writing an LLM from scratch, part 32f -- Interventions: weight decay","item":"https://blog.yuyins.com/reading-list/writing-an-llm-from-scratch-part-32f----interventi-v3dm6r/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-b4zvghpy]{display:inline-flex;align-items:center;gap:.45rem;border-radius:9999px;border:1px solid transparent;background:var(--muted);color:var(--foreground);font-weight:500;line-height:1.4;text-decoration:none;white-space:nowrap}.chip--sm[data-astro-cid-b4zvghpy]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-b4zvghpy]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-b4zvghpy]{cursor:pointer;transition:background-color .2s ease,color .2s ease,opacity .2s ease}.chip--interactive[data-astro-cid-b4zvghpy]:hover{background-color:color-mix(in srgb,var(--accent) 10%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 68%,var(--foreground))}.chip--active[data-astro-cid-b4zvghpy],.chip[data-astro-cid-b4zvghpy].active{background-color:color-mix(in srgb,var(--accent) 18%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 82%,var(--foreground));border-color:transparent;box-shadow:none;font-weight:600}.chip--dashed[data-astro-cid-b4zvghpy]{border-style:dashed;border-color:color-mix(in srgb,var(--accent) 22%,var(--border));background:color-mix(in srgb,var(--background) 70%,var(--muted))}.chip[data-astro-cid-b4zvghpy]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+<link rel="stylesheet" href="/_astro/Layout.C4bMjQ2U.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0;animation:fadeIn .3s ease-out}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;color:var(--muted-foreground);font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.8125rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--accent)}.back-link--top[data-astro-cid-wrgicudb]{display:inline-block;margin-bottom:1rem}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2> 雅俗共赏 </a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-otpdt6jm> <div class="search-dialog-card" data-astro-cid-otpdt6jm> <div class="search-dialog-bar" data-astro-cid-otpdt6jm> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="8" data-astro-cid-otpdt6jm></circle><path d="m21 21-4.3-4.3" data-astro-cid-otpdt6jm></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-otpdt6jm></div> <kbd class="search-kbd" data-astro-cid-otpdt6jm>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-otpdt6jm> <path d="M18 6 6 18" data-astro-cid-otpdt6jm></path><path d="m6 6 12 12" data-astro-cid-otpdt6jm></path> </svg> </button> </div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(e=0){if(sessionStorage.getItem(c)==="true")return m(),!0;const s=document.getElementById("pagefind-ui");if(!s)return!1;s.innerHTML='<div class="search-loading">加载中...</div>';try{return await new Promise((r,o)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=r,a.onerror=o,document.head.appendChild(a)}),m(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),e<2?(console.log(`Retrying search load... (${e+1}/2)`),await new Promise(r=>setTimeout(r,1e3)),l(e+1)):(s&&(s.innerHTML=`
+          <div class="search-loading">
+            <p>搜索功能加载失败</p>
+            <button id="retry-search" class="search-retry-btn">重试</button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Writing an LLM from scratch, part 32f -- Interventions: weight decay</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://gilesthomas.com" target="_blank" rel="noopener noreferrer" data-astro-cid-wrgicudb="true" data-astro-cid-b4zvghpy="true" class="chip chip--sm chip--interactive source-tag"> gilesthomas.com </a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年3月23日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>I'm still working on improving the test loss for a from-scratch GPT-2 small base model, trained on code based on
+<a href="https://sebastianraschka.com/" target="_blank" rel="noopener noreferrer">Sebastian Raschka</a>'s book
+"<a href="https://www.manning.com/books/build-a-large-language-model-from-scratch" target="_blank" rel="noopener noreferrer">Build a Large Language Model (from Scratch)</a>".</p>
+
+<p>In my training code, I have this code to create the optimiser:</p>
+
+<div>
+<pre><span></span><code>    <span>optimizer</span> <span>=</span> <span>torch</span><span>.</span><span>optim</span><span>.</span><span>AdamW</span><span>(</span>
+        <span>model</span><span>.</span><span>parameters</span><span>(),</span>
+        <span>lr</span><span>=</span><span>0.0004</span><span>,</span> <span>weight_decay</span><span>=</span><span>0.1</span>
+    <span>)</span>
+</code></pre>
+</div>
+
+<p>In my <a href="/2026/03/llm-from-scratch-32e-interventions-learning-rate" target="_blank" rel="noopener noreferrer">last post</a> I looked
+into the learning rate, the <code>lr</code> parameter in that code, and found a value for that,
+plus some extra code to schedule it -- that is, to vary it over time -- which gave better training results.</p>
+
+<p>This time I want to go into the weight decay.  What is it, what is it for, and is
+0.1 really the best value?</p>
+<p>I was a little concerned going into this that in order to understand this hyperparameter,
+I'd need to have a good understanding of how the optimiser works; I've been building
+what I think is a solid mental model of optimisers, but I don't think I understand
+them well enough to explain them yet, and I've been hoping to delay posting about them
+to a separate blog post series after this one.</p>
+
+<p>The good news is that while weight decay is an important aspect of how optimisers work
+-- the "W" in AdamW, the thing that makes it different to the older Adam optimiser,
+is a nod to its different treatment of weight decay -- you don't need to know how
+the optimiser itself works to understand what weight decay is.</p>
+
+<p>Instead, you just need to consider an older and more fundamental aspect of building
+ML systems -- regularisation.  In order to dig into that, let's start with overfitting.</p>
+
+<h3>Overfitting</h3>
+
+<p>Let's imagine a simple classification task: we want to build a model that can -- for
+any point on this chart -- predict whether a cross or a circle should go there, training it using
+the sample data points that we already have:</p>
+
+<p><img src="/post-assets/llm-from-scratch-32f-interventions-weight-decay/overfit_plot1.png" alt="Overfitting example: the training data" title="Overfitting example: the training data" /></p>
+
+<p>Let's say that we train a powerful model on this dataset, and it comes up with this:</p>
+
+<p><img src="/post-assets/llm-from-scratch-32f-interventions-weight-decay/overfit_plot2.png" alt="Overfitting example: the powerful model's solution" title="Overfitting example: the powerful model's solution" /></p>
+
+<p>Now, <em>ab initio</em> we don't know whether that's a good result or not; we need to use our
+validation set to evaluate it.  Let's say that the validation points are these
+blue ones:</p>
+
+<p><img src="/post-assets/llm-from-scratch-32f-interventions-weight-decay/overfit_plot3.png" alt="Overfitting example: validation samples show that it's overfit" title="Overfitting example: validation samples show that it's overfit" /></p>
+
+<p>We can see that it looks like our powerful model has overfit.  The training set is
+all nicely split by the boundary, but the validation points are not.</p>
+
+<p>A common solution to how to handle that kind of issue that you might see in
+introductory ML courses is to try using a less powerful model.  A less powerful model
+in this case might come up with a less "wiggly" line to separate the two categories,
+perhaps because it didn't have enough parameters to make it wiggle so much, so you
+might find that it came up with a classifier that looked more like this:</p>
+
+<p><img src="/post-assets/llm-from-scratch-32f-interventions-weight-decay/overfit_plot4.png" alt="Overfitting example: a simpler model fits perfectly" title="Overfitting example: a simpler model fits perfectly" /></p>
+
+<p>So: we use our validation set to detect overfitting, and we can adjust the complexity
+of our model to try to avoid it.</p>
+
+<p>Now, this is all very well, but it does require manual intervention.  We had to do
+a training run, identify that we were overfitting, and then decide on parameters for
+the new simpler model (how many parameters should it have?).  We could, perhaps have
+gone too far and wound up with something like this:</p>
+
+<p><img src="/post-assets/llm-from-scratch-32f-interventions-weight-decay/overfit_plot5.png" alt="Overfitting example: a too-simple model underfits" title="Overfitting example: a too-simple model underfits" /></p>
+
+<p>...and underfit.</p>
+
+<p>There's no way when we start out knowing what the right number of parameters is,
+so we need to try various values and then try to work out the optimum balance.</p>
+
+<p>Regularisation techniques are designed to try to automate this -- to prevent overfitting
+without all that tedious mucking about with the model.</p>
+
+<h3>Regularisation</h3>
+
+<p>We've already <a href="/2025/03/llm-from-scratch-10-dropout" target="_blank" rel="noopener noreferrer">looked at Dropout</a>, which is one
+of the standard ways to do that.  Although <a href="/2025/03/dropout-and-mandatory-vacation" target="_blank" rel="noopener noreferrer">my own mental model</a>
+of what it does goes some way beyond just helping to prevent overfitting, I may well be
+wrong -- and given that our LLM train is never seeing the same training data twice, being
+a single-epoch run, removing it <a href="/2026/02/llm-from-scratch-32c-interventions-removing-dropout" target="_blank" rel="noopener noreferrer">turned out to improve our model</a>.</p>
+
+<p>Another technique is just stopping the training run when you start seeing the validation
+loss rise, also known as "early stopping".  That's such an obvious thing to do that I
+came up with it independently <a href="/2024/12/fine-tuning-10#step-25-early-stopping" target="_blank" rel="noopener noreferrer">back when I was doing my early experiments with fine-tuning</a>.
+Now, we don't have a separate validation set for these training runs, but because we're doing
+a single epoch, the training data it sees is just as "new to it" as a held-back
+validation set would be, so we could use a similar trick and treat "train loss starts rising" instead of validation loss
+rising as a reason to stop the train early.  It's not exactly the same thing, but
+perhaps it would be close enough.</p>
+
+<p>But in all of the trains in this series,
+that's never happened -- while sometimes the train loss blips up for a bit, in the longer term
+it keeps going down.</p>
+
+<p>But there are other techniques that rely on a neat trick.  Let's think back to the
+manual, boring way of trying to find how many parameters are appropriate for a modelling
+task.  We tried one number, found that it overfit, then we might try a lower one, find that
+it underfit, then try something in the middle and find that it's better but still not
+perfect one way or the other, and rinse and repeat until we find something we're happy with.
+This kind of searching through a solution space to find an optimum is exactly what we're doing
+when training a model.  It would be really nice to automate it in the same way.</p>
+
+<p>One trick is: if we want to minimise the complexity of our model so that it doesn't overfit,
+we can try adding a measure of the model's complexity to the loss function -- and then
+our normal process of gradient descent will try to minimise that, just like it will
+try to minimise the loss from the training results themselves.  And that brings us
+on to weight decay.</p>
+
+<h3>Weight decay (finally!)</h3>
+
+<p>Regularisation by weight decay starts off with the hypothesis that the "size" of all
+of the model's weights, taken together, is a measure of the model's complexity.  If
+the model's weights are small, then it's a simpler model than if they're large. <sup><a href="#fn-1" target="_blank" rel="noopener noreferrer">1</a></sup></p>
+
+<p>The "size" in this sense is the square of the L2 norm -- that's something we came across in
+<a href="/2026/02/llm-from-scratch-32b-interventions-gradient-clipping#how" target="_blank" rel="noopener noreferrer">gradient clipping</a>.
+The L2 norm is basically all of the weights squared, added together and then the resulting sum
+square-rooted.  You can think of it as the length of the vector that the weights
+represent -- that is, for our 163M-parameter model, it would be the length of the
+model's weights considered as a vector in 163-million dimensional space. <sup><a href="#fn-2" target="_blank" rel="noopener noreferrer">2</a></sup>  And by
+using its square, we get something that penalises larger values more (and we
+also save the time in calculating a square root).</p>
+
+<p>To me, it's not intuitively obvious that that measure really does express
+the complexity of the model in any clear sense.  After all, you'd think that doubling
+all parameters would leave it no more complex than it was before, but it would double
+the L2 norm. <sup><a href="#fn-3" target="_blank" rel="noopener noreferrer">3</a></sup>  But I imagine there is solid maths behind it to say that it does work in
+a more general way, so in the interests of not disappearing down a mathematical rabbit
+hole at this stage, I'll take it as given.</p>
+
+<p>So: we're using the squared L2 norm as a measure of model complexity, and we're going to
+add that on to the training loss as a way to try to minimise both.  The next question
+is, how do we balance between the two -- the training loss and the model complexity
+penalty?</p>
+
+<p>This is, in a somewhat hand-wavy way, similar to the decision of how much of the current
+loss function's gradient to use when adjusting the weights.  For that, we use η, the
+learning rate to scale the gradients before applying them:</p>
+
+wnew=w−η×gradient
+
+<p>And the balance between the "real" loss and the model complexity penalty is done in
+a similar way -- we have a number, the weight decay, normally represented
+by a lower-case lambda, λ, and we multiply the squared L2 norm by that, something like this:</p>
+
+ℒ′=ℒ+λ·N2
+
+<p>...where I'm using ℒ for the normal loss on the training inputs vs
+the targets, N2 for the squared L2 norm of the weights, and ℒ′ for the combined
+loss.  And ℒ′ is what we -- in theory -- actually try to minimise using our optimiser.</p>
+
+<p>But there's actually a neat simplification that we can apply to make this even easier.</p>
+
+<p>Firstly, let's make one small change to the equation above: we'll halve the
+squared L2 norm before multiplying it by λ.  That obviously doesn't change the underlying maths, it just
+means that we'd need to use larger values for λ to get the same effect.  You'll see why that's useful in a bit.</p>
+
+ℒ′=ℒ+λ·N22
+
+<p>Now let's think about normal gradient descent.  Again, we work out the gradient of the loss function for each weight,
+and subtract that times the learning rate η from the weight's value to update it:</p>
+
+wnew=w−η×gradient
+
+<p>Let's reformulate that a bit.  The gradient of the loss function for the weight is
+its partial derivative against that weight, so we can write the above like this
+for the version of the loss function including weight decay, ℒ′:</p>
+
+wnew=w−η∂ℒ′∂w
+
+<p>Now, we defined ℒ′ above as ℒ+λ·N22, so we can
+substitute that in there:</p>
+
+wnew=w−η∂∂w(ℒ+λ·N22)
+
+<p>Now, let's think about that L2 norm, N.  It's
+the square root of the sum of all of the weights squared, or equivalently we can
+square it (like we do in the formula above) and say:</p>
+
+N2=w02+w12+…+wn2
+
+<p>Let's drop that in:</p>
+
+wnew=w−η∂∂w(ℒ+λ·w02+w12+…+wn22)
+
+<p>Now, the derivative of a bunch of things added together is just each of them differentiated
+separately and then added together.  Let's apply that to the two terms in the brackets:</p>
+
+wnew=w−η(∂ℒ∂w+∂∂w(λ·w02+w12+…+wn22))
+
+<p>...and now pull the constant λ and the 2 out of the second partial derivative:</p>
+
+wnew=w−η(∂ℒ∂w+λ2∂∂w(w02+w12+…+wn2))
+
+<p>Then we apply the rule for the derivative of a bunch of things added together again:</p>
+
+wnew=w−η(∂ℒ∂w+λ2(∂∂ww02+∂∂ww12+…+∂∂wwn2))
+
+<p>Now, we're doing a partial derivative versus one specific weight, w, which is one of
+the w0, w1, and so on in there.  From that perspective,
+all of the other weights are constant -- which means that their derivative
+with respect to w is zero.  So we can just get rid of all of them apart from the one that
+actually <em>is</em> w, and we wind up with this:</p>
+
+wnew=w−η(∂ℒ∂w+λ2(∂∂ww2))
+
+<p>The derivative of w2 with respect to w is just 2w.
+Thanks to that crafty halving of the N2 earlier, that means that we can go to this:</p>
+
+wnew=w−η(∂ℒ∂w+λ·w)
+
+<p>Multiplying that −η across the bracketed terms, we get:</p>
+
+wnew=w−η∂ℒ∂w−ηλw
+
+<p>That's exactly the same as the normal gradient descent update, using the unmodified
+loss function without weight decay -- except that we're additionally subtracting
+the weight's original value scaled down by both the learning rate η and the
+weight decay value λ.</p>
+
+<p>Much simpler :-)</p>
+
+<p>(As an aside: the description above
+is correct for "traditional" simple gradient descent and -- loosely -- for Adam, but AdamW's trick is
+to do things somewhat differently.  That's something I'll go into in more detail when I get round to writing
+my post on optimisers.)</p>
+
+<p>So: weight decay is a regularisation technique that tries to prevent our model from
+getting any more complex than it needs to be.  We have one number, λ, which
+determines how much to weight complexity against the normal training loss.  And, as we
+can see from the code:</p>
+
+<div>
+<pre><span></span><code>    <span>optimizer</span> <span>=</span> <span>torch</span><span>.</span><span>optim</span><span>.</span><span>AdamW</span><span>(</span>
+        <span>model</span><span>.</span><span>parameters</span><span>(),</span>
+        <span>lr</span><span>=</span><span>0.0004</span><span>,</span> <span>weight_decay</span><span>=</span><span>0.1</span>
+    <span>)</span>
+</code></pre>
+</div>
+
+<p>...right now we're setting λ to 0.1.  Is that the right value?</p>
+
+<h3>The literature</h3>
+
+<h3>Best guesses for GPT-2</h3>
+
+<p>As usual, the <a href="https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf" target="_blank" rel="noopener noreferrer">GPT-2 paper</a>
+is light on the details of the hyperparameters they used, but nostalgebraist wrote
+<a href="https://nostalgebraist.tumblr.com/post/642136680709652480/gpt2s-weight-decay" target="_blank" rel="noopener noreferrer">a really nice post on Tumblr</a>
+where they dug into what the number might have been.  As they say:</p>
+
+<blockquote>
+  <p>It does say it follows the first GPT paper in most respects, and that paper used weight decay of 0.01.</p>
+</blockquote>
+
+<p><a href="https://arxiv.org/pdf/2001.08361" target="_blank" rel="noopener noreferrer">Their link</a> for the paper appears to be mistaken, as it's a different (albeit very interesting) paper from
+2020, a year after the GPT-2 one, but I believe <a href="https://www.cs.ubc.ca/~amuham01/LING530/papers/radford2018improving.pdf" target="_blank" rel="noopener noreferrer">this is the paper normally called the GPT-1 one</a>.
+They do indeed use 0.01 there:</p>
+
+<blockquote>
+  <p>We also
+  employed a modified version of L2 regularization proposed in [37], with w = 0.01 on all non bias or
+  gain weights.</p>
+</blockquote>
+
+<p>The link to the <a href="https://arxiv.org/pdf/2005.14165" target="_blank" rel="noopener noreferrer">GPT-3 paper</a> looks right, though, and as
+they say, it uses a weight decay of 0.1:</p>
+
+<blockquote>
+  <p>All models use weight decay of 0.1 to provide a
+  small amount of regularization</p>
+</blockquote>
+
+<p>They then do a bit of maths to work out whether the GPT-2 weights are likely to have
+been regularised by something like weight decay, and come to the conclusion that they
+probably used 0.01, just like the GPT-1 paper.  It seems plausible, but of course not
+certain.</p>
+
+<p>But: tentatively, GPT-2 used 0.01, while we're using 0.1, perhaps because the GPT-3 paper
+does.  What other data points do we have?</p>
+
+<p>The <a href="https://huggingface.co/spaces/HuggingFaceTB/smol-training-playbook" target="_blank" rel="noopener noreferrer">Hugging Face "Smol training playbook"</a> has some
+interesting stuff (including not using weight decay on embeddings, which they say
+they found helped), but the value that they use is 0.1, which they call "a very vanilla setting".
+And:</p>
+
+<blockquote>
+  <p>Interestingly, over the last few years the AdamW hyperparameters have barely moved:</p>
+  
+  <ul>
+  <li>β1 = 0.9, β2 = 0.95</li>
+  <li>Grad norm clipping = 1.0</li>
+  <li>Weight decay = 0.1 (Llama 3 405B drops this to 0.01)</li>
+  </ul>
+  
+  <p>The same triplet is reused in Llama 1, 2, and 3 and DeepSeek-V1, V2, and V3-671B, with no changes.</p>
+</blockquote>
+
+<p>Anyway, assuming they're right about weight decay value for the models they mention
+(and I assume they've done the research -- I had the link to the <a href="https://arxiv.org/abs/2401.02954" target="_blank" rel="noopener noreferrer">DeepSeek paper</a>
+to hand, and that one certainly says 0.1), it looks like 0.1 is pretty much standard these
+days.  And a quick double-check of what a typical value would be -- asking ChatGPT, Claude,
+Gemini and Grok -- they all recommend 0.1 as a solid sensible default with AdamW (though they all
+also say that values between 0.01 and 0.1 are reasonable).</p>
+
+<p>So on that basis, I think we can say that 0.1 is a reasonable default, and has pretty much
+become the standard, but it might be worth trying 0.01 just to see if it does help with
+tiny models like ours.</p>
+
+<p>Are there any dissenting voices to the 0.1 orthodoxy?</p>
+
+<h3>The Cerebras paper</h3>
+
+<p>I came across a paper
+from a team at <a href="https://www.cerebras.ai/" target="_blank" rel="noopener noreferrer">Cerebras Systems</a>,
+"<a href="https://arxiv.org/abs/2505.13738" target="_blank" rel="noopener noreferrer">Power Lines: Scaling Laws for Weight Decay and Batch Size in LLM Pre-training</a>".</p>
+
+<p>It's essentially a Chinchilla-like attempt to get scaling laws, but rather than looking
+just at optimal tokens per parameter in order to work out what you should scale up when
+adding on more compute, they're trying to find optimal batch sizes and values for weight
+decay.  That's certainly relevant to our interests :-)</p>
+
+<p>However, it is very dense and in-depth, and fully understanding it at this stage would need quite a lot
+of work -- very much a side quest.  Definitely something to come back to later, but for now,
+I'll just try to extract the stuff we need.</p>
+
+<p>Let's start off with the optimal batch size, as they have it right there on the first page.
+We're not going to use it, but it will be interesting to compare with what we're using,
+and what the <a href="https://arxiv.org/abs/2401.02954" target="_blank" rel="noopener noreferrer">DeepSeek paper</a> that I looked at
+in the <a href="/2026/03/llm-from-scratch-32e-interventions-learning-rate" target="_blank" rel="noopener noreferrer">last post</a> suggested.</p>
+
+<p>They fit this formula:</p>
+
+Bopt=0.0306·D0.383
+
+<p>...where D is the total number of tokens that you're training on.  That's quite different
+to the formula in the DeepSeek paper, which was:</p>
+
+Bopt=0.2920·C0.3271
+
+<p>...where C is the number of FLOPs <sup><a href="#fn-4" target="_blank" rel="noopener noreferrer">4</a></sup>.  C scales up linearly with the number of tokens D,
+but also with the number of parameters in the model N, so you can see the DeepSeek formula
+as a function of N and D -- as your model gets bigger, so does Bopt --
+whereas this Cerebras paper is saying that it's just a function of D, unaffected by model size.  They did
+train over a number of different sizes (from 111M parameters up to 1.7B) and their
+formula seems to hold, so it's not just that they didn't treat model size as relevant.</p>
+
+<p>Well, let's see what their formula comes up with.  We have 3,260,252,160 tokens in
+our train, so their formula for Bopt comes out as:</p>
+
+0.0306·3,260,252,1600.383
+
+≈0.0306·4401.24
+
+≈134.68
+
+<p>That's much closer to the 97-or-so sequences that appeared to be optimal when I did
+<a href="/2026/01/llm-from-scratch-29-ddp-training-a-base-model-in-the-cloud" target="_blank" rel="noopener noreferrer">some rough-and-ready curve-fitting</a>
+than the 373 that the DeepSeek formula gave for our setup :-)</p>
+
+<p>OK, so what about the weight decay?  They don't give a direct formula for that, but they
+do give a formula for the optimal τ, the AdamW timescale.  Without going into exactly what that means
+right now (that's one for my optimisers post later), they relate it to other numbers that
+we do know with this formula:</p>
+
+τ=BηλD
+
+<p>...where B is the batch size, D is the amount of data, and of
+course λ and η are weight decay and learning rate respectively.
+So if we know the optimal τ we can work out the optimal λ for our training run;
+solving for λ, we get:</p>
+
+λopt=BητoptD
+
+<p>So let's work out the τopt.  Their fitted formula is this:</p>
+
+τopt=1.084·(TPP)−0.527
+
+<p>...where TPP is tokens-per-parameter.  For us, with our Chinchilla-optimal TPP of 20,
+we get:</p>
+
+=1.084·20−0.527
+
+≈1.084*0.2062
+
+≈0.22352
+
+<p>Now, we're using a batch size B of 96, and (as before) D is 3,260,252,160.  Our
+learning rate η is 0.0004 for this train -- remember, although in the last post
+we found that a scheduled learning rate with a peak at 0.0014 was better, in this
+post we're testing changing weight decay in isolation. <sup><a href="#fn-5" target="_blank" rel="noopener noreferrer">5</a></sup></p>
+
+<p>So, we just need to plug our τopt into this:</p>
+
+λopt=BητoptD
+
+<p>...right?</p>
+
+<p>Before we do: having a batch size and a number of tokens in the same formula feels like a unit
+mismatch.</p>
+
+<p>In particular,
+as part of the explanation of that formula, they tie it back to a value S, the total number of optimisation steps, which they define
+as D/B.  For that to work,  either both need to be in terms of tokens, or both need to be in terms
+of sequences</p>
+
+<p>They clearly say that "B is reported in units of sequences".  I'm not sure how
+to explain this, except by saying that perhaps the D is also meant to be in terms
+of sequences too, even though I'm pretty sure that it's meant to be in terms
+of tokens in the equation for the batch size. <sup><a href="#fn-6" target="_blank" rel="noopener noreferrer">6</a></sup></p>
+
+<p>Well, let's assume that is the case, and plug in numbers for sequences.  We have
+3,260,252,160 training tokens split into 1,024-token sequences, which is 3,183,840
+sequences, so that comes out as:</p>
+
+λopt=960.0004·0.22352·3,183,840
+
+<p>(Note that
+we'd get the same numbers if we plugged in numbers for tokens in both cases, as it would just
+multiply the top and the bottom by 1,024.)</p>
+
+<p>That comes out as 0.33724.
+Wow!  That's even higher than the "traditional" 0.1, never
+mind the 0.01 that is the best guess we have for GPT-2.  Even if I'm missing something here
+(I certainly can't say I've read the paper in as much detail as it
+deserves), that actually gives us a nice number to try out as an experiment.</p>
+
+<p>We already have a loss on our test set for a model trained with a weight decay of 0.1, as that was what we used in
+our baseline train.  It looks like it might be worth doing two more, one with the
+GPT-2 estimate of 0.01, and one with this Cerebras-inspired 0.33724, neatly bracketing
+it.  Let's give them a go!</p>
+
+<h3>Training with the estimated GPT-2 weight decay, 0.01</h3>
+
+<p>Firstly, the training run with λ=0.01:</p>
+
+<p><img src="/post-assets/llm-from-scratch-32f-interventions-weight-decay/gpt-2-lambda-loss-chart.png" alt="Loss for training run with estimated GPT-2 weight decay, 0.01" title="Loss for training run with estimated GPT-2 weight decay, 0.01" /></p>
+
+<p>Looks like a nice smooth train -- one small loss spike near the start but it quickly
+recovered.  The output was:</p>
+
+<pre><code>Training complete in 12,244.461 seconds
+Tokens seen: 3,260,252,160
+Throughput: 266,263 tokens/second
+Final train loss: 3.697
+</code></pre>
+
+<p>That's not a bad final train loss (which does tend to indicate a good model).</p>
+
+<p>Let's look at the evals; firstly, the smoke test -- how would it complete "Every
+effort moves you"?</p>
+
+<pre><code>Every effort moves you and any of the other staff at a time by using different techniques from the other members or staff who
+</code></pre>
+
+<p>Passably coherent.  Let's take a look at the loss it gets on our test set:</p>
+
+<pre><code>Loss against our test dataset: 3.643
+</code></pre>
+
+<p>Not bad at all!  Time to <a href="https://huggingface.co/gpjt/8xa100m40-weight-decay-gpt2" target="_blank" rel="noopener noreferrer">upload it to Hugging Face</a>
+and to add it to the table so that we can compare it to the other
+interventions we've tried so far.</p>
+
+<table>
+<thead>
+<tr>
+  <th></th>
+  <th>Test set loss</th>
+  <th>Improvement vs baseline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>8xa100m40-baseline</td>
+  <td>3.692</td>
+  <td>-</td>
+</tr>
+<tr>
+  <td>8xa100m40-gradient-clipping</td>
+  <td>3.678</td>
+  <td>0.014</td>
+</tr>
+<tr>
+  <td>8xa100m40-qkv-bias</td>
+  <td>3.669</td>
+  <td>0.023</td>
+</tr>
+<tr>
+  <td>8xa100m40-weight-decay-gpt2</td>
+  <td>3.643</td>
+  <td>0.049</td>
+</tr>
+<tr>
+  <td>8xa100m40-remove-dropout</td>
+  <td>3.641</td>
+  <td>0.051</td>
+</tr>
+<tr>
+  <td>8xa100m40-schedule-learning-rate</td>
+  <td>3.602</td>
+  <td>0.09</td>
+</tr>
+</tbody>
+</table>
+
+<p>So, it's better than gradient clipping and the QKV bias, but slightly worse than removing
+dropout and much worse than scheduling (and increasing) the learning rate.</p>
+
+<p>Now, that suggests to me that the much-higher Cerebras-inspired weight decay will
+be worse.  My logic is this: if both decreasing it and increasing it improved loss,
+that would suggest that we have an inverted-U loss curve for weight decay like this:</p>
+
+<p><img src="/post-assets/llm-from-scratch-32f-interventions-weight-decay/weight_decay_plot1.png" alt="Intuition on weight decay changes, part 1: an inverted U-shaped curve" title="Intuition on weight decay changes, part 1: an inverted U-shaped curve" /></p>
+
+<p>Now, it seems vanishingly unlikely that those downward trends on either
+side would continue so that you could get arbitrarily low loss by increasing or
+decreasing weight decay even more.  So the curve would perhaps look a bit more like
+this W-shaped one:</p>
+
+<p><img src="/post-assets/llm-from-scratch-32f-interventions-weight-decay/weight_decay_plot2.png" alt="Intuition on weight decay changes, part 2: a W-shaped curve" title="Intuition on weight decay changes, part 2: a W-shaped curve" /></p>
+
+<p>My intuition is that having multiple minima -- especially ones that <em>just happen</em> to be
+on either side of the "standard" value for weight decay -- seems less likely than
+the alternative -- that the higher number will be worse because we're actually on a
+U-shaped curve more like this:</p>
+
+<p><img src="/post-assets/llm-from-scratch-32f-interventions-weight-decay/weight_decay_plot3.png" alt="Intuition on weight decay changes, part 3: a U-shaped curve" title="Intuition on weight decay changes, part 3: a U-shaped curve" /></p>
+
+<p>Of course, my intuition could be completely off on this, and it's definitely still
+worth doing the test!</p>
+
+<h3>Training with the Cerebras-inspired weight decay, 0.33724</h3>
+
+<p>Here's the loss chart with that:</p>
+
+<p><img src="/post-assets/llm-from-scratch-32f-interventions-weight-decay/cerebras-lambda-loss-chart.png" alt="Loss for training run with Cerebras-inspired weight decay, 0.33724" title="Loss for training run with Cerebras-inspired weight decay, 0.33724" /></p>
+
+<p>You can see right away that it was a much choppier train, with quite a few loss
+spikes, some quite late on.  The output at the end reflected this:</p>
+
+<pre><code>Training complete in 12,254.884 seconds
+Tokens seen: 3,260,252,160
+Throughput: 266,037 tokens/second
+Final train loss: 3.867
+</code></pre>
+
+<p>...a significantly worse loss at the end.  Still, we should do the evals.  Firstly
+the smoke test:</p>
+
+<pre><code>Every effort moves you so far away (but to no surprise, a real change was the only goal I did in 2009
+</code></pre>
+
+<p>Not too bad, but the loss test is the important one:</p>
+
+<pre><code>Loss against our test dataset: 3.814
+</code></pre>
+
+<p>That's terrible!  Our first result for loss on the test set for an intervention that is actually worse than the baseline.
+Much worse:</p>
+
+<table>
+<thead>
+<tr>
+  <th></th>
+  <th>Test set loss</th>
+  <th>Improvement vs baseline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>8xa100m40-weight-decay-cerebras</td>
+  <td>3.814</td>
+  <td>-0.122</td>
+</tr>
+<tr>
+  <td>8xa100m40-baseline</td>
+  <td>3.692</td>
+  <td>-</td>
+</tr>
+<tr>
+  <td>8xa100m40-gradient-clipping</td>
+  <td>3.678</td>
+  <td>0.014</td>
+</tr>
+<tr>
+  <td>8xa100m40-qkv-bias</td>
+  <td>3.669</td>
+  <td>0.023</td>
+</tr>
+<tr>
+  <td>8xa100m40-weight-decay-gpt2</td>
+  <td>3.643</td>
+  <td>0.049</td>
+</tr>
+<tr>
+  <td>8xa100m40-remove-dropout</td>
+  <td>3.641</td>
+  <td>0.051</td>
+</tr>
+<tr>
+  <td>8xa100m40-schedule-learning-rate</td>
+  <td>3.602</td>
+  <td>0.09</td>
+</tr>
+</tbody>
+</table>
+
+<p>However, at this point I started wondering.  When I was looking at the learning
+rate, <a href="/2026/03/llm-from-scratch-32e-interventions-learning-rate#the-initial-learning-rate-value" target="_blank" rel="noopener noreferrer">the number I selected based on the DeepSeek paper</a>
+worked well with learning rate scheduling, but failed to converge without.  The
+weight decay number is multiplied by the current learning rate before it's used
+to reduce weights' values, so will be affected by both scheduling and η.</p>
+
+<p>It seemed likely that Cerebras used a learning rate schedule, and double-checking
+the paper:</p>
+
+<blockquote>
+  <p>We present results with a single (standard) learning rate schedule
+  ...
+  For a given TPP, all models have the exact same warmup phase: a linear warmup of the learning rate from
+  0 to the maximum value.
+  ...
+  We use the µP-tuned and adjusted peak
+  η, for 111M models. The learning rate increases linearly to the peak for the first 10% of steps, then decreases
+  from the peak to 0 for the remainder of steps.</p>
+</blockquote>
+
+<p>Seems pretty certain.</p>
+
+<p>Now, I've been following a fairly strict rule of testing interventions in isolation;
+however, the learning rate and the weight decay parameters are so intertwined that
+perhaps that's just not reasonable here.  I decided to
+do two more trains, both with learning rate
+scheduling.  I'd use the same schedule as in the last blog post -- a warmup from
+pretty-much zero to the peak over 10% of the run, followed by a cosine decay to 10%
+of the peak.  In the first, I'd use the same learning rate as our baseline model, 0.0004.
+In the second, I'd use the one we got from the DeepSeek paper, which did really well
+when scheduled: 0.0014.</p>
+
+<h3>Training with the Cerebras-inspired weight decay, scheduling learning rate with a peak of 0.0004</h3>
+
+<p><img src="/post-assets/llm-from-scratch-32f-interventions-weight-decay/cerebras-lambda-scheduled-loss-chart.png" alt="Loss for training run with Cerebras-inspired weight decay, 0.33724, scheduled learning rate peaking at 0.0004" title="Loss for training run with Cerebras-inspired weight decay, 0.33724, scheduled learning rate peaking at 0.0004" /></p>
+
+<p>Well, that's less choppy, at least -- the scheduling calmed down the later parts of
+the run, as you'd expect given that the learning rate was dropping.  The output:</p>
+
+<pre><code>Training complete in 12,275.101 seconds
+Tokens seen: 3,260,252,160
+Throughput: 265,599 tokens/second
+Final train loss: 3.801
+</code></pre>
+
+<p>Still a kind of high training loss at the end, though.  The smoke test:</p>
+
+<pre><code>Every effort moves you toward the most beneficial method for the best outcomes is for your child, whether you are an expert,
+</code></pre>
+
+<p>Not too bad, and the test set loss:</p>
+
+<pre><code>Loss against our test dataset: 3.739
+</code></pre>
+
+<p>Unfortunately still worse than the baseline of 3.692, albeit better than the one without
+learning rate scheduling.  I'm not going to add it to the table, as this was more in
+the way of an exploratory training run.</p>
+
+<p>Let's see how we do with the larger DeepSeek-suggested learning rate.</p>
+
+<h3>Training with the Cerebras-inspired weight decay, scheduling learning rate with a peak of 0.0014</h3>
+
+<p>For this one, I kept the weight decay at 0.33724.  (This was an error, as I realised
+later -- more on that shortly)</p>
+
+<p><img src="/post-assets/llm-from-scratch-32f-interventions-weight-decay/cerebras-lambda-scheduled-and-higher-loss-chart.png" alt="Loss for training run with Cerebras-inspired weight decay, 0.33724, scheduled learning rate peaking at 0.0014" title="Loss for training run with Cerebras-inspired weight decay, 0.33724, scheduled learning rate peaking at 0.0014" /></p>
+
+<p>Ouch, super-choppy loss -- and the loss at the end of the train isn't promising either</p>
+
+<pre><code>Training complete in 12,258.767 seconds
+Tokens seen: 3,260,252,160
+Throughput: 265,953 tokens/second
+Final train loss: 3.911
+</code></pre>
+
+<p>Terrible loss at the end.  The smoke test gives this:</p>
+
+<pre><code>Every effort moves you forward, it doesn´t take time for the next chapter in our history as much time or a
+</code></pre>
+
+<p>...which is not too bad, but the test set loss:</p>
+
+<pre><code>Loss against our test dataset: 3.847
+</code></pre>
+
+<p>...is still pretty terrible (though still a tad better than the one without the learning
+rate scheduling).</p>
+
+<p>Another one to throw away, I think.</p>
+
+<p>But then something occurred to me: the formula to go from the optimal AdamW time horizon τopt to
+the optimal weight decay λopt is this:</p>
+
+λopt=BητoptD
+
+<p>It has the learning rate η in it -- I even made a footnote saying that I was going to
+have to remember to recalculate the weight decay value when that changed :-S</p>
+
+<p>Luckily, though, running the real numbers through that:</p>
+
+λopt=960.0014×0.22352×3,183,840
+
+≈0.096355
+
+<p>...which is almost exactly the same as the 0.1 that we've been using for all of
+our other experiments.</p>
+
+<p>So that actually suggests that the Cerebras equations come up with a reasonably
+usable number for weight decay if you use the DeepSeek-optimal level for the learning
+rate, and schedule it in a normal warmup-cosine decay manner.  But it's still not
+as good -- for this model -- as using the GPT-2 number. <sup><a href="#fn-7" target="_blank" rel="noopener noreferrer">7</a></sup></p>
+
+<p>With that, I think it's time to wrap this intervention up!</p>
+
+<h3>Conclusion</h3>
+
+<p>Let's look at our results table again:</p>
+
+<table>
+<thead>
+<tr>
+  <th></th>
+  <th>Test set loss</th>
+  <th>Improvement vs baseline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>8xa100m40-weight-decay-cerebras</td>
+  <td>3.814</td>
+  <td>-0.122</td>
+</tr>
+<tr>
+  <td>8xa100m40-baseline</td>
+  <td>3.692</td>
+  <td>-</td>
+</tr>
+<tr>
+  <td>8xa100m40-gradient-clipping</td>
+  <td>3.678</td>
+  <td>0.014</td>
+</tr>
+<tr>
+  <td>8xa100m40-qkv-bias</td>
+  <td>3.669</td>
+  <td>0.023</td>
+</tr>
+<tr>
+  <td>8xa100m40-weight-decay-gpt2</td>
+  <td>3.643</td>
+  <td>0.049</td>
+</tr>
+<tr>
+  <td>8xa100m40-remove-dropout</td>
+  <td>3.641</td>
+  <td>0.051</td>
+</tr>
+<tr>
+  <td>8xa100m40-schedule-learning-rate</td>
+  <td>3.602</td>
+  <td>0.09</td>
+</tr>
+</tbody>
+</table>
+
+<p>We've found that reducing the weight decay from the now-standard 0.1 to a GPT-2-inspired
+0.01 improves the loss our model gets on the test set; it's the third-best intervention
+so far, after getting rid of dropout and updating our learning rate -- and the difference
+between it and the dropout intervention is pretty small.</p>
+
+<p>It did surprise me that the Cerebras-inspired number did so badly, though.  To recap:</p>
+
+<ul>
+<li>With our too-low learning rate of 0.0004, it performed terribly</li>
+<li>When we added scheduling, it was a bit better but still not great.</li>
+<li>When we used a DeepSeek-optimal learning rate (and actually did the right calculations
+to get the real value for weight decay based on that), we got a number which was
+<em>very</em> close to our baseline train, and seems very unlikely on the face of it
+to have a significantly different resulting test set loss.</li>
+</ul>
+
+<p>I think that for now, I should not head any further down this rabbit hole and just take
+the win -- we have a weight decay parameter that works better than the one we had, and
+so that's something that can go into our set of working interventions.  I can revisit
+the Cerebras paper later when I've spent more time studying optimisers.</p>
+
+<p>As to why this old-fashioned GPT-2 value might work better than
+the current default of 0.1: I think that could plausibly be due to scale.  The 0.1
+value appears to come from the GPT-3 paper, which essentially was an experiment
+in scaling up GPT-2.  Perhaps larger models need larger weight decays?
+And the model we're working with here is really small, at 163M parameters.</p>
+
+<p>So, that's weight decay done!  Of the <a href="/2026/02/llm-from-scratch-32a-interventions-baseline-model" target="_blank" rel="noopener noreferrer">list of planned interventions I wanted to try</a>,
+only training in full-fat 32 bits (rather than AMP), and weight-tying remain.
+I think I'll look into the second of those next.  Stay tuned!</p>
+
+<p><a href="/2026/03/llm-from-scratch-32g-interventions-weight-tying" target="_blank" rel="noopener noreferrer">Here's a link to the next post in this series</a>.</p>
+
+<div>
+<hr />
+<ol>
+<li>
+<p>More precisely, from <a href="https://www.deeplearningbook.org/" target="_blank" rel="noopener noreferrer">Deep Learning</a>:</p>
+
+<blockquote>
+  <p>Minimizing J(w) results in a choice of weights that make a tradeoff between
+  fitting the training data and being small. This gives us solutions that have
+  a smaller slope, or that put weight on fewer of the features.</p>
+</blockquote>
+
+<p>...where J(w) is the loss function we're trying to minimise in our training run,
+combining the "real" loss and a measure of the model's size. <a href="#fnref-1" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>I can't decide whether that makes it easier or harder to understand ;-) <a href="#fnref-2" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>Wild speculation: how about something using the Shannon entropy of the weights...? <a href="#fnref-3" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>Specifically the non-embedding training FLOPs. <a href="#fnref-4" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>Note to self: don't forget to adjust it if we do decide to combine this with the
+learning rate update.  Also: I'm pretty sure from reading the paper that
+the η that they're using in these formulae is the peak -- they certainly are
+using learning rate scheduling, albeit with a decay-to-zero rather than the
+decay-to-10% we used. <a href="#fnref-5" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>Plugging in the number of sequences into the batch size formula gives us an
+optimal value of 9.47, which definitely doesn't look right based on the trains
+I've done. <a href="#fnref-6" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>Assuming that the GPT-2 value for weight decay "stacks up" well with the learning
+rate update and the scheduling from the last post.  There may be some useful
+tests to do when we try to put this all together. <a href="#fnref-7" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+</ol>
+</div></div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://www.gilesthomas.com/2026/03/llm-from-scratch-32f-interventions-weight-decay" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text footer-text--strong" data-astro-cid-sz7xmlte>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-sz7xmlte>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-wlspcwf4> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-wlspcwf4> <path d="M18 15l-6-6-6 6" data-astro-cid-wlspcwf4></path> </svg> </button> <script type="module">function o(){const e=document.getElementById("back-to-top");if(!e)return;const s=300;let t=!1;const n=()=>{const i=window.scrollY>s;e.hidden=!i,t=!1},d=()=>{t||(requestAnimationFrame(n),t=!0)};e.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"})}),window.addEventListener("scroll",d,{passive:!0}),n(),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",d)},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",o):o();document.addEventListener("astro:page-load",o);</script></body></html>
