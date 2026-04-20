@@ -6,94 +6,111 @@
             <button id="retry-search" class="search-retry-btn">重试</button>
           </div>
         `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--default" data-astro-cid-sckkx6r4> <h1 id="-github-releases-监控列表">📦 GitHub Releases 监控列表</h1>
-<p>当前系统监控 <strong>13</strong> 个开源项目，每日自动抓取最新版本并生成 AI 摘要。</p>
-<p>最后更新: 2026-04-19</p>
+<p>当前系统监控 <strong>16</strong> 个开源项目，每日自动抓取最新版本并生成 AI 摘要。</p>
+<p>最后更新: 2026-04-20</p>
 <hr>
-<h2 id="go-1">Go (1)</h2>
+<h2 id="go-3">Go (3)</h2>
 <ul>
-<li><strong><a href="https://github.com/rclone/rclone" rel="noopener noreferrer" target="_blank">rclone/rclone</a></strong> ⭐ 56.7k
-“rsync for cloud storage” - Google Drive, S3, Dropbox, Backblaze B2, One Drive, Swift, Hubic, Wasabi, Google Cloud Storage, Azure Blob, Azure Files, Yandex Files
-<em>最后更新: 2026-04-19</em></li>
+<li>
+<p><strong><a href="https://github.com/AlistGo/alist" rel="noopener noreferrer" target="_blank">AlistGo/alist</a></strong> ⭐ 49.3k
+🗂️A file list/WebDAV program that supports multiple storages, powered by Gin and Solidjs. / 一个支持多存储的文件列表 / WebDAV 程序，使用 Gin 和 Solidjs。
+<em>最后更新: 2026-04-20</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/SagerNet/sing-box" rel="noopener noreferrer" target="_blank">SagerNet/sing-box</a></strong> ⭐ 32.9k
+The universal proxy platform
+<em>最后更新: 2026-04-20</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/beck-8/subs-check" rel="noopener noreferrer" target="_blank">beck-8/subs-check</a></strong> ⭐ 4.8k
+订阅转换、测速、测活、流媒体检测、重命名、导出为任意格式订阅的工具
+<em>最后更新: 2026-04-20</em></p>
+</li>
 </ul>
 <hr>
-<h2 id="javascript-1">JavaScript (1)</h2>
+<h2 id="kotlin-4">Kotlin (4)</h2>
 <ul>
-<li><strong><a href="https://github.com/fishjar/kiss-translator" rel="noopener noreferrer" target="_blank">fishjar/kiss-translator</a></strong> ⭐ 9.5k
-A simple, open source bilingual translation extension &#x26; Greasemonkey script (一个简约、开源的 双语对照翻译扩展 &#x26; 油猴脚本)
-<em>最后更新: 2026-04-19</em></li>
-</ul>
-<hr>
-<h2 id="kotlin-1">Kotlin (1)</h2>
-<ul>
-<li><strong><a href="https://github.com/rikkahub/rikkahub" rel="noopener noreferrer" target="_blank">rikkahub/rikkahub</a></strong> ⭐ 4.0k
+<li>
+<p><strong><a href="https://github.com/gkd-kit/gkd" rel="noopener noreferrer" target="_blank">gkd-kit/gkd</a></strong> ⭐ 37.9k
+基于无障碍，高级选择器，订阅规则的自定义屏幕点击安卓应用 | An Android APP with custom screen tapping based on Accessibility, Advanced Selectors, and Subscription Rules
+<em>最后更新: 2026-04-20</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/MetaCubeX/ClashMetaForAndroid" rel="noopener noreferrer" target="_blank">MetaCubeX/ClashMetaForAndroid</a></strong> ⭐ 37.8k
+A rule-based tunnel for Android.
+<em>最后更新: 2026-04-20</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/ben-manes/gradle-versions-plugin" rel="noopener noreferrer" target="_blank">ben-manes/gradle-versions-plugin</a></strong> ⭐ 4.1k
+Gradle plugin to discover dependency updates
+<em>最后更新: 2026-04-20</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/rikkahub/rikkahub" rel="noopener noreferrer" target="_blank">rikkahub/rikkahub</a></strong> ⭐ 4.0k
 RikkaHub is an Android APP that supports for multiple LLM providers.
-<em>最后更新: 2026-04-19</em></li>
+<em>最后更新: 2026-04-20</em></p>
+</li>
 </ul>
 <hr>
 <h2 id="python-1">Python (1)</h2>
 <ul>
-<li><strong><a href="https://github.com/jxxghp/MoviePilot" rel="noopener noreferrer" target="_blank">jxxghp/MoviePilot</a></strong> ⭐ 10.9k
-NAS 媒体库自动化管理工具
-<em>最后更新: 2026-04-19</em></li>
-</ul>
-<hr>
-<h2 id="ruby-1">Ruby (1)</h2>
-<ul>
-<li><strong><a href="https://github.com/Homebrew/brew" rel="noopener noreferrer" target="_blank">Homebrew/brew</a></strong> ⭐ 47.6k
-🍺 The missing package manager for macOS (or Linux)
-<em>最后更新: 2026-04-19</em></li>
+<li><strong><a href="https://github.com/MetaCubeX/mihomo" rel="noopener noreferrer" target="_blank">MetaCubeX/mihomo</a></strong> ⭐ 29.2k
+A simple Python Pydantic model for Honkai: Star Rail parsed data from the Mihomo API.
+<em>最后更新: 2026-04-20</em></li>
 </ul>
 <hr>
 <h2 id="rust-2">Rust (2)</h2>
 <ul>
 <li>
-<p><strong><a href="https://github.com/openai/codex" rel="noopener noreferrer" target="_blank">openai/codex</a></strong> ⭐ 76.3k
+<p><strong><a href="https://github.com/zed-industries/zed" rel="noopener noreferrer" target="_blank">zed-industries/zed</a></strong> ⭐ 79.4k
+Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter.
+<em>最后更新: 2026-04-20</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/openai/codex" rel="noopener noreferrer" target="_blank">openai/codex</a></strong> ⭐ 76.5k
 Lightweight coding agent that runs in your terminal
-<em>最后更新: 2026-04-19</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/jdx/mise" rel="noopener noreferrer" target="_blank">jdx/mise</a></strong> ⭐ 26.9k
-dev tools, env vars, task runner
-<em>最后更新: 2026-04-19</em></p>
+<em>最后更新: 2026-04-20</em></p>
 </li>
 </ul>
 <hr>
-<h2 id="swift-2">Swift (2)</h2>
+<h2 id="shell-1">Shell (1)</h2>
 <ul>
-<li>
-<p><strong><a href="https://github.com/exelban/stats" rel="noopener noreferrer" target="_blank">exelban/stats</a></strong> ⭐ 38.1k
+<li><strong><a href="https://github.com/mack-a/v2ray-agent" rel="noopener noreferrer" target="_blank">mack-a/v2ray-agent</a></strong> ⭐ 20.2k
+Xray、Tuic、hysteria2、sing-box 八合一一键脚本
+<em>最后更新: 2026-04-20</em></li>
+</ul>
+<hr>
+<h2 id="swift-1">Swift (1)</h2>
+<ul>
+<li><strong><a href="https://github.com/exelban/stats" rel="noopener noreferrer" target="_blank">exelban/stats</a></strong> ⭐ 38.1k
 macOS system monitor in your menu bar
-<em>最后更新: 2026-04-19</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/steipete/CodexBar" rel="noopener noreferrer" target="_blank">steipete/CodexBar</a></strong> ⭐ 10.9k
-Show usage stats for OpenAI Codex and Claude Code, without having to login.
-<em>最后更新: 2026-04-19</em></p>
-</li>
+<em>最后更新: 2026-04-20</em></li>
 </ul>
 <hr>
-<h2 id="typescript-4">TypeScript (4)</h2>
+<h2 id="typescript-3">TypeScript (3)</h2>
 <ul>
 <li>
-<p><strong><a href="https://github.com/openclaw/openclaw" rel="noopener noreferrer" target="_blank">openclaw/openclaw</a></strong> ⭐ 360.5k
-Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞
-<em>最后更新: 2026-04-19</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/anomalyco/opencode" rel="noopener noreferrer" target="_blank">anomalyco/opencode</a></strong> ⭐ 145.9k
+<p><strong><a href="https://github.com/anomalyco/opencode" rel="noopener noreferrer" target="_blank">anomalyco/opencode</a></strong> ⭐ 146.5k
 The open source coding agent.
-<em>最后更新: 2026-04-19</em></p>
+<em>最后更新: 2026-04-20</em></p>
 </li>
 <li>
-<p><strong><a href="https://github.com/ryoppippi/ccusage" rel="noopener noreferrer" target="_blank">ryoppippi/ccusage</a></strong> ⭐ 13.1k
-A CLI tool for analyzing Claude Code/Codex CLI usage from local JSONL files.
-<em>最后更新: 2026-04-19</em></p>
+<p><strong><a href="https://github.com/CherryHQ/cherry-studio" rel="noopener noreferrer" target="_blank">CherryHQ/cherry-studio</a></strong> ⭐ 43.9k
+AI productivity studio with smart chat, autonomous agents, and 300+ assistants. Unified access to frontier LLMs
+<em>最后更新: 2026-04-20</em></p>
 </li>
 <li>
 <p><strong><a href="https://github.com/shd101wyy/vscode-markdown-preview-enhanced" rel="noopener noreferrer" target="_blank">shd101wyy/vscode-markdown-preview-enhanced</a></strong> ⭐ 1.9k
 One of the “BEST” markdown preview extensions for Visual Studio Code
-<em>最后更新: 2026-04-19</em></p>
+<em>最后更新: 2026-04-20</em></p>
 </li>
+</ul>
+<hr>
+<h2 id="vue-1">Vue (1)</h2>
+<ul>
+<li><strong><a href="https://github.com/Zephyruso/zashboard" rel="noopener noreferrer" target="_blank">Zephyruso/zashboard</a></strong> ⭐ 2.6k
+(无描述)
+<em>最后更新: 2026-04-20</em></li>
 </ul>
 <hr>
 <h2 id="-说明">📖 说明</h2>
