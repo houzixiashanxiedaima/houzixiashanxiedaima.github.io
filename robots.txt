@@ -1,6 +1,94 @@
 # robots.txt for blog.yuyins.com
+# Explicitly declares access policy for general crawlers, search engines,
+# and AI agents / LLM training bots.
+
+# Default policy: allow all well-behaved crawlers
 User-agent: *
 Allow: /
+Disallow: /og/
 
-# Sitemap
+# Cloudflare Content Signals (https://developers.cloudflare.com/bots/concepts/content-signals/)
+# Declares intended use of the content for automated consumers.
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+
+# ---------------------------------------------------------------------------
+# AI / LLM crawlers (explicitly allowed)
+# ---------------------------------------------------------------------------
+
+# OpenAI
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Google (Gemini / Vertex training opt-in)
+User-agent: Google-Extended
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Common Crawl (upstream corpus for many LLMs)
+User-agent: CCBot
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot-Extended
+Allow: /
+
+# Meta AI
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# Amazon
+User-agent: Amazonbot
+Allow: /
+
+# ByteDance / Doubao
+User-agent: Bytespider
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+
+User-agent: cohere-training-data-crawler
+Allow: /
+
+# Mistral
+User-agent: MistralAI-User
+Allow: /
+
+# Diffbot
+User-agent: Diffbot
+Allow: /
+
+# DuckDuckGo Assist
+User-agent: DuckAssistBot
+Allow: /
+
+# ---------------------------------------------------------------------------
+# Sitemaps & LLM index
+# ---------------------------------------------------------------------------
 Sitemap: https://blog.yuyins.com/sitemap-index.xml
