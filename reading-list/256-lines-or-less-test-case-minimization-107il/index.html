@@ -1,0 +1,801 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.0.8"><!-- Core SEO --><meta name="description" content="
+
+  256 Lines or Less: Test Case Minimization
+  Apr 20, 2026
+
+Property Based Testing and fuzzing are a deep and science-intensive topic. There are enough advanced
+techniques there for a couple of PhDs"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/256-lines-or-less-test-case-minimization-107il/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/256-lines-or-less-test-case-minimization-107il/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/256-lines-or-less-test-case-minimization-107il/"><meta property="og:title" content="256 Lines or Less: Test Case Minimization"><meta property="og:description" content="
+
+  256 Lines or Less: Test Case Minimization
+  Apr 20, 2026
+
+Property Based Testing and fuzzing are a deep and science-intensive topic. There are enough advanced
+techniques there for a couple of PhDs"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="
+
+  256 Lines or Less: Test Case Minimization
+  Apr 20, 2026
+
+Property Based Testing and fuzzing are a deep and science-intensive topic. There are enough advanced
+techniques there for a couple of PhDs"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/256-lines-or-less-test-case-minimization-107il/"><meta property="twitter:title" content="256 Lines or Less: Test Case Minimization"><meta property="twitter:description" content="
+
+  256 Lines or Less: Test Case Minimization
+  Apr 20, 2026
+
+Property Based Testing and fuzzing are a deep and science-intensive topic. There are enough advanced
+techniques there for a couple of PhDs"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>256 Lines or Less: Test Case Minimization</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/","potentialAction":{"@type":"SearchAction","target":"https://blog.yuyins.com/search?q={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"256 Lines or Less: Test Case Minimization","item":"https://blog.yuyins.com/reading-list/256-lines-or-less-test-case-minimization-107il/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-b4zvghpy]{display:inline-flex;align-items:center;gap:.45rem;border-radius:9999px;border:1px solid transparent;background:var(--muted);color:var(--foreground);font-weight:500;line-height:1.4;text-decoration:none;white-space:nowrap}.chip--sm[data-astro-cid-b4zvghpy]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-b4zvghpy]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-b4zvghpy]{cursor:pointer;transition:background-color .2s ease,color .2s ease,opacity .2s ease}.chip--interactive[data-astro-cid-b4zvghpy]:hover{background-color:color-mix(in srgb,var(--accent) 10%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 68%,var(--foreground))}.chip--active[data-astro-cid-b4zvghpy],.chip[data-astro-cid-b4zvghpy].active{background-color:color-mix(in srgb,var(--accent) 18%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 82%,var(--foreground));border-color:transparent;box-shadow:none;font-weight:600}.chip--dashed[data-astro-cid-b4zvghpy]{border-style:dashed;border-color:color-mix(in srgb,var(--accent) 22%,var(--border));background:color-mix(in srgb,var(--background) 70%,var(--muted))}.chip[data-astro-cid-b4zvghpy]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+<link rel="stylesheet" href="/_astro/Layout.Bg2tw_eu.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0;animation:fadeIn .3s ease-out}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;color:var(--muted-foreground);font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.8125rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--accent)}.back-link--top[data-astro-cid-wrgicudb]{display:inline-block;margin-bottom:1rem}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2> 雅俗共赏 </a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-otpdt6jm> <div class="search-dialog-card" data-astro-cid-otpdt6jm> <div class="search-dialog-bar" data-astro-cid-otpdt6jm> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="8" data-astro-cid-otpdt6jm></circle><path d="m21 21-4.3-4.3" data-astro-cid-otpdt6jm></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-otpdt6jm></div> <kbd class="search-kbd" data-astro-cid-otpdt6jm>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-otpdt6jm> <path d="M18 6 6 18" data-astro-cid-otpdt6jm></path><path d="m6 6 12 12" data-astro-cid-otpdt6jm></path> </svg> </button> </div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(e=0){if(sessionStorage.getItem(c)==="true")return m(),!0;const s=document.getElementById("pagefind-ui");if(!s)return!1;s.innerHTML='<div class="search-loading">加载中...</div>';try{return await new Promise((r,o)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=r,a.onerror=o,document.head.appendChild(a)}),m(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),e<2?(console.log(`Retrying search load... (${e+1}/2)`),await new Promise(r=>setTimeout(r,1e3)),l(e+1)):(s&&(s.innerHTML=`
+          <div class="search-loading">
+            <p>搜索功能加载失败</p>
+            <button id="retry-search" class="search-retry-btn">重试</button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>256 Lines or Less: Test Case Minimization</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://matklad.github.io" target="_blank" rel="noopener noreferrer" data-astro-cid-wrgicudb="true" data-astro-cid-b4zvghpy="true" class="chip chip--sm chip--interactive source-tag"> matklad.github.io </a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年4月20日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb>
+<header>
+  <h1>256 Lines or Less: Test Case Minimization</h1>
+  <time>Apr 20, 2026</time>
+</header>
+<p>Property Based Testing and fuzzing are a deep and science-intensive topic. There are enough advanced
+techniques there for a couple of PhDs, a PBT daemon, and
+a <a href="https://antithesis.com/blog/2026/hegel/" target="_blank" rel="noopener noreferrer">client-server architecture</a>. But I have this weird
+parlor-trick PBT library, implementable in a couple of hundred lines of code in one sitting.</p>
+<p>This week I’ve been thinking about a cool variation of a consensus algorithm. I implemented it on the
+weekend. And it took just a couple of hours to write a PBT library itself first, and then a test,
+that showed a deep algorithmic flaw in my thinking (after a dozen trivial flaws in my coding).
+So, I don’t get to write more about consensus yet, but I at least can write about the library. It is
+very simple, simplistic even. To use an old Soviet joke about
+<a href="https://en.wikipedia.org/wiki/Isaac_Babel" target="_blank" rel="noopener noreferrer">Babel</a> and <a href="https://en.wikipedia.org/wiki/August_Bebel" target="_blank" rel="noopener noreferrer">Bebel</a>,
+it’s Gogol rather than Hegel. But for just 256 lines, it’s one of the highest power-to-weight ratio
+tools in my toolbox.</p>
+<p>Read this post if:</p>
+<ul>
+<li>
+You want to stretch your generative testing muscles.
+</li>
+<li>
+You are a do-it-yourself type, and wouldn’t want to pull a ginormous PBT library off the shelf.
+</li>
+<li>
+You would pull a library, but want to have a more informed opinion about available options, about
+essential and accidental complexity.
+</li>
+<li>
+You want some self-contained real-world Zig examples :P
+</li>
+</ul>
+<p>Zig works well here because it, too, is exceptional in its power-to-weight.</p>
+<section>
+
+<h2><a href="#FRNG" target="_blank" rel="noopener noreferrer">FRNG</a></h2>
+<p>The implementation is a single file,
+<a href="https://gist.github.com/matklad/343d13547c8bfe9af310e2ca2fbfe109" target="_blank" rel="noopener noreferrer"><code>FRNG.zig</code></a>,
+because the core abstraction here is a Finite
+Random Number Generator — a PRNG where all numbers are pre-generated, and can run out. We start
+with standard boilerplate:</p>
+
+<figure>
+
+
+<pre><code><span><span>const</span> std = <span>@import</span>(<span>"std"</span>);</span>
+<span><span>const</span> assert = std.debug.assert;</span>
+<span></span>
+<span>entropy: []<span>const</span> <span>u8</span>,</span>
+<span></span>
+<span><span>pub</span> <span>const</span> Error = <span>error</span>{OutOfEntropy};</span>
+<span></span>
+<span><span>const</span> FRNG = <span>@This</span>();</span>
+<span></span>
+<span><span>pub</span> <span>fn</span><span> init</span>(entropy: []<span>const</span> <span>u8</span>) FRNG {</span>
+<span>    <span>return</span> .{ .entropy = entropy };</span>
+<span>}</span></code></pre>
+
+</figure>
+<p>In Zig, files are structs: you obviously need structs, and the language becomes simpler if structs
+are re-used for what files are. In the above
+<span><code>const FRNG = @This()</code></span>
+assigns a conventional name to the file struct, and
+<span><code>entropy: []const u8</code></span>
+declares instance fields (only one here). <code>const Error</code> and <code>fn init</code> are “static” (container
+level) declarations.</p>
+<p>The only field we have is just a slice of raw bytes, our pre-generated random numbers. And the only
+error condition we can raise is <code>OutOfEntropy</code>.</p>
+<p>The simplest thing we can generate is a slice of bytes. Typically, API for this takes a mutable
+slice as an out parameter:</p>
+
+<figure>
+
+
+<pre><code><span><span>pub</span> <span>fn</span><span> fill</span>(prng: <span>*</span>PRNG, bytes: []<span>u8</span>) <span>void</span> { ... }</span></code></pre>
+
+</figure>
+<p>But, due to pre-generated nature of FRNG, we can return the slice directly, provided that we have
+enough entropy. This is going to be our (sole) basis function, everything else is going to be a
+convenience helper on top:</p>
+
+<figure>
+
+
+<pre><code><span><span>pub</span> <span>fn</span><span> bytes</span>(frng: <span>*</span>FRNG, size: <span>usize</span>) Error<span>!</span>[]<span>const</span> <span>u8</span> {</span>
+<span>    <span>if</span> (frng.entropy.len &lt; size) <span>return</span> <span>error</span>.OutOfEntropy;</span>
+<span>    <span>const</span> result = frng.entropy[<span>0</span>..size];</span>
+<span>    frng.entropy = frng.entropy[size..];</span>
+<span>    <span>return</span> result;</span>
+<span>}</span></code></pre>
+
+</figure>
+<p>The next simplest thing is an array (a slice with a fixed size):</p>
+
+<figure>
+
+
+<pre><code><span><span>pub</span> <span>fn</span><span> array</span>(frng: <span>*</span>FRNG, <span>comptime</span> size: <span>usize</span>) Error<span>!</span>[size]<span>u8</span> {</span>
+<span>    <span>return</span> (<span>try</span> frng.bytes(size))[<span>0</span>..size].<span>*</span>;</span>
+<span>}</span></code></pre>
+
+</figure>
+<p>Notice how Zig goes from runtime-known slice length, to comptime known array type. Because <code>size</code> is
+a <code>comptime</code> constant, slicing <code>[]const u8</code> with <code>[0..size]</code> returns a pointer to array,
+<span><code>*const [size]u8</code>.</span></p>
+<p>We can re-interpret a 4-byte array into <code>u32</code>. But, because this is Zig, we can trivially generalize
+the function to work for any integer type, by passing in <code>Int</code> comptime parameter of type <code>type</code>:</p>
+
+<figure>
+
+
+<pre><code><span><span>const</span> builtin = <span>@import</span>(<span>"builtin"</span>);</span>
+<span></span>
+<span><span>pub</span> <span>fn</span><span> int</span>(frng: <span>*</span>FRNG, Int: <span>type</span>) Error<span>!</span>Int {</span>
+<span>    <span>comptime</span> {</span>
+<span>        assert(<span>@typeInfo</span>(Int).int.signedness <span>==</span> .unsigned);</span>
+<span>        assert(builtin.cpu.arch.endian() <span>==</span> .little);</span>
+<span>    }</span>
+<span>    <span>return</span> <span>@bitCast</span>(<span>try</span> frng.array(<span>@sizeOf</span>(Int)));</span>
+<span>}</span></code></pre>
+
+</figure>
+<p>This function is monomorphised for every <code>Int</code> type, so <code>@sizeOf(Int)</code> becomes a compile-time
+constant we can pass to <code>fn array</code>.</p>
+<p>Production code would be endian-clean here, but, for simplicity, we encode our endianness assumption
+as a compile-time assertion. Note how Zig communicates information about endianness to the program.
+There isn’t any kind of side-channel or extra input to compilation, like <code>--cfg</code> flags. Instead, the
+compiler materializes all information about target CPU as Zig code. There’s a <code>builtin.zig</code> file
+somewhere in the compiler caches directory that contains</p>
+
+<figure>
+
+
+<pre><code><span><span>pub</span> <span>const</span> cpu: std.Target.Cpu = .{</span>
+<span>    .arch = .aarch64,</span>
+<span>    .model = <span>&amp;</span>std.Target.aarch64.cpu.apple_m3,</span>
+<span>    <span>// ...</span></span>
+<span>}</span></code></pre>
+
+</figure>
+<p>This file can be accessed via <span><code>@import("builtin")</code></span> and all the constants inspected at
+compile time.</p>
+<p>We can make an integer, and a boolean is even easier:</p>
+
+<figure>
+
+
+<pre><code><span><span>pub</span> <span>fn</span><span> boolean</span>(frng: <span>*</span>FRNG) Error<span>!</span><span>bool</span> {</span>
+<span>    <span>return</span> (<span>try</span> frng.int(<span>u8</span>)) <span>&amp;</span> <span>1</span> <span>==</span> <span>1</span>;</span>
+<span>}</span></code></pre>
+
+</figure>
+<p>Strictly speaking, we only need one bit, not one byte, but tracking individual bits is too much of a
+hassle.</p>
+<p>From an arbitrary int, we can generate an int in range. As per
+<a href="https://matklad.github.io/2025/03/31/random-numbers-included.html" target="_blank" rel="noopener noreferrer"><em>Random Numbers Included</em></a>,
+we use a closed range, which makes the API infailable and is usually more convenient at the
+call-site:</p>
+
+<figure>
+
+
+<pre><code><span><span>pub</span> <span>fn</span><span> int_inclusive</span>(frng: <span>*</span>FRNG, Int: <span>type</span>, max: Int) Error<span>!</span>Int</span></code></pre>
+
+</figure>
+<p>As a bit of PRNG trivia, while this could be implemented as
+<span><code>frng.int(Int) % (max + 1)</code>,</span>
+the result will be biased (not uniform). Consider the case where <code>Int = u8</code>, and a call like
+<span><code>frng.int_inclusive(u8, 64 * 3)</code>.</span></p>
+<p>The numbers in <code>0..64</code> are going to be twice as likely as the numbers in <code>64..(64*3)</code>, because the
+last quarter of 256 range will be aliased with the first one.</p>
+<p>Generating an <em>unbiased</em> number is tricky and might require drawing <em>arbitrary</em> number of bytes from
+entropy. Refer to
+<span><a href="https://www.pcg-random.org/posts/bounded-rands.html" target="_blank" rel="noopener noreferrer">https://www.pcg-random.org/posts/bounded-rands.html</a></span>
+for details. I didn’t, and copy-pasted code from the Zig standard library. Use at your own risk!</p>
+
+<figure>
+
+
+<pre><code><span><span>pub</span> <span>fn</span><span> int_inclusive</span>(frng: <span>*</span>FRNG, Int: <span>type</span>, max: Int) Error<span>!</span>Int {</span>
+<span>    <span>comptime</span> assert(<span>@typeInfo</span>(Int).int.signedness <span>==</span> .unsigned);</span>
+<span>    <span>if</span> (max <span>==</span> std.math.maxInt(Int)) <span>return</span> <span>try</span> frng.int(Int);</span>
+<span></span>
+<span>    <span>const</span> bits = <span>@typeInfo</span>(Int).int.bits;</span>
+<span>    <span>const</span> less_than = max <span>+</span> <span>1</span>;</span>
+<span></span>
+<span>    <span>var</span> x = <span>try</span> frng.int(Int);</span>
+<span>    <span>var</span> m = std.math.mulWide(Int, x, less_than);</span>
+<span>    <span>var</span> l: Int = <span>@truncate</span>(m);</span>
+<span>    <span>if</span> (l &lt; less_than) {</span>
+<span>        <span>var</span> t = <span>-%</span>less_than;</span>
+<span></span>
+<span>        <span>if</span> (t &gt;= less_than) {</span>
+<span>            t <span>-=</span> less_than;</span>
+<span>            <span>if</span> (t &gt;= less_than) t <span>%=</span> less_than;</span>
+<span>        }</span>
+<span>        <span>while</span> (l &lt; t) {</span>
+<span>            x = <span>try</span> frng.int(Int);</span>
+<span>            m = std.math.mulWide(Int, x, less_than);</span>
+<span>            l = <span>@truncate</span>(m);</span>
+<span>        }</span>
+<span>    }</span>
+<span>    <span>return</span> <span>@intCast</span>(m <span>&gt;&gt;</span> bits);</span>
+<span>}</span></code></pre>
+
+</figure>
+<p>Now we can generate an int bounded from above and below:</p>
+
+<figure>
+
+
+<pre><code><span><span>pub</span> <span>fn</span><span> range_inclusive</span>(</span>
+<span>    frng: <span>*</span>FRNG, Int: <span>type</span>,</span>
+<span>    min: Int, max: Int,</span>
+<span>) Error<span>!</span>Int {</span>
+<span>    <span>comptime</span> assert(<span>@typeInfo</span>(Int).int.signedness <span>==</span> .unsigned);</span>
+<span>    assert(min &lt;= max);</span>
+<span>    <span>return</span> min <span>+</span> <span>try</span> frng.int_inclusive(Int, max <span>-</span> min);</span>
+<span>}</span></code></pre>
+
+</figure>
+<p>Another common operation is picking a random element from a slice. If you want to return a pointer
+to a element, you’ll need a <code>const</code> and <code>mut</code> versions of the function. A simpler and more general
+solution is to return an index:</p>
+
+<figure>
+
+
+<pre><code><span><span>pub</span> <span>fn</span><span> index</span>(frng: <span>*</span>FRNG, slice: <span>anytype</span>) Error<span>!</span><span>usize</span> {</span>
+<span>    assert(slice.len &gt; <span>0</span>);</span>
+<span>    <span>return</span> <span>try</span> frng.range_inclusive(<span>usize</span>, <span>0</span>, slice.len <span>-</span> <span>1</span>);</span>
+<span>}</span></code></pre>
+
+</figure>
+<p>At the call site,
+<span><code>xs[try frng.index(xs)]</code></span>
+doesn’t look too bad, is appropriately <code>const</code>-polymorphic, and is also usable for multiple parallel
+arrays.</p>
+</section>
+<section>
+
+<h2><a href="#Simulation" target="_blank" rel="noopener noreferrer">Simulation</a></h2>
+<p>So far, we’ve spent about 40% of our line budget implementing a worse random number generator that
+can fail with <code>OutOfEntropy</code> at any point in time. What is it good for?</p>
+<p>We use it to feed our system under test with random inputs, see how it reacts, and check that it
+does not crash. If we code our system to crash if anything unexpected happens and our random inputs
+cover the space of all possible inputs, we get a measure of confidence that bugs will be detected in
+testing.</p>
+<p>For my consensus simulation, I have a <code>World</code> struct that holds a <code>FRNG</code> and a set of replicas:</p>
+
+<figure>
+
+
+<pre><code><span><span>const</span> World = <span>struct</span> {</span>
+<span>    frng: <span>*</span>FRNG,</span>
+<span>    replicas: []Replica,</span>
+<span>    <span>// ...</span></span>
+<span>};</span></code></pre>
+
+</figure>
+<p><code>World</code> has methods like:</p>
+
+<figure>
+
+
+<pre><code><span><span>fn</span><span> simulate_request</span>(world: <span>*</span>World) <span>!</span><span>void</span> {</span>
+<span>    <span>const</span> replica = <span>try</span> world.frng.index(world.replicas);</span>
+<span>    <span>const</span> payload = <span>try</span> world.frng.int(<span>u64</span>);</span>
+<span></span>
+<span>    world.send_payload(replica, payload);</span>
+<span>}</span></code></pre>
+
+</figure>
+<p>I then select which method to call at random:</p>
+
+<figure>
+
+
+<pre><code><span><span>fn</span><span> step</span>(world: <span>*</span>World) <span>!</span><span>void</span> {</span>
+<span>    <span>const</span> action = <span>try</span> world.frng.weighted(.{</span>
+<span>        .request = <span>10</span>,</span>
+<span>        .message = <span>20</span>,</span>
+<span>        .crash = <span>1</span>,</span>
+<span>    });</span>
+<span>    <span>switch</span> (action) {</span>
+<span>        .request =&gt; <span>try</span> world.simulate_request(),</span>
+<span>        .message =&gt; { ... },</span>
+<span>        .crash =&gt; { ... },</span>
+<span>    }</span>
+<span>}</span></code></pre>
+
+</figure>
+<p>Here, <code>fn weighted</code> is another FRNG helper that selects an action at random, proportional to its
+weight. This helper needs quite a bit more reflection machinery than we’ve seen so far:</p>
+
+<figure>
+
+
+<pre><code><span><span>pub</span> <span>fn</span><span> weighted</span>(</span>
+<span>    frng: <span>*</span>FRNG,</span>
+<span>    weights: <span>anytype</span>,</span>
+<span>) Error<span>!</span>std.meta.FieldEnum(<span>@TypeOf</span>(weights)) {</span>
+<span>    <span>const</span> fields =</span>
+<span>        <span>comptime</span> std.meta.fieldNames(<span>@TypeOf</span>(weights));</span>
+<span></span>
+<span>    <span>var</span> total: <span>u32</span> = <span>0</span>;</span>
+<span>    <span>inline</span> <span>for</span> (fields) <span>|</span>field<span>|</span></span>
+<span>        total <span>+=</span> <span>@field</span>(weights, field);</span>
+<span>    assert(total &gt; <span>0</span>);</span>
+<span></span>
+<span>    <span>var</span> pick = <span>try</span> frng.int_inclusive(<span>u64</span>, total <span>-</span> <span>1</span>);</span>
+<span>    <span>inline</span> <span>for</span> (fields) <span>|</span>field<span>|</span> {</span>
+<span>        <span>const</span> weight = <span>@field</span>(weights, field);</span>
+<span>        <span>if</span> (pick &lt; weight) {</span>
+<span>            <span>return</span> <span>@field</span>(</span>
+<span>                std.meta.FieldEnum(<span>@TypeOf</span>(weights)),</span>
+<span>                field,</span>
+<span>            );</span>
+<span>        }</span>
+<span>        pick <span>-=</span> weight;</span>
+<span>    }</span>
+<span>    <span>unreachable</span>;</span>
+<span>}</span></code></pre>
+
+</figure>
+<p><code>weights: anytype</code> is compile-time duck-typing. It means that our <code>weighted</code> function is callable
+with any type, and each specific type creates a new monomorphised instance of a function. While we
+don’t explicitly name the type of <code>weights</code>, we can get it as <code>@TypeOf(weights)</code>.</p>
+<p><code>FieldEnum</code> is a type-level function that takes a struct type:</p>
+
+<figure>
+
+
+<pre><code><span><span>const</span> S = <span>struct</span> {</span>
+<span>    foo: <span>bool</span>,</span>
+<span>    bar: <span>u32</span>,</span>
+<span>    baz: []<span>const</span> <span>u8</span></span>
+<span>};</span></code></pre>
+
+</figure>
+<p>and turns it into an enum type, with a variant per-field, exactly what we want for the return type:</p>
+
+<figure>
+
+
+<pre><code><span><span>const</span> E = <span>enum</span> { foo, bar, baz };</span></code></pre>
+
+</figure>
+<p>Tip: if you want to quickly learn Zig’s reflection capabilities, study the implementation of
+<a href="https://codeberg.org/ziglang/zig/src/tag/0.16.0/lib/std/meta.zig" target="_blank" rel="noopener noreferrer"><code>std.meta</code></a> and
+<a href="https://codeberg.org/ziglang/zig/src/tag/0.16.0/lib/std/enums.zig" target="_blank" rel="noopener noreferrer"><code>std.enums</code></a>
+in Zig’s standard library.</p>
+<p>The <code>@field</code> built-in function accesses a field given <code>comptime</code> field name. It’s exactly like
+Python’s <code>getattr</code> / <code>setattr</code> with an extra restriction that it must be evaluated at compile time.</p>
+<p>To add one more twist here, I always find it hard to figure out which weights are reasonable, and
+like to generate the weights themselves at random at the start of the test:</p>
+
+<figure>
+
+
+<pre><code><span><span>pub</span> <span>fn</span><span> swarm_weights</span>(frng: <span>*</span>FRNG, Weights: <span>type</span>) Error<span>!</span>Weights {</span>
+<span>    <span>var</span> result: Weights = <span>undefined</span>;</span>
+<span>    <span>inline</span> <span>for</span> (<span>comptime</span> std.meta.fieldNames(Weights)) <span>|</span>field<span>|</span> {</span>
+<span>        <span>@field</span>(result, field) = <span>try</span> frng.range_inclusive(<span>u32</span>, <span>1</span>, <span>100</span>);</span>
+<span>    }</span>
+<span>    <span>return</span> result;</span>
+<span>}</span></code></pre>
+
+</figure>
+<p>(If you feel confused here, check out
+<a href="https://tigerbeetle.com/blog/2025-04-23-swarm-testing-data-structures/" target="_blank" rel="noopener noreferrer"><em>Swarm Testing Data Structures</em></a>)</p>
+</section>
+<section>
+
+<h2><a href="#Stepping-And-Runnig" target="_blank" rel="noopener noreferrer">Stepping And Runnig</a></h2>
+<p>Now we have enough machinery to describe the shape of test overall:</p>
+
+<figure>
+
+
+<pre><code><span><span>fn</span><span> run_test</span>(gpa: Allocator, frng: <span>*</span>FRNG) <span>!</span><span>void</span> {</span>
+<span>    <span>var</span> world = World.init(gpa, <span>&amp;</span>frng) <span>catch</span> <span>|</span>err<span>|</span></span>
+<span>        <span>switch</span> (err) {</span>
+<span>            <span>error</span>.OutOfEntropy =&gt; <span>return</span>,</span>
+<span>            <span>else</span> =&gt; <span>return</span> err,</span>
+<span>        };</span>
+<span>    <span>defer</span> world.deinit(gpa);</span>
+<span></span>
+<span>    <span>while</span> (<span>true</span>) {</span>
+<span>        world.step() <span>catch</span> <span>|</span>err<span>|</span> <span>switch</span> (err) {</span>
+<span>            <span>error</span>.OutOfEntropy =&gt; <span>break</span>,</span>
+<span>        };</span>
+<span>    }</span>
+<span>}</span>
+<span></span>
+<span><span>const</span> World = <span>struct</span> {</span>
+<span>    frng: <span>*</span>FRNG,</span>
+<span>    weights: ActionWeights,</span>
+<span></span>
+<span>    <span>// ...</span></span>
+<span></span>
+<span>    <span>const</span> ActionWeights = <span>struct</span> {</span>
+<span>        request: <span>u32</span>,</span>
+<span>        message: <span>u32</span>,</span>
+<span>        crash: <span>u32</span>,</span>
+<span>        <span>// ...</span></span>
+<span>    };</span>
+<span></span>
+<span>    <span>pub</span> <span>fn</span><span> init</span>(gpa: Allocator, frng: <span>*</span>FRNG) <span>!</span><span>void</span> {</span>
+<span>        <span>const</span> weights = <span>try</span> frng.swarm_weights(ActionWeights);</span>
+<span>        <span>// ...</span></span>
+<span>    }</span>
+<span></span>
+<span>    <span>fn</span><span> step</span>(world: <span>*</span>World) <span>error</span>{OutOfEntropy}<span>!</span><span>void</span> {</span>
+<span>        <span>const</span> action = <span>try</span> world.frng.weighted(world.weights);</span>
+<span>        <span>switch</span> (action) {</span>
+<span>            .request =&gt; { ... },</span>
+<span>            <span>// ...</span></span>
+<span>        }</span>
+<span>    }</span>
+<span>};</span></code></pre>
+
+</figure>
+<p>A test needs an <code>FRNG</code> (which ultimately determines the outcome) and an General Purpose Allocator
+for the <code>World</code>. We start by creating a simulated <code>World</code> with random action weights. If <code>FRNG</code>
+entropy is very low, we can run out of entropy even at this stage. We assume that the code is
+innocent until proven guilty — if we don’t have enough entropy to find a bug, this particular test
+returns success. Don’t worry, we’ll make sure that we have enough entropy elsewhere.</p>
+<p>We use <code>catch |err| switch(err)</code> to peel off <code>OutOfEntropy</code> error. I find that, whenever I handle
+errors in Zig, very often I want to discharge just a single error from the error set. I wish I could
+use parenthesis with a <code>catch</code>:</p>
+
+<figure>
+
+
+<pre><code><span><span>// NOT ACTUALY ZIG :(</span></span>
+<span></span>
+<span><span>var</span> world = <span>try</span> World.init(gpa, <span>&amp;</span>frng)</span>
+<span>    <span>catch</span> (<span>error</span>.OutOfEntropy) <span>return</span>;</span></code></pre>
+
+</figure>
+<p>Anyway, having created the <code>World</code>, we step through it while we still have entropy left. If any step
+detects an internal inconsistency, the entire <code>World</code> crashes with an assertion failure. If we got
+to the end of <code>while(true)</code> loop, we know that at least that particular slice of entropy didn’t
+uncover anything suspicious.</p>
+<p>Notice what <em>isn’t</em> there. We aren’t generating a complete list of actions up-front. Rather, we make
+random decisions as we go, and can freely use the current state of the <code>World</code> to construct a menu
+of possible choices (e.g., when sending a message, we can consider only not currently crashed
+replicas).</p>
+</section>
+<section>
+
+<h2><a href="#Binary-Search-the-Answer" target="_blank" rel="noopener noreferrer">Binary Search the Answer</a></h2>
+<p>And here we can finally see the reason why we bothered writing a custom <em>Finite</em> PRNG, rather than
+using an off-the-shelf one. The amount of entropy in FRNG defines the complexity of the test. The
+fewer random bytes we start with, the faster we exit the step loop. And this gives us an ability to
+minimize test cases essentially for free.</p>
+<p>Suppose you know that a particular entropy slice makes the test fail (cluster enters split brain at
+the millionth step). Let’s say that the slice was 16KiB. The obvious next step is to see if just
+8KiB would be enough to crash it. And, if 8KiB isn’t, than perhaps 12KiB?</p>
+<p>You can <strong><strong>binary search</strong></strong> the minimal amount of entropy that’s enough for the test to fail. And this
+works for <em>any</em> test, it doesn’t have to be a distributed system. If you can write the code to
+generate <em>your</em> inputs randomly, you can measure complexity of each particular input by measuring
+how many random bytes were drawn in its construction.</p>
+<p>And now the hilarious part — of course it seems that the way to minimize entropy is to start with
+a particular failing slice and apply genetic-algorithm mutations to it. But a much simpler approach
+seems to work in practice — just generated a fresh, shorter entropy slice. If you found <em>some</em>
+failure at random, then you should be able to randomly stumble into a smaller failing example, if
+one exists — there are much fewer small examples, so finding a failing one becomes easier when the
+<code>size</code> goes down!</p>
+</section>
+<section>
+
+<h2><a href="#The-Searcher" target="_blank" rel="noopener noreferrer">The Searcher</a></h2>
+<p>The problem with binary searching for failing entropy is that a tripped assertion crashes the
+program. There’s no unwinding in Zig. For this reason, we’ll move the search code to a different
+process. So a single test will be a binary with a <code>main</code> function, that takes entropy on <code>stdin</code>.</p>
+<p>Zig’s new juicy main makes writing this easier than in any previous versions of Zig :D</p>
+
+<figure>
+
+
+<pre><code><span><span>pub</span> <span>fn</span><span> main</span>(init: std.process.Init) <span>!</span><span>void</span> {</span>
+<span>    <span>const</span> gpa = init.gpa;</span>
+<span>    <span>const</span> io = init.io;</span>
+<span></span>
+<span>    <span>var</span> stdin_reader = std.Io.File.stdin().reader(io, <span>&amp;</span>.{});</span>
+<span>    <span>const</span> entropy = <span>try</span> stdin_reader.interface</span>
+<span>        .allocRemaining(gpa, .unlimited);</span>
+<span>    <span>defer</span> gpa.free(entropy);</span>
+<span></span>
+<span>    <span>var</span> frng = FRNG.init(entropy);</span>
+<span></span>
+<span>    <span>var</span> world = World.init(gpa, <span>&amp;</span>frng, .{}) <span>catch</span> <span>|</span>err<span>|</span></span>
+<span>        <span>switch</span> (err) {</span>
+<span>            <span>error</span>.OutOfEntropy =&gt; <span>return</span>,</span>
+<span>            <span>else</span> =&gt; <span>return</span> err,</span>
+<span>        };</span>
+<span>    <span>defer</span> world.deinit(gpa);</span>
+<span></span>
+<span>    world.run();</span>
+<span>}</span></code></pre>
+
+</figure>
+<p>Main gets <code>Init</code> as an argument, which provides access to things like command line arguments,
+default allocator and a default <code>Io</code> implementation. These days, Zig eschews global ambient IO
+capabilities, and requires threading an Io instance whenever we need to make a syscall. Here,
+we need Io to read stdin.</p>
+<p>Now we will implement a harness to call this main. This will be <code>FRNG.Driver</code>:</p>
+
+<figure>
+
+
+<pre><code><span><span>pub</span> <span>const</span> Driver = <span>struct</span> {</span>
+<span>    io: std.Io,</span>
+<span>    sut: []<span>const</span> <span>u8</span>,</span>
+<span>    buffer: []<span>u8</span>,</span>
+<span></span>
+<span>    <span>const</span> log = std.log;</span>
+<span>};</span></code></pre>
+
+</figure>
+<p>It will be spawning external processes, so it’ll need an <code>Io</code>. We also need a path to an executable
+with a test main function, a System Under Test. And we’ll need a buffer to hold the entropy. This
+driver will be communicating successes and failures to the users, so we also prepare a <code>log</code> for
+textual output.</p>
+<p>How we get entropy to feed into <code>sut</code>? Because we are only interested in entropy size, we won’t be
+storing the actual entropy bytes, and instead will generate it from a <code>u64</code> seed. In other words,
+just two numbres, entropy size and seed, are needed to reproduce a single run of the test:</p>
+
+<figure>
+
+
+<pre><code><span><span>fn</span><span> run_once</span>(driver: Driver, options: <span>struct</span> {</span>
+<span>    size: <span>u32</span>,</span>
+<span>    seed: <span>u64</span>,</span>
+<span>    quiet: <span>bool</span>,</span>
+<span>}) <span>!</span><span>enum</span> { pass, fail } {</span>
+<span>    assert(options.size &lt;= driver.buffer.len);</span>
+<span>    <span>const</span> entropy = driver.buffer[<span>0</span>..options.size];</span>
+<span></span>
+<span>    <span>var</span> rng = std.Random.DefaultPrng.init(options.seed);</span>
+<span>    rng.random().bytes(entropy);</span>
+<span></span>
+<span>    <span>var</span> child = <span>try</span> std.process.spawn(driver.io, .{</span>
+<span>        .argv = <span>&amp;</span>.{driver.sut},</span>
+<span>        .stdin = .pipe,</span>
+<span>        .stderr = <span>if</span> (options.quiet) .ignore <span>else</span> .inherit,</span>
+<span>    });</span>
+<span></span>
+<span>    <span>try</span> child.stdin.?.writeStreamingAll(driver.io, entropy);</span>
+<span>    child.stdin.?.close(driver.io);</span>
+<span>    child.stdin = <span>null</span>;</span>
+<span></span>
+<span>    <span>const</span> term = <span>try</span> child.wait(driver.io);</span>
+<span>    <span>return</span> <span>if</span> (success(term)) .pass <span>else</span> .fail;</span>
+<span>}</span>
+<span></span>
+<span><span>fn</span><span> success</span>(term: std.process.Child.Term) <span>bool</span> {</span>
+<span>    <span>return</span> term <span>==</span> .exited <span>and</span> term.exited <span>==</span> <span>0</span>;</span>
+<span>}</span></code></pre>
+
+</figure>
+<p>We use default deterministic PRNG to expand our short seed into entropy slice of the required size.
+Then we spawn <code>sut</code> proces, feeding the resulting entropy via stdin. Closing child’s stdin signals
+the end of entropy. We then return either <code>.pass</code> or <code>.fail</code> depending on child’s exit code. So, both
+explicit errors and crashes will be recognized as failures.</p>
+<p>Next, we implement the logic for checking if a particular seed size is sufficient to find a failure.
+Of course, we won’t be able to say that for sure in a finite amount of time, so we’ll settle for some
+user-specified amount of retries:</p>
+
+<figure>
+
+
+<pre><code><span><span>fn</span><span> run_multiple</span>(driver: Driver, options: <span>struct</span> {</span>
+<span>    size: <span>u32</span>,</span>
+<span>    attempts: <span>u32</span>,</span>
+<span>}) <span>!</span><span>union</span>(<span>enum</span>) { pass, fail: <span>u64</span> } {</span>
+<span>    <span>// ...</span></span>
+<span>}</span></code></pre>
+
+</figure>
+<p>The user passes us the number of <code>attempts</code> to make, and we return <code>.pass</code> if they all were
+successfull, or a specific failing seed if we found one:</p>
+
+<figure>
+
+
+<pre><code><span>assert(options.size &lt;= driver.buffer.len);</span>
+<span></span>
+<span><span>for</span> (<span>0</span>..options.attempts) <span>|</span>_<span>|</span> {</span>
+<span>    <span>var</span> seed: <span>u64</span> = <span>undefined</span>;</span>
+<span>    driver.io.random(<span>@ptrCast</span>(<span>&amp;</span>seed));</span>
+<span></span>
+<span>    <span>const</span> outcome = <span>try</span> driver.run_once(.{</span>
+<span>        .seed = seed,</span>
+<span>        .size = options.size,</span>
+<span>        .quiet = <span>true</span>,</span>
+<span>    });</span>
+<span>    <span>switch</span> (outcome) {</span>
+<span>        .fail =&gt; <span>return</span> .{ .fail = seed },</span>
+<span>        .pass =&gt; {},</span>
+<span>    }</span>
+<span>}</span>
+<span><span>return</span> .pass;</span></code></pre>
+
+</figure>
+<p>To generate a real seed we need “true” cryptographic non-deterministic randomness, which is provided
+by <code>io.random</code>.</p>
+<p>Finally, the search for the size:</p>
+
+<figure>
+
+
+<pre><code><span><span>fn</span><span> search</span>(driver: Driver, options: <span>struct</span> {</span>
+<span>    attempts: <span>u32</span> = <span>100</span>,</span>
+<span>}) <span>!</span><span>union</span>(<span>enum</span>) {</span>
+<span>    pass,</span>
+<span>    fail: <span>struct</span> { size: <span>u32</span>, seed: <span>u64</span> },</span>
+<span>} {</span>
+<span>    <span>// ...</span></span>
+<span>}</span></code></pre>
+
+</figure>
+<p>Here, we are going to find a smallest entropy size that crashes <code>sut</code>. If we succeed, we return the
+seed and the size. The upper bound for the size is the space available in the pre-allocated entropy
+buffer.</p>
+<p>The search loop is essentially a binary search, with a twist — rather than using dichotomy on the
+<code>size</code> directly, we will be doubling a <code>step</code> we use to change the size between iterations.</p>
+<p>That is, we start with a small size and step, and, on every iteration, double the step and add it to
+the size, until we hit a failure (or run out of buffer for the entropy).</p>
+<p>Once we found a failure, we continue the serach in the other direction — halving the step and
+subtracting it from the <code>size</code>, keeping the smaller <code>size</code> if it still fails.</p>
+<p>On each step, we log the current size and outcome, and report the smallest failing size at the end.</p>
+
+<figure>
+
+
+<pre><code><span><span>var</span> found_size: ?<span>u32</span> = <span>null</span>;</span>
+<span><span>var</span> found_seed: ?<span>u64</span> = <span>null</span>;</span>
+<span></span>
+<span><span>var</span> pass: <span>bool</span> = <span>true</span>;</span>
+<span><span>var</span> size: <span>u32</span> = <span>16</span>;</span>
+<span><span>var</span> step: <span>u32</span> = <span>16</span>;</span>
+<span><span>for</span> (<span>0</span>..<span>1024</span>) <span>|</span>_<span>|</span> {</span>
+<span>    <span>if</span> (step <span>==</span> <span>0</span>) <span>break</span>;</span>
+<span>    <span>const</span> size_next = <span>if</span> (pass) size <span>+</span> step <span>else</span> size <span>-</span><span>|</span> step;</span>
+<span>    <span>if</span> (size &gt; driver.buffer.len) <span>break</span>;</span>
+<span></span>
+<span>    <span>const</span> outcome = <span>try</span> driver.run_multiple(.{</span>
+<span>        .size = size_next,</span>
+<span>        .attempts = options.attempts,</span>
+<span>    });</span>
+<span>    <span>switch</span> (outcome) {</span>
+<span>        .pass =&gt; log.info(<span>"pass: size={}"</span>, .{size_next}),</span>
+<span>        .fail =&gt; <span>|</span>seed<span>|</span> {</span>
+<span>            found_size = size_next;</span>
+<span>            found_seed = seed;</span>
+<span>            log.err(<span>"fail: size={} seed={}"</span>, .{ size_next, seed });</span>
+<span>        },</span>
+<span>    }</span>
+<span>    <span>const</span> pass_next = (outcome <span>==</span> .pass);</span>
+<span></span>
+<span>    <span>if</span> (pass <span>and</span> pass_next) {</span>
+<span>        step <span>*=</span> <span>2</span>;</span>
+<span>    } <span>else</span> <span>if</span> (<span>!</span>pass <span>and</span> <span>!</span>pass_next) {</span>
+<span>        <span>// Keep the step.</span></span>
+<span>    } <span>else</span> {</span>
+<span>        step <span>/=</span> <span>2</span>;</span>
+<span>    }</span>
+<span></span>
+<span>    <span>if</span> (pass <span>or</span> <span>!</span>pass_next) {</span>
+<span>        size = size_next;</span>
+<span>        pass = pass_next;</span>
+<span>    }</span>
+<span>} <span>else</span> <span>@panic</span>(<span>"safety counter"</span>);</span>
+<span></span>
+<span><span>if</span> (found_size <span>==</span> <span>null</span>) <span>return</span> .pass;</span>
+<span><span>return</span> .{ .fail = .{</span>
+<span>    .size = found_size.?,</span>
+<span>    .seed = found_seed.?,</span>
+<span>} };</span></code></pre>
+
+</figure>
+<p>Finally, we wrap Driver’s functionality into main that works in two modes — either reproduces a
+given failure from seed and size, or searches for a minimal failure:</p>
+
+<figure>
+
+
+<pre><code><span><span>pub</span> <span>fn</span><span> main</span>(</span>
+<span>    gpa: std.mem.Allocator,</span>
+<span>    io: std.Io,</span>
+<span>    sut: []<span>const</span> <span>u8</span>,</span>
+<span>    operation: <span>union</span>(<span>enum</span>) {</span>
+<span>        replay: <span>struct</span> { size: <span>u32</span>, seed: <span>u64</span> },</span>
+<span>        search: <span>struct</span> {</span>
+<span>            attempts: <span>u32</span> = <span>100</span>,</span>
+<span>            size_max: <span>u32</span> = <span>4</span> <span>*</span> <span>1024</span> <span>*</span> <span>1024</span>,</span>
+<span>        },</span>
+<span>    },</span>
+<span>) <span>!</span><span>void</span> {</span>
+<span>    <span>const</span> size_max = <span>switch</span> (operation) {</span>
+<span>        .replay =&gt; <span>|</span>options<span>|</span> options.size,</span>
+<span>        .search =&gt; <span>|</span>options<span>|</span> options.size_max,</span>
+<span>    };</span>
+<span></span>
+<span>    <span>const</span> buffer = <span>try</span> gpa.alloc(<span>u8</span>, size_max);</span>
+<span>    <span>defer</span> gpa.free(buffer);</span>
+<span></span>
+<span>    <span>var</span> driver: Driver = .{</span>
+<span>        .io = io,</span>
+<span>        .buffer = buffer,</span>
+<span>        .sut = sut,</span>
+<span>    };</span>
+<span></span>
+<span>    <span>switch</span> (operation) {</span>
+<span>        .replay =&gt; <span>|</span>options<span>|</span> {</span>
+<span>            <span>const</span> outcome = <span>try</span> driver.run_once(.{</span>
+<span>                .size = options.size,</span>
+<span>                .seed = options.seed,</span>
+<span>                .quiet = <span>false</span>,</span>
+<span>            });</span>
+<span>            log.info(<span>"{t}"</span>, .{outcome});</span>
+<span>        },</span>
+<span>        .search =&gt; <span>|</span>options<span>|</span> {</span>
+<span>            <span>const</span> outcome = <span>try</span> driver.search(.{</span>
+<span>                .attempts = options.attempts,</span>
+<span>             });</span>
+<span>            <span>switch</span> (outcome) {</span>
+<span>                .pass =&gt; log.info(<span>"ok"</span>, .{}),</span>
+<span>                .fail =&gt; <span>|</span>fail<span>|</span> {</span>
+<span>                    log.err(<span>"minimized size={} seed={}"</span>, .{</span>
+<span>                        fail.size, fail.seed,</span>
+<span>                     });</span>
+<span>                },</span>
+<span>            }</span>
+<span>        },</span>
+<span>    }</span>
+<span>}</span></code></pre>
+
+</figure>
+<p>Running the search routine looks like this in a terminal:</p>
+<figure>
+
+</figure>
+<p>Those final seed&amp;size can then be used for <code>.replay</code>, giving you a minimal reproducible failure for
+debugging!</p>
+<p>This … of course doesn’t look too exciting without visualizing a <em>specific</em> bug we can find this
+way, but the problem there is that interesting examples of systems to test in this way usually take
+more than 256 lines to implement. So I’ll leave it to your imagination, but you get the idea: if you
+can make a system fail under a “random” input, you can also systematically search the space of all
+inputs for the smallest counter-example, <em>without</em> adding knowledge about the system to the
+searcher. <a href="https://matklad.github.io/2024/07/05/properly-testing-concurrent-data-structures.html" target="_blank" rel="noopener noreferrer">This article</a>
+also provides a concrete (but somewhat verbose) example.</p>
+<p>Here’s the full code:</p>
+<p><a href="https://gist.github.com/matklad/343d13547c8bfe9af310e2ca2fbfe109" target="_blank" rel="noopener noreferrer">https://gist.github.com/matklad/343d13547c8bfe9af310e2ca2fbfe109</a></p>
+</section>
+</div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://matklad.github.io/2026/04/20/test-case-minimization.html" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text footer-text--strong" data-astro-cid-sz7xmlte>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-sz7xmlte>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-wlspcwf4> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-wlspcwf4> <path d="M18 15l-6-6-6 6" data-astro-cid-wlspcwf4></path> </svg> </button> <script type="module">function o(){const e=document.getElementById("back-to-top");if(!e)return;const s=300;let t=!1;const n=()=>{const i=window.scrollY>s;e.hidden=!i,t=!1},d=()=>{t||(requestAnimationFrame(n),t=!0)};e.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"})}),window.addEventListener("scroll",d,{passive:!0}),n(),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",d)},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",o):o();document.addEventListener("astro:page-load",o);</script></body></html>
