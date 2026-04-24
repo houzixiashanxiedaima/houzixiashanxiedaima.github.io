@@ -1,0 +1,131 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.0.8"><!-- Core SEO --><meta name="description" content="最近断断续续 Vibe Coding 写了一个小工具，叫 Runnel。我原本只是想写一个自己能用的代理工具，顺便把一些网络相关的东西重新摸一遍。写着写着，东西越来越像一个小型 VPN/代理工具箱。Runnel 有“小水道”的意思，我觉得还挺贴切：不是要做一个很宏大的网络基础设施，就是在本机和远端之间挖一条能用、能看、能调试的小通道。
+最初的动机是因为自己用的两个机场都跪了 (虽然后来又逐渐恢复了"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/runnel--8d6nn/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/runnel--8d6nn/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/runnel--8d6nn/"><meta property="og:title" content="开发 Runnel 的一些记录"><meta property="og:description" content="最近断断续续 Vibe Coding 写了一个小工具，叫 Runnel。我原本只是想写一个自己能用的代理工具，顺便把一些网络相关的东西重新摸一遍。写着写着，东西越来越像一个小型 VPN/代理工具箱。Runnel 有“小水道”的意思，我觉得还挺贴切：不是要做一个很宏大的网络基础设施，就是在本机和远端之间挖一条能用、能看、能调试的小通道。
+最初的动机是因为自己用的两个机场都跪了 (虽然后来又逐渐恢复了"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="最近断断续续 Vibe Coding 写了一个小工具，叫 Runnel。我原本只是想写一个自己能用的代理工具，顺便把一些网络相关的东西重新摸一遍。写着写着，东西越来越像一个小型 VPN/代理工具箱。Runnel 有“小水道”的意思，我觉得还挺贴切：不是要做一个很宏大的网络基础设施，就是在本机和远端之间挖一条能用、能看、能调试的小通道。
+最初的动机是因为自己用的两个机场都跪了 (虽然后来又逐渐恢复了"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/runnel--8d6nn/"><meta property="twitter:title" content="开发 Runnel 的一些记录"><meta property="twitter:description" content="最近断断续续 Vibe Coding 写了一个小工具，叫 Runnel。我原本只是想写一个自己能用的代理工具，顺便把一些网络相关的东西重新摸一遍。写着写着，东西越来越像一个小型 VPN/代理工具箱。Runnel 有“小水道”的意思，我觉得还挺贴切：不是要做一个很宏大的网络基础设施，就是在本机和远端之间挖一条能用、能看、能调试的小通道。
+最初的动机是因为自己用的两个机场都跪了 (虽然后来又逐渐恢复了"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>开发 Runnel 的一些记录</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/","potentialAction":{"@type":"SearchAction","target":"https://blog.yuyins.com/search?q={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"开发 Runnel 的一些记录","item":"https://blog.yuyins.com/reading-list/runnel--8d6nn/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-b4zvghpy]{display:inline-flex;align-items:center;gap:.45rem;border-radius:9999px;border:1px solid transparent;background:var(--muted);color:var(--foreground);font-weight:500;line-height:1.4;text-decoration:none;white-space:nowrap}.chip--sm[data-astro-cid-b4zvghpy]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-b4zvghpy]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-b4zvghpy]{cursor:pointer;transition:background-color .2s ease,color .2s ease,opacity .2s ease}.chip--interactive[data-astro-cid-b4zvghpy]:hover{background-color:color-mix(in srgb,var(--accent) 10%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 68%,var(--foreground))}.chip--active[data-astro-cid-b4zvghpy],.chip[data-astro-cid-b4zvghpy].active{background-color:color-mix(in srgb,var(--accent) 18%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 82%,var(--foreground));border-color:transparent;box-shadow:none;font-weight:600}.chip--dashed[data-astro-cid-b4zvghpy]{border-style:dashed;border-color:color-mix(in srgb,var(--accent) 22%,var(--border));background:color-mix(in srgb,var(--background) 70%,var(--muted))}.chip[data-astro-cid-b4zvghpy]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+<link rel="stylesheet" href="/_astro/Layout.YGtbHsr_.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0;animation:fadeIn .3s ease-out}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.8125rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--accent)}.back-link--top[data-astro-cid-wrgicudb]{display:inline-block;margin-bottom:1rem}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2> 雅俗共赏 </a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-otpdt6jm> <div class="search-dialog-card" data-astro-cid-otpdt6jm> <div class="search-dialog-bar" data-astro-cid-otpdt6jm> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="8" data-astro-cid-otpdt6jm></circle><path d="m21 21-4.3-4.3" data-astro-cid-otpdt6jm></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-otpdt6jm></div> <kbd class="search-kbd" data-astro-cid-otpdt6jm>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-otpdt6jm> <path d="M18 6 6 18" data-astro-cid-otpdt6jm></path><path d="m6 6 12 12" data-astro-cid-otpdt6jm></path> </svg> </button> </div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(e=0){if(sessionStorage.getItem(c)==="true")return m(),!0;const s=document.getElementById("pagefind-ui");if(!s)return!1;s.innerHTML='<div class="search-loading">加载中...</div>';try{return await new Promise((r,o)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=r,a.onerror=o,document.head.appendChild(a)}),m(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),e<2?(console.log(`Retrying search load... (${e+1}/2)`),await new Promise(r=>setTimeout(r,1e3)),l(e+1)):(s&&(s.innerHTML=`
+          <div class="search-loading">
+            <p>搜索功能加载失败</p>
+            <button id="retry-search" class="search-retry-btn">重试</button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>开发 Runnel 的一些记录</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="http://catcoding.me/atom.xml" target="_blank" rel="noopener noreferrer" data-astro-cid-wrgicudb="true" data-astro-cid-b4zvghpy="true" class="chip chip--sm chip--interactive source-tag"> 程序员的喵 </a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年4月23日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>最近断断续续 Vibe Coding 写了一个小工具，叫 <a target="_blank" rel="noopener noreferrer" href="https://github.com/chenyukang/runnel">Runnel</a>。我原本只是想写一个自己能用的代理工具，顺便把一些网络相关的东西重新摸一遍。写着写着，东西越来越像一个小型 VPN/代理工具箱。Runnel 有“小水道”的意思，我觉得还挺贴切：不是要做一个很宏大的网络基础设施，就是在本机和远端之间挖一条能用、能看、能调试的小通道。</p>
+<p>最初的动机是因为自己用的两个机场都跪了 (虽然后来又逐渐恢复了)，于是萌生了一个自己写个工具来翻墙的想法。先让 AI 快速撸了一个车 native-http 版本的，然后又加了多路复用的 native-mux 模式。</p>
+<p>后来又想到一个同事说他一直用自己写的代理工具叫做 <a target="_blank" rel="noopener noreferrer" href="https://github.com/libraries/daze">daze</a>，所以立马让 AI 用 Rust 重写了一份跑了起来。</p>
+<p>于是它现在支持几种模式：<code>native-http</code>、<code>native-mux</code>、几个 daze 风格的模式，以及后来主要投入精力做的 <code>wg</code> 模式。</p>
+<p>前面这些更像传统 SOCKS 代理，应用明确连到本地 SOCKS 端口，然后 Runnel 把流量转到远端。WG 模式不一样，它走 TUN 设备和 WireGuard 风格的 UDP 包，更像日常会用的全局 VPN。</p>
+<p>真正让我把重心转到 WG 模式的原因也很普通：SOCKS 在浏览器里挺好用，但到系统级流量、命令行工具、各种后台服务时就没那么舒服了。macOS 下总会碰到有些软件不吃系统代理，有些软件自己做 DNS，有些东西干脆只看路由表。最后还是得上 TUN。</p>
+<h2><a href="#先让它能跑" target="_blank" rel="noopener noreferrer"></a>先让它能跑</h2>
+<p>WG 模式底层用的是 Cloudflare 的 <code>boringtun</code>。最开始的版本目标很简单：</p>
+<ul>
+<li>client 创建一个 TUN 设备；</li>
+<li>server 也创建一个 TUN 设备；</li>
+<li>两边用 WireGuard key 建立 peer；</li>
+<li>client 把默认路由打进去；</li>
+<li>server 开转发和 NAT。</li>
+</ul>
+<p>听起来像配置一遍 WireGuard 而已，但自己写以后就会发现，大部分时间并不在加密和解密上，而是在处理操作系统。</p>
+<p>Linux 上需要 <code>/dev/net/tun</code>、<code>ip</code>、<code>sysctl</code>、<code>iptables</code>。macOS 上是 <code>ifconfig</code>、<code>route</code>、<code>networksetup</code>。命令不复杂，但出错方式很多。例如服务端没停干净，再起一次就会卡在：</p>
+<pre><code><span><span><span>ip</span></span><span> address add 10.8.0.1 peer 10.8.0.2 dev runnel-wg0</span>
+</span></code></pre>
+<p>因为设备还在，地址也还在。再比如 macOS 上如果之前的 tunnel 没清理干净，WG endpoint 的路由可能会被系统解析到某个 <code>utun</code> 上。这个时候 client 还没真正起来，但发往 server endpoint 的 UDP 包已经准备钻进旧 tunnel，最后当然连不上。</p>
+<p>这类问题很烦，但它们也逼着我把启动阶段做得更啰嗦一点。现在 Runnel 会做 preflight，会打印 hook，会在 client 装路由之前先做一次短 handshake probe。key、endpoint 或两端配置有问题时，最好在启动阶段直接报错，而不是把系统路由改完，然后留给用户一个没有响应的黑盒。</p>
+<p>我写这类工具最大的感受是：网络工具的“好用”，很多时候不是吞吐量高一点，而是坏的时候知道坏在哪里。</p>
+<h2><a href="#配置生成" target="_blank" rel="noopener noreferrer"></a>配置生成</h2>
+<p>WG 的配置很容易写错，尤其是 private key、peer public key、tunnel IP 这种互相交叉的字段。手写一次就够让人烦了，所以后来加了：</p>
+<pre><code><span><span><span>runnel</span></span><span> wg-config<span><span> --</span>server-endpoint</span> SERVER-IP:1443 <span>&gt;</span> runnel.yaml</span>
+</span></code></pre>
+<p>这个命令会一次生成 client 和 server 两边配置。两台机器用同一个 YAML，只是启动时分别执行：</p>
+<pre><code><span><span><span>sudo</span></span><span> runnel<span><span> --</span>config</span> runnel.yaml server</span>
+<span><span>sudo</span></span><span> runnel<span><span> --</span>config</span> runnel.yaml client<span><span> --</span>tui</span></span>
+</span></code></pre>
+<p>我挺喜欢这个设计。它减少了很多“我复制错了吗”的问题，也方便把一些默认值放进去。比如现在生成配置默认带 adblock，默认启用 DNS capture，也会默认带上 noise engine 和 mask obfs：</p>
+<pre><code><span><span><span>client</span></span><span>:</span>
+  <span><span>wg</span></span><span>:</span>
+    <span><span>engine</span></span><span>:</span> <span>noise</span>
+    <span><span>obfs</span></span><span>:</span> <span>mask</span>
+    <span><span>obfs_padding_min</span></span><span>:</span> <span>8</span>
+    <span><span>obfs_padding_max</span></span><span>:</span> <span>96</span>
+    <span><span>obfs_handshake_padding</span></span><span>:</span> <span>256</span>
+    <span><span>obfs_response_padding</span></span><span>:</span> <span>192</span>
+</span></code></pre>
+<p>这些东西不一定适合所有人，但它们很适合我自己的使用场景：默认配置应该尽量接近日常可用，而不是只给一个裸 tunnel。</p>
+<h2><a href="#分流" target="_blank" rel="noopener noreferrer"></a>分流</h2>
+<p>我原来只想做 IP 规则，例如：</p>
+<pre><code><span><span><span>client</span></span><span>:</span>
+  <span><span>ip_rules</span></span><span>:</span>
+    <span><span>direct</span></span><span>:</span>
+      <span>-</span> <span><span>"</span>10.*<span>"</span></span>
+      <span>-</span> <span><span>"</span>192.168.*<span>"</span></span>
+</span></code></pre>
+<p>这个在 WG 模式下比较直观，<code>direct</code> 就是给这些 IP 加本地直连 route，不让它们进 tunnel。后来很快又想要域名规则：</p>
+<pre><code><span><span><span>client</span></span><span>:</span>
+  <span><span>domain_rules</span></span><span>:</span>
+    <span><span>direct</span></span><span>:</span>
+      <span>-</span> <span><span>"</span>*.qq.com<span>"</span></span>
+      <span>-</span> <span><span>"</span>*.cn<span>"</span></span>
+    <span><span>block</span></span><span>:</span>
+      <span>-</span> <span><span>"</span>*.xxx.com<span>"</span></span>
+</span></code></pre>
+<p>问题是 WG 看到的是 IP 包，不知道这个连接原本访问的是 <code>qq.com</code> 还是别的什么域名。能抓到域名的地方只有 DNS。</p>
+<p>所以现在 WG 的 domain rules 是 DNS 驱动的。client 会把本机 DNS 指到 <code>127.0.0.1:53</code>，Runnel 在本地做一个很小的 DNS forwarder。它看到查询 <code>www.qq.com</code>，发现命中 direct 规则，就等上游 DNS 返回 IP，然后动态加一条 host route，让这个 IP 走本地网关。</p>
+<p>这个方案很实用，但并不完美。第一次访问一个域名时，如果系统还没有拿到解析结果，它可能已经先走了 tunnel。DoH、DoT、浏览器缓存、直接访问 IP，也都绕过这条逻辑。CDN 共享 IP 还会带来另一个问题：你为了某个域名加的直连 route，可能影响另一个解析到同一 IP 的域名。</p>
+<p>这些限制没法假装不存在，所以文档里也写清楚了。能解决 80% 的日常问题就很好，剩下 20% 要靠更底层的 packet inspection 或系统扩展，那又是另外一个坑。</p>
+<h2><a href="#顺手加的-Adblock" target="_blank" rel="noopener noreferrer"></a>顺手加的 Adblock</h2>
+<p>后来我把 <a target="_blank" rel="noopener noreferrer" href="https://github.com/brave/adblock-rust/">adblock-rust</a> 集成进来了。原因很简单：既然 WG 模式已经有 DNS capture，那 block 域名就可以顺手做掉。</p>
+<p>这里我比较在意优先级。最后定下来是：</p>
+<ol>
+<li>用户自己的 <code>domain_rules.block</code></li>
+<li>adblock 规则</li>
+<li>用户自己的 direct/proxy 规则</li>
+<li>默认走 proxy，也就是 tunnel</li>
+</ol>
+<p>用户手写规则永远应该赢过订阅规则。否则哪天 EasyPrivacy 把一个你需要的域名拦了，你会很难受。</p>
+<p>性能上我一开始也有点担心。毕竟 tunnel 里每个包都可能很密集，如果每个请求、每个 packet 都去跑 adblock，那肯定不行。最后实现是 DNS 级别的：只有新的域名查询会进入规则匹配，订阅会缓存在本地，域名决策也有内存缓存。实际看下来，这个成本可以接受。</p>
+<p>有次 TUI 里看到 <code>p.data.cctv.com</code> 被 block，我还专门去查了一下。它不是用户规则拦的，是订阅规则命中的。这个例子也提醒我，TUI 不能只显示 block，还得让用户知道大概是谁 block 的。否则所有东西看起来都像程序在自作主张。</p>
+<h2><a href="#TUI-比我预想中更有用" target="_blank" rel="noopener noreferrer"></a>TUI 比我预想中更有用</h2>
+<p>Runnel 有一个 TUI，不是为了好看，主要是为了少开几个终端。</p>
+<p>WG 模式刚开始出问题时，我经常要同时看：</p>
+<ul>
+<li>client 有没有握手；</li>
+<li>server 有没有看到 endpoint；</li>
+<li>最近有没有 REKEY timeout；</li>
+<li>DNS 最近解析了什么域名；</li>
+<li>哪些域名被 direct、proxy、block；</li>
+<li>tunnel 有没有流量。</li>
+</ul>
+<p>这些信息散在 log、<code>netstat</code>、<code>route</code>、<code>tcpdump</code> 里会很痛苦。放到一个 TUI 里之后，很多问题一眼能看出方向。</p>
+<p>比如看到 <code>HANDSHAKE(REKEY_TIMEOUT)</code> 连续刷，基本就是两边没有成功握手，先别怀疑浏览器。看到 <code>www.qq.com pending</code>，就知道 DNS query 被捕获了，但还没拿到可用于直连的 IP。看到某个 tracker 域名一秒内 block 了几十次，就知道 UI 需要合并重复记录，不然屏幕全被刷满。</p>
+<p>这里也有一些取舍。比如 tunnel speed 只能统计 WG tunnel 里的流量，直连出去的流量本来就不经过 tunnel，所以不会出现在 download wave 里。这个听起来像 bug，但其实是统计边界的问题。</p>
+<h2><a href="#Benchmark-测试" target="_blank" rel="noopener noreferrer"></a>Benchmark 测试</h2>
+<p>我给所有模式都加了一个 <code>mode_perf</code> benchmark。小请求跑 1000 次，大响应跑 8 个 1MiB 下载。非 WG 模式走 SOCKS path，WG 模式会真正拉起 child process，创建 TUN 设备，然后从 tunnel IP 发 HTTP 请求。</p>
+<p>本机测试的结果挺有意思：</p>
+<pre><code>native-mux  小请求大约 3300 req/s
+daze-czar   小请求大约 3400 req/s
+wg          小请求大约 2500 req/s
+</code></pre>
+<p>但大响应吞吐 WG 看起来很低，只有几十 MiB/s。刚看到这个数字我也有点怀疑，毕竟实际用起来 WG 并不觉得卡。后来想想也正常：这个 benchmark 是 localhost 上的端到端测试，WG 走真实 TUN 设备，会经过内核路由、用户态加解密、UDP socket、NAT 这些路径；而很多 SOCKS 模式本质上就是本机 TCP 流转发，少了不少系统边界。</p>
+<p>日常使用的“流畅”也不完全由大文件吞吐决定。连接建立、DNS、浏览器并发、小请求延迟，这些东西更容易影响体感。WG 在小请求上的数据并不差，而且系统级接管以后，很多应用不用再单独配置代理，反而省心。</p>
+<p>所以 benchmark 还是要有，但不能只看一个数。尤其是代理/VPN 这种东西，不同 workload 差别太大。</p>
+<h2><a href="#Noise-和混淆" target="_blank" rel="noopener noreferrer"></a>Noise 和混淆</h2>
+<p>标准的 WireGuard 长度非常固定，所以基本上会容易检测出来。我在最初使用单纯的 WG 用一段时间开始丢包，于是我开始琢磨如何加噪音来抗审查。</p>
+<p>于是给 WG mode 加了 noise engine。默认的 device engine 是让 boringtun 自己管理 WireGuard 设备和 UAPI socket，比较标准。noise engine 则是 Runnel 自己跑 TUN/UDP loop，直接用 <code>boringtun::noise::Tunn</code> 做加解密。</p>
+<p>这样做的好处是 transport 变得更可控。比如可以在 WireGuard UDP 包外面包一层 mask，把包头和长度藏一下，再加一些 padding。现在的 <code>obfs: mask</code> 做的就是这个方向。</p>
+<p>我不想把它说成什么“抗审查神器”。这类话太大了，也不诚实。现实网络环境要麻烦得多，包长、时序、UDP 行为、重传模式，都可能暴露特征。但作为一个实验层，它有用：至少可以让标准 WireGuard 包的形状变得不那么裸。</p>
+<p>我也看了一些类似工具的方向，比如 AmneziaWG、Nym 把 QUIC 和 WG 组合起来的思路。它们给我的启发是，VPN 工具不一定非要把“WireGuard 协议”和“底层传输形态”绑死。真正有意思的地方在中间那层：你能不能保留 WG 的 key、handshake、TUN 语义，同时换掉或包装它的传输外观。</p>
+<p>Runnel 现在还只是很早期的版本，但 noise engine 让后面继续试 QUIC、padding profile、甚至更麻烦的 packet shaping 都方便了一些。</p>
+<hr />
+<p>Runnel 还没有到我觉得很完整的阶段。比如 WG 的 domain rules 还是 DNS 驱动，IPv6 和双栈还需要更好的 schema，macOS 上更细粒度的 app split tunneling 也不是简单路由表能解决的。后面如果继续做，可能会往两个方向走：一是把 WG 模式打磨到更适合日常使用，二是继续试验 noise/QUIC 这类 transport。</p>
+<p>但目前这个状态我已经挺满意了，它不是一个周末玩具了，至少已经变成了我自己会认真拿来用、拿来测、拿来折腾网络问题的工具。</p>
+<p>这大概就是个人项目最舒服的地方：先让自己用得爽一点，遇到问题再修复。</p>
+</div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="http://catcoding.me/p/runnel-dev-notes/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text footer-text--strong" data-astro-cid-sz7xmlte>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-sz7xmlte>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-wlspcwf4> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-wlspcwf4> <path d="M18 15l-6-6-6 6" data-astro-cid-wlspcwf4></path> </svg> </button> <script type="module">function o(){const e=document.getElementById("back-to-top");if(!e)return;const s=300;let t=!1;const n=()=>{const i=window.scrollY>s;e.hidden=!i,t=!1},d=()=>{t||(requestAnimationFrame(n),t=!0)};e.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"})}),window.addEventListener("scroll",d,{passive:!0}),n(),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",d)},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",o):o();document.addEventListener("astro:page-load",o);</script></body></html>
