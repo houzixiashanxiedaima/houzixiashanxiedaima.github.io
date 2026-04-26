@@ -6,78 +6,75 @@
             <button id="retry-search" class="search-retry-btn">重试</button>
           </div>
         `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--default" data-astro-cid-sckkx6r4> <h1 id="-github-releases-监控列表">📦 GitHub Releases 监控列表</h1>
-<p>当前系统监控 <strong>11</strong> 个开源项目，每日自动抓取最新版本并生成 AI 摘要。</p>
-<p>最后更新: 2026-04-25</p>
+<p>当前系统监控 <strong>10</strong> 个开源项目，每日自动抓取最新版本并生成 AI 摘要。</p>
+<p>最后更新: 2026-04-26</p>
 <hr>
-<h2 id="go-2">Go (2)</h2>
+<h2 id="kotlin-2">Kotlin (2)</h2>
 <ul>
 <li>
-<p><strong><a href="https://github.com/QuantumNous/new-api" rel="noopener noreferrer" target="_blank">QuantumNous/new-api</a></strong> ⭐ 28.9k
-A unified AI model hub for aggregation &#x26; distribution. It supports cross-converting various LLMs into OpenAI-compatible, Claude-compatible, or Gemini-compatible formats. A centralized gateway for personal and enterprise model management. 🍥
-<em>最后更新: 2026-04-25</em></p>
+<p><strong><a href="https://github.com/2dust/v2rayNG" rel="noopener noreferrer" target="_blank">2dust/v2rayNG</a></strong> ⭐ 54.9k
+A V2Ray client for Android, support Xray core and v2fly core
+<em>最后更新: 2026-04-26</em></p>
 </li>
 <li>
-<p><strong><a href="https://github.com/beck-8/subs-check" rel="noopener noreferrer" target="_blank">beck-8/subs-check</a></strong> ⭐ 4.8k
-订阅转换、测速、测活、流媒体检测、重命名、导出为任意格式订阅的工具
-<em>最后更新: 2026-04-25</em></p>
+<p><strong><a href="https://github.com/rikkahub/rikkahub" rel="noopener noreferrer" target="_blank">rikkahub/rikkahub</a></strong> ⭐ 4.1k
+RikkaHub is an Android APP that supports for multiple LLM providers.
+<em>最后更新: 2026-04-26</em></p>
 </li>
 </ul>
 <hr>
-<h2 id="python-1">Python (1)</h2>
+<h2 id="php-1">PHP (1)</h2>
 <ul>
-<li><strong><a href="https://github.com/jxxghp/MoviePilot" rel="noopener noreferrer" target="_blank">jxxghp/MoviePilot</a></strong> ⭐ 10.9k
-NAS 媒体库自动化管理工具
-<em>最后更新: 2026-04-25</em></li>
+<li><strong><a href="https://github.com/ellite/Wallos" rel="noopener noreferrer" target="_blank">ellite/Wallos</a></strong> ⭐ 7.7k
+Wallos: Open-source, self-hostable personal subscription tracker. Visualize your recurring expenses, manage your budget, and save money.
+<em>最后更新: 2026-04-26</em></li>
 </ul>
 <hr>
-<h2 id="rust-2">Rust (2)</h2>
+<h2 id="rust-3">Rust (3)</h2>
 <ul>
 <li>
-<p><strong><a href="https://github.com/zed-industries/zed" rel="noopener noreferrer" target="_blank">zed-industries/zed</a></strong> ⭐ 79.8k
-Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter.
-<em>最后更新: 2026-04-25</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/openai/codex" rel="noopener noreferrer" target="_blank">openai/codex</a></strong> ⭐ 77.9k
+<p><strong><a href="https://github.com/openai/codex" rel="noopener noreferrer" target="_blank">openai/codex</a></strong> ⭐ 78.0k
 Lightweight coding agent that runs in your terminal
-<em>最后更新: 2026-04-25</em></p>
+<em>最后更新: 2026-04-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/dani-garcia/vaultwarden" rel="noopener noreferrer" target="_blank">dani-garcia/vaultwarden</a></strong> ⭐ 59.3k
+Unofficial Bitwarden compatible server written in Rust, formerly known as bitwarden_rs
+<em>最后更新: 2026-04-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/jdx/mise" rel="noopener noreferrer" target="_blank">jdx/mise</a></strong> ⭐ 27.3k
+dev tools, env vars, task runner
+<em>最后更新: 2026-04-26</em></p>
 </li>
 </ul>
 <hr>
-<h2 id="swift-1">Swift (1)</h2>
-<ul>
-<li><strong><a href="https://github.com/Ranchero-Software/NetNewsWire" rel="noopener noreferrer" target="_blank">Ranchero-Software/NetNewsWire</a></strong> ⭐ 10.0k
-RSS reader for macOS and iOS.
-<em>最后更新: 2026-04-25</em></li>
-</ul>
-<hr>
-<h2 id="typescript-5">TypeScript (5)</h2>
+<h2 id="swift-2">Swift (2)</h2>
 <ul>
 <li>
-<p><strong><a href="https://github.com/openclaw/openclaw" rel="noopener noreferrer" target="_blank">openclaw/openclaw</a></strong> ⭐ 363.8k
+<p><strong><a href="https://github.com/exelban/stats" rel="noopener noreferrer" target="_blank">exelban/stats</a></strong> ⭐ 38.3k
+macOS system monitor in your menu bar
+<em>最后更新: 2026-04-26</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/steipete/CodexBar" rel="noopener noreferrer" target="_blank">steipete/CodexBar</a></strong> ⭐ 11.3k
+Show usage stats for OpenAI Codex and Claude Code, without having to login.
+<em>最后更新: 2026-04-26</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="typescript-1">TypeScript (1)</h2>
+<ul>
+<li><strong><a href="https://github.com/openclaw/openclaw" rel="noopener noreferrer" target="_blank">openclaw/openclaw</a></strong> ⭐ 364.4k
 Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞
-<em>最后更新: 2026-04-25</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/anomalyco/opencode" rel="noopener noreferrer" target="_blank">anomalyco/opencode</a></strong> ⭐ 149.4k
-The open source coding agent.
-<em>最后更新: 2026-04-25</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/google-gemini/gemini-cli" rel="noopener noreferrer" target="_blank">google-gemini/gemini-cli</a></strong> ⭐ 102.4k
-An open-source AI agent that brings the power of Gemini directly into your terminal.
-<em>最后更新: 2026-04-25</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/laurent22/joplin" rel="noopener noreferrer" target="_blank">laurent22/joplin</a></strong> ⭐ 54.5k
-Joplin - the privacy-focused note taking app with sync capabilities for Windows, macOS, Linux, Android and iOS.
-<em>最后更新: 2026-04-25</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/xishang0128/sparkle" rel="noopener noreferrer" target="_blank">xishang0128/sparkle</a></strong> ⭐ 6.9k
-:electron: Another Mihomo GUI. (🛠building…)
-<em>最后更新: 2026-04-25</em></p>
-</li>
+<em>最后更新: 2026-04-26</em></li>
+</ul>
+<hr>
+<h2 id="vue-1">Vue (1)</h2>
+<ul>
+<li><strong><a href="https://github.com/Lissy93/dashy" rel="noopener noreferrer" target="_blank">Lissy93/dashy</a></strong> ⭐ 24.8k
+🚀 A self-hostable personal dashboard built for you. Includes status-checking, widgets, themes, icon packs, a UI editor and tons more!
+<em>最后更新: 2026-04-26</em></li>
 </ul>
 <hr>
 <h2 id="-说明">📖 说明</h2>
