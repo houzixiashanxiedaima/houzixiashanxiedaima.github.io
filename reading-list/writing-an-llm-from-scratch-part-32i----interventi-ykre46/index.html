@@ -1,0 +1,1000 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.0.8"><!-- Core SEO --><meta name="description" content="Towards the end of last year, I
+trained a 163M-parameter GPT-2-style model from scratch on my local RTX 3090,
+using code based on
+Sebastian Raschka's book
+&#34;Build a Large Language Model (from Scratch)&#34;"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/writing-an-llm-from-scratch-part-32i----interventi-ykre46/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/writing-an-llm-from-scratch-part-32i----interventi-ykre46/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/writing-an-llm-from-scratch-part-32i----interventi-ykre46/"><meta property="og:title" content="Writing an LLM from scratch, part 32i -- Interventions: what is in the noise?"><meta property="og:description" content="Towards the end of last year, I
+trained a 163M-parameter GPT-2-style model from scratch on my local RTX 3090,
+using code based on
+Sebastian Raschka's book
+&#34;Build a Large Language Model (from Scratch)&#34;"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="Towards the end of last year, I
+trained a 163M-parameter GPT-2-style model from scratch on my local RTX 3090,
+using code based on
+Sebastian Raschka's book
+&#34;Build a Large Language Model (from Scratch)&#34;"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/writing-an-llm-from-scratch-part-32i----interventi-ykre46/"><meta property="twitter:title" content="Writing an LLM from scratch, part 32i -- Interventions: what is in the noise?"><meta property="twitter:description" content="Towards the end of last year, I
+trained a 163M-parameter GPT-2-style model from scratch on my local RTX 3090,
+using code based on
+Sebastian Raschka's book
+&#34;Build a Large Language Model (from Scratch)&#34;"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Writing an LLM from scratch, part 32i -- Interventions: what is in the noise?</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/","potentialAction":{"@type":"SearchAction","target":"https://blog.yuyins.com/search?q={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Writing an LLM from scratch, part 32i -- Interventions: what is in the noise?","item":"https://blog.yuyins.com/reading-list/writing-an-llm-from-scratch-part-32i----interventi-ykre46/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-b4zvghpy]{display:inline-flex;align-items:center;gap:.45rem;border-radius:9999px;border:1px solid transparent;background:var(--muted);color:var(--foreground);font-weight:500;line-height:1.4;text-decoration:none;white-space:nowrap}.chip--sm[data-astro-cid-b4zvghpy]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-b4zvghpy]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-b4zvghpy]{cursor:pointer;transition:background-color .2s ease,color .2s ease,opacity .2s ease}.chip--interactive[data-astro-cid-b4zvghpy]:hover{background-color:color-mix(in srgb,var(--accent) 10%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 68%,var(--foreground))}.chip--active[data-astro-cid-b4zvghpy],.chip[data-astro-cid-b4zvghpy].active{background-color:color-mix(in srgb,var(--accent) 18%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 82%,var(--foreground));border-color:transparent;box-shadow:none;font-weight:600}.chip--dashed[data-astro-cid-b4zvghpy]{border-style:dashed;border-color:color-mix(in srgb,var(--accent) 22%,var(--border));background:color-mix(in srgb,var(--background) 70%,var(--muted))}.chip[data-astro-cid-b4zvghpy]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+<link rel="stylesheet" href="/_astro/Layout.YGtbHsr_.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0;animation:fadeIn .3s ease-out}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.8125rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--accent)}.back-link--top[data-astro-cid-wrgicudb]{display:inline-block;margin-bottom:1rem}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2> 雅俗共赏 </a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-otpdt6jm> <div class="search-dialog-card" data-astro-cid-otpdt6jm> <div class="search-dialog-bar" data-astro-cid-otpdt6jm> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="8" data-astro-cid-otpdt6jm></circle><path d="m21 21-4.3-4.3" data-astro-cid-otpdt6jm></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-otpdt6jm></div> <kbd class="search-kbd" data-astro-cid-otpdt6jm>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-otpdt6jm> <path d="M18 6 6 18" data-astro-cid-otpdt6jm></path><path d="m6 6 12 12" data-astro-cid-otpdt6jm></path> </svg> </button> </div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(e=0){if(sessionStorage.getItem(c)==="true")return m(),!0;const s=document.getElementById("pagefind-ui");if(!s)return!1;s.innerHTML='<div class="search-loading">加载中...</div>';try{return await new Promise((r,o)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=r,a.onerror=o,document.head.appendChild(a)}),m(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),e<2?(console.log(`Retrying search load... (${e+1}/2)`),await new Promise(r=>setTimeout(r,1e3)),l(e+1)):(s&&(s.innerHTML=`
+          <div class="search-loading">
+            <p>搜索功能加载失败</p>
+            <button id="retry-search" class="search-retry-btn">重试</button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Writing an LLM from scratch, part 32i -- Interventions: what is in the noise?</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://gilesthomas.com" target="_blank" rel="noopener noreferrer" data-astro-cid-wrgicudb="true" data-astro-cid-b4zvghpy="true" class="chip chip--sm chip--interactive source-tag"> gilesthomas.com </a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年4月7日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>Towards the end of last year, I
+<a href="/2025/12/llm-from-scratch-28-training-a-base-model-from-scratch" target="_blank" rel="noopener noreferrer">trained a 163M-parameter GPT-2-style model from scratch on my local RTX 3090</a>,
+using code based on
+<a href="https://sebastianraschka.com/" target="_blank" rel="noopener noreferrer">Sebastian Raschka</a>'s book
+"<a href="https://www.manning.com/books/build-a-large-language-model-from-scratch" target="_blank" rel="noopener noreferrer">Build a Large Language Model (from Scratch)</a>".</p>
+
+<p>The result was a pretty decent little model, but it wasn't as good as the original
+GPT-2-small, despite having more parameters (because it wasn't using weight-tying).
+Specifically: on a particular test set, my model gave a loss of 3.944 -- quite a lot
+more than the original GPT-2's 3.500 on the same dataset.</p>
+
+<p>I wanted to see whether I could train a model on my own hardware (or on something that
+didn't cost too much to rent in the cloud) that got closer to the original model's
+performance.  So over the last few months, I've done a bunch of further training runs, each one testing
+a specific intervention -- a stand-alone change that I expected to change the loss, either
+for better or for worse.  Specifically:</p>
+
+<ul>
+<li>I trained <a href="/2026/02/llm-from-scratch-32a-interventions-baseline-model" target="_blank" rel="noopener noreferrer">a baseline model</a> on
+an 8x A100 40 GiB per GPU machine on Lambda (which
+was better than my original locally-trained model, I believe due to the larger batch size
+that the larger machine made possible).</li>
+<li>I tried <a href="/2026/02/llm-from-scratch-32b-interventions-gradient-clipping" target="_blank" rel="noopener noreferrer">adding gradient clipping</a>
+to see if that would help by limiting the effects of loss spikes.</li>
+<li>I tried <a href="/2026/02/llm-from-scratch-32c-interventions-removing-dropout" target="_blank" rel="noopener noreferrer">removing dropout</a>, given
+that these days people tend not to use it (because we're doing single-epoch training runs).</li>
+<li>I tried <a href="/2026/02/llm-from-scratch-32d-interventions-adding-attention-bias" target="_blank" rel="noopener noreferrer">adding bias to the attention weight matrices</a> --
+something that was popular back in the GPT-2 era, and was used by the original weights, but which my code did not use.</li>
+<li>Instead of just using the learning rate of 0.0004 that was used in the code from
+the book, I looked into what values people use these days, and learned how
+to <a href="/2026/03/llm-from-scratch-32e-interventions-learning-rate" target="_blank" rel="noopener noreferrer">schedule it over the course of the training run</a>.</li>
+<li>Similarly, I learned more about <a href="/2026/03/llm-from-scratch-32f-interventions-weight-decay" target="_blank" rel="noopener noreferrer">weight decay</a> and
+tried some alternative values.</li>
+<li>Then I tried making my model more like the original GPT-2 one by introducing
+<a href="/2026/03/llm-from-scratch-32g-interventions-weight-tying" target="_blank" rel="noopener noreferrer">weight tying</a> to
+see if that would help.</li>
+<li>Finally, I decided to try <a href="/2026/04/llm-from-scratch-32h-interventions-full-fat-float32" target="_blank" rel="noopener noreferrer">training in "full-fat" float32</a>
+instead of using PyTorch's AMP and TF32 matrix multiplication performance
+enhancements.</li>
+</ul>
+
+<p>At the end of all of that, I had this table showing the effect of each intervention
+in terms of loss on the test set.  They're sorted from least-effective to most-effective,
+and you can see the baseline in there too:</p>
+
+<table>
+<thead>
+<tr>
+  <th></th>
+  <th>Test set loss</th>
+  <th>Improvement vs baseline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>8xa100m40-weight-tying</td>
+  <td>3.874</td>
+  <td>-0.182</td>
+</tr>
+<tr>
+  <td>8xa100m40-weight-decay-cerebras</td>
+  <td>3.867</td>
+  <td>-0.175</td>
+</tr>
+<tr>
+  <td>8xa100m40-baseline</td>
+  <td>3.692</td>
+  <td>-</td>
+</tr>
+<tr>
+  <td>8xa100m80-no-amp</td>
+  <td>3.679</td>
+  <td>0.013</td>
+</tr>
+<tr>
+  <td>8xa100m40-gradient-clipping</td>
+  <td>3.678</td>
+  <td>0.014</td>
+</tr>
+<tr>
+  <td>8xa100m40-qkv-bias</td>
+  <td>3.669</td>
+  <td>0.023</td>
+</tr>
+<tr>
+  <td>8xa100m40-weight-decay-gpt2</td>
+  <td>3.643</td>
+  <td>0.049</td>
+</tr>
+<tr>
+  <td>8xa100m40-remove-dropout</td>
+  <td>3.641</td>
+  <td>0.051</td>
+</tr>
+<tr>
+  <td>8xa100m40-schedule-learning-rate</td>
+  <td>3.602</td>
+  <td>0.09</td>
+</tr>
+</tbody>
+</table>
+
+<p>Winners and losers are reasonably clear:</p>
+
+<ul>
+<li>Weight tying and the number for weight decay I derived from a paper by
+Cerebras Research (probably without understanding it properly) were negatives.</li>
+<li>Full-fat float32, gradient clipping,  attention biases, the GPT-2 weight decay
+parameter, removing dropout, and scheduling (and updating) the learning rate
+were positives.</li>
+</ul>
+
+<p>So, for an optimal train, we'd just use the effective interventions, right?
+Well, not quite.</p>
+
+<p>Full-fat float32 I decided wasn't worth the effort, as it meant that the
+train took more than twice as long, and (because it required a larger machine), cost
+more than three times as much.</p>
+
+<p>The others did look like solid changes, but there was one concern.  The effect of
+each intervention is actually pretty small.  For example, gradient clipping reduced
+the loss by 0.014, from 3.692 to 3.678.  That's a 0.3% improvement.  Even the best
+intervention, scheduling the learning rate, only improved things by 2%.</p>
+
+<p>Could it be that some or all of these improvements were not real, but just a result
+of the random nature of training deep neural networks?  Could the differences just
+be in the noise?  They seemed small enough for that to be possible.</p>
+
+<p>I've trained seven more models over the last few days to try to get a feel as to how
+big an effect noise has for this kind of training run.  The results appear to show
+that variations in the initial weights matter quite a lot, but randomness in the
+training loop (given the same initial weights) actually has a fairly minimal impact.
+That surprised me a bit!</p>
+
+<p>Let's go through the details.</p>
+<h3>Is my random seed code working?</h3>
+
+<p>When I did the original baseline training run -- creating the model that was the
+comparison point for all of the interventions --
+I wanted to minimise the amount of random number-induced differences
+between the training runs in this interventions series.  I did this by setting the random seed
+at the start -- specifically, I had this code:</p>
+
+<div>
+<pre><span></span><code>    <span>seed</span> <span>=</span> <span>42</span>
+    <span>random</span><span>.</span><span>seed</span><span>(</span><span>seed</span><span>)</span>
+    <span>torch</span><span>.</span><span>manual_seed</span><span>(</span><span>seed</span><span>)</span>
+    <span>torch</span><span>.</span><span>cuda</span><span>.</span><span>manual_seed_all</span><span>(</span><span>seed</span><span>)</span>
+</code></pre>
+</div>
+
+<p>At the time I wrote it, this seemed pretty complete -- the seed is set on Python's
+own random number generator, on PyTorch's, and on the separate ones it uses for CUDA.</p>
+
+<p>However, in a separate project, where I was fine-tuning a Qwen model as a classifier,
+I'd found that this wasn't enough.  In order to get full reproducibility, I'd had to
+lock things down a bit more, with this additional code:</p>
+
+<div>
+<pre><span></span><code>    <span>torch</span><span>.</span><span>backends</span><span>.</span><span>cudnn</span><span>.</span><span>deterministic</span> <span>=</span> <span>True</span>
+    <span>torch</span><span>.</span><span>backends</span><span>.</span><span>cudnn</span><span>.</span><span>benchmark</span> <span>=</span> <span>False</span>
+    <span>torch</span><span>.</span><span>use_deterministic_algorithms</span><span>(</span><span>True</span><span>)</span>
+</code></pre>
+</div>
+
+<p>So: was my random number seed code enough for this case?  Or would I get a different
+model if I ran the same code a second time?</p>
+
+<p>That was easy enough to do; I spun up a machine, and just ran the "baseline" train
+again.  3 hours 24 minutes later:</p>
+
+<pre><code>Training complete in 12,276.306 seconds
+Tokens seen: 3,260,252,160
+Throughput: 265,573 tokens/second
+Final train loss: 3.743
+</code></pre>
+
+<p>Interestingly, that was exactly the same final train loss as the original baseline
+train.  <a href="https://huggingface.co/gpjt/8xa100m40-baseline-2" target="_blank" rel="noopener noreferrer">Here's the model</a>.</p>
+
+<p>I ran my normal smoke test, asking it to complete "Every effort moves you"</p>
+
+<pre><code>Every effort moves you in the way of getting into that.
+I will let you down as you move, not by
+</code></pre>
+
+<p>...so that was OK -- the model was generating reasonably coherent text.
+Then I ran the eval to find its loss on the test set:</p>
+
+<pre><code>Loss against our test dataset: 3.692
+</code></pre>
+
+<p>Exactly the same as the original baseline!  That was certainly promising.  Now, the
+use of three decimal places for the output from the loss eval is just a formatting thing,
+so I bumped it up to 6 dps, and the new model got this:</p>
+
+<pre><code>Loss against our test dataset: 3.691526
+</code></pre>
+
+<p>Running that against the original baseline model:</p>
+
+<pre><code>Loss against our test dataset: 3.691526
+</code></pre>
+
+<p>Again, exactly the same.  Finally, more out of idle interest than anything else,
+I decided to see if the models were at least different:</p>
+
+<pre><code>giles@perry:~/Dev/ddp-base-model-from-scratch (main)$ diff runs/8xa100m40-baseline/checkpoints/best/model.safetensors runs/8xa100m40-baseline-2/checkpoints/best/model.safetensors
+giles@perry:~/Dev/ddp-base-model-from-scratch (main)$
+</code></pre>
+
+<p>That is, quite frankly, amazing to me.  I was expecting pretty close results, but
+what we're seeing here is that two separate models, trained on the same data, but
+on different machines more than a month apart, have weights that are bit-wise identical.
+No random noise at all.</p>
+
+<p>That's actually really reassuring!  It makes me much more comfortable that we're
+standing on a stable foundation here.</p>
+
+<p>Now it was time to see what effect changing that random seed would have.</p>
+
+<h3>Changing the random seed</h3>
+
+<p>Let's think about what the random seed does.  When we call <code>random.seed(42)</code>, we're
+initialising Python's pseudo-random number generator so that it will start at a particular
+point -- after we've called it, it will generate the same sequence of "random" numbers
+each time it's asked for a new one.  So the effect of this code:</p>
+
+<div>
+<pre><span></span><code>    <span>seed</span> <span>=</span> <span>42</span>
+    <span>random</span><span>.</span><span>seed</span><span>(</span><span>seed</span><span>)</span>
+    <span>torch</span><span>.</span><span>manual_seed</span><span>(</span><span>seed</span><span>)</span>
+    <span>torch</span><span>.</span><span>cuda</span><span>.</span><span>manual_seed_all</span><span>(</span><span>seed</span><span>)</span>
+</code></pre>
+</div>
+
+<p>...is to initialise three separate pseudo-random number generators to be in a known
+deterministic state, so they'll all generate the same sequence in every run.</p>
+
+<p>So, the first thing to do was to see what happened if we changed that number.</p>
+
+<p>I decided to do two training runs, each with exactly the same code as the baseline,
+but with different random seeds.  Firstly, I changed it from 42 to 22 <sup><a href="#fn-1" target="_blank" rel="noopener noreferrer">1</a></sup>:</p>
+
+<div>
+<pre><span></span><code><span>ubuntu@130-61-223-25:~/ddp-base-model-from-scratch$ </span>git<span> </span>diff
+<span>diff --git a/ddp_train.py b/ddp_train.py</span>
+<span>index 5519353..16a8be5 100644</span>
+<span>--- a/ddp_train.py</span>
+<span>+++ b/ddp_train.py</span>
+<span>@@ -623,7 +623,7 @@ def main(run, datasets_dir_path, checkpoint, find_max_microbatch_size):</span>
+<span>     dist.init_process_group(backend, device_id=local_rank)</span>
+
+<span>     # </span>Set<span> </span>all<span> </span>of<span> </span>the<span> </span>random<span> </span>seeds
+<span>-    seed = 42</span>
+<span>+    seed = 22</span>
+<span>     random.seed(seed)</span>
+<span>     torch.manual_seed(seed)</span>
+<span>     torch.cuda.manual_seed_all(seed)</span>
+</code></pre>
+</div>
+
+<p>That training run completed:</p>
+
+<pre><code>Training complete in 12,287.950 seconds
+Tokens seen: 3,260,252,160
+Throughput: 265,321 tokens/second
+Final train loss: 3.724
+</code></pre>
+
+<p><a href="https://huggingface.co/gpjt/8xa100m40-baseline-3" target="_blank" rel="noopener noreferrer">Here's the model</a>.</p>
+
+<p>Time for the evals; the smoke test:</p>
+
+<pre><code>Every effort moves you a few spots in your path. Sooner, just think twice how many steps you take. If
+</code></pre>
+
+<p>...and the loss test:</p>
+
+<pre><code>Loss against our test dataset: 3.673453
+</code></pre>
+
+<p>So, that's 3.673453 compared to 3.691526, an improvement of 0.018 over the run with a seed
+of 42.  That's more than
+the 0.014 improvement we got from gradient clipping (and indeed, the 0.013 from full-fat float32
+training), and quite close to the 0.023 improvement from adding attention weight bias.</p>
+
+<p>Time for another training run:</p>
+
+<div>
+<pre><span></span><code><span>ubuntu@141-148-168-241:~/ddp-base-model-from-scratch$ </span>git<span> </span>diff
+<span>diff --git a/ddp_train.py b/ddp_train.py</span>
+<span>index 5519353..1e9b5bc 100644</span>
+<span>--- a/ddp_train.py</span>
+<span>+++ b/ddp_train.py</span>
+<span>@@ -623,7 +623,7 @@ def main(run, datasets_dir_path, checkpoint, find_max_microbatch_size):</span>
+<span>     dist.init_process_group(backend, device_id=local_rank)</span>
+
+<span>     # </span>Set<span> </span>all<span> </span>of<span> </span>the<span> </span>random<span> </span>seeds
+<span>-    seed = 42</span>
+<span>+    seed = 67</span>
+<span>     random.seed(seed)</span>
+<span>     torch.manual_seed(seed)</span>
+<span>     torch.cuda.manual_seed_all(seed)</span>
+<span>ubuntu@141-148-168-241:~/ddp-base-model-from-scratch$</span>
+</code></pre>
+</div>
+
+<p>Another 3h24m later:</p>
+
+<pre><code>Training complete in 12,263.076 seconds
+Tokens seen: 3,260,252,160
+Throughput: 265,859 tokens/second
+Final train loss: 3.704
+</code></pre>
+
+<p><a href="https://huggingface.co/gpjt/8xa100m40-baseline-4" target="_blank" rel="noopener noreferrer">Here's the model</a>.</p>
+
+<p>The smoke test:</p>
+
+<pre><code>Every effort moves you to a new level. The next phase is a one-way street in which you are free to
+</code></pre>
+
+<p>...and the test set loss:</p>
+
+<pre><code>Loss against our test dataset: 3.653593
+</code></pre>
+
+<p>A further improvement!  That's 0.038 better than our original baseline, which beats
+adding on attention weight bias (though it's worse than the weight decay update).</p>
+
+<p>Now, three data points is rather a small number for any kind of statistical
+analysis, but just out of interest, let's do the basics.
+<a href="https://www.geeksforgeeks.org/maths/variance/" target="_blank" rel="noopener noreferrer">GeeksForGeeks has a good refresher here</a> if you're a bit
+rusty.</p>
+
+<p>Firstly, our mean is</p>
+
+μ=3.691526+3.673453+3.6535933≈3.672857
+
+<p>...and our variance<sup><a href="#fn-2" target="_blank" rel="noopener noreferrer">2</a></sup> is:</p>
+
+σ2=(3.672857−3.691526)2+(3.672857−3.673453)2+(3.672857−3.653593)23≈0.000240
+
+<p>If we take the square root of that, we get the standard deviation (SD):</p>
+
+σ=0.000240≈0.0154919
+
+<p>So, if we assume a normal distribution, what would that say about our results?  Here's
+the results table again.</p>
+
+<table>
+<thead>
+<tr>
+  <th></th>
+  <th>Test set loss</th>
+  <th>Improvement vs baseline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>8xa100m40-weight-tying</td>
+  <td>3.874</td>
+  <td>-0.182</td>
+</tr>
+<tr>
+  <td>8xa100m40-weight-decay-cerebras</td>
+  <td>3.867</td>
+  <td>-0.175</td>
+</tr>
+<tr>
+  <td>8xa100m40-baseline</td>
+  <td>3.692</td>
+  <td>-</td>
+</tr>
+<tr>
+  <td>8xa100m80-no-amp</td>
+  <td>3.679</td>
+  <td>0.013</td>
+</tr>
+<tr>
+  <td>8xa100m40-gradient-clipping</td>
+  <td>3.678</td>
+  <td>0.014</td>
+</tr>
+<tr>
+  <td>8xa100m40-qkv-bias</td>
+  <td>3.669</td>
+  <td>0.023</td>
+</tr>
+<tr>
+  <td>8xa100m40-weight-decay-gpt2</td>
+  <td>3.643</td>
+  <td>0.049</td>
+</tr>
+<tr>
+  <td>8xa100m40-remove-dropout</td>
+  <td>3.641</td>
+  <td>0.051</td>
+</tr>
+<tr>
+  <td>8xa100m40-schedule-learning-rate</td>
+  <td>3.602</td>
+  <td>0.09</td>
+</tr>
+</tbody>
+</table>
+
+<p>If we assume that the results are on a normal distribution:</p>
+
+<ul>
+<li>We would expect ~68.2% of results to be within one SD of the mean -- that is, between
+3.6573651 and 3.6883489.  Interestingly, our actual baseline result is outside that
+range!  But it does include both the gradient clipping and the
+QKV bias results.</li>
+<li>We would additionally expect ~95.4% of the results to be within two SDs, which is
+3.6418732 to 3.7038408.  That includes our baseline and our weight decay result (though not our experiment
+removing dropout -- the six-DP loss number for that is 3.641282).</li>
+<li>Finally, we'd expect ~99.7% of results to be within three SDs, which is a range from
+3.6263813 to 3.7193327.  That covers all of our positive results apart from scheduling learning
+rate!</li>
+</ul>
+
+<p>That seemed a bit saddening -- were all of the results apart from scheduling the learning
+rate within the noise?
+Well, so as I said, three data points is too small a number to take those results
+without a fistful of salt.  I was thinking of perhaps trying another few random seeds
+to see what would happen, and perhaps to tighten those numbers up a bit, but then something
+occurred to me -- randomness was being used in two different ways in the training
+run, and perhaps we could separate them?</p>
+
+<h3>Breaking the randomness apart</h3>
+
+<p>Where do we use the random numbers?  Well, immediately after we set the seeds, we create
+our uninitialised model for training:</p>
+
+<div>
+<pre><span></span><code>    <span>model</span> <span>=</span> <span>GPTModel</span><span>(</span><span>model_conf</span><span>)</span><span>.</span><span>to</span><span>(</span><span>local_rank</span><span>)</span>
+</code></pre>
+</div>
+
+<p>One of the random number generators -- Python's, PyTorch's, or one of the CUDA ones -- will be used to generate the initial weights
+that we're going to start training.  That means that <em>for the same model setup</em>, we'll
+always start with exactly the same weights.  But if the model settings change
+such that we initialise different things in a different order, then we'll have different weights.</p>
+
+<p>After we've done that, we go into the training loop.  That <em>can have</em> randomness in it;
+although the AdamW optimiser itself is deterministic, we are (in all but one of these training
+runs) using dropout, which drops a random bunch of activations at various points -- 10% of
+them with our config.  And it seems entirely possible that each of the interventions
+could change the order of execution of different steps in non-obvious ways, which would
+lead to dropout being applied in different ways in different runs.</p>
+
+<p>So, the question was: what kinds of randomness -- in terms of the initial weights, or
+in terms of the training run -- did each intervention potentially change vs the baseline?
+Disregarding the full-fat float32 run:</p>
+
+<ul>
+<li>Gradient clipping: randomness only affected the training run -- the weights it started with
+would have been exactly the same as the baseline model's.</li>
+<li>Removing dropout: although this is a parameter on the model, I don't think it changes
+the initial weights.  But in the training run, it certainly does affect randomness
+by removing its use of the random number generator.</li>
+<li>Adding bias to the attention weights.  This will change both the initial weights -- because
+we have those bias weights, things will be initialised differently -- and as a result, the training run,
+as the random number generator will have been sampled a different number of times
+prior to the run.</li>
+<li>Changing and scheduling the learning rate certainly should not change the initial
+weights, but it might conceivably have a non-obvious effect on training.</li>
+<li>Likewise weight decay; no effect I can see on the initial weights, but it could well
+change training dynamics.</li>
+<li>Weight-tying.  When I <a href="https://github.com/gpjt/ddp-base-model-from-scratch/commit/c7d6256192ac2206bc16bcf71a56fa4f9c2115b6" target="_blank" rel="noopener noreferrer">added it to the code</a>, I
+tried to do so in such a way that the other weights would be unaffected -- I created
+exactly the same weights as I would without weight tying, then threw away the output
+head and replaced it with a reference to the input embedding weights.  So I think
+that in theory, this one won't have changed the other model weights (apart from ignoring
+the initialised-but-thrown-away output head), but it could well have
+changed the training run.</li>
+</ul>
+
+<p>Given that, I wanted to get two measures of how sensitive to noise each phase of
+the training run was: the initialisation of weights at the start, and the training
+run itself.</p>
+
+<p>I decided to start by nailing down exactly what the training run started with.</p>
+
+<h4>Loss changes with the same weights but different training run seeds</h4>
+
+<p>We already had a baseline training run with a specific state of the random number
+generator at the start; in our "real" baseline, we seeded with 42 at the start,
+and then initialised our weights.  After that, the random number generator would
+have reached some specific state based on its initial seed and how many numbers had been generated so far.</p>
+
+<p>Now, in theory, we could get the RNG into that specific state by seeding it with some
+number A at that point.  We don't know what A is, of course.  But it seems vanishingly
+unlikely that it would be something we'd come up with -- specifically, we can be
+pretty sure that A≠23 and A≠67.</p>
+
+<p>So, I put the old initial seed of 42 back in, but re-seeded after the model
+had been initialised:</p>
+
+<p>Firstly, with a re-seed value of 23:</p>
+
+<div>
+<pre><span></span><code><span>ubuntu@167-234-217-254:~/ddp-base-model-from-scratch$ </span>git<span> </span>diff
+<span>diff --git a/ddp_train.py b/ddp_train.py</span>
+<span>index 5519353..7b7993c 100644</span>
+<span>--- a/ddp_train.py</span>
+<span>+++ b/ddp_train.py</span>
+<span>@@ -643,6 +643,12 @@ def main(run, datasets_dir_path, checkpoint, find_max_microbatch_size):</span>
+<span>     else:</span>
+<span>         scaler = None</span>
+
+<span>+    # Set all of the random seeds again</span>
+<span>+    seed = 23</span>
+<span>+    random.seed(seed)</span>
+<span>+    torch.manual_seed(seed)</span>
+<span>+    torch.cuda.manual_seed_all(seed)</span>
+<span>+</span>
+<span>     datasets_dir = Path(datasets_dir_path)</span>
+<span>     dataset_name = train_conf["dataset"]</span>
+<span>     dataset_dir = datasets_dir / dataset_name</span>
+<span>ubuntu@167-234-217-254:~/ddp-base-model-from-scratch$</span>
+</code></pre>
+</div>
+
+<p>I let that run....</p>
+
+<pre><code>Training complete in 12,263.247 seconds
+Tokens seen: 3,260,252,160
+Throughput: 265,856 tokens/second
+Final train loss: 3.731
+</code></pre>
+
+<p>...and got <a href="https://huggingface.co/gpjt/8xa100m40-baseline-5" target="_blank" rel="noopener noreferrer">this model</a>.  Time
+for the normal evals:</p>
+
+<pre><code>Every effort moves you into a relationship in a world full of meaning and the beauty of your character that you will never forget
+</code></pre>
+
+<p>...and:</p>
+
+<pre><code>Loss against our test dataset: 3.681356
+</code></pre>
+
+<p>Next, I did another training run, the same as the previous one, but with 67 instead of 23
+for the re-seed:</p>
+
+<div>
+<pre><span></span><code><span>ubuntu@141-148-168-241:~/ddp-base-model-from-scratch$ </span>git<span> </span>diff
+<span>diff --git a/ddp_train.py b/ddp_train.py</span>
+<span>index 5519353..90b902a 100644</span>
+<span>--- a/ddp_train.py</span>
+<span>+++ b/ddp_train.py</span>
+<span>@@ -643,6 +643,12 @@ def main(run, datasets_dir_path, checkpoint, find_max_microbatch_size):</span>
+<span>     else:</span>
+<span>         scaler = None</span>
+
+<span>+    # Set all of the random seeds again</span>
+<span>+    seed = 67</span>
+<span>+    random.seed(seed)</span>
+<span>+    torch.manual_seed(seed)</span>
+<span>+    torch.cuda.manual_seed_all(seed)</span>
+<span>+</span>
+<span>     datasets_dir = Path(datasets_dir_path)</span>
+<span>     dataset_name = train_conf["dataset"]</span>
+<span>     dataset_dir = datasets_dir / dataset_name</span>
+</code></pre>
+</div>
+
+<p>That one ran:</p>
+
+<pre><code>Training complete in 12,245.932 seconds
+Tokens seen: 3,260,252,160
+Throughput: 266,231 tokens/second
+Final train loss: 3.732
+</code></pre>
+
+<p>...producing <a href="https://huggingface.co/gpjt/8xa100m40-baseline-6" target="_blank" rel="noopener noreferrer">this model</a>,
+which eval'ed like this <sup><a href="#fn-3" target="_blank" rel="noopener noreferrer">3</a></sup>:</p>
+
+<pre><code>Every effort moves you and I back home, to ensure the security of these children, but in this age transition to a
+</code></pre>
+
+<p>...and...</p>
+
+<pre><code>Loss against our test dataset: 3.680505
+</code></pre>
+
+<p>Let's bring those together:</p>
+
+<ul>
+<li>Our normal baseline: weights initialised with seed 42, and training run starts
+with a "seed" of our imaginary A value from above: 3.691526</li>
+<li>The first run above: weights initialised with seed 42, and training run starts
+with a seed of 23: 3.681356</li>
+<li>The second run above: weights initialised with seed 42, and training run starts
+with a seed of 67: 3.680505</li>
+</ul>
+
+<p>That's a mean of ~3.684462, with a variance of ~0.0000752 and a standard deviation
+of ~0.008672.  Those are <em>tiny</em> compared to the numbers from the two trains we did
+with the change of the seed prior to the model initialisation.</p>
+
+<p>That actually surprised
+me a bit; we're using dropout in all of these training runs, and it's dropping a random
+10% of activations in every forward training pass.  With our different training run
+starting seeds, they should be getting very different dropout patterns.  Hand-wavingly,
+perhaps over the three million or so sequences we're training on, it averages out?
+Still a little counterintuitive, though.</p>
+
+<p>Anyway, let's take a look at the intervention results again, this time
+highlighting the ones that we believe will be starting with the same weights:</p>
+
+<table>
+<thead>
+<tr>
+  <th></th>
+  <th>Test set loss</th>
+  <th>Improvement vs baseline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>8xa100m40-weight-tying</td>
+  <td>3.874</td>
+  <td>-0.182</td>
+</tr>
+<tr>
+  <td><strong>8xa100m40-weight-decay-cerebras</strong></td>
+  <td>3.867</td>
+  <td>-0.175</td>
+</tr>
+<tr>
+  <td><strong>8xa100m40-baseline</strong></td>
+  <td>3.692</td>
+  <td>-</td>
+</tr>
+<tr>
+  <td><strong>8xa100m80-no-amp</strong></td>
+  <td>3.679</td>
+  <td>0.013</td>
+</tr>
+<tr>
+  <td><strong>8xa100m40-gradient-clipping</strong></td>
+  <td>3.678</td>
+  <td>0.014</td>
+</tr>
+<tr>
+  <td>8xa100m40-qkv-bias</td>
+  <td>3.669</td>
+  <td>0.023</td>
+</tr>
+<tr>
+  <td><strong>8xa100m40-weight-decay-gpt2</strong></td>
+  <td>3.643</td>
+  <td>0.049</td>
+</tr>
+<tr>
+  <td><strong>8xa100m40-remove-dropout</strong></td>
+  <td>3.641</td>
+  <td>0.051</td>
+</tr>
+<tr>
+  <td><strong>8xa100m40-schedule-learning-rate</strong></td>
+  <td>3.602</td>
+  <td>0.09</td>
+</tr>
+</tbody>
+</table>
+
+<p>Using the "99.7% should be within three SDs" heuristic, we get a range of
+3.658446 - 3.710478.  Of the intervention runs with (I believe) stable weights, only the no-AMP
+and the gradient clipping ones are within that range.</p>
+
+<p>That made me feel quite positive.  If my beliefs are correct about which runs have the same
+weights, then noise in the training runs seems unlikely to be causing
+the differences -- that is, perhaps the results from the interventions for those
+same-weight training runs are real signal and not just noise.</p>
+
+<p>What would happen if instead of pinning the seed for generating the weights and
+varying the starting seed for the training run, we varied the weight seed and
+pinned the training one?</p>
+
+<h4>Loss changes with different weights but the training run seed nailed down</h4>
+
+<p>We'd already done a training run with a seed of 42 before generating the weights
+and a re-seed to 23 after that:</p>
+
+<ul>
+<li>The first run above: weights initialised with seed 42, and training run starts
+with a seed of 23: 3.681356</li>
+</ul>
+
+<p>So I decided to see what would happen if I varied the pre-weights initialisation seed.</p>
+
+<p>Firstly:</p>
+
+<div>
+<pre><span></span><code><span>ubuntu@167-234-217-254:~/ddp-base-model-from-scratch$ </span>git<span> </span>diff
+<span>diff --git a/ddp_train.py b/ddp_train.py</span>
+<span>index 5519353..932acc4 100644</span>
+<span>--- a/ddp_train.py</span>
+<span>+++ b/ddp_train.py</span>
+<span>@@ -623,7 +623,7 @@ def main(run, datasets_dir_path, checkpoint, find_max_microbatch_size):</span>
+<span>     dist.init_process_group(backend, device_id=local_rank)</span>
+
+<span>     # </span>Set<span> </span>all<span> </span>of<span> </span>the<span> </span>random<span> </span>seeds
+<span>-    seed = 42</span>
+<span>+    seed = 23</span>
+<span>     random.seed(seed)</span>
+<span>     torch.manual_seed(seed)</span>
+<span>     torch.cuda.manual_seed_all(seed)</span>
+<span>@@ -643,6 +643,12 @@ def main(run, datasets_dir_path, checkpoint, find_max_microbatch_size):</span>
+<span>     else:</span>
+<span>         scaler = None</span>
+
+<span>+    # Set all of the random seeds again</span>
+<span>+    seed = 23</span>
+<span>+    random.seed(seed)</span>
+<span>+    torch.manual_seed(seed)</span>
+<span>+    torch.cuda.manual_seed_all(seed)</span>
+<span>+</span>
+<span>     datasets_dir = Path(datasets_dir_path)</span>
+<span>     dataset_name = train_conf["dataset"]</span>
+<span>     dataset_dir = datasets_dir / dataset_name</span>
+</code></pre>
+</div>
+
+<p>Let that train:</p>
+
+<pre><code>Training complete in 12,249.079 seconds
+Tokens seen: 3,260,252,160
+Throughput: 266,163 tokens/second
+Final train loss: 3.725
+</code></pre>
+
+<p>...getting <a href="https://huggingface.co/gpjt/8xa100m40-baseline-7" target="_blank" rel="noopener noreferrer">this model</a>.  Evals:</p>
+
+<pre><code>Every effort moves you from an easy and comfortable one and can be used up to 90% or even more and the result
+</code></pre>
+
+<p>...and...</p>
+
+<pre><code>Loss against our test dataset: 3.673943
+</code></pre>
+
+<p>Next, one with 67 as the weights initialisation seed:</p>
+
+<div>
+<pre><span></span><code><span>ubuntu@141-148-168-241:~/ddp-base-model-from-scratch$ </span>git<span> </span>diff
+<span>diff --git a/ddp_train.py b/ddp_train.py</span>
+<span>index 5519353..a64b423 100644</span>
+<span>--- a/ddp_train.py</span>
+<span>+++ b/ddp_train.py</span>
+<span>@@ -623,7 +623,7 @@ def main(run, datasets_dir_path, checkpoint, find_max_microbatch_size):</span>
+<span>     dist.init_process_group(backend, device_id=local_rank)</span>
+
+<span>     # </span>Set<span> </span>all<span> </span>of<span> </span>the<span> </span>random<span> </span>seeds
+<span>-    seed = 42</span>
+<span>+    seed = 67</span>
+<span>     random.seed(seed)</span>
+<span>     torch.manual_seed(seed)</span>
+<span>     torch.cuda.manual_seed_all(seed)</span>
+<span>@@ -643,6 +643,12 @@ def main(run, datasets_dir_path, checkpoint, find_max_microbatch_size):</span>
+<span>     else:</span>
+<span>         scaler = None</span>
+
+<span>+    # Set all of the random seeds again</span>
+<span>+    seed = 23</span>
+<span>+    random.seed(seed)</span>
+<span>+    torch.manual_seed(seed)</span>
+<span>+    torch.cuda.manual_seed_all(seed)</span>
+<span>+</span>
+<span>     datasets_dir = Path(datasets_dir_path)</span>
+<span>     dataset_name = train_conf["dataset"]</span>
+<span>     dataset_dir = datasets_dir / dataset_name</span>
+</code></pre>
+</div>
+
+<p>That trained:</p>
+
+<pre><code>Training complete in 12,255.283 seconds
+Tokens seen: 3,260,252,160
+Throughput: 266,028 tokens/second
+Final train loss: 3.714
+</code></pre>
+
+<p>...getting <a href="https://huggingface.co/gpjt/8xa100m40-baseline-8" target="_blank" rel="noopener noreferrer">this model</a>, and <sup><a href="#fn-4" target="_blank" rel="noopener noreferrer">4</a></sup>:</p>
+
+<pre><code>Every effort moves you, in an attempt to protect it’s rights and the rights of the people in any respect
+</code></pre>
+
+<p>...and</p>
+
+<pre><code>Loss against our test dataset: 3.664345
+</code></pre>
+
+<p>OK, so here we have:</p>
+
+<ul>
+<li>Mean: ~3.673215</li>
+<li>Variance: ~0.000145</li>
+<li>SD: ~0.012062</li>
+</ul>
+
+<p>Compared to the SD we got when we varied just the initial seed, 0.0154919, it's not
+too far off.  Using the 3-SD rule, we get a range of 3.637030 - 3.709400, and looking
+at the table again, this time with the ones that we <em>don't</em> expect to have the same
+weights highlighted:</p>
+
+<table>
+<thead>
+<tr>
+  <th></th>
+  <th>Test set loss</th>
+  <th>Improvement vs baseline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>8xa100m40-weight-tying</strong></td>
+  <td>3.874</td>
+  <td>-0.182</td>
+</tr>
+<tr>
+  <td>8xa100m40-weight-decay-cerebras</td>
+  <td>3.867</td>
+  <td>-0.175</td>
+</tr>
+<tr>
+  <td>8xa100m40-baseline</td>
+  <td>3.692</td>
+  <td>-</td>
+</tr>
+<tr>
+  <td>8xa100m80-no-amp</td>
+  <td>3.679</td>
+  <td>0.013</td>
+</tr>
+<tr>
+  <td>8xa100m40-gradient-clipping</td>
+  <td>3.678</td>
+  <td>0.014</td>
+</tr>
+<tr>
+  <td><strong>8xa100m40-qkv-bias</strong></td>
+  <td>3.669</td>
+  <td>0.023</td>
+</tr>
+<tr>
+  <td>8xa100m40-weight-decay-gpt2</td>
+  <td>3.643</td>
+  <td>0.049</td>
+</tr>
+<tr>
+  <td>8xa100m40-remove-dropout</td>
+  <td>3.641</td>
+  <td>0.051</td>
+</tr>
+<tr>
+  <td>8xa100m40-schedule-learning-rate</td>
+  <td>3.602</td>
+  <td>0.09</td>
+</tr>
+</tbody>
+</table>
+
+<p>...we can see that the QKV bias is well within that range (as are all of the interventions
+apart from the two negative-effect ones and scheduling the learning rate).</p>
+
+<p>Right, what does all of that tell us?</p>
+
+<h3>Conclusion</h3>
+
+<p>This post obviously isn't even trying to be statistically rigorous.  The number of
+training runs I've done and the amount of data is way too small for that.  However,
+training runs are expensive (Lambda have raised their prices again, so these cost
+more than US$50 each!), so there's a limit to how much I can do.</p>
+
+<p>But even with the limited amount of data, something seems pretty clear:</p>
+
+<ul>
+<li>Varying the random seed at the start, prior to initialising weights, and not
+constraining the starting point for the training runs, gave a mean of 3.672857,
+with an SD of 0.0154919.</li>
+<li>Keeping the same seed for model weights (so that they all started with the same
+weights), and varying the seed for the training run, gave a mean of 3.684462,
+with an SD of 0.008672.</li>
+<li>Varying the seed for the model weights (so that they all started with different
+weights), and keeping the training run seed pinned, gave a mean of 3.673215
+and an SD of 0.012062.</li>
+</ul>
+
+<p>"One of these things is not like the others".  Keeping the model weights stable
+and only allowing variation in randomness across the training run itself meant that
+almost all of the differences between training runs disappeared.  Could this be
+a result of the small number of samples?  I guess conceivably it might, but it seems
+vanishingly unlikely.</p>
+
+<p>So I feel reasonably confident in saying that the bulk of the variation in results that
+we can chalk up to random noise in these training runs comes from variations in the
+model weights' initialisation.</p>
+
+<p>Additionally, the first training run in this post -- the re-run of the baseline model
+with no changes -- gave exactly the same numbers as the original baseline run.  So we
+can be confident that all of the models with no changes to the weight initialisation
+started with the same weights.  Of course, I could be wrong about which models really
+did have the same weights, but given that they were running the same code with the same
+seed, I'm pretty much sure.</p>
+
+<p>That makes me fairly confident that the intervention runs that had the same initial
+weights gave a real signal about whether or not the intervention in question actually
+helped.  The only exception is gradient clipping, which fell within the three-SD
+range for the same-weights tests -- and it's essentially free, adding just 100 seconds
+to a three hour training run.</p>
+
+<p>That's a really interesting result!  As I said earlier, given that dropout is making
+us ignore a random 10% of activations during the training run, I would have thought
+that changing <em>which</em> random 10% were being ignored would have a much larger effect.
+And that's not even considering other sources of random noise in the training run.</p>
+
+<p>I was less surprised that model weight initialisation was important, though.  It's pretty
+obvious that your starting position in the loss landscape is going to affect where you
+end up at the end of the training run.</p>
+
+<p>Still, we now have a reasonable level of trust that our interventions gave a real signal,
+so I think we have everything in place to see how they stack
+together, and do a best-effort training run.  Can we approach the original GPT-2 small
+weights' performance on our test set loss?</p>
+
+<p>It should be fun to find out :-)</p>
+
+<p><a href="/2026/04/llm-from-scratch-32j-interventions-trying-to-train-a-better-model-in-the-cloud" target="_blank" rel="noopener noreferrer">Here's a link to the next post in this series</a>.</p>
+
+<div>
+<hr />
+<ol>
+<li>
+<p>Numbers chosen based on a misremembering of <a href="https://xkcd.com/3184/" target="_blank" rel="noopener noreferrer">this XKCD</a>.
+For some reason (perhaps because it rhymes) I thought that the old-timey funny
+number thing was "22 skidoo" rather than "23 skidoo". <a href="#fnref-1" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>On working through this later: with n samples from a dataset, it is (as I understand it) best to
+use n−1 as the denominator here (Bessel's correction) for the "sample variance".
+If we had every possible value, then it would be correct to use n.  However, while
+this changes a few details in the analysis, I don't think it changes the final conclusion
+of the post meaningfully (it would just bump up the SDs by 22% or so), so I've
+left it as-is. <a href="#fnref-2" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>I found it interesting that this model does the "you and I" hypercorrection that so
+many people do when trying to write formally!  Based on the (correct) correction
+of "me and you move back home" to "you and I move back home", I think as a result of
+excessive pattern-matching. <a href="#fnref-3" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>Another grammatical error based on pattern-matching -- it would make
+sense that the possessive form of "it" in English was "it's", just like the possessive
+form of "John" is "John's". <a href="#fnref-4" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+</ol>
+</div></div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://www.gilesthomas.com/2026/04/llm-from-scratch-32i-interventions-what-is-in-the-noise" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text footer-text--strong" data-astro-cid-sz7xmlte>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-sz7xmlte>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-wlspcwf4> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-wlspcwf4> <path d="M18 15l-6-6-6 6" data-astro-cid-wlspcwf4></path> </svg> </button> <script type="module">function o(){const e=document.getElementById("back-to-top");if(!e)return;const s=300;let t=!1;const n=()=>{const i=window.scrollY>s;e.hidden=!i,t=!1},d=()=>{t||(requestAnimationFrame(n),t=!0)};e.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"})}),window.addEventListener("scroll",d,{passive:!0}),n(),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",d)},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",o):o();document.addEventListener("astro:page-load",o);</script></body></html>
