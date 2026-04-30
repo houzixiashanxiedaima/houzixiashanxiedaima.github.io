@@ -1,0 +1,205 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.0.8"><!-- Core SEO --><meta name="description" content="
+ 
+ 
+  文｜周鑫雨 王毓婵
+  编辑｜杨轩
+  解读DeepSeek V4的技术报告，是这几天AI行业最狂热的集体活动。
+  V4很强吗？在工程优化的维度中，答案是毋庸置疑的。过去，大家信奉“Scaling Law的暴力美学”——也就是靠堆更多优质算力、更大参数规模来提升模型性能。而V4走的是一条完全不同的路，它定义了一种“模型训练的克制美学”：
+  它不靠疯狂堆算力和参数，而是通过一系列组"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/all-in-deepseek-v410-bjmzc3/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/all-in-deepseek-v410-bjmzc3/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/all-in-deepseek-v410-bjmzc3/"><meta property="og:title" content="别急着All-in DeepSeek V4，先看看这10位从业者的真心话"><meta property="og:description" content="
+ 
+ 
+  文｜周鑫雨 王毓婵
+  编辑｜杨轩
+  解读DeepSeek V4的技术报告，是这几天AI行业最狂热的集体活动。
+  V4很强吗？在工程优化的维度中，答案是毋庸置疑的。过去，大家信奉“Scaling Law的暴力美学”——也就是靠堆更多优质算力、更大参数规模来提升模型性能。而V4走的是一条完全不同的路，它定义了一种“模型训练的克制美学”：
+  它不靠疯狂堆算力和参数，而是通过一系列组"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="
+ 
+ 
+  文｜周鑫雨 王毓婵
+  编辑｜杨轩
+  解读DeepSeek V4的技术报告，是这几天AI行业最狂热的集体活动。
+  V4很强吗？在工程优化的维度中，答案是毋庸置疑的。过去，大家信奉“Scaling Law的暴力美学”——也就是靠堆更多优质算力、更大参数规模来提升模型性能。而V4走的是一条完全不同的路，它定义了一种“模型训练的克制美学”：
+  它不靠疯狂堆算力和参数，而是通过一系列组"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/all-in-deepseek-v410-bjmzc3/"><meta property="twitter:title" content="别急着All-in DeepSeek V4，先看看这10位从业者的真心话"><meta property="twitter:description" content="
+ 
+ 
+  文｜周鑫雨 王毓婵
+  编辑｜杨轩
+  解读DeepSeek V4的技术报告，是这几天AI行业最狂热的集体活动。
+  V4很强吗？在工程优化的维度中，答案是毋庸置疑的。过去，大家信奉“Scaling Law的暴力美学”——也就是靠堆更多优质算力、更大参数规模来提升模型性能。而V4走的是一条完全不同的路，它定义了一种“模型训练的克制美学”：
+  它不靠疯狂堆算力和参数，而是通过一系列组"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>别急着All-in DeepSeek V4，先看看这10位从业者的真心话</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/","potentialAction":{"@type":"SearchAction","target":"https://blog.yuyins.com/search?q={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"别急着All-in DeepSeek V4，先看看这10位从业者的真心话","item":"https://blog.yuyins.com/reading-list/all-in-deepseek-v410-bjmzc3/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-b4zvghpy]{display:inline-flex;align-items:center;gap:.45rem;border-radius:9999px;border:1px solid transparent;background:var(--muted);color:var(--foreground);font-weight:500;line-height:1.4;text-decoration:none;white-space:nowrap}.chip--sm[data-astro-cid-b4zvghpy]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-b4zvghpy]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-b4zvghpy]{cursor:pointer;transition:background-color .2s ease,color .2s ease,opacity .2s ease}.chip--interactive[data-astro-cid-b4zvghpy]:hover{background-color:color-mix(in srgb,var(--accent) 10%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 68%,var(--foreground))}.chip--active[data-astro-cid-b4zvghpy],.chip[data-astro-cid-b4zvghpy].active{background-color:color-mix(in srgb,var(--accent) 18%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 82%,var(--foreground));border-color:transparent;box-shadow:none;font-weight:600}.chip--dashed[data-astro-cid-b4zvghpy]{border-style:dashed;border-color:color-mix(in srgb,var(--accent) 22%,var(--border));background:color-mix(in srgb,var(--background) 70%,var(--muted))}.chip[data-astro-cid-b4zvghpy]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+<link rel="stylesheet" href="/_astro/Layout.YGtbHsr_.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0;animation:fadeIn .3s ease-out}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.8125rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--accent)}.back-link--top[data-astro-cid-wrgicudb]{display:inline-block;margin-bottom:1rem}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2> 雅俗共赏 </a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-otpdt6jm> <div class="search-dialog-card" data-astro-cid-otpdt6jm> <div class="search-dialog-bar" data-astro-cid-otpdt6jm> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="8" data-astro-cid-otpdt6jm></circle><path d="m21 21-4.3-4.3" data-astro-cid-otpdt6jm></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-otpdt6jm></div> <kbd class="search-kbd" data-astro-cid-otpdt6jm>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-otpdt6jm> <path d="M18 6 6 18" data-astro-cid-otpdt6jm></path><path d="m6 6 12 12" data-astro-cid-otpdt6jm></path> </svg> </button> </div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(e=0){if(sessionStorage.getItem(c)==="true")return m(),!0;const s=document.getElementById("pagefind-ui");if(!s)return!1;s.innerHTML='<div class="search-loading">加载中...</div>';try{return await new Promise((r,o)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=r,a.onerror=o,document.head.appendChild(a)}),m(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),e<2?(console.log(`Retrying search load... (${e+1}/2)`),await new Promise(r=>setTimeout(r,1e3)),l(e+1)):(s&&(s.innerHTML=`
+          <div class="search-loading">
+            <p>搜索功能加载失败</p>
+            <button id="retry-search" class="search-retry-btn">重试</button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>别急着All-in DeepSeek V4，先看看这10位从业者的真心话</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="http://36kr.com" target="_blank" rel="noopener noreferrer" data-astro-cid-wrgicudb="true" data-astro-cid-b4zvghpy="true" class="chip chip--sm chip--interactive source-tag"> 36氪 </a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年4月29日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb>
+ 
+ 
+  <p><strong>文｜周鑫雨 王毓婵</strong></p>
+  <p><strong>编辑｜杨轩</strong></p>
+  <p>解读DeepSeek V4的技术报告，是这几天AI行业最狂热的集体活动。</p>
+  <p>V4很强吗？在工程优化的维度中，答案是毋庸置疑的。过去，大家信奉“Scaling Law的暴力美学”——也就是靠堆更多优质算力、更大参数规模来提升模型性能。而V4走的是一条完全不同的路，它定义了一种“模型训练的克制美学”：</p>
+  <p>它不靠疯狂堆算力和参数，而是通过一系列组合优化和重构：</p>
+  <p><strong>注意力机制</strong>（让模型学会“抓重点”，像人读长文章时会自动关注关键句子一样）</p>
+  <p><strong>MoE架构（混合专家模型，可以理解为“让不同的专家负责不同类型的问题，每次只激活少数专家，省时又省力”）</strong></p>
+  <p><strong>后训练</strong>（模型初步练成后再针对性地补课强化）</p>
+  <p><strong>推理系统工程</strong>（优化实际运行时各个环节的效率）</p>
+  <p>这样做的成果是把V4-Pro在处理百万Token（大约几十万字）长上下文时需要的算力，压低到了上一代V3.2的27%，同时用来临时存储对话上下文的<strong>KV缓存</strong>（可以理解为模型在跟你聊天时“记笔记”的草稿纸）被压缩到了原来的10%。</p>
+  <p>不过，工程只是工程，榜单只是榜单。</p>
+  <p>评价一个模型，我们不希望只停留在纸面参数上，而是放到部署、开发、投资的真实场景中去讨论V4的价值。为此，我们邀请了近10名开发者、应用创业者和投资人，进行了三天左右的体验和测试。</p>
+  <p>先说一个反直觉的结论：DeepSeek对应用层带来的影响，或许比模型层更大。</p>
+  <p>在惊叹极致的工程优化之余，正如DeepSeek自己在V4技术报告中坦言的那样：发展轨迹大约滞后前沿闭源模型3至6个月——V4如今的成果，就好比<strong>与魔鬼做交易：</strong>拉长了推理和Agent（智能体）能力的长板，代价是牺牲了部分准确性。</p>
+  <p>闭源模型厂商们，暂时可以松一口气。对于注重稳定、精确的商业世界而言，V4显然不是一款能够直接落地的模型。</p>
+  <p>Pine AI首席科学家李博杰，以及某头部Coding Agent创业者Chillin都对我们直言，工具调用稳定性+幻觉率，这两点必须在harness（给智能体套上的“缰绳”和“安全带”，用来规范它的行为、降低出错风险）层面补足，V4落地离不开“脚手架”。</p>
+  <p>但智力大脑的迭代方向，往往牵动着下游应用的生态。AI应用创业，将会面对技术和资本更严厉的双重考验。</p>
+  <p>“基模的性能还在快速迭代”——这句业内的共识，也意味着应用随时可能成为被模型颠覆的沙砾。一名双币基金的投资人举了不少“昨日黄花”的案例：“Workflow、Coding……”</p>
+  <p>AI应用公司“涌跃智能”创始人兼CEO陈炜鹏总结：未来，AI应用的壁垒，是把模型、Agent、产品场景和数据反馈组织成一个可靠、低成本、可规模化的生产系统。</p>
+  <h2><strong>亮点：不只有长文本和编程能力，而是高能力还成本低</strong></h2>
+  <h3><strong>写在前面：核心优势——代码与智能体能力</strong></h3>
+  <p>在几个关键的代码和软件工程评测中，V4-Pro展现出了当前开源模型的最高水平，与顶尖闭源模型几乎不相上下。我们把核心数据整理如下：</p>
+  <p><img src="https://img.36krcdn.com/hsossms/20260430/v2_f323208e3d7f405883a280e4a85c355c@5783683_oswg513782oswg1080oswg627_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>AI制图</p>
+  <h3><strong>🧑‍🏫PingCAP联合创始人兼CTO 黄东旭</strong></h3>
+  <p>我正在把自己的Hermes工作流迁移到DeepSeek V4上。原来我用得比较浪费，是用Claude Opus和GPT5.4来做Agent，但后来我发现，大多数日常工作其实并不需要特别高的coding能力。</p>
+  <p>日常办公任务，主要包括：(a)日常邮件整理；(b)文章撰写；(c)日历管理；(d)内容总结；(e)网络浏览。</p>
+  <p>现在我已经完全切换到DeepSeek V4了。它的效果比我想象中要好，可能是针对中文做了一些优化，整体语言能力比Opus和GPT更符合中文母语者的使用习惯。</p>
+  <p>所以我第一个结论是：如果你现在正在用一些更贵的模型来作为日常工作助理的Agent，其实可以比较放心地切换到DeepSeek V4 Pro上。</p>
+  <p>它的能力大概在Claude Sonnet 4.5到4.6的水平，但价格只有头部模型的四分之一还不到。现在我基本上已经不用再关注Agent的成本开销了。</p>
+  <p>DeepSeek V4的论文里一直在强调1M的上下文，但这点我其实感觉不是太强，因为现在主流的SOTA模型基本上至少也都是1M的上下文了，这只是追赶上了。</p>
+  <p>它真正的点在于：</p>
+  <p>1.成本真的非常低；</p>
+  <p>2.它是一个开放开源的模型。</p>
+  <p>我不用太担心Anthropic或者OpenAI如果断供，我之前的一些工作流就不能用了，这种事情之前其实发生过。在这一点上，切到DeepSeek V4，安全感是更高的。</p>
+  <p>其次，看编程能力。因为测试时间还比较短，我还没有用它来开发非常复杂的大型系统应用。</p>
+  <p>但在大概几千行代码的规模，或者做一些小型应用，以及处理充满各种外部第三方系统调用的场景（比如去Supabase或者TiDB Cloud上，通过阅读文档去接入一个它不太熟悉的工具），目前我的体感是基本上没有出现太大的问题。</p>
+  <p>在几千到一万行的规模里，V4 one-shot（一次性给足例子和指令，不额外调试）的成功率还是比较高的。</p>
+  <p>所以如果你只是做一些简单的小网站或者小型应用，我觉得DeepSeek的编程能力肯定比前一代要强非常多。</p>
+  <p>因为现在我的Harness框架其实并没有太复杂的人为编排，更多是依靠模型自身的协同能力（使用Slock.ai）。</p>
+  <p>简单来说，有以下两点：</p>
+  <p>1.它能够跟使用其他模型的Agent进行协同；</p>
+  <p>2.它完成一些简单的/具体的任务。</p>
+  <p>所以，如果前面有一些比较强的模型（例如像GPT5.5这种级别的）去给DeepSeek V4 Pro指方向，然后让它负责执行，这种模式我觉得能让整个Harness Engineering的成本大幅下降。</p>
+  <h3><strong>🧑‍🏫零一万物技术与产品中心副总裁 赵斌强</strong></h3>
+  <p>DeepSeek V4不是“最全能的”，但它是“最值得信赖的”——坚定的开源承诺、完整的技术报告、极低的推理成本、全技术栈国产化，让它成为ToB（面向企业）场景下性价比最优的基础模型选择。</p>
+  <p>DeepSeek V4最让我惊艳的是两件事。</p>
+  <p>第一，模型架构的底层创新。在100万Token上下文窗口下依然保持高质量推理能力，背后是<strong>混合注意力机制</strong>的底层创新。这种机制可以通俗地理解成：“粗读”着眼大局整体含义，“精读”精确理解细节。</p>
+  <p>尤其是在Context压缩方面的探索非常先进，而且DeepSeek在技术报告中毫无保留地公开了细节。这种坦诚和开源精神，在竞争激烈的大模型行业中极为宝贵。</p>
+  <p>第二，国产算力全栈适配。DeepSeek完成了华为昇腾910B/950的适配，在量化、稀疏化机制、领域expert优化等方面的工作做得非常细致。</p>
+  <p>这意味着从芯片到底层软件到模型训练、推理，国产全栈解决方案已在正确的方向上迈出了实质性一步。虽不能说完全摆脱对英伟达生态的依赖，但已经找到了正确的发展方向。这件事的难度和意义，怎么强调都不为过。</p>
+  <h3>🧑‍🏫<strong>Pine AI首席科学家 李博杰</strong></h3>
+  <p>最惊艳的是DeepSeek把MoE、CSA+HCA混合注意力、mHC、Muon、FP4QAT这一长串架构创新真正在1.6T（1.6万亿参数）这个目前最大开源规模上跑通了。</p>
+  <p>这就像把一堆理论上很先进、但在小规模实验里经常失效的技术，成功组合到一台巨型引擎上并稳定运转起来。我们自己试过20多种架构创新，结论几乎都是“在70亿参数规模上可行，一上规模就掉链子甚至反作用”。</p>
+  <p>其他家的模型架构创新大多也卡在这一步。能在最大规模上让多项创新协同工作，说明DeepSeek底层训练的技术积累极深，仅其中一项“mHC”技术，就把原来在27B实验里近3000倍的信号放大，压到了约1.6倍，让训练变得稳定可控。</p>
+  <h3><strong>🧑‍🏫联想集团副总裁，联想创投首席投资官、高级合伙人 宋春雨</strong></h3>
+  <p>DeepSeek证明了“AI性价比”可以成为一种主动设计出的结构性优势。</p>
+  <p>27%、显存占用仅10%。同时，其1.6T总参数量大，但每次仅激活49B参数，效率极高。</p>
+  <p>这种结构性降本，再加上V4-Flash版本API 1元/百万Token的低价策略，使得“平民化超长上下文”成为了AI应用的新基准。</p>
+  <h3>🧑‍🏫<strong>涌跃智能创始人兼CEO 陈炜鹏</strong></h3>
+  <p>DeepSeek V4最让我振奋的，不只是某个单点能力的提升，而是它说明国内大模型已经从“追赶基座能力”，进入到“参与Agent时代系统竞争”的阶段。</p>
+  <p>过去大家更关心模型会不会回答、推理、写代码；但到了今天，真正重要的是模型能不能在复杂任务中稳定完成目标，能不能以足够低的成本、足够高的效率接入真实产品系统。</p>
+  <h2><strong>遗憾：真正落地，V4还缺一些“脚手架”</strong></h2>
+  <h3><strong>写在前面：相对劣势——事实性知识与极端复杂推理</strong></h3>
+  <p>DeepSeek官方和各评估平台指出了V4-Pro的几个明显弱点。为了更直观，我们将关键弱项数据整理成下表：</p>
+  <p><img src="https://img.36krcdn.com/hsossms/20260430/v2_73e74b1f41b740a589336593797a27e6@5783683_oswg586514oswg1080oswg720_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>AI制图。</p>
+  <h3><strong>🧑‍🏫Pine AI首席科学家 李博杰</strong></h3>
+  <p>我主要使用的是代码类和Agentic任务。这一类工作里：</p>
+  <p>V4-Pro的工具调用能力和通用世界知识，基本追平了前沿模型的次一档版本（大致相当于Claude 4.6 Sonnet水平）；</p>
+  <p>但工具调用稳定性+幻觉率仍然是硬伤——这两点必须在Agent Harness层面补足（比如加强校验、失败后自动重试、用外部知识库让模型“接地气”、把工具使用规范定得严格清晰），否则在长链条任务里，任务链路一拉长，错误就会被不断放大；</p>
+  <p>一旦Harness层补好了这两个缺陷，整体推理成本能比前沿模型低好几倍。这才是真正的杠杆。</p>
+  <p>另一条线是：V4-Flash作为垂直微调的“甜点”是非常好的。什么叫垂直微调？就是在通用模型基础上，用特定领域的专业数据再“补课”，让它成为某个行业的专家。</p>
+  <p>1.6万亿参数的超大模型做后训练（SFT/RL）成本太高，一般公司根本负担不起，而2000亿到3000亿参数的模型才是市场做后训练的主力尺寸。我们之前在千问235B（2350亿参数）上做后训练，效果明显弱于同尺寸的V4-Flash。</p>
+  <p>Flash的性能已经追上前一代万亿级开源模型，超过600B多的DeepSeek V3.2和老版Kimi。Flash会成为做业务微调的首选基座。</p>
+  <h3><strong>🧑‍🏫Coding Agent创业者 Chillin</strong></h3>
+  <p>我们内部测评后得出的结论是：在Coding Agent场景下，DeepSeek V4是Claude一年多前的水平。</p>
+  <p>问题可能出现在两方面，一是参数规模，二是数据。DeepSeek和Anthropic还有比较显著的差距。</p>
+  <p>如果要真正落地，DeepSeek V4还需要一些特殊的脚手架，比如SWE-Agent（软件工程智能体）、OpenHands（一个开源Coding智能体）、Claude Code、OpenClaw。这都需要开发者额外配置。</p>
+  <h3><strong>🧑‍🏫涌跃智能创始人兼CEO 陈炜鹏</strong></h3>
+  <p>以Loopit（涌跃智能旗下的AI互动内容产品）的实际使用（主要是Coding场景）来看，要客观看到，DeepSeek V4在执行复杂长程任务的稳定性和任务完成率上，距离海外最强闭源模型仍有差距。</p>
+  <p>国内头部模型之间的能力差异在变小。这说明模型竞争正在进入一个新阶段：在Agent时代，模型能否理解长上下文、适应复杂框架、稳定完成长程任务，并以可接受的成本和速度运行，会变得同样重要。</p>
+  <p>真正拉开差距的，不只是模型本身，而是模型、后训练、Agent框架、评估体系和工程效率形成的整体系统。</p>
+  <h3><strong>🧑‍🏫联想集团副总裁，联想创投首席投资官、高级合伙人 宋春雨</strong></h3>
+  <p>V4的发布没有包含原生多模态版本（即同时能处理文字、图像、声音等的模型），这在当前市场环境下稍显遗憾。</p>
+  <p>但结合其全面拥抱国产算力的战略，这很可能是为了集中资源攻克最核心的算力底座问题而做出的阶段性取舍。</p>
+  <h3><strong>🧑‍🏫零一万物技术与产品中心副总裁 赵斌强</strong></h3>
+  <p>说“不及预期”有点鸡蛋里挑骨头。</p>
+  <p>但如果从ToC（面向个人用户）角度来看，产品化打磨还不够——Flash版本涉及创作、编程等复杂任务，能力略显不足；Pro版本虽然接近顶级闭源模型水准，但起步算力要求较高，存在入门门槛。</p>
+  <h2><strong>影响：AI并不是简单地越来越便宜</strong></h2>
+  <h3><strong>🧑‍🏫涌跃智能创始人兼CEO 陈炜鹏</strong></h3>
+  <p>一个重要趋势是，AI并不是简单地越来越便宜。</p>
+  <p>全球最旗舰模型的调用成本其实在上升，因为它们承载的是更高复杂度、更长上下文、更高价值的任务。真正快速变便宜的，是中层模型、开源模型和可自部署模型。</p>
+  <p>所以未来应用公司不会只问“哪个模型最强”，而是要建立一套模型调度系统：哪些任务必须用最强模型，哪些任务可以用高性价比模型，哪些能力可以通过Agent框架和工程系统补足。</p>
+  <p>DeepSeek V4的意义在于，它进一步丰富了模型供给层。</p>
+  <p>对企业来说，它不是简单替代某一个海外模型，而是让应用可以更灵活地做多模型编排、自部署和成本优化。</p>
+  <p>未来AI应用的壁垒，也不会是简单调用一个模型，而是把模型、Agent、产品场景和数据反馈组织成一个可靠、低成本、可规模化的生产系统。</p>
+  <p>对Loopit来说，这个趋势非常关键。我们做的是AI互动内容，模型能力决定创作上限，成本和速度决定创作能否规模化。</p>
+  <p>只有当不同层级的模型都足够可用，并且能够被有效编排，普通用户的大量创意才有可能被实时生成、互动和传播。DeepSeek V4的进展，会加速这个过程。</p>
+  <h3><strong>🧑‍🏫Pine AI首席科学家 李博杰</strong></h3>
+  <p>在垂直微调市场，千问、Llama等200-300B档基座被V4-Flash系统性替换。</p>
+  <p>所有做该尺寸后训练的团队都会重新评测；Flash同尺寸效果反超、推理框架Day-0适配齐全（SGLang/vLLM/TileLang），6个月内会成为国内开源垂直模型的默认起点。</p>
+  <p>华为昇腾950 SuperNode推理生态正式起步，并冲击英伟达芯片溢价。</p>
+  <p>这是第一个完整跑通的“国产芯+国产顶级开源模型”方案（NVIDIA/AMD都没拿到V4的早期适配），下半年950大规模出货后，Agent长上下文场景里会出现一波纯本土推理替换；</p>
+  <p>这间接影响是英伟达在中国市场的估值与溢价被重新定价——不是销量崩，是议价能力被压。</p>
+  <p>能完成复杂长程任务的Agent整体使用成本大幅下降。</p>
+  <p>V4-Pro输入(缓存未命中)1.74美元/输出3.48美元+1M上下文高效KV+MegaMoE已经把单Token成本压到前沿模型的1/6-1/7；</p>
+  <p>只要业界在Agent Harness层把V4的工具调用稳定性和幻觉率补齐（验证器、外部接地、严格Schema、自一致性投票），那些过去因为成本无法实用化的多步研究、长程代码Agent、深度搜索类应用会在今年下半年走出demo进入真实业务，Agent经济性的拐点就在这一波。</p>
+  <p>以及，闭源前沿厂商不会因此降价——它们的产品仍然显著领先，V4不构成定价压力。</p>
+  <h3><strong>🧑‍🏫零一万物技术与产品中心副总裁 赵斌强</strong></h3>
+  <p>ToB AI应用的核心命题是：在保证效果的前提下实现全周期的成本控制。DeepSeek V4的出现为这一命题提供了极具竞争力的解法。</p>
+  <p>Flash覆盖简单任务，Pro覆盖高复杂度场景，整体成本相比主流闭源方案会大幅降低，让零一万物在交付时能够显著提升方案性价比。</p>
+  <p>更重要的是，DeepSeek的开源是坚定的、不摇摆的，不会突然宣布闭源让应用的投入打水漂。这种坚定的开源姿态为企业级技术选型提供了宝贵的确定性。</p>
+  <p>零一万物内部已经全面启动基于DeepSeek V4的产品评测与能力验证，重点评估其在生产调度、智能办公、投资管理等企业核心场景中的表现，验证达标后会考虑替换原有模型，让更多行业客户用上顶级国产大模型。</p>
+  <p>V4发布后，我认为行业会主要产生三个变化：</p>
+  <p><strong>1.国产全技术栈解决方案进入发展轨道，国产化替代从“梦想”变“现实”</strong></p>
+  <p>DeepSeek成功适配华为昇腾，意味着国内AI产业在“芯片+框架+模型+应用”全技术栈国产化的方向上迈出了实质性一步。</p>
+  <p>对于有合规要求的政企客户，这是刚需。ToB市场的国产化替代进程将明显加速。</p>
+  <p><strong>2.开源大模型倒逼闭源降价，AI应用业务减少被闭源模型吸血</strong></p>
+  <p>DeepSeek用远远低于顶级闭源模型的价格实现了接近顶级闭源模型的效果，它的示范效应会进一步拉高开源模型的整体性能。</p>
+  <p>这也会迫使Anthropic、OpenAI等闭源模型厂商的高价策略面对压力。行业利润中心将从基座模型向深度行业应用迁移，对AI长期的发展极有益处。</p>
+  <p><strong>3.开源模型≠企业应用，Harness能力成为新分水岭</strong></p>
+  <p>开源降低了基座门槛，Harness决定了落地高度。从优质开源模型到稳定可靠的企业级产品，中间还隔着Harness这一层，包括幻觉消除、指令遵循、错误校验、专业性注入等工程能力。</p>
+  <p>每个行业的需求不同，没有一套Harness是通用的。这恰恰是零一万物的核心优势所在：基于自动评测、自动反馈、自动改进、专业性注入，为不同行业快速构建专属的Harness体系，让大模型真正在业务中用起来。</p>
+  <h3><strong>🧑‍🏫联想集团副总裁，联想创投首席投资官、高级合伙人 宋春雨</strong></h3>
+  <p>第一，百万级上下文成为应用层的“标配”，催生Agent爆发：V4将超长上下文能力下沉为普惠基础设施。</p>
+  <p>第二，行业竞争从“卷模型”转向“卷应用与数据”：当顶级开源模型性能逼近闭源、成本大幅下降后，模型本身将不再是稀缺壁垒。未来的投资与竞争焦点，将更明确地转向谁能利用这些基础模型，在医疗、金融、法律等高价值垂直场景中建立数据与应用闭环，形成商业护城河。</p>
+  <p>第三，国产算力产业链迎来巨大投资机遇：V4的成功，向业界证明了大模型在国产算力上也能摘取“皇冠上的明珠”。这必然催生对国产算力的确定性需求，带动从芯片设计、服务器到云服务的全产业链投资热潮。</p>
+  <p>我们判断，“今年的国产算力，就是去年的海外算力”，其产业趋势和资本市场的映射效应将尤为强劲。</p>
+  <p>我们会把资源向“能快速商业化、能落地行业、能形成产品壁垒”的项目集中，同时保持对底层架构与算力基础设施的长期投资。</p>
+  <h3><strong>🧑‍🏫某双币基金投资人</strong></h3>
+  <p>我今年的愿望是：基模Portfio（被投资方）顺利上市。</p>
+  <p>DeepSeek启动融资后，一定会吸收一级市场（尤其是国资）的大量资金。对剩下几家还没IPO的基模公司来说，继续滚动融资是不可持续的。</p>
+  <p>我还有个比较悲观的观点：今年应用层融资会比较困难。</p>
+  <p>基模能力还在快速迭代，意味着一大批应用会被颠覆。就像去年非常火热的Coding、Workflow，今年一级市场已经没什么人提了。</p>
+  <h3><strong>🧑‍🏫Coding Agent创业者 Chillin</strong></h3>
+  <p>开源是一个好事，DeepSeek V4能进一步推动交流和优化。但是这个时间距离拉的很大，让人感觉比较难受；</p>
+  <p>DeepSeek V4会迫使模型厂更加正面地面对规模和数据的问题，然而这两个问题极难解决，这是资本量的问题；</p>
+  <p>它也进一步地证明了Scaling Law的极限。工程化带来的性能跃升是有限的，这迫使所有人去找更底层的解。路漫漫其修远兮。</p>
+  <h2><strong>Bonus：一份DeepSeek V4实用指南</strong></h2>
+  <h3><strong>适合干什么？</strong></h3>
+  <p><strong>编程与代码学习：</strong>如果你是编程初学者或需要编写个人脚本，DeepSeek V4是目前最顶级的选择之一。它能非常可靠地理解上下文、生成高质量代码，并且极擅长代码调试。</p>
+  <p><strong>中文及中日韩（CJK）内容创作：</strong>无论是写文章、润色文案还是进行翻译，V4在中文、日文和韩文环境下的表现极其优异。</p>
+  <p><strong>超长文本阅读与分析：</strong>V4原生支持高达100万Token的上下文窗口。你可以一次性将整本书、数万字的长篇报告或完整的代码库直接喂给它，让它帮你总结或提取关键信息。</p>
+  <h3><strong>不适合干什么？</strong></h3>
+  <p><strong>搜索与查证客观事实：</strong>V4是一款“推理模型”而非“百科全书”，它在事实性知识（如历史细节、特定实体信息）的回忆测试中表现较弱，且极容易产生幻觉。特别是V4-Flash版本，在事实问答测试中得分仅有34.1%。建议：不要用它来当搜索引擎，查证事实请使用带搜索功能的其他AI或自己核实。</p>
+  <p><strong>处理图片或文档排版：</strong>DeepSeek V4是一个纯文本模型，不支持任何图像输入或输出（No Vision）。如果你需要分析图表或图片，请使用其他多模态模型（如GPT-5.4 Mini）。</p>
+  <p><strong>纯英文的高级创意写作：</strong>虽然它能写英文，但它的英文输出有时会显得行文生硬（stilted phrasing），如果你需要创作高度自然、地道或富有创意的纯英文内容，建议使用其他西方主流模型。</p>
+  <h3><strong>其他须知：</strong></h3>
+  <p><strong>给予充分的思考空间：</strong>如果你使用的是具备显式<strong>思维链</strong>（CoT，即模型在给出答案前会先一步步推理，类似于“先打草稿再誊写”）的Pro版本，遇到难题时，不妨在提示词中鼓励它“多想几步”或开启“Think Max”模式，它推导得越深入，给出的答案往往越准确。</p>
+  <p><strong>容忍偶尔的啰嗦：</strong>评估显示V4是一款相对“啰嗦”的模型，输出速度也偏慢。如果你只想要简短的答案，可以在提示词中明确要求“请用一句话回答”或“请尽量简短”。</p>
+  <p><img src="https://img.36krcdn.com/hsossms/20260430/v2_fa146f2efbef43b79809c7ea97495363@5783683_oswg478457oswg1080oswg402_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>欢迎交流！</p>
+  <p><img src="https://img.36krcdn.com/hsossms/20260430/v2_0f0fe202ecda48e4970e0bffdeeb2f81@5783683_oswg173650oswg900oswg335_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>欢迎交流！</p>
+ 
+</div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://36kr.com/p/3788151000751364?f=rss" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text footer-text--strong" data-astro-cid-sz7xmlte>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-sz7xmlte>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-wlspcwf4> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-wlspcwf4> <path d="M18 15l-6-6-6 6" data-astro-cid-wlspcwf4></path> </svg> </button> <script type="module">function o(){const e=document.getElementById("back-to-top");if(!e)return;const s=300;let t=!1;const n=()=>{const i=window.scrollY>s;e.hidden=!i,t=!1},d=()=>{t||(requestAnimationFrame(n),t=!0)};e.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"})}),window.addEventListener("scroll",d,{passive:!0}),n(),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",d)},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",o):o();document.addEventListener("astro:page-load",o);</script></body></html>

@@ -45,7 +45,7 @@ void AcquireExclusive()
     }
 }
 
-void ReleaseShared()
+void ReleaseExclusive()
 {
     ReleaseSemaphore(sharedSemaphore, MAX_SHARED, nullptr);
 }
