@@ -19,6 +19,7 @@ category: Android
 ## 新建Navigation Drawer Activity
 
 首先我们新建一个Navigation Drawer Activity作为我们BaseActivity，布局文件如下：
+
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout
@@ -53,39 +54,43 @@ category: Android
 </android.support.v4.widget.DrawerLayout>
 
 ```
+
 我们首先将Android studio自己生成的`<include></include>`注释掉，换成代码中的FrameLayout，接下来修改自动生成的BaseActivity代码：
 
 重写setContentView函数,重写后的函数如下：
 
- ``` kotlin
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-    override fun setContentView(layoutResID: Int) {
-        //首先获取带有DrawerLayout的布局
-        val drawer = layoutInflater.inflate(R.layout.activity_base_drawer, null) as DrawerLayout
-        //然后获取这个布局里面的FrameLayout，也就是我们刚才在xml中添加的FrameLayout
-        val frameContainer = drawer.findViewById(R.id.frame_container) as FrameLayout
-        //然后将子类的布局添加到FrameLayout中
-        layoutInflater.inflate(layoutResID, frameContainer, true)
-        //最后设置布局为DrawerLayout的布局
-        setContentView(drawer)
-        //下面就是一些设置DrawerLayout动作和点击事件的代码
-        val toggle = ActionBarDrawerToggle(
-                this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer.setDrawerListener(toggle)
-        toggle.syncState()
+```kotlin
+   override fun onCreate(savedInstanceState: Bundle?) {
+       super.onCreate(savedInstanceState)
+   }
+   override fun setContentView(layoutResID: Int) {
+       //首先获取带有DrawerLayout的布局
+       val drawer = layoutInflater.inflate(R.layout.activity_base_drawer, null) as DrawerLayout
+       //然后获取这个布局里面的FrameLayout，也就是我们刚才在xml中添加的FrameLayout
+       val frameContainer = drawer.findViewById(R.id.frame_container) as FrameLayout
+       //然后将子类的布局添加到FrameLayout中
+       layoutInflater.inflate(layoutResID, frameContainer, true)
+       //最后设置布局为DrawerLayout的布局
+       setContentView(drawer)
+       //下面就是一些设置DrawerLayout动作和点击事件的代码
+       val toggle = ActionBarDrawerToggle(
+               this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+       drawer.setDrawerListener(toggle)
+       toggle.syncState()
 
-        val navigationView = findViewById(R.id.nav_view) as NavigationView
-        navigationView.setNavigationItemSelectedListener(this)
+       val navigationView = findViewById(R.id.nav_view) as NavigationView
+       navigationView.setNavigationItemSelectedListener(this)
 
-        toolbar.setNavigationOnClickListener { view -> drawer.openDrawer(Gravity.START) }
-    }
- ```
+       toolbar.setNavigationOnClickListener { view -> drawer.openDrawer(Gravity.START) }
+   }
+```
+
 上面的代码使用Kotlin写的，顺便提一句：
+
 > 在今天凌晨的Google I/O 2017上，Android Team已经将Kotlin做为Android开发的"first-class"了。
 
 上面设置完之后，我们可以随便新建一个Activity，然后继承BaseActivity即可。
+
 ```kotlin
 class DrawerActivity : BaseDrawerActivity() {
 
@@ -96,6 +101,7 @@ class DrawerActivity : BaseDrawerActivity() {
     }
 }
 ```
+
 来看看结果：
 ![drawer-layout.gif](http://upload-images.jianshu.io/upload_images/2524102-d6e24c1d16735925.gif?imageMogr2/auto-orient/strip)
 可以看到我们的功能已经实现了，但是有一些小瑕疵：
@@ -103,6 +109,7 @@ class DrawerActivity : BaseDrawerActivity() {
 > Toolbar上面没有菜单键，需要通过从屏幕左边滑才能呼出Drawer
 
 这个问题从我们上面的代码中也体现出来了，在BaseActivity中并没有将Drawer的操作与Toolbar联系到一起，接下来我们就来添加代码，让Toolbar和Drawer联系到一起，添加到上面重写的setContentView中相应的位置
+
 ```kotlin
   //获取Toolbar
   val toolbar = frameContainer.findViewById(R.id.toolbar) as Toolbar
@@ -113,6 +120,7 @@ class DrawerActivity : BaseDrawerActivity() {
   //最后设置toolbar的点击事件
   toolbar.setNavigationOnClickListener { view -> drawer.openDrawer(Gravity.START) }
 ```
+
 经过上面的设置之后，再来看看运行效果：
 ![drawer-layout-new.gif](http://upload-images.jianshu.io/upload_images/2524102-d49733181469cf69.gif?imageMogr2/auto-orient/strip)
 

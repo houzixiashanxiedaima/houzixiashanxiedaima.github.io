@@ -39,7 +39,7 @@ category: Android
   //修改前
   include ':app'
   rootProject.name = "BlogTmp"
-  
+
   //修改后
   include(":app")
   rootProject.name = "BlogTmp"
@@ -59,23 +59,23 @@ category: Android
       dependencies {
           classpath "com.android.tools.build:gradle:4.0.1"
           classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-  
+
           // NOTE: Do not place your application dependencies here; they belong
           // in the individual module build.gradle files
       }
   }
-  
+
   allprojects {
       repositories {
           google()
           jcenter()
       }
   }
-  
+
   task clean(type: Delete) {
       delete rootProject.buildDir
   }
-  
+
   //修改后
   // Top-level build file where you can add configuration options common to all sub-projects/modules.
   buildscript {
@@ -87,19 +87,19 @@ category: Android
       dependencies {
           classpath ("com.android.tools.build:gradle:4.0.1")
           classpath ("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
-  
+
           // NOTE: Do not place your application dependencies here; they belong
           // in the individual module build.gradle files
       }
   }
-  
+
   allprojects {
       repositories {
           google()
           jcenter()
       }
   }
-  
+
   tasks.register("clean", Delete::class) {
       delete(rootProject.buildDir)
   }
@@ -113,21 +113,21 @@ category: Android
   apply plugin: 'com.android.application'
   apply plugin: 'kotlin-android'
   apply plugin: 'kotlin-android-extensions'
-  
+
   android {
       compileSdkVersion 29
       buildToolsVersion "29.0.3"
-  
+
       defaultConfig {
           applicationId "com.agiao.blogtmp"
           minSdkVersion 16
           targetSdkVersion 29
           versionCode 1
           versionName "1.0"
-  
+
           testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
       }
-  
+
       buildTypes {
           release {
               minifyEnabled false
@@ -135,7 +135,7 @@ category: Android
           }
       }
   }
-  
+
   dependencies {
       implementation fileTree(dir: "libs", include: ["*.jar"])
       implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -145,7 +145,7 @@ category: Android
       testImplementation 'junit:junit:4.12'
       androidTestImplementation 'androidx.test.ext:junit:1.1.1'
       androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-  
+
   }
   ```
 
@@ -158,43 +158,43 @@ category: Android
       id("kotlin-android-extensions")
       id("kotlin-kapt")
   }
-  
-  
+
+
   android {
-  
+
       compileSdkVersion(Versions.compileSdkVersion)
       buildToolsVersion(Versions.buildToolsVersion)
-  
+
       defaultConfig {
           applicationId = Versions.applicationId
           minSdkVersion(Versions.minSdkVersion)
           targetSdkVersion(Versions.targetSdkVersion)
           versionCode = Versions.versionCode
           versionName = Versions.versionName
-  
+
           testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
       }
-  
+
       buildTypes {
           getByName(BuildType.release) {
               isMinifyEnabled = true
               proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
           }
       }
-  
+
       compileOptions {
           sourceCompatibility = JavaVersion.VERSION_1_8
           targetCompatibility = JavaVersion.VERSION_1_8
       }
   }
-  
+
   dependencies {
       implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
       implementation(Dependencies.kotlinStd)
       implementation(Dependencies.coreKTX)
       implementation(Dependencies.constraintLayout)
       implementation(Dependencies.appCompat)
-  
+
       testImplementation(Test.junit)
       androidTestImplementation(Test.junitTest)
       androidTestImplementation(Test.espresso)

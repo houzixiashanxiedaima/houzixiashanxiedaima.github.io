@@ -30,7 +30,7 @@
 <span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">    android:background</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@color/colorPrimary"</span></span>
 <span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">    android:fitsSystemWindows</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"true"</span></span>
 <span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">    tools:context</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"stephen.com.material_design.NoteActivity"</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">></span></span>
-<span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">        </span></span>
+<span data-line=""> </span>
 <span data-line=""><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">    &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#8DDB8C">include</span></span>
 <span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">        layout</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"@layout/app_bar_note"</span></span>
 <span data-line=""><span style="--shiki-light:#6F42C1;--shiki-dark:#6CB6FF">        android:layout_width</span><span style="--shiki-light:#24292E;--shiki-dark:#ADBAC7">=</span><span style="--shiki-light:#032F62;--shiki-dark:#96D0FF">"match_parent"</span></span>
@@ -44,8 +44,7 @@
 <li>设置 Toolbar 不扩展到状态栏：<code>android:fitsSystemWindows="true"</code>
 在布局文件中设置完毕后，还需要在<code>onCreate()</code>里面加上如下的代码：</li>
 <li>设置状态栏颜色为透明：<code>getWindow().setStatusBarColor(Color.TRANSPARENT);</code></li>
-<li>设置状态栏和 APP 的位置关系：<code>getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);</code></li>
-</ul>
+<li>设置状态栏和 APP 的位置关系：<code>getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);</code>
 <blockquote>
 <p>setSystemUiVisibility (int visibility) 传入的实参类型如下：</p>
 <ol>
@@ -55,6 +54,8 @@
 <li>View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN：Activity 全屏显示，但状态栏不会被隐藏覆盖，状态栏依然可见，Activity 顶端布局部分会被状态遮住。</li>
 </ol>
 </blockquote>
+</li>
+</ul>
 <p>主要需要用到的参数就是以上的几个，其他的参数在实际的开发中用的相对较少，这里也就不列举出来了。
 通过上面的两个地方的代码设置之后，我们的 APP 就可以实现透明状态栏的效果了。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2524102-c81ed81629099945.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="普通界面的透明状态栏"></p>

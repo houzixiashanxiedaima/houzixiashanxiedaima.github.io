@@ -37,12 +37,14 @@ category: Android
         android:textColor="#FFFFFF"/>
 </RelativeLayout>
 ```
+
 上面这个是一个简单布局文件，这个布局文件对应的`坐标信息`：
 
 ![TextView的坐标信息](http://upload-images.jianshu.io/upload_images/2524102-c83b13d3a71e882f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 > 图画的很粗糙，意思表达到了就行。
-win10 下有什么好的画这种图的软件也可以推荐下。
+> win10 下有什么好的画这种图的软件也可以推荐下。
 
 上面图中，外层红色框表示的RelativeLayout，里面的蓝色实心矩形表示的是TextView。图中的标明的坐标信息解释如下：
+
 > getTop()表示Textview上边缘距离父布局上边的距离

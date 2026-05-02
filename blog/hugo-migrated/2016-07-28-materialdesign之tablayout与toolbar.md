@@ -59,7 +59,9 @@ category: Android
 </android.support.design.widget.CoordinatorLayout>
 
 ```
+
 上面就是我们主布局的代码，然后我们看看ViewPager对应的布局的代码：
+
 ```xml
 <android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -87,6 +89,7 @@ category: Android
 </android.support.v4.widget.NestedScrollView>
 
 ```
+
 这个里面的代码也很简单，就是一个ListView，主要的作用就是上下滑动，然后触发Toolbar的动画。
 剩下的就是一些简单的Fragment和一些控件初始化之类的，就不贴代码了，然后我们直接运行。运行之后截图如下：
 
@@ -101,17 +104,19 @@ category: Android
 运行结果向上滑动时，状态栏也会向上滑，给人的感觉就像是被Toolbar和TabLayout挤上去的样子。
 
 基于以上的两个不同之处，我们大致可以推断出Toolbar没有完全隐藏可能是因为状态栏的原因，那么我们就开始着手解决这个问题。
+
 - 从布局开始
-首先我们进行了将主布局的`android:fitsSystemWindows="true"`放到不同的地方，看看是否是这行代码出了问题，我分别将这行代码放到了CoordinatorLayout、AppBarLayout、Toolbar、TabLayout等多个地方，最后发现并没有解决问题。但是在这个过程中，却有一个小的变化是比较奇怪的，那就是当我`android:fitsSystemWindows="true"`这行代码移出CoordinatorLayout中时，我们运行程序之后会出现如下结果：
-![将上述代码移动到AppBarLayout中的结果](http://upload-images.jianshu.io/upload_images/2524102-cdda1190eb30c4a7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+  首先我们进行了将主布局的`android:fitsSystemWindows="true"`放到不同的地方，看看是否是这行代码出了问题，我分别将这行代码放到了CoordinatorLayout、AppBarLayout、Toolbar、TabLayout等多个地方，最后发现并没有解决问题。但是在这个过程中，却有一个小的变化是比较奇怪的，那就是当我`android:fitsSystemWindows="true"`这行代码移出CoordinatorLayout中时，我们运行程序之后会出现如下结果：
+  ![将上述代码移动到AppBarLayout中的结果](http://upload-images.jianshu.io/upload_images/2524102-cdda1190eb30c4a7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 从上图中我们可以看到，上面的状态栏变白了。这个发现就更加印证了我们之前的推测：这件事情肯定和状态栏有关系。既然已经知道这个，那么我们就可以从第二个方面来解决。
 
 - 从代码入手
-我们尝试着在**进行了第一步尝试的基础上**在代码中将状态栏的颜色修改一下`getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));`修改完之后，发现是可以得到和需求一样的结果。问题得到了完美的解决......吗？我们都知道上面这修改状态栏颜色的代码是在api>=21才可以用的，那如果api<21怎么办？可能有人会说用开源库来修改啊。这个确实是一种非常好的解决办法，但是我并不想“撞大运”式的将这个问题解决。所以我们还得继续的深入查找问题，那么这个时候就想到了，和状态栏有关的属性，除了布局文件中和代码中，还有一个地方，就是`style.xml`中。
+  我们尝试着在**进行了第一步尝试的基础上**在代码中将状态栏的颜色修改一下`getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));`修改完之后，发现是可以得到和需求一样的结果。问题得到了完美的解决......吗？我们都知道上面这修改状态栏颜色的代码是在api>=21才可以用的，那如果api<21怎么办？可能有人会说用开源库来修改啊。这个确实是一种非常好的解决办法，但是我并不想“撞大运”式的将这个问题解决。所以我们还得继续的深入查找问题，那么这个时候就想到了，和状态栏有关的属性，除了布局文件中和代码中，还有一个地方，就是`style.xml`中。
 
 - 从`style.xml`入手
-先贴出代码：
+  先贴出代码：
+
 ```xml
 <resources>
     <style name="AppTheme.NoActionBar">
@@ -122,6 +127,7 @@ category: Android
     </style>
 </resources>
 ```
+
 上面这个是`style.xml`(v21)的代码，从这段代码中我们就可以找到这次这个bug的罪魁祸首了。就是这一行`<item name="android:statusBarColor">@android:color/transparent</item>`
 就是这行代码将我们的状态栏给弄成了透明了，结果就导致我们看到的状态栏和布局文件是在同一个z轴上，也就是会被挤上去，从而导致我们的Toolbar不能完全的隐藏起来。
 

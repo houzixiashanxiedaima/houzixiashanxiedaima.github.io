@@ -17,11 +17,7 @@ category: Android
 
 ![](https://i.loli.net/2020/04/15/DNjXiwZC51ekBy8.png)
 
-
-
 <!--more-->
-
-
 
 ## 环境配置
 
@@ -30,9 +26,8 @@ category: Android
 1. 创建私有的源文件仓库
 
    创建私有源文件仓库是因为部分源文件中会包含一些敏感的信息，为了更好地保护隐私。具体操作如图所示
-   
-      ![](https://i.loli.net/2020/04/15/3OiMJrNfTyUQCIB.png)
 
+   ![](https://i.loli.net/2020/04/15/3OiMJrNfTyUQCIB.png)
 
    在上图中，我们创建了一个名为`HexoSourceRepo`仓库，以后我们就会将博客的基本配置和文件存放在这个仓库。因此后续的主要操作，都是在`HexoSourceRepo`仓库进行的。
 
@@ -41,9 +36,8 @@ category: Android
    ![](https://i.loli.net/2020/04/15/PEpmUk12brxzRvC.png)
 
    创建静态页面仓库和源文件仓库步骤是一样的，但是有两个地方需要注意
-
    1. 公开仓库的名称必须是你的用户名.github.io，比如你的用户名是`zhangsan`，那么仓库名称就必须是`zhangsan.github.io`
-   2.  静态页面仓库，也就是`zhangsan.github.io`是公开的，而源文件仓库是私有的。
+   2. 静态页面仓库，也就是`zhangsan.github.io`是公开的，而源文件仓库是私有的。
 
 创建好两个仓库之后，我们就可以开始安装`Hexo`了，但是在安装`Hexo`之前，需要先安装`Node`环境，因为`Hexo`是`Node.js`支持的。
 
@@ -56,14 +50,14 @@ category: Android
 在安装`Node`的时候会自动安装`npm`包管理工具，但是`npm`默认使用国外的镜像，所以在后面安装包的时候可能会非常慢，所以我们先将`npm`替换为`cnpm`，在命令行中输入如下命令
 
 ```bash
-npm install -g cnpm --registry=https://registry.npm.taobao.org 
+npm install -g cnpm --registry=https://registry.npm.taobao.org
 ```
 
 ~~安装`cnpm`并将镜像替换为国内的`taobao`镜像，加速包的下载速度。如果不想安装`cnpm`也可以直接将`npm`的镜像替换为`taobao`镜像~~
 
- ```bash
-  npm config set registry https://registry.npm.taobao.org   
- ```
+```bash
+ npm config set registry https://registry.npm.taobao.org
+```
 
 ~~安装完`cnpm`之后，就可以将所有的`npm`命令使用`cnpm`代替。~~
 
@@ -97,7 +91,7 @@ nrm use cnpm #切换源
 ```bash
 git init //初始化Git仓库
 git remote add origin https://github.com/yourname/HexoSourceRepo.git //添加远程仓库
-git add . 
+git add .
 git commit -m "init hexo blog" //第一次提交
 git push -u origin master
 
@@ -116,7 +110,7 @@ cnpm install hexo-deployer-git //安装部署插件
 ```yaml
 deploy:
   type: git
-  repository: 
+  repository:
     github: git@github.com:yourname/yourname.github.io.git //注意将yourname替换为自己的用户名
   branch: master
 ```
@@ -126,7 +120,7 @@ deploy:
 ```bash
 git add .
 git commit -m "first deploy"
-git push origin master 
+git push origin master
 //然后继续执行
 hexo g -d //将生成的网站部署到Github Pages静态页面上
 ```
