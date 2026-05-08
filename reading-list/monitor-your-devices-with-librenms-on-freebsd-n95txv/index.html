@@ -1,0 +1,194 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.2.1"><!-- Core SEO --><meta name="description" content="LibreNMS has been a faithful companion for years now. It quietly handles the monitoring of my servers, devices, and services without demanding much in return - exactly what you want from a tool whose "><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/monitor-your-devices-with-librenms-on-freebsd-n95txv/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/monitor-your-devices-with-librenms-on-freebsd-n95txv/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/monitor-your-devices-with-librenms-on-freebsd-n95txv/"><meta property="og:title" content="Monitor your devices with LibreNMS on FreeBSD"><meta property="og:description" content="LibreNMS has been a faithful companion for years now. It quietly handles the monitoring of my servers, devices, and services without demanding much in return - exactly what you want from a tool whose "><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="LibreNMS has been a faithful companion for years now. It quietly handles the monitoring of my servers, devices, and services without demanding much in return - exactly what you want from a tool whose "><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/monitor-your-devices-with-librenms-on-freebsd-n95txv/"><meta property="twitter:title" content="Monitor your devices with LibreNMS on FreeBSD"><meta property="twitter:description" content="LibreNMS has been a faithful companion for years now. It quietly handles the monitoring of my servers, devices, and services without demanding much in return - exactly what you want from a tool whose "><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Monitor your devices with LibreNMS on FreeBSD</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/","potentialAction":{"@type":"SearchAction","target":"https://blog.yuyins.com/search?q={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Monitor your devices with LibreNMS on FreeBSD","item":"https://blog.yuyins.com/reading-list/monitor-your-devices-with-librenms-on-freebsd-n95txv/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-b4zvghpy]{display:inline-flex;align-items:center;gap:.45rem;border-radius:9999px;border:1px solid transparent;background:var(--muted);color:var(--foreground);font-weight:500;line-height:1.4;text-decoration:none;white-space:nowrap}.chip--sm[data-astro-cid-b4zvghpy]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-b4zvghpy]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-b4zvghpy]{cursor:pointer;transition:background-color .2s ease,color .2s ease,opacity .2s ease}.chip--interactive[data-astro-cid-b4zvghpy]:hover{background-color:color-mix(in srgb,var(--accent) 10%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 68%,var(--foreground))}.chip--active[data-astro-cid-b4zvghpy],.chip[data-astro-cid-b4zvghpy].active{background-color:color-mix(in srgb,var(--accent) 18%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 82%,var(--foreground));border-color:transparent;box-shadow:none;font-weight:600}.chip--dashed[data-astro-cid-b4zvghpy]{border-style:dashed;border-color:color-mix(in srgb,var(--accent) 22%,var(--border));background:color-mix(in srgb,var(--background) 70%,var(--muted))}.chip[data-astro-cid-b4zvghpy]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+<link rel="stylesheet" href="/_astro/Layout.fN4a1ue5.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0;animation:fadeIn .3s ease-out}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.8125rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--accent)}.back-link--top[data-astro-cid-wrgicudb]{display:inline-block;margin-bottom:1rem}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2> 雅俗共赏 </a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-otpdt6jm> <div class="search-dialog-card" data-astro-cid-otpdt6jm> <div class="search-dialog-bar" data-astro-cid-otpdt6jm> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="8" data-astro-cid-otpdt6jm></circle><path d="m21 21-4.3-4.3" data-astro-cid-otpdt6jm></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-otpdt6jm></div> <kbd class="search-kbd" data-astro-cid-otpdt6jm>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-otpdt6jm> <path d="M18 6 6 18" data-astro-cid-otpdt6jm></path><path d="m6 6 12 12" data-astro-cid-otpdt6jm></path> </svg> </button> </div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(e=0){if(sessionStorage.getItem(c)==="true")return m(),!0;const s=document.getElementById("pagefind-ui");if(!s)return!1;s.innerHTML='<div class="search-loading">加载中...</div>';try{return await new Promise((r,o)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=r,a.onerror=o,document.head.appendChild(a)}),m(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),e<2?(console.log(`Retrying search load... (${e+1}/2)`),await new Promise(r=>setTimeout(r,1e3)),l(e+1)):(s&&(s.innerHTML=`
+          <div class="search-loading">
+            <p>搜索功能加载失败</p>
+            <button id="retry-search" class="search-retry-btn">重试</button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Monitor your devices with LibreNMS on FreeBSD</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://it-notes.dragas.net" target="_blank" rel="noopener noreferrer" data-astro-cid-wrgicudb="true" data-astro-cid-b4zvghpy="true" class="chip chip--sm chip--interactive source-tag"> it-notes.dragas.net </a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年5月7日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p><img src="https://it-notes.dragas.net/featured/watchdog.webp" alt="Monitor your devices with LibreNMS on FreeBSD" /></p><p><a href="https://www.librenms.org" target="_blank" rel="noopener noreferrer">LibreNMS</a> has been a faithful companion for years now. It quietly handles the monitoring of my servers, devices, and services without demanding much in return - exactly what you want from a tool whose job is to watch over everything else. It's a solid alternative to heavier solutions like Zabbix, and it gives you alerts, data, and graphs on virtually anything reachable over SNMP.</p>
+<p>I usually install it on a host that is <em>not</em> reachable from the outside, then let it poll all the devices through a VPN: a single observation point, clean perimeter. The ability to create multiple dashboards - and to filter them by user - has also let me give clients a transparent window onto their own servers. Transparency, in my experience, is always the better long-term bet.</p>
+<p>Together with <a href="https://it-notes.dragas.net/2024/07/22/install-uptime-kuma-freebsd-jail/" target="_blank" rel="noopener noreferrer">Uptime-Kuma</a> (and the good old Nagios/Munin pair), LibreNMS lives in a FreeBSD jail on my monitoring servers and just does its job.</p>
+<p>This post walks through a plain installation of LibreNMS on FreeBSD: package-based, no reverse proxy, no HTTPS, no fancy hardening. The goal is to get to a working setup you can build on top of.</p>
+<h2>Assumptions</h2>
+<ul>
+<li>FreeBSD 15.0-RELEASE, in a jail or on a dedicated VM/host</li>
+<li>nginx + php-fpm + MySQL 8.4</li>
+<li>LibreNMS installed from the official package — not via <code>git clone</code></li>
+</ul>
+<p>One note before we start: in this guide I use plain HTTP just to reach the first-time setup. If your LibreNMS instance won't stay confined to a private network or behind a VPN, configuring HTTPS is mandatory, not optional.</p>
+<h2>Installation</h2>
+<pre><code>pkg install librenms mysql84-server python3 nginx
+</code></pre>
+
+<p>LibreNMS currently depends on PHP 8.4. If you want to speed PHP up, install OPcache too:</p>
+<pre><code>pkg install php84-opcache
+</code></pre>
+
+<h2>MySQL</h2>
+<p>Two settings need to be in place <em>before</em> MySQL starts for the first time. After the first start they cannot be changed without reinitializing the data directory, so it's worth getting them right now.</p>
+<pre><code>cd /usr/local/etc/mysql
+cp my.cnf.sample my.cnf
+</code></pre>
+
+<p>In the <code>[mysqld]</code> section, add:</p>
+<pre><code>innodb_file_per_table=1
+lower_case_table_names=0
+</code></pre>
+
+<p>Now start MySQL:</p>
+<pre><code>service mysql-server enable
+service mysql-server start
+</code></pre>
+
+<p>On a fresh FreeBSD install, the local <code>root</code> user can connect to MySQL without a password from the command line. Connect and create the database and user. I'm using <code>password</code> here as a placeholder - don't.</p>
+<pre><code>mysql
+</code></pre>
+
+<pre><code>CREATE DATABASE librenms CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER 'librenms'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON librenms.* TO 'librenms'@'localhost';
+exit
+</code></pre>
+
+<h2>php-fpm</h2>
+<p>Edit <code>/usr/local/etc/php-fpm.d/www.conf</code> and adjust the listen directives:</p>
+<pre><code>listen = /var/run/php-fpm-librenms.sock
+listen.owner = www
+listen.group = www
+listen.mode = 0660
+</code></pre>
+
+<p>Then create <code>php.ini</code> from the production sample:</p>
+<pre><code>cd /usr/local/etc
+cp php.ini-production php.ini
+</code></pre>
+
+<p>And set the timezone in <code>php.ini</code>:</p>
+<pre><code>date.timezone = Europe/Rome
+</code></pre>
+
+<h2>nginx</h2>
+<p>Since this jail (or host) is dedicated to LibreNMS, we can rewrite the <code>server</code> block in <code>/usr/local/etc/nginx/nginx.conf</code> directly:</p>
+<pre><code>server {
+    listen      80;
+    #server_name yourServerName
+    root        /usr/local/www/librenms/html;
+    index       index.php;
+
+    charset utf-8;
+    gzip on;
+    gzip_types text/css application/javascript text/javascript application/x-javascript image/svg+xml text/plain text/xsd text/xsl text/xml image/x-icon;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location /api/v0 {
+        try_files $uri $uri/ /api_v0.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+        set $path_info $fastcgi_path_info;
+        try_files $fastcgi_script_name =404;
+        include fastcgi_params;
+        fastcgi_param SERVER_SOFTWARE "";
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $path_info;
+        fastcgi_index index.php;
+        fastcgi_pass unix:/var/run/php-fpm-librenms.sock;
+        fastcgi_buffers 256 4k;
+        fastcgi_intercept_errors on;
+        fastcgi_read_timeout 14400;
+    }
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+}
+</code></pre>
+
+<p>Now start nginx and php-fpm:</p>
+<pre><code>service nginx enable
+service nginx start
+
+service php_fpm enable
+service php_fpm start
+</code></pre>
+
+<h2>LibreNMS configuration</h2>
+<p>Copy the default config:</p>
+<pre><code>cp /usr/local/www/librenms/config.php.default /usr/local/www/librenms/config.php
+</code></pre>
+
+<p>Because we installed from the package, this file already has the right commands and paths for FreeBSD - no need to hunt down <code>mtr</code>, <code>fping</code>, <code>snmpwalk</code> and friends one by one.</p>
+<p>Create the directory for RRD graphs and set ownership:</p>
+<pre><code>mkdir -p /var/db/librenms/rrd
+chown -R www:www /var/db/librenms
+chmod 775 /var/db/librenms/rrd
+</code></pre>
+
+<p>Then the <code>.env</code> file:</p>
+<pre><code>cd /usr/local/www/librenms
+cp .env.example .env
+chown www .env
+</code></pre>
+
+<p>Edit <code>.env</code> and set at least:</p>
+<ul>
+<li><code>DB_DATABASE</code> - <code>librenms</code></li>
+<li><code>DB_USERNAME</code> - <code>librenms</code></li>
+<li><code>DB_PASSWORD</code> - the one you actually used (not <code>password</code>, please)</li>
+</ul>
+<p>Then add this line, which tells LibreNMS we still need to run the web installer:</p>
+<pre><code>INSTALL=true
+</code></pre>
+
+<p>A note on permissions. The official LibreNMS documentation suggests <code>chown -R www:www</code> over the entire application tree, but on FreeBSD the package already lays down sane ownership, with <code>storage/</code> and <code>bootstrap/cache/</code> writable by <code>www</code>. There's no reason to widen the rest of the codebase. If <code>validate.php</code> complains later about something write-related, the first place to check is:</p>
+<pre><code>ls -la /usr/local/www/librenms/storage /usr/local/www/librenms/bootstrap/cache
+</code></pre>
+
+<p>Now generate the app key as <code>www</code>, since the file is owned by <code>www</code>:</p>
+<pre><code>su -m www -c "php artisan key:generate"
+</code></pre>
+
+<p>And tighten <code>.env</code>:</p>
+<pre><code>chmod 600 .env
+</code></pre>
+
+<p>Refresh the configuration cache:</p>
+<pre><code>su -m www -c "lnms config:clear"
+su -m www -c "lnms config:cache"
+</code></pre>
+
+<h2>Web installer</h2>
+<p>Open <code>http://host/install</code> and follow the steps. The validation process may fail. Refreshing the cache picks up the values written to <code>config.php</code> during the install:</p>
+<pre><code>su -m www -c "lnms config:clear"
+su -m www -c "lnms config:cache"
+</code></pre>
+
+<p>When the web installer is done, edit .env again and remove the INSTALL=true line if it's still there. Leaving it in place re-exposes the installer to anyone who can reach the URL.</p>
+<h2>Polling service</h2>
+<p>LibreNMS needs something to actually run the polls. On FreeBSD, the package ships an rc service that runs the LibreNMS dispatcher, so there's no need to manage cron entries by hand the way most Linux guides assume.</p>
+<pre><code>service librenms enable
+service librenms start
+</code></pre>
+
+<h2>Validate</h2>
+<pre><code>cd /usr/local/www/librenms
+su -m www -c './validate.php'
+</code></pre>
+
+<p>You may see a couple of complaints right after starting the service - usually scheduler-related and self-resolving within a few minutes. Re-run <code>validate.php</code> once the dispatcher has had time to settle. Anything still red after that is worth investigating.</p>
+<h2>Next steps</h2>
+<p>At this point you can log into the web interface and start adding devices, configuring SNMP, and building dashboards. For that, the <a href="https://docs.librenms.org/" target="_blank" rel="noopener noreferrer">official LibreNMS documentation</a> is excellent, and there's no point in me paraphrasing it here.</p></div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://it-notes.dragas.net/2026/05/07/monitor-your-services-with-librenms-on-freebsd/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text footer-text--strong" data-astro-cid-sz7xmlte>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-sz7xmlte>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-wlspcwf4> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-wlspcwf4> <path d="M18 15l-6-6-6 6" data-astro-cid-wlspcwf4></path> </svg> </button> <script type="module">function o(){const e=document.getElementById("back-to-top");if(!e)return;const s=300;let t=!1;const n=()=>{const i=window.scrollY>s;e.hidden=!i,t=!1},d=()=>{t||(requestAnimationFrame(n),t=!0)};e.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"})}),window.addEventListener("scroll",d,{passive:!0}),n(),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",d)},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",o):o();document.addEventListener("astro:page-load",o);</script></body></html>
