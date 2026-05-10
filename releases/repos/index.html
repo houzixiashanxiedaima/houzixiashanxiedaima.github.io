@@ -6,88 +6,89 @@
             <button id="retry-search" class="search-retry-btn">重试</button>
           </div>
         `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--default" data-astro-cid-sckkx6r4> <h1 id="-github-releases-监控列表">📦 GitHub Releases 监控列表</h1>
-<p>当前系统监控 <strong>13</strong> 个开源项目，每日自动抓取最新版本并生成 AI 摘要。</p>
-<p>最后更新: 2026-05-09</p>
+<p>当前系统监控 <strong>12</strong> 个开源项目，每日自动抓取最新版本并生成 AI 摘要。</p>
+<p>最后更新: 2026-05-10</p>
 <hr>
-<h2 id="java-1">Java (1)</h2>
+<h2 id="c-1">C# (1)</h2>
 <ul>
-<li><strong><a href="https://github.com/Suwayomi/Suwayomi-Server" rel="noopener noreferrer" target="_blank">Suwayomi/Suwayomi-Server</a></strong> ⭐ 6.9k
-A rewrite of Tachiyomi for the Desktop
-<em>最后更新: 2026-05-09</em></li>
+<li><strong><a href="https://github.com/2dust/v2rayN" rel="noopener noreferrer" target="_blank">2dust/v2rayN</a></strong> ⭐ 105.1k
+A GUI client for Windows, Linux and macOS, support Xray and sing-box and others
+<em>最后更新: 2026-05-10</em></li>
 </ul>
 <hr>
-<h2 id="javascript-1">JavaScript (1)</h2>
+<h2 id="go-2">Go (2)</h2>
 <ul>
-<li><strong><a href="https://github.com/alyssaxuu/screenity" rel="noopener noreferrer" target="_blank">alyssaxuu/screenity</a></strong> ⭐ 18.2k
-The free and privacy-friendly screen recorder with no limits 🎥
-<em>最后更新: 2026-05-09</em></li>
+<li>
+<p><strong><a href="https://github.com/MHSanaei/3x-ui" rel="noopener noreferrer" target="_blank">MHSanaei/3x-ui</a></strong> ⭐ 36.6k
+Xray panel supporting multi-protocol multi-user expire day &#x26; traffic &#x26; IP limit (Vmess, Vless, Trojan, ShadowSocks, Wireguard, Hysteria, Tunnel, Mixed, HTTP, Tun)
+<em>最后更新: 2026-05-10</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/apernet/hysteria" rel="noopener noreferrer" target="_blank">apernet/hysteria</a></strong> ⭐ 19.9k
+Hysteria is a powerful, lightning fast and censorship resistant proxy.
+<em>最后更新: 2026-05-10</em></p>
+</li>
 </ul>
 <hr>
-<h2 id="kotlin-4">Kotlin (4)</h2>
+<h2 id="kotlin-2">Kotlin (2)</h2>
 <ul>
 <li>
 <p><strong><a href="https://github.com/2dust/v2rayNG" rel="noopener noreferrer" target="_blank">2dust/v2rayNG</a></strong> ⭐ 55.8k
 A V2Ray client for Android, support Xray core and v2fly core
-<em>最后更新: 2026-05-09</em></p>
+<em>最后更新: 2026-05-10</em></p>
 </li>
 <li>
-<p><strong><a href="https://github.com/MetaCubeX/ClashMetaForAndroid" rel="noopener noreferrer" target="_blank">MetaCubeX/ClashMetaForAndroid</a></strong> ⭐ 39.1k
-A rule-based tunnel for Android.
-<em>最后更新: 2026-05-09</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/gkd-kit/gkd" rel="noopener noreferrer" target="_blank">gkd-kit/gkd</a></strong> ⭐ 38.4k
-基于无障碍，高级选择器，订阅规则的自定义屏幕点击安卓应用 | An Android APP with custom screen tapping based on Accessibility, Advanced Selectors, and Subscription Rules
-<em>最后更新: 2026-05-09</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/AChep/keyguard-app" rel="noopener noreferrer" target="_blank">AChep/keyguard-app</a></strong> ⭐ 2.8k
-Alternative client for the Bitwarden® platform &#x26; KeePass (KDBX), created to provide the best user experience possible.
-<em>最后更新: 2026-05-09</em></p>
+<p><strong><a href="https://github.com/rikkahub/rikkahub" rel="noopener noreferrer" target="_blank">rikkahub/rikkahub</a></strong> ⭐ 4.5k
+RikkaHub is an Android APP that supports for multiple LLM providers.
+<em>最后更新: 2026-05-10</em></p>
 </li>
 </ul>
 <hr>
-<h2 id="rust-3">Rust (3)</h2>
+<h2 id="php-1">PHP (1)</h2>
 <ul>
-<li>
-<p><strong><a href="https://github.com/zed-industries/zed" rel="noopener noreferrer" target="_blank">zed-industries/zed</a></strong> ⭐ 82.3k
-Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter.
-<em>最后更新: 2026-05-09</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/openai/codex" rel="noopener noreferrer" target="_blank">openai/codex</a></strong> ⭐ 81.3k
-Lightweight coding agent that runs in your terminal
-<em>最后更新: 2026-05-09</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/jdx/mise" rel="noopener noreferrer" target="_blank">jdx/mise</a></strong> ⭐ 28.0k
+<li><strong><a href="https://github.com/FreshRSS/FreshRSS" rel="noopener noreferrer" target="_blank">FreshRSS/FreshRSS</a></strong> ⭐ 15.0k
+A free, self-hostable news aggregator…
+<em>最后更新: 2026-05-10</em></li>
+</ul>
+<hr>
+<h2 id="python-1">Python (1)</h2>
+<ul>
+<li><strong><a href="https://github.com/jxxghp/MoviePilot" rel="noopener noreferrer" target="_blank">jxxghp/MoviePilot</a></strong> ⭐ 11.0k
+NAS 媒体库自动化管理工具
+<em>最后更新: 2026-05-10</em></li>
+</ul>
+<hr>
+<h2 id="rust-1">Rust (1)</h2>
+<ul>
+<li><strong><a href="https://github.com/jdx/mise" rel="noopener noreferrer" target="_blank">jdx/mise</a></strong> ⭐ 28.0k
 dev tools, env vars, task runner
-<em>最后更新: 2026-05-09</em></p>
+<em>最后更新: 2026-05-10</em></li>
+</ul>
+<hr>
+<h2 id="typescript-3">TypeScript (3)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/openclaw/openclaw" rel="noopener noreferrer" target="_blank">openclaw/openclaw</a></strong> ⭐ 370.5k
+Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞
+<em>最后更新: 2026-05-10</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/anomalyco/opencode" rel="noopener noreferrer" target="_blank">anomalyco/opencode</a></strong> ⭐ 157.9k
+The open source coding agent.
+<em>最后更新: 2026-05-10</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/EKKOLearnAI/hermes-web-ui" rel="noopener noreferrer" target="_blank">EKKOLearnAI/hermes-web-ui</a></strong> ⭐ 4.3k
+Web dashboard for Hermes Agent — multi-platform AI chat, session management, scheduled jobs, usage analytics
+<em>最后更新: 2026-05-10</em></p>
 </li>
 </ul>
 <hr>
-<h2 id="typescript-4">TypeScript (4)</h2>
+<h2 id="vue-1">Vue (1)</h2>
 <ul>
-<li>
-<p><strong><a href="https://github.com/openclaw/openclaw" rel="noopener noreferrer" target="_blank">openclaw/openclaw</a></strong> ⭐ 370.2k
-Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞
-<em>最后更新: 2026-05-09</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/anomalyco/opencode" rel="noopener noreferrer" target="_blank">anomalyco/opencode</a></strong> ⭐ 157.5k
-The open source coding agent.
-<em>最后更新: 2026-05-09</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/karakeep-app/karakeep" rel="noopener noreferrer" target="_blank">karakeep-app/karakeep</a></strong> ⭐ 25.0k
-A self-hostable bookmark-everything app (links, notes and images) with AI-based automatic tagging and full text search
-<em>最后更新: 2026-05-09</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/EKKOLearnAI/hermes-web-ui" rel="noopener noreferrer" target="_blank">EKKOLearnAI/hermes-web-ui</a></strong> ⭐ 4.2k
-Web dashboard for Hermes Agent — multi-platform AI chat, session management, scheduled jobs, usage analytics &#x26; channel configuration (Telegram, Discord, Slack, WhatsApp)
-<em>最后更新: 2026-05-09</em></p>
-</li>
+<li><strong><a href="https://github.com/miantiao-me/Sink" rel="noopener noreferrer" target="_blank">miantiao-me/Sink</a></strong> ⭐ 6.6k
+⚡ A Simple / Speedy / Secure Link Shortener with Analytics, 100% run on Cloudflare.
+<em>最后更新: 2026-05-10</em></li>
 </ul>
 <hr>
 <h2 id="-说明">📖 说明</h2>
