@@ -25,13 +25,13 @@
 #mise </a><a href="/blog/tag/UniGetUI" data-astro-prefetch="true" data-astro-cid-lga65v7i="true" data-astro-cid-blwjyjpt="true" class="tag tag--interactive"> 
 #UniGetUI </a><a href="/blog/tag/rikkahub" data-astro-prefetch="true" data-astro-cid-lga65v7i="true" data-astro-cid-blwjyjpt="true" class="tag tag--interactive"> 
 #rikkahub </a><a href="/blog/tag/3x-ui" data-astro-prefetch="true" data-astro-cid-lga65v7i="true" data-astro-cid-blwjyjpt="true" class="tag tag--interactive"> 
-#3x-ui </a></div> </div> <div class="article-meta" data-astro-cid-bvzihdzo> <time datetime="2026-05-14T08:00:00.000Z" class="meta-item" data-astro-cid-bvzihdzo> 2026年5月14日 </time> <span class="meta-item" data-astro-cid-bvzihdzo>6 分钟阅读</span> </div> </div> </header> <!-- Content --> <div class="article-content app-prose" data-astro-cid-bvzihdzo>  <h2 id="2026-05-14-更新摘要">2026-05-14 更新摘要</h2>
+#3x-ui </a></div> </div> <div class="article-meta" data-astro-cid-bvzihdzo> <time datetime="2026-05-14T08:00:00.000Z" class="meta-item" data-astro-cid-bvzihdzo> 2026年5月14日 </time> <span class="meta-item" data-astro-cid-bvzihdzo>9 分钟阅读</span> </div> </div> </header> <!-- Content --> <div class="article-content app-prose" data-astro-cid-bvzihdzo>  <h2 id="2026-05-14-更新摘要">2026-05-14 更新摘要</h2>
 <p><strong>统计信息</strong></p>
 <ul>
 <li>由 DeepSeek V4 Flash (15) 总结</li>
 <li>监控仓库: 8 个</li>
 <li>今日更新: 11 个项目 (15 个版本)</li>
-<li>生成时间: 2026-05-15 12:25:39 (北京时间)</li>
+<li>生成时间: 2026-05-15 12:29:54 (北京时间)</li>
 </ul>
 <h3 id="zed-industrieszed-v123-deepseek-v4-flash"><a href="https://github.com/zed-industries/zed/releases/tag/v1.2.3" rel="noopener noreferrer" target="_blank">zed-industries/zed v1.2.3</a> <sup>DeepSeek V4 Flash</sup></h3>
 <p><strong>新内容</strong></p>
@@ -49,6 +49,16 @@
 <li>修复 Agent 配置忽略用户对工具的禁用设置</li>
 <li>减少 Linux GPU 恢复时的崩溃率</li>
 <li>修复缓冲区搜索中全部替换的性能问题</li>
+<li>修复 Zed CLI diff 不存在文件时的内存泄漏</li>
+<li>修复 Wayland 下可能出现的图形损坏</li>
+<li>修复 WSL 远程项目中创建 git worktree 的问题</li>
+<li>修复 inotify 事件队列在 Linux 上溢出问题</li>
+<li>修复 Windows 关闭设置窗口时的崩溃</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>移除已弃用的 Vercel v0 provider</li>
+<li>Ruby 文件默认禁用 fuzzy-ruby-server</li>
 </ul>
 <h3 id="jdxmise-v202657-deepseek-v4-flash"><a href="https://github.com/jdx/mise/releases/tag/v2026.5.7" rel="noopener noreferrer" target="_blank">jdx/mise v2026.5.7</a> <sup>DeepSeek V4 Flash</sup></h3>
 <p><strong>新内容</strong></p>
@@ -98,16 +108,53 @@
 <li>修复消息气泡样式和边距不一致的问题</li>
 </ul>
 <h3 id="mhsanaei3x-ui-v302-deepseek-v4-flash"><a href="https://github.com/MHSanaei/3x-ui/releases/tag/v3.0.2" rel="noopener noreferrer" target="_blank">MHSanaei/3x-ui v3.0.2</a> <sup>DeepSeek V4 Flash</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增 API Token 显示在安装输出中</li>
+<li>表格添加编辑按钮，增强布局</li>
+<li>JSON 编辑器替换为 CodeMirror 6</li>
+<li>设置和 Xray 标签栏合并为均匀分布图标</li>
+<li>节点页移动端卡片列表和信息弹窗优化</li>
+<li>新增 API 文档页面，支持多命名 Token 管理</li>
+<li>路由规则支持拖拽排序，支持移动端卡片布局</li>
+<li>新增 Xray 监控面板，包含探测历史</li>
+<li>安全强化：会话管理、SSRF 防护、CSP nonce、CSRF 登出</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 Docker 端口映射问题</li>
+<li>修复路由规则在移动端拖拽不生效的问题</li>
+<li>修复 QR 码在不同主题下颜色不一致</li>
+<li>修复单个入站流量重置重置所有入站的问题</li>
+<li>修复 reality random target/sni 按钮不工作</li>
+<li>修复 2FA 启用时会话失效问题</li>
+<li>修复搜索用户后删除按钮消失的问题</li>
+<li>修复 Hysteria2 入站表单缺少 masquerade 配置</li>
+<li>修复自动续期未在入站配置中重新启用客户端</li>
+<li>修复流量写入器重启时冻结的问题</li>
+</ul>
 <h3 id="ekkolearnaihermes-web-ui-v0520---v0522-deepseek-v4-flash"><a href="https://github.com/EKKOLearnAI/hermes-web-ui/releases" rel="noopener noreferrer" target="_blank">EKKOLearnAI/hermes-web-ui v0.5.20 - v0.5.22</a> <sup>DeepSeek V4 Flash</sup></h3>
 <p><strong>新内容</strong></p>
 <ul>
 <li>优化体积，highlight.js 与 i18n 按需加载</li>
 <li>新增繁体中文（zh-TW 和 zh-HK）Edge TTS 语音选项</li>
+<li>新增 Skills Usage 监控页面，包含每日趋势图和热门技能统计</li>
+<li>新增 CLI Chat Session Bridge，通过 Python Agent Bridge 实现 WebSocket 会话</li>
+<li>新增 Ollama Cloud 供应商预设，支持动态模型目录</li>
+<li>支持模型别名和模型可见性管理</li>
+<li>改进用量分析仪表盘</li>
+<li>Docker 单容器部署，合并双容器为单容器</li>
 </ul>
 <p><strong>问题修复</strong></p>
 <ul>
 <li>恢复 Hermes 会话历史列表功能</li>
 <li>修复自动更新重启问题</li>
+<li>修复群聊上下文压缩时误删 hermes session 的问题</li>
+<li>修复 SkillsUsage 页面 header 高度不一致</li>
+<li>修复插件页面 Python bridge 缺少 HERMES_HOME 环境变量的问题</li>
+<li>修复 profile show 输出中字段解析失败的问题</li>
+<li>修复非默认 profile 下的 fallback 警告</li>
+<li>修复 dev 模式重启时网关稳定性问题</li>
 </ul>
 <h3 id="groupultratelegram-search-v126-deepseek-v4-flash"><a href="https://github.com/groupultra/telegram-search/releases/tag/v1.2.6" rel="noopener noreferrer" target="_blank">groupultra/telegram-search v1.2.6</a> <sup>DeepSeek V4 Flash</sup></h3>
 <p><strong>问题修复</strong></p>
@@ -135,26 +182,30 @@
 <li>v2 模型和提供者调用新增 instance.directory 和 workspace 查询支持</li>
 <li>新增 v2 模型和提供者列表 API</li>
 <li>新增 DigitalOcean OAuth 和推理路由器支持</li>
+<li>无配置时自动创建全局 opencode.jsonc</li>
 <li>添加固定最近会话、快速槽位和会话循环功能</li>
 <li>添加 Ctrl/Cmd+ 数字快捷键切换项目</li>
-<li>无配置时自动创建全局 opencode.jsonc</li>
+<li>解析补丁 diff 中的围栏 Markdown 代码块</li>
+<li>自动补全配置的 @提及</li>
 </ul>
 <p><strong>问题修复</strong></p>
 <ul>
 <li>保持 HTTP 事件流在初始连接后开启，确保订阅者接收实例更新</li>
 <li>当会话正在运行提示或 Shell 工作时返回正确的繁忙错误</li>
-<li>无效 small_model 配置值现在会优雅降级而非破坏选择</li>
+<li>无效 small_model 配置值会优雅降级而非破坏选择</li>
 <li>改进 CLI 和类型调用者的缺失模型错误提示与建议</li>
-<li>修复宽字符的提示光标移动和提及问题</li>
-<li>防止重复提交创建空幻象会话</li>
+<li>恢复非交互式 run 退出行为</li>
 <li>减少切换工作区时的闪烁</li>
 <li>修复流式 Markdown 被截断的问题</li>
+<li>防止重复提交创建空幻象会话</li>
+<li>修复宽字符的提示光标移动和提及问题</li>
 <li>配置合并时保留分层权限规则顺序</li>
+<li>修复桌面端关闭当前项目时打开下一个可用项目</li>
 </ul>
 <h3 id="alyssaxuuscreenity-v443---v444-deepseek-v4-flash"><a href="https://github.com/alyssaxuu/screenity/releases" rel="noopener noreferrer" target="_blank">alyssaxuu/screenity v4.4.3 - v4.4.4</a> <sup>DeepSeek V4 Flash</sup></h3>
 <p><strong>新内容</strong></p>
 <ul>
-<li>Linux Chrome 录制改用 WebCodecs 路径，替代 MediaRecorder +</li>
+<li>Linux Chrome 录制改用 WebCodecs 路径，替代 MediaRecorder + ffmpeg 转换</li>
 </ul>
 <p><strong>问题修复</strong></p>
 <ul>
@@ -170,6 +221,8 @@
 <li>书签重命名为锚点，支持跨笔记链接</li>
 <li>重新引入 LLM 聊天功能，支持侧边栏工具</li>
 <li>自定义字典现在可在实例间同步</li>
+<li>Markdown 基础支持，支持预览和同步滚动</li>
+<li>新增 Linux AppImage 部署支持</li>
 </ul>
 <p><strong>问题修复</strong></p>
 <ul>
@@ -177,12 +230,19 @@
 <li>修复子笔记网格不清除浮动元素的问题</li>
 <li>修复打开标签页在后台加载导致的性能影响</li>
 <li>修复减少动画激活时保存指示器不消失的问题</li>
+<li>修复 canvas 笔记崩溃全文搜索的问题</li>
+<li>修复深色模式下设置文本难以阅读的问题</li>
+<li>修复 PDF 预览在软件更新间因缓存失败的问题</li>
+<li>修复 Linux Wayland 无法打印或导出 PDF</li>
+<li>修复中文文件名导入后乱码的问题</li>
+<li>修复大量输入延迟和 UI 冻结的性能问题</li>
 </ul>
 <p><strong>Breaking Changes</strong></p>
 <ul>
-<li>数据库和同步版本升级，桌面端和服务端需升级才能同步</li>
-<li>后端脚本移除 api.axios，已弃用超过两年</li>
+<li>数据库和同步版本升级，桌面端和服务端需同步升级</li>
+<li>后端脚本移除 api.axios（已弃用超过两年）</li>
 <li>Windows 二进制文件证书升级可能导致 SmartScreen 警告</li>
+<li>api.cheerio 已标记为弃用，推荐使用 node-html-parser</li>
 </ul>
 <p><strong>帮助我们改进</strong></p>
 <p>对今日摘要质量有建议？欢迎反馈！</p>
