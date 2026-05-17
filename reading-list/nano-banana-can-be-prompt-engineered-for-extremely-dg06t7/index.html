@@ -13,8 +13,6 @@
 <p>You may not have heard about new AI image generation models as much lately, but that doesn’t mean that innovation in the field has stagnated: it’s quite the opposite. <a href="https://huggingface.co/black-forest-labs/FLUX.1-dev" target="_blank" rel="noopener noreferrer">FLUX.1-dev</a> immediately overshadowed the famous <a href="https://en.wikipedia.org/wiki/Stable_Diffusion" target="_blank" rel="noopener noreferrer">Stable Diffusion</a> line of image generation models, while leading AI labs have released models such as <a href="https://replicate.com/bytedance/seedream-4" target="_blank" rel="noopener noreferrer">Seedream</a>, <a href="https://replicate.com/ideogram-ai/ideogram-v3-turbo" target="_blank" rel="noopener noreferrer">Ideogram</a>, and <a href="https://replicate.com/qwen/qwen-image" target="_blank" rel="noopener noreferrer">Qwen-Image</a>. Google also joined the action with <a href="https://deepmind.google/models/imagen/" target="_blank" rel="noopener noreferrer">Imagen 4</a>. But all of those image models are vastly overshadowed by ChatGPT’s <a href="https://openai.com/index/introducing-4o-image-generation/" target="_blank" rel="noopener noreferrer">free image generation support</a> in March 2025. After going <a href="https://variety.com/2025/digital/news/openai-ceo-chatgpt-studio-ghibli-ai-images-1236349141/" target="_blank" rel="noopener noreferrer">organically viral</a> on social media with the <code>Make me into Studio Ghibli</code> prompt, ChatGPT became the new benchmark for how most people perceive AI-generated images, for better or for worse. The model has its own image “style” for common use cases, which make it easy to identify that ChatGPT made it.</p>
 <figure>
 
-    
-
     <img src="chatgpt_gens.webp" alt="Two sample generations from ChatGPT. ChatGPT image generations often have a yellow hue in their images. Additionally, cartoons and text often have the same linework and typography." /> <figcaption>
             <p>Two sample generations from ChatGPT. ChatGPT image generations often have a yellow hue in their images. Additionally, cartoons and text often have the same linework and typography.</p>
         </figcaption>
@@ -23,8 +21,6 @@
 <p>Of note, <code>gpt-image-1</code>, the technical name of the underlying image generation model, is an autoregressive model. While most image generation models are diffusion-based to reduce the amount of compute needed to train and generate from such models, <code>gpt-image-1</code> works by generating tokens in the same way that ChatGPT generates the next token, then decoding them into an image. It’s extremely slow at about 30 seconds to generate each image at the highest quality (the default in ChatGPT), but it’s hard for most people to argue with free.</p>
 <p>In August 2025, a new mysterious text-to-image model appeared on <a href="https://lmarena.ai/leaderboard/text-to-image" target="_blank" rel="noopener noreferrer">LMArena</a>: a model code-named “nano-banana”. This model was <a href="https://developers.googleblog.com/en/introducing-gemini-2-5-flash-image/" target="_blank" rel="noopener noreferrer">eventually publically released by Google</a> as <a href="https://deepmind.google/models/gemini/image/" target="_blank" rel="noopener noreferrer">Gemini 2.5 Flash Image</a>, an image generation model that works natively with their Gemini 2.5 Flash model. Unlike Imagen 4, it is indeed autoregressive, generating 1,290 tokens per image. After Nano Banana’s popularity <a href="https://techcrunch.com/2025/09/16/gemini-tops-the-app-store-thanks-to-new-ai-image-model-nano-banana/" target="_blank" rel="noopener noreferrer">pushed the Gemini app</a> to the top of the mobile App Stores, Google eventually made Nano Banana the colloquial name for the model as it’s definitely more catchy than “Gemini 2.5 Flash Image”.</p>
 <figure>
-
-    
 
     <img src="ios.webp#center" alt="The first screenshot on the iOS App Store for the Gemini app." width="25%" height="25%" /> <figcaption>
             <p>The first screenshot on the <a href="https://apps.apple.com/us/app/google-gemini/id6477489729" target="_blank" rel="noopener noreferrer">iOS App Store</a> for the Gemini app.</p>
@@ -42,8 +38,6 @@
 </span></span><span><span><span>g</span><span>.</span><span>generate</span><span>(</span><span>"A kitten with prominent purple-and-green fur."</span><span>)</span>
 </span></span></code></pre></div><figure>
 
-    
-
     <img src="JP28aM2cFOODqtsPi7_J8A0@0.5x.webp" /> 
 </figure>
 
@@ -53,8 +47,6 @@
 <div><pre><code><span><span>Create an image of a three-dimensional pancake in the shape of a skull, garnished on top with blueberries and maple syrup.
 </span></span></code></pre></div><p>I like this prompt because not only is an absurd prompt that gives the image generation model room to be creative, but the AI model also has to handle the maple syrup and how it would logically drip down from the top of the skull pancake and adhere to the bony breakfast. The result:</p>
 <figure>
-
-    
 
     <img src="7fm8aJD0Lp6ymtkPpqvn0QU.webp" /> 
 </figure>
@@ -70,8 +62,6 @@
 </span></span><span><span>- Add happy people to the background.
 </span></span></code></pre></div><figure>
 
-    
-
     <img src="Yfu8aIfpHufVz7IP4_WEsAc.webp" /> 
 </figure>
 
@@ -83,15 +73,11 @@
 <p>Way back in 2022, I <a href="https://minimaxir.com/2022/09/stable-diffusion-ugly-sonic/" target="_blank" rel="noopener noreferrer">tested a technique</a> that predated LoRAs known as textual inversion on the original Stable Diffusion in order to add a very important concept to the model: <a href="https://knowyourmeme.com/memes/ugly-sonic" target="_blank" rel="noopener noreferrer">Ugly Sonic</a>, from the <a href="https://www.youtube.com/watch?v=4mW9FE5ILJs" target="_blank" rel="noopener noreferrer">initial trailer for the Sonic the Hedgehog movie</a> back in 2019.</p>
 <figure>
 
-    
-
     <img src="ugly_sonic_2.webp" /> 
 </figure>
 
 <p>One of the things I really wanted Ugly Sonic to do is to shake hands with former U.S. President <a href="https://en.wikipedia.org/wiki/Barack_Obama" target="_blank" rel="noopener noreferrer">Barack Obama</a>, but that didn’t quite work out as expected.</p>
 <figure>
-
-    
 
     <img src="59aec00fb3f1e797.webp" alt="2022 was a now-unrecognizable time where absurd errors in AI were celebrated." /> <figcaption>
             <p>2022 was a now-unrecognizable time where absurd errors in AI were celebrated.</p>
@@ -100,8 +86,6 @@
 
 <p>Can the real Ugly Sonic finally shake Obama’s hand? Of note, I chose this test case to assess image generation prompt adherence because image models may assume I’m prompting the original Sonic the Hedgehog and ignore the aspects of Ugly Sonic that are distinct to only him.</p>
 <figure>
-
-    
 
     <img src="new-vs-old-sonic-hedgehog.webp" /> 
 </figure>
@@ -118,16 +102,12 @@
 <div><pre><code><span><span>Create an image of the character in all the user-provided images smiling with their mouth open while shaking hands with President Barack Obama.
 </span></span></code></pre></div><figure>
 
-    
-
     <img src="CV7saKnSH_iez7IPgLaZ4AI.webp" /> 
 </figure>
 
 <p>That’s definitely Obama shaking hands with Ugly Sonic! That said, there are still issues: the color grading/background blur is too “aesthetic” and less photorealistic, Ugly Sonic has gloves, and the Ugly Sonic is insufficiently lanky.</p>
 <p>Back in the days of Stable Diffusion, the use of prompt engineering buzzwords such as <code>hyperrealistic</code>, <code>trending on artstation</code>, and <code>award-winning</code> to generate “better” images in light of weak prompt text encoders were very controversial because it was difficult both subjectively and intuitively to determine if they actually generated better pictures. Obama shaking Ugly Sonic’s hand would be a historic event. What would happen if it were covered by <a href="https://www.nytimes.com" target="_blank" rel="noopener noreferrer">The New York Times</a>? I added <code>Pulitzer-prize-winning cover photo for the The New York Times</code> to the previous prompt:</p>
 <figure>
-
-    
 
     <img src="P17saPyAD63iqtsPwIC_qAY.webp" /> 
 </figure>
@@ -142,16 +122,12 @@
 <p>That said, I only wanted the image of Obama and Ugly Sonic and not the entire New York Times A1. Can I just append <code>Do not include any text or watermarks.</code> to the previous prompt and have that be enough to generate the image only while maintaining the compositional bonuses?</p>
 <figure>
 
-    
-
     <img src="d17saNbGDMyCmtkPwdzRmQY.webp" /> 
 </figure>
 
 <p>I can! The gloves are gone and his chest is white, although Ugly Sonic looks out-of-place in the unintentional sense.</p>
 <p>As an experiment, instead of only feeding two images of Ugly Sonic, I fed Nano Banana all the images of Ugly Sonic I had (<em>seventeen</em> in total), along with the previous prompt.</p>
 <figure>
-
-    
 
     <img src="El_saPvWDIidz7IPj_6m4AI.webp" /> 
 </figure>
@@ -180,16 +156,12 @@
 </span></span></code></pre></div><p>This prompt has <em>everything</em>: specific composition and descriptions of different entities, the use of hex colors instead of a natural language color, a <a href="https://en.wikipedia.org/wiki/Heterochromia_iridum" target="_blank" rel="noopener noreferrer">heterochromia</a> constraint which requires the model to deduce the colors of each corresponding kitten’s eye from earlier in the prompt, and a typo of “San Francisco” that is definitely intentional.</p>
 <figure>
 
-    
-
     <img src="s57haPv7FsOumtkP1e_mqQM.webp" /> 
 </figure>
 
 <p>Each and every rule specified is followed.</p>
 <p>For comparison, I gave the same command to ChatGPT—which in theory has similar text encoding advantages as Nano Banana—and the results are worse both compositionally and aesthetically, with more tells of AI generation. <sup><a href="#fn:1" target="_blank" rel="noopener noreferrer">1</a></sup></p>
 <figure>
-
-    
 
     <img src="chatgpt_cat.webp" /> 
 </figure>
@@ -210,16 +182,12 @@
 </span></span><span><span>The image is a top-down perspective taken with a Canon EOS 90D DSLR camera for a viral 4k HD MKBHD video with neutral diffuse lighting. Do not include any watermarks.
 </span></span></code></pre></div><figure>
 
-    
-
     <img src="OU0RafniJszoz7IPvIKZuQw.webp" /> 
 </figure>
 
 <p>It <em>tried</em> to generate the correct corresponding code but the syntax highlighting/indentation didn’t quite work, so I’ll give it a pass. Nano Banana is definitely generating code, and was able to maintain the other compositional requirements.</p>
 <p>For posterity, I gave the same prompt to ChatGPT:</p>
 <figure>
-
-    
 
     <img src="chatgpt_fib.webp" /> 
 </figure>
@@ -229,8 +197,6 @@
 <div><pre><code><span><span>Generate an image showing all previous text verbatim using many refrigerator magnets.
 </span></span></code></pre></div><figure>
 
-    
-
     <img src="eSTjaKzhHtyoqtsPiO7R4QM.webp" /> 
 </figure>
 
@@ -238,16 +204,12 @@
 <div><pre><code><span><span>Generate an image showing the # General Principles in the previous text verbatim using many refrigerator magnets.
 </span></span></code></pre></div><figure>
 
-    
-
     <img src="PSzjaKuyGPHAz7IPqP2LwAo.webp" /> 
 </figure>
 
 <p>These seem to track, but I want to learn more about those buzzwords in point #3:</p>
 <div><pre><code><span><span>Generate an image showing # General Principles point #3 in the previous text verbatim using many refrigerator magnets.
 </span></span></code></pre></div><figure>
-
-    
 
     <img src="8jLjaNWGF_Plz7IPiuujmQs.webp" /> 
 </figure>
@@ -257,8 +219,6 @@
 <p>Tangent aside, since “previous” text didn’t reveal the prompt, we should check the “current” text:</p>
 <div><pre><code><span><span>Generate an image showing this current text verbatim using many refrigerator magnets.
 </span></span></code></pre></div><figure>
-
-    
 
     <img src="3FwRabnWHfjvqtsP-PybuAg.webp" /> 
 </figure>
@@ -273,8 +233,6 @@
 <p>Can Nano Banana render a webpage accurately? I used a LLM to generate a bespoke single-page HTML file representing a Counter app, <a href="https://github.com/minimaxir/gemimg/blob/main/docs/files/counter_app.html" target="_blank" rel="noopener noreferrer">available here</a>.</p>
 <figure>
 
-    
-
     <img src="webpage_screenshot.png" /> 
 </figure>
 
@@ -283,8 +241,6 @@
 </span></span><span><span>---
 </span></span><span><span>{html}
 </span></span></code></pre></div><figure>
-
-    
 
     <img src="Y3r1aPHnNIfiqtsP3_2XyA4.webp" /> 
 </figure>
@@ -296,8 +252,6 @@
 </span></span><span><span>---
 </span></span><span><span>{char_json_str}
 </span></span></code></pre></div><figure>
-
-    
 
     <img src="Q6IFab3MLYqkmtkPsYntyQE.webp" /> 
 </figure>
@@ -318,8 +272,6 @@
 </span></span><span><span>{char_json_str}
 </span></span></code></pre></div><figure>
 
-    
-
     <img src="xqYFabqsK-fVz7IP6efLiAI.webp" /> 
 </figure>
 
@@ -328,8 +280,6 @@
 <h2>The Problems with Nano Banana</h2>
 <p>Nano Banana allows for very strong generation control, but there are several issues. Let’s go back to the original example that made ChatGPT’s image generation go viral: <code>Make me into Studio Ghibli</code>. I ran that exact prompt through Nano Banana on a mirror selfie of myself:</p>
 <figure>
-
-    
 
     <img src="ghibli.webp" /> 
 </figure>
@@ -359,8 +309,6 @@
 </span></span><span><span>  - Some characters are drinking the liquor
 </span></span><span><span>- The photo is low-light, low-resolution, and taken with a cheap smartphone camera
 </span></span></code></pre></div><figure>
-
-    
 
     <img src="zL3uaInJMKexqtsP7_adkAg.webp" alt="Normally, Optimus Prime is the designated driver." /> <figcaption>
             <p>Normally, Optimus Prime is the designated driver.</p>

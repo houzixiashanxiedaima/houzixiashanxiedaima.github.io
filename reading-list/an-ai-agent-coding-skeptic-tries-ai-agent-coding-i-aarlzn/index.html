@@ -28,8 +28,6 @@
 <p>With my <code>AGENTS.md</code> file set up, I did more research into proper methods of prompting agents to see if I was missing something that led to the poor performance from working with Sonnet 4.5.</p>
 <figure>
 
-    
-
     <img src="claude_docs.png" alt="From the Claude Code quickstart." /> <figcaption>
             <p>From the <a href="https://code.claude.com/docs/en/quickstart" target="_blank" rel="noopener noreferrer">Claude Code quickstart</a>.</p>
         </figcaption>
@@ -37,8 +35,6 @@
 
 <p>Anthropic’s prompt suggestions are simple, but you can’t give an LLM an open-ended question like that and expect the results <em>you</em> want! You, the user, are likely subconsciously picky, and there are always functional requirements that the agent won’t magically apply because it cannot read minds and behaves as a <a href="https://tvtropes.org/pmwiki/pmwiki.php/Main/LiteralGenie" target="_blank" rel="noopener noreferrer">literal genie</a>. My approach to prompting is to write the potentially-very-large individual prompt in its own Markdown file (which can be tracked in <code>git</code>), then tag the agent with that prompt and tell it to implement that Markdown file. Once the work is completed and manually reviewed, I manually commit the work to <code>git</code>, with the message referencing the specific prompt file so I have good internal tracking.</p>
 <figure>
-
-    
 
     <img src="implement.png" /> 
 </figure>
@@ -65,8 +61,6 @@
 <div><pre><code><span><span>Create a Hacker News-worthy FastAPI application using HTMX for interactivity and PicoCSS for styling to build a YouTube-themed application that leverages <span>`youtube_videos.db`</span> to create an interactive webpage that shows the top videos for each month, including embedded YouTube videos which can be clicked.
 </span></span></code></pre></div><figure>
 
-    
-
     <img src="yt_web_app.webp" /> 
 </figure>
 
@@ -82,8 +76,6 @@
 <p>As someone who primarily works in Python, what first caught my attention about Rust is the <a href="https://pyo3.rs/v0.28.2/" target="_blank" rel="noopener noreferrer">PyO3</a> crate: a crate that allows accessing Rust code through Python with all the speed and memory benefits that entails while the Python end-user is none-the-wiser. My first exposure to <code>pyo3</code> was the fast tokenizers in <a href="https://huggingface.co" target="_blank" rel="noopener noreferrer">Hugging Face</a> <a href="https://github.com/huggingface/tokenizers" target="_blank" rel="noopener noreferrer">tokenizers</a>, but many popular Python libraries now also use this pattern for speed, including <a href="https://github.com/ijl/orjson" target="_blank" rel="noopener noreferrer">orjson</a>, <a href="https://docs.pydantic.dev/latest/" target="_blank" rel="noopener noreferrer">pydantic</a>, and my favorite <a href="https://pola.rs" target="_blank" rel="noopener noreferrer">polars</a>. If agentic LLMs could now write both performant Rust code and leverage the <code>pyo3</code> bridge, that would be <em>extremely</em> useful for myself.</p>
 <p>I decided to start with a very simple project: a project that can take icons from an icon font file such as the ones provided by <a href="https://fontawesome.com" target="_blank" rel="noopener noreferrer">Font Awesome</a> and render them into images at any arbitrary resolution.</p>
 <figure>
-
-    
 
     <img src="icons_header.webp" /> 
 </figure>
@@ -123,16 +115,12 @@
 <p>When I used word clouds in Rust as my test case for LLM Rust knowledge, I had an ulterior motive: I <em>love</em> word clouds. Back in 2019, I open-sourced a Python package titled <a href="https://github.com/minimaxir/stylecloud" target="_blank" rel="noopener noreferrer">stylecloud</a>: a package built on top of Python’s word cloud, but with the added ability to add more color gradients and masks based on icons to easily conform it into shapes (sound familiar?)</p>
 <figure>
 
-    
-
     <img src="stylecloud_banner.png" /> 
 </figure>
 
 <p>However, stylecloud was hacky and fragile, and a number of features I wanted to add such as non-90-degree word rotation, transparent backgrounds, and SVG output flat-out were not possible to add due to its dependency on Python’s <a href="https://github.com/amueller/word_cloud" target="_blank" rel="noopener noreferrer">wordcloud</a>/<a href="https://matplotlib.org" target="_blank" rel="noopener noreferrer">matplotlib</a>, and also the package was really slow. The only way to add the features I wanted was to build something from scratch: Rust fit the bill.</p>
 <p>The pipeline was very similar to <code>icon-to-image</code> above: ask Opus 4.5 to fulfill a long list of constraints with the addition of Python bindings. But there’s another thing that I wanted to test that would be extremely useful if it worked: WebAssembly (WASM) output with <a href="https://crates.io/crates/wasm-bindgen" target="_blank" rel="noopener noreferrer">wasm-bindgen</a>. Rust code compiled to WASM allows it to be run in any modern web browser with the speed benefits intact: no dependencies needed, and therefore should be future-proof. However, there’s a problem: I would have to design an interface and I am not a front end person, and I say without hyperbole that for me, designing even a simple HTML/CSS/JS front end for a project is more stressful than training an AI. However, Opus 4.5 is able to take general guidelines and get it into something workable: I first told it to use Pico CSS and vanilla JavaScript and that was enough, but then I had an idea to tell it to use <a href="https://ui.shadcn.com" target="_blank" rel="noopener noreferrer">shadcn/ui</a> — a minimalistic design framework normally reserved for Web Components — along with screenshots from that website as examples. That also worked.</p>
 <figure>
-
-    
 
     <img src="wordcloud_rust_ui.webp" /> 
 </figure>
@@ -142,8 +130,6 @@
 <p><code>Create a music player in the terminal using Rust</code> was another Rust stress test I gave to LLMs: command line terminals can’t play audio, right? Turns out, it can with the <a href="https://crates.io/crates/rodio" target="_blank" rel="noopener noreferrer">rodio</a> crate. Given the success so far with Opus 4.5 I decided to make the tasks more difficult: terminals can play sound, but can it <em>compose</em> sound? So I asked Opus 4.5 to create a MIDI composer and playback DAW within a terminal, which worked. Adding features forced me to learn more about how MIDIs and <a href="https://en.wikipedia.org/wiki/SoundFont" target="_blank" rel="noopener noreferrer">SoundFonts</a> actually work, so it was also educational!</p>
 <figure>
 
-    
-
     <img src="miditui.webp" /> 
 </figure>
 
@@ -152,8 +138,6 @@
 <h3>ballin</h3>
 <p>One night — after a glass of wine — I had another idea: one modern trick with <a href="https://en.wikipedia.org/wiki/ASCII_art" target="_blank" rel="noopener noreferrer">ASCII art</a> is the use of <a href="https://www.unicode.org/charts/nameslist/c_2800.html" target="_blank" rel="noopener noreferrer">Braille unicode characters</a> to allow for <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2807089604" target="_blank" rel="noopener noreferrer">very high detail</a>. That reminded me of ball physics simulations, so what about building a full physics simulator also in the terminal? So I asked Opus 4.5 to create a terminal physics simulator with the <a href="https://rapier.rs" target="_blank" rel="noopener noreferrer">rapier</a> 2D physics engine and a detailed explanation of the Braille character trick: this time Opus did better and completed it in one-shot, so I spent more time making it colorful and <em>fun</em>. I pessimistically thought the engine would only be able to handle a few hundred balls: instead, the Rust codebase can handle over 10,000 logical balls!</p>
 <figure>
-
-    
 
     <img src="ballin.webp" alt="I explicitly prompted Opus to make the Colors button have a different color for each letter." /> <figcaption>
             <p>I explicitly prompted Opus to make the Colors button have a different color for each letter.</p>
@@ -167,8 +151,6 @@
 <p>Before I wrote my blog post about how I use LLMs, I wrote a tongue-in-cheek blog post titled <a href="https://minimaxir.com/2025/01/write-better-code/" target="_blank" rel="noopener noreferrer">Can LLMs write better code if you keep asking them to “write better code”?</a> which is exactly as the name suggests. It was an experiment to determine how LLMs interpret the ambiguous command “write better code”: in this case, it was to prioritize making the code more convoluted with more helpful features, but if instead given commands to optimize the code, it did make the code faster successfully albeit at the cost of significant readability. In software engineering, one of the greatest sins is <a href="https://stackify.com/premature-optimization-evil/" target="_blank" rel="noopener noreferrer">premature optimization</a>, where you sacrifice code readability and thus maintainability to chase performance gains that slow down development time and may not be worth it. Buuuuuuut with agentic coding, we implicitly accept that our interpretation of the code is fuzzy: could agents iteratively applying optimizations for the sole purpose of minimizing benchmark runtime — and therefore faster code in typical use cases if said benchmarks are representative — now actually be a good idea? People complain about how AI-generated code is slow, but if AI can now reliably generate <em>fast</em> code, that changes the debate.</p>
 <figure>
 
-    
-
     <img src="div255.png" alt="Multiplication and division are too slow for Opus 4.6." /> <figcaption>
             <p>Multiplication and division are too slow for Opus 4.6.</p>
         </figcaption>
@@ -178,8 +160,6 @@
 <p>This month, OpenAI announced their <a href="https://openai.com/index/introducing-the-codex-app/" target="_blank" rel="noopener noreferrer">Codex app</a> and my coworkers were asking questions. So I downloaded it, and as a test case for the GPT-5.2-Codex (high) model, I asked it to reimplement the <a href="https://umap-learn.readthedocs.io/en/latest/" target="_blank" rel="noopener noreferrer">UMAP algorithm</a> in Rust. UMAP is a dimensionality reduction technique that can take in a high-dimensional matrix of data and simultaneously cluster and visualize data in lower dimensions. However, it is a very computationally-intensive algorithm and the only tool that can do it quickly is NVIDIA’s <a href="https://github.com/rapidsai/cuml" target="_blank" rel="noopener noreferrer">cuML</a> which requires CUDA dependency hell. If I can create a UMAP package in Rust that’s superfast with minimal dependencies, that is an <em>massive</em> productivity gain for the type of work I do and can enable fun applications if fast enough.</p>
 <p>After OpenAI <a href="https://openai.com/index/introducing-gpt-5-3-codex/" target="_blank" rel="noopener noreferrer">released</a> GPT-5.3-Codex (high) which performed substantially better and faster at these types of tasks than GPT-5.2-Codex, I asked Codex to write a UMAP implementation from scratch in Rust, which at a glance seemed to work and gave reasonable results. I also instructed it to create benchmarks that test a wide variety of representative input matrix sizes. Rust has a popular benchmarking crate in <a href="https://crates.io/crates/criterion" target="_blank" rel="noopener noreferrer">criterion</a>, which outputs the benchmark results in an easy-to-read format, which, most importantly, agents can easily parse.</p>
 <figure>
-
-    
 
     <img src="criterion.png" alt="Example output from criterion." /> <figcaption>
             <p>Example output from <code>criterion</code>.</p>
@@ -199,8 +179,6 @@
 </ol>
 <p>The simultaneous constraints of code quality requirements via <code>AGENTS.md</code>, speed requirements with a quantifiable target objective, and an output accuracy/quality requirement, all do succeed at finding meaningful speedups consistently (atleast 2x-3x)</p>
 <figure>
-
-    
 
     <img src="pca_benchmark_codex.png" alt="Codex 5.3 after optimizing a principal component analysis implementation." /> <figcaption>
             <p>Codex 5.3 after optimizing a <a href="https://en.wikipedia.org/wiki/Principal_component_analysis" target="_blank" rel="noopener noreferrer">principal component analysis</a> implementation.</p>
@@ -225,8 +203,6 @@
 <p>But that’s unironically a good idea so I decided to try and do it anyways. With the use of agents, I am now developing <code>rustlearn</code> (extreme placeholder name), a Rust crate that implements not only the fast implementations of the standard machine learning algorithms such as <a href="https://en.wikipedia.org/wiki/Logistic_regression" target="_blank" rel="noopener noreferrer">logistic regression</a> and <a href="https://en.wikipedia.org/wiki/K-means_clustering" target="_blank" rel="noopener noreferrer">k-means clustering</a>, but also includes the fast implementations of the algorithms above: the same three step pipeline I describe above still works even with the more simple algorithms to beat scikit-learn’s implementations. This crate can therefore receive Python bindings and even expand to the Web/JavaScript and beyond. This also gives me the oppertunity to add quality-of-life features to resolve grievances I’ve had to work around as a data scientist, such as model serialization and native integration with pandas/polars DataFrames. I hope this use case is considered to be more practical and complex than making a ball physics terminal app.</p>
 <p>Many people reading this will call bullshit on the performance improvement metrics, and honestly, fair. I too thought the agents would stumble in hilarious ways trying, but they did not. To demonstrate that I am not bullshitting, I also decided to release a more simple Rust-with-Python-bindings project today: nndex, an in-memory vector “store” that is designed to retrieve the exact nearest neighbors as fast as possible (and has fast approximate NN too), and is now available <a href="https://github.com/minimaxir/nndex" target="_blank" rel="noopener noreferrer">open-sourced on GitHub</a>. This leverages the <a href="https://en.wikipedia.org/wiki/Dot_product" target="_blank" rel="noopener noreferrer">dot product</a> which is one of the simplest matrix ops and is therefore heavily optimized by existing libraries such as Python’s <a href="https://numpy.org" target="_blank" rel="noopener noreferrer">numpy</a>…and yet after a few optimization passes, it tied <code>numpy</code> even though <code>numpy</code> leverages <a href="https://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms" target="_blank" rel="noopener noreferrer">BLAS</a> libraries for maximum mathematical performance. Naturally, I instructed Opus to also add support for BLAS with more optimization passes and it now is 1-5x numpy’s speed in the single-query case and much faster with batch prediction. <sup><a href="#fn:3" target="_blank" rel="noopener noreferrer">3</a></sup> It’s so fast that even though I also added GPU support for testing, it’s mostly ineffective below 100k rows due to the GPU dispatch overhead being greater than the actual retrieval speed.</p>
 <figure>
-
-    
 
     <img src="nndex.png" alt="Comparison of Python nndex to numpy on test workloads.topk_overlap measures result matches (perfect match) and max_similarity_abs_delta measure the largest difference between calculated cosine similarities (effectively zero)." /> <figcaption>
             <p>Comparison of Python <code>nndex</code> to numpy on test workloads.<code>topk_overlap</code> measures result matches (perfect match) and <code>max_similarity_abs_delta</code> measure the largest difference between calculated cosine similarities (effectively zero).</p>

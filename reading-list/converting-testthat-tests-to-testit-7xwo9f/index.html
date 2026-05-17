@@ -219,6 +219,21 @@ if (identical(tolower(Sys.getenv("CI")), "true")) {
  int [1:3] 1 2 4
 &lt;== (RHS) y
 </code></pre>
+<p>Be cautious about the operator precedence: in R, infix operators like <code>%==%</code> bind tighter than common arithmetic and logical operators such as <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>&gt;</code>, <code>&lt;</code>, <code>==</code>, <code>&amp;</code>, and <code>|</code>, etc. When you use the latter operators in a <code>%==%</code> expression, you need <code>()</code> to guarantee precedence, e.g.,</p>
+<pre><code>(1 + 2 %==% 2 + 1)
+</code></pre>
+<p>is interpreted as</p>
+<pre><code>(1 + (2 %==% 2) + 1)
+# =&gt; (1 + TRUE + 1) =&gt; (1 + 1 + 1) =&gt; (3) =&gt; FAIL
+</code></pre>
+<p>and you must group the LHS and RHS explicitly by <code>()</code>:</p>
+<pre><code>((1 + 2) %==% (2 + 1))
+</code></pre>
+<p>which may look ugly and confusing, so you may want to compute LHS and RHS before the <code>()</code> test, e.g.,</p>
+<pre><code>res = 1 + 2
+expected = 2 + 1
+(res %==% expected)
+</code></pre>
 <h3>Snapshot tests</h3>
 <p><strong>testthat</strong> stores snapshots in <code>tests/testthat/_snaps/</code>. <strong>testit</strong> uses a simpler approach: just Markdown files like <code>tests/testit/test-name.md</code> alongside the <code>.R</code> test scripts.</p>
 <pre><code>## `function_name()` description (optional)

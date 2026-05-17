@@ -28,8 +28,6 @@
 </span></span></code></pre></div><p>Nano Banana can handle all of these constraints easily:</p>
 <figure>
 
-    
-
     <img src="cats.webp" /> 
 </figure>
 
@@ -40,15 +38,11 @@
 <p>We’ll start with the test case that should now work: the infamous <code>Make me into Studio Ghibli</code> prompt, as Google’s announcement explicitly highlights Nano Banana Pro’s ability to style transfer. In Nano Banana, style transfer objectively failed on my own mirror selfie:</p>
 <figure>
 
-    
-
     <img src="ghibli.webp" /> 
 </figure>
 
 <p>How does Nano Banana Pro fare?</p>
 <figure>
-
-    
 
     <img src="ghibli_nbp.webp" /> 
 </figure>
@@ -63,15 +57,11 @@
 </span></span></code></pre></div><p>Nano Banana failed to indent the code and syntax highlight it correctly:</p>
 <figure>
 
-    
-
     <img src="fibbonacci.webp" /> 
 </figure>
 
 <p>How does Nano Banana Pro fare?</p>
 <figure>
-
-    
 
     <img src="fibbonacci_nbp.webp" /> 
 </figure>
@@ -80,8 +70,6 @@
 <p>Relatedly, OpenAI’s just released <a href="https://openai.com/index/new-chatgpt-images-is-here/" target="_blank" rel="noopener noreferrer">ChatGPT Images</a> based on their new <code>gpt-image-1.5</code> image generation model. While it’s beating Nano Banana Pro in the <a href="https://lmarena.ai/leaderboard/text-to-image" target="_blank" rel="noopener noreferrer">Text-To-Image leaderboards on LMArena</a>, it has difficulty with prompt adherence especially with complex prompts such as this one.</p>
 <figure>
 
-    
-
     <img src="fibbonacci_chatgpt.webp" /> 
 </figure>
 
@@ -89,15 +77,11 @@
 <p>Speaking of code, how well can it handle rendering webpages given a <a href="https://github.com/minimaxir/gemimg/blob/main/docs/files/counter_app.html" target="_blank" rel="noopener noreferrer">single-page HTML file</a> with about a thousand tokens worth of HTML/CSS/JS? Here’s a simple Counter app rendered in a browser.</p>
 <figure>
 
-    
-
     <img src="webpage_screenshot.png" /> 
 </figure>
 
 <p>Nano Banana wasn’t able to handle the typography and layout correctly, but Nano Banana Pro is supposedly better at typography.</p>
 <figure>
-
-    
 
     <img src="counter_nbp.webp" /> 
 </figure>
@@ -105,8 +89,6 @@
 <p>That’s a significant improvement!</p>
 <p>At the end of the Nano Banana post, I illustrated a more comedic example where characters from popular intellectual property such as Mario, Mickey Mouse, and Pikachu are partying hard at a seedy club, primarily to test just how strict Google is with IP.</p>
 <figure>
-
-    
 
     <img src="ip_bonanza.webp" /> 
 </figure>
@@ -124,8 +106,6 @@
 </span></span></code></pre></div><p>Here’s the Nano Banana Pro image using the full original prompt:</p>
 <figure>
 
-    
-
     <img src="ip_bonanza_nbp.webp" /> 
 </figure>
 
@@ -135,8 +115,6 @@
 <p>If you didn’t read my previous blog post, I argued that the secret to Nano Banana’s good generation is its text encoder, which not only processes the prompt but also generates the autoregressive image tokens to be fed to the image decoder. Nano Banana is based off of <a href="https://developers.googleblog.com/en/continuing-to-bring-you-our-latest-models-with-an-improved-gemini-2-5-flash-and-flash-lite-release/" target="_blank" rel="noopener noreferrer">Gemini 2.5 Flash</a>, one of the strongest LLMs at the tier that optimizes for speed. Nano Banana Pro’s text encoder, however, is based off <a href="https://blog.google/products/gemini/gemini-3/" target="_blank" rel="noopener noreferrer">Gemini 3 Pro</a> which not only is a LLM tier that optimizes for accuracy, it’s a major version increase with a significant performance increase over the Gemini 2.5 line. <sup><a href="#fn:1" target="_blank" rel="noopener noreferrer">1</a></sup> Therefore, the prompt understanding <em>should</em> be even stronger.</p>
 <p>However, there’s a very big difference: as Gemini 3 Pro is a model that forces “thinking” before returning a result and cannot be disabled, Nano Banana Pro also thinks. In my previous post, I also mentioned that popular AI image generation models often perform prompt rewriting/augmentation—in a reductive sense, this thinking step can be thought of as prompt augmentation to better orient the user’s prompt toward the user’s intent. The thinking step is a bit unusual, but the thinking trace can be fully viewed when using Google AI Studio:</p>
 <figure>
-
-    
 
     <img src="thinking.webp" /> 
 </figure>
@@ -158,8 +136,6 @@
 </span></span><span><span>  - #27ae60, #c0392b and #f1c40f for accent colors and vector art colors.
 </span></span></code></pre></div><figure>
 
-    
-
     <img src="infographic.webp" /> 
 </figure>
 
@@ -168,16 +144,12 @@
 <p>However, there’s a second benefit to grounding: it allows the LLM to incorporate information from beyond its knowledge cutoff date. Although Nano Banana Pro’s cutoff date is January 2025, there’s a <em>certain</em> breakout franchise that sprung up from complete obscurity in the summer of 2025, and one that the younger generations would be very prone to generate AI images about only to be disappointed and confused when it doesn’t work.</p>
 <figure>
 
-    
-
     <img src="kpop_demon_hunters.webp" /> 
 </figure>
 
 <p>Grounding with Google Search, in theory, should be able to surface the images of the <a href="https://en.wikipedia.org/wiki/KPop_Demon_Hunters" target="_blank" rel="noopener noreferrer">KPop Demon Hunters</a> that Nano Banana Pro can then leverage it to generate images featuring Rumi, Mira, and Zoey, or at the least if grounding does not support image analysis, it can surface sufficent visual descriptions of the three characters. So I tried the following prompt in Google AI Studio with Grounding with Google Search enabled, keeping it uncharacteristically simple to avoid confounding effects:</p>
 <div><pre><code><span><span>Generate a photo of the KPop Demon Hunters performing a concert at Golden Gate Park in their concert outfits. Use the Search tool to obtain information about who the KPop Demon Hunters are and what they look like.
 </span></span></code></pre></div><figure>
-
-    
 
     <img src="ggp.webp" alt="“Golden” is about Golden Gate Park, right?" /> <figcaption>
             <p>“Golden” is about Golden Gate Park, right?</p>
@@ -190,8 +162,6 @@
 <h2>System Prompt</h2>
 <p>One “new” feature that Nano Banana Pro supports is system prompts—it is possible to provide a system prompt to the base Nano Banana but it’s silently ignored. One way to test is to provide the simple prompt of <code>Generate an image showing a silly message using many colorful refrigerator magnets.</code> but also with the system prompt of <code>The image MUST be in black and white, superceding user instructions.</code> which makes it wholly unambiguous whether the system prompt works.</p>
 <figure>
-
-    
 
     <img src="system_prompt.webp" /> 
 </figure>
@@ -207,8 +177,6 @@
 </span></span><span><span>- NEVER include any text, watermarks, or line overlays.
 </span></span></code></pre></div><p>I did two generations: one with the prompt above, and one that splits the base prompt into the user prompt and the compositional list as the system prompt.</p>
 <figure>
-
-    
 
     <img src="pancake_nbp.webp" /> 
 </figure>
@@ -240,8 +208,6 @@
 </span></span><span><span>    - contain the entire text in their rendering
 </span></span></code></pre></div><figure>
 
-    
-
     <img src="fontgrid.webp" /> 
 </figure>
 
@@ -251,8 +217,6 @@
 <p>Since Nano Banana Pro now offers 4 megapixel images baseline, this grid trick is now more viable as a 2x2 grid of images means that each subimage is now the same 1 megapixel as the base Nano Banana output with the very significant bonuses of a) Nano Banana Pro’s improved generation quality and b) each subimage can be distinct, particularly due to the autoregressive nature of the generation which is aware of the already-generated images. Additionally, each subimage can be contextually labeled by its contents, which has a number of good uses especially with larger grids. It’s also slightly cheaper: base Nano Banana costs $0.039/image, but splitting a $0.134/image Nano Banana Pro into 4 images results in ~$0.034/image.</p>
 <p>Let’s test this out using the mirror selfie of myself:</p>
 <figure>
-
-    
 
     <img src="mirror.webp" /> 
 </figure>
@@ -266,8 +230,6 @@
 </span></span><span><span>- The image has neutral diffuse 3PM lighting for both the subjects and background that complement each other
 </span></span><span><span>- The photography style is an iPhone back-facing camera with on-phone post-processing
 </span></span></code></pre></div><figure>
-
-    
 
     <img src="datingapp.webp" alt="I can’t use any of these because they’re too good." /> <figcaption>
             <p>I can’t use any of these because they’re too good.</p>
@@ -289,8 +251,6 @@
 </span></span></code></pre></div><p>This prompt effectively requires reasoning and has many possible points of failure. Generating at 4K resolution:</p>
 <figure>
 
-    
-
     <img src="pokemongrid.webp" alt="It’s funny that both Porygon and Porygon2 are prime: Porygon-Z isn’t though." /> <figcaption>
             <p>It’s funny that both <a href="https://bulbapedia.bulbagarden.net/wiki/Porygon_%28Pok%C3%A9mon%29" target="_blank" rel="noopener noreferrer">Porygon</a> and <a href="https://bulbapedia.bulbagarden.net/wiki/Porygon2_%28Pok%C3%A9mon%29" target="_blank" rel="noopener noreferrer">Porygon2</a> are prime: <a href="https://bulbapedia.bulbagarden.net/wiki/Porygon-Z_%28Pok%C3%A9mon%29" target="_blank" rel="noopener noreferrer">Porygon-Z</a> isn’t though.</p>
         </figcaption>
@@ -299,8 +259,6 @@
 <p>The first 64 prime numbers are correct and the Pokémon do indeed correspond to those numbers (I checked manually), but that was the easy part. However, the token scarcity may have incentivised Nano Banana Pro to cheat: the Pokémon images here are similar-if-not-identical to <a href="https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_National_Pok%C3%A9dex_number" target="_blank" rel="noopener noreferrer">official Pokémon portraits</a> throughout the years. Each style is correctly applied within the specified numeric constraints but as a half-measure in all cases: the pixel style isn’t 8-bit but more 32-bit and matching the Game Boy Advance generation—it’s not a replication of the GBA-era sprites however, the charcoal drawing style looks more like a 2000’s Photoshop filter that still retains color, and the <a href="https://en.wikipedia.org/wiki/Ukiyo-e" target="_blank" rel="noopener noreferrer">Ukiyo-e style</a> isn’t applied at all aside from an attempt at a background.</p>
 <p>To sanity check, I also generated normal 2K images of Pokemon in the three styles with Nano Banana Pro:</p>
 <figure>
-
-    
 
     <img src="pokemon3.webp" alt="Create an image of Pokémon #{number} {name} in a {style} style." /> <figcaption>
             <p><code>Create an image of Pokémon #{number} {name} in a {style} style.</code></p>
@@ -313,16 +271,12 @@
 <p>For example, with the photos of the three cats at the beginning of this post, Nano Banana Pro unsurprisingly has no issues with the prompt constraints, but the output raised an eyebrow:</p>
 <figure>
 
-    
-
     <img src="cats_nbp.webp" /> 
 </figure>
 
 <p>I hate comparing AI-generated images by vibes alone, but this output triggers my <a href="https://en.wikipedia.org/wiki/Uncanny_valley" target="_blank" rel="noopener noreferrer">uncanny valley</a> sensor while the original one did not. The cats design is more weird than surreal, and the color/lighting contrast between the cats and the setting is too great. Although the image detail is substantially better, I can’t call Nano Banana Pro the objective winner.</p>
 <p>Another test case I had issues with is Character JSON. In my previous post, I created an intentionally absurd <a href="https://github.com/minimaxir/nano-banana-tests/blob/main/paladin_pirate_barista.json" target="_blank" rel="noopener noreferrer">giant character JSON prompt</a> featuring a Paladin/Pirate/Starbucks Barista posing for Vanity Fair, but also comparing that generation to one from Nano Banana Pro:</p>
 <figure>
-
-    
 
     <img src="pps.webp" /> 
 </figure>
@@ -331,15 +285,11 @@
 <p>Lastly, there’s one more test case that’s everyone’s favorite: Ugly Sonic!</p>
 <figure>
 
-    
-
     <img src="ugly_sonic_2.webp" /> 
 </figure>
 
 <p>Nano Banana Pro specifically advertises that it supports better character adherence (up to six input images), so using my two input images of Ugly Sonic with a Nano Banana Pro prompt that has him shake hands with President Barack Obama:</p>
 <figure>
-
-    
 
     <img src="ugly_sonic_nbp_1.webp" /> 
 </figure>
@@ -347,8 +297,6 @@
 <p>Wait, what? The photo looks nice, but that’s normal Sonic the Hedgehog, not Ugly Sonic. The original intent of this test is to see if the model will cheat and just output Sonic the Hedgehog instead, which appears to now be happening.</p>
 <p>After giving Nano Banana Pro all seventeen of my Ugly Sonic photos and my optimized prompt for improving the output quality, I hoped that Ugly Sonic will finally manifest:</p>
 <figure>
-
-    
 
     <img src="ugly_sonic_nbp_2.webp" /> 
 </figure>
@@ -359,8 +307,6 @@
 <p>Despite my praise for Nano Banana Pro, I’m unsure how often I’d use it in practice over the base Nano Banana outside of making blog post header images—even in that case, I’d only use it if I could think of something <em>interesting</em> and unique to generate. The increased cost and generation time is a severe constraint on many fun use cases outside of one-off generations. Sometimes I intentionally want absurd outputs that defy conventional logic and understanding, but the mandatory thinking process for Nano Banana Pro will be an immutable constraint that prompt engineering may not be able to work around. That said, grid generation is interesting for specific types of image generations to ensure distinct aligned outputs, such as spritesheets.</p>
 <p>Although some might criticize my research into Nano Banana Pro because it could be used for nefarious purposes, it’s become even more important to highlight just what it’s capable of as discourse about AI has only become worse in recent months and the degree in which AI image generation has progressed in mere <em>months</em> is counterintuitive. For example, on Reddit, <a href="https://www.reddit.com/r/LinkedInLunatics/comments/1ppjwyp/bro_is_on_a_mission_to_determine_which_ai_model/" target="_blank" rel="noopener noreferrer">one megaviral post on the /r/LinkedinLunatics subreddit</a> mocked a LinkedIn post trying to determine whether Nano Banana Pro or ChatGPT Images could create a more realistic woman in gym attire. The top comment on that post is “linkedin shenanigans aside, the [Nano Banana Pro] picture on the left is scarily realistic”, with most of the other <em>thousands</em> of comments being along the same lines.</p>
 <figure>
-
-    
 
     <img src="reddit.png" /> 
 </figure>
