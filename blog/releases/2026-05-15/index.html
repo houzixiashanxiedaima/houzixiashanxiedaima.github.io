@@ -25,13 +25,13 @@
 #planning-with-files </a><a href="/blog/tag/zed" data-astro-prefetch="true" data-astro-cid-lga65v7i="true" data-astro-cid-blwjyjpt="true" class="tag tag--interactive"> 
 #zed </a><a href="/blog/tag/opencode" data-astro-prefetch="true" data-astro-cid-lga65v7i="true" data-astro-cid-blwjyjpt="true" class="tag tag--interactive"> 
 #opencode </a><a href="/blog/tag/MoviePilot" data-astro-prefetch="true" data-astro-cid-lga65v7i="true" data-astro-cid-blwjyjpt="true" class="tag tag--interactive"> 
-#MoviePilot </a></div> </div> <div class="article-meta" data-astro-cid-bvzihdzo> <time datetime="2026-05-15T08:00:00.000Z" class="meta-item" data-astro-cid-bvzihdzo> 2026年5月15日 </time> <span class="meta-item" data-astro-cid-bvzihdzo>8 分钟阅读</span> </div> </div> </header> <!-- Content --> <div class="article-content app-prose" data-astro-cid-bvzihdzo>  <h2 id="2026-05-15-更新摘要">2026-05-15 更新摘要</h2>
+#MoviePilot </a></div> </div> <div class="article-meta" data-astro-cid-bvzihdzo> <time datetime="2026-05-15T08:00:00.000Z" class="meta-item" data-astro-cid-bvzihdzo> 2026年5月15日 </time> <span class="meta-item" data-astro-cid-bvzihdzo>10 分钟阅读</span> </div> </div> </header> <!-- Content --> <div class="article-content app-prose" data-astro-cid-bvzihdzo>  <h2 id="2026-05-15-更新摘要">2026-05-15 更新摘要</h2>
 <p><strong>统计信息</strong></p>
 <ul>
-<li>由 DeepSeek V4 Flash (2), Qwen3.5 27B (6), GLM-4.7-Flash (8), 本地降级 (7) 总结</li>
-<li>监控仓库: 17 个</li>
+<li>由 DeepSeek V4 Flash (4), Qwen3 235B (Cerebras) (13), Qwen3.5 27B (6) 总结</li>
+<li>监控仓库: 13 个</li>
 <li>今日更新: 16 个项目 (23 个版本)</li>
-<li>生成时间: 2026-05-16 05:41:00 (北京时间)</li>
+<li>生成时间: 2026-05-18 11:09:50 (北京时间)</li>
 </ul>
 <h3 id="nextai-translatornextai-translator-v0615-deepseek-v4-flash"><a href="https://github.com/nextai-translator/nextai-translator/releases/tag/v0.6.15" rel="noopener noreferrer" target="_blank">nextai-translator/nextai-translator v0.6.15</a> <sup>DeepSeek V4 Flash</sup></h3>
 <p><strong>新内容</strong></p>
@@ -52,58 +52,61 @@
 <ul>
 <li>重写 OpenCode 会话恢复脚本，适配 SQLite 存储迁移</li>
 </ul>
-<h3 id="zed-industrieszed-v124---v126-glm-47-flash"><a href="https://github.com/zed-industries/zed/releases" rel="noopener noreferrer" target="_blank">zed-industries/zed v1.2.4 - v1.2.6</a> <sup>GLM-4.7-Flash</sup></h3>
+<h3 id="zed-industrieszed-v124---v126-qwen35-27b"><a href="https://github.com/zed-industries/zed/releases" rel="noopener noreferrer" target="_blank">zed-industries/zed v1.2.4 - v1.2.6</a> <sup>Qwen3.5 27B</sup></h3>
 <p><strong>新内容</strong></p>
 <ul>
-<li>支持通过 ChatGPT 订阅指定 OpenAI 模型的努力程度</li>
-<li>新增 ChatGPT 订阅提供商，支持使用 ChatGPT Plus/Pro 订阅配合 Zed ag</li>
-<li>为 OpenAI 提供商添加对 gpt-5.4-nano/mini 模型的支持</li>
-<li>提升使用 OpenAI 模型时的输出质量</li>
-<li>支持在使用 OpenAI 模型时指定努力级别</li>
+<li>新增通过 ChatGPT 订阅使用 OpenAI 模型时指定努力级别的支持</li>
+<li>新增 ChatGPT 订阅支持，可使用 ChatGPT Plus/Pro 账户</li>
+<li>支持 OpenAI 的 gpt-5.4-nano/mini 模型</li>
+<li>提升 OpenAI 模型输出质量</li>
+<li>支持为 OpenAI 模型指定努力程度</li>
 </ul>
 <p><strong>问题修复</strong></p>
 <ul>
-<li>修复 Vue 语言服务器请求中 body 不存在时未传递 null 的问题</li>
-<li>修复 Agent 面板设置视图打开时，按下 Cmd-N 无响应的问题</li>
-<li>修复因文件系统或语言服务器事件导致 Zed 取消监视大量路径从而引发高 CPU 使用率的问题</li>
-<li>修复 Agent 中当 limit_content_width=false 时消息编辑器被挤压的问题</li>
+<li>修复 Vue 语言服务器请求中主体不存在时始终传递 null 的问题</li>
+<li>修复了 Agent Panel 设置视图打开时，按 “新建线程” 或 Cmd-N 无响应的问题</li>
+<li>修复大量路径取消监听导致 CPU 占用过高问题</li>
+<li>修复 limit_content_width=false 时消息编辑器被压缩问题</li>
 </ul>
 <p><strong>Breaking Changes</strong></p>
 <ul>
 <li>移除已弃用的 OpenAI 模型</li>
 </ul>
-<h3 id="anomalycoopencode-v11451---v1150-glm-47-flash"><a href="https://github.com/anomalyco/opencode/releases" rel="noopener noreferrer" target="_blank">anomalyco/opencode v1.14.51 - v1.15.0</a> <sup>GLM-4.7-Flash</sup></h3>
+<h3 id="anomalycoopencode-v11451---v1150-qwen3-235b-cerebras"><a href="https://github.com/anomalyco/opencode/releases" rel="noopener noreferrer" target="_blank">anomalyco/opencode v1.14.51 - v1.15.0</a> <sup>Qwen3 235B (Cerebras)</sup></h3>
 <p><strong>新内容</strong></p>
 <ul>
-<li>新增基于 Effect 的核心事件系统，提升跨会话和集成的完整事件传递</li>
-<li>在 Linux 和 Windows 上自动隐藏菜单栏</li>
-<li>新增实验性后台子代理功能，支持任务后台运行</li>
-<li>为 NVIDIA 端点添加计费源站头信息</li>
-<li>集成 MCP 连接状态与直接重新认证流程</li>
+<li>新增基于 Effect 的核心事件系统，提升跨会话和集成的事件投递完整性</li>
+<li>自动隐藏 Linux 和 Windows 的菜单栏</li>
+<li>新增实验性后台子代理，支持任务后台运行</li>
+<li>添加 NVIDIA 端点所需计费来源头</li>
+<li>新增 MCP 连接状态及客户端认证重认证流程</li>
 </ul>
 <p><strong>问题修复</strong></p>
 <ul>
-<li>忽略自定义工具模块中的无效导出，防止工具加载失败</li>
-<li>忽略项目指令查找错误，确保项目指令发现失败时会话仍能加载</li>
-<li>修复版本化事件投影仪查找，确保事件重播使用正确的处理器</li>
-<li>修复存档状态未改变时存档会话被重新处理的问题</li>
+<li>忽略自定义工具模块中的无效导出，避免工具加载失败</li>
+<li>忽略项目指令查找错误，确保指令发现失败时会话仍可加载</li>
+<li>修复版本化事件投影器查找，确保事件重放使用正确的处理器</li>
+<li>修复归档会话被重复处理的问题</li>
 <li>恢复 JavaScript SDK 中缺失的事件类型，包括会话和消息事件</li>
-<li>修复工作树创建请求遗漏 POST 体的问题</li>
-<li>解决会话因助手消息中断而卡住的问题</li>
-<li>修复压缩后消息重排导致的重复自动压缩</li>
-<li>修正截断的 shell 输出流关闭逻辑</li>
-<li>恢复超大图片附件的自动调整大小功能</li>
+<li>修复工作区创建请求缺少 POST 体的问题</li>
+<li>修复会话取消后助手消息中断导致卡住的问题</li>
+<li>修复自动压缩重排消息后重复压缩的问题</li>
+<li>修复截断的 shell 输出流关闭不正常的问题</li>
+<li>修复通过补全 API 调用 Azure gpt-5.5 请求失败的问题</li>
+<li>恢复超大图像附件的自动缩放功能</li>
+<li>修复 Windows 应用检测时读取 where 输出的问题</li>
+<li>修复 DigitalOcean OAuth 仅请求必要 GenAI 权限范围</li>
+<li>保留点击问题提示选项时的文本选中状态</li>
+<li>停止 HTTP API 暴露内部命名缺陷详情</li>
 </ul>
 <p><strong>Breaking Changes</strong></p>
 <ul>
-<li>升级 LiteLLM 至 v1.85.0-rc.2+ 以支持 GPT-5 和工具调用行为</li>
+<li>LiteLLM 兼容性要求升级至 v1.85.0-rc.2 + 版本</li>
 </ul>
-<h3 id="jxxghpmoviepilot-v2113---v2114-glm-47-flash"><a href="https://github.com/jxxghp/MoviePilot/releases" rel="noopener noreferrer" target="_blank">jxxghp/MoviePilot v2.11.3 - v2.11.4</a> <sup>GLM-4.7-Flash</sup></h3>
+<h3 id="jxxghpmoviepilot-v2113---v2114-qwen3-235b-cerebras"><a href="https://github.com/jxxghp/MoviePilot/releases" rel="noopener noreferrer" target="_blank">jxxghp/MoviePilot v2.11.3 - v2.11.4</a> <sup>Qwen3 235B (Cerebras)</sup></h3>
 <p><strong>新内容</strong></p>
 <ul>
-<li>为 Telegram、Slack、Discord、飞书添加统一处理状态指示器</li>
-<li>优化种子过滤</li>
-<li>优化媒体识别内部逻辑</li>
+<li>新增 Telegram、Slack 等平台统一处理状态提示</li>
 <li>传输时支持同步匹配的字幕和音频文件</li>
 <li>文件管理器及传输历史搜索支持通配符</li>
 <li>电视最佳版本订阅新增整季打包选项</li>
@@ -112,8 +115,8 @@
 </ul>
 <p><strong>问题修复</strong></p>
 <ul>
-<li>规范化下载器返回路径</li>
-<li>绑定 venv python 以支持更多 pip 命令，并为兼容性包装器添加测试</li>
+<li>修复下载器返回路径不一致问题</li>
+<li>修复 venv 环境 pip 命令兼容性问题</li>
 <li>剧集升级优先选择完整包</li>
 <li>刷新自定义占位符无需重启</li>
 <li>通过命名捕获缓解 CVE-2026-42945 漏洞</li>
@@ -145,14 +148,14 @@
 <li>解决快速重录同一标签页时出现无法捕获活动流标签页的错误</li>
 <li>修复启动失败或扩展重启后弹窗卡在正在开始录制状态的问题</li>
 </ul>
-<h3 id="jdxmise-v202658---v202659-glm-47-flash"><a href="https://github.com/jdx/mise/releases" rel="noopener noreferrer" target="_blank">jdx/mise v2026.5.8 - v2026.5.9</a> <sup>GLM-4.7-Flash</sup></h3>
+<h3 id="jdxmise-v202658---v202659-qwen3-235b-cerebras"><a href="https://github.com/jdx/mise/releases" rel="noopener noreferrer" target="_blank">jdx/mise v2026.5.8 - v2026.5.9</a> <sup>Qwen3 235B (Cerebras)</sup></h3>
 <p><strong>新内容</strong></p>
 <ul>
-<li>SwiftPM 安装优先使用预构建 artifact bundle</li>
-<li>watch_files 钩子支持自定义内联 shell</li>
-<li>watch_files 条目支持可选的 shell 字段</li>
-<li>纯字符串 Tera 渲染获得快速路径</li>
-<li>添加 SonarQube CLI 到 aqua 注册表</li>
+<li>SwiftPM 支持预构建 artifact bundle 安装</li>
+<li>watch_files 钩子可自定义内联 shell</li>
+<li>新增 SonarQube CLI 注册条目</li>
+<li>Tera 模板无标记字符串跳过渲染提升性能</li>
+<li>文档更新了操作指南</li>
 <li>新增 mise patrons 子命令，列出支持开发的支持者</li>
 <li>新增 racket 简写，通过 aqua 提供 racket 和 raco 工具</li>
 <li>优化任务命令输出，跳过 shebang 和配置行显示</li>
@@ -160,57 +163,77 @@
 </ul>
 <p><strong>问题修复</strong></p>
 <ul>
-<li>修复 GitHub OAuth 设备流程路径错误</li>
-<li>修复 aqua 最新标签解析问题</li>
-<li>修复 vfox 命令相关问题</li>
-<li>修复 patron 链接指向错误</li>
+<li>修复 aqua latest-tag 版本过滤问题</li>
+<li>修复 vfox cmd.exec 使用默认 shell 参数</li>
+<li>修复 GitHub OAuth 设备流路径错误</li>
+<li>修复赞助链接指向错误</li>
 <li>修复升级摘要被进度清理擦除的问题</li>
 <li>修复任务脚本以 shebang 开头时命令行显示不完整</li>
 </ul>
 <p><strong>Breaking Changes</strong></p>
 <ul>
-<li>npm 解析方式变更，通过 aqua:npm/cli</li>
-<li>buck2 切换到 aqua:facebook/buck2</li>
+<li>npm 和 buck2 默认通过 aqua 注册解析，可能影响现有配置</li>
 <li>弃用顶层 env_file 设置，改用 env._.file 配置</li>
 </ul>
-<h3 id="steipetecodexbar-v0260---v0261-glm-47-flash"><a href="https://github.com/steipete/CodexBar/releases" rel="noopener noreferrer" target="_blank">steipete/CodexBar v0.26.0 - v0.26.1</a> <sup>GLM-4.7-Flash</sup></h3>
+<h3 id="steipetecodexbar-v0260---v0261-qwen3-235b-cerebras"><a href="https://github.com/steipete/CodexBar/releases" rel="noopener noreferrer" target="_blank">steipete/CodexBar v0.26.0 - v0.26.1</a> <sup>Qwen3 235B (Cerebras)</sup></h3>
 <p><strong>新内容</strong></p>
 <ul>
-<li>新增 OpenAI API 支出图表及每日详情交互图表</li>
-<li>新增 CLI codexbar serve 本地 JSON 访问功能</li>
+<li>新增 OpenAI API 用量展示，包含 30 天消费图表和详细日数据</li>
+<li>新增 codexbar serve 命令，支持通过本地接口访问用量和成本</li>
+<li>新增 Codex 分层长上下文及优先定价支持</li>
+<li>新增 Kiro 账户详情与信用余额显示</li>
+<li>新增 Google OAuth 账号切换功能</li>
+<li>新增 OpenRouter API 密钥消费统计</li>
+<li>新增隐藏用量条警告刻度的设置</li>
 </ul>
 <p><strong>问题修复</strong></p>
 <ul>
-<li>修复 Codex 后台探测记录问题</li>
-<li>修复菜单成本子菜单不稳定问题</li>
-<li>修复本地化：新增巴西葡萄牙语配额警告</li>
+<li>修复 Codex 后台状态检测记录误入桌面版历史的问题</li>
+<li>修复成本子菜单稳定性问题，优化菜单重建逻辑</li>
+<li>修复巴西葡萄牙语配额警告设置文本缺失</li>
+<li>修复 Codex 无速率限制时的错误提示</li>
+<li>修复仅含错误的提供商行显示问题</li>
+<li>修复菜单切换时的闪烁问题</li>
+<li>修复后台刷新导致菜单无响应的问题</li>
+<li>修复 Cursor 账号添加的登录方式</li>
 </ul>
-<h3 id="cherryhqcherry-studio-v196-降级"><a href="https://github.com/CherryHQ/cherry-studio/releases/tag/v1.9.6" rel="noopener noreferrer" target="_blank">CherryHQ/cherry-studio v1.9.6</a> <sup>降级</sup></h3>
-<p><strong>原始更新记录</strong></p>
+<h3 id="cherryhqcherry-studio-v196-qwen3-235b-cerebras"><a href="https://github.com/CherryHQ/cherry-studio/releases/tag/v1.9.6" rel="noopener noreferrer" target="_blank">CherryHQ/cherry-studio v1.9.6</a> <sup>Qwen3 235B (Cerebras)</sup></h3>
+<p><strong>问题修复</strong></p>
 <ul>
-<li>fix(knowledge): preserve HTTP URLs in knowledge base documents by @Raymond8196 in</li>
-<li>fix(ai): thread idle timeout handle to stream chunk adapter by @GeorgeDong32 in</li>
-<li>fix(ci): improve GitCode sync reliability by @zhibisora in</li>
-<li>fix(image): convert assistant image blocks to base64 for multi-turn editing by @Raymond8196 in</li>
-<li>fix(agent): invalidate provider cache on settings changes by @404-Page-Found in</li>
+<li>修复知识库文档中 HTTP 链接丢失问题</li>
+<li>修复 AI 线程空闲超时处理逻辑</li>
+<li>提升 GitCode 同步稳定性</li>
+<li>修复助手图像块多轮编辑问题</li>
+<li>修复设置变更后提供方缓存未失效问题</li>
+<li>修复 Ctrl 键无法识别问题</li>
+<li>修复模型提供方未找到导致的崩溃</li>
+<li>修复提供方模型列表操作不一致问题</li>
+<li>修复定时任务会话名称问题</li>
+<li>修复 MinerU 预处理中文件不存在错误</li>
+<li>修复删除 MCP 服务器时 OAuth 令牌残留问题</li>
+<li>修复 DeepSeek-R1 模型功能调用能力误报</li>
+<li>修复 MCP 工具审批卡片需手动展开问题</li>
+<li>修复 Claude 代码提供方管理环境变量缺失问题</li>
+<li>修复新建助手时时间戳更新异常问题</li>
+<li>修复七牛 PDF 回退在 GPT-5.4 中问题</li>
+<li>修复 Codex CLI 保留提供方 ID 处理问题</li>
 </ul>
-<h3 id="mack-av2ray-agent-v3518-glm-47-flash"><a href="https://github.com/mack-a/v2ray-agent/releases/tag/v3.5.18" rel="noopener noreferrer" target="_blank">mack-a/v2ray-agent v3.5.18</a> <sup>GLM-4.7-Flash</sup></h3>
+<h3 id="mack-av2ray-agent-v3518-qwen3-235b-cerebras"><a href="https://github.com/mack-a/v2ray-agent/releases/tag/v3.5.18" rel="noopener noreferrer" target="_blank">mack-a/v2ray-agent v3.5.18</a> <sup>Qwen3 235B (Cerebras)</sup></h3>
 <p><strong>问题修复</strong></p>
 <ul>
 <li>修复无法下载核心的问题</li>
 </ul>
-<h3 id="sagernetsing-box-v11312-glm-47-flash"><a href="https://github.com/SagerNet/sing-box/releases/tag/v1.13.12" rel="noopener noreferrer" target="_blank">SagerNet/sing-box v1.13.12</a> <sup>GLM-4.7-Flash</sup></h3>
+<h3 id="sagernetsing-box-v11312-qwen3-235b-cerebras"><a href="https://github.com/SagerNet/sing-box/releases/tag/v1.13.12" rel="noopener noreferrer" target="_blank">SagerNet/sing-box v1.13.12</a> <sup>Qwen3 235B (Cerebras)</sup></h3>
 <p><strong>新内容</strong></p>
 <ul>
 <li>更新 naiveproxy 至 v148.0.7778.96-1</li>
-<li>修复并改进</li>
 </ul>
 <p><strong>问题修复</strong></p>
 <ul>
-<li>修复并改进</li>
+<li>修复若干问题并提升稳定性</li>
 </ul>
-<h3 id="gkd-kitgkd-v1120-降级"><a href="https://github.com/gkd-kit/gkd/releases/tag/v1.12.0" rel="noopener noreferrer" target="_blank">gkd-kit/gkd v1.12.0</a> <sup>降级</sup></h3>
-<p><strong>原始更新记录</strong></p>
+<h3 id="gkd-kitgkd-v1120-qwen3-235b-cerebras"><a href="https://github.com/gkd-kit/gkd/releases/tag/v1.12.0" rel="noopener noreferrer" target="_blank">gkd-kit/gkd v1.12.0</a> <sup>Qwen3 235B (Cerebras)</sup></h3>
+<p><strong>新内容</strong></p>
 <ul>
 <li>新增自动化工作模式</li>
 <li>新增滑动操作</li>
@@ -218,33 +241,56 @@
 <li>新增备份和恢复功能</li>
 <li>新增 toast 显示模板</li>
 </ul>
-<h3 id="pdfmathtranslate-nextpdfmathtranslate-next-v290-降级"><a href="https://github.com/PDFMathTranslate-next/PDFMathTranslate-next/releases/tag/v2.9.0" rel="noopener noreferrer" target="_blank">PDFMathTranslate-next/PDFMathTranslate-next v2.9.0</a> <sup>降级</sup></h3>
-<p><strong>原始更新记录</strong></p>
+<p><strong>问题修复</strong></p>
 <ul>
-<li>feat(deepseek): add v4 thinking mode controls @Rosetears520 (#338)</li>
-<li>fix: prevent PowerShell window popups on Windows PyStand build @SCWM-P (#331)</li>
-<li>feat(gui): fix rate-limit param bug &#x26; improve WebUI usability @JIKOFS (#316)</li>
-<li><code>pdf2zh-v2.9.0-BabelDOC-&#x3C;version>-win64.zip</code>: pdf2zh <strong>without</strong> assets(font, model, etc.)</li>
-<li><code>pdf2zh-v2.9.0-BabelDOC-&#x3C;version>-with-assets-win64.zip</code>: (<strong>Recommended</strong>) pdf2zh <strong>with</strong> assets(font, model, etc.)</li>
+<li>修复提权自身不生效</li>
+<li>修复 Android 17 部分问题</li>
+<li>新增崩溃重启错误报告页</li>
+<li>优化部分文案和布局</li>
+<li>优化无网络环境下提示</li>
 </ul>
-<h3 id="libre-tubelibretube-v312-降级"><a href="https://github.com/libre-tube/LibreTube/releases/tag/v31.2" rel="noopener noreferrer" target="_blank">libre-tube/LibreTube v31.2</a> <sup>降级</sup></h3>
-<p><strong>原始更新记录</strong></p>
+<h3 id="pdfmathtranslate-nextpdfmathtranslate-next-v290-deepseek-v4-flash"><a href="https://github.com/PDFMathTranslate-next/PDFMathTranslate-next/releases/tag/v2.9.0" rel="noopener noreferrer" target="_blank">PDFMathTranslate-next/PDFMathTranslate-next v2.9.0</a> <sup>DeepSeek V4 Flash</sup></h3>
+<p><strong>新内容</strong></p>
 <ul>
-<li>[<code>456d63e</code>]( - <strong>SponsorBlock</strong>: add <code>selfpromo</code> full video label <em>(commit by @FineFindus)</em></li>
-<li>[<code>20cebd3</code>]( - <strong>SponsorBlock</strong>: display icon in full video labels <em>(commit by @FineFindus)</em></li>
-<li>[<code>2638ad0</code>]( - <strong>SponsorBlock</strong>: set tooltip of thumbnail badge <em>(commit by @FineFindus)</em></li>
-<li>[<code>02e9d75</code>]( - <strong>Search</strong>: show deletion icon only for previous searches <em>(commit by @FineFindus)</em></li>
-<li>[<code>a92a15a</code>]( - crash when leaving subscriptions after refreshing feed <em>(commit by @Bnyro)</em></li>
+<li>发布 PDF 科学论文翻译工具 v2.9.0 版本</li>
+<li>提供带资源与不带资源两种 Windows 安装包</li>
 </ul>
-<h3 id="ekkolearnaihermes-web-ui-v0523---v0524-降级"><a href="https://github.com/EKKOLearnAI/hermes-web-ui/releases" rel="noopener noreferrer" target="_blank">EKKOLearnAI/hermes-web-ui v0.5.23 - v0.5.24</a> <sup>降级</sup></h3>
-<p><strong>原始更新记录</strong></p>
+<h3 id="libre-tubelibretube-v312-qwen3-235b-cerebras"><a href="https://github.com/libre-tube/LibreTube/releases/tag/v31.2" rel="noopener noreferrer" target="_blank">libre-tube/LibreTube v31.2</a> <sup>Qwen3 235B (Cerebras)</sup></h3>
+<p><strong>新内容</strong></p>
 <ul>
-<li>[codex] align bridge multimodal handling by @EKKOLearnAI in</li>
-<li>fix: preserve newlines in chat message markdown rendering by @rqbbss in</li>
-<li>feat(settings): add debounce to NInputNumber in Memory/Agent/Session settings by @1624318455 in</li>
-<li>fix: pass default headers to agent bridge by @tevenfeng in</li>
-<li>feat(chat): add custom drag-resize handle on input top border by @1624318455 in</li>
-<li>Fix bridge compression history handling by @EKKOLearnAI in</li>
+<li>SponsorBlock 新增自宣传完整视频标签</li>
+<li>SponsorBlock 在完整视频标签中显示图标</li>
+<li>SponsorBlock 设置缩略图徽章的提示文字</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复退出全屏视频后键盘自动弹出问题</li>
+<li>修复本地视频流 / 信息提取默认未启用问题</li>
+<li>修复视频缓冲时字幕自动关闭问题</li>
+<li>修复退出订阅页面时崩溃问题</li>
+<li>修复搜索历史仅显示删除图标问题</li>
+</ul>
+<h3 id="ekkolearnaihermes-web-ui-v0523---v0524-deepseek-v4-flash"><a href="https://github.com/EKKOLearnAI/hermes-web-ui/releases" rel="noopener noreferrer" target="_blank">EKKOLearnAI/hermes-web-ui v0.5.23 - v0.5.24</a> <sup>DeepSeek V4 Flash</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>对齐桥接多模态处理</li>
+<li>聊天输入框顶部新增自定义拖拽调整大小手柄</li>
+<li>设置中为内存 / 代理 / 会话添加输入防抖</li>
+<li>启动网关前自动切换到默认配置文件</li>
+<li>新增清空可见模型选择功能</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复聊天消息 Markdown 渲染中换行丢失问题</li>
+<li>修复代理桥接默认请求头未传递问题</li>
+<li>修复桥接压缩历史处理逻辑</li>
+<li>修复桥接代理初始化兼容性问题</li>
+<li>修复网关启动时的调试日志输出</li>
+<li>修复网关配置文件环境隔离问题</li>
+<li>修复网关端口分配占用 Web UI 端口问题</li>
+<li>修复桥接状态数据库同步问题</li>
+<li>修复命令压缩 token 估算问题</li>
+<li>统一压缩 token 估算逻辑</li>
 </ul>
 <p><strong>帮助我们改进</strong></p>
 <p>对今日摘要质量有建议？欢迎反馈！</p>
@@ -252,7 +298,7 @@
 <li><a href="https://github.com/houzixiashanxiedaima/AstroBlog/issues/new" rel="noopener noreferrer" target="_blank">反馈摘要质量</a></li>
 <li><a href="https://github.com/houzixiashanxiedaima/AstroBlog/issues/new" rel="noopener noreferrer" target="_blank">评价今日日报</a></li>
 </ul>
-<p>您的反馈将帮助我们优化 AI Prompt, 提升摘要准确性</p>  </div> <!-- Footer navigation --> <footer class="article-footer" data-astro-cid-bvzihdzo> <nav class="post-navigation" aria-label="Article navigation" data-astro-cid-bvzihdzo> <div class="nav-prev" data-astro-cid-bvzihdzo> <a href="/blog/releases/2026-05-14" class="nav-link" data-astro-prefetch data-astro-cid-bvzihdzo> <span class="nav-label" data-astro-cid-bvzihdzo>上一篇</span> <span class="nav-title" data-astro-cid-bvzihdzo>GitHub Releases 日报 - 2026-05-14</span> </a> </div> <div class="nav-next" data-astro-cid-bvzihdzo> <a href="/blog/releases/2026-05-16" class="nav-link" data-astro-prefetch data-astro-cid-bvzihdzo> <span class="nav-label" data-astro-cid-bvzihdzo>下一篇</span> <span class="nav-title" data-astro-cid-bvzihdzo>GitHub Releases 日报 - 2026-05-16</span> </a> </div> </nav> <div class="back-to-list" data-astro-cid-bvzihdzo> <a href="/" class="back-link" data-astro-prefetch data-astro-cid-bvzihdzo>← 返回文章列表</a> </div> </footer> </article> <!-- Table of Contents --> <aside class="toc-aside" data-astro-cid-bvzihdzo> <nav class="toc" aria-label="目录导航" data-astro-cid-xvrfupwn><ul class="toc-list" data-astro-cid-xvrfupwn><li class="toc-item toc-item-2" data-slug="2026-05-15-更新摘要" data-astro-cid-xvrfupwn><a href="#2026-05-15-更新摘要" class="toc-link" data-slug="2026-05-15-更新摘要" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>2026-05-15 更新摘要</span></a></li><li class="toc-item toc-item-3" data-slug="nextai-translatornextai-translator-v0615-deepseek-v4-flash" data-astro-cid-xvrfupwn><a href="#nextai-translatornextai-translator-v0615-deepseek-v4-flash" class="toc-link" data-slug="nextai-translatornextai-translator-v0615-deepseek-v4-flash" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>nextai-translator/nextai-translator v0.6.15 DeepSeek V4 Flash</span></a></li><li class="toc-item toc-item-3" data-slug="othmanadiplanning-with-files-v2380-deepseek-v4-flash" data-astro-cid-xvrfupwn><a href="#othmanadiplanning-with-files-v2380-deepseek-v4-flash" class="toc-link" data-slug="othmanadiplanning-with-files-v2380-deepseek-v4-flash" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>OthmanAdi/planning-with-files v2.38.0 DeepSeek V4 Flash</span></a></li><li class="toc-item toc-item-3" data-slug="zed-industrieszed-v124---v126-glm-47-flash" data-astro-cid-xvrfupwn><a href="#zed-industrieszed-v124---v126-glm-47-flash" class="toc-link" data-slug="zed-industrieszed-v124---v126-glm-47-flash" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>zed-industries/zed v1.2.4 - v1.2.6 GLM-4.7-Flash</span></a></li><li class="toc-item toc-item-3" data-slug="anomalycoopencode-v11451---v1150-glm-47-flash" data-astro-cid-xvrfupwn><a href="#anomalycoopencode-v11451---v1150-glm-47-flash" class="toc-link" data-slug="anomalycoopencode-v11451---v1150-glm-47-flash" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>anomalyco/opencode v1.14.51 - v1.15.0 GLM-4.7-Flash</span></a></li><li class="toc-item toc-item-3" data-slug="jxxghpmoviepilot-v2113---v2114-glm-47-flash" data-astro-cid-xvrfupwn><a href="#jxxghpmoviepilot-v2113---v2114-glm-47-flash" class="toc-link" data-slug="jxxghpmoviepilot-v2113---v2114-glm-47-flash" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>jxxghp/MoviePilot v2.11.3 - v2.11.4 GLM-4.7-Flash</span></a></li><li class="toc-item toc-item-3" data-slug="openclawopenclaw-v2026512-qwen35-27b" data-astro-cid-xvrfupwn><a href="#openclawopenclaw-v2026512-qwen35-27b" class="toc-link" data-slug="openclawopenclaw-v2026512-qwen35-27b" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>openclaw/openclaw v2026.5.12 Qwen3.5 27B</span></a></li><li class="toc-item toc-item-3" data-slug="alyssaxuuscreenity-v445-qwen35-27b" data-astro-cid-xvrfupwn><a href="#alyssaxuuscreenity-v445-qwen35-27b" class="toc-link" data-slug="alyssaxuuscreenity-v445-qwen35-27b" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>alyssaxuu/screenity v4.4.5 Qwen3.5 27B</span></a></li><li class="toc-item toc-item-3" data-slug="jdxmise-v202658---v202659-glm-47-flash" data-astro-cid-xvrfupwn><a href="#jdxmise-v202658---v202659-glm-47-flash" class="toc-link" data-slug="jdxmise-v202658---v202659-glm-47-flash" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>jdx/mise v2026.5.8 - v2026.5.9 GLM-4.7-Flash</span></a></li><li class="toc-item toc-item-3" data-slug="steipetecodexbar-v0260---v0261-glm-47-flash" data-astro-cid-xvrfupwn><a href="#steipetecodexbar-v0260---v0261-glm-47-flash" class="toc-link" data-slug="steipetecodexbar-v0260---v0261-glm-47-flash" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>steipete/CodexBar v0.26.0 - v0.26.1 GLM-4.7-Flash</span></a></li><li class="toc-item toc-item-3" data-slug="cherryhqcherry-studio-v196-降级" data-astro-cid-xvrfupwn><a href="#cherryhqcherry-studio-v196-降级" class="toc-link" data-slug="cherryhqcherry-studio-v196-降级" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>CherryHQ/cherry-studio v1.9.6 降级</span></a></li><li class="toc-item toc-item-3" data-slug="mack-av2ray-agent-v3518-glm-47-flash" data-astro-cid-xvrfupwn><a href="#mack-av2ray-agent-v3518-glm-47-flash" class="toc-link" data-slug="mack-av2ray-agent-v3518-glm-47-flash" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>mack-a/v2ray-agent v3.5.18 GLM-4.7-Flash</span></a></li><li class="toc-item toc-item-3" data-slug="sagernetsing-box-v11312-glm-47-flash" data-astro-cid-xvrfupwn><a href="#sagernetsing-box-v11312-glm-47-flash" class="toc-link" data-slug="sagernetsing-box-v11312-glm-47-flash" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>SagerNet/sing-box v1.13.12 GLM-4.7-Flash</span></a></li><li class="toc-item toc-item-3" data-slug="gkd-kitgkd-v1120-降级" data-astro-cid-xvrfupwn><a href="#gkd-kitgkd-v1120-降级" class="toc-link" data-slug="gkd-kitgkd-v1120-降级" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>gkd-kit/gkd v1.12.0 降级</span></a></li><li class="toc-item toc-item-3" data-slug="pdfmathtranslate-nextpdfmathtranslate-next-v290-降级" data-astro-cid-xvrfupwn><a href="#pdfmathtranslate-nextpdfmathtranslate-next-v290-降级" class="toc-link" data-slug="pdfmathtranslate-nextpdfmathtranslate-next-v290-降级" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>PDFMathTranslate-next/PDFMathTranslate-next v2.9.0 降级</span></a></li><li class="toc-item toc-item-3" data-slug="libre-tubelibretube-v312-降级" data-astro-cid-xvrfupwn><a href="#libre-tubelibretube-v312-降级" class="toc-link" data-slug="libre-tubelibretube-v312-降级" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>libre-tube/LibreTube v31.2 降级</span></a></li><li class="toc-item toc-item-3" data-slug="ekkolearnaihermes-web-ui-v0523---v0524-降级" data-astro-cid-xvrfupwn><a href="#ekkolearnaihermes-web-ui-v0523---v0524-降级" class="toc-link" data-slug="ekkolearnaihermes-web-ui-v0523---v0524-降级" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>EKKOLearnAI/hermes-web-ui v0.5.23 - v0.5.24 降级</span></a></li></ul></nav><script type="module">let E=!1;function L(){const u=document.querySelector(".toc");if(!u||E)return;E=!0;const R=Array.from(document.querySelectorAll(".toc-item")),g=document.querySelectorAll(".article-content h2, .article-content h3, .article-content h4");if(g.length===0)return;let T=[];function P(){T=Array.from(g).map((t,i)=>{const r=t.getBoundingClientRect(),o=window.scrollY,n=r.top+o,c=g[i+1];let e;if(c)e=c.getBoundingClientRect().top+o;else{const s=document.querySelector(".article-content");s?e=s.getBoundingClientRect().bottom+o:e=document.documentElement.scrollHeight}return{id:t.id,element:t,top:n,bottom:e}})}const b=new Set;function m(){const t=window.scrollY,i=window.innerHeight,r=80,o=document.documentElement.scrollHeight,n=t+r,c=t+i>=o-50;R.forEach((e,s)=>{const l=e.getAttribute("data-slug");if(!l)return;const p=T.find(d=>d.id===l);if(!p)return;const C=e.querySelector(".toc-link"),H=e.querySelector(".toc-progress-bar");if(!C||!H)return;const a=p.top,w=p.bottom,v=s===R.length-1;n>=a&&b.add(l);const q=b.has(l)&&(n>=w||v&&c),x=n>=a&&n<w&&!(v&&c);if(e.classList.remove("is-read","is-reading","is-unread"),q)e.classList.add("is-read"),e.style.setProperty("--progress","100%");else if(x){e.classList.add("is-reading");const d=w-a,y=n-a;let S;if(v){const I=o-i-t;S=Math.min(Math.max(y/Math.min(d,y+I),0),1)}else S=Math.min(Math.max(y/d,0),1);e.style.setProperty("--progress",`${S*100}%`)}else e.classList.add("is-unread"),e.style.setProperty("--progress","0%")})}P(),m();let f=!1;const k=()=>{f||(requestAnimationFrame(()=>{m(),f=!1}),f=!0)};let h;const A=()=>{clearTimeout(h),h=setTimeout(()=>{P(),m()},100)};window.addEventListener("scroll",k,{passive:!0}),window.addEventListener("resize",A,{passive:!0});const B=t=>{const r=t.target.closest(".toc-link");if(!r)return;t.preventDefault();const o=r.getAttribute("data-slug"),n=o?document.getElementById(o):null;if(n){const s=n.getBoundingClientRect().top+window.scrollY-80;window.scrollTo({top:s,behavior:"smooth"})}};u.addEventListener("click",B),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",k),window.removeEventListener("resize",A),u.removeEventListener("click",B),clearTimeout(h),E=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",L):L();document.addEventListener("astro:page-load",L);</script> </aside> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text footer-text--strong" data-astro-cid-sz7xmlte>
+<p>您的反馈将帮助我们优化 AI Prompt, 提升摘要准确性</p>  </div> <!-- Footer navigation --> <footer class="article-footer" data-astro-cid-bvzihdzo> <nav class="post-navigation" aria-label="Article navigation" data-astro-cid-bvzihdzo> <div class="nav-prev" data-astro-cid-bvzihdzo> <a href="/blog/releases/2026-05-14" class="nav-link" data-astro-prefetch data-astro-cid-bvzihdzo> <span class="nav-label" data-astro-cid-bvzihdzo>上一篇</span> <span class="nav-title" data-astro-cid-bvzihdzo>GitHub Releases 日报 - 2026-05-14</span> </a> </div> <div class="nav-next" data-astro-cid-bvzihdzo> <a href="/blog/releases/2026-05-16" class="nav-link" data-astro-prefetch data-astro-cid-bvzihdzo> <span class="nav-label" data-astro-cid-bvzihdzo>下一篇</span> <span class="nav-title" data-astro-cid-bvzihdzo>GitHub Releases 日报 - 2026-05-16</span> </a> </div> </nav> <div class="back-to-list" data-astro-cid-bvzihdzo> <a href="/" class="back-link" data-astro-prefetch data-astro-cid-bvzihdzo>← 返回文章列表</a> </div> </footer> </article> <!-- Table of Contents --> <aside class="toc-aside" data-astro-cid-bvzihdzo> <nav class="toc" aria-label="目录导航" data-astro-cid-xvrfupwn><ul class="toc-list" data-astro-cid-xvrfupwn><li class="toc-item toc-item-2" data-slug="2026-05-15-更新摘要" data-astro-cid-xvrfupwn><a href="#2026-05-15-更新摘要" class="toc-link" data-slug="2026-05-15-更新摘要" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>2026-05-15 更新摘要</span></a></li><li class="toc-item toc-item-3" data-slug="nextai-translatornextai-translator-v0615-deepseek-v4-flash" data-astro-cid-xvrfupwn><a href="#nextai-translatornextai-translator-v0615-deepseek-v4-flash" class="toc-link" data-slug="nextai-translatornextai-translator-v0615-deepseek-v4-flash" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>nextai-translator/nextai-translator v0.6.15 DeepSeek V4 Flash</span></a></li><li class="toc-item toc-item-3" data-slug="othmanadiplanning-with-files-v2380-deepseek-v4-flash" data-astro-cid-xvrfupwn><a href="#othmanadiplanning-with-files-v2380-deepseek-v4-flash" class="toc-link" data-slug="othmanadiplanning-with-files-v2380-deepseek-v4-flash" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>OthmanAdi/planning-with-files v2.38.0 DeepSeek V4 Flash</span></a></li><li class="toc-item toc-item-3" data-slug="zed-industrieszed-v124---v126-qwen35-27b" data-astro-cid-xvrfupwn><a href="#zed-industrieszed-v124---v126-qwen35-27b" class="toc-link" data-slug="zed-industrieszed-v124---v126-qwen35-27b" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>zed-industries/zed v1.2.4 - v1.2.6 Qwen3.5 27B</span></a></li><li class="toc-item toc-item-3" data-slug="anomalycoopencode-v11451---v1150-qwen3-235b-cerebras" data-astro-cid-xvrfupwn><a href="#anomalycoopencode-v11451---v1150-qwen3-235b-cerebras" class="toc-link" data-slug="anomalycoopencode-v11451---v1150-qwen3-235b-cerebras" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>anomalyco/opencode v1.14.51 - v1.15.0 Qwen3 235B (Cerebras)</span></a></li><li class="toc-item toc-item-3" data-slug="jxxghpmoviepilot-v2113---v2114-qwen3-235b-cerebras" data-astro-cid-xvrfupwn><a href="#jxxghpmoviepilot-v2113---v2114-qwen3-235b-cerebras" class="toc-link" data-slug="jxxghpmoviepilot-v2113---v2114-qwen3-235b-cerebras" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>jxxghp/MoviePilot v2.11.3 - v2.11.4 Qwen3 235B (Cerebras)</span></a></li><li class="toc-item toc-item-3" data-slug="openclawopenclaw-v2026512-qwen35-27b" data-astro-cid-xvrfupwn><a href="#openclawopenclaw-v2026512-qwen35-27b" class="toc-link" data-slug="openclawopenclaw-v2026512-qwen35-27b" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>openclaw/openclaw v2026.5.12 Qwen3.5 27B</span></a></li><li class="toc-item toc-item-3" data-slug="alyssaxuuscreenity-v445-qwen35-27b" data-astro-cid-xvrfupwn><a href="#alyssaxuuscreenity-v445-qwen35-27b" class="toc-link" data-slug="alyssaxuuscreenity-v445-qwen35-27b" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>alyssaxuu/screenity v4.4.5 Qwen3.5 27B</span></a></li><li class="toc-item toc-item-3" data-slug="jdxmise-v202658---v202659-qwen3-235b-cerebras" data-astro-cid-xvrfupwn><a href="#jdxmise-v202658---v202659-qwen3-235b-cerebras" class="toc-link" data-slug="jdxmise-v202658---v202659-qwen3-235b-cerebras" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>jdx/mise v2026.5.8 - v2026.5.9 Qwen3 235B (Cerebras)</span></a></li><li class="toc-item toc-item-3" data-slug="steipetecodexbar-v0260---v0261-qwen3-235b-cerebras" data-astro-cid-xvrfupwn><a href="#steipetecodexbar-v0260---v0261-qwen3-235b-cerebras" class="toc-link" data-slug="steipetecodexbar-v0260---v0261-qwen3-235b-cerebras" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>steipete/CodexBar v0.26.0 - v0.26.1 Qwen3 235B (Cerebras)</span></a></li><li class="toc-item toc-item-3" data-slug="cherryhqcherry-studio-v196-qwen3-235b-cerebras" data-astro-cid-xvrfupwn><a href="#cherryhqcherry-studio-v196-qwen3-235b-cerebras" class="toc-link" data-slug="cherryhqcherry-studio-v196-qwen3-235b-cerebras" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>CherryHQ/cherry-studio v1.9.6 Qwen3 235B (Cerebras)</span></a></li><li class="toc-item toc-item-3" data-slug="mack-av2ray-agent-v3518-qwen3-235b-cerebras" data-astro-cid-xvrfupwn><a href="#mack-av2ray-agent-v3518-qwen3-235b-cerebras" class="toc-link" data-slug="mack-av2ray-agent-v3518-qwen3-235b-cerebras" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>mack-a/v2ray-agent v3.5.18 Qwen3 235B (Cerebras)</span></a></li><li class="toc-item toc-item-3" data-slug="sagernetsing-box-v11312-qwen3-235b-cerebras" data-astro-cid-xvrfupwn><a href="#sagernetsing-box-v11312-qwen3-235b-cerebras" class="toc-link" data-slug="sagernetsing-box-v11312-qwen3-235b-cerebras" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>SagerNet/sing-box v1.13.12 Qwen3 235B (Cerebras)</span></a></li><li class="toc-item toc-item-3" data-slug="gkd-kitgkd-v1120-qwen3-235b-cerebras" data-astro-cid-xvrfupwn><a href="#gkd-kitgkd-v1120-qwen3-235b-cerebras" class="toc-link" data-slug="gkd-kitgkd-v1120-qwen3-235b-cerebras" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>gkd-kit/gkd v1.12.0 Qwen3 235B (Cerebras)</span></a></li><li class="toc-item toc-item-3" data-slug="pdfmathtranslate-nextpdfmathtranslate-next-v290-deepseek-v4-flash" data-astro-cid-xvrfupwn><a href="#pdfmathtranslate-nextpdfmathtranslate-next-v290-deepseek-v4-flash" class="toc-link" data-slug="pdfmathtranslate-nextpdfmathtranslate-next-v290-deepseek-v4-flash" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>PDFMathTranslate-next/PDFMathTranslate-next v2.9.0 DeepSeek V4 Flash</span></a></li><li class="toc-item toc-item-3" data-slug="libre-tubelibretube-v312-qwen3-235b-cerebras" data-astro-cid-xvrfupwn><a href="#libre-tubelibretube-v312-qwen3-235b-cerebras" class="toc-link" data-slug="libre-tubelibretube-v312-qwen3-235b-cerebras" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>libre-tube/LibreTube v31.2 Qwen3 235B (Cerebras)</span></a></li><li class="toc-item toc-item-3" data-slug="ekkolearnaihermes-web-ui-v0523---v0524-deepseek-v4-flash" data-astro-cid-xvrfupwn><a href="#ekkolearnaihermes-web-ui-v0523---v0524-deepseek-v4-flash" class="toc-link" data-slug="ekkolearnaihermes-web-ui-v0523---v0524-deepseek-v4-flash" data-astro-cid-xvrfupwn><span class="toc-progress-bar" data-astro-cid-xvrfupwn></span><span class="toc-text" data-astro-cid-xvrfupwn>EKKOLearnAI/hermes-web-ui v0.5.23 - v0.5.24 DeepSeek V4 Flash</span></a></li></ul></nav><script type="module">let E=!1;function L(){const u=document.querySelector(".toc");if(!u||E)return;E=!0;const R=Array.from(document.querySelectorAll(".toc-item")),g=document.querySelectorAll(".article-content h2, .article-content h3, .article-content h4");if(g.length===0)return;let T=[];function P(){T=Array.from(g).map((t,i)=>{const r=t.getBoundingClientRect(),o=window.scrollY,n=r.top+o,c=g[i+1];let e;if(c)e=c.getBoundingClientRect().top+o;else{const s=document.querySelector(".article-content");s?e=s.getBoundingClientRect().bottom+o:e=document.documentElement.scrollHeight}return{id:t.id,element:t,top:n,bottom:e}})}const b=new Set;function m(){const t=window.scrollY,i=window.innerHeight,r=80,o=document.documentElement.scrollHeight,n=t+r,c=t+i>=o-50;R.forEach((e,s)=>{const l=e.getAttribute("data-slug");if(!l)return;const p=T.find(d=>d.id===l);if(!p)return;const C=e.querySelector(".toc-link"),H=e.querySelector(".toc-progress-bar");if(!C||!H)return;const a=p.top,w=p.bottom,v=s===R.length-1;n>=a&&b.add(l);const q=b.has(l)&&(n>=w||v&&c),x=n>=a&&n<w&&!(v&&c);if(e.classList.remove("is-read","is-reading","is-unread"),q)e.classList.add("is-read"),e.style.setProperty("--progress","100%");else if(x){e.classList.add("is-reading");const d=w-a,y=n-a;let S;if(v){const I=o-i-t;S=Math.min(Math.max(y/Math.min(d,y+I),0),1)}else S=Math.min(Math.max(y/d,0),1);e.style.setProperty("--progress",`${S*100}%`)}else e.classList.add("is-unread"),e.style.setProperty("--progress","0%")})}P(),m();let f=!1;const k=()=>{f||(requestAnimationFrame(()=>{m(),f=!1}),f=!0)};let h;const A=()=>{clearTimeout(h),h=setTimeout(()=>{P(),m()},100)};window.addEventListener("scroll",k,{passive:!0}),window.addEventListener("resize",A,{passive:!0});const B=t=>{const r=t.target.closest(".toc-link");if(!r)return;t.preventDefault();const o=r.getAttribute("data-slug"),n=o?document.getElementById(o):null;if(n){const s=n.getBoundingClientRect().top+window.scrollY-80;window.scrollTo({top:s,behavior:"smooth"})}};u.addEventListener("click",B),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",k),window.removeEventListener("resize",A),u.removeEventListener("click",B),clearTimeout(h),E=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",L):L();document.addEventListener("astro:page-load",L);</script> </aside> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text footer-text--strong" data-astro-cid-sz7xmlte>
 &copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-sz7xmlte>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-sz7xmlte>
 Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
 Astro
