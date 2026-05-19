@@ -1,0 +1,294 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.3.3"><!-- Core SEO --><meta name="description" content="When I wrote about FediMeteo for the first time, I told the story from the beginning: the idea born almost by chance while checking the weather for a holiday, the memory of my grandfather, who for yea"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/fedimeteo-haproxy-and-the-art-of-not-wasting-snac--f3cr5s/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/fedimeteo-haproxy-and-the-art-of-not-wasting-snac--f3cr5s/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/fedimeteo-haproxy-and-the-art-of-not-wasting-snac--f3cr5s/"><meta property="og:title" content="FediMeteo, HAProxy, and the art of not wasting snac threads"><meta property="og:description" content="When I wrote about FediMeteo for the first time, I told the story from the beginning: the idea born almost by chance while checking the weather for a holiday, the memory of my grandfather, who for yea"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="When I wrote about FediMeteo for the first time, I told the story from the beginning: the idea born almost by chance while checking the weather for a holiday, the memory of my grandfather, who for yea"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/fedimeteo-haproxy-and-the-art-of-not-wasting-snac--f3cr5s/"><meta property="twitter:title" content="FediMeteo, HAProxy, and the art of not wasting snac threads"><meta property="twitter:description" content="When I wrote about FediMeteo for the first time, I told the story from the beginning: the idea born almost by chance while checking the weather for a holiday, the memory of my grandfather, who for yea"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>FediMeteo, HAProxy, and the art of not wasting snac threads</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/","potentialAction":{"@type":"SearchAction","target":"https://blog.yuyins.com/search?q={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"FediMeteo, HAProxy, and the art of not wasting snac threads","item":"https://blog.yuyins.com/reading-list/fedimeteo-haproxy-and-the-art-of-not-wasting-snac--f3cr5s/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-b4zvghpy]{display:inline-flex;align-items:center;gap:.45rem;border-radius:9999px;border:1px solid transparent;background:var(--muted);color:var(--foreground);font-weight:500;line-height:1.4;text-decoration:none;white-space:nowrap}.chip--sm[data-astro-cid-b4zvghpy]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-b4zvghpy]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-b4zvghpy]{cursor:pointer;transition:background-color .2s ease,color .2s ease,opacity .2s ease}.chip--interactive[data-astro-cid-b4zvghpy]:hover{background-color:color-mix(in srgb,var(--accent) 10%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 68%,var(--foreground))}.chip--active[data-astro-cid-b4zvghpy],.chip[data-astro-cid-b4zvghpy].active{background-color:color-mix(in srgb,var(--accent) 18%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 82%,var(--foreground));border-color:transparent;box-shadow:none;font-weight:600}.chip--dashed[data-astro-cid-b4zvghpy]{border-style:dashed;border-color:color-mix(in srgb,var(--accent) 22%,var(--border));background:color-mix(in srgb,var(--background) 70%,var(--muted))}.chip[data-astro-cid-b4zvghpy]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+<link rel="stylesheet" href="/_astro/Layout.DcVswIO1.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0;animation:fadeIn .3s ease-out}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.8125rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--accent)}.back-link--top[data-astro-cid-wrgicudb]{display:inline-block;margin-bottom:1rem}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2> 雅俗共赏 </a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-otpdt6jm> <div class="search-dialog-card" data-astro-cid-otpdt6jm> <div class="search-dialog-bar" data-astro-cid-otpdt6jm> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="8" data-astro-cid-otpdt6jm></circle><path d="m21 21-4.3-4.3" data-astro-cid-otpdt6jm></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-otpdt6jm></div> <kbd class="search-kbd" data-astro-cid-otpdt6jm>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-otpdt6jm> <path d="M18 6 6 18" data-astro-cid-otpdt6jm></path><path d="m6 6 12 12" data-astro-cid-otpdt6jm></path> </svg> </button> </div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(e=0){if(sessionStorage.getItem(c)==="true")return m(),!0;const s=document.getElementById("pagefind-ui");if(!s)return!1;s.innerHTML='<div class="search-loading">加载中...</div>';try{return await new Promise((r,o)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=r,a.onerror=o,document.head.appendChild(a)}),m(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),e<2?(console.log(`Retrying search load... (${e+1}/2)`),await new Promise(r=>setTimeout(r,1e3)),l(e+1)):(s&&(s.innerHTML=`
+          <div class="search-loading">
+            <p>搜索功能加载失败</p>
+            <button id="retry-search" class="search-retry-btn">重试</button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>FediMeteo, HAProxy, and the art of not wasting snac threads</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://it-notes.dragas.net" target="_blank" rel="noopener noreferrer" data-astro-cid-wrgicudb="true" data-astro-cid-b4zvghpy="true" class="chip chip--sm chip--interactive source-tag"> it-notes.dragas.net </a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年5月18日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p><img src="https://unsplash.com/photos/ZVhm6rEKEX8/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzQwNTEzNjE5fA&amp;force=true&amp;w=640" alt="FediMeteo, HAProxy, and the art of not wasting snac threads" /></p><p>When I wrote about <a href="https://it-notes.dragas.net/2025/02/26/fedimeteo-how-a-tiny-freebsd-vps-became-a-global-weather-service-for-thousands/" target="_blank" rel="noopener noreferrer">FediMeteo</a> for the first time, I told the story from the beginning: the idea born almost by chance while checking the weather for a holiday, the memory of my grandfather, who for years had been my personal meteorologist, the decision to build something small and useful, and then the surprise of seeing people actually use it. What began as a personal experiment quickly became a small global service, still running with the same philosophy: FreeBSD, jails, simple scripts, snac, text, emoji, and a lot of small pieces doing their work quietly.</p>
+<p>That article was mostly about the birth and growth of the project. This one is about one of the less romantic parts of the same story, although I have to admit that I find a certain beauty in it too: keeping the service light as it grows.</p>
+<p><a href="https://fedimeteo.com" target="_blank" rel="noopener noreferrer">FediMeteo</a> is still intentionally simple from the outside. A homepage, some numbers, a list of countries, and many ActivityPub accounts publishing weather forecasts. The posts are text and emoji. There is no JavaScript requirement to read the pages, no heavy frontend, no unnecessary media attached to every forecast, and no dynamic homepage recalculated at every visit just to show the same numbers. This is not accidental. It is the way I wanted the service to behave from the beginning.</p>
+<p>But the more the service is used, the more the small details matter. A request that looks harmless when there are ten followers may become a repeated request when there are thousands of followers, remote instances, crawlers, previews, and other servers fetching the same public objects. In the Fediverse, the same small thing can be asked many times by many different places, each one with a perfectly legitimate reason. The backend doesn't care: it just needs to deal with the requests.</p>
+<p>And in FediMeteo, the backend is <a href="https://codeberg.org/grunfink/snac2" target="_blank" rel="noopener noreferrer">snac</a>.</p>
+<p>I like snac very much precisely because it is small, clear, and efficient. It is not a giant application that tries to be everything. It does a focused job and does it well. But this also means that I want to respect its shape. I do not want to waste its threads on work that the reverse proxy can safely do. A snac thread serving the same public avatar again and again is not a tragedy, but it is still a waste. A snac thread answering the same public ActivityPub object several times in the same minute is doing real work, but often not necessary work.</p>
+<p>This is the reason behind the <a href="https://www.haproxy.org" target="_blank" rel="noopener noreferrer">HAProxy</a> tuning I am currently using in front of FediMeteo.</p>
+<p>It is not about making the configuration look clever. It is about keeping snac quiet.</p>
+<h2>A continuation of the same idea</h2>
+<p>I had already explored the same problem with snac and nginx in two previous posts:  <a href="https://it-notes.dragas.net/2025/01/29/improving-snac-performance-with-nginx-proxy-cache/" target="_blank" rel="noopener noreferrer">Improving snac Performance with Nginx Proxy Cache</a>  and  <a href="https://it-notes.dragas.net/2025/02/08/caching-snac-proxied-media-with-nginx/" target="_blank" rel="noopener noreferrer">Caching snac Proxied Media with Nginx</a>. In both cases, the idea was that the reverse proxy should absorb repeated public requests instead of letting them consume snac resources.</p>
+<p>This is especially important because snac uses a limited number of threads. I like that. Limits are healthy. They force us to understand what the service is doing, and they prevent a small program from pretending to be an infinite resource. But limits also make waste visible. If a few threads are busy serving files that could have been served from cache, those threads are not available for something more useful.</p>
+<p>With FediMeteo the implementation is different because the reverse proxy is HAProxy, but the reasoning is the same. I have many small snac instances, each one in its own FreeBSD (<a href="https://github.com/BastilleBSD/bastille" target="_blank" rel="noopener noreferrer">Bastille</a>) jail, and one public entry point that has to route, terminate TLS, compress, cache, and generally remove as much repetitive work as possible from the backends.</p>
+<p>This is, in a way, the natural continuation of the original FediMeteo design. In the first article I wrote that I wanted to manage everything according to the Unix philosophy: small pieces working together. This is another piece of that same puzzle. HAProxy does the edge work. snac does the ActivityPub work. Scripts generate forecasts. cron launches updates. ZFS gives me snapshots. FreeBSD jails keep countries separated. Nothing is particularly heroic by itself, but the whole system becomes pleasant because each part has a clear responsibility.</p>
+<h2>Why there is almost no media</h2>
+<p>Before talking about HAProxy, it is worth mentioning one of the most important optimizations, which is not in the proxy configuration at all.</p>
+<p>FediMeteo does not use media in its forecasts.</p>
+<p>No images attached to the posts, no generated weather cards, no maps for each city, no decorative banners. The forecasts are text and emoji. This was a deliberate decision. Weather information does not become more useful just because it is put inside an image, and every media file used by the service would become something to store, serve, cache, federate, expire, back up, and occasionally debug.</p>
+<p>Text and emoji are enough. They are accessible, light, readable in text browsers, friendly to timelines, and understandable even when someone does not know the local language perfectly. This was one of the original design principles of FediMeteo, and it also helps the infrastructure. Less media means less work, fewer cache entries, fewer repeated fetches, fewer surprises.</p>
+<p>There is one exception: the avatar.</p>
+<p>All FediMeteo accounts use the same avatar, and this is also intentional. I could have used a different avatar for each country, or for each city, or created something visually richer. It would have been nicer in some screenshots, perhaps. It would also have been operationally worse.</p>
+<p>With one shared avatar, the reverse proxy has one very useful object to cache. It is public, identical for everyone, small, requested often, and therefore almost always hot in cache. HAProxy can serve it directly instead of asking each snac instance to return the same file. Since avatars are requested by remote instances, browsers, profile previews, and all sorts of federation-related fetches, this single decision removes a surprising amount of pointless backend traffic.</p>
+<p>So the avatar is not only a visual identity. It is part of the architecture.</p>
+<p>This is the kind of optimization I like most, because it starts before the software. It starts with deciding not to create a problem.</p>
+<h2>The homepage is static because it can be static</h2>
+<p>The main homepage follows the same logic.</p>
+<p>It is a static HTML page generated from a template. Once per hour, a cron script updates the numbers and statistics. It counts the data I want to show, regenerates the page, and then the page remains static until the next run.</p>
+<p>This is not because I cannot make a dynamic page. It is because I do not need one. Boring is good.</p>
+<p>The homepage does not need to query all the country instances on every visit. It does not need a database request for each user who opens it. It does not need to ask snac anything in real time. The numbers are useful, but they do not need to be updated every second. Once per hour is enough, and it also fits the spirit of the whole project: do the work when it is needed, then serve the result cheaply.</p>
+<p>I have seen too many small services become heavy because the first implementation was convenient rather than appropriate. A cron job and a template are not fashionable, but they are often exactly what a page like this needs.</p>
+<h2>Many countries, one entry point</h2>
+<p>FediMeteo is made of many country instances. Each one runs in its own jail and listens on its own internal address and port. From the outside, however, they all live under the same domain structure:</p>
+<pre><code>fedimeteo.com
+www.fedimeteo.com
+it.fedimeteo.com
+uk.fedimeteo.com
+jp.fedimeteo.com
+us.fedimeteo.com
+usa.fedimeteo.com
+can.fedimeteo.com
+canada.fedimeteo.com
+</code></pre>
+
+<p>And many more.</p>
+<p>At the beginning, it is always tempting to write one ACL after another in the HAProxy frontend. It is quick, it is explicit, and for five hostnames it is perfectly fine. But FediMeteo did not remain at five hostnames. As countries and aliases grew, a long chain of ACLs would have turned the frontend into a list of names instead of a description of how the proxy behaves.</p>
+<p>So I moved the hostname to backend mapping into a map file:</p>
+<pre><code>fedimeteo.com        backend_fedimeteo
+www.fedimeteo.com    backend_fedimeteo
+it.fedimeteo.com     backend_it
+uk.fedimeteo.com     backend_uk
+jp.fedimeteo.com     backend_jp
+us.fedimeteo.com     backend_us
+usa.fedimeteo.com    backend_us
+can.fedimeteo.com    backend_ca
+canada.fedimeteo.com backend_ca
+</code></pre>
+
+<p>The frontend then needs only one rule:</p>
+<pre><code>use_backend %[req.hdr(host),field(1,:),lower,map(/usr/local/etc/fedimeteo.map,backend_fedimeteo)]
+</code></pre>
+
+<p>This reads the  <code>Host</code>  header, removes the port if present, lowercases the result, and looks it up in  <code>/usr/local/etc/fedimeteo.map</code>. If nothing matches, it falls back to the main FediMeteo backend.</p>
+<p>I like this because it keeps the configuration honest. The frontend contains the policy. The map contains the data. Adding a country means adding an entry to the map and defining a backend. I do not need to make the frontend more complicated every time the service grows.</p>
+<h2>Backends as small compartments</h2>
+<p>The country backends are deliberately plain:</p>
+<pre><code>backend backend_it
+    mode http
+    http-reuse safe
+    server srv1 10.0.0.2:8001 maxconn 30
+
+backend backend_uk
+    mode http
+    http-reuse safe
+    server srv1 10.0.0.7:8001 maxconn 30
+
+backend backend_jp
+    mode http
+    http-reuse safe
+    server srv1 10.0.0.32:8001 maxconn 30
+</code></pre>
+
+<p>One backend, one jail, one snac instance. This is exactly the same organizational principle as the rest of the project. If I need to reason about Italy, I look at the Italian jail. If I need to reason about the United Kingdom, I look at the UK jail. If one day I need to move a country elsewhere, the separation is already there.</p>
+<p>The  <code>maxconn 30</code>  value is not a magic number. It is a ceiling. I want each small backend to have a visible limit in front of it. If something starts hammering a country instance, I prefer the pressure to appear at the HAProxy layer instead of becoming unlimited concurrent work inside snac.</p>
+<p><code>http-reuse safe</code>  lets HAProxy reuse backend connections where appropriate. This is another small reduction in unnecessary work. Opening connections repeatedly is not the biggest problem in the world, but avoiding it is still better, especially when many small services sit behind the same proxy.</p>
+<h2>The front door</h2>
+<p>The HTTPS frontend listens on IPv4 and IPv6 and offers both HTTP/2 and HTTP/1.1:</p>
+<pre><code>frontend https_in
+    bind :::443 v4v6 ssl crt /usr/local/etc/certs/ alpn h2,http/1.1
+    mode http
+    option http-keep-alive
+</code></pre>
+
+<p>TLS defaults are set globally:</p>
+<pre><code>ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
+ssl-default-bind-options no-sslv3 no-tlsv10 no-tlsv11 no-tls-tickets
+</code></pre>
+
+<p>Port 80 only redirects to HTTPS, except for Let's Encrypt challenges:</p>
+<pre><code>acl letsencrypt-acl path_beg /.well-known/acme-challenge/
+http-request redirect scheme https code 301 unless letsencrypt-acl
+use_backend letsencrypt-backend if letsencrypt-acl
+</code></pre>
+
+<p>In the HTTPS frontend I also set the usual forwarding headers:</p>
+<pre><code>http-request set-header X-Real-IP %[src]
+http-request set-header X-Forwarded-Proto https
+</code></pre>
+
+<p>And I add HSTS:</p>
+<pre><code>http-response set-header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+</code></pre>
+
+<p>None of this is unusual, and that is fine. The interesting parts of an infrastructure are not always the parts that should be unusual.</p>
+<h2>Two caches, because the requests are different</h2>
+<p>The HAProxy configuration defines two caches:</p>
+<pre><code>cache mediacache
+  total-max-size 128
+  max-object-size 10000000
+  max-age 3600
+  process-vary on
+  max-secondary-entries 12
+
+cache jsoncache
+  total-max-size 16
+  max-object-size 1000000
+  max-age 60
+  process-vary on
+  max-secondary-entries 12
+</code></pre>
+
+<p>I keep media and ActivityPub JSON separate because they are not the same kind of traffic.</p>
+<p>The media cache is larger and has a longer maximum age. In FediMeteo, this mostly means the shared avatar and a few static-looking objects. Since there is intentionally almost no media, the important cached object is requested very often and remains warm.</p>
+<p>The JSON cache is smaller and short-lived. It is there for public ActivityPub GET requests, not to store federation state forever. A 60 second cache is enough to collapse many repeated requests that arrive close together in time, without pretending that ActivityPub responses should be treated like immutable files.</p>
+<p>This distinction is important. Caching is not one decision. It is a set of small decisions about what a response means, who can see it, how often it changes, and what happens if it is served again.</p>
+<h2>Recognizing media</h2>
+<p>For media, the ACL is based on file extensions:</p>
+<pre><code>acl is_media path_end -i .jpg .jpeg .png .gif .webp .svg .ico .mp4 .webm .mp3 .ogg .wav .flac .mov .avi .mkv .m4v
+</code></pre>
+
+<p>Then I store the result in a transaction variable:</p>
+<pre><code>http-request set-var(txn.is_media) bool(true) if is_media
+</code></pre>
+
+<p>The cache lookup is straightforward:</p>
+<pre><code>http-request cache-use mediacache if { var(txn.is_media) -m bool true }
+</code></pre>
+
+<p>And on the response side:</p>
+<pre><code>http-response set-header Cache-Control "max-age=3600, public" if { var(txn.is_media) -m bool true }
+http-response del-header Set-Cookie if { var(txn.is_media) -m bool true }
+http-response del-header Vary if { var(txn.is_media) -m bool true }
+http-response cache-store mediacache if { var(txn.is_media) -m bool true }
+</code></pre>
+
+<p>The  <code>Cache-Control</code>  header makes the intent explicit.  <code>Set-Cookie</code>  is removed because a public media object should not carry session information.  <code>Vary</code>  is removed because I do not want the same avatar to fragment into many cache entries because of harmless header differences.</p>
+<p>This is aggressive only if removed from its context. In this service, with this media policy, it is a reasonable choice. FediMeteo is not serving private media under these paths. It is mostly serving the same public avatar over and over.</p>
+<p>For the same reason, I clean the request before it reaches the backend:</p>
+<pre><code>http-request del-header Authorization if { var(txn.is_media) -m bool true }
+http-request del-header Cookie        if { var(txn.is_media) -m bool true }
+</code></pre>
+
+<p>I would not do this globally. I do it after deciding that the request is media. Scope is what makes these rules safe.</p>
+<p>The result is exactly what I want: the shared avatar becomes an almost perfect cache object. Small, public, repeatedly requested, and served by HAProxy instead of snac.</p>
+<h2>ActivityPub JSON microcaching</h2>
+<p>The ActivityPub side starts from the  <code>Accept</code>  header:</p>
+<pre><code>acl is_ap_json   req.hdr(Accept),lower -m sub application/activity+json
+acl is_ap_ldjson req.hdr(Accept),lower -m sub application/ld+json
+acl is_outbox    path_end /outbox
+acl is_get       method GET
+acl has_auth     req.hdr(Authorization) -m found
+acl has_cookie   req.hdr(Cookie) -m found
+</code></pre>
+
+<p>This part matters because ActivityPub uses content negotiation. The same path may return HTML to a browser and JSON to a remote instance. If the proxy pretends that a URL is always one thing, it will eventually cache the wrong representation.</p>
+<p>So I only mark public ActivityPub GET requests as cacheable:</p>
+<pre><code>http-request set-var(txn.is_activitypub) bool(true) if is_get !is_outbox is_ap_json !has_auth !has_cookie
+http-request set-var(txn.is_activitypub) bool(true) if is_get !is_outbox is_ap_ldjson !has_auth !has_cookie
+</code></pre>
+
+<p>There are several decisions here, all important.</p>
+<p>It must be a  <code>GET</code>, because I am not caching deliveries or anything that changes state. It must not be  <code>/outbox</code>, because outbox collections are not the traffic I want to cache here. It must not have  <code>Authorization</code>, and it must not have cookies, because authenticated or user-specific requests do not belong in a shared public cache.</p>
+<p>Then the cache can be used and populated:</p>
+<pre><code>http-request cache-use jsoncache if { var(txn.is_activitypub) -m bool true }
+
+http-response set-header Cache-Control "max-age=60, public" if { var(txn.is_activitypub) -m bool true }
+http-response cache-store jsoncache if { var(txn.is_activitypub) -m bool true }
+</code></pre>
+
+<p>Sixty seconds is short, but useful. Federation often creates small clusters of identical requests. A remote server fetches an actor, another fetches the same actor, something asks for the same object, something retries. I do not need to cache these responses for hours. I only need HAProxy to answer the second and third identical request during the same small burst.</p>
+<p>This is microcaching in the most practical sense. It reduces repeated work without changing the nature of the service.</p>
+<h2>Static media paths</h2>
+<p>There is also a rule for static paths:</p>
+<pre><code>acl is_short_path path_reg ^/[^/]+/s/
+http-request cache-use mediacache if is_short_path
+</code></pre>
+
+<p>This comes from the same observation that led me to cache snac media with nginx. snac uses static media paths, and those paths often represent the kind of public, repeatable traffic that should not consume backend threads if the proxy can serve it. I call them "short", not because they are, but because the first time I saw them, I thought the 's' stood for "short", not "static". The name just stuck.</p>
+<p>In FediMeteo this is less central than on a normal social instance, because I deliberately do not use media except for the avatar and basic static objects. Still, the rule fits the general policy: let HAProxy handle repeatable edge work, and let snac spend its threads where they are actually needed.</p>
+<h2><code>Vary</code>, but not without limits</h2>
+<p>Both caches have:</p>
+<pre><code>process-vary on
+max-secondary-entries 12
+</code></pre>
+
+<p>I want HAProxy to process  <code>Vary</code>, because content negotiation is real, especially when ActivityPub is involved. But I also want variation to be bounded. If every slightly different header creates another cache entry, the cache becomes a complicated way to miss.</p>
+<p>For media, I remove  <code>Vary</code>  before storing the response. A shared avatar does not need to vary by  <code>Accept</code>. For ActivityPub JSON, I am more careful because the representation matters.</p>
+<p>Again, the important thing is not the number itself. It is the decision to make variation explicit and limited.</p>
+<h2>Seeing whether it works</h2>
+<p>During rollout, I like to expose a very small diagnostic header:</p>
+<pre><code>http-response set-header X-Cache-Status HIT if !{ srv_id -m found }
+http-response set-header X-Cache-Status MISS if { srv_id -m found }
+</code></pre>
+
+<p>This is intentionally simple. If HAProxy selected a backend server, I call it a miss. If no backend server was selected, the response came from cache, so I call it a hit. It is not a complete observability system, but it is enough to answer the first question I usually have after changing a cache rule.</p>
+<p>Did this request reach snac?</p>
+<p>A test can be as simple as:</p>
+<pre><code>curl -I https://it.fedimeteo.com/path/to/avatar.png
+curl -I https://it.fedimeteo.com/path/to/avatar.png
+</code></pre>
+
+<p>The second request should be a hit.</p>
+<p>For ActivityPub JSON, the test must use the right  <code>Accept</code>  header:</p>
+<pre><code>curl -I \
+  -H 'Accept: application/activity+json' \
+  https://it.fedimeteo.com/some/activitypub/object
+</code></pre>
+
+<p>And I also want to verify that cookies and authorization prevent public caching:</p>
+<pre><code>curl -I \
+  -H 'Cookie: test=value' \
+  -H 'Accept: application/activity+json' \
+  https://it.fedimeteo.com/some/activitypub/object
+
+curl -I \
+  -H 'Authorization: Bearer fake' \
+  -H 'Accept: application/activity+json' \
+  https://it.fedimeteo.com/some/activitypub/object
+</code></pre>
+
+<p>A cache that works should be visible. A cache that is invisible can be correct, but it can also be silently wrong. I prefer to know.</p>
+<h2>Compression and operational paths</h2>
+<p>HAProxy also handles gzip compression:</p>
+<pre><code>filter compression
+compression algo gzip
+compression type text/css text/html text/javascript application/javascript text/plain text/xml application/json application/activity+json
+</code></pre>
+
+<p>This keeps another common responsibility at the edge. The country instances can stay focused on snac and the forecast data, while HAProxy deals with client-facing compression for HTML, JSON, and ActivityPub responses.</p>
+<p>There is also a local Prometheus exporter:</p>
+<pre><code>frontend prometheus
+  bind 127.0.0.1:8405
+  mode http
+  http-request use-service prometheus-exporter
+  no log
+</code></pre>
+
+<p>And I keep internal operational paths, such as statistics and Grafana, handled before the hostname map. These are small details, but ordering matters. Special paths should be explicit and early. The hostname map is for FediMeteo routing, not for every internal tool I happen to expose behind the same proxy.</p>
+<h2>What this changes in practice</h2>
+<p>The nice thing about this configuration is that none of its parts is particularly surprising.</p>
+<p>The map keeps hostname routing manageable. The backend definitions keep each country isolated and limited. The static homepage avoids dynamic work for something that changes once per hour. The shared avatar gives HAProxy one very hot media object to serve directly. The media cache keeps public files away from snac. The JSON microcache absorbs short ActivityPub bursts. Header cleanup prevents useless variation. Connection reuse avoids unnecessary backend connection churn.</p>
+<p>But all of this is only a longer way of saying one thing:</p>
+<p><em>fewer requests reach snac</em>.</p>
+<p>That is the metric I care about here.</p>
+<p>Not because snac is slow. If anything, FediMeteo exists in its current form because snac is efficient enough to make this kind of project possible on a very small VPS. But precisely because the whole architecture is small and pleasant, I do not want to waste resources where there is no need.</p>
+<p>This is also consistent with the rest of the project. Forecasts are serialized by scripts. Updates happen every six hours. The homepage is regenerated hourly. Countries live in separate jails. Snapshots and backups are handled outside the application. No single component tries to be the entire system.</p>
+<p>HAProxy is just another small piece, but it sits in the right place to remove a lot of repeated work.</p>
+<h2>Caveats</h2>
+<p>This configuration is not a universal HAProxy recipe for ActivityPub services.</p>
+<p>It matches FediMeteo as it is now: almost no media, one shared avatar, static homepage, public forecasts, many small snac instances, and ActivityPub traffic that can benefit from a short public cache when there are no cookies or authorization headers.</p>
+<p>If I decide one day to use media in forecasts, the media cache rules will need to be reviewed. If I use different avatars for each city or country, the cache will still work, but I will lose the very nice property of one shared, always-hot avatar. If ActivityPub responses become actor-dependent, public JSON caching must be reconsidered. If one country grows a very different traffic pattern from the others, it may deserve a different limit or policy.</p>
+<p>This is why I do not like presenting configurations as magic. A good configuration is a written form of the assumptions behind a service. When the assumptions change, the configuration must change too.</p>
+<h2>Conclusion</h2>
+<p>FediMeteo started as a small idea and became larger than I expected, but I still want it to feel small in the right ways. Small does not mean fragile. Small means understandable. It means that each part has a reason to exist, and that unnecessary work is removed before it becomes a problem.</p>
+<p>The HAProxy layer follows this idea. It terminates TLS, routes hostnames through a map, reuses backend connections, serves the shared avatar from cache, microcaches public ActivityPub JSON, avoids authenticated and cookie-based traffic, and gives me a small diagnostic header to see what is happening.</p>
+<p>There is no single brilliant directive here. There is only the usual work of matching infrastructure to reality.</p>
+<p>FediMeteo publishes weather forecasts as text and emoji. The homepage is static HTML updated every hour. The accounts share the same avatar because it is enough, and because it is better for the cache. Each country has its own snac instance in its own FreeBSD jail. HAProxy stands in front of them and tries, quietly, not to bother them unless it has to.</p>
+<p>I like this kind of infrastructure.</p>
+<p>Not because it is invisible, but because when it works well, it leaves very little to say.</p></div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://it-notes.dragas.net/2026/05/18/fedimeteo-haproxy-and-the-art-of-not-wasting-snac-threads/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text footer-text--strong" data-astro-cid-sz7xmlte>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-sz7xmlte>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-wlspcwf4> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-wlspcwf4> <path d="M18 15l-6-6-6 6" data-astro-cid-wlspcwf4></path> </svg> </button> <script type="module">function o(){const e=document.getElementById("back-to-top");if(!e)return;const s=300;let t=!1;const n=()=>{const i=window.scrollY>s;e.hidden=!i,t=!1},d=()=>{t||(requestAnimationFrame(n),t=!0)};e.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"})}),window.addEventListener("scroll",d,{passive:!0}),n(),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",d)},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",o):o();document.addEventListener("astro:page-load",o);</script></body></html>
