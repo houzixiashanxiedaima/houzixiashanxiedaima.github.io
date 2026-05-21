@@ -23,6 +23,25 @@
 <p><img src="https://www.johndcook.com/coshacosh2.png" width="480" height="399" /></p>
 <p>This is because √<em>a</em> √<em>b</em> does not necessarily equal √(<em>ab</em>) when the arguments may be negative.</p>
 <p>The square root function and the arccosh function are not naturally single-valued functions. They require branch cuts to force them to be single-valued, and the two functions require <em>different</em> branch cuts. I go into this in some detail <a href="https://www.johndcook.com/blog/2026/03/10/sinh-arccosh/" target="_blank" rel="noopener noreferrer">here</a>.</p>
+<p>There is a way to reformulate our identity so that it holds everywhere. If we replace</p>
+<p><img src="https://www.johndcook.com/cosh_sum4.svg" alt="\sqrt{z^2 - 1}" width="63" height="24" /></p>
+<p>with</p>
+<p><img src="https://www.johndcook.com/cosh_sum5.svg" alt="f(z) = \exp\left( \tfrac{1}{2}\left( \log(z - 1) + \log(z + 1) \right) \right)" width="320" height="36" /></p>
+<p>which is equivalent for <em>z</em> &gt; 1, the corresponding identity holds everywhere.</p>
+<p>We can verify this with the following Mathematica code.</p>
+<pre>f[z_] := Exp[(1/2) (Log[z - 1 ] + Log[z + 1])]
+FullSimplify[Cosh[ArcCosh[x] + ArcCosh[y]] - x y - f[x] f[y]]
+</pre>
+<p>This returns 0.</p>
+<p>By contrast, the code</p>
+<pre>FullSimplify[
+ Cosh[ArcCosh[x] + ArcCosh[y]] - x y - Sqrt[x^2 - 1] Sqrt[y^2 - 1]]</pre>
+<p>simply returns its input with no simplification, unless we add restrictions on <em>x</em> and <em>y</em>. The code</p>
+<pre>FullSimplify[
+ Cosh[ArcCosh[x] + ArcCosh[y]] - x y - Sqrt[x^2 - 1] Sqrt[y^2 - 1], 
+ Assumptions -&gt; {x &gt; -1 &amp;&amp; y &gt; -1}]
+</pre>
+<p>does return 0.</p>
 <h2>Related posts</h2>
 <ul>
 <li><a href="https://www.johndcook.com/blog/2026/03/12/arccos/" target="_blank" rel="noopener noreferrer">Inverse cosine</a></li>
