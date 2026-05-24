@@ -1,0 +1,212 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.3.6"><!-- Core SEO --><meta name="description" content="
+  This is going to be a rant about modern web design practices.  But
+  before I get to that, let me begin with a familiar principle from
+  the world of cryptography.  Among software developers, and
+ "><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/dont-roll-your-own--5339kp/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/dont-roll-your-own--5339kp/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/dont-roll-your-own--5339kp/"><meta property="og:title" content="Don't Roll Your Own ..."><meta property="og:description" content="
+  This is going to be a rant about modern web design practices.  But
+  before I get to that, let me begin with a familiar principle from
+  the world of cryptography.  Among software developers, and
+ "><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="
+  This is going to be a rant about modern web design practices.  But
+  before I get to that, let me begin with a familiar principle from
+  the world of cryptography.  Among software developers, and
+ "><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/dont-roll-your-own--5339kp/"><meta property="twitter:title" content="Don't Roll Your Own ..."><meta property="twitter:description" content="
+  This is going to be a rant about modern web design practices.  But
+  before I get to that, let me begin with a familiar principle from
+  the world of cryptography.  Among software developers, and
+ "><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Don&#39;t Roll Your Own ...</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/","potentialAction":{"@type":"SearchAction","target":"https://blog.yuyins.com/search?q={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Don't Roll Your Own ...","item":"https://blog.yuyins.com/reading-list/dont-roll-your-own--5339kp/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-b4zvghpy]{display:inline-flex;align-items:center;gap:.45rem;border-radius:9999px;border:1px solid transparent;background:var(--muted);color:var(--foreground);font-weight:500;line-height:1.4;text-decoration:none;white-space:nowrap}.chip--sm[data-astro-cid-b4zvghpy]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-b4zvghpy]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-b4zvghpy]{cursor:pointer;transition:background-color .2s ease,color .2s ease,opacity .2s ease}.chip--interactive[data-astro-cid-b4zvghpy]:hover{background-color:color-mix(in srgb,var(--accent) 10%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 68%,var(--foreground))}.chip--active[data-astro-cid-b4zvghpy],.chip[data-astro-cid-b4zvghpy].active{background-color:color-mix(in srgb,var(--accent) 18%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 82%,var(--foreground));border-color:transparent;box-shadow:none;font-weight:600}.chip--dashed[data-astro-cid-b4zvghpy]{border-style:dashed;border-color:color-mix(in srgb,var(--accent) 22%,var(--border));background:color-mix(in srgb,var(--background) 70%,var(--muted))}.chip[data-astro-cid-b4zvghpy]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+<link rel="stylesheet" href="/_astro/Layout.D4FZajHL.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0;animation:fadeIn .3s ease-out}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.8125rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--accent)}.back-link--top[data-astro-cid-wrgicudb]{display:inline-block;margin-bottom:1rem}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2> 雅俗共赏 </a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-otpdt6jm> <div class="search-dialog-card" data-astro-cid-otpdt6jm> <div class="search-dialog-bar" data-astro-cid-otpdt6jm> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="8" data-astro-cid-otpdt6jm></circle><path d="m21 21-4.3-4.3" data-astro-cid-otpdt6jm></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-otpdt6jm></div> <kbd class="search-kbd" data-astro-cid-otpdt6jm>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-otpdt6jm> <path d="M18 6 6 18" data-astro-cid-otpdt6jm></path><path d="m6 6 12 12" data-astro-cid-otpdt6jm></path> </svg> </button> </div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(e=0){if(sessionStorage.getItem(c)==="true")return m(),!0;const s=document.getElementById("pagefind-ui");if(!s)return!1;s.innerHTML='<div class="search-loading">加载中...</div>';try{return await new Promise((r,o)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=r,a.onerror=o,document.head.appendChild(a)}),m(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),e<2?(console.log(`Retrying search load... (${e+1}/2)`),await new Promise(r=>setTimeout(r,1e3)),l(e+1)):(s&&(s.innerHTML=`
+          <div class="search-loading">
+            <p>搜索功能加载失败</p>
+            <button id="retry-search" class="search-retry-btn">重试</button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Don&#39;t Roll Your Own ...</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://susam.net" target="_blank" rel="noopener noreferrer" data-astro-cid-wrgicudb="true" data-astro-cid-b4zvghpy="true" class="chip chip--sm chip--interactive source-tag"> susam.net </a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年5月23日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>
+  This is going to be a rant about modern web design practices.  But
+  before I get to that, let me begin with a familiar principle from
+  the world of cryptography.  Among software developers, and
+  especially among those who work on security-sensitive systems, there
+  is a well-known maxim: <em>Don't roll your own crypto.</em>  This
+  does not mean that nobody is allowed to write cryptographic code.
+  Someone has to.  It means that, for ordinary production software
+  that protects sensitive data of users, we should not rely on a
+  private, unreviewed implementation that has not been vetted by the
+  wider software development community.  We should use established,
+  vetted software packages or tools wherever possible.
+</p>
+<p>
+  Fortunately, it is now standard industry practice to avoid rolling
+  your own crypto and instead use cryptographic algorithms and
+  packages that have been peer reviewed and stood the test of time.
+  It wasn't so some twenty years ago.  I have seen several flawed
+  home-grown RC4 implementations early in my career, with issues like
+  improper initialisation vectors, predictable keystreams and partial
+  leakage of plaintext into ciphertext, putting sensitive data of
+  users at risk.  But today, major e-commerce websites or banks
+  typically do not use home-grown cryptography for its web services.
+  In fact, in regulated domains such as payments, healthcare and
+  personal data processing, doing so could violate requirements for
+  strong cryptography, possibly leading to hefty financial penalties.
+</p>
+<p>
+  Website design is obviously not cryptography.  A broken scroll bar
+  is not the same kind of failure as a broken encryption scheme.  But
+  I wish there were a similar maxim for website design as well.  There
+  are many aspects of websites where, I think, developers should not
+  be rolling their own X, especially when X is something browsers
+  already do well and something users depend on every day.  Here I
+  present a list of such X.
+</p>
+<ul>
+  <li>
+    Don't roll your own page scrolling.
+  </li>
+  <li>
+    Don't roll your own link navigation.
+  </li>
+  <li>
+    Don't roll your own text selection.
+  </li>
+  <li>
+    Don't roll your own context menu.
+  </li>
+  <li>
+    Don't roll your own copy and paste.
+  </li>
+  <li>
+    Don't roll your own password field.
+  </li>
+  <li>
+    Don't roll your own date picker.
+  </li>
+</ul>
+<p>
+  Of course, there are valid scenarios where you may need to roll your
+  own X.  But here I want to focus on the cases where you should not
+  roll your own X, and how doing so can lead to a worse user
+  experience, at least in my experience.  I am not saying that nobody
+  should ever build anything themselves.  As someone who does a lot of
+  creative computing myself and develops fun tools from time to time,
+  I am a big proponent of developing your own stuff.  But when it
+  comes to developing user interface features for serious websites
+  that people need to use to get their work done, I wish the software
+  development community were more conservative in deciding what fancy
+  feature goes into a website and what is left out.  Do keep in mind
+  that I am no expert in user experience.  Far from it.  So none of
+  what I am saying here should be taken as a recommendation.  But I am
+  a <em>user</em> of the Web, and as a user, I have found some modern
+  web design patterns to be frustrating.  This post is a lament from
+  one user of the Web, not a design guide.
+</p>
+<p>
+  Of all the things I mentioned above, the one that bothers me the
+  most is custom scroll behaviour on websites.  I am used to how page
+  scrolling responds to my mouse, touchpad or keyboard input.  When
+  you override the default scrolling behaviour of the web browser with
+  your own implementation, it 'breaks' the page for me.  The page now
+  moves too slowly or too quickly when I scroll.  Keyboard scrolling
+  may or may not work.  You take something I am so familiar with that
+  I don't even think about it, and turn it into something unfamiliar
+  that I now have to think about.
+</p>
+<p>
+  Custom link navigation is another pet peeve of mine.  Web browsers
+  can already handle links very well.  You could say that this is the
+  whole reason web browsers even exist.  Following links is their
+  bread and butter.  You shouldn't have to mess with that behaviour at
+  all.  If you think you need to, reconsider what you are trying to
+  achieve and whether it is really so important as to disrupt normal
+  link navigation.  The worst offender I have found here is GitHub.
+  When you click on a link on GitHub, say, a file link or an issue
+  link, it triggers a massive piece of functionality implemented in
+  JavaScript that handles the link click for you.  If you don't
+  believe me, visit your favourite project on GitHub using Firefox or
+  Chrome, type <kbd>F12</kbd> to open the browser's developer tools,
+  then go to the 'Debugger' or 'Sources' tab, find 'Event Listener
+  Breakpoints' on the right sidebar, expand 'Mouse' and select
+  'click'.  Then click on a link on GitHub and see what happens.
+</p>
+<figure>
+  <img src="files/blog/ghdbg.png" alt="Screenshot of a GitHub repository page with the browser's developer tools open, paused in the JavaScript debugger on a click event listener." />
+</figure>
+<p>
+  I'm sure I am not the only one who has noticed that, on GitHub, a
+  clicked link sometimes takes too long to load.  Ironically, it is
+  often faster to open the link in a new tab than to wait for GitHub's
+  JavaScript code to handle the navigation in the current tab.
+</p>
+<p>
+  A custom password input field is another such hazard.  Fortunately,
+  custom password input fields have become rarer over the years.  The
+  password input field that comes with the web browser is generally
+  well equipped to handle passwords.  It can offer to save passwords,
+  fill them in later and generate strong passwords for new accounts.
+  It can also warn when a password is submitted over an insecure HTTP
+  connection, work well with password managers and autofill, and
+  cooperate with mobile keyboards and accessibility tools.  If you
+  replace the browser's password field with your own fake version, you
+  may break all of that.  You may also end up using an ordinary text
+  field and masking it yourself, in which case the password may be
+  treated by the browser, the operating system or assistive tools as
+  ordinary visible text rather than as a password, thereby exposing
+  the password in ways you did not intend.
+</p>
+<p>
+  Custom date pickers are another common annoyance.  I know that
+  <code>&lt;input type="date"&gt;</code> does not help you select a
+  date range.  But that is okay.  You can provide two date input
+  fields, one for the start date and one for the end date.  I am
+  willing to pay the small price of using two different inputs to
+  select a date range if that means I can use my favourite web browser
+  to navigate the calendar and select dates the same way everywhere.
+  What I am less inclined to do is to learn ten different ways of
+  using the date selector in ten different implementations across ten
+  different websites.  Right now the implementations of date selector
+  are all over the place.  Some require you to zoom out of the month
+  view to enter a year view, where you can select years. While you are
+  there, you cannot change the month again until you return to the
+  month view.  Some require you to click the previous-year button
+  literally forty times to select your year of birth if you are old
+  enough.  Some do not let you type the date at all.  No.  I do not
+  want to learn your calendar widget.  I just want to use the date
+  picker in my favourite browser, which is quite sane.  Saner than
+  your custom implementation.  If you need to have a calendar widget
+  to support browsers with inadequate native date-picker support,
+  perhaps that support can be added alongside the native date picker
+  rather than as a replacement for it.  For example, the
+  ordinary <code>&lt;input type="date"&gt;</code> element could be
+  left intact, with a custom widget provided <em>in addition</em> to
+  it so that users can manipulate the same field.
+</p>
+<p>
+  In general, just stop messing with the form controls.  They almost
+  always introduce new problems while solving some existing ones.  And
+  while you are at it, don't keep changing your website layout and
+  interface every few months!  I may adapt to the new design, but my
+  ageing relatives cannot.  For them, every time you change the user
+  interface, it amounts to learning a whole new tool.  If every
+  website keeps doing this every few months, they have to spend a
+  significant amount of time relearning familiar things for no
+  functional benefit.  Please just let them enjoy their retirement.
+  Imagine how you would feel if a Linux distribution decided to
+  redesign all its core commands and their command-line options every
+  few months.  Or imagine how you would feel if the buttons of your
+  washing machine were rearranged every morning.  It wouldn't be
+  pleasant!
+</p>
+
+<p>
+  <a href="https://susam.net/do-not-roll-your-own.html" target="_blank" rel="noopener noreferrer">Read on website</a> |
+  <a href="https://susam.net/tag/web.html" target="_blank" rel="noopener noreferrer">#web</a> |
+  <a href="https://susam.net/tag/technology.html" target="_blank" rel="noopener noreferrer">#technology</a>
+</p></div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://susam.net/do-not-roll-your-own.html" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text footer-text--strong" data-astro-cid-sz7xmlte>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-sz7xmlte>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-wlspcwf4> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-wlspcwf4> <path d="M18 15l-6-6-6 6" data-astro-cid-wlspcwf4></path> </svg> </button> <script type="module">function o(){const e=document.getElementById("back-to-top");if(!e)return;const s=300;let t=!1;const n=()=>{const i=window.scrollY>s;e.hidden=!i,t=!1},d=()=>{t||(requestAnimationFrame(n),t=!0)};e.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"})}),window.addEventListener("scroll",d,{passive:!0}),n(),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",d)},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",o):o();document.addEventListener("astro:page-load",o);</script></body></html>
