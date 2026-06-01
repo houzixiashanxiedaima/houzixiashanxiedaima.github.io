@@ -1,0 +1,534 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.4.2"><!-- Core SEO --><meta name="description" content="The trigonometric Fourier series is a beautiful mathematical theory that
+shows how to decompose a periodic function into an infinite sum of
+sinusoids. These are my notes on the subject, with some exam"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/notes-on-fourier-series-m9c3sw/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/notes-on-fourier-series-m9c3sw/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/notes-on-fourier-series-m9c3sw/"><meta property="og:title" content="Notes on Fourier series"><meta property="og:description" content="The trigonometric Fourier series is a beautiful mathematical theory that
+shows how to decompose a periodic function into an infinite sum of
+sinusoids. These are my notes on the subject, with some exam"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="The trigonometric Fourier series is a beautiful mathematical theory that
+shows how to decompose a periodic function into an infinite sum of
+sinusoids. These are my notes on the subject, with some exam"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/notes-on-fourier-series-m9c3sw/"><meta property="twitter:title" content="Notes on Fourier series"><meta property="twitter:description" content="The trigonometric Fourier series is a beautiful mathematical theory that
+shows how to decompose a periodic function into an infinite sum of
+sinusoids. These are my notes on the subject, with some exam"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Notes on Fourier series</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/","potentialAction":{"@type":"SearchAction","target":"https://blog.yuyins.com/search?q={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Notes on Fourier series","item":"https://blog.yuyins.com/reading-list/notes-on-fourier-series-m9c3sw/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-b4zvghpy]{display:inline-flex;align-items:center;gap:.45rem;border-radius:9999px;border:1px solid transparent;background:var(--muted);color:var(--foreground);font-weight:500;line-height:1.4;text-decoration:none;white-space:nowrap}.chip--sm[data-astro-cid-b4zvghpy]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-b4zvghpy]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-b4zvghpy]{cursor:pointer;transition:background-color .2s ease,color .2s ease,opacity .2s ease}.chip--interactive[data-astro-cid-b4zvghpy]:hover{background-color:color-mix(in srgb,var(--accent) 10%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 68%,var(--foreground))}.chip--active[data-astro-cid-b4zvghpy],.chip[data-astro-cid-b4zvghpy].active{background-color:color-mix(in srgb,var(--accent) 18%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 82%,var(--foreground));border-color:transparent;box-shadow:none;font-weight:600}.chip--dashed[data-astro-cid-b4zvghpy]{border-style:dashed;border-color:color-mix(in srgb,var(--accent) 22%,var(--border));background:color-mix(in srgb,var(--background) 70%,var(--muted))}.chip[data-astro-cid-b4zvghpy]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+<link rel="stylesheet" href="/_astro/Layout.BLruMMys.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0;animation:fadeIn .3s ease-out}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.8125rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--accent)}.back-link--top[data-astro-cid-wrgicudb]{display:inline-block;margin-bottom:1rem}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2> 雅俗共赏 </a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-otpdt6jm> <div class="search-dialog-card" data-astro-cid-otpdt6jm> <div class="search-dialog-bar" data-astro-cid-otpdt6jm> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="8" data-astro-cid-otpdt6jm></circle><path d="m21 21-4.3-4.3" data-astro-cid-otpdt6jm></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-otpdt6jm></div> <kbd class="search-kbd" data-astro-cid-otpdt6jm>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-otpdt6jm> <path d="M18 6 6 18" data-astro-cid-otpdt6jm></path><path d="m6 6 12 12" data-astro-cid-otpdt6jm></path> </svg> </button> </div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(e=0){if(sessionStorage.getItem(c)==="true")return m(),!0;const s=document.getElementById("pagefind-ui");if(!s)return!1;s.innerHTML='<div class="search-loading">加载中...</div>';try{return await new Promise((r,o)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=r,a.onerror=o,document.head.appendChild(a)}),m(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),e<2?(console.log(`Retrying search load... (${e+1}/2)`),await new Promise(r=>setTimeout(r,1e3)),l(e+1)):(s&&(s.innerHTML=`
+          <div class="search-loading">
+            <p>搜索功能加载失败</p>
+            <button id="retry-search" class="search-retry-btn">重试</button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Notes on Fourier series</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://eli.thegreenplace.net" target="_blank" rel="noopener noreferrer" data-astro-cid-wrgicudb="true" data-astro-cid-b4zvghpy="true" class="chip chip--sm chip--interactive source-tag"> eli.thegreenplace.net </a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年5月28日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>The trigonometric Fourier series is a beautiful mathematical theory that
+shows how to decompose a periodic function into an infinite sum of
+sinusoids. These are my notes on the subject, with some examples and the
+connection to linear algebra in Hilbert space.</p>
+<div>
+<h2>Coefficients of Fourier series</h2>
+<p>Let’s assume that <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" /> is a <em>well-behaved</em> 2L-periodic <a href="#footnote-1" target="_blank" rel="noopener noreferrer">[1]</a>
+function and that we can find coefficients a_n and b_n
+such that:</p>
+\[f(x)=\sum_{n=0}^{\infty}\left(a_n cos\frac{n\pi x}{L}+b_n sin\frac{n\pi x}{L}\right)\]
+<p>Then we say that the <em>Fourier series</em> on the right-hand side converges
+to <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" />. We’ll talk more about the assumptions mentioned above
+and convergence in the next section.</p>
+<p>Note that when n=0, the sum becomes just <img alt="a_0" src="https://eli.thegreenplace.net/images/math/4a5997da73aadd118038761e69d01e24586bf958.png" />; therefore
+it’s customary to write the series starting with n=1, with a
+separate constant component (which is the function's average over
+one period). To make computations nicer, this constant is typically
+called a_0 / 2, so:</p>
+\[f(x)=\frac{a_0}{2}+\sum_{n=1}^{\infty}\left(a_n cos\frac{n\pi x}{L}+b_n sin\frac{n\pi x}{L}\right)\]
+<p>Our goal is to find the coefficients a_n and b_n that
+satisfy this equation. We’ll do this in three steps.</p>
+<p><strong>Step 1:</strong> Integrate both sides of the equation between -L and
+L  <a href="#footnote-2" target="_blank" rel="noopener noreferrer">[2]</a>.</p>
+\[\int_{-L}^{L}f(x)dx=\int_{-L}^{L}\frac{a_0}{2}dx+\sum_{n=1}^{\infty}\bigg (\int_{-L}^{L}a_n cos\frac{n\pi x}{L}dx+\int_{-L}^{L}b_n sin\frac{n\pi x}{L}dx\bigg )\]
+<p>Per Appendix A, all integrals within the sum are zero, so we’re left
+with:</p>
+\[\int_{-L}^{L}f(x)dx=\int_{-L}^{L}\frac{a_0}{2}dx=\bigg[\frac{x\cdot a_0}{2}\bigg]_{-L}^{L}=a_0\cdot L\]
+<p>And thus we find <img alt="a_0" src="https://eli.thegreenplace.net/images/math/4a5997da73aadd118038761e69d01e24586bf958.png" />:</p>
+\[a_0=\frac{1}{L}\int_{-L}^{L}f(x)dx\]
+<p><strong>Step 2:</strong> Multiply both sides by cos\frac{m\pi x}{L}
+(m is a positive integer constant) and integrate between
+-L and L.</p>
+\[\begin{aligned}
+    \int_{-L}^{L}f(x)cos\frac{m\pi x}{L}dx&amp;=\int_{-L}^{L}\frac{a_0}{2}cos\frac{m\pi x}{L}dx\\
+    &amp;+\sum_{n=1}^{\infty}\bigg (\int_{-L}^{L}a_n cos\frac{n\pi x}{L}cos\frac{m\pi x}{L}dx+\int_{-L}^{L}b_n sin\frac{n\pi x}{L}cos\frac{m\pi x}{L}dx\bigg )
+\end{aligned}\]
+<p>Looking at the right-hand side, the first integral is zero per Appendix
+A, and the last integral is zero per Appendix B. We’re left with:</p>
+\[\int_{-L}^{L}f(x)cos\frac{m\pi x}{L}dx=\sum_{n=1}^{\infty}\int_{-L}^{L}a_n cos\frac{n\pi x}{L}cos\frac{m\pi x}{L}dx\]
+<p>Per Appendix B, the integral on the right is zero for all
+n\neq m, and L for n=m. Therefore, we can write:</p>
+\[\int_{-L}^{L}f(x)cos\frac{m\pi x}{L}dx=a_m\cdot L\]
+<p>Recall that m is an arbitrary integer, just like <img alt="n" src="https://eli.thegreenplace.net/images/math/d1854cae891ec7b29161ccaf79a24b00c274bdaa.png" />; for
+consistency, we’ll replace m by <img alt="n" src="https://eli.thegreenplace.net/images/math/d1854cae891ec7b29161ccaf79a24b00c274bdaa.png" /> and isolate
+a_n:</p>
+\[a_n=\frac{1}{L}\int_{-L}^{L}f(x)cos\frac{n\pi x}{L}dx\]
+<p><strong>Step 3:</strong> Hopefully it’s clear where this is going now; multiply both
+sides by sin\frac{m\pi x}{L} and integrate between -L
+and L. Using a very similar reasoning to step 2, we’ll end up
+with:</p>
+\[b_n=\frac{1}{L}\int_{-L}^{L}f(x)sin\frac{n\pi x}{L}dx\]
+<p>We’ve just found a way to calculate all the coefficients of our Fourier
+series for <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" />:</p>
+\[f(x)=\frac{a_0}{2}+\sum_{n=1}^{\infty}\left(a_n cos\frac{n\pi x}{L}+b_n sin\frac{n\pi x}{L}\right)\]
+<p>Where:</p>
+\[\begin{aligned}
+    a_0&amp;=\frac{1}{L}\int_{-L}^{L}f(x)dx\\
+    a_n&amp;=\frac{1}{L}\int_{-L}^{L}f(x)cos\frac{n\pi x}{L}dx\\
+    b_n&amp;=\frac{1}{L}\int_{-L}^{L}f(x)sin\frac{n\pi x}{L}dx
+\end{aligned}\]
+</div>
+<div>
+<h2>Conditions on <em>f</em> and convergence of Fourier series</h2>
+<p>The previous section discusses Fourier series for a function
+<img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" /> that is <em>well-behaved</em> - but what does that mean? The full
+answer would lead us deep into analysis, which I’d like to avoid here.
+So I’ll keep it brief.</p>
+<p>We typically assume that <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" /> is <a href="https://en.wikipedia.org/wiki/Square-integrable_function" target="_blank" rel="noopener noreferrer">square
+integrable</a>,
+which is denoted as L^2. Moreover, we assume that the function
+is <a href="https://en.wikipedia.org/wiki/Piecewise_function" target="_blank" rel="noopener noreferrer">piecewise
+smooth</a>: each
+segment of the function has continuous derivatives. A very simple
+example of a piecewise smooth function is f(x)=|x|. Another is
+the triangular wave function used in the example below.</p>
+<p>These conditions hold for pretty much any reasonable function we want to
+approximate using Fourier series, so they aren’t a serious burden.</p>
+<p>For a function <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" /> that satisfies these conditions, it’s
+guaranteed to have a Fourier series that <em>pointwise converges</em> to it.
+This means that at every continuous point of <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" />, the Fourier
+series converges to it exactly; at every jump point, the Fourier series
+converges to the mid-point of the jump.</p>
+</div>
+<div>
+<h2>Cosine and Sine series</h2>
+<p>Sometimes, additional properties of the function <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" /> can help
+us simplify the Fourier series for it. If f_e(x) is an <a href="https://eli.thegreenplace.net/2025/notes-on-even-and-odd-functions/" target="_blank" rel="noopener noreferrer">even
+function</a>,
+then we know that:</p>
+\[b_n=\frac{1}{L}\int_{-L}^{L}f(x)sin\frac{n\pi x}{L}dx=0\]
+<p>Because the function inside the integral is odd, and integrating an
+odd function over a symmetric interval results in 0.</p>
+<p>Therefore, the Fourier series for such f_e(x) is a <em>cosine
+series</em>:</p>
+\[f_e(x)=\frac{a_0}{2}+\sum_{n=1}^{\infty}a_n cos\frac{n\pi x}{L}\]
+<p>With coefficients <img alt="a_0" src="https://eli.thegreenplace.net/images/math/4a5997da73aadd118038761e69d01e24586bf958.png" /> and a_n given as before.</p>
+<p>Similarly if f_o(x) is an <em>odd</em> function, then its <img alt="a_0" src="https://eli.thegreenplace.net/images/math/4a5997da73aadd118038761e69d01e24586bf958.png" />
+and a_n are 0, and its Fourier series is a <em>sine series</em>:</p>
+\[f_o(x)=\sum_{n=1}^{\infty}b_n sin\frac{n\pi x}{L}\]
+</div>
+<div>
+<h2>Fourier series for a non-periodic function defined on an interval</h2>
+<p>So far we’ve been talking about 2L-periodic functions that can
+be faithfully represented by Fourier series. But what if we have a
+non-periodic function defined on a finite interval?</p>
+<p>E.g. suppose we have f(x)=x on the interval [0,L]. Can
+we approximate it with a Fourier series?</p>
+<p>Yes! First, we have to make a choice of how to extend the function to
+the negative interval [-L,0]. Then, we simply repeat the
+function every 2L - this is called a <em>periodic extension</em>. Note
+that the Fourier series calculation only cares about the range
+[-L,L]. The resulting series will approximate the generated
+periodic function in its entirety, and in particular will also converge
+to it in the [0,L] interval (except maybe the endpoints,
+depending on the mode of extension).</p>
+<p>There are several natural ways to extend a function defined on
+[0,L] into the interval [-L,0] <a href="#footnote-3" target="_blank" rel="noopener noreferrer">[3]</a>:</p>
+<ul>
+<li>Direct periodic repetition: we simply repeat <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" /> every
+L: f(x+L)=f(x)\ \forall x.</li>
+<li>Even extension: f(|x|)</li>
+<li>Odd extension: <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" /> when x\ge 0 and
+-f(-x) when x&lt;0.</li>
+</ul>
+<p>Here’s an example of extending our sample function f(x)=x onto
+the full interval [-L,L] and then repeating it periodically
+every 2L:</p>
+<div>
+  
+  Your browser does not support the HTML5 canvas tag.
+  
+</div><p>Note that the Fourier series for these extended functions will be
+different. However, they will all converge to <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" /> in the
+interval [0,L]. Typically, even and odd extensions have the
+benefit of producing either cosine or sine series, correspondingly (as
+discussed in the previous section).</p>
+<p>We’ve seen that Fourier series work well for periodic functions and also
+non-periodic functions defined on a finite domain (because we can extend
+these periodically). But what about aperiodic functions defined on the
+entire real line? This is where we’ll have to leave Fourier series
+behind and move on to their generalization - the <em>Fourier transform</em>;
+this will be a topic for a separate post.</p>
+</div>
+<div>
+<h2>Example</h2>
+<p>Let’s take the following triangular function t(x) <a href="#footnote-4" target="_blank" rel="noopener noreferrer">[4]</a>:</p>
+<div>
+  
+  Your browser does not support the HTML5 canvas tag.
+  
+</div><p>t(x) is periodic with period 4. We can define it by starting
+with a formula on the interval [0,2]:</p>
+\[t(x)=
+\begin{cases}
+    x     &amp;  0 \leq x \leq 1 \\
+    2-x   &amp;  1 &lt; x \leq 2  \\
+\end{cases}\]
+<p>Then making an odd extension into [-2,0] and repeating it
+periodically. Now we can go ahead to calculate its Fourier coefficients.</p>
+<p>Since this function is odd, we know that we’ll get a <em>sine series</em>, as
+a_n are going to be 0 for all <img alt="n" src="https://eli.thegreenplace.net/images/math/d1854cae891ec7b29161ccaf79a24b00c274bdaa.png" />. Let’s calculate
+b_n; in our case L=2 (half the period).</p>
+\[b_n=\frac{1}{2}\int_{-2}^{2}t(x)sin\frac{n\pi x}{2}dx\]
+<p>Since t(x) is odd and so is the sine, we’re integrating an even
+function over a symmetric interval. Therefore, we only have to integrate
+on the positive half of the range and multiply the result by two:</p>
+\[b_n=\int_{0}^{2}t(x)sin\frac{n\pi x}{2}dx\]
+<p>Let’s set k=\frac{n\pi}{2}:</p>
+\[b_n=\int_{0}^{2}t(x)sin(kx)dx\]
+<p>And split up the integral for the different segments of t(x):</p>
+\[b_n=\int_{0}^{1}x\cdot sin(kx)dx+\int_{1}^{2}(2-x)sin(kx)dx\]
+<p>The first integral, by the method described in Appendix C:</p>
+\[I_1=\int_{0}^{1}x\cdot sin(kx)dx=\bigg[\frac{-x cos(kx)}{k}+\frac{sin(kx)}{k^2} \bigg]_{0}^{1}=\frac{sin(k)}{k^2}-\frac{cos(k)}{k}\]
+<p>The second integral can also be split into two:</p>
+\[I_2=\int_{1}^{2}2sin(kx)dx - \int_{1}^{2}x\cdot sin(kx)dx\]
+<p>The first of these is trivial to calculate; the second can once again
+use Appendix C. After some tedious but straightforward calculations <a href="#footnote-5" target="_blank" rel="noopener noreferrer">[5]</a>
+we’ll get:</p>
+\[I_2=\frac{cos(k)}{k}+\frac{sin(k)-sin(2k)}{k^2}\]
+<p>Adding I_1+I_2, we get:</p>
+\[\begin{aligned}
+b_n=I_1+I_2&amp;=\frac{sin(k)}{k^2}-\frac{cos(k)}{k}+\frac{cos(k)}{k}+\frac{sin(k)-sin(2k)}{k^2}\\
+&amp;=\frac{2sin(k)-sin(2k)}{k^2}
+\end{aligned}\]
+<p>Now let’s substitute k=\frac{n\pi}{2} back. This makes
+sin(2k) zero because the sine of an integer multiple of
+\pi is always zero:</p>
+\[b_n=\frac{2sin \frac{n\pi}{2}}{\left (\frac{n\pi}{2}\right )^2}=\frac{8sin \frac{n\pi}{2}}{n^2\pi^2}\]
+<p>We have b_n, so the Fourier series for our t(x) is:</p>
+\[t(x)=\sum_{n=1}^{\infty}\frac{8}{n^2\pi^2}sin\frac{n\pi}{2}sin\frac{n\pi x}{2}\]
+<p>Note that for even values of <img alt="n" src="https://eli.thegreenplace.net/images/math/d1854cae891ec7b29161ccaf79a24b00c274bdaa.png" />, sin \frac{n\pi}{2} is
+zero, so only the odd terms remain:</p>
+\[t(x)=\frac{8}{\pi^2}\bigg[ sin\frac{\pi x}{2}-\frac{1}{3^2} sin\frac{3\pi x}{2}+\frac{1}{5^2}sin\frac{5\pi x}{2}-\cdots\bigg]\]
+<p>Here’s an interactive chart showing how the series t(x)
+converges to our triangular function. You can set the number of terms in
+the Fourier series and see the effect (red line). Note that all even
+coefficients are zero so it will look the same for <img alt="n" src="https://eli.thegreenplace.net/images/math/d1854cae891ec7b29161ccaf79a24b00c274bdaa.png" /> as for
+n-1 when <img alt="n" src="https://eli.thegreenplace.net/images/math/d1854cae891ec7b29161ccaf79a24b00c274bdaa.png" /> is odd.</p>
+<div>
+  
+  Your browser does not support the HTML5 canvas tag.
+  
+
+  <div>
+    <div>
+      
+        n (terms in the Fourier series)
+        
+      
+    </div>
+
+    <div></div>
+  </div>
+</div></div>
+<div>
+<h2>Compact formula using a single phase-shifted sinusoid</h2>
+<p>We’ve written the Fourier series for <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" /> as follows so far:</p>
+\[f(x)=\frac{a_0}{2}+\sum_{n=1}^{\infty}\left(a_n cos\frac{n\pi x}{L}+b_n sin\frac{n\pi x}{L}\right)\]
+<p>We can rewrite this in a somewhat more compact form, using a single
+sinusoid with a configurable phase at each <img alt="n" src="https://eli.thegreenplace.net/images/math/d1854cae891ec7b29161ccaf79a24b00c274bdaa.png" />:</p>
+\[f(x)=\frac{a_0}{2}+\sum_{n=1}^{\infty}q_n\cdot cos\left(\frac{n\pi x}{L}+\theta_n\right)\]
+<p>Based on Appendix D, q_n and \theta_n can be computed as
+follows:</p>
+\[\begin{aligned}
+    q_n&amp;=\sqrt{a_n^2+b_n^2}\\
+    \theta_n&amp;=\operatorname{atan2}(-b_n,a_n)
+\end{aligned}\]
+<p>When Fourier series are used in the context of signal processing, this
+formulation is easier to reason about because it represents the
+magnitude and phase shift of each harmonic of <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" /> in the
+frequency domain <a href="#footnote-6" target="_blank" rel="noopener noreferrer">[6]</a></p>
+</div>
+<div>
+<h2>Complex Fourier series</h2>
+<p>It should not come as a surprise that the Fourier series, being a
+combination of trigonometric functions, can also be represented with
+complex exponential functions.</p>
+<p>Specifically, we’ll show that our <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" /> can be approximated as
+follows:</p>
+\[f(x)=\sum_{n=-\infty}^{\infty}C_n\cdot e^{in\pi x/L}\]
+<p>Let’s calculate C_n. We proceed in a manner similar to before,
+by multiplying both sides of the equation by e^{-im\pi x/L} and
+taking an integral in the range [-L,L]:</p>
+\[\begin{aligned}
+\int_{-L}^{L}f(x)e^{-im\pi x/L}dx&amp;=\sum_{n=-\infty}^{\infty}\int_{-L}^{L}C_n\cdot e^{in\pi x/L}e^{-im\pi x/L}dx\\
+&amp;=\sum_{n=-\infty}^{\infty}\int_{-L}^{L}C_n\cdot e^{i(n-m)\pi x/L}dx
+\end{aligned}\]
+<p>By Appendix A, the sum elements are all zero when n\neq m. When
+n=m, we get:</p>
+\[\int_{-L}^{L}f(x)e^{-im\pi x/L}dx=\int_{-L}^{L}C_m\cdot 1 \cdot dx=2LC_m\]
+<p>Therefore, renaming m to <img alt="n" src="https://eli.thegreenplace.net/images/math/d1854cae891ec7b29161ccaf79a24b00c274bdaa.png" /> (since it’s just an arbitrary
+integer constant):</p>
+\[C_n=\frac{1}{2L}\int_{-L}^{L}f(x)e^{-in\pi x/L}dx\]
+<p>We’ve found an alternative formulation to Fourier series, using complex
+exponentials instead of trigonometric functions. While this was a direct
+derivation, another way to achieve the same result is to use the <a href="https://eli.thegreenplace.net/2024/notes-on-the-euler-formula/" target="_blank" rel="noopener noreferrer">Euler
+Formula</a>
+to derive:</p>
+\[\begin{aligned}
+    cos\theta&amp;=\frac{e^{i\theta}+e^{-i\theta}}{2}\\
+    sin\theta&amp;=\frac{e^{i\theta}-e^{-i\theta}}{2i}
+\end{aligned}\]
+<p>And substitute these into the original Fourier series formula. I’ll
+leave this as an exercise for the diligent reader; eventually, the
+result will be the same. Moreover, it’s possible to show a direct
+correspondence between a_n, b_n and C_n, for
+n&gt;0:</p>
+\[\begin{aligned}
+    C_0&amp;=\frac{a_0}{2}\\
+    C_n&amp;=\frac{a_n-ib_n}{2}\\
+    C_{-n}&amp;=\frac{a_n+ib_n}{2}\\
+\end{aligned}\]
+<p>Note that C_{-n}=C_n^* when both a_n and b_n are
+real (which is the case for a real-valued <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" />). This helps
+explain why the complex formulation has negative frequencies in the sum;
+when the function is actually real, each negative frequency is paired up
+with a positive frequency and the result is real <a href="#footnote-7" target="_blank" rel="noopener noreferrer">[7]</a>:</p>
+\[\begin{aligned}
+C_n e^{in\pi x/L}+C_{-n} e^{-in\pi x/L}&amp;=C_n e^{in\pi x/L}+C_n^* e^{-in\pi x/L}\\
+&amp;=C_n e^{in\pi x/L}+\left(C_{n} e^{in\pi x/L}\right)^*\\
+&amp;=2\operatorname{Re}\bigg(C_{n} e^{in\pi x/L}\bigg)
+\end{aligned}\]
+<p>So, for a real function we only need to account for positive
+frequencies:</p>
+\[f(x)=C_0+\sum_{n=1}^{\infty}2\operatorname{Re}\bigg(C_{n} e^{in\pi x/L}\bigg)\]
+<p>We can take it further. C_n is a complex number, so let’s
+represent it in polar form as C_n=\frac{q_n}{2} e^{i\theta_n}
+(the factor of half will make sense soon). Then:</p>
+\[\begin{aligned}
+\operatorname{Re}\bigg(C_{n} e^{in\pi x/L}\bigg)&amp;=\operatorname{Re}\bigg(\frac{q_n}{2} e^{i\theta_n}e^{in\pi x/L}\bigg)\\
+&amp;=\frac{q_n}{2}\operatorname{Re}\bigg(e^{i(n\pi x/L + \theta_n)}\bigg)\\
+&amp;=\frac{q_n}{2} cos\bigg(\frac{n\pi x}{L}+\theta_n\bigg)
+\end{aligned}\]
+<p>And substituting back into the sum:</p>
+\[f(x)=C_0+\sum_{n=1}^{\infty}q_n cos\bigg(\frac{n\pi x}{L}+\theta_n\bigg)\]
+<p>This is precisely the compact formulation from the previous section!</p>
+</div>
+<div>
+<h2>Fourier orthogonal basis in Hilbert space</h2>
+<p>The most beautiful aspect of Fourier theory is that it doesn’t just
+happen to work by chance, and is deeply connected to linear algebra.
+Please read <a href="https://eli.thegreenplace.net/2025/hilbert-space-treating-functions-as-vectors/" target="_blank" rel="noopener noreferrer">my post on Hilbert
+space</a>
+before proceeding.</p>
+<p>The space of real-valued square integrable functions L^2 forms a
+Hilbert space, in which we can define the inner product (assuming real
+functions):</p>
+\[\langle f,g \rangle=\int_{-L}^{L}f(x)g(x) dx\]
+<p>We’ve demonstrated that the family of functions:</p>
+\[1,\qquad cos\frac{n\pi x}{L},\qquad sin\frac{n\pi x}{L}\]
+<p>Are all mutually orthogonal, because their pairwise inner products are
+zero! We’ve also shown that any function in L^2 can be
+represented as a weighted sum of these functions:</p>
+\[f(x)=\frac{a_0}{2}+\sum_{n=1}^{\infty}\left(a_n cos\frac{n\pi x}{L}+b_n sin\frac{n\pi x}{L}\right)\]
+<p>So these functions form a <em>basis</em> for L^2. When we think of
+these functions as vectors (in an infinite Hilbert space), much of what
+we did in this post starts feeling like "normal" linear algebra. For
+example, when we have a set of basis vectors and we want to know how to
+represent some vector <img alt="v" src="https://eli.thegreenplace.net/images/math/7a38d8cbd20d9932ba948efaa364bb62651d5ad4.png" /> in this basis, we usually find the
+coefficients by <a href="https://eli.thegreenplace.net/2024/projections-and-projection-matrices/" target="_blank" rel="noopener noreferrer">projecting
+it</a>
+onto the basis. E.g. with a basis vector e_1, the coefficient of
+<img alt="v" src="https://eli.thegreenplace.net/images/math/7a38d8cbd20d9932ba948efaa364bb62651d5ad4.png" />:</p>
+\[c=\frac{\langle v, e_1\rangle}{\langle e_1, e_1\rangle}\]
+<p>Similarly, when we calculate the coefficient b_n for some
+function <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" />, we project <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" /> onto the basis vector
+sin\frac{n\pi x}{L} by calculating:</p>
+\[b_n=\frac{\langle f(x), sin\frac{n\pi x}{L}\rangle}{\langle sin\frac{n\pi x}{L}, sin\frac{n\pi x}{L}\rangle}\]
+<p>From Appendix B, we know that the denominator is L, and we’ve
+just denoted:</p>
+\[\langle f(x), sin\frac{n\pi x}{L}\rangle=\int_{-L}^{L}f(x)sin\frac{n\pi x}{L}dx\]
+<p>So we get:</p>
+\[b_n=\frac{1}{L}\int_{-L}^{L}f(x)sin\frac{n\pi x}{L}dx\]
+<p>Which should look familiar!</p>
+<p>This is the core linear-algebra idea behind Fourier series: the
+functions 1, cos\frac{n\pi x}{L}, and
+sin\frac{n\pi x}{L} play the role of orthogonal basis vectors,
+while the Fourier coefficients are coordinates of <img alt="f" src="https://eli.thegreenplace.net/images/math/4a0a19218e082a343a1b17e5333409af9d98f0f5.png" /> in this
+basis. The integral formulas for a_n and b_n are not
+mysterious tricks; they are projections, just like dot products with
+basis vectors in ordinary Euclidean space.</p>
+<p>Fourier series therefore let us decompose a function into independent
+orthogonal directions, much like decomposing a vector into its
+<img alt="x" src="https://eli.thegreenplace.net/images/math/11f6ad8ec52a2984abaafd7c3b516503785c2072.png" />, <img alt="y" src="https://eli.thegreenplace.net/images/math/95cb0bfd2977c761298d9624e4b4d4c72a39974a.png" />, and z components.</p>
+</div>
+<div>
+<h2>Appendix A: Integrals of sinusoids</h2>
+<p>For any integer n\neq 0 and an arbitrary constant L, we have:</p>
+\[\begin{aligned}
+\int_{-L}^{L}cos\frac{n\pi x}{L}dx&amp;=\bigg[\frac{L}{n\pi}sin\frac{n\pi x}{L}\bigg]_{-L}^{L}\\
+&amp;=\frac{L}{n\pi}(sin(n\pi)-sin(-n\pi))=0
+\end{aligned}\]
+<p>Similarly:</p>
+\[\begin{aligned}
+\int_{-L}^{L}sin\frac{n\pi x}{L}dx&amp;=\bigg[\frac{-L}{n\pi}cos\frac{n\pi x}{L}\bigg]_{-L}^{L}\\
+&amp;=\frac{-L}{n\pi}\left(cos(n\pi)-cos(-n\pi)\right)=0
+\end{aligned}\]
+<p>Using these, we can calculate the integral of a complex exponential
+function for an integer n\neq 0:</p>
+\[\begin{aligned}
+\int_{-L}^{L}e^{in\pi x/L}dx=\int_{-L}^{L}\bigg[ cos\frac{n\pi x}{L} +i\cdot sin\frac{n\pi x}{L}\bigg] dx=0
+\end{aligned}\]
+</div>
+<div>
+<h2>Appendix B: Integrals of products of sinusoids</h2>
+<p>We’ll start with the product of two sines, for any positive integers
+m and <img alt="n" src="https://eli.thegreenplace.net/images/math/d1854cae891ec7b29161ccaf79a24b00c274bdaa.png" />:</p>
+\[ss=\int_{-L}^{L}sin\frac{m\pi x}{L}\cdot sin\frac{n\pi x}{L}dx\]
+<p>Using the trigonometric identity for a product of sines, we can write:</p>
+\[\begin{aligned}
+    ss&amp;=\frac{1}{2}\int_{-L}^{L}\bigg(cos\frac{(m-n)\pi x}{L}-cos\frac{(m+n)\pi x}{L}\bigg)dx\\
+    &amp;=\frac{1}{2}\int_{-L}^{L}cos\frac{(m-n)\pi x}{L}dx-\frac{1}{2}\int_{-L}^{L}cos\frac{(m+n)\pi x}{L}dx
+\end{aligned}\]
+<p>Now let’s focus on two different scenarios, m\neq n and
+m=n.</p>
+<p>If m\neq n, then each of the integrals constituting <em>ss</em> are 0
+(see on Appendix A), so ss=0.</p>
+<p>If m=n, then the second integral is still 0, but the first one
+isn’t:</p>
+\[\begin{aligned}
+    ss&amp;=\frac{1}{2}\int_{-L}^{L}cos\frac{0\pi x}{L}dx\\
+    &amp;=\frac{1}{2}\int_{-L}^{L}1dx=L
+\end{aligned}\]
+<p>Therefore:</p>
+\[ss=\int_{-L}^{L}sin\frac{m\pi x}{L}\cdot sin\frac{n\pi x}{L}dx=
+\begin{cases}
+    L      &amp; m = n \\
+    0      &amp; m \neq n
+\end{cases}\]
+<p>We can use exactly the same approach to show that:</p>
+\[cc=\int_{-L}^{L}cos\frac{m\pi x}{L}\cdot cos\frac{n\pi x}{L}dx=
+\begin{cases}
+    L      &amp; m = n \\
+    0      &amp; m \neq n
+\end{cases}\]
+<p>One more variant to cover:</p>
+\[sc=\int_{-L}^{L}sin\frac{m\pi x}{L}\cdot cos\frac{n\pi x}{L}dx\]
+<p>Since sine is an odd function and cosine is an even function, their
+product is an odd function. And the integral of an odd function over a
+symmetric interval is 0 (see <a href="https://eli.thegreenplace.net/2025/notes-on-even-and-odd-functions/" target="_blank" rel="noopener noreferrer">this post for more
+details</a>).</p>
+<p>Therefore:</p>
+\[sc=\int_{-L}^{L}sin\frac{m\pi x}{L}\cdot cos\frac{n\pi x}{L}dx=0\]
+</div>
+<div>
+<h2>Appendix C: A useful integral</h2>
+<p>Let’s calculate the indefinite integral:</p>
+\[I=\int x\cdot sin(kx) dx\]
+<p>For some constant k. We’ll use integration by parts:</p>
+\[\int u\cdot dv =u\cdot v - \int v\cdot du\]
+<p>Here u=x, so du=dx. Also dv=sin(kx), so
+v=-\frac{cos(kx)}{k}.</p>
+<p>Putting it together:</p>
+\[I=\frac{-x\cdot cos(kx)}{k}+\int \frac{cos(kx)}{k} dx=\frac{-x\cdot cos(kx)}{k}+\frac{sin(kx)}{k^2}\]
+</div>
+<div>
+<h2>Appendix D: Sinusoid with phase as a sum of sin and cos</h2>
+<p>Let’s take a general sinusoid with magnitude q, frequency
+<img alt="w" src="https://eli.thegreenplace.net/images/math/aff024fe4ab0fece4091de044c58c9ae4233383a.png" /> and phase <img alt="\theta" src="https://eli.thegreenplace.net/images/math/cb005d76f9f2e394a770c2562c2e150a413b3216.png" />:</p>
+\[s(x)=q\cdot cos(wx+\theta)\]
+<p>We’re going to show that s(x) can be represented as a sum of a
+<em>sine</em> and a <em>cosine</em> with no phase. This is related to <a href="https://eli.thegreenplace.net/2023/sum-of-same-frequency-sinusoids/" target="_blank" rel="noopener noreferrer">my earlier post
+on the sum of same-frequency
+sinusoids</a>.</p>
+<p>Let’s start by expanding s(x) using a trigonometric identity:</p>
+\[s(x)=q\cdot cos(\theta)cos(wx)-q\cdot sin(\theta)sin(wx)\]
+<p>Now we’ll denote: a=q\cdot cos(\theta) and
+b=-q\cdot sin(\theta), so:</p>
+\[s(x)=a\cdot cos(wx)+b\cdot sin(wx)\]
+<p>We have a and b in terms of q and
+<img alt="\theta" src="https://eli.thegreenplace.net/images/math/cb005d76f9f2e394a770c2562c2e150a413b3216.png" />, but what about the other way around?</p>
+<p>Let’s take the equations:</p>
+\[\begin{aligned}
+    a&amp;=q\cdot cos(\theta)\\
+    b&amp;=-q\cdot sin(\theta)
+\end{aligned}\]
+<p>Square both of them and add together:</p>
+\[\begin{aligned}
+    a^2+b^2&amp;=q^2\cdot(cos^2(\theta)+sin^2(\theta))=q^2\\
+    &amp;\Rightarrow q=\sqrt{a^2+b^2}
+\end{aligned}\]
+<p>Now we’ll take the equations for b and a and divide one
+by the other:</p>
+\[\begin{aligned}
+    \frac{b}{a}&amp;=\frac{-sin(\theta)}{cos(\theta)}\\
+    &amp;\Rightarrow\theta=\operatorname{atan2}(-b,a)
+\end{aligned}\]
+<p>Where <a href="https://en.wikipedia.org/wiki/Atan2" target="_blank" rel="noopener noreferrer">the atan2 function</a> is
+careful to take into account the sign of both numerator and denominator.
+Also it’s worth mentioning that <img alt="\theta" src="https://eli.thegreenplace.net/images/math/cb005d76f9f2e394a770c2562c2e150a413b3216.png" /> is determined up to
+additions of 2\pi.</p>
+<p>To conclude, for any q, <img alt="w" src="https://eli.thegreenplace.net/images/math/aff024fe4ab0fece4091de044c58c9ae4233383a.png" /> and <img alt="\theta" src="https://eli.thegreenplace.net/images/math/cb005d76f9f2e394a770c2562c2e150a413b3216.png" />:</p>
+\[q\cdot cos(wx+\theta)=a\cdot cos(wx)+b\cdot sin(wx)\]
+<p>With the aforementioned conversion formulas for a, b.</p>
+<hr />
+<table>
+<colgroup><col></col><col></col></colgroup>
+<tbody>
+<tr><td><a href="#footnote-reference-1" target="_blank" rel="noopener noreferrer">[1]</a></td><td>A function <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" /> is called periodic if there exists some
+constant P&gt;0 such that f(x+P)=f(x)\ \forall x. In our
+case, we denote the period as P=2L to make presentation and
+calculations neater.</td></tr>
+</tbody>
+</table>
+<table>
+<colgroup><col></col><col></col></colgroup>
+<tbody>
+<tr><td><a href="#footnote-reference-2" target="_blank" rel="noopener noreferrer">[2]</a></td><td>Since f(x)\in L^2, we know that it’s integrable on a finite
+interval</td></tr>
+</tbody>
+</table>
+<table>
+<colgroup><col></col><col></col></colgroup>
+<tbody>
+<tr><td><a href="#footnote-reference-3" target="_blank" rel="noopener noreferrer">[3]</a></td><td>There’s also an infinite number of less natural ways to extend the
+function; they will still work, but may make the calculation
+needlessly complicated</td></tr>
+</tbody>
+</table>
+<table>
+<colgroup><col></col><col></col></colgroup>
+<tbody>
+<tr><td><a href="#footnote-reference-4" target="_blank" rel="noopener noreferrer">[4]</a></td><td>I chose this one because the more common ones like a square wave and
+a sawtooth wave have many derivations available online, including on
+Wikipedia.</td></tr>
+</tbody>
+</table>
+<table>
+<colgroup><col></col><col></col></colgroup>
+<tbody>
+<tr><td><a href="#footnote-reference-5" target="_blank" rel="noopener noreferrer">[5]</a></td><td>Try it for yourself - it’s a good exercise.</td></tr>
+</tbody>
+</table>
+<table>
+<colgroup><col></col><col></col></colgroup>
+<tbody>
+<tr><td><a href="#footnote-reference-6" target="_blank" rel="noopener noreferrer">[6]</a></td><td>When q_n=0 for some <img alt="n" src="https://eli.thegreenplace.net/images/math/d1854cae891ec7b29161ccaf79a24b00c274bdaa.png" />, the corresponding
+\theta_n can be chosen arbitrarily.</td></tr>
+</tbody>
+</table>
+<table>
+<colgroup><col></col><col></col></colgroup>
+<tbody>
+<tr><td><a href="#footnote-reference-7" target="_blank" rel="noopener noreferrer">[7]</a></td><td>For a complex-valued <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" />, this conjugate symmetry no longer
+holds in general. a_n and b_n may be complex, so
+C_n and C_{-n} need not be conjugates.</td></tr>
+</tbody>
+</table>
+</div></div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://eli.thegreenplace.net/2026/notes-on-fourier-series/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text footer-text--strong" data-astro-cid-sz7xmlte>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-sz7xmlte>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-wlspcwf4> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-wlspcwf4> <path d="M18 15l-6-6-6 6" data-astro-cid-wlspcwf4></path> </svg> </button> <script type="module">function o(){const e=document.getElementById("back-to-top");if(!e)return;const s=300;let t=!1;const n=()=>{const i=window.scrollY>s;e.hidden=!i,t=!1},d=()=>{t||(requestAnimationFrame(n),t=!0)};e.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"})}),window.addEventListener("scroll",d,{passive:!0}),n(),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",d)},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",o):o();document.addEventListener("astro:page-load",o);</script></body></html>
