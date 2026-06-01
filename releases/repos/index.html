@@ -6,27 +6,77 @@
             <button id="retry-search" class="search-retry-btn">重试</button>
           </div>
         `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--default" data-astro-cid-sckkx6r4> <h1 id="-github-releases-监控列表">📦 GitHub Releases 监控列表</h1>
-<p>当前系统监控 <strong>3</strong> 个开源项目，每日自动抓取最新版本并生成 AI 摘要。</p>
+<p>当前系统监控 <strong>11</strong> 个开源项目，每日自动抓取最新版本并生成 AI 摘要。</p>
 <p>最后更新: 2026-06-01</p>
+<hr>
+<h2 id="go-1">Go (1)</h2>
+<ul>
+<li><strong><a href="https://github.com/rorkai/App-Store-Connect-CLI" rel="noopener noreferrer" target="_blank">rorkai/App-Store-Connect-CLI</a></strong> ⭐ 4.6k
+Fast, scriptable CLI for the App Store Connect API. Automate TestFlight, builds, submissions, signing, analytics, screenshots, subscriptions, and more. JSON-first, no interactive prompts
+<em>最后更新: 2026-06-01</em></li>
+</ul>
+<hr>
+<h2 id="kotlin-2">Kotlin (2)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/2dust/v2rayNG" rel="noopener noreferrer" target="_blank">2dust/v2rayNG</a></strong> ⭐ 57.3k
+A V2Ray client for Android, support Xray core and v2fly core
+<em>最后更新: 2026-06-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/MetaCubeX/ClashMetaForAndroid" rel="noopener noreferrer" target="_blank">MetaCubeX/ClashMetaForAndroid</a></strong> ⭐ 40.5k
+A rule-based tunnel for Android.
+<em>最后更新: 2026-06-01</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="rust-1">Rust (1)</h2>
+<ul>
+<li><strong><a href="https://github.com/openai/codex" rel="noopener noreferrer" target="_blank">openai/codex</a></strong> ⭐ 87.6k
+Lightweight coding agent that runs in your terminal
+<em>最后更新: 2026-06-01</em></li>
+</ul>
 <hr>
 <h2 id="shell-1">Shell (1)</h2>
 <ul>
 <li><strong><a href="https://github.com/ophub/amlogic-s9xxx-openwrt" rel="noopener noreferrer" target="_blank">ophub/amlogic-s9xxx-openwrt</a></strong> ⭐ 2.9k
 Supports running OpenWrt on Amlogic, Allwinner, and Rockchip devices. Support a311d, s922x, s905x3, s905x2, s912, s905d, s905x, s905w, s905, s905l, rk3588, rk3568, rk3399, rk3328, h6, etc.
-<em>最后更新: 2026-05-31</em></li>
-</ul>
-<hr>
-<h2 id="swift-1">Swift (1)</h2>
-<ul>
-<li><strong><a href="https://github.com/steipete/CodexBar" rel="noopener noreferrer" target="_blank">steipete/CodexBar</a></strong> ⭐ 14.0k
-Show usage stats for OpenAI Codex and Claude Code, without having to login.
 <em>最后更新: 2026-06-01</em></li>
 </ul>
 <hr>
-<h2 id="typescript-1">TypeScript (1)</h2>
+<h2 id="typescript-5">TypeScript (5)</h2>
 <ul>
-<li><strong><a href="https://github.com/nextai-translator/nextai-translator" rel="noopener noreferrer" target="_blank">nextai-translator/nextai-translator</a></strong> ⭐ 24.9k
+<li>
+<p><strong><a href="https://github.com/openclaw/openclaw" rel="noopener noreferrer" target="_blank">openclaw/openclaw</a></strong> ⭐ 376.1k
+Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞
+<em>最后更新: 2026-06-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/code-yeongyu/oh-my-openagent" rel="noopener noreferrer" target="_blank">code-yeongyu/oh-my-openagent</a></strong> ⭐ 60.6k
+omo; the one and only agent harness for complex codebases; the pickaxe for complex software engineering
+<em>最后更新: 2026-06-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/MHSanaei/3x-ui" rel="noopener noreferrer" target="_blank">MHSanaei/3x-ui</a></strong> ⭐ 39.1k
+Xray panel supporting multi-protocol multi-user expire day &#x26; traffic &#x26; IP limit (Vmess, Vless, Trojan, ShadowSocks, Wireguard, Hysteria, Tunnel, Mixed, HTTP, Tun)
+<em>最后更新: 2026-06-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/nextai-translator/nextai-translator" rel="noopener noreferrer" target="_blank">nextai-translator/nextai-translator</a></strong> ⭐ 24.9k
 基于 ChatGPT API 的划词翻译浏览器插件和跨平台桌面端应用    -    Browser extension and cross-platform desktop application for translation based on ChatGPT API.
+<em>最后更新: 2026-06-01</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/EKKOLearnAI/hermes-web-ui" rel="noopener noreferrer" target="_blank">EKKOLearnAI/hermes-web-ui</a></strong> ⭐ 6.9k
+Web dashboard for Hermes Agent — multi-platform AI chat, session management, scheduled jobs, usage analytics
+<em>最后更新: 2026-06-01</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="vue-1">Vue (1)</h2>
+<ul>
+<li><strong><a href="https://github.com/Zephyruso/zashboard" rel="noopener noreferrer" target="_blank">Zephyruso/zashboard</a></strong> ⭐ 2.8k
+(无描述)
 <em>最后更新: 2026-06-01</em></li>
 </ul>
 <hr>
