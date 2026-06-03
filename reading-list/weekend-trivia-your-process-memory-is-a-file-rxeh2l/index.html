@@ -29,7 +29,7 @@ Gid:    1000    1000    1000    1000
 ...
 VmSize:     2420 kB
 ...</code></pre></div></blockquote><p>But then… if you ever snooped around the <code>/proc/&lt;pid&gt;/</code> directory on Linux, you might have noticed a mysterious file that seemingly can’t be read:</p><blockquote><div><pre><code>$ cat /proc/self/mem
-cat: /proc/self/mem: I/O error</code></pre></div></blockquote><p>To get anything out of that “file”, you need to <em>lseek(…)</em> to a specific offset before calling <em>read(…) </em>or <em>write(…)</em>; alternatively, you can pass the offset when calling <em>pread(…) </em>or <em>pwrite(…)</em>. If you follow that procedure, you can then seamlessly fetch or modify the memory of the target program in real time.</p><p>Here’s how it works in practice — a program that performs self-surgery by accessing the file-based interface (<a href="https://godbolt.org/z/hsEfdqhhh" target="_blank" rel="noopener noreferrer">demo link</a>):</p><blockquote><div><pre><code>#include &lt;stdio.h&gt;
+cat: /proc/self/mem: I/O error</code></pre></div></blockquote><p>To get anything out of that “file”, you need to <em>lseek(…)</em> to a specific offset before calling <em>read(…) </em>or <em>write(…)</em>; alternatively, you can pass the offset when calling <em>pread(…) </em>or <em>pwrite(…)</em>. If you follow that procedure, you can then seamlessly fetch or modify the memory of the target program in real time.</p><p>Here’s how it works in practice — a program that carries out performative self-surgery via the file-based interface (<a href="https://godbolt.org/z/hsEfdqhhh" target="_blank" rel="noopener noreferrer">demo link</a>):</p><blockquote><div><pre><code>#include &lt;stdio.h&gt;
 #include &lt;unistd.h&gt;
 #include &lt;fcntl.h&gt;
 
