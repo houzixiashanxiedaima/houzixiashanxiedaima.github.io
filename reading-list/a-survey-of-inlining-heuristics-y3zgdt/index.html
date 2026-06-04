@@ -1,0 +1,1011 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.4.3"><!-- Core SEO --><meta name="description" content="Compilers, especially method just-in-time compilers, operate on one function at
+a time. It is a natural code unit size, especially for a dynamic language JIT:
+at a given point in time, what more infor"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/a-survey-of-inlining-heuristics-y3zgdt/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/a-survey-of-inlining-heuristics-y3zgdt/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/a-survey-of-inlining-heuristics-y3zgdt/"><meta property="og:title" content="A survey of inlining heuristics"><meta property="og:description" content="Compilers, especially method just-in-time compilers, operate on one function at
+a time. It is a natural code unit size, especially for a dynamic language JIT:
+at a given point in time, what more infor"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="Compilers, especially method just-in-time compilers, operate on one function at
+a time. It is a natural code unit size, especially for a dynamic language JIT:
+at a given point in time, what more infor"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/a-survey-of-inlining-heuristics-y3zgdt/"><meta property="twitter:title" content="A survey of inlining heuristics"><meta property="twitter:description" content="Compilers, especially method just-in-time compilers, operate on one function at
+a time. It is a natural code unit size, especially for a dynamic language JIT:
+at a given point in time, what more infor"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>A survey of inlining heuristics</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/","potentialAction":{"@type":"SearchAction","target":"https://blog.yuyins.com/search?q={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"A survey of inlining heuristics","item":"https://blog.yuyins.com/reading-list/a-survey-of-inlining-heuristics-y3zgdt/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-b4zvghpy]{display:inline-flex;align-items:center;gap:.45rem;border-radius:9999px;border:1px solid transparent;background:var(--muted);color:var(--foreground);font-weight:500;line-height:1.4;text-decoration:none;white-space:nowrap}.chip--sm[data-astro-cid-b4zvghpy]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-b4zvghpy]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-b4zvghpy]{cursor:pointer;transition:background-color .2s ease,color .2s ease,opacity .2s ease}.chip--interactive[data-astro-cid-b4zvghpy]:hover{background-color:color-mix(in srgb,var(--accent) 10%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 68%,var(--foreground))}.chip--active[data-astro-cid-b4zvghpy],.chip[data-astro-cid-b4zvghpy].active{background-color:color-mix(in srgb,var(--accent) 18%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 82%,var(--foreground));border-color:transparent;box-shadow:none;font-weight:600}.chip--dashed[data-astro-cid-b4zvghpy]{border-style:dashed;border-color:color-mix(in srgb,var(--accent) 22%,var(--border));background:color-mix(in srgb,var(--background) 70%,var(--muted))}.chip[data-astro-cid-b4zvghpy]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+<link rel="stylesheet" href="/_astro/Layout.BLruMMys.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0;animation:fadeIn .3s ease-out}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.8125rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--accent)}.back-link--top[data-astro-cid-wrgicudb]{display:inline-block;margin-bottom:1rem}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2> 雅俗共赏 </a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-otpdt6jm> <div class="search-dialog-card" data-astro-cid-otpdt6jm> <div class="search-dialog-bar" data-astro-cid-otpdt6jm> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="8" data-astro-cid-otpdt6jm></circle><path d="m21 21-4.3-4.3" data-astro-cid-otpdt6jm></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-otpdt6jm></div> <kbd class="search-kbd" data-astro-cid-otpdt6jm>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-otpdt6jm> <path d="M18 6 6 18" data-astro-cid-otpdt6jm></path><path d="m6 6 12 12" data-astro-cid-otpdt6jm></path> </svg> </button> </div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(e=0){if(sessionStorage.getItem(c)==="true")return m(),!0;const s=document.getElementById("pagefind-ui");if(!s)return!1;s.innerHTML='<div class="search-loading">加载中...</div>';try{return await new Promise((r,o)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=r,a.onerror=o,document.head.appendChild(a)}),m(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),e<2?(console.log(`Retrying search load... (${e+1}/2)`),await new Promise(r=>setTimeout(r,1e3)),l(e+1)):(s&&(s.innerHTML=`
+          <div class="search-loading">
+            <p>搜索功能加载失败</p>
+            <button id="retry-search" class="search-retry-btn">重试</button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>A survey of inlining heuristics</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://bernsteinbear.com" target="_blank" rel="noopener noreferrer" data-astro-cid-wrgicudb="true" data-astro-cid-b4zvghpy="true" class="chip chip--sm chip--interactive source-tag"> bernsteinbear.com </a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年6月3日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>Compilers, especially method just-in-time compilers, operate on one function at
+a time. It is a natural code unit size, especially for a dynamic language JIT:
+at a given point in time, what more information can you gather about other
+parts of a running, changing system?</p>
+
+<p>I don’t have any data to back this up—maybe I should go gather some—but on
+average, methods are small. Especially in languages such as Ruby that use
+method dispatch for everything, even instance variable (attribute, field, …)
+lookups, they are <em>small</em>. And everywhere.</p>
+
+<p>This makes the compiler sad. If we are to continue to anthropomorphize them,
+compilers like having more context so they can optimize better. Consider the
+following silly-looking example that is actually representative of a surprising
+amount of real-world code:</p>
+
+<div><div><pre><code><span>class</span> <span>Point</span>
+  <span>attr_reader</span> <span>:x</span><span>,</span> <span>:y</span>
+
+  <span>def</span> <span>initialize</span><span>(</span><span>x</span><span>,</span> <span>y</span><span>)</span>
+    <span>@x</span> <span>=</span> <span>x</span>
+    <span>@y</span> <span>=</span> <span>y</span>
+  <span>end</span>
+
+  <span>def</span> <span>distance</span><span>(</span><span>other</span><span>)</span>
+    <span>Math</span><span>.</span><span>sqrt</span><span>((</span><span>@x</span> <span>-</span> <span>other</span><span>.</span><span>x</span><span>)</span><span>**</span><span>2</span> <span>+</span> <span>(</span><span>@y</span> <span>-</span> <span>other</span><span>.</span><span>y</span><span>)</span><span>**</span><span>2</span><span>)</span>
+  <span>end</span>
+<span>end</span>
+
+<span>def</span> <span>distance_from_origin</span><span>(</span><span>x</span><span>,</span> <span>y</span><span>)</span>
+  <span>Point</span><span>.</span><span>new</span><span>(</span><span>x</span><span>,</span> <span>y</span><span>).</span><span>distance</span><span>(</span><span>Point</span><span>.</span><span>new</span><span>(</span><span>0</span><span>,</span> <span>0</span><span>))</span>
+<span>end</span>
+</code></pre></div></div>
+
+<p>Right now, in the <code>distance_from_origin</code> method, I count 8 different method calls:</p>
+
+<ul>
+  <li><code>Point.new</code></li>
+  <li><code>Point#initialize</code></li>
+  <li><code>Point.new</code></li>
+  <li><code>Point#initialize</code></li>
+  <li><code>Point#distance</code></li>
+  <li><code>Float#**</code></li>
+  <li><code>Float#**</code></li>
+  <li><code>Math.sqrt</code></li>
+</ul>
+
+<p>(Technically more, but the ivar lookups (including <code>attr_reader</code>!), addition,
+and subtraction are generally specialized and don’t push a frame, even in the
+interpreter.)</p>
+
+<p>Furthermore, there are at least two heap allocations: one for each <code>Point</code>
+instance.</p>
+
+<p>Last, there is a bunch of memory traffic to and from <code>Point</code> instances.</p>
+
+<p>This all is a huge bummer! What should be a simple math operation is now
+overwhelmed with a bunch of other stuff. <code>Point</code> is certainly not a zero-cost
+abstraction.</p>
+
+<p>Even if we had a bunch of other optimizations such as load-store elimination or
+escape analysis, they would not be able to do much: pretty much everything
+escapes and is effectful. That is, unless we <em>inline</em>. Inlining is the lever
+that enables a bunch of other optimization passes to kick in.</p>
+
+<h2>Inlining: the “easy” part</h2>
+
+<p>I wrote about the design and implementation of Cinder’s inliner (<a href="https://engineering.fb.com/2022/05/02/open-source/cinder-jits-instagram/" target="_blank" rel="noopener noreferrer">FB
+link</a>,
+<a href="/blog/cinder-jit-inliner/" target="_blank" rel="noopener noreferrer">personal blog link</a>) a couple of years ago. I wrote
+about arguably the simplest part, which is copying the callee body into the
+caller. It took me at least a week to get working. Probably closer to months if
+you consider all the plumbing through the rest of the JIT. In February during a
+small hackathon, I watched my colleague <a href="https://github.com/k0kubun" target="_blank" rel="noopener noreferrer">k0kubun</a>
+prototype that bit of the inliner inside ZJIT in about 30 minutes.</p>
+
+<p>There is more to do when pretty much every part of the VM is observable from
+the guest language: both Python and Ruby allow inspecting the state of the
+locals, the call stack, etc from user code. Sampling profilers also expect some
+amount of breadcrumbs to work with to inspect the stack. So there’s some more
+machinery still required to pretend like the callee function was not inlined. I
+talk about this a little bit in the Cinder blog post.</p>
+
+<p>Even so, all of that can probably be designed and wired together in a couple
+of months. Then you will find yourself tuning the inliner for the next 10
+years. This is much harder.</p>
+
+<h2>When: the harder part</h2>
+
+<p>The thing that makes inlining difficult, especially in a method JIT, is that
+you are trying to make an entire (dynamic!) system faster but you are only
+looking through a microscope and only capable of local reasoning<sup><a href="#fn:aot-split" rel="noopener noreferrer" target="_blank">1</a></sup>.
+Whereas other optimizations such as strength reduction, inline caches, and
+value numbering are an un-alloyed good for the generated code, inlining can
+have <em>negative effects</em>. It is also perhaps the first optimization people add
+that has non-local impact.</p>
+
+<p>If you inline wrong, your code size might blow up. This might thrash your CPU’s
+caches. Bummer, but happens to the best of us.</p>
+
+<p>But also, if you inline wrong, you might get in the way of other helpful
+optimizations: if you hit some size limit after inlining method A, you might
+never get to inline B, which is the key to unlocking the performance of the
+method you are trying to optimize.</p>
+
+<p>Last, inlining might hurt compile time. In situations where latency is
+paramount (think: interactive client JavaScript), adding tons more code into
+the fray might add noticeable hiccups, even if the long-term throughput
+improves. As always, in-band compilation is a trade-off because any time you
+spend compiling, you are <em>not executing code</em>.</p>
+
+<p>You have to write your compiler to reason about all of this stuff. So you have
+heuristics. For example, here is Michael Pollan’s inliner heuristic:</p>
+
+<blockquote>
+  <p><em>Inline methods. Mostly small. Not too many.</em></p>
+</blockquote>
+
+<p>I did a survey of a bunch of compilers, mostly JIT compilers, to see what their
+inlining heuristics look like. I also read (skimmed) some papers to see what
+those folks had to say. I wonder if they agree.</p>
+
+<p>This post was a long time coming. I started working on it about five years ago
+but then when I quit working at Facebook I accidentally left behind all of the
+inliner research I did for Cinder’s inliner. So then I kind of just thought
+about it aimlessly for a while before redoing it this year. Anyway, here’s
+wonderwall.</p>
+
+<h2>The heuristics</h2>
+
+<p>Spoiler alert: all in all, people tend to look at:</p>
+
+<ul>
+  <li>Profiles of call target</li>
+  <li>Cumulative caller size (increasing as callees get inlined)</li>
+  <li>Callee size</li>
+  <li>Inline depth</li>
+  <li>Number of inlined calls at a certain depth</li>
+  <li>If recursion is present</li>
+  <li>Callee/caller call count ratio (if callee only called less than K% of calls
+to caller, don’t inline callee)</li>
+  <li>Callee stack usage</li>
+  <li>Polymorphism in callee</li>
+  <li>What mode the compiler is in (baseline vs more aggressive)</li>
+  <li>If the callee looks like it always raises/throws</li>
+</ul>
+
+<p>And also have different interesting ways to pipe in profile information.</p>
+
+<p>Last, some newer papers do some wild stuff:</p>
+
+<ul>
+  <li>Train neural networks to make inlining decisions</li>
+  <li>Let inlining drive the entire optimization pipeline, treating it as a search
+heuristic over a BFS walk of the call graph</li>
+  <li>Use AOT-gathered information to aid in JIT heuristics</li>
+</ul>
+
+<p>Another thing to consider in inlining is how you gather and interpret profiles.</p>
+
+<h2>Call context and profiles: the other harder part</h2>
+
+<p>When you compile a function, you tend to specialize it based on the input it
+has historically been given. For a monomorphic input, maybe you guard that the
+type is still the same and otherwise jump into the interpreter. For a
+polymorphic input, maybe you check the top K (~4) common cases and otherwise
+jump into the interpreter. Fine.</p>
+
+<p>But sometimes you can be compiling a polymorphic method <code>bar</code> that is actually
+monomorphic in its caller <code>foo</code>. That is, <code>foo</code> might only ever pass one kind
+of input to <code>bar</code>, but other callers pass all kinds of stuff. Here is a bit of
+a silly example to show what I mean:</p>
+
+<div><div><pre><code><span>class</span> <span>HashWithIndifferentAccess</span>
+  <span>def</span> <span>initialize</span>
+    <span>@hash</span> <span>=</span> <span>{}</span>
+  <span>end</span>
+
+  <span># Allow reading from the Hash with either a String or a Symbol</span>
+  <span>def</span> <span>[]</span><span>(</span><span>key</span><span>)</span> <span>=</span> <span>@hash</span><span>[</span><span>key</span><span>.</span><span>to_sym</span><span>]</span>
+
+  <span># ...</span>
+<span>end</span>
+
+<span># some method...</span>
+<span>some_hash</span> <span>=</span> <span>HashWithIndifferentAccess</span><span>.</span><span>new</span>
+<span># ...</span>
+<span>some_hash</span><span>[</span><span>"abc"</span><span>]</span>
+
+<span># some other method...</span>
+<span>another_hash</span> <span>=</span> <span>HashWithIndifferentAccess</span><span>.</span><span>new</span>
+<span># ...</span>
+<span>another_hash</span><span>[</span><span>:xyz</span><span>]</span>
+</code></pre></div></div>
+
+<p>Just kidding, not so silly at all. It’s a super common pattern <a href="https://github.com/rails/rails/blob/6c75e6d5663afa4278ee593c2d6c20c1ee396e32/activesupport/lib/active_support/hash_with_indifferent_access.rb#L55" target="_blank" rel="noopener noreferrer">in
+Rails</a>. It makes <code>key</code> polymorphic in <code>HashWithIndifferentAccess#[]</code> even
+though for many of its callers, it may well be monomorphic (or even a
+constant).</p>
+
+<p>In order to plumb this information through to the compiler, you have to figure
+out this call context relationship. There are a couple of common ways to do it.</p>
+
+<h3>Splitting</h3>
+
+<p>YJIT, for example, though it does not inline, splits methods based on the types
+of the arguments going in. This means that it clones the compiled code,
+generating a new version for each context. This does not give <em>call</em> context
+(“A calls B”) but gives type context (“B is called with integers, B’ is called
+with strings”).</p>
+
+<p>A compiler could do type-based splitting in the interpreter or a baseline tier.</p>
+
+<h3>Profile splitting</h3>
+
+<p>If you don’t fancy duplicating the code, you can instead duplicate the
+profiles. You could either do this using type context (as above) or using call
+context. SpiderMonkey, for example, does “trial inlining” that allows callers
+to pass down a bit of memory for potential inline candidate callees to record
+their inline caches. Instead of each function holding its own ICScript, the
+caller allocates a unique ICScript for that potential-inline call-site. This
+gives each callee function (at least?) one level of call context.</p>
+
+<p>Later, when inlining the callee into the caller, we don’t have other callers’
+type information polluting the IR builder (or whatever reads the profiles).</p>
+
+<h3>Bytecode inlining</h3>
+
+<p>JavaScriptCore handles this by inlining bytecode into other bytecode. This is a
+gnarly transformation but gives the interpreter, even (!) access to call
+context. On tier-up to the compiler, all the inlining decisions have been made
+already.</p>
+
+<h3>Early tier with counters</h3>
+
+<p>HotSpot handles this with multiple tiers. The interpreter tiers up to the
+client compiler, C1. C1 profiles branch and call targets in compiled code. C1
+may eventually recompile based on this new information. C1 may eventually tier
+up to C2, which copies C1 inlining decisions. This way, we get call context in
+profiles via inlining.</p>
+
+<h3>Inline and analyze and hope</h3>
+
+<p>One last thing you could do is just trust your type inference and branch
+folding in the optimizer. You could inline and do polymorphic specialization in
+the callee when building the IR, then hope that your branch pruning
+monomorphizes the inlined callee. It’s a little wasteful because the
+polymorphic code is built “for nothing”, but it might work fine?</p>
+
+
+
+<p>Okay, onto the collected notes and half-baked commentary. Here’s a survey of a
+bunch of JIT compilers and how they reason about inlining heuristics.</p>
+
+<h3>Thanks</h3>
+
+<p>But before we get into that, thanks to Iain Ireland, CF Bolz-Tereick, and Ian
+Rogers for feedback on this blog post!</p>
+
+<h2>The survey: bits and bobbles</h2>
+
+<p>What follows is mostly a “bits and bobbles” section a la <a href="https://www.philipzucker.com/" target="_blank" rel="noopener noreferrer">Phil
+Zucker</a>.</p>
+
+<p>We’ll start with <a href="https://github.com/facebookincubator/cinderx" target="_blank" rel="noopener noreferrer">Cinder</a>, because when I wrote Cinder’s inliner I
+added only the simplest heuristics, mostly “don’t inline” signals. Over time,
+after I left, people tuned it a bit more.</p>
+
+<h3>Cinder</h3>
+
+<p>The <a href="https://github.com/facebookincubator/cinderx/blob/88189ebf4bfd196ac7578c5076efa39bfa11f211/cinderx/Jit/hir/inliner.cpp#L341" target="_blank" rel="noopener noreferrer">inliner</a> starts from the caller CFG, walking it to find
+suitable inlining candidates. Inlining candidates are only for call targets
+that are known—in Cinder’s case, only for monomorphic call targets—and pass
+some checks. The callee is only known by it’s function object, which includes
+its bytecode. There is no IR available for the callee until we decide to inline.</p>
+
+<p>Most of the “can’t handle this” checks are related to argument handling. Python
+has a pretty complex calling convention, so if the caller/callee have not
+agreed on how the arguments should be passed through, the inliner doesn’t care
+to try and figure it out on its own. That is the responsibility of <a href="https://github.com/facebookincubator/cinderx/blob/88189ebf4bfd196ac7578c5076efa39bfa11f211/cinderx/Jit/hir/simplify.cpp#L1765" target="_blank" rel="noopener noreferrer">other parts
+of the compiler</a>. Things in this <code>canInline</code>
+function could be considered “TODO”.</p>
+
+<div><div><pre><code><span>bool</span> <span>canInline</span><span>(</span><span>Function</span><span>&amp;</span> <span>caller</span><span>,</span> <span>AbstractCall</span><span>*</span> <span>call_instr</span><span>)</span> <span>{</span>
+  <span>// ...</span>
+  <span>BorrowedRef</span><span>&lt;</span><span>PyFunctionObject</span><span>&gt;</span> <span>func</span> <span>=</span> <span>call_instr</span><span>-&gt;</span><span>func</span><span>;</span>
+  <span>auto</span> <span>fail</span> <span>=</span> <span>[</span><span>&amp;</span><span>](</span><span>InlineFailureType</span> <span>failure_type</span><span>)</span> <span>{</span>
+    <span>dlogAndCollectFailureStats</span><span>(</span><span>caller</span><span>,</span> <span>call_instr</span><span>,</span> <span>failure_type</span><span>);</span>
+    <span>return</span> <span>false</span><span>;</span>
+  <span>};</span>
+
+  <span>if</span> <span>(</span><span>func</span><span>-&gt;</span><span>func_kwdefaults</span> <span>!=</span> <span>nullptr</span><span>)</span> <span>{</span>
+    <span>return</span> <span>fail</span><span>(</span><span>InlineFailureType</span><span>::</span><span>kHasKwdefaults</span><span>);</span>
+  <span>}</span>
+
+  <span>BorrowedRef</span><span>&lt;</span><span>PyCodeObject</span><span>&gt;</span> <span>code</span><span>{</span><span>func</span><span>-&gt;</span><span>func_code</span><span>};</span>
+  <span>JIT_CHECK</span><span>(</span><span>PyCode_Check</span><span>(</span><span>code</span><span>),</span> <span>"Expected PyCodeObject"</span><span>);</span>
+
+  <span>if</span> <span>(</span><span>code</span><span>-&gt;</span><span>co_kwonlyargcount</span> <span>&gt;</span> <span>0</span><span>)</span> <span>{</span>
+    <span>return</span> <span>fail</span><span>(</span><span>InlineFailureType</span><span>::</span><span>kHasKwOnlyArgs</span><span>);</span>
+  <span>}</span>
+  <span>// ...</span>
+<span>}</span>
+</code></pre></div></div>
+
+<p>Failures are logged so they can be analyzed. If the Cinder team determines that
+there is some very frequent case they should handle, they will find out from
+the logs.</p>
+
+<p>The inliner collects all candidate call instructions in one pass over the CFG.
+It loads the configurable “cost limit” from the options struct. Then it does
+one pass over the inlining candidates vector, inlining until it (maybe) hits
+the cost limit.</p>
+
+<div><div><pre><code><span>// ...</span>
+<span>size_t</span> <span>cost_limit</span> <span>=</span> <span>getConfig</span><span>().</span><span>inliner_cost_limit</span><span>;</span>
+<span>size_t</span> <span>cost</span> <span>=</span> <span>codeCost</span><span>(</span><span>irfunc</span><span>.</span><span>code</span><span>);</span>
+
+<span>// Inline as many calls as possible, starting from the top of the function and</span>
+<span>// working down.</span>
+<span>for</span> <span>(</span><span>auto</span><span>&amp;</span> <span>call</span> <span>:</span> <span>to_inline</span><span>)</span> <span>{</span>
+  <span>BorrowedRef</span><span>&lt;</span><span>PyCodeObject</span><span>&gt;</span> <span>call_code</span><span>{</span><span>call</span><span>.</span><span>func</span><span>-&gt;</span><span>func_code</span><span>};</span>
+  <span>size_t</span> <span>new_cost</span> <span>=</span> <span>cost</span> <span>+</span> <span>codeCost</span><span>(</span><span>call_code</span><span>);</span>
+  <span>if</span> <span>(</span><span>new_cost</span> <span>&gt;</span> <span>cost_limit</span><span>)</span> <span>{</span>
+    <span>LOG_INLINER</span><span>(</span>
+        <span>"Inliner reached cost limit of {} when trying to inline {} into {}, "</span>
+        <span>"inlining stopping early"</span><span>,</span>
+        <span>new_cost</span><span>,</span>
+        <span>funcFullname</span><span>(</span><span>call</span><span>.</span><span>func</span><span>),</span>
+        <span>irfunc</span><span>.</span><span>fullname</span><span>);</span>
+    <span>break</span><span>;</span>
+  <span>}</span>
+  <span>cost</span> <span>=</span> <span>new_cost</span><span>;</span>
+
+  <span>inlineFunctionCall</span><span>(</span><span>irfunc</span><span>,</span> <span>&amp;</span><span>call</span><span>);</span>
+
+  <span>// We need to reflow types after every inline to propagate new type</span>
+  <span>// information from the callee.</span>
+  <span>reflowTypes</span><span>(</span><span>irfunc</span><span>);</span>
+<span>}</span>
+<span>// ...</span>
+</code></pre></div></div>
+
+<p>It does some graph maintenance work after inlining these calls, but that’s it.</p>
+
+<p>This approach gets a surprising amount of utility for being so simple: it
+inlines constants (quite a few methods look like <code>def foo(): return 5</code>), small
+methods, and (at least, as far as I can remember) shrinks the compiled code
+size. All for very little compile time overhead.</p>
+
+<p>There’s one other “standalone” Python JIT out there, PyPy. So we should look at
+that too.</p>
+
+<h3>PyPy</h3>
+
+<p>There are two inliners in PyPy. One is inside the RPython to C translation
+pipeline, which acts more like an ahead-of-time compiler<sup><a href="#fn:rpython-inliner" rel="noopener noreferrer" target="_blank">2</a></sup>.
+Then there is the tracing JIT bit, which has its own optimizer and heuristics.
+We’re going to look at the latter.</p>
+
+<p>I talked to <a href="https://cfbolz.de/" target="_blank" rel="noopener noreferrer">CF Bolz-Tereick</a> about the inliner and their
+comment was that PyPy’s inlining heuristic is “yes”. There are a couple of
+exceptions, such as not inlining recursive functions or functions with loops.
+But the basic idea of tracing includes tracing through call instructions, which
+naturally means that you are “inlining”.</p>
+
+<p>PyPy also does this neat thing where they treat frame pushes like normal
+allocation. Frame pushes, frame reads, and frame writes get written to the
+trace like normal object memory traffic and can get optimized away like other
+field reads and writes. This means that they can “just” use DCE to eliminate
+frame pushes and pops, whereas Cinder has some complicated mechanism to do it
+(which is my fault).</p>
+
+<p>TODO get more details here</p>
+
+<h3>V8</h3>
+
+<p>V8 is a JS engine and it has over the years had many execution approaches.
+We’ll look at three of them since they all have or had their place in the
+history:</p>
+
+<ul>
+  <li>Hydrogen was the first real SSA IR and it looks very familiar to me, having
+worked on Cinder and now ZJIT. It is now defunct.</li>
+  <li>Turbofan was the replacement, going full Sea of Nodes. In the grand scheme of
+things it is a pretty fast compiler, but it does not hold back from doing some
+expensive rewrites. This was recently rewritten from Sea of Nodes to a mode
+traditional CFG and nicknamed Turboshaft.</li>
+  <li>Maglev is meant to coexist alongside Turbofan, preferring to speculate a little
+more eagerly and do fewer incremental rewrites in the name of compile
+time.<sup><a href="#fn:turbolev" rel="noopener noreferrer" target="_blank">3</a></sup></li>
+</ul>
+
+<p>They also each inline at different times in the pipeline, which made for a fun
+time trying to understand the different codebases.</p>
+
+<h4>V8 Hydrogen</h4>
+
+<p>Inlining happens during Hydrogen graph building</p>
+<ul>
+  <li><a href="https://github.com/tekknolagi/v8/blob/a969ab67f8e1e7475d9b26468225c3a772890c64/src/crankshaft/hydrogen.cc#L9236" target="_blank" rel="noopener noreferrer">https://github.com/tekknolagi/v8/blob/a969ab67f8e1e7475d9b26468225c3a772890c64/src/crankshaft/hydrogen.cc#L9236</a></li>
+</ul>
+
+<p>Don’t store function bytecode of all functions; need to re-parse callee <em>text
+source</em> to inline</p>
+
+<p>Heuristics <a href="https://github.com/tekknolagi/v8/blob/a969ab67f8e1e7475d9b26468225c3a772890c64/src/crankshaft/hydrogen.cc#L7807" target="_blank" rel="noopener noreferrer">https://github.com/tekknolagi/v8/blob/a969ab67f8e1e7475d9b26468225c3a772890c64/src/crankshaft/hydrogen.cc#L7807</a></p>
+<ul>
+  <li>something about native context</li>
+  <li>check callee AST size against configurable limit</li>
+  <li>check inlining depth against configurable limit</li>
+  <li>don’t inline recursive functions</li>
+  <li>check current cumulative method size (as tracked by AST node count) against
+configurable limit</li>
+</ul>
+
+<h4>V8 TurboFan</h4>
+
+<p><a href="https://docs.google.com/document/d/1VoYBhpDhJC4VlqMXCKvae-8IGuheBGxy32EOgC2LnT8/edit" target="_blank" rel="noopener noreferrer">https://docs.google.com/document/d/1VoYBhpDhJC4VlqMXCKvae-8IGuheBGxy32EOgC2LnT8/edit</a></p>
+
+<p><a href="https://github.com/v8/v8/blob/036842f4841326130a40adfcff38f85a9b4cd30a/src/compiler/js-inlining-heuristic.h#L14" target="_blank" rel="noopener noreferrer">https://github.com/v8/v8/blob/036842f4841326130a40adfcff38f85a9b4cd30a/src/compiler/js-inlining-heuristic.h#L14</a></p>
+
+<ul>
+  <li>Find candidates <a href="https://github.com/v8/v8/blob/036842f4841326130a40adfcff38f85a9b4cd30a/src/compiler/js-inlining-heuristic.cc#L134" target="_blank" rel="noopener noreferrer">https://github.com/v8/v8/blob/036842f4841326130a40adfcff38f85a9b4cd30a/src/compiler/js-inlining-heuristic.cc#L134</a></li>
+  <li>Can inline <a href="https://github.com/v8/v8/blob/036842f4841326130a40adfcff38f85a9b4cd30a/src/compiler/js-inlining-heuristic.cc#L75" target="_blank" rel="noopener noreferrer">https://github.com/v8/v8/blob/036842f4841326130a40adfcff38f85a9b4cd30a/src/compiler/js-inlining-heuristic.cc#L75</a></li>
+  <li>Force inline small functions <a href="https://github.com/v8/v8/blob/036842f4841326130a40adfcff38f85a9b4cd30a/src/compiler/js-inlining-heuristic.cc#L309" target="_blank" rel="noopener noreferrer">https://github.com/v8/v8/blob/036842f4841326130a40adfcff38f85a9b4cd30a/src/compiler/js-inlining-heuristic.cc#L309</a></li>
+  <li>Loop over sorted (by comparator) list <a href="https://github.com/v8/v8/blob/036842f4841326130a40adfcff38f85a9b4cd30a/src/compiler/js-inlining-heuristic.cc#L847" target="_blank" rel="noopener noreferrer">https://github.com/v8/v8/blob/036842f4841326130a40adfcff38f85a9b4cd30a/src/compiler/js-inlining-heuristic.cc#L847</a></li>
+</ul>
+
+<h4>V8 Maglev</h4>
+
+<p>When optimizing, add call instructions to the inline candidates list: <a href="https://github.com/v8/v8/blob/1a391f98cc7a9196369f2d6cab7df35ffbe92c08/src/maglev/maglev-graph-optimizer.cc#L1271" target="_blank" rel="noopener noreferrer">https://github.com/v8/v8/blob/1a391f98cc7a9196369f2d6cab7df35ffbe92c08/src/maglev/maglev-graph-optimizer.cc#L1271</a></p>
+
+<div><div><pre><code><span>ProcessResult</span> <span>MaglevGraphOptimizer</span><span>::</span><span>VisitCall</span><span>(</span><span>Call</span><span>*</span> <span>node</span><span>,</span>
+                                              <span>const</span> <span>ProcessingState</span><span>&amp;</span> <span>state</span><span>)</span> <span>{</span>
+  <span>// ...</span>
+  <span>int</span> <span>bytecode_length</span> <span>=</span> <span>shared</span><span>.</span><span>GetBytecodeArray</span><span>(</span><span>broker</span><span>()).</span><span>length</span><span>();</span>
+  <span>float</span> <span>score</span> <span>=</span>
+      <span>(</span><span>call_frequency</span> <span>/</span> <span>bytecode_length</span><span>)</span> <span>*</span> <span>(</span><span>loop_depth_</span> <span>&gt;</span> <span>0</span> <span>?</span> <span>1.5</span> <span>:</span> <span>1.0</span><span>);</span>
+
+  <span>bool</span> <span>is_small_function</span> <span>=</span>
+      <span>bytecode_length</span> <span>&lt;</span>
+      <span>reducer_</span><span>.</span><span>graph</span><span>()</span><span>-&gt;</span><span>compilation_info</span><span>()</span><span>-&gt;</span><span>flags</span><span>().</span><span>max_eager_inlined_bytecode</span><span>;</span>
+  <span>// ...</span>
+  <span>MaglevCallSiteInfo</span><span>*</span> <span>call_site</span> <span>=</span> <span>reducer_</span><span>.</span><span>zone</span><span>()</span><span>-&gt;</span><span>New</span><span>&lt;</span><span>MaglevCallSiteInfo</span><span>&gt;</span><span>(</span>
+      <span>MaglevCallerDetails</span><span>{</span>
+          <span>...</span>
+          <span>is_small_function</span><span>,</span> <span>call_frequency</span><span>,</span>
+          <span>...</span>
+      <span>},</span>
+      <span>score</span><span>,</span> <span>bytecode_length</span><span>);</span>
+  <span>reducer_</span><span>.</span><span>PushInlineCandidate</span><span>(</span><span>call_site</span><span>);</span>
+  <span>// ...</span>
+<span>}</span>
+</code></pre></div></div>
+
+<p><a href="https://github.com/v8/v8/blob/036842f4841326130a40adfcff38f85a9b4cd30a/src/maglev/maglev-inlining.h#L36" target="_blank" rel="noopener noreferrer">https://github.com/v8/v8/blob/036842f4841326130a40adfcff38f85a9b4cd30a/src/maglev/maglev-inlining.h#L36</a></p>
+
+<p>Unlike for example Cinder, Maglev looks like it does not have a lot of
+restrictions about what can get inlined into what, so its “can inline” signal
+is about budget. Actually two budgets: small budget and normal budget.</p>
+
+<div><div><pre><code><span>bool</span> <span>MaglevInliner</span><span>::</span><span>CanInlineCall</span><span>()</span> <span>{</span>
+  <span>// We stop inlining entirely if the small budget is exhausted.</span>
+  <span>// Inlining decisions after that become bad if we stop inlining small</span>
+  <span>// functions, but keep inlining large ones.</span>
+  <span>return</span> <span>!</span><span>graph_</span><span>-&gt;</span><span>inlineable_calls</span><span>().</span><span>empty</span><span>()</span> <span>&amp;&amp;</span>
+         <span>(</span><span>graph_</span><span>-&gt;</span><span>total_inlined_bytecode_size</span><span>()</span> <span>&lt;</span>
+              <span>max_inlined_bytecode_size_cumulative</span><span>()</span> <span>||</span>
+          <span>graph_</span><span>-&gt;</span><span>total_inlined_bytecode_size_small</span><span>()</span> <span>&lt;</span>
+              <span>max_inlined_bytecode_size_small_total</span><span>());</span>
+<span>}</span>
+</code></pre></div></div>
+
+<p>Then its inlining loop is a greedy walk of the to-inline queue checking
+candidate sizes.</p>
+
+<div><div><pre><code><span>bool</span> <span>MaglevInliner</span><span>::</span><span>InlineCallSites</span><span>()</span> <span>{</span>
+  <span>DCHECK</span><span>(</span><span>CanInlineCall</span><span>());</span>
+  <span>while</span> <span>(</span><span>!</span><span>graph_</span><span>-&gt;</span><span>inlineable_calls</span><span>().</span><span>empty</span><span>())</span> <span>{</span>
+    <span>// pop from inlineable_calls</span>
+    <span>MaglevCallSiteInfo</span><span>*</span> <span>call_site</span> <span>=</span> <span>ChooseNextCallSite</span><span>();</span>
+
+    <span>bool</span> <span>is_small_with_heapnum_input_outputs</span> <span>=</span>
+        <span>IsSmallWithHeapNumberInputsOutputs</span><span>(</span><span>call_site</span><span>);</span>
+
+    <span>if</span> <span>(</span><span>graph_</span><span>-&gt;</span><span>total_inlined_bytecode_size</span><span>()</span> <span>&gt;</span>
+        <span>max_inlined_bytecode_size_cumulative</span><span>())</span> <span>{</span>
+      <span>// We ran out of budget. Checking if this is a small-ish function that we</span>
+      <span>// can still inline.</span>
+      <span>if</span> <span>(</span><span>graph_</span><span>-&gt;</span><span>total_inlined_bytecode_size_small</span><span>()</span> <span>&gt;</span>
+          <span>max_inlined_bytecode_size_small_total</span><span>())</span> <span>{</span>
+        <span>graph_</span><span>-&gt;</span><span>compilation_info</span><span>()</span><span>-&gt;</span><span>set_could_not_inline_all_candidates</span><span>();</span>
+        <span>break</span><span>;</span>
+      <span>}</span>
+
+      <span>if</span> <span>(</span><span>!</span><span>is_small_with_heapnum_input_outputs</span><span>)</span> <span>{</span>
+        <span>graph_</span><span>-&gt;</span><span>compilation_info</span><span>()</span><span>-&gt;</span><span>set_could_not_inline_all_candidates</span><span>();</span>
+        <span>// Not that we don't break just rather just continue: next candidates</span>
+        <span>// might be inlineable.</span>
+        <span>continue</span><span>;</span>
+      <span>}</span>
+    <span>}</span>
+
+    <span>InliningResult</span> <span>result</span> <span>=</span>
+        <span>BuildInlineFunction</span><span>(</span><span>call_site</span><span>,</span> <span>is_small_with_heapnum_input_outputs</span><span>);</span>
+    <span>// ...</span>
+  <span>}</span>
+  <span>return</span> <span>true</span><span>;</span>
+<span>}</span>
+</code></pre></div></div>
+
+<p>It runs this loop (which drains the queue) interleaved with the optimizer
+(which populates the queue).</p>
+
+<div><div><pre><code><span>bool</span> <span>MaglevInliner</span><span>::</span><span>Run</span><span>()</span> <span>{</span>
+  <span>if</span> <span>(</span><span>graph_</span><span>-&gt;</span><span>inlineable_calls</span><span>().</span><span>empty</span><span>())</span> <span>return</span> <span>true</span><span>;</span>
+
+  <span>while</span> <span>(</span><span>CanInlineCall</span><span>())</span> <span>{</span>
+    <span>if</span> <span>(</span><span>!</span><span>InlineCallSites</span><span>())</span> <span>return</span> <span>false</span><span>;</span>
+    <span>RunOptimizer</span><span>();</span>
+  <span>}</span>
+  <span>// ...</span>
+<span>}</span>
+</code></pre></div></div>
+
+<p>Confusingly, though, the optimizer also calls another function called
+<code>CanInlineCall</code> which checks if it legally can inline:</p>
+<ul>
+  <li>skip recursion</li>
+  <li><a href="https://github.com/v8/v8/blob/1a391f98cc7a9196369f2d6cab7df35ffbe92c08/src/objects/shared-function-info-inl.h#L421" target="_blank" rel="noopener noreferrer">https://github.com/v8/v8/blob/1a391f98cc7a9196369f2d6cab7df35ffbe92c08/src/objects/shared-function-info-inl.h#L421</a></li>
+  <li>not called enough (min call frequency)</li>
+  <li>bytecode too big</li>
+</ul>
+
+<p><code>bool MaglevGraphBuilder::ShouldEagerInlineCall(</code> appears unused? / dead
+declaration? maybe src/maglev/maglev-graph-builder.cc is just not working on
+github search</p>
+
+<p><code>MaybeReduceResult MaglevGraphBuilder::TryBuildCallKnownJSFunction(</code> also
+unused / dead declaration same</p>
+
+<h3>JavaScriptCore</h3>
+
+<p>JavaScriptCore is funky! Unlike these other compilers that do inlining in their
+neat little SSA IRs, JSC inlines <em>at the bytecode level</em><sup><a href="#fn:fil" rel="noopener noreferrer" target="_blank">4</a></sup>. This is their way of
+making sure that they get at least one level of call context into their
+interpreter inline caches, which will eventually give better information to the
+compiler.</p>
+
+<ul>
+  <li>Bytecode inlining
+    <ul>
+      <li><a href="https://github.com/WebKit/WebKit/blob/709c3895afd71e0836f8c8be7393e44d41fab7e1/Source/JavaScriptCore/bytecode/CodeBlock.cpp#L2453" target="_blank" rel="noopener noreferrer">https://github.com/WebKit/WebKit/blob/709c3895afd71e0836f8c8be7393e44d41fab7e1/Source/JavaScriptCore/bytecode/CodeBlock.cpp#L2453</a></li>
+    </ul>
+  </li>
+  <li>DFG
+    <ul>
+      <li><a href="https://github.com/WebKit/WebKit/blob/709c3895afd71e0836f8c8be7393e44d41fab7e1/Source/JavaScriptCore/dfg/DFGCapabilities.cpp#L76" target="_blank" rel="noopener noreferrer">https://github.com/WebKit/WebKit/blob/709c3895afd71e0836f8c8be7393e44d41fab7e1/Source/JavaScriptCore/dfg/DFGCapabilities.cpp#L76</a></li>
+      <li><a href="https://github.com/WebKit/WebKit/blob/917854a9c245b87b333e23ed4b195505d574a333/Source/JavaScriptCore/dfg/DFGByteCodeParser.cpp#L1703" target="_blank" rel="noopener noreferrer">https://github.com/WebKit/WebKit/blob/917854a9c245b87b333e23ed4b195505d574a333/Source/JavaScriptCore/dfg/DFGByteCodeParser.cpp#L1703</a></li>
+      <li><a href="https://github.com/WebKit/WebKit/blob/917854a9c245b87b333e23ed4b195505d574a333/Source/JavaScriptCore/bytecode/CallLinkStatus.cpp#L294" target="_blank" rel="noopener noreferrer">https://github.com/WebKit/WebKit/blob/917854a9c245b87b333e23ed4b195505d574a333/Source/JavaScriptCore/bytecode/CallLinkStatus.cpp#L294</a></li>
+      <li><a href="https://github.com/WebKit/WebKit/blob/d919344236c47b610930636d3310f00380624d43/Source/JavaScriptCore/bytecode/InlineCallFrame.h" target="_blank" rel="noopener noreferrer">https://github.com/WebKit/WebKit/blob/d919344236c47b610930636d3310f00380624d43/Source/JavaScriptCore/bytecode/InlineCallFrame.h</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>JSC only inlines based on bytecode profile information, and only inlines
+bytecode??</p>
+
+<p>TODO find better sources for bytecode inlining</p>
+
+
+
+<h3>SpiderMonkey</h3>
+
+<p>SpiderMonkey has another way of getting that call contet without doing bytecode
+inlining: they add call context to their inline caches. Methods can pass down
+an <em>ICScript</em> to their callees where the callee writes its inline cache
+information. Then, when compiling, the callee is more likely to be
+monomorphized.</p>
+
+<p>Wasm</p>
+
+<p><a href="https://github.com/mozilla-firefox/firefox/blob/438a3ce10eb77fb50d968463b7741117aec5bb4a/js/src/wasm/WasmHeuristics.h#L213" target="_blank" rel="noopener noreferrer">https://github.com/mozilla-firefox/firefox/blob/438a3ce10eb77fb50d968463b7741117aec5bb4a/js/src/wasm/WasmHeuristics.h#L213</a></p>
+
+<p>SpiderMonkey ICScript</p>
+
+<h3>Wasmtime and Cranelift</h3>
+
+<p><a href="https://fitzgen.com/2025/11/19/inliner.html" target="_blank" rel="noopener noreferrer">https://fitzgen.com/2025/11/19/inliner.html</a></p>
+
+<h3>HotSpot</h3>
+
+<p>Plan: run in interpreter; tier up to C1; profile call targets; inline in C1;
+profile branch counts; tier up to C2, which copies C1 inlining decisions in
+bytecode parser</p>
+
+<p>HotSpot C2</p>
+
+<p><a href="https://github.com/openjdk/jdk/blob/a05d5d2514c835f2bfeaf7a8c7df0ac241f0177f/src/hotspot/share/opto/bytecodeInfo.cpp#L116" target="_blank" rel="noopener noreferrer">https://github.com/openjdk/jdk/blob/a05d5d2514c835f2bfeaf7a8c7df0ac241f0177f/src/hotspot/share/opto/bytecodeInfo.cpp#L116</a></p>
+
+<p><a href="https://github.com/openjdk/jdk/blob/497dca2549a9829530670576115bf4b8fab386b3/src/hotspot/share/opto/bytecodeInfo.cpp#L197" target="_blank" rel="noopener noreferrer">https://github.com/openjdk/jdk/blob/497dca2549a9829530670576115bf4b8fab386b3/src/hotspot/share/opto/bytecodeInfo.cpp#L197</a></p>
+
+<p><a href="https://github.com/openjdk/jdk/blob/497dca2549a9829530670576115bf4b8fab386b3/src/hotspot/share/opto/parse.hpp#L42" target="_blank" rel="noopener noreferrer">https://github.com/openjdk/jdk/blob/497dca2549a9829530670576115bf4b8fab386b3/src/hotspot/share/opto/parse.hpp#L42</a></p>
+
+<p><a href="https://github.com/openjdk/jdk/blob/497dca2549a9829530670576115bf4b8fab386b3/src/hotspot/share/opto/doCall.cpp#L185" target="_blank" rel="noopener noreferrer">https://github.com/openjdk/jdk/blob/497dca2549a9829530670576115bf4b8fab386b3/src/hotspot/share/opto/doCall.cpp#L185</a></p>
+
+<p>Not too small</p>
+
+<p>Walk up the call stack to figure out what to compile</p>
+
+<p>Handling the right thing to inline: def foo(a) = a.each {|x| x }
+want to compile <code>foo</code>, inline each, inline block, not compile block separately
+(probably)</p>
+
+<p>HotSpot C1</p>
+
+<p><a href="https://bernsteinbear.com/assets/img/design-hotspot-client-compiler.pdf" target="_blank" rel="noopener noreferrer">https://bernsteinbear.com/assets/img/design-hotspot-client-compiler.pdf</a></p>
+
+<p><a href="https://github.com/openjdk/jdk/blob/d854a04231a437a6af36ae65780961f40f336343/src/hotspot/share/c1/c1_GraphBuilder.cpp#L755" target="_blank" rel="noopener noreferrer">https://github.com/openjdk/jdk/blob/d854a04231a437a6af36ae65780961f40f336343/src/hotspot/share/c1/c1_GraphBuilder.cpp#L755</a></p>
+
+<p><a href="https://github.com/openjdk/jdk/blob/d854a04231a437a6af36ae65780961f40f336343/src/hotspot/share/c1/c1_GraphBuilder.cpp#L3854" target="_blank" rel="noopener noreferrer">https://github.com/openjdk/jdk/blob/d854a04231a437a6af36ae65780961f40f336343/src/hotspot/share/c1/c1_GraphBuilder.cpp#L3854</a></p>
+
+<ul>
+  <li>skip callees with exception handlers (unless explicitly allowed with a CLI flag)</li>
+  <li>skip synchronized callees (unless explicitly allowed with a CLI flag)</li>
+  <li>skip classes with unlinked callees</li>
+  <li>skip uninitialized classes</li>
+  <li>…</li>
+</ul>
+
+<p>heuristics:</p>
+<ul>
+  <li>max inline level (default 9)</li>
+  <li>max recursive inline level (default 1)</li>
+  <li>callee bytecode size (max for top level is 35 bytecodes, but falls off by 10% per inline level)</li>
+  <li>callee stack usage (max of 10 slots)
+    <div><div><pre><code>      <span>// Additional condition to limit stack usage for non-recursive calls.</span>
+      <span>if</span> <span>((</span><span>callee_recursive_level</span> <span>==</span> <span>0</span><span>)</span> <span>&amp;&amp;</span>
+          <span>(</span><span>callee</span><span>-&gt;</span><span>max_stack</span><span>()</span> <span>+</span> <span>callee</span><span>-&gt;</span><span>max_locals</span><span>()</span> <span>-</span> <span>callee</span><span>-&gt;</span><span>size_of_parameters</span><span>()</span> <span>&gt;</span> <span>C1InlineStackLimit</span><span>))</span> <span>{</span>
+        <span>INLINE_BAILOUT</span><span>(</span><span>"callee uses too much stack"</span><span>);</span>
+      <span>}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>max total method size (default 8000 bytecodes)</li>
+</ul>
+
+<h3>TruffleRuby</h3>
+
+<p>TruffleRuby uses weighted compile queue</p>
+
+<p>Graal
+<a href="https://ieeexplore.ieee.org/document/8661171" target="_blank" rel="noopener noreferrer">https://ieeexplore.ieee.org/document/8661171</a></p>
+
+<h3>.NET</h3>
+
+<p><a href="https://github.com/dotnet/runtime/blob/2d638dc1179164a08d9387cbe6354fe2b7e4d823/docs/design/coreclr/jit/inlining-plans.md" target="_blank" rel="noopener noreferrer">https://github.com/dotnet/runtime/blob/2d638dc1179164a08d9387cbe6354fe2b7e4d823/docs/design/coreclr/jit/inlining-plans.md</a></p>
+
+<p><a href="https://github.com/dotnet/runtime/blob/0b3f3ab1ecf4de06459e5f0e2b7cb3baf70ef981/src/coreclr/jit/inline.def#L94" target="_blank" rel="noopener noreferrer">https://github.com/dotnet/runtime/blob/0b3f3ab1ecf4de06459e5f0e2b7cb3baf70ef981/src/coreclr/jit/inline.def#L94</a></p>
+
+<p><a href="https://github.com/dotnet/runtime/blob/0b3f3ab1ecf4de06459e5f0e2b7cb3baf70ef981/src/coreclr/jit/inlinepolicy.cpp" target="_blank" rel="noopener noreferrer">https://github.com/dotnet/runtime/blob/0b3f3ab1ecf4de06459e5f0e2b7cb3baf70ef981/src/coreclr/jit/inlinepolicy.cpp</a></p>
+
+<p><a href="https://github.com/dotnet/runtime/blob/0b3f3ab1ecf4de06459e5f0e2b7cb3baf70ef981/docs/design/coreclr/jit/inline-size-estimates.md?plain=1#L5" target="_blank" rel="noopener noreferrer">https://github.com/dotnet/runtime/blob/0b3f3ab1ecf4de06459e5f0e2b7cb3baf70ef981/docs/design/coreclr/jit/inline-size-estimates.md?plain=1#L5</a>
+<a href="https://github.com/dotnet/runtime/blob/0b3f3ab1ecf4de06459e5f0e2b7cb3baf70ef981/src/coreclr/jit/fginline.cpp" target="_blank" rel="noopener noreferrer">https://github.com/dotnet/runtime/blob/0b3f3ab1ecf4de06459e5f0e2b7cb3baf70ef981/src/coreclr/jit/fginline.cpp</a></p>
+
+<p><a href="https://github.com/dotnet/runtime/issues/10303" target="_blank" rel="noopener noreferrer">https://github.com/dotnet/runtime/issues/10303</a></p>
+
+<p><a href="https://github.com/AndyAyersMS/PerformanceExplorer/blob/master/notes/notes-aug-2016.md" target="_blank" rel="noopener noreferrer">https://github.com/AndyAyersMS/PerformanceExplorer/blob/master/notes/notes-aug-2016.md</a>
+</p>
+
+<h3>Dart</h3>
+
+<p><a href="https://github.com/dart-lang/sdk/blob/391212f3da8cc0790fc532d367549042216bd5ca/runtime/vm/compiler/backend/inliner.cc#L49" target="_blank" rel="noopener noreferrer">https://github.com/dart-lang/sdk/blob/391212f3da8cc0790fc532d367549042216bd5ca/runtime/vm/compiler/backend/inliner.cc#L49</a></p>
+
+<p><a href="https://github.com/dart-lang/sdk/blob/391212f3da8cc0790fc532d367549042216bd5ca/runtime/vm/compiler/backend/inliner.cc#L1023" target="_blank" rel="noopener noreferrer">https://github.com/dart-lang/sdk/blob/391212f3da8cc0790fc532d367549042216bd5ca/runtime/vm/compiler/backend/inliner.cc#L1023</a></p>
+
+<p><a href="https://web.archive.org/web/20170830093403id_/https://link.springer.com/content/pdf/10.1007/978-3-540-78791-4_5.pdf" target="_blank" rel="noopener noreferrer">https://web.archive.org/web/20170830093403id_/https://link.springer.com/content/pdf/10.1007/978-3-540-78791-4_5.pdf</a></p>
+
+<div><div><pre><code><span>DEFINE_FLAG</span><span>(</span><span>int</span><span>,</span>
+            <span>deoptimization_counter_inlining_threshold</span><span>,</span>
+            <span>12</span><span>,</span>
+            <span>"How many times we allow deoptimization before we stop inlining."</span><span>);</span>
+<span>DEFINE_FLAG</span><span>(</span><span>bool</span><span>,</span> <span>trace_inlining</span><span>,</span> <span>false</span><span>,</span> <span>"Trace inlining"</span><span>);</span>
+<span>DEFINE_FLAG</span><span>(</span><span>charp</span><span>,</span> <span>inlining_filter</span><span>,</span> <span>nullptr</span><span>,</span> <span>"Inline only in named function"</span><span>);</span>
+
+<span>// Flags for inlining heuristics.</span>
+<span>DEFINE_FLAG</span><span>(</span><span>int</span><span>,</span>
+            <span>inline_getters_setters_smaller_than</span><span>,</span>
+            <span>10</span><span>,</span>
+            <span>"Always inline getters and setters that have fewer instructions"</span><span>);</span>
+<span>DEFINE_FLAG</span><span>(</span><span>int</span><span>,</span>
+            <span>inlining_depth_threshold</span><span>,</span>
+            <span>6</span><span>,</span>
+            <span>"Inline function calls up to threshold nesting depth"</span><span>);</span>
+<span>DEFINE_FLAG</span><span>(</span>
+    <span>int</span><span>,</span>
+    <span>inlining_size_threshold</span><span>,</span>
+    <span>25</span><span>,</span>
+    <span>"Always inline functions that have threshold or fewer instructions"</span><span>);</span>
+<span>DEFINE_FLAG</span><span>(</span><span>int</span><span>,</span>
+            <span>inlining_callee_call_sites_threshold</span><span>,</span>
+            <span>1</span><span>,</span>
+            <span>"Always inline functions containing threshold or fewer calls."</span><span>);</span>
+<span>DEFINE_FLAG</span><span>(</span><span>int</span><span>,</span>
+            <span>inlining_callee_size_threshold</span><span>,</span>
+            <span>160</span><span>,</span>
+            <span>"Do not inline callees larger than threshold"</span><span>);</span>
+<span>DEFINE_FLAG</span><span>(</span><span>int</span><span>,</span>
+            <span>inlining_small_leaf_size_threshold</span><span>,</span>
+            <span>50</span><span>,</span>
+            <span>"Do not inline leaf callees larger than threshold"</span><span>);</span>
+<span>DEFINE_FLAG</span><span>(</span><span>int</span><span>,</span>
+            <span>inlining_caller_size_threshold</span><span>,</span>
+            <span>50000</span><span>,</span>
+            <span>"Stop inlining once caller reaches the threshold."</span><span>);</span>
+<span>DEFINE_FLAG</span><span>(</span><span>int</span><span>,</span>
+            <span>inlining_hotness</span><span>,</span>
+            <span>10</span><span>,</span>
+            <span>"Inline only hotter calls, in percents (0 .. 100); "</span>
+            <span>"default 10%: calls above-equal 10% of max-count are inlined."</span><span>);</span>
+<span>DEFINE_FLAG</span><span>(</span><span>int</span><span>,</span>
+            <span>inlining_recursion_depth_threshold</span><span>,</span>
+            <span>1</span><span>,</span>
+            <span>"Inline recursive function calls up to threshold recursion depth."</span><span>);</span>
+<span>DEFINE_FLAG</span><span>(</span><span>int</span><span>,</span>
+            <span>max_inlined_per_depth</span><span>,</span>
+            <span>500</span><span>,</span>
+            <span>"Max. number of inlined calls per depth"</span><span>);</span>
+</code></pre></div></div>
+
+<p><a href="/assets/img/adaptive-inline.pdf" target="_blank" rel="noopener noreferrer">An adaptive strategy for inline substitution</a> (PDF)</p>
+
+<div><div><pre><code>  <span>// Inlining heuristics based on Cooper et al. 2008.</span>
+  <span>InliningDecision</span> <span>ShouldWeInline</span><span>(</span><span>const</span> <span>Function</span><span>&amp;</span> <span>callee</span><span>,</span>
+                                  <span>intptr_t</span> <span>instr_count</span><span>,</span>
+                                  <span>intptr_t</span> <span>call_site_count</span><span>)</span> <span>{</span>
+    <span>// Pragma or size heuristics.</span>
+    <span>if</span> <span>(</span><span>inliner_</span><span>-&gt;</span><span>AlwaysInline</span><span>(</span><span>callee</span><span>))</span> <span>{</span>
+      <span>return</span> <span>InliningDecision</span><span>::</span><span>Yes</span><span>(</span><span>"AlwaysInline"</span><span>);</span>
+    <span>}</span> <span>else</span> <span>if</span> <span>(</span><span>inlined_size_</span> <span>&gt;</span> <span>FLAG_inlining_caller_size_threshold</span><span>)</span> <span>{</span>
+      <span>// Prevent caller methods becoming humongous and thus slow to compile.</span>
+      <span>return</span> <span>InliningDecision</span><span>::</span><span>No</span><span>(</span><span>"--inlining-caller-size-threshold"</span><span>);</span>
+    <span>}</span> <span>else</span> <span>if</span> <span>(</span><span>instr_count</span> <span>&gt;</span> <span>FLAG_inlining_callee_size_threshold</span><span>)</span> <span>{</span>
+      <span>// Prevent inlining of callee methods that exceed certain size.</span>
+      <span>return</span> <span>InliningDecision</span><span>::</span><span>No</span><span>(</span><span>"--inlining-callee-size-threshold"</span><span>);</span>
+    <span>}</span>
+    <span>// Inlining depth.</span>
+    <span>const</span> <span>int</span> <span>callee_inlining_depth</span> <span>=</span> <span>callee</span><span>.</span><span>inlining_depth</span><span>();</span>
+    <span>if</span> <span>(</span><span>callee_inlining_depth</span> <span>&gt;</span> <span>0</span> <span>&amp;&amp;</span>
+        <span>((</span><span>callee_inlining_depth</span> <span>+</span> <span>inlining_depth_</span><span>)</span> <span>&gt;</span>
+         <span>FLAG_inlining_depth_threshold</span><span>))</span> <span>{</span>
+      <span>return</span> <span>InliningDecision</span><span>::</span><span>No</span><span>(</span><span>"--inlining-depth-threshold"</span><span>);</span>
+    <span>}</span>
+    <span>// Situation instr_count == 0 denotes no counts have been computed yet.</span>
+    <span>// In that case, we say ok to the early heuristic and come back with the</span>
+    <span>// late heuristic.</span>
+    <span>if</span> <span>(</span><span>instr_count</span> <span>==</span> <span>0</span><span>)</span> <span>{</span>
+      <span>return</span> <span>InliningDecision</span><span>::</span><span>Yes</span><span>(</span><span>"need to count first"</span><span>);</span>
+    <span>}</span> <span>else</span> <span>if</span> <span>(</span><span>instr_count</span> <span>&lt;=</span> <span>FLAG_inlining_size_threshold</span><span>)</span> <span>{</span>
+      <span>return</span> <span>InliningDecision</span><span>::</span><span>Yes</span><span>(</span><span>"--inlining-size-threshold"</span><span>);</span>
+    <span>}</span> <span>else</span> <span>if</span> <span>(</span><span>call_site_count</span> <span>&lt;=</span> <span>FLAG_inlining_callee_call_sites_threshold</span><span>)</span> <span>{</span>
+      <span>return</span> <span>InliningDecision</span><span>::</span><span>Yes</span><span>(</span><span>"--inlining-callee-call-sites-threshold"</span><span>);</span>
+    <span>}</span>
+    <span>return</span> <span>InliningDecision</span><span>::</span><span>No</span><span>(</span><span>"default"</span><span>);</span>
+  <span>}</span>
+</code></pre></div></div>
+
+
+
+
+
+<h3>HHVM</h3>
+
+<p>tracelet based</p>
+
+<p><a href="https://github.com/facebook/hhvm/blob/eeba7ad1ffa372a9b8cc9d1ec7f5295d45627009/hphp/runtime/vm/jit/inlining-decider.h#L89" target="_blank" rel="noopener noreferrer">https://github.com/facebook/hhvm/blob/eeba7ad1ffa372a9b8cc9d1ec7f5295d45627009/hphp/runtime/vm/jit/inlining-decider.h#L89</a></p>
+
+<div><div><pre><code>  <span>// Refuse if the cost exceeds our thresholds.</span>
+  <span>// We measure the cost of inlining each callstack and stop when it exceeds a</span>
+  <span>// certain threshold.  (Note that we do not measure the total cost of all the</span>
+  <span>// inlined calls for a given caller---just the cost of each nested stack.)</span>
+  <span>cost</span> <span>=</span> <span>costOfInlining</span><span>(</span><span>callerSk</span><span>,</span> <span>callee</span><span>,</span> <span>regionAndUnit</span><span>,</span> <span>annotationsPtr</span><span>);</span>
+  <span>if</span> <span>(</span><span>cost</span> <span>&lt;=</span> <span>Cfg</span><span>::</span><span>HHIR</span><span>::</span><span>AlwaysInlineVasmCostLimit</span><span>)</span> <span>{</span>
+    <span>return</span> <span>accept</span><span>(</span><span>folly</span><span>::</span><span>sformat</span><span>(</span><span>"cost={} within always-inline limit"</span><span>,</span> <span>cost</span><span>));</span>
+  <span>}</span>
+
+  <span>if</span> <span>(</span><span>region</span><span>.</span><span>instrSize</span><span>()</span> <span>&gt;</span> <span>irgs</span><span>.</span><span>budgetBCInstrs</span><span>)</span> <span>{</span>
+    <span>return</span> <span>refuse</span><span>(</span><span>folly</span><span>::</span><span>sformat</span><span>(</span>
+      <span>"exhausted bytecode budget: budgetBCInstrs={}, regionSize={}"</span><span>,</span>
+      <span>irgs</span><span>.</span><span>budgetBCInstrs</span><span>,</span> <span>region</span><span>.</span><span>instrSize</span><span>()));</span>
+  <span>}</span>
+  <span>auto</span> <span>maxTotalCost</span> <span>=</span> <span>adjustedMaxVasmCost</span><span>(</span><span>irgs</span><span>,</span> <span>region</span><span>,</span> <span>inlineDepth</span><span>(</span><span>irgs</span><span>));</span>
+  <span>int</span> <span>maxCost</span> <span>=</span> <span>maxTotalCost</span><span>;</span>
+  <span>if</span> <span>(</span><span>Cfg</span><span>::</span><span>HHIR</span><span>::</span><span>InliningUseStackedCost</span><span>)</span> <span>{</span>
+    <span>maxCost</span> <span>-=</span> <span>irgs</span><span>.</span><span>inlineState</span><span>.</span><span>cost</span><span>;</span>
+  <span>}</span>
+  <span>const</span> <span>auto</span> <span>baseProfCount</span> <span>=</span> <span>s_baseProfCount</span><span>.</span><span>load</span><span>();</span>
+  <span>const</span> <span>auto</span> <span>callerProfCount</span> <span>=</span> <span>irgen</span><span>::</span><span>curProfCount</span><span>(</span><span>irgs</span><span>);</span>
+  <span>const</span> <span>auto</span> <span>calleeProfCount</span> <span>=</span> <span>irgen</span><span>::</span><span>calleeProfCount</span><span>(</span><span>irgs</span><span>,</span> <span>region</span><span>);</span>
+  <span>if</span> <span>(</span><span>cost</span> <span>&gt;</span> <span>maxCost</span><span>)</span> <span>{</span>
+    <span>auto</span> <span>const</span> <span>depth</span> <span>=</span> <span>inlineDepth</span><span>(</span><span>irgs</span><span>);</span>
+    <span>return</span> <span>refuse</span><span>(</span><span>folly</span><span>::</span><span>sformat</span><span>(</span>
+      <span>"too expensive: cost={} : maxCost={} : "</span>
+      <span>"baseProfCount={} : callerProfCount={} : calleeProfCount={} : depth={}"</span><span>,</span>
+      <span>cost</span><span>,</span> <span>maxCost</span><span>,</span> <span>baseProfCount</span><span>,</span> <span>callerProfCount</span><span>,</span> <span>calleeProfCount</span><span>,</span> <span>depth</span><span>));</span>
+  <span>}</span>
+
+  <span>return</span> <span>accept</span><span>(</span><span>folly</span><span>::</span><span>sformat</span><span>(</span><span>"small region with return: cost={} : "</span>
+                               <span>"maxTotalCost={} : maxCost={} : baseProfCount={}"</span>
+                               <span>" : callerProfCount={} : calleeProfCount={}"</span><span>,</span>
+                               <span>cost</span><span>,</span> <span>maxTotalCost</span><span>,</span> <span>maxCost</span><span>,</span> <span>baseProfCount</span><span>,</span>
+                               <span>callerProfCount</span><span>,</span> <span>calleeProfCount</span><span>));</span>
+</code></pre></div></div>
+
+<h3>ART</h3>
+
+<p><a href="https://github.com/LineageOS/android_art/blob/8ce603e0c68899bdfbc9cd4c50dcc65bbf777982/compiler/optimizing/inliner.h" target="_blank" rel="noopener noreferrer">https://github.com/LineageOS/android_art/blob/8ce603e0c68899bdfbc9cd4c50dcc65bbf777982/compiler/optimizing/inliner.h</a></p>
+
+<div><div><pre><code><span>// Instruction limit to control memory.</span>
+<span>static</span> <span>constexpr</span> <span>size_t</span> <span>kMaximumNumberOfTotalInstructions</span> <span>=</span> <span>1024</span><span>;</span>
+
+<span>// Maximum number of instructions for considering a method small,</span>
+<span>// which we will always try to inline if the other non-instruction limits</span>
+<span>// are not reached.</span>
+<span>static</span> <span>constexpr</span> <span>size_t</span> <span>kMaximumNumberOfInstructionsForSmallMethod</span> <span>=</span> <span>3</span><span>;</span>
+
+<span>// Limit the number of dex registers that we accumulate while inlining</span>
+<span>// to avoid creating large amount of nested environments.</span>
+<span>static</span> <span>constexpr</span> <span>size_t</span> <span>kMaximumNumberOfCumulatedDexRegisters</span> <span>=</span> <span>32</span><span>;</span>
+
+<span>// Limit recursive call inlining, which do not benefit from too</span>
+<span>// much inlining compared to code locality.</span>
+<span>static</span> <span>constexpr</span> <span>size_t</span> <span>kMaximumNumberOfRecursiveCalls</span> <span>=</span> <span>4</span><span>;</span>
+
+<span>// Limit recursive polymorphic call inlining to prevent code bloat, since it can quickly get out of</span>
+<span>// hand in the presence of multiple Wrapper classes. We set this to 0 to disallow polymorphic</span>
+<span>// recursive calls at all.</span>
+<span>static</span> <span>constexpr</span> <span>size_t</span> <span>kMaximumNumberOfPolymorphicRecursiveCalls</span> <span>=</span> <span>0</span><span>;</span>
+
+<span>// Controls the use of inline caches in AOT mode.</span>
+<span>static</span> <span>constexpr</span> <span>bool</span> <span>kUseAOTInlineCaches</span> <span>=</span> <span>true</span><span>;</span>
+
+<span>// Controls the use of inlining try catches.</span>
+<span>static</span> <span>constexpr</span> <span>bool</span> <span>kInlineTryCatches</span> <span>=</span> <span>true</span><span>;</span>
+</code></pre></div></div>
+
+<div><div><pre><code><span>void</span> <span>HInliner</span><span>::</span><span>UpdateInliningBudget</span><span>()</span> <span>{</span>
+  <span>if</span> <span>(</span><span>total_number_of_instructions_</span> <span>&gt;=</span> <span>kMaximumNumberOfTotalInstructions</span><span>)</span> <span>{</span>
+    <span>// Always try to inline small methods.</span>
+    <span>inlining_budget_</span> <span>=</span> <span>kMaximumNumberOfInstructionsForSmallMethod</span><span>;</span>
+  <span>}</span> <span>else</span> <span>{</span>
+    <span>inlining_budget_</span> <span>=</span> <span>std</span><span>::</span><span>max</span><span>(</span>
+        <span>kMaximumNumberOfInstructionsForSmallMethod</span><span>,</span>
+        <span>kMaximumNumberOfTotalInstructions</span> <span>-</span> <span>total_number_of_instructions_</span><span>);</span>
+  <span>}</span>
+<span>}</span>
+</code></pre></div></div>
+
+<div><div><pre><code><span>bool</span> <span>HInliner</span><span>::</span><span>IsInliningEncouraged</span><span>(</span><span>const</span> <span>HInvoke</span><span>*</span> <span>invoke_instruction</span><span>,</span>
+                                    <span>ArtMethod</span><span>*</span> <span>method</span><span>,</span>
+                                    <span>const</span> <span>CodeItemDataAccessor</span><span>&amp;</span> <span>accessor</span><span>)</span> <span>const</span> <span>{</span>
+  <span>if</span> <span>(</span><span>CountRecursiveCallsOf</span><span>(</span><span>method</span><span>)</span> <span>&gt;</span> <span>kMaximumNumberOfRecursiveCalls</span><span>)</span> <span>{</span>
+    <span>LOG_FAIL</span><span>(</span><span>stats_</span><span>,</span> <span>MethodCompilationStat</span><span>::</span><span>kNotInlinedRecursiveBudget</span><span>)</span>
+        <span>&lt;&lt;</span> <span>"Method "</span>
+        <span>&lt;&lt;</span> <span>method</span><span>-&gt;</span><span>PrettyMethod</span><span>()</span>
+        <span>&lt;&lt;</span> <span>" is not inlined because it has reached its recursive call budget."</span><span>;</span>
+    <span>return</span> <span>false</span><span>;</span>
+  <span>}</span>
+
+  <span>size_t</span> <span>inline_max_code_units</span> <span>=</span> <span>codegen_</span><span>-&gt;</span><span>GetCompilerOptions</span><span>().</span><span>GetInlineMaxCodeUnits</span><span>();</span>
+  <span>if</span> <span>(</span><span>accessor</span><span>.</span><span>InsnsSizeInCodeUnits</span><span>()</span> <span>&gt;</span> <span>inline_max_code_units</span><span>)</span> <span>{</span>
+    <span>LOG_FAIL</span><span>(</span><span>stats_</span><span>,</span> <span>MethodCompilationStat</span><span>::</span><span>kNotInlinedCodeItem</span><span>)</span>
+        <span>&lt;&lt;</span> <span>"Method "</span> <span>&lt;&lt;</span> <span>method</span><span>-&gt;</span><span>PrettyMethod</span><span>()</span>
+        <span>&lt;&lt;</span> <span>" is not inlined because its code item is too big: "</span>
+        <span>&lt;&lt;</span> <span>accessor</span><span>.</span><span>InsnsSizeInCodeUnits</span><span>()</span>
+        <span>&lt;&lt;</span> <span>" &gt; "</span>
+        <span>&lt;&lt;</span> <span>inline_max_code_units</span><span>;</span>
+    <span>return</span> <span>false</span><span>;</span>
+  <span>}</span>
+
+  <span>if</span> <span>(</span><span>graph_</span><span>-&gt;</span><span>IsCompilingBaseline</span><span>()</span> <span>&amp;&amp;</span>
+      <span>accessor</span><span>.</span><span>InsnsSizeInCodeUnits</span><span>()</span> <span>&gt;</span> <span>CompilerOptions</span><span>::</span><span>kBaselineInlineMaxCodeUnits</span><span>)</span> <span>{</span>
+    <span>LOG_FAIL_NO_STAT</span><span>()</span> <span>&lt;&lt;</span> <span>"Reached baseline maximum code unit for inlining  "</span>
+                       <span>&lt;&lt;</span> <span>method</span><span>-&gt;</span><span>PrettyMethod</span><span>();</span>
+    <span>outermost_graph_</span><span>-&gt;</span><span>SetUsefulOptimizing</span><span>();</span>
+    <span>return</span> <span>false</span><span>;</span>
+  <span>}</span>
+
+  <span>if</span> <span>(</span><span>invoke_instruction</span><span>-&gt;</span><span>GetBlock</span><span>()</span><span>-&gt;</span><span>GetLastInstruction</span><span>()</span><span>-&gt;</span><span>IsThrow</span><span>())</span> <span>{</span>
+    <span>LOG_FAIL</span><span>(</span><span>stats_</span><span>,</span> <span>MethodCompilationStat</span><span>::</span><span>kNotInlinedEndsWithThrow</span><span>)</span>
+        <span>&lt;&lt;</span> <span>"Method "</span> <span>&lt;&lt;</span> <span>method</span><span>-&gt;</span><span>PrettyMethod</span><span>()</span>
+        <span>&lt;&lt;</span> <span>" is not inlined because its block ends with a throw"</span><span>;</span>
+    <span>return</span> <span>false</span><span>;</span>
+  <span>}</span>
+
+  <span>return</span> <span>true</span><span>;</span>
+<span>}</span>
+</code></pre></div></div>
+
+<div><div><pre><code><span>if</span> <span>(</span><span>outermost_graph_</span><span>-&gt;</span><span>IsCompilingBaseline</span><span>()</span> <span>&amp;&amp;</span>
+    <span>(</span><span>current</span><span>-&gt;</span><span>IsInvokeVirtual</span><span>()</span> <span>||</span> <span>current</span><span>-&gt;</span><span>IsInvokeInterface</span><span>())</span> <span>&amp;&amp;</span>
+    <span>ProfilingInfoBuilder</span><span>::</span><span>IsInlineCacheUseful</span><span>(</span><span>current</span><span>-&gt;</span><span>AsInvoke</span><span>(),</span> <span>codegen_</span><span>))</span> <span>{</span>
+  <span>uint32_t</span> <span>maximum_inlining_depth_for_baseline</span> <span>=</span>
+      <span>InlineCache</span><span>::</span><span>MaxDexPcEncodingDepth</span><span>(</span>
+          <span>outermost_graph_</span><span>-&gt;</span><span>GetArtMethod</span><span>(),</span>
+          <span>codegen_</span><span>-&gt;</span><span>GetCompilerOptions</span><span>().</span><span>GetInlineMaxCodeUnits</span><span>());</span>
+  <span>if</span> <span>(</span><span>depth_</span> <span>+</span> <span>1</span> <span>&gt;</span> <span>maximum_inlining_depth_for_baseline</span><span>)</span> <span>{</span>
+    <span>LOG_FAIL_NO_STAT</span><span>()</span> <span>&lt;&lt;</span> <span>"Reached maximum depth for inlining in baseline compilation: "</span>
+                       <span>&lt;&lt;</span> <span>depth_</span> <span>&lt;&lt;</span> <span>" for "</span> <span>&lt;&lt;</span> <span>callee_graph</span><span>-&gt;</span><span>GetArtMethod</span><span>()</span><span>-&gt;</span><span>PrettyMethod</span><span>();</span>
+    <span>outermost_graph_</span><span>-&gt;</span><span>SetUsefulOptimizing</span><span>();</span>
+    <span>return</span> <span>false</span><span>;</span>
+  <span>}</span>
+<span>}</span>
+</code></pre></div></div>
+
+<h3>JikesRVM</h3>
+
+<p><a href="https://github.com/JikesRVM/JikesRVM/blob/5072f19761115d987b6ee162f49a03522d36c697/rvm/src/org/jikesrvm/compilers/opt/inlining/DefaultInlineOracle.java#L55" target="_blank" rel="noopener noreferrer">https://github.com/JikesRVM/JikesRVM/blob/5072f19761115d987b6ee162f49a03522d36c697/rvm/src/org/jikesrvm/compilers/opt/inlining/DefaultInlineOracle.java#L55</a></p>
+
+<h3>Other/research</h3>
+
+<p>Partial inlining</p>
+
+<p><a href="https://ethz.ch/content/dam/ethz/special-interest/infk/ast-dam/documents/Theodoridis-ASPLOS22-Inlining-Paper.pdf" target="_blank" rel="noopener noreferrer">Understanding and Exploiting Optimal Function Inlining</a> (PDF)</p>
+
+<p>machine learning</p>
+
+<p><a href="https://ieeexplore.ieee.org/document/6495004" target="_blank" rel="noopener noreferrer">Automatic construction of inlining heuristics using machine learning</a></p>
+
+<p><a href="https://ssw.jku.at/Teaching/PhDTheses/Mosaner/Dissertation%20Mosaner.pdf" target="_blank" rel="noopener noreferrer">Machine-Learning-Based Optimization Heuristics in Dynamic Compilers</a> (PDF)</p>
+
+<p><a href="https://webdocs.cs.ualberta.ca/~amaral/thesis/ErickOchoaMSc.pdf" target="_blank" rel="noopener noreferrer">Guiding Inlining Decisions Using Post-Inlining Transformations</a> (PDF)</p>
+
+<p><a href="https://karimali.ca/resources/papers/ourinliner.pdf" target="_blank" rel="noopener noreferrer">U Can’t Inline This!</a> (PDF)</p>
+
+<p><a href="https://dl.acm.org/doi/10.1145/182409.182489" target="_blank" rel="noopener noreferrer">Towards better inlining decisions using inlining trials</a></p>
+
+<p><a href="https://github.com/chrisseaton/rhizome/blob/main/doc/inlining.md" target="_blank" rel="noopener noreferrer">RhizomeRuby inlining</a></p>
+
+<p><a href="http://aleksandar-prokopec.com/resources/docs/prio-inliner-final.pdf" target="_blank" rel="noopener noreferrer">An Optimization-Driven Incremental Inline Substitution Algorithm for Just-in-Time Compilers</a> (PDF)</p>
+
+<p><a href="https://www.cresco.enea.it/SC05/schedule/pdf/pap274.pdf" target="_blank" rel="noopener noreferrer">Automatic Tuning of Inlining Heuristics</a> (PDF)</p>
+
+<p><a href="https://dl.acm.org/doi/pdf/10.1145/3563838.3567677" target="_blank" rel="noopener noreferrer">Inlining-Benefit Prediction with Interprocedural Partial Escape Analysis</a> (PDF)</p>
+
+<p><a href="/assets/img/virtual-inlining.pdf" target="_blank" rel="noopener noreferrer">Inlining of Virtual Methods</a> (PDF)</p>
+
+<p><a href="/assets/img/sable-inlining.pdf" target="_blank" rel="noopener noreferrer">A Study of Type Analysis for Speculative Method Inlining in a JIT Environment</a> (PDF)</p>
+
+<p><a href="https://dl.acm.org/doi/epdf/10.1145/351403.351416" target="_blank" rel="noopener noreferrer">A Comparative Study of Static and Profile-Based Heuristics for Inlining</a> (PDF)</p>
+
+<p>clusters from <a href="https://llvm.org/devmtg/2022-05/slides/2022EuroLLVM-CustomBenefitDrivenInliner-in-FalconJIT.pdf" target="_blank" rel="noopener noreferrer">Custom benefit-driven inliner in Falcon JIT</a> (PDF)</p>
+
+<h3>Graal</h3>
+
+<p><a href="https://github.com/oracle/graal/blob/5dde777cba22a99ebe3f19745d03ddfbc35c563c/compiler/src/jdk.graal.compiler/src/jdk/graal/compiler/phases/common/inlining/policy/GreedyInliningPolicy.java" target="_blank" rel="noopener noreferrer">https://github.com/oracle/graal/blob/5dde777cba22a99ebe3f19745d03ddfbc35c563c/compiler/src/jdk.graal.compiler/src/jdk/graal/compiler/phases/common/inlining/policy/GreedyInliningPolicy.java</a></p>
+
+<p><a href="https://github.com/oracle/graal/blob/5dde777cba22a99ebe3f19745d03ddfbc35c563c/compiler/src/jdk.graal.compiler/src/jdk/graal/compiler/phases/common/inlining/InliningPhase.java" target="_blank" rel="noopener noreferrer">https://github.com/oracle/graal/blob/5dde777cba22a99ebe3f19745d03ddfbc35c563c/compiler/src/jdk.graal.compiler/src/jdk/graal/compiler/phases/common/inlining/InliningPhase.java</a></p>
+
+<p><a href="https://github.com/oracle/graal/blob/5dde777cba22a99ebe3f19745d03ddfbc35c563c/compiler/src/jdk.graal.compiler/src/jdk/graal/compiler/phases/common/inlining/info/elem/InlineableGraph.java#L148" target="_blank" rel="noopener noreferrer">https://github.com/oracle/graal/blob/5dde777cba22a99ebe3f19745d03ddfbc35c563c/compiler/src/jdk.graal.compiler/src/jdk/graal/compiler/phases/common/inlining/info/elem/InlineableGraph.java#L148</a>
+</p>
+<div>
+  <ol>
+    <li>
+      <p>There are some newer papers, especially in Java land, that try to
+do a lot of analysis ahead-of-time and bundle the resulting information in
+.class files. Then the JIT can read it and see more than local context.</p>
+
+      <p>Or, if you are an AOT compiler, you can probably do a lot more whole system
+reasoning—both for time budget reasons and also because you can see more
+functions at once. <a href="#fnref:aot-split" target="_blank" rel="noopener noreferrer">↩</a></p>
+    </li>
+    <li>
+      <p><a href="https://github.com/pypy/pypy/blob/bab69dca82606f9e4feaf5507f8dd8dfb3e968b2/rpython/translator/backendopt/inline.py#L144" target="_blank" rel="noopener noreferrer">Check it
+out</a>
+if you like. I stumbled across it by accident. <a href="#fnref:rpython-inliner" target="_blank" rel="noopener noreferrer">↩</a></p>
+    </li>
+    <li>
+      <p>See also “Turbolev”, which seems to merge Maglev (CFG) with
+Turbofan (Sea of Nodes)… somehow. <a href="#fnref:turbolev" target="_blank" rel="noopener noreferrer">↩</a></p>
+    </li>
+    <li>
+      <p>Potentially a misunderstanding based on a private conversation. I’m
+working on tracking down the implementation… <a href="#fnref:fil" target="_blank" rel="noopener noreferrer">↩</a></p>
+    </li>
+  </ol>
+</div></div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://bernsteinbear.com/blog/inlining-heuristics/?utm_source=rss" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text footer-text--strong" data-astro-cid-sz7xmlte>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-sz7xmlte>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-wlspcwf4> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-wlspcwf4> <path d="M18 15l-6-6-6 6" data-astro-cid-wlspcwf4></path> </svg> </button> <script type="module">function o(){const e=document.getElementById("back-to-top");if(!e)return;const s=300;let t=!1;const n=()=>{const i=window.scrollY>s;e.hidden=!i,t=!1},d=()=>{t||(requestAnimationFrame(n),t=!0)};e.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"})}),window.addEventListener("scroll",d,{passive:!0}),n(),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",d)},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",o):o();document.addEventListener("astro:page-load",o);</script></body></html>
