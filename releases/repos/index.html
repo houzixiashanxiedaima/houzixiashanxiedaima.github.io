@@ -6,125 +6,90 @@
             <button id="retry-search" class="search-retry-btn">重试</button>
           </div>
         `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--default" data-astro-cid-sckkx6r4> <h1 id="-github-releases-监控列表">📦 GitHub Releases 监控列表</h1>
-<p>当前系统监控 <strong>19</strong> 个开源项目，每日自动抓取最新版本并生成 AI 摘要。</p>
-<p>最后更新: 2026-06-03</p>
+<p>当前系统监控 <strong>12</strong> 个开源项目，每日自动抓取最新版本并生成 AI 摘要。</p>
+<p>最后更新: 2026-06-04</p>
 <hr>
 <h2 id="c-1">C (1)</h2>
 <ul>
-<li><strong><a href="https://github.com/fastfetch-cli/fastfetch" rel="noopener noreferrer" target="_blank">fastfetch-cli/fastfetch</a></strong> ⭐ 23.0k
+<li><strong><a href="https://github.com/fastfetch-cli/fastfetch" rel="noopener noreferrer" target="_blank">fastfetch-cli/fastfetch</a></strong> ⭐ 23.1k
 A maintained, feature-rich and performance oriented, neofetch like system information tool.
-<em>最后更新: 2026-06-03</em></li>
+<em>最后更新: 2026-06-04</em></li>
 </ul>
 <hr>
-<h2 id="c-1-1">C++ (1)</h2>
+<h2 id="go-2">Go (2)</h2>
 <ul>
-<li><strong><a href="https://github.com/transmission/transmission" rel="noopener noreferrer" target="_blank">transmission/transmission</a></strong> ⭐ 14.8k
-Official Transmission BitTorrent client repository
-<em>最后更新: 2026-06-03</em></li>
+<li>
+<p><strong><a href="https://github.com/jesseduffield/lazygit" rel="noopener noreferrer" target="_blank">jesseduffield/lazygit</a></strong> ⭐ 78.9k
+simple terminal UI for git commands
+<em>最后更新: 2026-06-04</em></p>
+</li>
+<li>
+<p><strong><a href="https://github.com/SagerNet/sing-box" rel="noopener noreferrer" target="_blank">SagerNet/sing-box</a></strong> ⭐ 34.6k
+The universal proxy platform
+<em>最后更新: 2026-06-04</em></p>
+</li>
 </ul>
 <hr>
-<h2 id="go-1">Go (1)</h2>
+<h2 id="javascript-1">JavaScript (1)</h2>
 <ul>
-<li><strong><a href="https://github.com/caddyserver/caddy" rel="noopener noreferrer" target="_blank">caddyserver/caddy</a></strong> ⭐ 73.0k
-Fast and extensible multi-platform HTTP/1-2-3 web server with automatic HTTPS
-<em>最后更新: 2026-06-03</em></li>
+<li><strong><a href="https://github.com/fishjar/kiss-translator" rel="noopener noreferrer" target="_blank">fishjar/kiss-translator</a></strong> ⭐ 10.6k
+A simple, open source bilingual translation extension &#x26; Greasemonkey script (一个简约、开源的 双语对照翻译扩展 &#x26; 油猴脚本)
+<em>最后更新: 2026-06-04</em></li>
 </ul>
 <hr>
 <h2 id="kotlin-1">Kotlin (1)</h2>
 <ul>
-<li><strong><a href="https://github.com/ReadYouApp/ReadYou" rel="noopener noreferrer" target="_blank">ReadYouApp/ReadYou</a></strong> ⭐ 7.2k
-An Android RSS reader presented in Material You style.
-<em>最后更新: 2026-06-03</em></li>
+<li><strong><a href="https://github.com/MetaCubeX/ClashMetaForAndroid" rel="noopener noreferrer" target="_blank">MetaCubeX/ClashMetaForAndroid</a></strong> ⭐ 40.7k
+A rule-based tunnel for Android.
+<em>最后更新: 2026-06-04</em></li>
 </ul>
 <hr>
-<h2 id="python-1">Python (1)</h2>
+<h2 id="powershell-1">PowerShell (1)</h2>
 <ul>
-<li><strong><a href="https://github.com/jxxghp/MoviePilot" rel="noopener noreferrer" target="_blank">jxxghp/MoviePilot</a></strong> ⭐ 11.1k
-NAS 媒体库自动化管理工具
-<em>最后更新: 2026-06-03</em></li>
+<li><strong><a href="https://github.com/ChrisTitusTech/winutil" rel="noopener noreferrer" target="_blank">ChrisTitusTech/winutil</a></strong> ⭐ 55.5k
+Chris Titus Tech’s Windows Utility - Install Programs, Tweaks, Fixes, and Updates
+<em>最后更新: 2026-06-04</em></li>
 </ul>
 <hr>
-<h2 id="ruby-1">Ruby (1)</h2>
+<h2 id="rust-1">Rust (1)</h2>
 <ul>
-<li><strong><a href="https://github.com/Homebrew/brew" rel="noopener noreferrer" target="_blank">Homebrew/brew</a></strong> ⭐ 48.3k
-🍺 The missing package manager for macOS (or Linux)
-<em>最后更新: 2026-06-03</em></li>
-</ul>
-<hr>
-<h2 id="rust-3">Rust (3)</h2>
-<ul>
-<li>
-<p><strong><a href="https://github.com/openai/codex" rel="noopener noreferrer" target="_blank">openai/codex</a></strong> ⭐ 88.3k
+<li><strong><a href="https://github.com/openai/codex" rel="noopener noreferrer" target="_blank">openai/codex</a></strong> ⭐ 88.6k
 Lightweight coding agent that runs in your terminal
-<em>最后更新: 2026-06-03</em></p>
+<em>最后更新: 2026-06-04</em></li>
+</ul>
+<hr>
+<h2 id="shell-1">Shell (1)</h2>
+<ul>
+<li><strong><a href="https://github.com/233boy/sing-box" rel="noopener noreferrer" target="_blank">233boy/sing-box</a></strong> ⭐ 4.0k
+最好用的 sing-box 一键安装脚本 &#x26; 管理脚本，自动创建 REALITY 协议；支持 TUIC，Trojan，Hysteria2 等所有常见的协议
+<em>最后更新: 2026-06-04</em></li>
+</ul>
+<hr>
+<h2 id="swift-2">Swift (2)</h2>
+<ul>
+<li>
+<p><strong><a href="https://github.com/manaflow-ai/cmux" rel="noopener noreferrer" target="_blank">manaflow-ai/cmux</a></strong> ⭐ 21.0k
+Ghostty-based macOS terminal with vertical tabs and notifications for AI coding agents
+<em>最后更新: 2026-06-04</em></p>
 </li>
 <li>
-<p><strong><a href="https://github.com/zed-industries/zed" rel="noopener noreferrer" target="_blank">zed-industries/zed</a></strong> ⭐ 84.4k
-Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter.
-<em>最后更新: 2026-06-03</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/jdx/mise" rel="noopener noreferrer" target="_blank">jdx/mise</a></strong> ⭐ 29.1k
-dev tools, env vars, task runner
-<em>最后更新: 2026-06-03</em></p>
+<p><strong><a href="https://github.com/lwouis/alt-tab-macos" rel="noopener noreferrer" target="_blank">lwouis/alt-tab-macos</a></strong> ⭐ 15.8k
+Windows alt-tab on macOS
+<em>最后更新: 2026-06-04</em></p>
 </li>
 </ul>
 <hr>
-<h2 id="swift-4">Swift (4)</h2>
+<h2 id="typescript-2">TypeScript (2)</h2>
 <ul>
 <li>
-<p><strong><a href="https://github.com/exelban/stats" rel="noopener noreferrer" target="_blank">exelban/stats</a></strong> ⭐ 39.3k
-macOS system monitor in your menu bar
-<em>最后更新: 2026-06-03</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/ejbills/DockDoor" rel="noopener noreferrer" target="_blank">ejbills/DockDoor</a></strong> ⭐ 5.2k
-Window peeking, alt-tab and other enhancements for macOS
-<em>最后更新: 2026-06-03</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/nguyenphutrong/quotio" rel="noopener noreferrer" target="_blank">nguyenphutrong/quotio</a></strong> ⭐ 4.4k
-Stop juggling AI accounts. Quotio is a beautiful native macOS menu bar app that unifies your Claude, Gemini, OpenAI, Qwen, and Antigravity subscriptions – with real-time quota tracking and smart auto-failover for AI coding tools like Claude Code, OpenCode, and Droid.
-<em>最后更新: 2026-06-03</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/KartikLabhshetwar/better-shot" rel="noopener noreferrer" target="_blank">KartikLabhshetwar/better-shot</a></strong> ⭐ 1.7k
-An open-source alternative to CleanShot X for macOS. Capture, edit, and enhance your screenshots with professional quality.
-<em>最后更新: 2026-06-03</em></p>
-</li>
-</ul>
-<hr>
-<h2 id="typescript-6">TypeScript (6)</h2>
-<ul>
-<li>
-<p><strong><a href="https://github.com/openclaw/openclaw" rel="noopener noreferrer" target="_blank">openclaw/openclaw</a></strong> ⭐ 376.6k
+<p><strong><a href="https://github.com/openclaw/openclaw" rel="noopener noreferrer" target="_blank">openclaw/openclaw</a></strong> ⭐ 376.8k
 Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞
-<em>最后更新: 2026-06-03</em></p>
+<em>最后更新: 2026-06-04</em></p>
 </li>
 <li>
 <p><strong><a href="https://github.com/google-gemini/gemini-cli" rel="noopener noreferrer" target="_blank">google-gemini/gemini-cli</a></strong> ⭐ 104.9k
 An open-source AI agent that brings the power of Gemini directly into your terminal.
-<em>最后更新: 2026-06-03</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/code-yeongyu/oh-my-openagent" rel="noopener noreferrer" target="_blank">code-yeongyu/oh-my-openagent</a></strong> ⭐ 60.9k
-omo; the one and only agent harness for complex codebases. the pickaxe for complex software engineering. For your Codex, for your OpenCode
-<em>最后更新: 2026-06-03</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/tldraw/tldraw" rel="noopener noreferrer" target="_blank">tldraw/tldraw</a></strong> ⭐ 47.6k
-very good whiteboard infinite canvas SDK
-<em>最后更新: 2026-06-03</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/MHSanaei/3x-ui" rel="noopener noreferrer" target="_blank">MHSanaei/3x-ui</a></strong> ⭐ 39.3k
-Xray panel supporting multi-protocol multi-user expire day &#x26; traffic &#x26; IP limit (Vmess, Vless, Trojan, ShadowSocks, Wireguard, Hysteria, Tunnel, Mixed, HTTP, Tun)
-<em>最后更新: 2026-06-03</em></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/EKKOLearnAI/hermes-web-ui" rel="noopener noreferrer" target="_blank">EKKOLearnAI/hermes-web-ui</a></strong> ⭐ 7.2k
-Web dashboard for Hermes Agent — multi-platform AI chat, session management, scheduled jobs, usage analytics
-<em>最后更新: 2026-06-03</em></p>
+<em>最后更新: 2026-06-04</em></p>
 </li>
 </ul>
 <hr>
