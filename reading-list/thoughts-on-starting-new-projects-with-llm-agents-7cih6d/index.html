@@ -1,0 +1,198 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.4.4"><!-- Core SEO --><meta name="description" content="A few months ago I wrote about using LLM agents to help restructuring one of my
+Python projects.
+It's worth beginning by saying that the
+rewrite has been successful by all reasonable measures; I've be"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/thoughts-on-starting-new-projects-with-llm-agents-7cih6d/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/thoughts-on-starting-new-projects-with-llm-agents-7cih6d/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/thoughts-on-starting-new-projects-with-llm-agents-7cih6d/"><meta property="og:title" content="Thoughts on starting new projects with LLM agents"><meta property="og:description" content="A few months ago I wrote about using LLM agents to help restructuring one of my
+Python projects.
+It's worth beginning by saying that the
+rewrite has been successful by all reasonable measures; I've be"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="A few months ago I wrote about using LLM agents to help restructuring one of my
+Python projects.
+It's worth beginning by saying that the
+rewrite has been successful by all reasonable measures; I've be"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/thoughts-on-starting-new-projects-with-llm-agents-7cih6d/"><meta property="twitter:title" content="Thoughts on starting new projects with LLM agents"><meta property="twitter:description" content="A few months ago I wrote about using LLM agents to help restructuring one of my
+Python projects.
+It's worth beginning by saying that the
+rewrite has been successful by all reasonable measures; I've be"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Thoughts on starting new projects with LLM agents</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/","potentialAction":{"@type":"SearchAction","target":"https://blog.yuyins.com/search?q={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Thoughts on starting new projects with LLM agents","item":"https://blog.yuyins.com/reading-list/thoughts-on-starting-new-projects-with-llm-agents-7cih6d/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-b4zvghpy]{display:inline-flex;align-items:center;gap:.45rem;border-radius:9999px;border:1px solid transparent;background:var(--muted);color:var(--foreground);font-weight:500;line-height:1.4;text-decoration:none;white-space:nowrap}.chip--sm[data-astro-cid-b4zvghpy]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-b4zvghpy]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-b4zvghpy]{cursor:pointer;transition:background-color .2s ease,color .2s ease,opacity .2s ease}.chip--interactive[data-astro-cid-b4zvghpy]:hover{background-color:color-mix(in srgb,var(--accent) 10%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 68%,var(--foreground))}.chip--active[data-astro-cid-b4zvghpy],.chip[data-astro-cid-b4zvghpy].active{background-color:color-mix(in srgb,var(--accent) 18%,var(--background-subtle, var(--background)));color:color-mix(in srgb,var(--accent-hover) 82%,var(--foreground));border-color:transparent;box-shadow:none;font-weight:600}.chip--dashed[data-astro-cid-b4zvghpy]{border-style:dashed;border-color:color-mix(in srgb,var(--accent) 22%,var(--border));background:color-mix(in srgb,var(--background) 70%,var(--muted))}.chip[data-astro-cid-b4zvghpy]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+<link rel="stylesheet" href="/_astro/Layout.blNaH8PN.css">
+<style>.blog-post-container[data-astro-cid-wrgicudb]{width:100%;margin:0 auto;padding:2rem 0;animation:fadeIn .3s ease-out}.blog-post[data-astro-cid-wrgicudb]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-wrgicudb]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.article-header[data-astro-cid-wrgicudb] h1[data-astro-cid-wrgicudb]{font-size:2rem;line-height:1.3;margin-bottom:1rem;font-weight:700;color:var(--foreground);word-break:break-word}.article-meta[data-astro-cid-wrgicudb]{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted-foreground)}.separator[data-astro-cid-wrgicudb]{color:var(--border)}.article-content[data-astro-cid-wrgicudb]{line-height:1.8;margin-bottom:3rem;font-size:1.0625rem;color:var(--foreground)}.article-content[data-astro-cid-wrgicudb] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-wrgicudb] p{margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.article-content[data-astro-cid-wrgicudb] img{max-width:100%;height:auto;border-radius:.5rem;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] blockquote{border-left:4px solid var(--border);padding-left:1rem;margin:1.5rem 0;font-style:italic}.article-content[data-astro-cid-wrgicudb] pre{background:var(--muted);padding:1rem;border-radius:.5rem;overflow-x:auto;font-family:monospace;margin:1.5rem 0}.article-content[data-astro-cid-wrgicudb] ul,.article-content[data-astro-cid-wrgicudb] ol{padding-left:1.5rem;margin-bottom:1.25rem}.article-content[data-astro-cid-wrgicudb] li{margin-bottom:.5rem}.article-footer[data-astro-cid-wrgicudb]{padding-top:2rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:1.5rem;align-items:center}.action-row[data-astro-cid-wrgicudb]{display:flex;justify-content:center}.read-original-btn[data-astro-cid-wrgicudb]{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background-color:var(--foreground);color:var(--background);border-radius:.5rem;font-weight:500;text-decoration:none;transition:opacity .2s}.read-original-btn[data-astro-cid-wrgicudb]:hover{opacity:.9}.back-to-list[data-astro-cid-wrgicudb]{text-align:center}.back-link[data-astro-cid-wrgicudb]{color:var(--muted-foreground);text-decoration:none;font-size:.8125rem;transition:color .2s}.back-link[data-astro-cid-wrgicudb]:hover{color:var(--accent)}.back-link--top[data-astro-cid-wrgicudb]{display:inline-block;margin-bottom:1rem}
+</style></head> <body data-astro-cid-sckkx6r4> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-sckkx6r4>Skip to content</a> <header class="header" data-astro-cid-3ef6ksr2> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/" class="header-logo" data-astro-cid-3ef6ksr2> 雅俗共赏 </a> <div class="header-links" data-astro-cid-3ef6ksr2> <ul class="nav-list" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 文章 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 分类 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 订阅 </a> </li><li data-astro-cid-3ef6ksr2> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-3ef6ksr2> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-3ef6ksr2> <div id="search" data-astro-cid-otpdt6jm> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-otpdt6jm> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-otpdt6jm></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-otpdt6jm> <div class="search-dialog-card" data-astro-cid-otpdt6jm> <div class="search-dialog-bar" data-astro-cid-otpdt6jm> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-otpdt6jm> <circle cx="11" cy="11" r="8" data-astro-cid-otpdt6jm></circle><path d="m21 21-4.3-4.3" data-astro-cid-otpdt6jm></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-otpdt6jm></div> <kbd class="search-kbd" data-astro-cid-otpdt6jm>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-otpdt6jm> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-otpdt6jm> <path d="M18 6 6 18" data-astro-cid-otpdt6jm></path><path d="m6 6 12 12" data-astro-cid-otpdt6jm></path> </svg> </button> </div> </div> </dialog> </div> <script type="module">let d=!1;const c="pagefind-loaded";async function l(e=0){if(sessionStorage.getItem(c)==="true")return m(),!0;const s=document.getElementById("pagefind-ui");if(!s)return!1;s.innerHTML='<div class="search-loading">加载中...</div>';try{return await new Promise((r,o)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=r,a.onerror=o,document.head.appendChild(a)}),m(),sessionStorage.setItem(c,"true"),!0}catch(i){return console.error("Failed to load search:",i),e<2?(console.log(`Retrying search load... (${e+1}/2)`),await new Promise(r=>setTimeout(r,1e3)),l(e+1)):(s&&(s.innerHTML=`
+          <div class="search-loading">
+            <p>搜索功能加载失败</p>
+            <button id="retry-search" class="search-retry-btn">重试</button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{sessionStorage.removeItem(c),l(0)})),!1)}}function m(){typeof PagefindUI<"u"&&(new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),setTimeout(()=>{const e=document.querySelector(".pagefind-ui__search-input");e instanceof HTMLElement&&e.focus()},100))}function u(){if(d)return;d=!0;const e=document.getElementById("search-button"),n=document.getElementById("search-dialog"),s=document.getElementById("close-search");if(!e||!n||!s)return;let i=sessionStorage.getItem(c)==="true";const r=async()=>{n.showModal(),i?setTimeout(()=>{const t=document.querySelector(".pagefind-ui__search-input");t instanceof HTMLElement&&t.focus()},100):await l()&&(i=!0)},o=()=>{n.close()},a=t=>{t.target===n&&o()},f=t=>{(t.metaKey||t.ctrlKey)&&t.key==="k"&&(t.preventDefault(),n.open?o():r())};e.addEventListener("click",r),s.addEventListener("click",o),n.addEventListener("click",a),document.addEventListener("keydown",f),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),s.removeEventListener("click",o),n.removeEventListener("click",a),document.removeEventListener("keydown",f),d=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-sckkx6r4>  <div class="blog-post-container" data-astro-cid-wrgicudb> <article class="blog-post" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> <header class="article-header" data-astro-cid-wrgicudb> <h1 data-astro-cid-wrgicudb>Thoughts on starting new projects with LLM agents</h1> <div class="article-meta" data-astro-cid-wrgicudb> <a href="https://eli.thegreenplace.net" target="_blank" rel="noopener noreferrer" data-astro-cid-wrgicudb="true" data-astro-cid-b4zvghpy="true" class="chip chip--sm chip--interactive source-tag"> eli.thegreenplace.net </a> <span class="separator" data-astro-cid-wrgicudb>·</span> <time data-astro-cid-wrgicudb>2026年6月7日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-wrgicudb><p>A few months ago I wrote about <a href="https://eli.thegreenplace.net/2026/rewriting-pycparser-with-the-help-of-an-llm/" target="_blank" rel="noopener noreferrer">using LLM agents to help restructuring one of my
+Python projects</a>.
+It's worth beginning by saying that the
+rewrite has been successful by all reasonable measures; I've been able to
+continue maintaining that project since then without an issue.</p>
+<p>In this post, I want to discuss another project I've recently completed with
+significant help from agents: <a href="https://eli.thegreenplace.net/2026/watgo-a-webassembly-toolkit-for-go/" target="_blank" rel="noopener noreferrer">watgo</a>. In
+this project many things are different; most notably, it's a from-scratch
+project rather than a rewrite, and it uses a different programming language
+(Go). This post describes my experience working on the project, and some lessons
+learned along the way.</p>
+<div>
+<h2>The process</h2>
+<p>This is a new project, so it required extensive design. I began by iterating on
+the design with the agent, with a sketch of the API. For this purpose, I
+recommend using a Markdown file <a href="https://github.com/eliben/watgo/blob/main/doc/notes.md" target="_blank" rel="noopener noreferrer">committed into the repository</a>
+for future reference.</p>
+<p>After that, I started asking the agent to write CLs <a href="#footnote-1" target="_blank" rel="noopener noreferrer">[1]</a> in a logical order that
+made sense to me, keeping them small
+and reviewable (more on this in the next section). Sometimes it's not easy to
+have a small CL, and multiple rounds of revision may confuse the agent;
+in this case, I commit the CL and then go back and ask the agent to modify
+or refactor the code, as much as needed, with separate CLs. In the worst case,
+the whole sequence can be reverted if I feel we've taken the wrong direction
+(branches could also be helpful here for more complicated scenarios).</p>
+<p>This point is worth reiterating: sometimes a single CL is a huge step forward,
+but requires lots of review, cleanup and refactoring to be viable. I've had
+multiple instances where an agent produced several days of work in a single
+CL, but I then spent hours instructing it to clean up and refactor. Overall,
+it's still a productivity gain, just not as much as some pundits would like us
+to believe.</p>
+</div>
+<div>
+<h2>Keeping the human in the loop</h2>
+<p>Given the current state of agent capabilities, I think it's worth splitting
+projects into two categories:</p>
+<ol>
+<li>Low importance / prototype / throw away projects where deep code
+understanding is unnecessary. These can be "vibe-coded" (submitting agent
+code without even reviewing it).</li>
+<li>High importance projects that I actually want to maintain; here, vibe-coding
+is ill advised and I insist on reviewing and guiding all code the agent
+writes before it's submitted (or shortly after, as discussed above).</li>
+</ol>
+<p>The watgo projects is a clear example of (2): I certainly intend to maintain
+this project in the long term, so I insist on code that I understand. With very
+few exceptions, no code gets in without full review and often multiple rounds
+of revisions.</p>
+<p>Even if the cost for writing code went down, maintaining a project is so much
+more than that. It's triaging and fixing bugs, it's thinking through what needs
+to be done rather than how to do it, it's keeping the code healthy over time,
+and so on. As <a href="https://www.goodreads.com/quotes/273375-everyone-knows-that-debugging-is-twice-as-hard-as-writing" target="_blank" rel="noopener noreferrer">Brian Kernighan said</a>:</p>
+<blockquote>
+Everyone knows that debugging is twice as hard as writing a program in the
+first place. So if you're as clever as you can be when you write it, how will
+you ever debug it?</blockquote>
+<p>Maybe at some point agents will become good enough that projects in category
+(2) can be implemented and maintained completely autonomously. Maybe. But
+we're certainly not there yet. My hunch is that getting there will require
+crossing the AGI line <a href="#footnote-2" target="_blank" rel="noopener noreferrer">[2]</a>, after which little in our world remains certain.</p>
+<div>
+<h3>Practical workflow</h3>
+<p>If you're using an agent to send an actual PR and only review <em>that</em>, it's
+difficult to be disciplined enough to actually perform a thorough review. I find
+the following method to be more reliable:</p>
+<p>I use a CLI agent running locally in my repository, and ask it to update the
+code there. In parallel, I have a VSCode window open in the same project, where
+I can:</p>
+<ol>
+<li>Review the agent's changes using VSCode's diff view</li>
+<li>Make my own tweaks and code changes if needed</li>
+</ol>
+<p>Once I'm pleased with the change, I manually create a commit.</p>
+</div>
+</div>
+<div>
+<h2>Keeping the CLs small</h2>
+<p>As mentioned above, it's imperative to keep making progress in small chunks,
+with small enough CLs that a human can fully understand in a single review. It's
+very tempting to sprint ahead submitting thousands of lines of code every day,
+but this temptation has to be avoided. Coding with an agent is like
+speed-reading; yes, you're making more progress, but comprehension suffers
+the faster you go.</p>
+<p>Particularly for refactoring, agents still take the shortest route to
+destination. It's important to guide them to think about the "big picture" at
+all times, find all instances where X is better done as Y, not just a single
+place noticed during a review. This is why it's sometimes OK to have
+a CL submitted before you fully agree with everything, and go back to it later
+for several refactoring rounds. Source control works amazingly well when
+pair-coding with agents.</p>
+</div>
+<div>
+<h2>Testing strategy</h2>
+<p>It's a key point discussed in every "how to succeed with AI" article, but
+still critical enough to reiterate here: a solid testing strategy is absolutely
+crucial for success. Agents produce - by far - the best results when they have
+a solid test suite to test their code against.</p>
+<p>With the <a href="https://github.com/eliben/pycparser" target="_blank" rel="noopener noreferrer">pycparser</a> rewrite, I had
+a large existing test suite. For <a href="https://github.com/eliben/watgo" target="_blank" rel="noopener noreferrer">watgo</a>,
+the very first thing I did was think through how to adapt the test suites of
+the <a href="https://github.com/WebAssembly/spec/" target="_blank" rel="noopener noreferrer">WASM spec</a> and of the
+<a href="https://github.com/WebAssembly/wabt" target="_blank" rel="noopener noreferrer">wabt project</a> for my needs.</p>
+<p>If your project doesn't have such tests to rely on, this should be your first
+order of business - finding one, or building one from scratch. Beware of
+self-reinforcing loops though; it's dangerous to trust agents for both the
+tests and the implementations tested against them.</p>
+</div>
+<div>
+<h2>Language choice - Go for agent-written projects</h2>
+<p>Go is a fantastic language for agents to write, because it's designed to be
+very readable by humans. The biggest strengths of Go
+are exactly what makes the experience of reviewing agent code so positive:</p>
+<ul>
+<li>Go changes very infrequently, so you don't have to wonder "are we using the
+most modern / idiomatic approach" or "what the hell is this construct"
+as often as with other languages (looking at you, Python and TypeScript).</li>
+<li>There are relatively few ways to accomplish the same thing in Go, further
+lowering the mental burden.</li>
+<li>The standard library is rich and there's much less need to keep abreast of
+the package-everyone-uses du jour.</li>
+<li>In general, Go is designed for readability, with a mild-but-still-strong type
+system, uniform formatting, explicit error propagation and opinionated choices
+already made for you.</li>
+</ul>
+<p>Since most of the time spent by humans when using agents is <em>reading</em> rather
+than <em>writing</em> code, these effects compound and produce a great experience.
+Recall the discussion of how some languages are optimized for writability (Perl)
+while others are optimized for readability (Go)? Well, when working on a project
+with an agent we live in a world of 99% reading vs. 1% writing, so this really
+matters.</p>
+<p>I find this aspect really crucial in light of the earlier points made in this
+post - namely, keeping the human in the loop by understanding and reviewing
+all of the agent's design choices and code.</p>
+</div>
+<div>
+<h2>Final thoughts</h2>
+<p>If you're working on a subject that's completely new to you, I would strongly
+recommend <em>against</em> the approach described in this post. To really learn
+something, you have to work through it from scratch, yourself, reading,
+designing, writing the code. Agents don't change this basic fact; even before
+agents, if you wanted to learn X, copying it from Stack Overflow or some other
+project clearly wasn't the right way to go. Similarly, while agents can be used
+as a prop for learning, they cannot learn <em>for you</em>.</p>
+<p>As a corollary, junior engineers should exercise <em>extreme caution</em> when relying
+on LLMs. There's no replacement to hard-won experience and the sweat and tears
+of learning new, challenging topics. Learning is supposed to be hard; if it's
+too easy, you're probably not learning.</p>
+<p>For senior engineers, agents are a boon; it's a great tool to increase
+productivity, avoid the boring stuff, and get unstuck from procrastination; but
+only when used judiciously.</p>
+<hr />
+<table>
+<colgroup><col></col><col></col></colgroup>
+<tbody>
+<tr><td><a href="#footnote-reference-1" target="_blank" rel="noopener noreferrer">[1]</a></td><td>CL stands for Changelist, also known as a "patch" or a "diff" - basically
+a standalone commit that touches one or more files. This term originates
+from the source control systems Perforce and Subversion.</td></tr>
+</tbody>
+</table>
+<table>
+<colgroup><col></col><col></col></colgroup>
+<tbody>
+<tr><td><a href="#footnote-reference-2" target="_blank" rel="noopener noreferrer">[2]</a></td><td>Programming is the ultimate realization of thought; if machines can
+design, produce, maintain and understand code better than humans, it
+means they can start improving themselves, which is the definition of
+<a href="https://en.wikipedia.org/wiki/Technological_singularity" target="_blank" rel="noopener noreferrer">singularity</a>.</td></tr>
+</tbody>
+</table>
+</div></div> <footer class="article-footer" data-astro-cid-wrgicudb> <div class="action-row" data-astro-cid-wrgicudb> <a href="https://eli.thegreenplace.net/2026/thoughts-on-starting-new-projects-with-llm-agents/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-wrgicudb>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-wrgicudb> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-wrgicudb>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="footer-text footer-text--strong" data-astro-cid-sz7xmlte>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-sz7xmlte>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-sz7xmlte>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-sz7xmlte>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-wlspcwf4> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-wlspcwf4> <path d="M18 15l-6-6-6 6" data-astro-cid-wlspcwf4></path> </svg> </button> <script type="module">function o(){const e=document.getElementById("back-to-top");if(!e)return;const s=300;let t=!1;const n=()=>{const i=window.scrollY>s;e.hidden=!i,t=!1},d=()=>{t||(requestAnimationFrame(n),t=!0)};e.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"})}),window.addEventListener("scroll",d,{passive:!0}),n(),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",d)},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",o):o();document.addEventListener("astro:page-load",o);</script></body></html>
