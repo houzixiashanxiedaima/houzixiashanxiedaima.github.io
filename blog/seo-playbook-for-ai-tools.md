@@ -6,7 +6,7 @@ pubDatetime: 2026-04-02T00:00:00.000Z
 draft: false
 featured: false
 tags: ["SEO", "AI工具", "出海", "增长"]
-category: SEO
+category: 教程
 ---
 > 我推崇把网站当成一本书 & 内容产品来做增长的策略，在写这本 SEO 小册子。因上努力，果上随缘，希望自己坚持写到底...
 
