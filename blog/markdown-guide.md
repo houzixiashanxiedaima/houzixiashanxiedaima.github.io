@@ -1,7 +1,6 @@
 ---
 title: Markdown 写作指南
 description: 掌握 Markdown 语法，高效撰写博客文章。
-author: 博客作者
 pubDatetime: 2024-01-05T00:00:00.000Z
 draft: false
 featured: false

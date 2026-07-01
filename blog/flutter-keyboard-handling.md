@@ -1,7 +1,6 @@
 ---
 title: Flutter 键盘顶起对话框排障记录
 description: 记录一次 Flutter 键盘顶起对话框的排障过程及解决方案
-author: 博客作者
 pubDatetime: 2024-10-24T00:00:00.000Z
 draft: false
 featured: false

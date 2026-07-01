@@ -1,7 +1,6 @@
 ---
 title: build.gradle.kts + buildSrc管理Gradle依赖
 description: build.gradle.kts + buildSrc管理Gradle依赖
-author: 博客作者
 pubDatetime: 2020-08-09T00:00:00.000Z
 draft: false
 featured: false

@@ -1,7 +1,6 @@
 ---
 title: Virtualbox与Mactype共存
 description: Virtualbox与Mactype共存
-author: 博客作者
 pubDatetime: 2016-07-28T00:00:00.000Z
 draft: false
 featured: false

@@ -1,7 +1,6 @@
 ---
 title: Hexo + Github Pages搭建博客
 description: Hexo + Github Pages搭建博客
-author: 博客作者
 pubDatetime: 2020-02-13T00:00:00.000Z
 draft: false
 featured: false

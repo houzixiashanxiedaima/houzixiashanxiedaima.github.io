@@ -1,7 +1,6 @@
 ---
 title: DrawerLayout：Write-Once，Run-EveryWhere
 description: DrawerLayout：Write-Once，Run-EveryWhere
-author: 博客作者
 pubDatetime: 2016-07-28T00:00:00.000Z
 draft: false
 featured: false

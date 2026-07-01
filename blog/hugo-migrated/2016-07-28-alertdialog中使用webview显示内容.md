@@ -1,7 +1,6 @@
 ---
 title: AlertDialog中使用WebView显示内容
 description: AlertDialog中使用WebView显示内容
-author: 博客作者
 pubDatetime: 2016-07-28T00:00:00.000Z
 draft: false
 featured: false

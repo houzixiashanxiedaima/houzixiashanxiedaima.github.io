@@ -1,7 +1,6 @@
 ---
 title: Material-Design-之TabLayout与Toolbar
 description: Material-Design-之TabLayout与Toolbar
-author: 博客作者
 pubDatetime: 2016-07-28T00:00:00.000Z
 draft: false
 featured: false
