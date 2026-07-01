@@ -1,0 +1,1695 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.0.2"><!-- Core SEO --><meta name="description" content="
+  Much have I travell'd in the realms of gold,
+  And many goodly states and kingdoms seen;
+  Round many western islands have I been
+  Which bards in fealty to Apollo hold.
+  Oft of one wide expanse h"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/on-first-looking-into-jax-5410d6/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/on-first-looking-into-jax-5410d6/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/on-first-looking-into-jax-5410d6/"><meta property="og:title" content="On first looking into JAX"><meta property="og:description" content="
+  Much have I travell'd in the realms of gold,
+  And many goodly states and kingdoms seen;
+  Round many western islands have I been
+  Which bards in fealty to Apollo hold.
+  Oft of one wide expanse h"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="
+  Much have I travell'd in the realms of gold,
+  And many goodly states and kingdoms seen;
+  Round many western islands have I been
+  Which bards in fealty to Apollo hold.
+  Oft of one wide expanse h"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/on-first-looking-into-jax-5410d6/"><meta property="twitter:title" content="On first looking into JAX"><meta property="twitter:description" content="
+  Much have I travell'd in the realms of gold,
+  And many goodly states and kingdoms seen;
+  Round many western islands have I been
+  Which bards in fealty to Apollo hold.
+  Oft of one wide expanse h"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>On first looking into JAX</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/","potentialAction":{"@type":"SearchAction","target":"https://blog.yuyins.com/search?q={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"On first looking into JAX","item":"https://blog.yuyins.com/reading-list/on-first-looking-into-jax-5410d6/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-k2qn5omv]{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip[data-astro-cid-k2qn5omv]:after{content:none!important}.chip--sm[data-astro-cid-k2qn5omv]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-k2qn5omv]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-k2qn5omv]{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}.chip--interactive[data-astro-cid-k2qn5omv]:hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}.chip--active[data-astro-cid-k2qn5omv],.chip[data-astro-cid-k2qn5omv].active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed[data-astro-cid-k2qn5omv]{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip[data-astro-cid-k2qn5omv]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.blog-post[data-astro-cid-veycvx62]{width:100%;min-width:0;max-width:42rem;margin:0 auto}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem;font-style:italic}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;font-family:monospace;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link[data-astro-cid-veycvx62]{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link[data-astro-cid-veycvx62]:hover{color:var(--accent)}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style><link rel="stylesheet" href="/_astro/Layout.CaYMEf85.css"></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-06-30" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-06-30</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-06-29" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-06-29</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-06-28" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-06-28</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-06-27" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-06-27</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-06-27" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-06-27</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-06-26" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-06-26</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module">var o=!1;function m(){let e=0;const t=()=>{const n=document.querySelector(".pagefind-ui__search-input");n instanceof HTMLElement?n.focus():e++<60&&requestAnimationFrame(t)};requestAnimationFrame(t)}function c(){const e=document.getElementById("search-suggestions");if(!e)return;const t=document.querySelector(".pagefind-ui__search-input");e.hidden=!!t&&t.value.trim()!==""}async function d(e=0){const n=document.getElementById("pagefind-ui");if(!n)return!1;if(typeof PagefindUI<"u")return f(),!0;n.innerHTML='<div class="search-loading">加载中...</div>';try{return await new Promise((r,i)=>{const a=document.createElement("script");a.src="/pagefind/pagefind-ui.js",a.onload=r,a.onerror=i,document.head.appendChild(a)}),f(),!0}catch(r){return console.error("Failed to load search:",r),e<2?(console.log(`Retrying search load... (${e+1}/2)`),await new Promise(i=>setTimeout(i,1e3)),d(e+1)):(n&&(n.innerHTML=`
+          <div class="search-loading">
+            <p>搜索功能加载失败</p>
+            <button id="retry-search" class="search-retry-btn">重试</button>
+          </div>
+        `,document.getElementById("retry-search")?.addEventListener("click",()=>{d(0)})),!1)}}function f(){if(typeof PagefindUI<"u"){const e=document.getElementById("pagefind-ui");e&&(e.innerHTML=""),new PagefindUI({element:"#pagefind-ui",showSubResults:!0,showImages:!1,excerptLength:15,autofocus:!0,translations:{placeholder:"搜索文章...",clear_search:"清除",load_more:"加载更多",search_label:"搜索此站点",filters_label:"筛选",zero_results:"未找到结果 [SEARCH_TERM]",many_results:"找到 [COUNT] 个结果 [SEARCH_TERM]",one_result:"找到 [COUNT] 个结果 [SEARCH_TERM]",alt_search:"未找到 [SEARCH_TERM] 的结果。显示 [DIFFERENT_TERM] 的结果",search_suggestion:"未找到 [SEARCH_TERM] 的结果。尝试以下搜索：",searching:"搜索中 [SEARCH_TERM]..."}}),m(),c()}}function u(){if(o)return;o=!0;const e=document.getElementById("search-button"),t=document.getElementById("search-dialog"),n=document.getElementById("close-search");if(!e||!t||!n)return;const r=async()=>{t.showModal(),document.getElementById("pagefind-ui")?.querySelector(".pagefind-ui__search-input")||await d(),m(),c()},i=()=>{t.close()},a=s=>{s.target===t&&i()},l=s=>{(s.metaKey||s.ctrlKey)&&s.key==="k"&&(s.preventDefault(),t.open?i():r())};e.addEventListener("click",r),n.addEventListener("click",i),t.addEventListener("click",a),t.addEventListener("input",c),document.addEventListener("keydown",l),document.addEventListener("astro:before-swap",()=>{e.removeEventListener("click",r),n.removeEventListener("click",i),t.removeEventListener("click",a),document.removeEventListener("keydown",l),o=!1},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u):u();document.addEventListener("astro:page-load",u);</script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>On first looking into JAX</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://gilesthomas.com" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" data-astro-cid-k2qn5omv="true" class="chip chip--sm chip--interactive source-tag"> gilesthomas.com </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年5月30日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-veycvx62><blockquote>
+  <p>Much have I travell'd in the realms of gold,<br />
+  And many goodly states and kingdoms seen;<br />
+  Round many western islands have I been<br />
+  Which bards in fealty to Apollo hold.<br />
+  Oft of one wide expanse had I been told<br />
+  That deep-brow'd Homer ruled as his demesne;<br />
+  Yet did I never breathe its pure serene<br />
+  Till I heard Chapman speak out loud and bold:<br />
+  Then felt I like some watcher of the skies<br />
+  When a new planet swims into his ken;<br />
+  Or like stout Cortez when with eagle eyes<br />
+  He star'd at the Pacific -- and all his men<br />
+  Look'd at each other with a wild surmise --<br />
+  Silent, upon a peak in Darien.<br />
+  <br />
+  John Keats, <em>On First Looking into Chapman's Homer</em></p>
+</blockquote>
+
+<p>I've been working with <a href="https://pytorch.org/" target="_blank" rel="noopener noreferrer">PyTorch</a> quite a lot for the last couple of years, and feel
+like I've come to a reasonably solid understanding of how it all fits together.
+<a href="/llm-from-scratch" target="_blank" rel="noopener noreferrer">Working through</a> <a href="https://sebastianraschka.com/" target="_blank" rel="noopener noreferrer">Sebastian Raschka</a>'s book
+"<a href="https://www.manning.com/books/build-a-large-language-model-from-scratch" target="_blank" rel="noopener noreferrer">Build a Large Language Model (from Scratch)</a>",
+training my own LLMs <a href="/2025/12/llm-from-scratch-28-training-a-base-model-from-scratch" target="_blank" rel="noopener noreferrer">locally</a> and <a href="/2026/04/llm-from-scratch-32j-interventions-trying-to-train-a-better-model-in-the-cloud" target="_blank" rel="noopener noreferrer">in the cloud</a>,
+<a href="/2025/10/retro-language-models-rebuilding-karpathys-rnn-in-pytorch" target="_blank" rel="noopener noreferrer">rebuilding Andrej Karpathy's 2015-vintage RNNs</a> --
+over time, it all adds up!</p>
+
+<p>But, of course, there are other frameworks, and one I kept hearing about was
+<a href="https://docs.jax.dev/en/latest/index.html" target="_blank" rel="noopener noreferrer">JAX</a>.  While it's less
+dominant than PyTorch, it has a reputation for a certain cleanliness, a certain purity.
+And having spent time over the last couple of weeks working through the tutorials, and translating small PyTorch examples
+into it, I've been really impressed.</p>
+
+<p>In this post I want to give an overview -- to report back to beginners like me, still
+living in PyTorch-land, on my new discovery.  Less like Herschel discovering Uranus,
+and more like a 16th-century European coming back after having discovered something that
+the people who lived there were perfectly well aware of.  What is this JAX thing,
+and how does it differ from PyTorch?</p>
+<h3>Some theses, significantly overstated</h3>
+
+<p>I think that the main differences between PyTorch and JAX are something like this, but a little
+less strident:</p>
+
+<ol>
+<li>PyTorch is engineering; JAX is maths.</li>
+<li>PyTorch has historically<sup><a href="#fn-1" target="_blank" rel="noopener noreferrer">1</a></sup> been optimised piecewise, JAX is JITted.</li>
+<li>PyTorch is procedural, JAX (tries to be) functional.</li>
+<li>PyTorch is maximalist; JAX is minimalist.</li>
+</ol>
+
+<p>Having overstated my claims, let me dig in and perhaps walk them back a bit.
+Once I've gone through them, I'll do a walkthrough of porting a simple PyTorch
+training loop to JAX, which should illustrate the points well.</p>
+
+<p>Finally, I'll wrap up with the counterargument.  JAX is wonderful and shiny, and
+30+ years of industry experience and cynicism makes me fear that it might be doomed :-(</p>
+
+<p>But let's start with the positive!  [Happy face on.]</p>
+
+<h3>1. Maths versus engineering</h3>
+
+<p>A simple example that nicely contrasts the different philosophies of
+the two frameworks is what the core of a training loop looks like.  Here's how
+you might write one in PyTorch:</p>
+
+<div>
+<pre><span></span><code>    <span>optimizer</span><span>.</span><span>zero_grad</span><span>()</span>
+
+    <span>result</span> <span>=</span> <span>model</span><span>(</span><span>inputs</span><span>)</span>
+    <span>loss</span> <span>=</span> <span>loss_function</span><span>(</span><span>result</span><span>,</span> <span>targets</span><span>)</span>
+
+    <span>loss</span><span>.</span><span>backward</span><span>()</span>
+
+    <span>optimizer</span><span>.</span><span>step</span><span>()</span>
+</code></pre>
+</div>
+
+<p>This is kind of mechanistic.  You're telling the computer what to do, step by step:</p>
+
+<ul>
+<li>Zero out the gradients that you currently have attached to the parameters.</li>
+<li>Do a forward pass to get the model's outputs.</li>
+<li>Work out the loss based on those outputs.</li>
+<li>Do the backward pass.</li>
+<li>Update the parameters based on the gradients that the backward pass attached to them.</li>
+</ul>
+
+<p>Now let's look at a parallel JAX implementation:</p>
+
+<div>
+<pre><span></span><code><span>def</span><span> </span><span>calculate_loss</span><span>(</span><span>parameters</span><span>,</span> <span>inputs</span><span>,</span> <span>targets</span><span>):</span>
+    <span>result</span> <span>=</span> <span>forward</span><span>(</span><span>parameters</span><span>,</span> <span>inputs</span><span>)</span>
+    <span>return</span> <span>loss_function</span><span>(</span><span>result</span><span>,</span> <span>targets</span><span>)</span>
+
+<span>...</span>
+
+<span>def</span><span> </span><span>train</span><span>():</span>
+    <span>...</span>
+
+    <span>grads</span> <span>=</span> <span>jax</span><span>.</span><span>grad</span><span>(</span><span>calculate_loss</span><span>)(</span><span>layers</span><span>,</span> <span>inputs</span><span>,</span> <span>targets</span><span>)</span>
+
+    <span>layers</span> <span>=</span> <span>step</span><span>(</span><span>layers</span><span>,</span> <span>grads</span><span>,</span> <span>learning_rate</span><span>)</span>
+</code></pre>
+</div>
+
+<p>It's clearly very different.  No explicit backward pass, no gradient-zeroing,
+and the forward pass and loss calculation are baked into a separate function.
+But why is it shaped that way?</p>
+
+<p>Let's think about what we're actually doing in our training loop.  The gradients
+are the partial derivative of the loss function ℒ against
+the weights W:</p>
+
+gradients=∂ℒ∂W
+
+<p>Now, I'm being a bit sloppy with that notation, because ℒ is a function, and
+it -- in the mathematical formulation -- takes the weights as a parameter.  So it would be
+better written like this:</p>
+
+gradients=∂∂Wℒ(W)
+
+<p>But that's still not quite right.  In a real training loop, we're doing this in the
+context of a particular input batch, X,
+and its associated targets, Y. <sup><a href="#fn-2" target="_blank" rel="noopener noreferrer">2</a></sup>  We might write that mathematically as this:</p>
+
+gradients=∂∂Wℒ(W:X,Y)
+
+<p>...where you can read the colon as "given".  Now let's look again at the JAX code to work
+out the gradients:</p>
+
+<div>
+<pre><span></span><code><span>grads</span> <span>=</span> <span>jax</span><span>.</span><span>grad</span><span>(</span><span>calculate_loss</span><span>)(</span><span>layers</span><span>,</span> <span>inputs</span><span>,</span> <span>targets</span><span>)</span>
+</code></pre>
+</div>
+
+<p>That's an almost-perfect mirror of the maths!</p>
+
+<p>The <code>jax.grad</code> function takes a function <code>f</code>, and returns another function, <code>g</code>,
+which takes the same arguments.  When you call <code>g</code>, instead of returning the result
+of <code>f</code>, it will return the derivative of <code>f</code> with respect to its first argument,
+given the values of the others. <sup><a href="#fn-3" target="_blank" rel="noopener noreferrer">3</a></sup></p>
+
+<p>How is it doing that magic?  Let's look at a simple concrete example:</p>
+
+<div>
+<pre><span></span><code><span>def</span><span> </span><span>f</span><span>(</span><span>x</span><span>,</span> <span>y</span><span>):</span>
+    <span>print</span><span>(</span><span>f</span><span>"In the function </span><span>{</span><span>x</span><span>=}</span><span>, </span><span>{</span><span>y</span><span>=}</span><span>"</span><span>)</span>
+    <span>return</span> <span>x</span> <span>+</span> <span>y</span>
+</code></pre>
+</div>
+
+<p>If you do the initial call to <code>grad</code>:</p>
+
+<div>
+<pre><span></span><code><span>g</span> <span>=</span> <span>jax</span><span>.</span><span>grad</span><span>(</span><span>f</span><span>)</span>
+</code></pre>
+</div>
+
+<p>...then it just wraps <code>f</code> in a helper function.  It's when you call <code>g</code> that the magic
+happens.</p>
+
+<div>
+<pre><span></span><code><span>g</span><span>(</span><span>2.0</span><span>,</span> <span>1.0</span><span>)</span>
+</code></pre>
+</div>
+
+<p>...will print out this:</p>
+
+<div>
+<pre><span></span><code><span>In the function x=GradTracer(primal=2.0, typeof(tangent)=f32[]), y=1.0</span>
+</code></pre>
+</div>
+
+<p>The first parameter -- the one with respect to which we're asking for the derivative --
+is replaced by a <code>GradTracer</code> object.  Because it's wrapping a float, it can
+be used like one, so the function executes as expected. But it also keeps track of what happens to this
+variable as the code executes, and essentially builds up what in PyTorch would be
+represented by the computation graph.</p>
+
+<p>So: while in PyTorch, the variables that you pass in to a function that you need gradients
+for need to be special PyTorch objects that can keep a reference to those gradients --
+the <code>requires_grad</code> parameter that pops up frequently in PyTorch code -- in JAX, it's
+all handled by variables being automatically wrapped in these special tracers.</p>
+
+<p>Once it has the results of the function as a whole, including the chain of operations
+that was traced, it can automatically do a backward pass, and we're done.
+That's really nifty!</p>
+
+<p>Now, the example above was a toy one, with just one parameter.
+In a real training loop, you're differentiating against a set of weights, and
+those will be something more complex.  But <code>grad</code>
+handles that gracefully.  Let's see what happens if we pass in an array
+as the first parameter:</p>
+
+<div>
+<pre><span></span><code><span>&gt;&gt;&gt;</span> <span>import</span><span> </span><span>jax</span>
+<span>&gt;&gt;&gt;</span> <span>import</span><span> </span><span>jax.numpy</span><span> </span><span>as</span><span> </span><span>jnp</span>
+<span>&gt;&gt;&gt;</span> <span>def</span><span> </span><span>f</span><span>(</span><span>x</span><span>,</span> <span>y</span><span>):</span>
+<span>...</span>     <span>print</span><span>(</span><span>f</span><span>"In the function </span><span>{</span><span>x</span><span>=}</span><span>, </span><span>{</span><span>y</span><span>=}</span><span>"</span><span>)</span>
+<span>...</span>     <span>return</span> <span>(</span><span>x</span> <span>+</span> <span>y</span><span>)</span><span>.</span><span>sum</span><span>()</span>
+<span>...</span>
+<span>&gt;&gt;&gt;</span> <span>g</span> <span>=</span> <span>jax</span><span>.</span><span>grad</span><span>(</span><span>f</span><span>)</span>
+<span>&gt;&gt;&gt;</span> <span>g</span><span>(</span><span>jnp</span><span>.</span><span>array</span><span>([</span><span>1.</span><span>,</span> <span>2.</span><span>,</span> <span>3.</span><span>]),</span> <span>jnp</span><span>.</span><span>array</span><span>([</span><span>4.</span><span>,</span> <span>5.</span><span>,</span> <span>6.</span><span>]))</span>
+<span>In</span> <span>the</span> <span>function</span> <span>x</span><span>=</span><span>GradTracer</span><span>(</span><span>primal</span><span>=</span><span>[</span><span>1.</span> <span>2.</span> <span>3.</span><span>],</span> <span>typeof</span><span>(</span><span>tangent</span><span>)</span><span>=</span><span>f32</span><span>[</span><span>3</span><span>]),</span> <span>y</span><span>=</span><span>Array</span><span>([</span><span>4.</span><span>,</span> <span>5.</span><span>,</span> <span>6.</span><span>],</span> <span>dtype</span><span>=</span><span>float32</span><span>)</span>
+<span>Array</span><span>([</span><span>1.</span><span>,</span> <span>1.</span><span>,</span> <span>1.</span><span>],</span> <span>dtype</span><span>=</span><span>float32</span><span>)</span>
+</code></pre>
+</div>
+
+<p>So, we've got partial derivatives with respect to the elements of the array that was the first parameter --
+just what we'd need for a single-layer neural network without bias.</p>
+
+<p>But what about something more
+complicated?  For something like (say) an LLM, we have quite a lot of structure to our weights: our
+input embeddings, output head, all of the layers with their attention and feed-forward
+weights, and so on.</p>
+
+<p><code>grad</code> handles that by understanding basic Python structures --
+things that can be mapped to what JAX calls PyTrees.  PyTrees are nested tree structures of dictionaries,
+lists, tuples and so on, where the leaves are numbers or JAX arrays <sup><a href="#fn-4" target="_blank" rel="noopener noreferrer">4</a></sup>.</p>
+
+<p>If you ask for gradients of a variable that can be represented by a PyTree, you get them back in
+a form that mirrors that PyTree:</p>
+
+<div>
+<pre><span></span><code><span>&gt;&gt;&gt;</span> <span>def</span><span> </span><span>f</span><span>(</span><span>x</span><span>,</span> <span>y</span><span>):</span>
+<span>...</span>     <span>print</span><span>(</span><span>f</span><span>"In the function </span><span>{</span><span>x</span><span>=}</span><span>, </span><span>{</span><span>y</span><span>=}</span><span>"</span><span>)</span>
+<span>...</span>     <span>return</span> <span>(</span><span>x</span><span>[</span><span>"a"</span><span>][</span><span>"b"</span><span>]</span> <span>+</span> <span>y</span><span>)</span><span>.</span><span>sum</span><span>()</span>
+<span>...</span>
+<span>&gt;&gt;&gt;</span> <span>g</span> <span>=</span> <span>jax</span><span>.</span><span>grad</span><span>(</span><span>f</span><span>)</span>
+<span>&gt;&gt;&gt;</span> <span>g</span><span>({</span><span>"a"</span><span>:</span> <span>{</span><span>"b"</span><span>:</span> <span>jnp</span><span>.</span><span>array</span><span>([</span><span>1.</span><span>,</span> <span>2.</span><span>,</span> <span>3.</span><span>])}},</span> <span>jnp</span><span>.</span><span>array</span><span>([</span><span>4.</span><span>,</span> <span>5.</span><span>,</span> <span>6.</span><span>]))</span>
+<span>In</span> <span>the</span> <span>function</span> <span>x</span><span>=</span><span>{</span><span>'a'</span><span>:</span> <span>{</span><span>'b'</span><span>:</span> <span>GradTracer</span><span>(</span><span>primal</span><span>=</span><span>[</span><span>1.</span> <span>2.</span> <span>3.</span><span>],</span> <span>typeof</span><span>(</span><span>tangent</span><span>)</span><span>=</span><span>f32</span><span>[</span><span>3</span><span>])}},</span> <span>y</span><span>=</span><span>Array</span><span>([</span><span>4.</span><span>,</span> <span>5.</span><span>,</span> <span>6.</span><span>],</span> <span>dtype</span><span>=</span><span>float32</span><span>)</span>
+<span>{</span><span>'a'</span><span>:</span> <span>{</span><span>'b'</span><span>:</span> <span>Array</span><span>([</span><span>1.</span><span>,</span> <span>1.</span><span>,</span> <span>1.</span><span>],</span> <span>dtype</span><span>=</span><span>float32</span><span>)}}</span>
+</code></pre>
+</div>
+
+<p>If you combine that with JAX's tree-aware <code>map</code> function, you can combine those gradients with the
+original parameters to update them as you train.  I'll show you how that works later on, when we go through an
+example of porting some PyTorch code to JAX.</p>
+
+<p>So, all of that cool stuff was made possible by the tracer objects, which are passed
+in instead of the real parameters, and keep track of the computation graph (just like the
+graph that PyTorch attaches directly to the variables).</p>
+
+<p>But tracers are more generally useful than that; they really come into their own with the next JAX difference: the JIT.</p>
+
+<h3>2. JIT vs piecewise optimisation</h3>
+
+<p>Imagine that you've built some kind of nifty model in PyTorch.  As part of it, you
+do a calculation something like this:</p>
+
+score(q,d)=∑imaxj⟨qi,dj⟩
+
+<p>You decide that this is generally useful, so you
+<a href="https://huggingface.co/kernels/erikkaum/maxsim" target="_blank" rel="noopener noreferrer">code it up as a CUDA kernel</a> and make
+it available to the community, like Erik Kaunismäki has with his "MaxSim" kernel.  Maybe later on, it will get
+added to the PyTorch library as a standard component.</p>
+
+<p>There are a lot of optimisations like that built into PyTorch; people found that there
+were higher-level abstractions on top of basic tensor operations that were generally useful,
+so they coded up lower-level optimised versions.  For example, in the LLM I've been
+working with, there is <a href="/2025/07/llm-from-scratch-16-layer-normalisation" target="_blank" rel="noopener noreferrer">an implementation of LayerNorm</a>.
+But PyTorch has <a href="https://docs.pytorch.org/docs/2.12/generated/torch.nn.LayerNorm.html" target="_blank" rel="noopener noreferrer">its own one built in</a>.
+And there's a <a href="https://github.com/pytorch/pytorch/blob/main/aten/src/ATen/native/cuda/layer_norm_kernel.cu" target="_blank" rel="noopener noreferrer">CUDA implementation</a> that
+it will use automatically if it has the appropriate hardware available.</p>
+
+<p>There is a problem, though.  Imagine that someone else is working on a different kind
+of model in the future.  And for reasons completely unrelated to the MaxSim calculations
+that Kaunismäki nicely optimised, they happen to need to do the same calculations.</p>
+
+<p>Now, there are two things that can happen from there:</p>
+
+<ol>
+<li>They don't know that the MaxSim kernel exists, so their code remains unoptimised.</li>
+<li>They do know that it exists, so they repurpose it for whatever their use case is.</li>
+</ol>
+
+<p>The first is not ideal; but the second isn't great either, if what they're using it
+for is not a MaxSim operation in reality, just something that happens to look the same
+mathematically.</p>
+
+<p>In the general case: all optimisations that get into PyTorch have to be carefully named
+so that they reflect the exact level of abstraction that they're targeting.  And when
+people are writing PyTorch models, they need to actually know which optimised abstractions
+are available, and where to apply them.</p>
+
+<p>Now let's look at JAX.</p>
+
+<p>It has an innocuous-looking decorator, <code>jit</code>, and you can use it by adding a single
+line before your function:</p>
+
+<div>
+<pre><span></span><code><span>@jax</span><span>.</span><span>jit</span>
+<span>def</span><span> </span><span>selu</span><span>(</span><span>x</span><span>,</span> <span>alpha</span><span>=</span><span>1.67</span><span>,</span> <span>lambda_</span><span>=</span><span>1.05</span><span>):</span>
+    <span>return</span> <span>lambda_</span> <span>*</span> <span>jnp</span><span>.</span><span>where</span><span>(</span><span>x</span> <span>&gt;</span> <span>0</span><span>,</span> <span>x</span><span>,</span> <span>alpha</span> <span>*</span> <span>jnp</span><span>.</span><span>exp</span><span>(</span><span>x</span><span>)</span> <span>-</span> <span>alpha</span><span>)</span>
+</code></pre>
+</div>
+
+<p>Behind that single line is a huge amount of useful infrastructure.  Just like
+<code>grad</code>, it's a function that takes one function and returns another, without necessarily running
+the underlying code. <sup><a href="#fn-5" target="_blank" rel="noopener noreferrer">5</a></sup>  But when you call the wrapped function for the first time, some impressive stuff
+happens:</p>
+
+<div>
+<pre><span></span><code><span>selu</span><span>(</span><span>1.234</span><span>)</span>
+</code></pre>
+</div>
+
+<p>This will essentially execute the <code>selu</code> code twice:</p>
+
+<ol>
+<li><p>The first time through, it will create another of those tracer objects; this time,
+though, it won't wrap the number <code>1.234</code> -- it will just know that it is a wrapper
+for a float.  It will call the Python code with that tracer, and all of the operations in the function will be run, but the result
+that comes out at the end will essentially just be a representation of what calculations
+were done in an abstract sense -- like the computation graph that was used for
+working out gradients, but without specific numbers in it.</p>
+
+<p>JAX has a nice way to display these representations
+as what it calls JAXPRs, and the JAXPR for that function's representation when called
+with a float parameter will look something
+like this:</p>
+
+<pre><code>    { lambda ; a:f32[]. let
+    b:bool[] = gt a 0.0:f32[]
+    c:f32[] = exp a
+    d:f32[] = mul 1.67:f32[] c
+    e:f32[] = sub d 1.67:f32[]
+    f:f32[] = jit[
+      name=_where
+      jaxpr={ lambda ; b:bool[] a:f32[] e:f32[]. let
+          f:f32[] = select_n b e a
+        in (f,) }
+    ] b a e
+    g:f32[] = mul 1.05:f32[] f
+  in (g,) }
+</code></pre>
+
+<p>That JAXPR can be compiled into the appropriate code for the platform where
+you're running it -- x86 machine code, compiled CUDA, the equivalent for AMD
+or Google Tensor Processing Units (TPUs), and will be cached.  The key for
+the cache will be meta-information about the parameter -- in this case, something
+like "a 32-bit floating-point scalar".</p></li>
+<li><p>Next, the compiled code -- not the original Python -- is run with the actual value of the parameter, the
+<code>1.234</code> that we provided.</p></li>
+</ol>
+
+<p>Now, of course, the advantage of doing this is that when you call it with a different
+floating-point number -- say, <code>5.678</code> -- then you don't need to do the compilation again.
+You can just rely on the cached version.  And the fact that the compiled code is
+cached based on the metadata means that if you call <code>selu</code> with a vector, then it will compile
+a new version for that, and likewise for a matrix version. <sup><a href="#fn-6" target="_blank" rel="noopener noreferrer">6</a></sup></p>
+
+<p>This is all really nifty, and you can see how it would help right away.  But for me,
+at least, an excellent extra benefit is how it can save people like Erik Kaunismäki the bother
+of writing custom kernels.  The compilation that happens, taking the representation
+that it got from the tracing process and turning it into backend code, goes through an
+optimising compiler, <a href="https://openxla.org/" target="_blank" rel="noopener noreferrer">XLA</a>.  And that compiler can recognise
+"standard" operations and combine them together.</p>
+
+<p>This won't be at the level of "standard operations" like MaxSim, of course -- more,
+"this looks like a convolution, let's use the standard kernel".  But it does mean that
+instead of someone having to take code written in Python and hand-port it over to
+CUDA to get a GPU speedup, the same expertise can be put into improving the optimisation
+part of XLA to get a speedup for all code.</p>
+
+<p>That's pretty amazing.  However...</p>
+
+<h3>3. Procedural vs functional code</h3>
+
+<p>If you want something like the JIT to work properly, you need to limit the kind of code
+that it works with.  In particular, it needs to be functional.  A function must always
+return the same value when given the same inputs -- so this is fine:</p>
+
+<div>
+<pre><span></span><code><span>@jax</span><span>.</span><span>jit</span>
+<span>def</span><span> </span><span>add</span><span>(</span><span>x</span><span>,</span> <span>y</span><span>):</span>
+    <span>return</span> <span>x</span> <span>+</span> <span>y</span>
+
+<span>print</span><span>(</span><span>add</span><span>(</span><span>1</span><span>,</span> <span>2</span><span>))</span>
+<span>print</span><span>(</span><span>add</span><span>(</span><span>1</span><span>,</span> <span>3</span><span>))</span>
+</code></pre>
+</div>
+
+<p>...but this will cause problems:</p>
+
+<div>
+<pre><span></span><code><span>@jax</span><span>.</span><span>jit</span>
+<span>def</span><span> </span><span>addY</span><span>(</span><span>x</span><span>):</span>
+    <span>return</span> <span>x</span> <span>+</span> <span>y</span>
+
+<span>y</span> <span>=</span> <span>2</span>
+<span>print</span><span>(</span><span>addY</span><span>(</span><span>1</span><span>))</span>
+<span>y</span> <span>=</span> <span>3</span>
+<span>print</span><span>(</span><span>addY</span><span>(</span><span>1</span><span>))</span>
+</code></pre>
+</div>
+
+<p>...because <code>y</code> could be changed.  Specifically -- because the global <code>y</code> had the value
+<code>2</code> during the initial traced run of the function, that value will essentially get hard-coded
+into the cached JITted version, so both prints in the second example will output <code>3</code>.</p>
+
+<p>Something slightly surprising comes out of this -- something that makes JAX code look very different
+to PyTorch.  How we handle randomness needs to completely change.</p>
+
+<p>Consider this code:</p>
+
+<div>
+<pre><span></span><code><span>import</span><span> </span><span>random</span>
+
+<span>def</span><span> </span><span>f</span><span>(</span><span>x</span><span>):</span>
+    <span>return</span> <span>x</span> <span>+</span> <span>random</span><span>.</span><span>randint</span><span>(</span><span>1</span><span>,</span> <span>10</span><span>)</span>
+
+<span>random</span><span>.</span><span>seed</span><span>(</span><span>42</span><span>)</span>
+
+<span>print</span><span>(</span><span>f</span><span>(</span><span>1</span><span>))</span>
+<span>print</span><span>(</span><span>f</span><span>(</span><span>1</span><span>))</span>
+</code></pre>
+</div>
+
+<p>As a whole, it's deterministic.  But it breaks the functional requirement that
+the function can only depend on its inputs.  Both calls to <code>f</code> take the same input,
+but they return different results.</p>
+
+<p>Even worse, if we were to do something that consumed
+randomness between those two calls to <code>f</code>, for example:</p>
+
+<div>
+<pre><span></span><code><span>print</span><span>(</span><span>f</span><span>(</span><span>1</span><span>))</span>
+<span>random</span><span>.</span><span>randint</span><span>(</span><span>1</span><span>,</span> <span>10</span><span>)</span>
+<span>print</span><span>(</span><span>f</span><span>(</span><span>1</span><span>))</span>
+</code></pre>
+</div>
+
+<p>...we'd get different results.  The state of the random number generator is
+global state kept outside the function, just like <code>y</code> in the <code>addY</code> example above.</p>
+
+<p>A naive solution to this might be to make the state of the RNG explicit as a variable --
+you can imagine a library that worked something like this:</p>
+
+<div>
+<pre><span></span><code><span>import</span><span> </span><span>updated_random</span>
+
+<span>def</span><span> </span><span>f</span><span>(</span><span>x</span><span>,</span> <span>random_state</span><span>):</span>
+    <span>return</span> <span>x</span> <span>+</span> <span>random_state</span><span>.</span><span>randint</span><span>(</span><span>1</span><span>,</span> <span>10</span><span>)</span>
+
+<span>random_state</span> <span>=</span> <span>updated_random</span><span>.</span><span>new_state</span><span>(</span><span>42</span><span>)</span>
+<span>print</span><span>(</span><span>f</span><span>(</span><span>1</span><span>,</span> <span>random_state</span><span>))</span>
+<span>print</span><span>(</span><span>f</span><span>(</span><span>1</span><span>,</span> <span>random_state</span><span>))</span>
+</code></pre>
+</div>
+
+<p>That <em>looks</em> more functional, but when you think
+about it, we haven't actually fixed the problem.  We're passing the same <code>random_state</code>
+variable in in both cases, along with the same number, but we're getting different results.
+It's not global, but it's still mutable behind the scenes.</p>
+
+<p>What you'd actually need to do to make it purely functional would be something like
+this:</p>
+
+<div>
+<pre><span></span><code><span>import</span><span> </span><span>updated_random</span>
+
+<span>def</span><span> </span><span>f</span><span>(</span><span>x</span><span>,</span> <span>random_state</span><span>):</span>
+    <span>new_state</span><span>,</span> <span>randint</span> <span>=</span> <span>updated_random</span><span>.</span><span>randint</span><span>(</span><span>random_state</span><span>,</span> <span>1</span><span>,</span> <span>10</span><span>)</span>
+    <span>return</span> <span>new_state</span><span>,</span> <span>x</span> <span>+</span> <span>randint</span>
+
+<span>initial_random_state</span> <span>=</span> <span>updated_random</span><span>.</span><span>new_state</span><span>(</span><span>42</span><span>)</span>
+<span>first_call_random_state</span><span>,</span> <span>result</span> <span>=</span> <span>f</span><span>(</span><span>1</span><span>,</span> <span>initial_random_state</span><span>)</span>
+<span>print</span><span>(</span><span>result</span><span>)</span>
+<span>second_call_random_state</span><span>,</span> <span>result</span> <span>=</span> <span>f</span><span>(</span><span>1</span><span>,</span> <span>first_call_random_state</span><span>)</span>
+<span>print</span><span>(</span><span>result</span><span>)</span>
+</code></pre>
+</div>
+
+<p>The <code>updated_random.randint</code> function is generating a new random integer and returning
+both that and the new state of the RNG, then we pass that back along with our
+result.  We've made the random state variables immutable, and so it's functional.  But the
+API is getting pretty ugly pretty quickly.</p>
+
+<p>So JAX does something that is
+equivalent, but a bit cleaner.  There's a concept of a <em>key</em>, which needs to be passed
+into any function that consumes randomness:</p>
+
+<div>
+<pre><span></span><code><span>key</span> <span>=</span> <span>jax</span><span>.</span><span>random</span><span>.</span><span>key</span><span>(</span><span>42</span><span>)</span>
+</code></pre>
+</div>
+
+<p>That's kind of like the <code>random_state</code> that we have in the first version of the code above.
+But it's immutable; when you use it, like this:</p>
+
+<div>
+<pre><span></span><code><span>jax</span><span>.</span><span>random</span><span>.</span><span>randint</span><span>(</span><span>key</span><span>,</span> <span>(),</span> <span>1</span><span>,</span> <span>11</span><span>)</span>
+</code></pre>
+</div>
+
+<p>...it will not be changed, so no matter how many times you call it with the same
+key, that function will return the same value.  (Note that <code>jax.random.randint</code>
+takes an inclusive lower bound and an exclusive upper bound, like Python's <code>range</code>,
+but unlike the stdlib's <code>random.randint</code>.  It also needs to know the shape of the
+result -- <code>()</code> for a scalar, <code>(1, 2)</code> for a 1x2 array, and so on.)</p>
+
+<p>If you want it to "move on" to a new state, you use the <code>split</code> function, which
+takes an existing key and returns two (or more) new ones.  So you can do something like this:</p>
+
+<div>
+<pre><span></span><code><span>import</span><span> </span><span>jax.random</span>
+
+<span>def</span><span> </span><span>f</span><span>(</span><span>x</span><span>,</span> <span>key</span><span>):</span>
+    <span>return</span> <span>x</span> <span>+</span> <span>jax</span><span>.</span><span>random</span><span>.</span><span>randint</span><span>(</span><span>key</span><span>,</span> <span>(),</span> <span>1</span><span>,</span> <span>11</span><span>)</span>
+
+<span>initial_key</span> <span>=</span> <span>jax</span><span>.</span><span>random</span><span>.</span><span>key</span><span>(</span><span>42</span><span>)</span>
+<span>first_call_key</span><span>,</span> <span>new_key</span> <span>=</span> <span>jax</span><span>.</span><span>random</span><span>.</span><span>split</span><span>(</span><span>initial_key</span><span>)</span>
+<span>print</span><span>(</span><span>f</span><span>(</span><span>1</span><span>,</span> <span>first_call_key</span><span>))</span>
+<span>second_call_key</span><span>,</span> <span>new_new_key</span> <span>=</span> <span>jax</span><span>.</span><span>random</span><span>.</span><span>split</span><span>(</span><span>new_key</span><span>)</span>
+<span>print</span><span>(</span><span>f</span><span>(</span><span>1</span><span>,</span> <span>second_call_key</span><span>))</span>
+</code></pre>
+</div>
+
+<p>Now, that <code>new_key</code> and <code>new_new_key</code> stuff is a bit ugly, but while it's not OK
+to mutate the contents of variables in functional code, it's absolutely fine to assign a new value to
+an existing one, so what I've found myself doing is writing stuff like this:</p>
+
+<div>
+<pre><span></span><code><span>import</span><span> </span><span>jax.random</span>
+
+<span>def</span><span> </span><span>f</span><span>(</span><span>x</span><span>,</span> <span>key</span><span>):</span>
+    <span>return</span> <span>x</span> <span>+</span> <span>jax</span><span>.</span><span>random</span><span>.</span><span>randint</span><span>(</span><span>key</span><span>,</span> <span>(),</span> <span>1</span><span>,</span> <span>11</span><span>)</span>
+
+<span>key</span> <span>=</span> <span>jax</span><span>.</span><span>random</span><span>.</span><span>key</span><span>(</span><span>42</span><span>)</span>
+<span>first_call_key</span><span>,</span> <span>key</span> <span>=</span> <span>jax</span><span>.</span><span>random</span><span>.</span><span>split</span><span>(</span><span>key</span><span>)</span>
+<span>print</span><span>(</span><span>f</span><span>(</span><span>1</span><span>,</span> <span>first_call_key</span><span>))</span>
+<span>second_call_key</span><span>,</span> <span>key</span> <span>=</span> <span>jax</span><span>.</span><span>random</span><span>.</span><span>split</span><span>(</span><span>key</span><span>)</span>
+<span>print</span><span>(</span><span>f</span><span>(</span><span>1</span><span>,</span> <span>second_call_key</span><span>))</span>
+</code></pre>
+</div>
+
+<p>However, there are more powerful ways to use <code>split</code>; I'm not confident enough at
+using it yet to go into that, though, so I'll hold back for now.  I suspect (assuming I keep using JAX) I'll be
+posting about them in the future.</p>
+
+<p>OK: so the JIT means that we have to write functional code, which makes things a
+bit fiddly -- no more global state.  And that has a surprisingly big knock-on effect
+with randomness.</p>
+
+<p>But there's another thing that comes out of the JIT and the way it does
+tracing.  It's not a functional thing (though some of the docs seem to almost be
+treating it that way), but is caused by the same kind of constraints.  It's not
+part of my four theses above, but I think it's important enough to call out in
+its own subsection.</p>
+
+<h3>3.5. Control flow and values</h3>
+
+<p>Imagine this function:</p>
+
+<div>
+<pre><span></span><code><span>@jax</span><span>.</span><span>jit</span>
+<span>def</span><span> </span><span>f</span><span>(</span><span>x</span><span>):</span>
+    <span>if</span> <span>x</span> <span>&gt;</span> <span>2</span><span>:</span>
+        <span>return</span> <span>x</span> <span>**</span> <span>2</span>
+    <span>return</span> <span>x</span>
+
+<span>print</span><span>(</span><span>f</span><span>(</span><span>10.0</span><span>))</span>
+</code></pre>
+</div>
+
+<p>It's purely functional, so no problem there.
+But let's think about what the JIT is trying to do.  It wants to convert the function
+into a simple sequence of operations, so it will create a tracer for
+a floating-point scalar, then call <code>f</code> with it.</p>
+
+<p>When it hits that <code>if</code> statement, there will be
+a problem.  The tracer is meant to represent any arbitrary float, so should it take
+the <code>if</code> branch or not?  There's no good answer.  It doesn't know which branch to follow
+-- whether the sequence should be "square it and return the result" or just
+"return it directly" --
+and will fail with a somewhat obscure error message:</p>
+
+<div>
+<pre><span></span><code><span>jax.errors.TracerBoolConversionError: Attempted boolean conversion of traced array with shape bool[].</span>
+</code></pre>
+</div>
+
+<p>So this gives a hard constraint on functions that you want to JIT: by default, they can't base
+control flow on the values you pass in.  There is a workaround -- but it comes
+with tradeoffs.  Let's take a slightly sideways route to explain it.</p>
+
+<p>Firstly, although you cannot do control flow based on the <em>value</em> of a parameter -- which
+the tracer doesn't know -- you
+can base it on other information that actually is stored in the tracer.  Let's say that we called
+<code>f</code> like this:</p>
+
+<div>
+<pre><span></span><code><span>f</span><span>(</span><span>jax</span><span>.</span><span>numpy</span><span>.</span><span>array</span><span>([[</span><span>1.</span><span>,</span> <span>2.</span><span>],</span> <span>[</span><span>3.</span><span>,</span> <span>4.</span><span>]]))</span>
+</code></pre>
+</div>
+
+<p>The tracer that would be passed in when trying to trace the function would be
+something representing a 2x2 array.  The <em>shape</em> of the parameter is part of the tracer, even
+though the values aren't.  So you could do something like this:</p>
+
+<div>
+<pre><span></span><code><span>@jax</span><span>.</span><span>jit</span>
+<span>def</span><span> </span><span>f</span><span>(</span><span>x</span><span>):</span>
+    <span>if</span> <span>len</span><span>(</span><span>x</span><span>.</span><span>shape</span><span>)</span> <span>&gt;</span> <span>1</span><span>:</span>
+        <span>return</span> <span>x</span> <span>**</span> <span>2</span>
+    <span>return</span> <span>x</span>
+</code></pre>
+</div>
+
+<p>...and it would work.  It's worth thinking explicitly why this is.</p>
+
+<p>When you call
+a JITted function, it will create a tracer that contains information about the type
+of thing you passed in as a parameter -- scalar versus array, and if it's an array,
+the array's shape.  It then runs the function with the tracer, gets the sequence of
+operations, compiles them and then stores the result in a cache keyed on the metadata --
+type and, if appropriate, shape -- that it used to create the tracer.</p>
+
+<p>So when we call that function with a 2x2 array, we get a 2x2 array version, then if we
+call it later with a one-dimensional array of length 2, we'll get a new version for that.</p>
+
+<p>One workaround for basing control flow on values is essentially to tell the <code>jit</code> function
+that it should treat the values of a particular variable as being like the metadata used
+for this cache keying: it should
+compile a new version for each value it sees, rather than just using the metadata.  It
+takes a parameter <code>static_argnums</code>, and a matching <code>static_argnames</code>, which tell it
+which parameters to do that with.  So, this will work:</p>
+
+<div>
+<pre><span></span><code><span>from</span><span> </span><span>functools</span><span> </span><span>import</span> <span>partial</span>
+
+<span>@partial</span><span>(</span><span>jax</span><span>.</span><span>jit</span><span>,</span> <span>static_argnums</span><span>=</span><span>(</span><span>0</span><span>,))</span>
+<span>def</span><span> </span><span>f</span><span>(</span><span>x</span><span>):</span>
+    <span>if</span> <span>x</span> <span>&gt;</span> <span>2</span><span>:</span>
+        <span>return</span> <span>x</span> <span>**</span> <span>2</span>
+    <span>return</span> <span>x</span>
+
+<span>print</span><span>(</span><span>f</span><span>(</span><span>10.0</span><span>))</span>
+</code></pre>
+</div>
+
+<p>(Remember that the thing after the <code>@</code> for a decorator needs to be a function that
+returns a function, so we have to use <code>partial</code> to "inject" in the extra argument.)</p>
+
+<p>However, the downside is pretty clear: every time we call <code>f</code> with a new value, it's
+going to have to JIT a new version of the function and cache it -- that's going to be slow
+and take up memory.</p>
+
+<p>So, as an alternative, we can use <a href="https://docs.jax.dev/en/latest/jax.lax.html#control-flow-operators" target="_blank" rel="noopener noreferrer">the <code>jax.lax</code> package</a>.
+This provides more functional-looking alternatives for control flow, which <em>are</em>
+compatible with the way the JIT works.  For example, there's a <code>cond</code> function, which
+we can use to replace <code>if</code>s:</p>
+
+<div>
+<pre><span></span><code><span>@jax</span><span>.</span><span>jit</span>
+<span>def</span><span> </span><span>f</span><span>(</span><span>x</span><span>):</span>
+    <span>return</span> <span>jax</span><span>.</span><span>lax</span><span>.</span><span>cond</span><span>(</span><span>x</span> <span>&gt;</span> <span>2</span><span>,</span> <span>lambda</span><span>:</span> <span>x</span> <span>**</span> <span>2</span><span>,</span> <span>lambda</span><span>:</span> <span>x</span><span>)</span>
+
+<span>print</span><span>(</span><span>f</span><span>(</span><span>10.0</span><span>))</span>
+</code></pre>
+</div>
+
+<p>That feels a little bit like a workaround, but it does solve the problem.  How?  Well,
+it's worth checking the JAXPR for it:</p>
+
+<div>
+<pre><span></span><code><span>&gt;&gt;&gt;</span> <span>jax</span><span>.</span><span>make_jaxpr</span><span>(</span><span>f</span><span>)(</span><span>10.0</span><span>)</span>
+<span>{</span> <span>lambda</span> <span>;</span> <span>a</span><span>:</span><span>f32</span><span>[]</span><span>.</span> <span>let</span>
+    <span>b</span><span>:</span><span>f32</span><span>[]</span> <span>=</span> <span>jit</span><span>[</span>
+      <span>name</span><span>=</span><span>f</span>
+      <span>jaxpr</span><span>=</span><span>{</span> <span>lambda</span> <span>;</span> <span>a</span><span>:</span><span>f32</span><span>[]</span><span>.</span> <span>let</span>
+          <span>c</span><span>:</span><span>bool</span><span>[]</span> <span>=</span> <span>gt</span> <span>a</span> <span>2.0</span><span>:</span><span>f32</span><span>[]</span>
+          <span>d</span><span>:</span><span>i32</span><span>[]</span> <span>=</span> <span>convert_element_type</span><span>[</span><span>new_dtype</span><span>=</span><span>int32</span> <span>weak_type</span><span>=</span><span>False</span><span>]</span> <span>c</span>
+          <span>b</span><span>:</span><span>f32</span><span>[]</span> <span>=</span> <span>cond</span><span>[</span>
+            <span>branches</span><span>=</span><span>(</span>
+              <span>{</span> <span>lambda</span> <span>;</span> <span>e</span><span>:</span><span>f32</span><span>[]</span><span>.</span> <span>let</span>  <span>in</span> <span>(</span><span>e</span><span>,)</span> <span>}</span>
+              <span>{</span> <span>lambda</span> <span>;</span> <span>f</span><span>:</span><span>f32</span><span>[]</span><span>.</span> <span>let</span> <span>g</span><span>:</span><span>f32</span><span>[]</span> <span>=</span> <span>integer_pow</span><span>[</span><span>y</span><span>=</span><span>2</span><span>]</span> <span>f</span> <span>in</span> <span>(</span><span>g</span><span>,)</span> <span>}</span>
+            <span>)</span>
+          <span>]</span> <span>d</span> <span>a</span>
+        <span>in</span> <span>(</span><span>b</span><span>,)</span> <span>}</span>
+    <span>]</span> <span>a</span>
+  <span>in</span> <span>(</span><span>b</span><span>,)</span> <span>}</span>
+</code></pre>
+</div>
+
+<p>What's happened here, I think, is that the JIT has recognised the call to <code>jax.lax.cond</code> as
+being a primitive function in its intermediate language, so has just kept it in there.  It
+couldn't do that with the <code>if</code> because when it was tracing, all JAX itself saw was what was
+happening to the tracer -- there was a boolean comparison, and then the stuff in the chosen
+branch happened.  The fact that there was an <code>if</code> there happened in Python itself, outside
+JAX, so it was "invisible" to the trace.</p>
+
+<p>That feels a little inelegant to me right now, and I'll come back to
+it later.</p>
+
+<p>Let's move on to the final difference between the two libraries that I want to cover: JAX's relative
+minimalism to PyTorch's more maximalist approach.</p>
+
+<h3>4. Minimalism versus maximalism</h3>
+
+<p>I think the smaller size of JAX -- at least in terms of its API, if not in terms of
+the JIT and XLA magic under the hood -- compared to the sprawl of PyTorch is not
+entirely unrelated to the JIT being at its core.</p>
+
+<p>PyTorch, after some initial design, has almost been forced to grow organically; JAX feels more carefully designed,
+so it doesn't have the same <em>need</em> to grow (though of course it can).</p>
+
+<p>The reason for PyTorch's growth is, at least in part, because
+it needs to absorb optimisations.  If something is slow, someone needs to write a CUDA
+kernel for it.  If there's a CUDA kernel, it needs an API.  And if it is generally useful, that API becomes part of
+PyTorch.  Multi-head attention?  <a href="https://docs.pytorch.org/docs/2.12/generated/torch.nn.MultiheadAttention.html" target="_blank" rel="noopener noreferrer">There's a class for that</a>.
+SELU?  <a href="https://docs.pytorch.org/docs/2.12/generated/torch.nn.SELU.html" target="_blank" rel="noopener noreferrer">Yup</a>.
+Very specific softmax approximations based on a paper published in 2016?
+<a href="https://docs.pytorch.org/docs/2.12/generated/torch.nn.AdaptiveLogSoftmaxWithLoss.html" target="_blank" rel="noopener noreferrer">PyTorch has you covered</a>.</p>
+
+<p>By contrast, JAX doesn't even have linear layers or optimisers in the framework
+itself; if you want to use them, you can write them yourself (contraindicated), or
+you can use <a href="https://docs.jax.dev/en/latest/#ecosystem" target="_blank" rel="noopener noreferrer">libraries built on top of JAX</a>, like
+<a href="https://flax.readthedocs.io/en/stable/" target="_blank" rel="noopener noreferrer">Flax</a> for common neural network components
+and <a href="https://optax.readthedocs.io/en/latest/" target="_blank" rel="noopener noreferrer">Optax</a> for optimisers.</p>
+
+<p>This feels like a nice division of responsibilities, and it also seems like something
+that would have been very hard without the JIT.  So while the JAX core may well grow in the
+future, the design it has now puts it in a good position to grow in a more planned,
+well-designed manner -- rather than <em>having</em> to grow to absorb more and more abstractions
+just to keep it fast.  Those abstractions can more easily sit in libraries written on
+top of JAX.</p>
+
+<hr />
+
+<h3>Porting a toy PyTorch model to JAX</h3>
+
+<p>That's the 10,000-foot overview; four (or maybe four and a half) main differences
+between PyTorch and JAX.  It's more maths-y, JITted, functional and minimalist.
+What does that actually mean when you get down to coding with it?  Let's get
+into the weeds with an example.</p>
+
+<p>Let's use a really simple one: training a neural network with two inputs and one hidden
+layer to calculate the XOR function.  The code is in <a href="https://github.com/gpjt/toy-pytorch-to-jax" target="_blank" rel="noopener noreferrer">this GitHub repo</a>,
+but I'll put the relevant bits here in this post.</p>
+
+<p>Firstly, an idiomatic PyTorch implementation:</p>
+
+<div>
+<pre><span></span><code><span>import</span><span> </span><span>time</span>
+
+<span>import</span><span> </span><span>torch</span>
+
+
+<span>data</span> <span>=</span> <span>[</span>
+    <span>([</span><span>0.</span><span>,</span> <span>0.</span><span>],</span> <span>[</span><span>0</span><span>]),</span>
+    <span>([</span><span>0.</span><span>,</span> <span>1.</span><span>],</span> <span>[</span><span>1</span><span>]),</span>
+    <span>([</span><span>1.</span><span>,</span> <span>0.</span><span>],</span> <span>[</span><span>1</span><span>]),</span>
+    <span>([</span><span>1.</span><span>,</span> <span>1.</span><span>],</span> <span>[</span><span>0</span><span>]),</span>
+<span>]</span>
+
+
+<span>class</span><span> </span><span>XORModel</span><span>(</span><span>torch</span><span>.</span><span>nn</span><span>.</span><span>Module</span><span>):</span>
+
+    <span>def</span><span> </span><span>__init__</span><span>(</span><span>self</span><span>):</span>
+        <span>super</span><span>()</span><span>.</span><span>__init__</span><span>()</span>
+        <span>self</span><span>.</span><span>layer1</span> <span>=</span> <span>torch</span><span>.</span><span>nn</span><span>.</span><span>Linear</span><span>(</span><span>2</span><span>,</span> <span>2</span><span>,</span> <span>bias</span><span>=</span><span>True</span><span>)</span>
+        <span>self</span><span>.</span><span>layer1_activation</span> <span>=</span> <span>torch</span><span>.</span><span>nn</span><span>.</span><span>Sigmoid</span><span>()</span>
+        <span>self</span><span>.</span><span>layer2</span> <span>=</span> <span>torch</span><span>.</span><span>nn</span><span>.</span><span>Linear</span><span>(</span><span>2</span><span>,</span> <span>1</span><span>,</span> <span>bias</span><span>=</span><span>True</span><span>)</span>
+        <span>self</span><span>.</span><span>layer2_activation</span> <span>=</span> <span>torch</span><span>.</span><span>nn</span><span>.</span><span>Sigmoid</span><span>()</span>
+
+    <span>def</span><span> </span><span>forward</span><span>(</span><span>self</span><span>,</span> <span>x</span><span>):</span>
+        <span>hidden</span> <span>=</span> <span>self</span><span>.</span><span>layer1_activation</span><span>(</span><span>self</span><span>.</span><span>layer1</span><span>(</span><span>x</span><span>))</span>
+        <span>output</span> <span>=</span> <span>self</span><span>.</span><span>layer2_activation</span><span>(</span><span>self</span><span>.</span><span>layer2</span><span>(</span><span>hidden</span><span>))</span>
+        <span>return</span> <span>output</span>
+
+
+<span>def</span><span> </span><span>calculate_loss</span><span>(</span><span>model</span><span>,</span> <span>inputs</span><span>,</span> <span>target</span><span>):</span>
+    <span>result</span> <span>=</span> <span>model</span><span>(</span><span>inputs</span><span>)</span>
+    <span>return</span> <span>((</span><span>result</span> <span>-</span> <span>target</span><span>)</span> <span>**</span> <span>2</span><span>)</span><span>.</span><span>mean</span><span>()</span>
+
+
+<span>def</span><span> </span><span>main</span><span>():</span>
+    <span>torch</span><span>.</span><span>manual_seed</span><span>(</span><span>42</span><span>)</span>
+
+    <span>model</span> <span>=</span> <span>XORModel</span><span>()</span>
+    <span>optimizer</span> <span>=</span> <span>torch</span><span>.</span><span>optim</span><span>.</span><span>SGD</span><span>(</span><span>model</span><span>.</span><span>parameters</span><span>(),</span> <span>lr</span><span>=</span><span>0.1</span><span>)</span>
+
+    <span>start</span> <span>=</span> <span>time</span><span>.</span><span>time</span><span>()</span>
+    <span>for</span> <span>epoch</span> <span>in</span> <span>range</span><span>(</span><span>10000</span><span>):</span>
+        <span>losses</span> <span>=</span> <span>[]</span>
+
+        <span>for</span> <span>x</span><span>,</span> <span>y</span> <span>in</span> <span>data</span><span>:</span>
+            <span>optimizer</span><span>.</span><span>zero_grad</span><span>()</span>
+
+            <span>loss</span> <span>=</span> <span>calculate_loss</span><span>(</span><span>model</span><span>,</span> <span>torch</span><span>.</span><span>tensor</span><span>(</span><span>x</span><span>),</span> <span>torch</span><span>.</span><span>tensor</span><span>(</span><span>y</span><span>))</span>
+            <span>loss</span><span>.</span><span>backward</span><span>()</span>
+            <span>losses</span><span>.</span><span>append</span><span>(</span><span>loss</span><span>.</span><span>item</span><span>())</span>
+
+            <span>optimizer</span><span>.</span><span>step</span><span>()</span>
+
+        <span>if</span> <span>epoch</span> <span>%</span> <span>1000</span> <span>==</span> <span>0</span><span>:</span>
+            <span>avg_loss</span> <span>=</span> <span>sum</span><span>(</span><span>losses</span><span>)</span> <span>/</span> <span>len</span><span>(</span><span>losses</span><span>)</span>
+            <span>print</span><span>(</span><span>f</span><span>"Loss at epoch </span><span>{</span><span>epoch</span><span>}</span><span>: </span><span>{</span><span>avg_loss</span><span>:</span><span>.6f</span><span>}</span><span>"</span><span>)</span>
+    <span>end</span> <span>=</span> <span>time</span><span>.</span><span>time</span><span>()</span>
+
+    <span>print</span><span>(</span><span>f</span><span>"Trained in </span><span>{</span><span>end</span><span> </span><span>-</span><span> </span><span>start</span><span>:</span><span>.3f</span><span>}</span><span>s"</span><span>)</span>
+
+    <span>print</span><span>(</span><span>f</span><span>"Loss at end: </span><span>{</span><span>avg_loss</span><span>:</span><span>.6f</span><span>}</span><span>"</span><span>)</span>
+
+    <span>model</span><span>.</span><span>eval</span><span>()</span>
+    <span>with</span> <span>torch</span><span>.</span><span>no_grad</span><span>():</span>
+        <span>for</span> <span>x</span><span>,</span> <span>y</span> <span>in</span> <span>data</span><span>:</span>
+            <span>result</span> <span>=</span> <span>model</span><span>(</span><span>torch</span><span>.</span><span>tensor</span><span>(</span><span>x</span><span>))</span>
+            <span>print</span><span>(</span><span>f</span><span>"</span><span>{</span><span>x</span><span>=}</span><span>: </span><span>{</span><span>result</span><span>=}</span><span>, </span><span>{</span><span>y</span><span>=}</span><span>"</span><span>)</span>
+
+
+<span>if</span> <span>__name__</span> <span>==</span> <span>"__main__"</span><span>:</span>
+    <span>main</span><span>()</span>
+</code></pre>
+</div>
+
+<p>If we run that, it trains a solid-looking model in about four seconds on my machine:</p>
+
+<div>
+<pre><span></span><code>giles@perry:~/Dev/toy-pytorch-to-jax<span> </span><span>(</span>main<span>)</span>$<span> </span>uv<span> </span>run<span> </span>pytorch_xor.py
+Loss<span> </span>at<span> </span>epoch<span> </span><span>0</span>:<span> </span><span>0</span>.279327
+Loss<span> </span>at<span> </span>epoch<span> </span><span>1000</span>:<span> </span><span>0</span>.254715
+Loss<span> </span>at<span> </span>epoch<span> </span><span>2000</span>:<span> </span><span>0</span>.254279
+Loss<span> </span>at<span> </span>epoch<span> </span><span>3000</span>:<span> </span><span>0</span>.253985
+Loss<span> </span>at<span> </span>epoch<span> </span><span>4000</span>:<span> </span><span>0</span>.253649
+Loss<span> </span>at<span> </span>epoch<span> </span><span>5000</span>:<span> </span><span>0</span>.251566
+Loss<span> </span>at<span> </span>epoch<span> </span><span>6000</span>:<span> </span><span>0</span>.189219
+Loss<span> </span>at<span> </span>epoch<span> </span><span>7000</span>:<span> </span><span>0</span>.030093
+Loss<span> </span>at<span> </span>epoch<span> </span><span>8000</span>:<span> </span><span>0</span>.006666
+Loss<span> </span>at<span> </span>epoch<span> </span><span>9000</span>:<span> </span><span>0</span>.003516
+Trained<span> </span><span>in</span><span> </span><span>4</span>.154s
+Loss<span> </span>at<span> </span>end:<span> </span><span>0</span>.003516
+<span>x</span><span>=[</span><span>0</span>.0,<span> </span><span>0</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>tensor<span>([</span><span>0</span>.0483<span>])</span>,<span> </span><span>y</span><span>=[</span><span>0</span><span>]</span>
+<span>x</span><span>=[</span><span>0</span>.0,<span> </span><span>1</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>tensor<span>([</span><span>0</span>.9567<span>])</span>,<span> </span><span>y</span><span>=[</span><span>1</span><span>]</span>
+<span>x</span><span>=[</span><span>1</span>.0,<span> </span><span>0</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>tensor<span>([</span><span>0</span>.9425<span>])</span>,<span> </span><span>y</span><span>=[</span><span>1</span><span>]</span>
+<span>x</span><span>=[</span><span>1</span>.0,<span> </span><span>1</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>tensor<span>([</span><span>0</span>.0434<span>])</span>,<span> </span><span>y</span><span>=[</span><span>0</span><span>]</span>
+</code></pre>
+</div>
+
+<p>Now, if we're porting to JAX we need to do something about the fact that JAX doesn't
+have optimisers and the neural network stuff built in.  If this was a real codebase,
+we'd almost certainly do that by using the libraries built on top of JAX, like
+Flax and Optax.  But for this toy example, I think it's more illustrative to strip
+down the PyTorch version so that it uses fewer parts of the API -- essentially so that
+it only uses the stuff that JAX has -- and then to port the result.</p>
+
+<p>The optimiser first.  <a href="https://github.com/gpjt/toy-pytorch-to-jax/blob/main/pytorch_xor_no_optimizer.py" target="_blank" rel="noopener noreferrer">The code is here</a>
+but the diffs are pretty simple.  Instead of creating an optimiser, we just
+specify our learning rate:</p>
+
+<div>
+<pre><span></span><code><span>&lt;     optimizer = torch.optim.SGD(model.parameters(), lr=0.1)</span>
+<span>---</span>
+<span>&gt;     learning_rate = 0.1</span>
+</code></pre>
+</div>
+
+<p>Instead of zeroing out the gradients using the optimiser, we can just ask the model
+to do it:</p>
+
+<div>
+<pre><span></span><code><span>&lt;             optimizer.zero_grad()</span>
+<span>---</span>
+<span>&gt;             model.zero_grad()</span>
+</code></pre>
+</div>
+
+<p>And instead of stepping the optimiser, we call a new <code>step</code> function passing in
+the model and the learning rate:</p>
+
+<div>
+<pre><span></span><code><span>&lt;             optimizer.step()</span>
+<span>---</span>
+<span>&gt;             step(model, learning_rate)</span>
+</code></pre>
+</div>
+
+<p>The <code>step</code> function is simple enough; we just switch into <code>no_grad</code> mode so that PyTorch
+doesn't try to track the computation graph (working out gradients for applying gradients
+and triggering some kind of crazy gradient-ception), then we just iterate over the model's
+parameters and follow the normal SGD process, subtracting the
+gradients times the learning rate:</p>
+
+<div>
+<pre><span></span><code><span>def</span><span> </span><span>step</span><span>(</span><span>model</span><span>,</span> <span>learning_rate</span><span>):</span>
+    <span>with</span> <span>torch</span><span>.</span><span>no_grad</span><span>():</span>
+        <span>for</span> <span>p</span> <span>in</span> <span>model</span><span>.</span><span>parameters</span><span>():</span>
+            <span>if</span> <span>p</span><span>.</span><span>grad</span> <span>is</span> <span>not</span> <span>None</span><span>:</span>
+                <span>p</span> <span>-=</span> <span>p</span><span>.</span><span>grad</span> <span>*</span> <span>learning_rate</span>
+</code></pre>
+</div>
+
+<p>Running that on my machine actually works out slightly faster than the original <sup><a href="#fn-7" target="_blank" rel="noopener noreferrer">7</a></sup>!</p>
+
+<div>
+<pre><span></span><code>giles@perry:~/Dev/toy-pytorch-to-jax<span> </span><span>(</span>main<span>)</span>$<span> </span>uv<span> </span>run<span> </span>pytorch_xor_no_optimizer.py
+Loss<span> </span>at<span> </span>epoch<span> </span><span>0</span>:<span> </span><span>0</span>.279327
+Loss<span> </span>at<span> </span>epoch<span> </span><span>1000</span>:<span> </span><span>0</span>.254715
+Loss<span> </span>at<span> </span>epoch<span> </span><span>2000</span>:<span> </span><span>0</span>.254279
+Loss<span> </span>at<span> </span>epoch<span> </span><span>3000</span>:<span> </span><span>0</span>.253985
+Loss<span> </span>at<span> </span>epoch<span> </span><span>4000</span>:<span> </span><span>0</span>.253649
+Loss<span> </span>at<span> </span>epoch<span> </span><span>5000</span>:<span> </span><span>0</span>.251566
+Loss<span> </span>at<span> </span>epoch<span> </span><span>6000</span>:<span> </span><span>0</span>.189219
+Loss<span> </span>at<span> </span>epoch<span> </span><span>7000</span>:<span> </span><span>0</span>.030091
+Loss<span> </span>at<span> </span>epoch<span> </span><span>8000</span>:<span> </span><span>0</span>.006665
+Loss<span> </span>at<span> </span>epoch<span> </span><span>9000</span>:<span> </span><span>0</span>.003516
+Trained<span> </span><span>in</span><span> </span><span>3</span>.806s
+Loss<span> </span>at<span> </span>end:<span> </span><span>0</span>.003516
+<span>x</span><span>=[</span><span>0</span>.0,<span> </span><span>0</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>tensor<span>([</span><span>0</span>.0483<span>])</span>,<span> </span><span>y</span><span>=[</span><span>0</span><span>]</span>
+<span>x</span><span>=[</span><span>0</span>.0,<span> </span><span>1</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>tensor<span>([</span><span>0</span>.9567<span>])</span>,<span> </span><span>y</span><span>=[</span><span>1</span><span>]</span>
+<span>x</span><span>=[</span><span>1</span>.0,<span> </span><span>0</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>tensor<span>([</span><span>0</span>.9425<span>])</span>,<span> </span><span>y</span><span>=[</span><span>1</span><span>]</span>
+<span>x</span><span>=[</span><span>1</span>.0,<span> </span><span>1</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>tensor<span>([</span><span>0</span>.0434<span>])</span>,<span> </span><span>y</span><span>=[</span><span>0</span><span>]</span>
+</code></pre>
+</div>
+
+<p>It's also quite nice to see that (within the bounds of the printing precision) the
+loss and the final results are identical.</p>
+
+<p>OK, so now that we've got rid of the optimiser, let's do the same with the
+<code>nn.Linear</code>s.  <a href="https://github.com/gpjt/toy-pytorch-to-jax/blob/main/pytorch_xor_no_nn_helpers.py" target="_blank" rel="noopener noreferrer">Here's the code</a>,
+but let's do a quick walk through the differences.</p>
+
+<p>Instead of creating an <code>XORModel</code>, we will just generate an array of layers:</p>
+
+<div>
+<pre><span></span><code><span>&lt;     model = XORModel()</span>
+<span>---</span>
+<span>&gt;     layers = [</span>
+<span>&gt;         generate_layer_parameters(2, 2),</span>
+<span>&gt;         generate_layer_parameters(2, 1),</span>
+<span>&gt;     ]</span>
+</code></pre>
+</div>
+
+<p>Zeroing out the existing gradients will also need to be done on those layers:</p>
+
+<div>
+<pre><span></span><code><span>&lt;             model.zero_grad()</span>
+<span>---</span>
+<span>&gt;             zero_grad(layers)</span>
+</code></pre>
+</div>
+
+<p>...and likewise our loss calculations and the <code>step</code> function will need to use them:</p>
+
+<div>
+<pre><span></span><code><span>&lt;             loss = calculate_loss(model, torch.tensor(x), torch.tensor(y))</span>
+<span>---</span>
+<span>&gt;             loss = calculate_loss(layers, torch.tensor(x), torch.tensor(y))</span>
+58c76
+<span>&lt;             step(model, learning_rate)</span>
+<span>---</span>
+<span>&gt;             step(layers, learning_rate)</span>
+</code></pre>
+</div>
+
+<p>We used a couple of new helper functions there; this one generates the
+initial weights for the layers (based on the <a href="https://docs.pytorch.org/docs/2.12/generated/torch.nn.Linear.html" target="_blank" rel="noopener noreferrer">docs for <code>torch.nn.Linear</code></a>):</p>
+
+<div>
+<pre><span></span><code><span>def</span><span> </span><span>generate_layer_parameters</span><span>(</span><span>d_in</span><span>,</span> <span>d_out</span><span>):</span>
+    <span>root_k</span> <span>=</span> <span>math</span><span>.</span><span>sqrt</span><span>(</span><span>1.</span> <span>/</span> <span>d_in</span><span>)</span>
+    <span>weights</span> <span>=</span> <span>(</span><span>torch</span><span>.</span><span>rand</span><span>(</span><span>d_out</span><span>,</span> <span>d_in</span><span>)</span> <span>*</span> <span>2</span> <span>*</span> <span>root_k</span><span>)</span> <span>-</span> <span>root_k</span>
+    <span>biases</span> <span>=</span> <span>(</span><span>torch</span><span>.</span><span>rand</span><span>(</span><span>d_out</span><span>)</span> <span>*</span> <span>2</span> <span>*</span> <span>root_k</span><span>)</span> <span>-</span> <span>root_k</span>
+    <span>return</span> <span>{</span>
+        <span>"weights"</span><span>:</span> <span>weights</span><span>.</span><span>requires_grad_</span><span>(),</span>
+        <span>"biases"</span><span>:</span> <span>biases</span><span>.</span><span>requires_grad_</span><span>(),</span>
+    <span>}</span>
+</code></pre>
+</div>
+
+<p>Note that each of the tensors we created, the <code>weights</code> and the <code>biases</code> need to be
+explicitly told, using <code>requires_grad_</code>, that we're going to want PyTorch to track
+gradients on them.</p>
+
+<p>Zeroing out the gradients is just a case of chugging through each layer, and then for each
+setting the weights' and the biases' gradients to <code>None</code>:</p>
+
+<div>
+<pre><span></span><code><span>def</span><span> </span><span>zero_grad</span><span>(</span><span>layers</span><span>):</span>
+    <span>for</span> <span>layer</span> <span>in</span> <span>layers</span><span>:</span>
+        <span>for</span> <span>p</span> <span>in</span> <span>(</span><span>layer</span><span>[</span><span>"weights"</span><span>],</span> <span>layer</span><span>[</span><span>"biases"</span><span>]):</span>
+            <span>p</span><span>.</span><span>grad</span> <span>=</span> <span>None</span>
+</code></pre>
+</div>
+
+<p>Now, to calculate the loss, we're actually not changing much.  We had this:</p>
+
+<div>
+<pre><span></span><code><span>def</span><span> </span><span>calculate_loss</span><span>(</span><span>model</span><span>,</span> <span>inputs</span><span>,</span> <span>target</span><span>):</span>
+    <span>result</span> <span>=</span> <span>model</span><span>(</span><span>inputs</span><span>)</span>
+    <span>return</span> <span>((</span><span>result</span> <span>-</span> <span>target</span><span>)</span> <span>**</span> <span>2</span><span>)</span><span>.</span><span>mean</span><span>()</span>
+</code></pre>
+</div>
+
+<p>...and now we just change it to this:</p>
+
+<div>
+<pre><span></span><code><span>def</span><span> </span><span>calculate_loss</span><span>(</span><span>layers</span><span>,</span> <span>inputs</span><span>,</span> <span>target</span><span>):</span>
+    <span>result</span> <span>=</span> <span>forward</span><span>(</span><span>layers</span><span>,</span> <span>inputs</span><span>)</span>
+    <span>return</span> <span>((</span><span>result</span> <span>-</span> <span>target</span><span>)</span> <span>**</span> <span>2</span><span>)</span><span>.</span><span>mean</span><span>()</span>
+</code></pre>
+</div>
+
+<p>That is, we've added on a new function <code>forward</code> to do a forward pass through the
+given layers with the given parameters.  That looks like this:</p>
+
+<div>
+<pre><span></span><code><span>def</span><span> </span><span>forward</span><span>(</span><span>layers</span><span>,</span> <span>inputs</span><span>):</span>
+    <span>x</span> <span>=</span> <span>inputs</span>
+    <span>for</span> <span>layer</span> <span>in</span> <span>layers</span><span>:</span>
+        <span>x</span> <span>=</span> <span>torch</span><span>.</span><span>sigmoid</span><span>(</span>
+            <span>x</span> <span>@</span> <span>layer</span><span>[</span><span>"weights"</span><span>]</span><span>.</span><span>T</span> <span>+</span> <span>layer</span><span>[</span><span>"biases"</span><span>]</span>
+        <span>)</span>
+    <span>return</span> <span>x</span>
+</code></pre>
+</div>
+
+<p><a href="https://www.gilesthomas.com/2025/02/basic-neural-network-matrix-maths-part-2" target="_blank" rel="noopener noreferrer">Standard NN stuff</a>.</p>
+
+<p>A quick tweak to use <code>forward</code> in the printing of the results at the end:</p>
+
+<div>
+<pre><span></span><code><span>&lt;             result = model(torch.tensor(x))</span>
+<span>---</span>
+<span>&gt;             result = forward(layers, torch.tensor(x))</span>
+</code></pre>
+</div>
+
+<p>...and we're done!</p>
+
+<p>Let's run it:</p>
+
+<div>
+<pre><span></span><code>giles@perry:~/Dev/toy-pytorch-to-jax<span> </span><span>(</span>main<span>)</span>$<span> </span>uv<span> </span>run<span> </span>pytorch_xor_no_nn_helpers.py
+Loss<span> </span>at<span> </span>epoch<span> </span><span>0</span>:<span> </span><span>0</span>.279327
+Loss<span> </span>at<span> </span>epoch<span> </span><span>1000</span>:<span> </span><span>0</span>.254715
+Loss<span> </span>at<span> </span>epoch<span> </span><span>2000</span>:<span> </span><span>0</span>.254279
+Loss<span> </span>at<span> </span>epoch<span> </span><span>3000</span>:<span> </span><span>0</span>.253985
+Loss<span> </span>at<span> </span>epoch<span> </span><span>4000</span>:<span> </span><span>0</span>.253649
+Loss<span> </span>at<span> </span>epoch<span> </span><span>5000</span>:<span> </span><span>0</span>.251566
+Loss<span> </span>at<span> </span>epoch<span> </span><span>6000</span>:<span> </span><span>0</span>.189218
+Loss<span> </span>at<span> </span>epoch<span> </span><span>7000</span>:<span> </span><span>0</span>.030092
+Loss<span> </span>at<span> </span>epoch<span> </span><span>8000</span>:<span> </span><span>0</span>.006665
+Loss<span> </span>at<span> </span>epoch<span> </span><span>9000</span>:<span> </span><span>0</span>.003516
+Trained<span> </span><span>in</span><span> </span><span>3</span>.504s
+Loss<span> </span>at<span> </span>end:<span> </span><span>0</span>.003516
+<span>x</span><span>=[</span><span>0</span>.0,<span> </span><span>0</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>tensor<span>([</span><span>0</span>.0483<span>])</span>,<span> </span><span>y</span><span>=[</span><span>0</span><span>]</span>
+<span>x</span><span>=[</span><span>0</span>.0,<span> </span><span>1</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>tensor<span>([</span><span>0</span>.9567<span>])</span>,<span> </span><span>y</span><span>=[</span><span>1</span><span>]</span>
+<span>x</span><span>=[</span><span>1</span>.0,<span> </span><span>0</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>tensor<span>([</span><span>0</span>.9425<span>])</span>,<span> </span><span>y</span><span>=[</span><span>1</span><span>]</span>
+<span>x</span><span>=[</span><span>1</span>.0,<span> </span><span>1</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>tensor<span>([</span><span>0</span>.0434<span>])</span>,<span> </span><span>y</span><span>=[</span><span>0</span><span>]</span>
+</code></pre>
+</div>
+
+<p>Even faster!  Sounds like there aren't any nice pre-baked optimisations in that part
+of PyTorch, then...  But again, within the bounds of our precision, that's exactly the
+same numbers as we got from the original PyTorch version, which is very reassuring.</p>
+
+<p>OK, now that we've got something that's kind of JAX-shaped, let's port it over.  I think
+it's worth showing all of the code for that (though it's
+<a href="https://github.com/gpjt/toy-pytorch-to-jax/blob/main/pure_jax_xor_no_jit.py" target="_blank" rel="noopener noreferrer">here on GitHub</a>
+if you want to view it there), and then I'll highlight the important diffs separately.</p>
+
+<div>
+<pre><span></span><code><span>import</span><span> </span><span>math</span>
+<span>import</span><span> </span><span>time</span>
+
+<span>import</span><span> </span><span>jax</span>
+<span>import</span><span> </span><span>jax.numpy</span><span> </span><span>as</span><span> </span><span>jnp</span>
+
+<span>jax</span><span>.</span><span>config</span><span>.</span><span>update</span><span>(</span><span>"jax_platform_name"</span><span>,</span> <span>"cpu"</span><span>)</span>
+
+
+<span>data</span> <span>=</span> <span>[</span>
+    <span>([</span><span>0.</span><span>,</span> <span>0.</span><span>],</span> <span>[</span><span>0</span><span>]),</span>
+    <span>([</span><span>0.</span><span>,</span> <span>1.</span><span>],</span> <span>[</span><span>1</span><span>]),</span>
+    <span>([</span><span>1.</span><span>,</span> <span>0.</span><span>],</span> <span>[</span><span>1</span><span>]),</span>
+    <span>([</span><span>1.</span><span>,</span> <span>1.</span><span>],</span> <span>[</span><span>0</span><span>]),</span>
+<span>]</span>
+
+
+<span>def</span><span> </span><span>generate_layer_parameters</span><span>(</span><span>key</span><span>,</span> <span>d_in</span><span>,</span> <span>d_out</span><span>):</span>
+    <span>weight_key</span><span>,</span> <span>bias_key</span> <span>=</span> <span>jax</span><span>.</span><span>random</span><span>.</span><span>split</span><span>(</span><span>key</span><span>)</span>
+    <span>root_k</span> <span>=</span> <span>math</span><span>.</span><span>sqrt</span><span>(</span><span>1.</span> <span>/</span> <span>d_in</span><span>)</span>
+    <span>weights</span> <span>=</span> <span>(</span><span>jax</span><span>.</span><span>random</span><span>.</span><span>uniform</span><span>(</span><span>weight_key</span><span>,</span> <span>shape</span><span>=</span><span>(</span><span>d_out</span><span>,</span> <span>d_in</span><span>))</span> <span>*</span> <span>2</span> <span>*</span> <span>root_k</span><span>)</span> <span>-</span> <span>root_k</span>
+    <span>biases</span> <span>=</span> <span>(</span><span>jax</span><span>.</span><span>random</span><span>.</span><span>uniform</span><span>(</span><span>bias_key</span><span>,</span> <span>shape</span><span>=</span><span>(</span><span>d_out</span><span>,))</span> <span>*</span> <span>2</span> <span>*</span> <span>root_k</span><span>)</span> <span>-</span> <span>root_k</span>
+    <span>return</span> <span>{</span>
+        <span>"weights"</span><span>:</span> <span>weights</span><span>,</span>
+        <span>"biases"</span><span>:</span> <span>biases</span><span>,</span>
+    <span>}</span>
+
+
+<span>def</span><span> </span><span>forward</span><span>(</span><span>layers</span><span>,</span> <span>inputs</span><span>):</span>
+    <span>x</span> <span>=</span> <span>inputs</span>
+    <span>for</span> <span>layer</span> <span>in</span> <span>layers</span><span>:</span>
+        <span>x</span> <span>=</span> <span>jax</span><span>.</span><span>nn</span><span>.</span><span>sigmoid</span><span>(</span>
+            <span>x</span> <span>@</span> <span>layer</span><span>[</span><span>"weights"</span><span>]</span><span>.</span><span>T</span> <span>+</span> <span>layer</span><span>[</span><span>"biases"</span><span>]</span>
+        <span>)</span>
+    <span>return</span> <span>x</span>
+
+
+<span>def</span><span> </span><span>step</span><span>(</span><span>layers</span><span>,</span> <span>grads</span><span>,</span> <span>learning_rate</span><span>):</span>
+    <span>layers</span> <span>=</span> <span>jax</span><span>.</span><span>tree</span><span>.</span><span>map</span><span>(</span>
+        <span>lambda</span> <span>p</span><span>,</span> <span>g</span><span>:</span> <span>p</span> <span>-</span> <span>g</span> <span>*</span> <span>learning_rate</span><span>,</span>
+        <span>layers</span><span>,</span>
+        <span>grads</span><span>,</span>
+    <span>)</span>
+    <span>return</span> <span>layers</span>
+
+
+<span>def</span><span> </span><span>calculate_loss</span><span>(</span><span>layers</span><span>,</span> <span>inputs</span><span>,</span> <span>target</span><span>):</span>
+    <span>result</span> <span>=</span> <span>forward</span><span>(</span><span>layers</span><span>,</span> <span>inputs</span><span>)</span>
+    <span>return</span> <span>((</span><span>result</span> <span>-</span> <span>target</span><span>)</span> <span>**</span> <span>2</span><span>)</span><span>.</span><span>mean</span><span>()</span>
+
+
+<span>def</span><span> </span><span>main</span><span>():</span>
+    <span>key</span> <span>=</span> <span>jax</span><span>.</span><span>random</span><span>.</span><span>key</span><span>(</span><span>42</span><span>)</span>
+
+    <span>layer_1_key</span><span>,</span> <span>layer_2_key</span> <span>=</span> <span>jax</span><span>.</span><span>random</span><span>.</span><span>split</span><span>(</span><span>key</span><span>)</span>
+    <span>layers</span> <span>=</span> <span>[</span>
+        <span>generate_layer_parameters</span><span>(</span><span>layer_1_key</span><span>,</span> <span>2</span><span>,</span> <span>2</span><span>),</span>
+        <span>generate_layer_parameters</span><span>(</span><span>layer_2_key</span><span>,</span> <span>2</span><span>,</span> <span>1</span><span>),</span>
+    <span>]</span>
+
+    <span>learning_rate</span> <span>=</span> <span>0.1</span>
+
+    <span>start</span> <span>=</span> <span>time</span><span>.</span><span>time</span><span>()</span>
+    <span>for</span> <span>epoch</span> <span>in</span> <span>range</span><span>(</span><span>10000</span><span>):</span>
+        <span>losses</span> <span>=</span> <span>[]</span>
+
+        <span>for</span> <span>x</span><span>,</span> <span>y</span> <span>in</span> <span>data</span><span>:</span>
+            <span>loss</span><span>,</span> <span>grads</span> <span>=</span> <span>jax</span><span>.</span><span>value_and_grad</span><span>(</span><span>calculate_loss</span><span>)(</span><span>layers</span><span>,</span> <span>jnp</span><span>.</span><span>array</span><span>(</span><span>x</span><span>),</span> <span>jnp</span><span>.</span><span>array</span><span>(</span><span>y</span><span>))</span>
+            <span>losses</span><span>.</span><span>append</span><span>(</span><span>loss</span><span>.</span><span>item</span><span>())</span>
+
+            <span>layers</span> <span>=</span> <span>step</span><span>(</span><span>layers</span><span>,</span> <span>grads</span><span>,</span> <span>learning_rate</span><span>)</span>
+
+        <span>if</span> <span>epoch</span> <span>%</span> <span>1000</span> <span>==</span> <span>0</span><span>:</span>
+            <span>avg_loss</span> <span>=</span> <span>sum</span><span>(</span><span>losses</span><span>)</span> <span>/</span> <span>len</span><span>(</span><span>losses</span><span>)</span>
+            <span>print</span><span>(</span><span>f</span><span>"Loss at epoch </span><span>{</span><span>epoch</span><span>}</span><span>: </span><span>{</span><span>avg_loss</span><span>:</span><span>.6f</span><span>}</span><span>"</span><span>)</span>
+
+    <span>end</span> <span>=</span> <span>time</span><span>.</span><span>time</span><span>()</span>
+
+    <span>print</span><span>(</span><span>f</span><span>"Trained in </span><span>{</span><span>end</span><span> </span><span>-</span><span> </span><span>start</span><span>:</span><span>.3f</span><span>}</span><span>s"</span><span>)</span>
+
+    <span>print</span><span>(</span><span>f</span><span>"Loss at end: </span><span>{</span><span>avg_loss</span><span>:</span><span>.6f</span><span>}</span><span>"</span><span>)</span>
+
+    <span>for</span> <span>x</span><span>,</span> <span>y</span> <span>in</span> <span>data</span><span>:</span>
+        <span>result</span> <span>=</span> <span>forward</span><span>(</span><span>layers</span><span>,</span> <span>jnp</span><span>.</span><span>array</span><span>(</span><span>x</span><span>))</span>
+        <span>print</span><span>(</span><span>f</span><span>"</span><span>{</span><span>x</span><span>=}</span><span>: </span><span>{</span><span>result</span><span>=}</span><span>, </span><span>{</span><span>y</span><span>=}</span><span>"</span><span>)</span>
+
+
+<span>if</span> <span>__name__</span> <span>==</span> <span>"__main__"</span><span>:</span>
+    <span>main</span><span>()</span>
+</code></pre>
+</div>
+
+<p>If you look at it side-by-side with <a href="https://github.com/gpjt/toy-pytorch-to-jax/blob/main/pytorch_xor_no_nn_helpers.py" target="_blank" rel="noopener noreferrer">the previous PyTorch implementation</a>,
+you'll see that it's really similar!  Running <code>diff</code> between them makes them look
+more different than they are because of the extra threading through of keys that we
+need to do in order to satisfy the strict constraints on random number handling in JAX,
+(and of course there are function name changes like <code>torch.rand</code> becoming <code>jax.random.uniform</code>
+and <code>torch.sigmoid</code> becoming <code>jax.nn.sigmoid</code>).  But the important changes are much smaller.</p>
+
+<p>Firstly, weights and biases no longer need to know that we'll want to track gradients for them,
+because that's all handled by the tracers that JAX wraps around them:</p>
+
+<div>
+<pre><span></span><code><span>&lt;         "weights": weights.requires_grad_(),</span>
+<span>&lt;         "biases": biases.requires_grad_(),</span>
+<span>---</span>
+<span>&gt;         "weights": weights,</span>
+<span>&gt;         "biases": biases,</span>
+</code></pre>
+</div>
+
+<p>Relatedly, the <code>zero_grad</code> function that iterated over the layers and zeroed out
+the existing ones is completely gone.  Because gradients are now stored on tracers
+that wrap around our parameters rather than on the parameters themselves, we don't need to zero them out.</p>
+
+<p>The step function is still there, though, but it's much simpler.
+Before we get to that, let's take a look at the way we're getting the gradients for it,
+in the main training loop.  Here's the diff:</p>
+
+<div>
+<pre><span></span><code><span>&lt;             loss = calculate_loss(layers, torch.tensor(x), torch.tensor(y))</span>
+<span>&lt;             loss.backward()</span>
+<span>---</span>
+<span>&gt;             loss, grads = jax.value_and_grad(calculate_loss)(layers, jnp.array(x), jnp.array(y))</span>
+</code></pre>
+</div>
+
+<p>Hopefully the change there will be nice and familiar from the start of this post:
+we've moved from the PyTorch procedural "do a forward pass then do the backward pass"
+to the JAX maths-y "work out the gradients for this function".  <code>value_and_grad</code> is
+a utility function that does the same as the <code>grad</code> we encountered then, but rather than
+just returning the gradients, it also returns
+the value of <code>calculate_loss</code> with the given parameters,
+which is useful for our logging.</p>
+
+<p>Now, remember that <code>layers</code> is a list of dictionaries, something like this:</p>
+
+<div>
+<pre><span></span><code><span>[</span>
+<span>    {</span>
+<span>        'biases': Array([-0.11810607, -0.58481467], dtype=float32),</span>
+<span>        'weights': Array([[-0.37359995,  0.6218162 ], [-0.4298191 ,  0.15088385]], dtype=float32)</span>
+<span>    },</span>
+<span>    {</span>
+<span>        'biases': Array([-0.49658495], dtype=float32),</span>
+<span>        'weights': Array([[-0.38409787,  0.6165393 ]], dtype=float32)</span>
+<span>    }</span>
+<span>]</span>
+</code></pre>
+</div>
+
+<p>And also remember that <code>grad</code> -- and likewise <code>value_and_grad</code> -- have that smart trick
+where they return the gradients in the same PyTree structure as the parameter that we're
+taking the derivative with respect to.  So <code>grads</code> will also be a list of dictionaries,
+each of which has <code>weights</code> and <code>biases</code>.</p>
+
+<p>Now, as I mentioned earlier, JAX has a useful function called <code>jax.tree.map</code>.  Like the <a href="https://docs.python.org/3/library/functions.html#map" target="_blank" rel="noopener noreferrer">Python <code>map</code></a>
+function that maps a function over one or more lists, JAX's version maps a function over one or
+more things with the same PyTree structure.</p>
+
+<p>So, because <code>layers</code> and <code>grads</code> have the same
+structure, our <code>step</code> function can just use it to apply simple gradient descent
+like this:</p>
+
+<div>
+<pre><span></span><code><span>def</span><span> </span><span>step</span><span>(</span><span>layers</span><span>,</span> <span>grads</span><span>,</span> <span>learning_rate</span><span>):</span>
+    <span>layers</span> <span>=</span> <span>jax</span><span>.</span><span>tree</span><span>.</span><span>map</span><span>(</span>
+        <span>lambda</span> <span>p</span><span>,</span> <span>g</span><span>:</span> <span>p</span> <span>-</span> <span>g</span> <span>*</span> <span>learning_rate</span><span>,</span>
+        <span>layers</span><span>,</span>
+        <span>grads</span><span>,</span>
+    <span>)</span>
+    <span>return</span> <span>layers</span>
+</code></pre>
+</div>
+
+<p>Very clean :-)</p>
+
+<p>That's it!  A full JAX implementation of our toy example, and when we run it:</p>
+
+<div>
+<pre><span></span><code>giles@perry:~/Dev/toy-pytorch-to-jax<span> </span><span>(</span>main<span>)</span>$<span> </span>uv<span> </span>run<span> </span>pure_jax_xor_no_jit.py
+An<span> </span>NVIDIA<span> </span>GPU<span> </span>may<span> </span>be<span> </span>present<span> </span>on<span> </span>this<span> </span>machine,<span> </span>but<span> </span>a<span> </span>CUDA-enabled<span> </span>jaxlib<span> </span>is<span> </span>not<span> </span>installed.<span> </span>Falling<span> </span>back<span> </span>to<span> </span>cpu.
+Loss<span> </span>at<span> </span>epoch<span> </span><span>0</span>:<span> </span><span>0</span>.267455
+Loss<span> </span>at<span> </span>epoch<span> </span><span>1000</span>:<span> </span><span>0</span>.247348
+Loss<span> </span>at<span> </span>epoch<span> </span><span>2000</span>:<span> </span><span>0</span>.061305
+Loss<span> </span>at<span> </span>epoch<span> </span><span>3000</span>:<span> </span><span>0</span>.008652
+Loss<span> </span>at<span> </span>epoch<span> </span><span>4000</span>:<span> </span><span>0</span>.004108
+Loss<span> </span>at<span> </span>epoch<span> </span><span>5000</span>:<span> </span><span>0</span>.002627
+Loss<span> </span>at<span> </span>epoch<span> </span><span>6000</span>:<span> </span><span>0</span>.001912
+Loss<span> </span>at<span> </span>epoch<span> </span><span>7000</span>:<span> </span><span>0</span>.001496
+Loss<span> </span>at<span> </span>epoch<span> </span><span>8000</span>:<span> </span><span>0</span>.001224
+Loss<span> </span>at<span> </span>epoch<span> </span><span>9000</span>:<span> </span><span>0</span>.001034
+Trained<span> </span><span>in</span><span> </span><span>104</span>.540s
+Loss<span> </span>at<span> </span>end:<span> </span><span>0</span>.001034
+<span>x</span><span>=[</span><span>0</span>.0,<span> </span><span>0</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>Array<span>([</span><span>0</span>.03008602<span>]</span>,<span> </span><span>dtype</span><span>=</span>float32<span>)</span>,<span> </span><span>y</span><span>=[</span><span>0</span><span>]</span>
+<span>x</span><span>=[</span><span>0</span>.0,<span> </span><span>1</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>Array<span>([</span><span>0</span>.97214633<span>]</span>,<span> </span><span>dtype</span><span>=</span>float32<span>)</span>,<span> </span><span>y</span><span>=[</span><span>1</span><span>]</span>
+<span>x</span><span>=[</span><span>1</span>.0,<span> </span><span>0</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>Array<span>([</span><span>0</span>.96557194<span>]</span>,<span> </span><span>dtype</span><span>=</span>float32<span>)</span>,<span> </span><span>y</span><span>=[</span><span>1</span><span>]</span>
+<span>x</span><span>=[</span><span>1</span>.0,<span> </span><span>1</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>Array<span>([</span><span>0</span>.02664344<span>]</span>,<span> </span><span>dtype</span><span>=</span>float32<span>)</span>,<span> </span><span>y</span><span>=[</span><span>0</span><span>]</span>
+</code></pre>
+</div>
+
+<p>...it works!  So, let's move on to...</p>
+
+<p>Hang on:</p>
+
+<div>
+<pre><span></span><code><span>Trained in 104.540s</span>
+</code></pre>
+</div>
+
+<p>Yikes.  It was almost 30 times slower than the PyTorch version.  But then -- we did
+all of that work to port the code over to JAX, which is great because it has a JIT,
+and then we didn't use the JIT.  Whoops!</p>
+
+<p>Adding a few calls to <code>@jax.jit</code> helps.  If we add them to the <code>forward</code>, <code>step</code>
+and <code>calculate_loss</code> function then we get <a href="https://github.com/gpjt/toy-pytorch-to-jax/blob/main/pure_jax_xor_initial_jit.py" target="_blank" rel="noopener noreferrer">this code</a>,
+which is faster:</p>
+
+<div>
+<pre><span></span><code>giles@perry:~/Dev/toy-pytorch-to-jax<span> </span><span>(</span>main<span>)</span>$<span> </span>uv<span> </span>run<span> </span>pure_jax_xor_initial_jit.py
+An<span> </span>NVIDIA<span> </span>GPU<span> </span>may<span> </span>be<span> </span>present<span> </span>on<span> </span>this<span> </span>machine,<span> </span>but<span> </span>a<span> </span>CUDA-enabled<span> </span>jaxlib<span> </span>is<span> </span>not<span> </span>installed.<span> </span>Falling<span> </span>back<span> </span>to<span> </span>cpu.
+Loss<span> </span>at<span> </span>epoch<span> </span><span>0</span>:<span> </span><span>0</span>.267455
+Loss<span> </span>at<span> </span>epoch<span> </span><span>1000</span>:<span> </span><span>0</span>.247348
+Loss<span> </span>at<span> </span>epoch<span> </span><span>2000</span>:<span> </span><span>0</span>.061305
+Loss<span> </span>at<span> </span>epoch<span> </span><span>3000</span>:<span> </span><span>0</span>.008652
+Loss<span> </span>at<span> </span>epoch<span> </span><span>4000</span>:<span> </span><span>0</span>.004108
+Loss<span> </span>at<span> </span>epoch<span> </span><span>5000</span>:<span> </span><span>0</span>.002627
+Loss<span> </span>at<span> </span>epoch<span> </span><span>6000</span>:<span> </span><span>0</span>.001912
+Loss<span> </span>at<span> </span>epoch<span> </span><span>7000</span>:<span> </span><span>0</span>.001496
+Loss<span> </span>at<span> </span>epoch<span> </span><span>8000</span>:<span> </span><span>0</span>.001224
+Loss<span> </span>at<span> </span>epoch<span> </span><span>9000</span>:<span> </span><span>0</span>.001034
+Trained<span> </span><span>in</span><span> </span><span>27</span>.663s
+Loss<span> </span>at<span> </span>end:<span> </span><span>0</span>.001034
+<span>x</span><span>=[</span><span>0</span>.0,<span> </span><span>0</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>Array<span>([</span><span>0</span>.03008603<span>]</span>,<span> </span><span>dtype</span><span>=</span>float32<span>)</span>,<span> </span><span>y</span><span>=[</span><span>0</span><span>]</span>
+<span>x</span><span>=[</span><span>0</span>.0,<span> </span><span>1</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>Array<span>([</span><span>0</span>.97214633<span>]</span>,<span> </span><span>dtype</span><span>=</span>float32<span>)</span>,<span> </span><span>y</span><span>=[</span><span>1</span><span>]</span>
+<span>x</span><span>=[</span><span>1</span>.0,<span> </span><span>0</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>Array<span>([</span><span>0</span>.96557194<span>]</span>,<span> </span><span>dtype</span><span>=</span>float32<span>)</span>,<span> </span><span>y</span><span>=[</span><span>1</span><span>]</span>
+<span>x</span><span>=[</span><span>1</span>.0,<span> </span><span>1</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>Array<span>([</span><span>0</span>.02664347<span>]</span>,<span> </span><span>dtype</span><span>=</span>float32<span>)</span>,<span> </span><span>y</span><span>=[</span><span>0</span><span>]</span>
+</code></pre>
+</div>
+
+<p>...but it's still almost eight times slower than the PyTorch code.</p>
+
+<p>How can we make it faster?  Well, perhaps we can do more if we put more of the
+loop into the JITted stuff.  Right now,
+the core of our training loop looks like this:</p>
+
+<div>
+<pre><span></span><code>        <span>for</span> <span>x</span><span>,</span> <span>y</span> <span>in</span> <span>data</span><span>:</span>
+            <span>loss</span><span>,</span> <span>grads</span> <span>=</span> <span>jax</span><span>.</span><span>value_and_grad</span><span>(</span><span>calculate_loss</span><span>)(</span><span>layers</span><span>,</span> <span>jnp</span><span>.</span><span>array</span><span>(</span><span>x</span><span>),</span> <span>jnp</span><span>.</span><span>array</span><span>(</span><span>y</span><span>))</span>
+            <span>losses</span><span>.</span><span>append</span><span>(</span><span>loss</span><span>.</span><span>item</span><span>())</span>
+
+            <span>layers</span> <span>=</span> <span>step</span><span>(</span><span>layers</span><span>,</span> <span>grads</span><span>,</span> <span>learning_rate</span><span>)</span>
+</code></pre>
+</div>
+
+<p><code>calculate_loss</code> and <code>step</code> are JITted.  But what happens if we try to JIT a larger
+step?  We can move the forward pass and the step into a JITted function on their own:</p>
+
+<div>
+<pre><span></span><code><span>@jax</span><span>.</span><span>jit</span>
+<span>def</span><span> </span><span>train_step</span><span>(</span><span>layers</span><span>,</span> <span>inputs</span><span>,</span> <span>targets</span><span>,</span> <span>learning_rate</span><span>):</span>
+    <span>loss</span><span>,</span> <span>grads</span> <span>=</span> <span>jax</span><span>.</span><span>value_and_grad</span><span>(</span><span>calculate_loss</span><span>)(</span><span>layers</span><span>,</span> <span>inputs</span><span>,</span> <span>targets</span><span>)</span>
+    <span>layers</span> <span>=</span> <span>step</span><span>(</span><span>layers</span><span>,</span> <span>grads</span><span>,</span> <span>learning_rate</span><span>)</span>
+    <span>return</span> <span>layers</span><span>,</span> <span>loss</span>
+</code></pre>
+</div>
+
+<p>...and then call it in the loop like this:</p>
+
+<div>
+<pre><span></span><code>        <span>for</span> <span>x</span><span>,</span> <span>y</span> <span>in</span> <span>data</span><span>:</span>
+            <span>layers</span><span>,</span> <span>loss</span> <span>=</span> <span>train_step</span><span>(</span><span>layers</span><span>,</span> <span>jnp</span><span>.</span><span>array</span><span>(</span><span>x</span><span>),</span> <span>jnp</span><span>.</span><span>array</span><span>(</span><span>y</span><span>),</span> <span>learning_rate</span><span>)</span>
+            <span>losses</span><span>.</span><span>append</span><span>(</span><span>loss</span><span>.</span><span>item</span><span>())</span>
+</code></pre>
+</div>
+
+<p>With that, all of the JAX code apart from input and target wrangling is moved into a JITted function.
+We get <a href="https://github.com/gpjt/toy-pytorch-to-jax/blob/main/pure_jax_xor_final_jit.py" target="_blank" rel="noopener noreferrer">this code</a>, and running it gives us this:</p>
+
+<div>
+<pre><span></span><code>giles@perry:~/Dev/toy-pytorch-to-jax<span> </span><span>(</span>main<span>)</span>$<span> </span>uv<span> </span>run<span> </span>pure_jax_xor_final_jit.py
+An<span> </span>NVIDIA<span> </span>GPU<span> </span>may<span> </span>be<span> </span>present<span> </span>on<span> </span>this<span> </span>machine,<span> </span>but<span> </span>a<span> </span>CUDA-enabled<span> </span>jaxlib<span> </span>is<span> </span>not<span> </span>installed.<span> </span>Falling<span> </span>back<span> </span>to<span> </span>cpu.
+Loss<span> </span>at<span> </span>epoch<span> </span><span>0</span>:<span> </span><span>0</span>.267455
+Loss<span> </span>at<span> </span>epoch<span> </span><span>1000</span>:<span> </span><span>0</span>.247348
+Loss<span> </span>at<span> </span>epoch<span> </span><span>2000</span>:<span> </span><span>0</span>.061305
+Loss<span> </span>at<span> </span>epoch<span> </span><span>3000</span>:<span> </span><span>0</span>.008652
+Loss<span> </span>at<span> </span>epoch<span> </span><span>4000</span>:<span> </span><span>0</span>.004108
+Loss<span> </span>at<span> </span>epoch<span> </span><span>5000</span>:<span> </span><span>0</span>.002627
+Loss<span> </span>at<span> </span>epoch<span> </span><span>6000</span>:<span> </span><span>0</span>.001912
+Loss<span> </span>at<span> </span>epoch<span> </span><span>7000</span>:<span> </span><span>0</span>.001496
+Loss<span> </span>at<span> </span>epoch<span> </span><span>8000</span>:<span> </span><span>0</span>.001224
+Loss<span> </span>at<span> </span>epoch<span> </span><span>9000</span>:<span> </span><span>0</span>.001034
+Trained<span> </span><span>in</span><span> </span><span>2</span>.432s
+Loss<span> </span>at<span> </span>end:<span> </span><span>0</span>.001034
+<span>x</span><span>=[</span><span>0</span>.0,<span> </span><span>0</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>Array<span>([</span><span>0</span>.03008603<span>]</span>,<span> </span><span>dtype</span><span>=</span>float32<span>)</span>,<span> </span><span>y</span><span>=[</span><span>0</span><span>]</span>
+<span>x</span><span>=[</span><span>0</span>.0,<span> </span><span>1</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>Array<span>([</span><span>0</span>.97214633<span>]</span>,<span> </span><span>dtype</span><span>=</span>float32<span>)</span>,<span> </span><span>y</span><span>=[</span><span>1</span><span>]</span>
+<span>x</span><span>=[</span><span>1</span>.0,<span> </span><span>0</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>Array<span>([</span><span>0</span>.96557194<span>]</span>,<span> </span><span>dtype</span><span>=</span>float32<span>)</span>,<span> </span><span>y</span><span>=[</span><span>1</span><span>]</span>
+<span>x</span><span>=[</span><span>1</span>.0,<span> </span><span>1</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>Array<span>([</span><span>0</span>.02664347<span>]</span>,<span> </span><span>dtype</span><span>=</span>float32<span>)</span>,<span> </span><span>y</span><span>=[</span><span>0</span><span>]</span>
+</code></pre>
+</div>
+
+<p>Woohoo!  Almost 45% faster than the PyTorch version :-)</p>
+
+<p>So: porting to JAX alone gives us nice maths-y code, but we need to JIT it properly
+to get performance that matches PyTorch.  (The fact that it's faster than PyTorch in this
+case is not something
+that I think you could rely on -- this is, after all, a toy example.)</p>
+
+<p>It's also an interesting indicator that you actually need to think about
+what to JIT.  My initial thought, "just whack an <code>@jit</code> on the inner stuff", was
+not enough.  We needed to do more than that.  I've just had an interesting chat
+with Claude Opus 4.8 about that, though, and will probably post more about it later.
+For now, I think a useful rule-of-thumb is to wrap stuff in <code>@jit</code> at as high a level
+as you reasonably can, to maximise coverage.</p>
+
+<p>So, this completes the happy part of this post -- I've shown what it can do, how
+nicely it maps to the maths, and how it's (relatively) easy to make it fast.  What
+are the downsides?</p>
+
+<h3>Why JAX is doomed</h3>
+
+<p>Another deliberately overly-strident heading ;-)</p>
+
+<p>I've been programming for more than 40 years, and working professionally in the tech
+industry for more than 30.  I'd like to feel that this makes me a better engineer than
+I was when I was first starting out, but I can confidently say that it has made me a
+much more cynical one.</p>
+
+<p>Over that period, I've come to categorise new APIs, languages, and tools into three
+approximate groups: godawful hacks, solid but not overly inspiring engineering,
+and things of beauty.  They're loose categories, and most things are somewhere between one
+and another.  But I think they hold reasonably well.</p>
+
+<p>My cynicism and experience tells me that:</p>
+
+<ul>
+<li>Horrible hacks can inexplicably become popular, but
+normally die off when people get tired of swearing at them.  (Though sometimes
+a large installed base means that they linger.)</li>
+<li>Things of beauty get people excited, and often pull in the best engineers.  But eventually,
+they drop by the wayside.  Perhaps there's some hidden flaw that no-one noticed at the outset,
+or perhaps the mental model you need to build in order to use them effectively
+is too complicated for them to get to critical mass.</li>
+<li>Solid, boring engineering wins in the long term.</li>
+</ul>
+
+<p>When we were building our programmable spreadsheet, <a href="/resolver-one" target="_blank" rel="noopener noreferrer">Resolver One</a>,
+some of the team pointed out that a functional language -- specifically,
+<a href="https://www.haskell.org/" target="_blank" rel="noopener noreferrer">Haskell</a> -- would be a better fit than Python.  It was
+a tough decision to stick with Python, and I'm still not 100% sure it was the right one.</p>
+
+<p>But I do remember having sales meetings with quants at various financial firms about it,
+and in those meetings, some of the potential customers also suggested a Haskell port.
+I'm not saying that there's a perfect correlation between where we heard that,
+and the later notes in our sales status spreadsheet saying
+<a href="/2008/11/do-one-thing-and-do-it-well" target="_blank" rel="noopener noreferrer">"client being acquired by a non-bankrupt competitor, all expenditure on hold"</a>
+during the 2008 financial crisis.  But I'm not <em>not</em> saying that either.</p>
+
+<p>If you've read this far, you can probably tell that I see PyTorch as solid engineering,
+and JAX as closer to a thing of beauty.</p>
+
+<p>Maybe it's just the cynicism of age, but let me try to articulate the things I worry
+might put JAX into the "beautiful but doomed" side of the "beautiful" category.</p>
+
+<p>Firstly, I'm not convinced by the way that JAX, with its JIT, requires you to try
+to write Python as if it were a functional language.  It's easy enough to see that
+this isn't functional:</p>
+
+<div>
+<pre><span></span><code><span>@jax</span><span>.</span><span>jit</span>
+<span>def</span><span> </span><span>addY</span><span>(</span><span>x</span><span>):</span>
+    <span>return</span> <span>x</span> <span>+</span> <span>y</span>
+</code></pre>
+</div>
+
+<p>...but harder with this:</p>
+
+<div>
+<pre><span></span><code><span>def</span><span> </span><span>f</span><span>(</span><span>x</span><span>):</span>
+    <span>return</span> <span>x</span> <span>+</span> <span>random</span><span>.</span><span>randint</span><span>(</span><span>1</span><span>,</span> <span>10</span><span>)</span>
+</code></pre>
+</div>
+
+<p>Even worse, the way that tracing works means that you have even more constraints
+than "just" being functional would require -- remember this example from earlier?</p>
+
+<div>
+<pre><span></span><code><span>@jax</span><span>.</span><span>jit</span>
+<span>def</span><span> </span><span>f</span><span>(</span><span>x</span><span>):</span>
+    <span>if</span> <span>x</span> <span>&gt;</span> <span>2</span><span>:</span>
+        <span>return</span> <span>x</span> <span>**</span> <span>2</span>
+    <span>return</span> <span>x</span>
+</code></pre>
+</div>
+
+<p>Python is not functional, and is deliberately so.  Trying to make it so is always going
+to lead to weird bugs (for example, how the value of the global <code>y</code> on the first run
+would be baked into that <code>addY</code> function) and hard-to-understand error messages (you
+really need to be clued-up to work out what <code>Attempted boolean conversion of traced array with shape bool[]</code>
+means).</p>
+
+<p>The <code>jax.lax</code> package -- for example, the <code>cond</code> function we used to
+work around the fact that JAX could not "see" the Python <code>if</code> way back in this post --
+feels like a bit of an ugly workaround.  Python has control flow functions, but they
+don't work with the JIT's tracing, so we have to re-implement them in JAX.  Hmmm.</p>
+
+<p>Now, I've written extensively above about how JAX's restrictions, however confusing, enable a lot
+of the amazing stuff that wouldn't be possible in normal PyTorch.  What if there were
+some way to write PyTorch code and compile it directly to something that can execute
+on the hardware?</p>
+
+<p>It turns out that as of 2023, there is: <a href="https://docs.pytorch.org/tutorials/intermediate/torch_compile_tutorial.html" target="_blank" rel="noopener noreferrer"><code>torch.compile</code></a>.
+From what I understand, you're meant to be able to just attach it to your code and
+it gets JITted.  But unlike JAX, you don't need to restrict the code you write.  I've
+not investigated in much depth (after all, this post is already absurdly long and
+has taken more than a month on and off to put together), but it looks like it handles
+stuff that can't be compiled by using a concept of a "graph break" -- that is, it happily
+JITs what it can, then if it hits something that it can't JIT, it will cache the
+"work so far" as one compiled unit, run the Python code for the unJITable stuff, then
+(when it can) drop back into JIT mode.</p>
+
+<p>The best of both worlds?  I don't know, and would need to spend much more time investigating
+in order to learn.  But I can say that for my minimal-effort
+<a href="https://github.com/gpjt/toy-pytorch-to-jax/blob/main/pytorch_xor_with_compile.py" target="_blank" rel="noopener noreferrer">port of my toy XOR code</a>,
+following the structure of the JITted JAX version, it really did not help:</p>
+
+<div>
+<pre><span></span><code>giles@perry:~/Dev/toy-pytorch-to-jax<span> </span><span>(</span>main<span>)</span>$<span> </span>uv<span> </span>run<span> </span>pytorch_xor_with_compile.py
+Loss<span> </span>at<span> </span>epoch<span> </span><span>0</span>:<span> </span><span>0</span>.279327
+Loss<span> </span>at<span> </span>epoch<span> </span><span>1000</span>:<span> </span><span>0</span>.254715
+Loss<span> </span>at<span> </span>epoch<span> </span><span>2000</span>:<span> </span><span>0</span>.254279
+Loss<span> </span>at<span> </span>epoch<span> </span><span>3000</span>:<span> </span><span>0</span>.253985
+Loss<span> </span>at<span> </span>epoch<span> </span><span>4000</span>:<span> </span><span>0</span>.253649
+Loss<span> </span>at<span> </span>epoch<span> </span><span>5000</span>:<span> </span><span>0</span>.251566
+Loss<span> </span>at<span> </span>epoch<span> </span><span>6000</span>:<span> </span><span>0</span>.189218
+Loss<span> </span>at<span> </span>epoch<span> </span><span>7000</span>:<span> </span><span>0</span>.030091
+Loss<span> </span>at<span> </span>epoch<span> </span><span>8000</span>:<span> </span><span>0</span>.006665
+Loss<span> </span>at<span> </span>epoch<span> </span><span>9000</span>:<span> </span><span>0</span>.003516
+Trained<span> </span><span>in</span><span> </span><span>6</span>.688s
+Loss<span> </span>at<span> </span>end:<span> </span><span>0</span>.003516
+<span>x</span><span>=[</span><span>0</span>.0,<span> </span><span>0</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>tensor<span>([</span><span>0</span>.0483<span>])</span>,<span> </span><span>y</span><span>=[</span><span>0</span><span>]</span>
+<span>x</span><span>=[</span><span>0</span>.0,<span> </span><span>1</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>tensor<span>([</span><span>0</span>.9567<span>])</span>,<span> </span><span>y</span><span>=[</span><span>1</span><span>]</span>
+<span>x</span><span>=[</span><span>1</span>.0,<span> </span><span>0</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>tensor<span>([</span><span>0</span>.9425<span>])</span>,<span> </span><span>y</span><span>=[</span><span>1</span><span>]</span>
+<span>x</span><span>=[</span><span>1</span>.0,<span> </span><span>1</span>.0<span>]</span>:<span> </span><span>result</span><span>=</span>tensor<span>([</span><span>0</span>.0434<span>])</span>,<span> </span><span>y</span><span>=[</span><span>0</span><span>]</span>
+</code></pre>
+</div>
+
+<p>For those who are keeping track, that's slower than the uncompiled version, which came
+in at about 3.5s.  And the
+issue doesn't seem to be an up-front cost of JITting that would be paid off if we ran
+for more epochs -- each individual "Loss at epoch XXX" print comes out slower.</p>
+
+<p>Again, for the sake of sanity I'm not going to dig into it further, especially given that
+this is a tiny toy model and probably about as far from the target use case of
+<code>torch.compile</code> as you can get.  But it's something
+well worth noting for the future.</p>
+
+<p>Stepping back: one other way of looking at this is that Python might just be the wrong language
+to try to build code that compiles to GPUs.  I'm learning JAX right now so that I
+can re-implement my existing <a href="/llm-from-scratch" target="_blank" rel="noopener noreferrer">LLM from scratch</a> project in something
+other than PyTorch, to make sure that I really understand it.  I
+<a href="https://x.com/gpjt/status/1985434030880293004" target="_blank" rel="noopener noreferrer">asked people on X/Twitter for votes or ideas</a>,
+and while JAX won, <a href="https://x.com/jeremyphoward/status/1985784350412304390" target="_blank" rel="noopener noreferrer">Jeremy Howard suggested Mojo</a>.</p>
+
+<p><a href="https://mojolang.org/" target="_blank" rel="noopener noreferrer">Mojo</a> is a Pythonic language that compiles directly to
+CPU or GPU code, so it explicitly only contains features that can be ported that way.
+Unfortunately, it's lower-level than I really wanted for this project (and, importantly, does not
+have built-in autograd support).</p>
+
+<p>But if it did -- if, for example, there was a library like JAX for it, perhaps it would
+be better than using Python as the foundation?  I've looked for something like that, but
+to no avail.  Some work-in-progress projects, but nothing ready for use.</p>
+
+<p>At the end of the day, I think further experience is essential if I'm going to come to a solid
+opinion on JAX.  Experience with other tools can only get you so far, and it's easy
+to fail by pattern-matching what you're looking at with things that you've seen before,
+especially when you're old and cynical.
+All I can say at this point is that JAX is making my "beautiful but doomed" spidey-sense
+tingle. <sup><a href="#fn-8" target="_blank" rel="noopener noreferrer">8</a></sup></p>
+
+<h3>Wrapping up</h3>
+
+<p>The title of this post is important -- it is my impressions on first looking into
+JAX, not the considered thoughts of someone who's spent months or years working with
+it.  I've only scratched the surface, and haven't even touched the larger JAX ecosystem,
+or indeed its powerful handling of memory sharding for multi-GPU or even multi-node
+setups (which may well be one of its biggest advantages).</p>
+
+<p>My next step is going to be to implement a GPT-2-style LLM in JAX, probably using
+Flax and Optax as helpers, and perhaps by the time I'm done with that I'll have changed
+my views.</p>
+
+<p>But at this point -- after working through the tutorials and porting some toy models
+to get at least an initial feel for it, I've come to the conclusion that I like it.
+The question is, do I like it like I liked Python when I first came to it -- "this thing
+is really neat and clean, even if it has flaws" or is it more like I liked Haskell -- "this is
+a stunning thing of beauty and is completely doomed in the real world"?</p>
+
+<p>Time will tell.  But in the meantime, if you've been working with JAX for some time
+and want to counter any of the points I made, if I've completely misunderstood
+anything, or if you have any corrections, then please let me know!  After all,
+explorers in areas new to them are prone to making mistakes from time to time...</p>
+
+<blockquote>
+  <p>The forest of Skund was indeed enchanted, which was nothing unusual on the
+  Disc, and was also the only forest in the whole universe to be called -- in the
+  local language -- Your Finger You Fool, which was the literal meaning of the word Skund.</p>
+  
+  <p>The reason for this is regrettably all too common. When the first explorers
+  from the warm lands around the Circle Sea travelled into the chilly hinterland
+  they filled in the blank spaces on their maps by grabbing the nearest native,
+  pointing at some distant landmark, speaking very clearly in a loud voice, and
+  writing down whatever the bemused man told them. Thus were immortalised in
+  generations of atlases such geographical oddities as Just A Mountain,
+  I Don't Know, What? and, of course, Your Finger You Fool.</p>
+  
+  <p>Rainclouds clustered around the bald heights of Mt. Oolskunrahod ('Who is this
+  Fool who does Not Know what a Mountain is') and the Luggage settled itself
+  more comfortably under a dripping tree, which tried unsuccessfully to strike up a conversation.</p>
+  
+  <p><a href="https://www.goodreads.com/quotes/886291-the-forest-of-skund-was-indeed-enchanted-which-was-nothing" target="_blank" rel="noopener noreferrer">Terry Pratchett, <em>The Light Fantastic</em></a></p>
+</blockquote>
+
+<div>
+<hr />
+<ol>
+<li>
+<p>Specifically, prior to the introduction of <code>torch.compile</code> -- more about that
+later. <a href="#fnref-1" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>That's something I find myself constantly forgetting; I'll talk about "the loss
+landscape" as if it's something our training loop is exploring.  And, of course,
+there is an overall loss landscape across all of the training data as a whole, but in
+any given iteration through the training loop, the loss is relative to the specific
+batch we're looking at. <a href="#fnref-2" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>You can also pass in an <code>argnums</code> argument, zero by default, to tell it to do the derivative
+with respect to a different parameter or with respect to a sequence of parameter indexes.  If
+you give a sequence, it will return a tuple of gradients.  Additionally, there's a
+<code>value_and_grad</code> that returns a tuple of the value of <code>f</code> and the gradients,
+which is useful for tracking loss as you train -- we'll use that later on. <a href="#fnref-3" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>You can also make classes "PyTree-compatible" by providing helper functions that
+map to and from that representation. <a href="#fnref-4" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>A reminder if your memory of Python decorator syntax is rusty -- this:</p>
+
+<div>
+<pre><span></span><code><span>@a_decorator</span>
+<span>def</span><span> </span><span>some_function</span><span>(</span><span>x</span><span>):</span>
+    <span>...</span>
+</code></pre>
+</div>
+
+<p>...is just syntactic sugar for this:</p>
+
+<div>
+<pre><span></span><code><span>def</span><span> </span><span>some_function</span><span>(</span><span>x</span><span>):</span>
+    <span>...</span>
+
+<span>some_function</span> <span>=</span> <span>a_decorator</span><span>(</span><span>some_function</span><span>)</span>
+</code></pre>
+</div>
+
+<p><a href="#fnref-5" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>It's a tad more complicated than that -- the metadata for array traces also
+contains the shape.  More about that later. <a href="#fnref-6" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>For the pedantic: over ten runs of each, the numbers were pretty stable. <a href="#fnref-7" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>In case you're thinking that JAX is backed by Google and guaranteed to thrive
+because of that, remember <a href="https://en.wikipedia.org/wiki/Ada_(programming_language)" target="_blank" rel="noopener noreferrer">Ada</a>.
+Backed by the US Department of Defense.  For its time, well-designed and elegant.
+It's still used, but it's hardly mainstream...
+I remember reading about it in <em>Byte</em> magazine back in 1988 or so, and had an
+"it's so beautiful" moment then too.  To be fair to me, I was 14. <a href="#fnref-8" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+</ol>
+</div></div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://www.gilesthomas.com/2026/05/on-first-looking-into-jax" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button> <script type="module">function n(){const e=document.getElementById("back-to-top");if(!e)return;const i=300;let t=!1;const o=()=>{e.hidden=window.scrollY<=i,t=!1},d=()=>{t||(requestAnimationFrame(o),t=!0)};e.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"})}),window.addEventListener("scroll",d,{passive:!0}),o(),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",d)},{once:!0})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",n):n();document.addEventListener("astro:page-load",n);</script> </body> </html>
