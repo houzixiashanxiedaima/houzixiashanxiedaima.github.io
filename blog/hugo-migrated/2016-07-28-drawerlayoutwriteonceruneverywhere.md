@@ -3,7 +3,6 @@ title: DrawerLayout：Write-Once，Run-EveryWhere
 description: DrawerLayout：Write-Once，Run-EveryWhere
 pubDatetime: 2016-07-28T00:00:00.000Z
 draft: false
-featured: false
 tags: ["Android"]
 category: Android
 ---

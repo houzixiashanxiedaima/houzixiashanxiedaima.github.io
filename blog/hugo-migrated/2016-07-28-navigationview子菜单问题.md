@@ -3,7 +3,6 @@ title: NavigationView-子菜单问题
 description: NavigationView-子菜单问题
 pubDatetime: 2016-07-28T00:00:00.000Z
 draft: false
-featured: false
 tags: ["Android"]
 category: Android
 ---

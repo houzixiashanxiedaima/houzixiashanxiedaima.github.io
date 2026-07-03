@@ -3,7 +3,6 @@ title: Markdown 写作指南
 description: 掌握 Markdown 语法，高效撰写博客文章。
 pubDatetime: 2024-01-05T00:00:00.000Z
 draft: false
-featured: false
 tags: ["Markdown", "写作", "技巧"]
 category: 写作
 ---

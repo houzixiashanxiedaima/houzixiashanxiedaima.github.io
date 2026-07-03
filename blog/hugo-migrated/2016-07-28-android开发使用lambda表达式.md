@@ -3,7 +3,6 @@ title: Android开发使用lambda表达式
 description: Android开发使用lambda表达式
 pubDatetime: 2016-07-28T00:00:00.000Z
 draft: false
-featured: false
 tags: ["Android"]
 category: Android
 ---

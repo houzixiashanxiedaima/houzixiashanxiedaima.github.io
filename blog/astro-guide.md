@@ -3,7 +3,6 @@ title: Astro 快速入门指南
 description: 学习如何使用 Astro 构建快速、现代的网站。
 pubDatetime: 2024-01-10T00:00:00.000Z
 draft: false
-featured: false
 tags: ["Astro", "Web开发", "教程"]
 category: 教程
 ---

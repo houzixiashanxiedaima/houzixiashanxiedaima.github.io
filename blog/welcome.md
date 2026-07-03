@@ -3,7 +3,6 @@ title: 欢迎来到雅俗共赏
 description: 了解这个博客当前的内容方向、设计取向与阅读体验。
 pubDatetime: 2024-01-15T00:00:00.000Z
 draft: false
-featured: true
 tags: ["Astro", "博客", "设计"]
 category: 公告
 ---

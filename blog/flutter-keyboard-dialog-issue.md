@@ -3,7 +3,6 @@ title: Flutter 键盘顶起对话框排障记录
 description: 记录一次 Flutter 键盘顶起对话框的排障过程，从局部调整到全局策略的完整解决方案
 pubDatetime: 2024-10-24T00:00:00.000Z
 draft: false
-featured: false
 tags: ["Flutter", "键盘处理", "问题排查", "Scaffold"]
 category: Flutter
 ---

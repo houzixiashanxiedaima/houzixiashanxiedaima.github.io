@@ -3,7 +3,6 @@ title: Android开发之View坐标问题
 description: Android开发之View坐标问题
 pubDatetime: 2016-07-28T00:00:00.000Z
 draft: false
-featured: false
 tags: ["Android"]
 category: Android
 ---

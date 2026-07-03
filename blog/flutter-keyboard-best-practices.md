@@ -3,7 +3,6 @@ title: Flutter 键盘处理最佳实践：避免键盘推挤界面
 description: 详细讲解 Flutter 中键盘避让机制的原理和最佳实践，帮助你彻底解决键盘推挤界面的问题
 pubDatetime: 2024-10-24T00:00:00.000Z
 draft: false
-featured: true
 tags: ["Flutter", "键盘处理", "最佳实践", "UI布局", "Scaffold"]
 category: Flutter
 ---
