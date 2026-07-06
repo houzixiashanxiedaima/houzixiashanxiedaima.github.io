@@ -1,0 +1,268 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.0.5"><!-- Core SEO --><meta name="description" content="A very strange Pi issue
+sent me down a rabbit hole over the last two days.  The short version is that
+newer Claude models sometimes call Pi&amp;#8217;s edit tool with extra, invented fields in
+the nested "><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/better-models-worse-tools-d2ub3b/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/better-models-worse-tools-d2ub3b/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/better-models-worse-tools-d2ub3b/"><meta property="og:title" content="Better Models: Worse Tools"><meta property="og:description" content="A very strange Pi issue
+sent me down a rabbit hole over the last two days.  The short version is that
+newer Claude models sometimes call Pi&amp;#8217;s edit tool with extra, invented fields in
+the nested "><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="A very strange Pi issue
+sent me down a rabbit hole over the last two days.  The short version is that
+newer Claude models sometimes call Pi&amp;#8217;s edit tool with extra, invented fields in
+the nested "><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/better-models-worse-tools-d2ub3b/"><meta property="twitter:title" content="Better Models: Worse Tools"><meta property="twitter:description" content="A very strange Pi issue
+sent me down a rabbit hole over the last two days.  The short version is that
+newer Claude models sometimes call Pi&amp;#8217;s edit tool with extra, invented fields in
+the nested "><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Better Models: Worse Tools</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/","potentialAction":{"@type":"SearchAction","target":"https://blog.yuyins.com/search?q={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Better Models: Worse Tools","item":"https://blog.yuyins.com/reading-list/better-models-worse-tools-d2ub3b/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-k2qn5omv]{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip[data-astro-cid-k2qn5omv]:after{content:none!important}.chip--sm[data-astro-cid-k2qn5omv]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-k2qn5omv]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-k2qn5omv]{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}.chip--interactive[data-astro-cid-k2qn5omv]:hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}.chip--active[data-astro-cid-k2qn5omv],.chip[data-astro-cid-k2qn5omv].active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed[data-astro-cid-k2qn5omv]{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip[data-astro-cid-k2qn5omv]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.CSjWFyk4.css"><style>.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem;font-style:italic}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;font-family:monospace;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-07-03" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-07-03</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-02" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-02</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-07-02" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-07-02</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-01" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-01</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-06-30" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-06-30</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-06-29" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-06-29</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.PHDZRRIC.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" data-pagefind-body class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>Better Models: Worse Tools</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://lucumr.pocoo.org" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" data-astro-cid-k2qn5omv="true" class="chip chip--sm chip--interactive source-tag"> lucumr.pocoo.org </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年7月4日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-veycvx62><p>A very strange <a href="https://github.com/earendil-works/pi/issues/6278" target="_blank" rel="noopener noreferrer">Pi issue</a>
+sent me down a rabbit hole over the last two days.  The short version is that
+newer Claude models sometimes call Pi’s edit tool with extra, invented fields in
+the nested <code>edits[]</code> array.  And not Haiku or some small model: Opus 4.8.  The
+edit itself is usually correct but the arguments do not match the schema as
+the model invents made-up keys and Pi thus rejects the tool call and asks to
+try again.</p>
+<p>That alone is not too surprising as models emit malformed tool calls sometimes.
+Particularly small ones.  What surprised me is that this is getting worse with
+newer Anthropic models as both Opus 4.8 and Sonnet 5 show it but none of the
+older models.  In other words, the SOTA models of the family are worse at this
+specific tool schema than their older siblings.</p>
+<p>In case you are curious about Fable: I intentionally did not test it because I
+was not sure if the classifiers they are running might downgrade me to Opus
+silently.</p>
+<h2>Tool Calls Are Text</h2>
+<p>If you have not spent too much time looking at LLM tool calling internals, the
+important thing to understand is that tool calls are not magic and use some
+rather crude in-band signalling.  The model receives a transcript, a system
+prompt and a list of available tools.  The server munches that into a large
+prompt with special marker tokens.  Because the model was trained and
+reinforced on examples of that format, at some point during generation it emits
+something that the API or client interprets as “call this tool with these
+arguments”.</p>
+<p>For a file edit tool, the intended invocation payload might say something like
+this:</p>
+<div><pre><span></span><span>{</span>
+<span>  </span><span>"path"</span><span>:</span><span> </span><span>"some/file.py"</span><span>,</span>
+<span>  </span><span>"edits"</span><span>:</span><span> </span><span>[</span>
+<span>    </span><span>{</span>
+<span>      </span><span>"oldText"</span><span>:</span><span> </span><span>"text to replace"</span><span>,</span>
+<span>      </span><span>"newText"</span><span>:</span><span> </span><span>"replacement text"</span>
+<span>    </span><span>}</span>
+<span>  </span><span>]</span>
+<span>}</span>
+</pre></div>
+<p>A harness then validates the arguments, performs the edit, and feeds the result
+back into the model.  If validation fails, the model sees an error and usually
+tries again.</p>
+<p>How exactly that formatting happens is not known for the Anthropic models, but
+some people have gotten out “ANTML” markers and they at times do leak also into
+public communications.  To the best of my knowledge, the call above would come
+out serialized like this from the model:</p>
+<div><pre><span></span><span>&lt;antml:function_calls&gt;</span>
+<span>  </span><span>&lt;antml:invoke</span><span> </span><span>name=</span><span>"edit"</span><span>&gt;</span>
+<span>    </span><span>&lt;antml:parameter</span><span> </span><span>name=</span><span>"path"</span><span>&gt;</span>some/file.py<span>&lt;/antml:parameter&gt;</span>
+<span>    </span><span>&lt;antml:parameter</span><span> </span><span>name=</span><span>"edits"</span><span>&gt;</span>
+[
+<span>  </span>{
+<span>    </span>"oldText":<span> </span>"text<span> </span>to<span> </span>replace",
+<span>    </span>"newText":<span> </span>"replacement<span> </span>text"
+<span>  </span>}
+]
+<span>    </span><span>&lt;/antml:parameter&gt;</span>
+<span>  </span><span>&lt;/antml:invoke&gt;</span>
+<span>&lt;/antml:function_calls&gt;</span>
+</pre></div>
+<p>An important thing to note here is that this thing, while looking like XML, is
+not really XML.  It’s just a thing they found convenient to tokenize and train
+on.  The other thing to note is that a basic top-level string parameter appears
+in-line whereas an array of objects is implemented via JSON serialization.
+While I’m not <em>entirely sure</em> that this is how it works, there are some
+indications that this is not too far off.  This will become relevant later.</p>
+<p>There are two very different ways to make the model produce a structure like
+this:</p>
+<ol>
+<li>You can <em>ask</em> the model to produce valid JSON matching a schema and then
+validate it afterwards.</li>
+<li>You can constrain the sampler so that invalid JSON, or even invalid schema
+shapes, cannot be sampled in the first place.</li>
+</ol>
+<p>The second approach is what people usually refer to as grammar-aware or
+constrained decoding.  The sampler masks out tokens that would violate the
+grammar.  If the model is currently inside a JSON object and the schema says
+only <code>oldText</code> and <code>newText</code> are allowed, the sampler can prevent it from
+emitting <code>"in_file"</code> or <code>"type"</code>.  Grammar-aware decoding can be used both to
+constrain something to be syntactically valid JSON and also to enforce specific
+enum values or keys.</p>
+<p>Without any form of constraints the model is merely following a learned
+convention.</p>
+<h2>The Failure</h2>
+<p>Pi’s edit tool supports multiple exact string replacements in one call.  That is
+why the arguments contain an <code>edits</code> array.  In the failing cases the model
+produces entries like this:</p>
+<div><pre><span></span><span>{</span>
+<span>  </span><span>"oldText"</span><span>:</span><span> </span><span>"..."</span><span>,</span>
+<span>  </span><span>"newText"</span><span>:</span><span> </span><span>"..."</span><span>,</span>
+<span>  </span><span>"requireUnique"</span><span>:</span><span> </span><span>true</span>
+<span>}</span>
+</pre></div>
+<p>or this:</p>
+<div><pre><span></span><span>{</span>
+<span>  </span><span>"oldText"</span><span>:</span><span> </span><span>"..."</span><span>,</span>
+<span>  </span><span>"newText"</span><span>:</span><span> </span><span>"..."</span><span>,</span>
+<span>  </span><span>"oldText2"</span><span>:</span><span> </span><span>""</span><span>,</span>
+<span>  </span><span>"newText2"</span><span>:</span><span> </span><span>""</span>
+<span>}</span>
+</pre></div>
+<p>Across repeated trials I saw a whole zoo of invented trailing keys: <code>type</code>,
+<code>id</code>, <code>kind</code>, <code>unique</code>, <code>requireUnique</code>, <code>matchCase</code>, <code>in_file</code>,
+<code>forceMatchCount</code>, <code>children</code>, <code>notes</code>, <code>cost</code>, <code>oldText2</code>, <code>newText2</code>,
+<code>oldText_2</code>, <code>newText_2</code>, and even an <code>event.0.additionalProperties</code> key inside
+the edit object itself.</p>
+<p>The most annoying part is that the actual <code>oldText</code> and <code>newText</code> payloads were
+byte-correct in the invalid calls I inspected.  The model had in fact produced
+the right invocation but then added nonsense at the end of the object.</p>
+<p>The failure is also heavily context-dependent.  A fresh single-turn prompt like
+“edit this file” did not reproduce it at all for me.  An agentic history where the
+model had read files, diagnosed a problem and then composed a multi-line edit
+could reproduce it.  And more annoyingly, not all transcripts will show that behavior.
+In fact, I needed <a href="https://github.com/pasky" target="_blank" rel="noopener noreferrer">Petr Baudis</a>‘s transcripts to
+reproduce this for me at all!  In that user’s session continuing the session
+caused Opus 4.8 to fail around 20% of the time.  Stripping thinking blocks from
+history reduced the failure rate by half.  Turning on strict tool invocation
+eliminated it in my runs.</p>
+<h2>Why It’s Getting Worse</h2>
+<p>My strongest hypothesis is that this is not random deterioration but a training
+artifact.</p>
+<p>When older Anthropic models were trained, they were trained on some tools (some of
+which were documented).  But that training did not yet have a user-shipped
+harness like Claude Code as the obvious target.  Modern Anthropic models are
+most likely different because their post-training includes Claude Code or a
+harness that looks very similar.  The model learns what a successful tool call
+looks like in that environment.  It also learns what mistakes are tolerated by that environment.</p>
+<p>Claude Code’s own tools are comparatively flat.  The ordinary edit tool is not
+Pi’s nested <code>edits[]</code> shape; it is closer to <code>file_path</code>, <code>old_string</code>,
+<code>new_string</code>, and an optional flag (<code>replace_all</code>).  Looking at Claude Code’s
+client is very instructive: it contains retry paths for malformed tool use,
+parameter aliases, type coercions, Unicode repairs and filtering of unknown
+keys.  In other words, Anthropic’s own client appears to expect and accept a
+fair amount of slop and repairs it, mostly silently.</p>
+<p>If reinforcement learning happens in a harness like that, or a simulation of
+one, then slightly malformed tool calls can still complete the task and receive
+reward.  The harness fully absorbs the error and there is little gradient
+against inventing an alias, adding a stray field or using a nearby parameter
+name.</p>
+<p>Worse, the model may become very strongly adapted to the canonical Claude Code
+edit tool shape.  A different harness can present a tool with the same semantic
+intent but a different schema.  Such a tool can increasingly be
+off-distribution.  The better-trained model might actually fight you harder
+because its prior is stronger.</p>
+<p>This is not too surprising, but it is a change from how this was a few months ago.
+When Opus 4.5 launched, it adapted to other edit tools exceptionally well.  In
+fact, I was pretty convinced that we’re on a good path where the models are
+more likely to adapt to any sort of tool shape that comes around for as long
+as the instructions are good.</p>
+<p>Now I’m somewhat worried about the track we’re on here.  Alternative tool
+schemas might not just be unfamiliar.  They might be implicitly punished by
+post-training that optimizes for one particular, forgiving tool ecology.  And
+that ecology is not documented.  While there is a <a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/text-editor-tool" target="_blank" rel="noopener noreferrer">text editor
+tool</a>
+that is documented, you will see that this format is in fact not followed by
+Claude Code.  What Claude Code does internally (which is a closed-source
+harness) is hidden from you.</p>
+<h2>The Slop Harness</h2>
+<p>Claude Code is obviously closed-source but we can look at the minified code and
+get some idea of what it does.  And honestly, it’s very forgiving of incoming
+data.</p>
+<p>For a start, Claude Code checks the model’s visible text for leaked <code>&lt;invoke</code>
+markup.  It also emits some telemetry when that happens and then it has its
+own state machine to retry such bad calls by pushing back to the model.</p>
+<p>It has explicit Unicode escape repair which fixes broken <code>\uXXXX</code> sequences and
+lone surrogates in string values.  It also has per-tool aliases for parameters.
+For instance, <code>Edit</code> accepts <code>old_str</code> (presumably from the times when the models
+were trained on the officially documented text editor tool), the newer <code>old_string</code>
+from the schema, <code>new_str</code>/<code>new_string</code>, <code>path</code> as an alias for <code>file_path</code>, and some more.</p>
+<p>It also silently filters out unexpected keys and it does not use <code>strict</code> mode
+either.  The issue with <code>strict</code> mode is that Anthropic applies complexity
+limits to the tool definitions that cause API requests to fail, so presumably
+that’s why Claude Code does not attempt to use it.</p>
+<h2>Strictness</h2>
+<p>Will this problem be with us in other harnesses too?  One huge issue with
+Anthropic is that the models are completely closed, and so is the harness.
+Codex models are also closed, but at least the harness is not.  We also have
+<a href="https://github.com/openai/gpt-oss" target="_blank" rel="noopener noreferrer">gpt-oss</a> which is at least a bit
+interesting.  The models are explicitly trained to use OpenAI’s
+<a href="https://github.com/openai/harmony" target="_blank" rel="noopener noreferrer">harmony</a> response format and there is
+a lot of documentation that at least tells us how OpenAI people think about
+this.</p>
+<p>Harmony makes channels and tool-call content types part of the prompt format.  A
+function call can look like this:</p>
+<div><pre><span></span>&lt;|start|&gt;assistant&lt;|channel|&gt;commentary to=functions.get_weather
+&lt;|constrain|&gt;json&lt;|message|&gt;{"location":"San Francisco"}&lt;|call|&gt;
+</pre></div>
+<p>The important bit is <code>&lt;|constrain|&gt;json</code>.  The model can express in-band that
+this message body is JSON, and an inference stack can use that boundary to
+switch into JSON-constrained sampling for the body of the tool call.  Presumably
+a bit of this also happens in Anthropic’s models, at least in <code>strict</code> mode
+I would imagine.</p>
+<p>The marker in harmony helps the sampler to detect when it needs to sample with a
+specific grammar, and because it is part of the transcript, it makes that rather
+easy to do.  For hosted GPT models, there is also an option to provide a
+<a href="https://lark-parser.readthedocs.io/en/latest/grammar.html" target="_blank" rel="noopener noreferrer">LARK</a> grammar for
+custom tools that need to adhere to something like this.</p>
+<p>Anthropic appears different from that, though maybe not entirely.  If an array
+of objects is represented as JSON, as it appears to be, then the model has to
+write JSON inside the tool parameter.  There is probably basic
+grammar-constrained sampling going on, and that may partly explain the extra
+keys.  For a nested array parameter, that JSON includes escaped multi-line file
+content inside string literals, inside one tag.  The unexpected,
+made-up keys appear exactly at the highest-entropy point of that task: after
+closing a several-hundred-token escaped <code>newText</code> string, where the model must
+decide <code>}</code> vs <code>, "..."</code>.</p>
+<p>Opus 4.8 and Sonnet 5 seem to have much stronger priors about what an edit tool
+call should look like and that prior appears to be Claude Code’s edit schema: a
+flat old/new string pair, plus the optional <code>replace_all</code> flag.  My guess is
+that Opus has learned that an edit operation may have one extra optional field,
+but under Pi’s nested <code>oldText</code>/<code>newText</code> shape it has no trained name for that
+field.  So it samples a plausible name fresh each time, which is why the
+failures produce dozens of random keys rather than one stable alias.</p>
+<p>As <code>strict</code> mode in Anthropic appears to fix this, I presume that on the server
+side they are refusing to sample a key that is not permitted by the JSON schema
+structure.  That would also explain why they have limits to the complexity of
+the tool definitions when strict mode is enabled.</p>
+<p>So far, the Codex models I tested did not show this type of regression.  I tested
+all available ones except 5.6, which I do not have access to yet.</p>
+<h2>What This Means For Harnesses</h2>
+<p>The uncomfortable lesson is that tool schemas are not neutral, at least not on
+Anthropic models.  We like to pretend that a schema is an abstract contract and
+the model is a general reasoner that will follow it, but that might no longer be
+the case for some of the tools.</p>
+<p>Tool schemas are somewhere in the distribution and some shapes are close to
+what the model saw during post-training and some are far away.  Some are easy for
+the provider’s hidden encoding (e.g. top-level attributes in ANTML), whereas some
+require the model to write large escaped JSON objects inside nested arrays after
+long multiline strings.  The model may be smart enough to understand the schema
+and still be bad at sampling the exact shape under pressure.</p>
+<p>If this type of model behavior continues, I wonder what the implications for
+harnesses are.  Obviously one could turn on <code>strict</code> sampling in
+Anthropic and the problem should go away.  On the other hand, that the model
+has this behavior shows the impact that reinforcement learning has on them.
+Fighting that prior is probably futile if you want to get the best model performance.</p>
+<p>Right now the reality is that Claude Code is not open source and we cannot
+really know what they are doing in their RL environments either.  We cannot assume
+Claude-Code-trained behavior will transfer cleanly to your tools unless they are
+a close match.  The more post-training happens inside one dominant harness, the
+more every other harness will have to inherit its quirks.</p>
+<p>I used to be more skeptical of strict grammar-constrained tool invocation
+because constrained decoding can have quality tradeoffs.  I still think that can
+be true in general, but this bug moved my priors significantly.  If the newest
+models get better at solving the task while getting worse at faithfully emitting
+an alternative tool schema, then the harness needs stronger guarantees
+somewhere.</p>
+<p>If you want to find out more, or you want to discuss this, consider reading the
+<a href="https://github.com/earendil-works/pi/issues/6278" target="_blank" rel="noopener noreferrer">issue on the Pi tracker</a>.</p>
+</div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://lucumr.pocoo.org/2026/7/4/better-models-worse-tools/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button> <script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>

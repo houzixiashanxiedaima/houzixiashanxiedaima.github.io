@@ -129,7 +129,7 @@
 
 <h3>Most walls are legal</h3>
 <p>It's almost guaranteed your evaluation function uses path length as an input. This requires running a path algorithm.</p>
-<p>Since you are already going to do this for your leaf-node evaluation function, you should skip it during all move generation. Move moves are legal!</p>
+<p>Since you are already going to do this for your leaf-node evaluation function, you should skip it during all move generation. Most moves are legal!</p>
 <p>Just recurse <em>assuming</em> all wall moves are legal, and if you discover at the leaf node that <em>whoops</em> we are in an illegal branch, that's fine, just return null instead of a score to mark that this node is invalid.</p>
 <p>If you're at an inner node and your very first child returns null, <em>then</em> do a path check to see if the inner node is illegal, and fast-return null if it is.</p>
 <p>This optimization only works because illegality is monotonic in Quoridor. Once you are in an illegal state, you cannot get to a legal state.</p>
