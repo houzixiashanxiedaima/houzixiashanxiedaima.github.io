@@ -1,0 +1,192 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.0.5"><!-- Core SEO --><meta name="description" content="This morning I released sqlite-utils 4.0, the 124th release of that project and the first major version bump since 3.0 in November 2020. In addition to some small but significant breaking changes (des"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/sqlite-utils-40-now-with-database-schema-migration-elsy0h/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/sqlite-utils-40-now-with-database-schema-migration-elsy0h/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/sqlite-utils-40-now-with-database-schema-migration-elsy0h/"><meta property="og:title" content="sqlite-utils 4.0, now with database schema migrations"><meta property="og:description" content="This morning I released sqlite-utils 4.0, the 124th release of that project and the first major version bump since 3.0 in November 2020. In addition to some small but significant breaking changes (des"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="This morning I released sqlite-utils 4.0, the 124th release of that project and the first major version bump since 3.0 in November 2020. In addition to some small but significant breaking changes (des"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/sqlite-utils-40-now-with-database-schema-migration-elsy0h/"><meta property="twitter:title" content="sqlite-utils 4.0, now with database schema migrations"><meta property="twitter:description" content="This morning I released sqlite-utils 4.0, the 124th release of that project and the first major version bump since 3.0 in November 2020. In addition to some small but significant breaking changes (des"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>sqlite-utils 4.0, now with database schema migrations</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/","potentialAction":{"@type":"SearchAction","target":"https://blog.yuyins.com/search?q={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"sqlite-utils 4.0, now with database schema migrations","item":"https://blog.yuyins.com/reading-list/sqlite-utils-40-now-with-database-schema-migration-elsy0h/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-k2qn5omv]{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip[data-astro-cid-k2qn5omv]:after{content:none!important}.chip--sm[data-astro-cid-k2qn5omv]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-k2qn5omv]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-k2qn5omv]{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}.chip--interactive[data-astro-cid-k2qn5omv]:hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}.chip--active[data-astro-cid-k2qn5omv],.chip[data-astro-cid-k2qn5omv].active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed[data-astro-cid-k2qn5omv]{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip[data-astro-cid-k2qn5omv]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.iBOtmocC.css"><style>.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem;font-style:italic}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;font-family:monospace;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-07-08" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-07-08</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-07" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-07</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-06" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-06</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-07-06" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-07-06</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-05" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-05</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-04" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-04</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.PHDZRRIC.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>sqlite-utils 4.0, now with database schema migrations</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://simonwillison.net" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag" data-astro-cid-k2qn5omv="true"> simonwillison.net </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年7月7日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-veycvx62><p>This morning I released <a href="https://sqlite-utils.datasette.io/en/stable/changelog.html#v4-0" target="_blank" rel="noopener noreferrer">sqlite-utils 4.0</a>, the 124th release of that project and the first major version bump since <a href="https://sqlite-utils.datasette.io/en/stable/changelog.html#v3-0" target="_blank" rel="noopener noreferrer">3.0</a> in November 2020. In addition to some small but significant breaking changes (described in <a href="https://sqlite-utils.datasette.io/en/stable/upgrading.html" target="_blank" rel="noopener noreferrer">this upgrade guide</a>), this version introduces three major features: <strong>database migrations</strong>, <strong>nested transactions</strong> (via a new <code>db.atomic()</code> method), and support for <strong>compound foreign keys</strong>.</p>
+<h4>Database schema migrations using sqlite-utils</h4>
+<p>Schema migrations define a sequence of changes to be made to a SQLite database, plus a mechanism for tracking which migrations have been applied and applying any that are found to be pending.</p>
+<p>Migrations are defined in Python files using the <a href="https://sqlite-utils.datasette.io/en/stable/python-api.html" target="_blank" rel="noopener noreferrer">sqlite-utils Python library</a>, which includes a powerful <code>table.transform()</code> method providing <a href="https://sqlite-utils.datasette.io/en/stable/python-api.html#transforming-a-table" target="_blank" rel="noopener noreferrer">enhanced alter table capabilities</a> that are not supported by SQLite's <code>ALTER TABLE</code> statement.</p>
+<p>(<code>table.transform()</code> implements the pattern <a href="https://www.sqlite.org/lang_altertable.html#otheralter" target="_blank" rel="noopener noreferrer">recommended by the SQLite documentation</a> - create a new temporary table with the new schema, copy across the data, then drop the old table and rename the temporary one in its place.)</p>
+<p>Here's an example migration file which creates a table called <code>creatures</code>, adds an additional column to it in a second step, then changes the types of two of the columns in a third:</p>
+<pre><span>from</span> <span>sqlite_utils</span> <span>import</span> <span>Migrations</span>
+
+<span>migrations</span> <span>=</span> <span>Migrations</span>(<span>"creatures"</span>)
+
+<span>@<span>migrations</span>()</span>
+<span>def</span> <span>create_table</span>(<span>db</span>):
+    <span>db</span>[<span>"creatures"</span>].<span>create</span>(
+        {<span>"id"</span>: <span>int</span>, <span>"name"</span>: <span>str</span>, <span>"species"</span>: <span>str</span>},
+        <span>pk</span><span>=</span><span>"id"</span>,
+    )
+
+<span>@<span>migrations</span>()</span>
+<span>def</span> <span>add_weight</span>(<span>db</span>):
+    <span>db</span>[<span>"creatures"</span>].<span>add_column</span>(<span>"weight"</span>, <span>float</span>)
+
+<span>@<span>migrations</span>()</span>
+<span>def</span> <span>change_column_types</span>(<span>db</span>):
+    <span>db</span>[<span>"creatures"</span>].<span>transform</span>(<span>types</span><span>=</span>{<span>"species"</span>: <span>int</span>, <span>"weight"</span>: <span>str</span>})</pre>
+<p>Save that as <code>migrations.py</code> and run it against a fresh database like this:</p>
+<div><pre>uvx sqlite-utils migrate data.db migrations.py</pre></div>
+<p>Then if you check the schema of that database:</p>
+<div><pre>uvx sqlite-utils schema data.db</pre></div>
+<p>You'll see this SQL:</p>
+<div><pre><span>CREATE</span> <span>TABLE</span> "<span>_sqlite_migrations</span>" (
+   <span><span>"</span>id<span>"</span></span> <span>INTEGER</span> <span>PRIMARY KEY</span>,
+   <span><span>"</span>migration_set<span>"</span></span> <span>TEXT</span>,
+   <span><span>"</span>name<span>"</span></span> <span>TEXT</span>,
+   <span><span>"</span>applied_at<span>"</span></span> <span>TEXT</span>
+);
+<span>CREATE</span> <span>UNIQUE INDEX</span> "<span>idx__sqlite_migrations_migration_set_name</span>"
+    <span>ON</span> <span><span>"</span>_sqlite_migrations<span>"</span></span> (<span><span>"</span>migration_set<span>"</span></span>, <span><span>"</span>name<span>"</span></span>);
+<span>CREATE</span> <span>TABLE</span> "<span>creatures</span>" (
+   <span><span>"</span>id<span>"</span></span> <span>INTEGER</span> <span>PRIMARY KEY</span>,
+   <span><span>"</span>name<span>"</span></span> <span>TEXT</span>,
+   <span><span>"</span>species<span>"</span></span> <span>INTEGER</span>,
+   <span><span>"</span>weight<span>"</span></span> <span>TEXT</span>
+);</pre></div>
+<p>The <code>_sqlite_migrations</code> table is used to keep track of which migration functions have been run. The <code>creatures</code> table above is the schema after all three migrations have been applied.</p>
+<p>To see a list of migrations, both pending and applied, run this:</p>
+<div><pre>uvx sqlite-utils migrate data.db migrations.py --list</pre></div>
+<p>Output:</p>
+<pre><code>Migrations for: creatures
+
+  Applied:
+    create_table - 2026-07-07 17:58:41.360051+00:00
+    add_weight - 2026-07-07 17:58:41.360608+00:00
+    change_column_types - 2026-07-07 18:01:15.802000+00:00
+
+  Pending:
+    (none)
+</code></pre>
+<p>If you don't specify a migrations file, the <code>sqlite-utils migrate data.db</code> command will scan the current directory and its subdirectories for files called <code>migrations.py</code> and apply any <code>Migrations()</code> instances it finds in them.</p>
+<p>You can also execute migrations <a href="https://sqlite-utils.datasette.io/en/stable/migrations.html#applying-migrations-in-python" target="_blank" rel="noopener noreferrer">from Python code</a> using the <code>migrations.apply(db)</code> method, which is useful for building tools that manage their own database schemas over multiple versions. My own <a href="https://llm.datasette.io/" target="_blank" rel="noopener noreferrer">LLM tool</a> has been using a version of this pattern for several years now, as shown in <a href="https://github.com/simonw/llm/blob/0.31/llm/embeddings_migrations.py" target="_blank" rel="noopener noreferrer">llm/embeddings_migrations.py</a>.</p>
+<h4>Prior art</h4>
+<p>My favorite implementation of this pattern remains <a href="https://docs.djangoproject.com/en/6.0/topics/migrations/" target="_blank" rel="noopener noreferrer">Django's Migrations</a>, developed by Andrew Godwin based on his earlier project <a href="https://github.com/andrewgodwin/south" target="_blank" rel="noopener noreferrer">South</a>. Fun fact: Andrew, Russ Keith-Magee, and I presented our competing approaches to schema migrations for Django on the <a href="https://www.youtube.com/watch?v=VSq8m00p1FM" target="_blank" rel="noopener noreferrer">Schema Evolution panel</a> at the very first DjangoCon back in 2008! My attempt was called <a href="https://simonwillison.net/2008/Sep/3/dmigrations/" target="_blank" rel="noopener noreferrer">dmigrations</a>, developed with a team at Global Radio in London.</p>
+<p>Django's migrations can be automatically generated from model definitions and include the ability to roll back to a previous version. The <code>sqlite-utils</code> approach is deliberately simpler: unlike Django, <code>sqlite-utils</code> encourages programmatic table creation rather than a model definition ORM, so there isn't anything we can use to automatically generate migrations.</p>
+<p>I decided to skip rollback, since in my experience it's a feature that is rarely used. With a SQLite project, an easy way to achieve rollback is to create a copy of your database file before you apply the migrations!</p>
+<h4>Migrating from sqlite-migrate</h4>
+<p>The design of <code>sqlite-utils</code> migrations is three years old now - I had originally released it as a separate package called <a href="https://github.com/simonw/sqlite-migrate" target="_blank" rel="noopener noreferrer">sqlite-migrate</a>, which never quite graduated beyond a beta release.</p>
+<p>I've used that package in enough places now that I'm confident in the design, so I've decided to promote it to a feature of <code>sqlite-utils</code> to make it available by default to all of the other tools in the growing sqlite-utils/Datasette/LLM ecosystem.</p>
+<p>I made <a href="https://github.com/simonw/sqlite-migrate/releases/tag/0.2" target="_blank" rel="noopener noreferrer">one last release</a> of <code>sqlite-migrate</code>, which switches it to depend on <code>sqlite-utils&gt;=4</code> and replaces the <code>__init__.py</code> file with the following:</p>
+<pre><span>from</span> <span>sqlite_utils</span> <span>import</span> <span>Migrations</span>
+
+<span>__all__</span> <span>=</span> [<span>"Migrations"</span>]</pre>
+<p>Any existing project that depends on <code>sqlite-migrate</code> should continue to work without alterations.</p>
+<h4>Everything else in sqlite-utils 4.0</h4>
+<p>Here are the release notes for this version, with some inline annotations:</p>
+<blockquote>
+<p>The 4.0 release includes some minor backwards-incompatible fixes (hence the major version number bump) and introduces three major new features:</p>
+<ul>
+<li>
+<a href="https://sqlite-utils.datasette.io/en/stable/migrations.html#migrations" target="_blank" rel="noopener noreferrer">Database migrations</a>, providing a structured mechanism for evolving a project’s schema over time. (<a href="https://github.com/simonw/sqlite-utils/issues/752" target="_blank" rel="noopener noreferrer">#752</a>)</li>
+</ul>
+</blockquote>
+<p>I think of migrations as the signature new feature, hence this blog post.</p>
+<blockquote>
+<ul>
+<li>
+<a href="https://sqlite-utils.datasette.io/en/stable/python-api.html#python-api-atomic" target="_blank" rel="noopener noreferrer">Nested transaction support</a> via <code>db.atomic()</code>, plus numerous improvements to how transactions work across the library. (<a href="https://github.com/simonw/sqlite-utils/issues/755" target="_blank" rel="noopener noreferrer">#755</a>)</li>
+</ul>
+</blockquote>
+<p><code>sqlite-utils</code> has long had a confused relationship with database transactions, partly because when I started designing the library back in 2018 I didn't yet have a great feel for how those worked in SQLite itself.</p>
+<p>Adding migrations to the core library made me determined to finally crack this nut, since transactions make migration systems a whole lot safer and easier to reason about.</p>
+<p>I ended up building this around a <code>db.atomic()</code> context manager which looks like this:</p>
+<pre><span>with</span> <span>db</span>.<span>atomic</span>():
+    <span>db</span>.<span>table</span>(<span>"dogs"</span>).<span>insert</span>({<span>"id"</span>: <span>1</span>, <span>"name"</span>: <span>"Cleo"</span>}, <span>pk</span><span>=</span><span>"id"</span>)
+    <span>db</span>.<span>table</span>(<span>"dogs"</span>).<span>insert</span>({<span>"id"</span>: <span>2</span>, <span>"name"</span>: <span>"Pancakes"</span>})</pre>
+<p>SQLite supports <a href="https://sqlite.org/lang_savepoint.html" target="_blank" rel="noopener noreferrer">Savepoints</a>, and as a result <code>db.atomic()</code> can be nested to carry out transactions inside of transactions. It's pretty neat!</p>
+<blockquote>
+<ul>
+<li>Support for <a href="https://sqlite-utils.datasette.io/en/stable/python-api.html#python-api-compound-foreign-keys" target="_blank" rel="noopener noreferrer">compound foreign keys</a>, including creation, transformation and introspection through <a href="https://sqlite-utils.datasette.io/en/stable/python-api.html#python-api-introspection-foreign-keys" target="_blank" rel="noopener noreferrer">table.foreign_keys</a>. (<a href="https://github.com/simonw/sqlite-utils/issues/594" target="_blank" rel="noopener noreferrer">#594</a>)</li>
+</ul>
+</blockquote>
+<p>This came about when I asked a coding agent to review all open issues and PRs for things that should be included in a 4.0 release since they would represent breaking changes if I added them later, and it correctly identified that compound foreign keys were exactly that kind of feature.</p>
+<p>I started with a breaking change to the <a href="https://sqlite-utils.datasette.io/en/stable/python-api.html#python-api-introspection-foreign-keys" target="_blank" rel="noopener noreferrer">table.foreign_keys</a> introspection method, and then decided to see if Claude Fable 5 could handle the more fiddly job of integrating compound foreign key <em>creation</em> into the library. The API design it helped create felt <a href="https://sqlite-utils.datasette.io/en/stable/python-api.html#compound-foreign-keys" target="_blank" rel="noopener noreferrer">exactly right to me</a> - consistent with how the rest of the library worked already.</p>
+<blockquote>
+<p>Other notable changes include:</p>
+<ul>
+<li>Upserts now use SQLite’s <code>INSERT ... ON CONFLICT ... DO UPDATE SET</code> syntax, detect existing table primary keys automatically and reject records that are missing required primary key values. (<a href="https://github.com/simonw/sqlite-utils/issues/652" target="_blank" rel="noopener noreferrer">#652</a>)</li>
+</ul>
+</blockquote>
+<p>This was the change that first pushed me to consider a breaking-change 4.0 version bump. I built this to help support <a href="https://github.com/simonw/sqlite-chronicle" target="_blank" rel="noopener noreferrer">sqlite-chronicle</a>, which uses triggers to keep track of rows in a table that have been inserted, updated or deleted.</p>
+<blockquote>
+<ul>
+<li>
+<code>db.query()</code> now executes immediately and rejects statements that do not return rows; use <code>db.execute()</code> for writes and DDL.</li>
+</ul>
+</blockquote>
+<p>Probably the <a href="https://sqlite-utils.datasette.io/en/stable/upgrading.html#python-api-changes" target="_blank" rel="noopener noreferrer">most disruptive breaking change</a> - I've had to update a few places in my own code to switch from <code>db.query()</code> to <code>db.execute()</code> as a result.</p>
+<blockquote>
+<ul>
+<li>CSV and TSV imports now detect column types by default, while inserts into existing tables preserve those tables’ column types. (<a href="https://github.com/simonw/sqlite-utils/issues/679" target="_blank" rel="noopener noreferrer">#679</a>)</li>
+</ul>
+</blockquote>
+<p>The <code>sqlite-utils insert data.db creatures creatures.csv --detect-types</code> flag was a later addition to allow column types (text, integer, real) to be automatically detected based on the data in a CSV. It should be the default, and releasing a 4.0 means I can make it so.</p>
+<blockquote>
+<ul>
+<li>
+<code>table.extract()</code> and <code>extracts=</code> no longer create lookup table records for all-<code>null</code> values. (<a href="https://github.com/simonw/sqlite-utils/issues/186" target="_blank" rel="noopener noreferrer">#186</a>)</li>
+</ul>
+</blockquote>
+<p>The oldest issue addressed by this release - the underlying bug was opened (by me) in October 2020.</p>
+<blockquote>
+<p>See <a href="https://sqlite-utils.datasette.io/en/stable/upgrading.html#upgrading-3-to-4" target="_blank" rel="noopener noreferrer">Upgrading from 3.x to 4.0</a> for details on backwards-incompatible changes.</p>
+<p>The detailed release notes for the features and fixes shipped during the 4.0 pre-release cycle are available in <a href="https://sqlite-utils.datasette.io/en/stable/changelog.html#v4-0a0" target="_blank" rel="noopener noreferrer">4.0a0</a>, <a href="https://sqlite-utils.datasette.io/en/stable/changelog.html#v4-0a1" target="_blank" rel="noopener noreferrer">4.0a1</a>, <a href="https://sqlite-utils.datasette.io/en/stable/changelog.html#v4-0rc1" target="_blank" rel="noopener noreferrer">4.0rc1</a>, <a href="https://sqlite-utils.datasette.io/en/stable/changelog.html#v4-0rc2" target="_blank" rel="noopener noreferrer">4.0rc2</a>, <a href="https://sqlite-utils.datasette.io/en/stable/changelog.html#v4-0rc3" target="_blank" rel="noopener noreferrer">4.0rc3</a> and <a href="https://sqlite-utils.datasette.io/en/stable/changelog.html#v4-0rc4" target="_blank" rel="noopener noreferrer">4.0rc4</a>.</p>
+</blockquote>
+<p>The upgrade guide was entirely written by Claude Fable 5, Claude Opus 4.8 and GPT-5.5. The same is true of the release notes.</p>
+<p>This is the kind of documentation I've slowly become comfortable outsourcing to the robots. It doesn't need to convince people of anything, or express any opinions - its job is to be as accurate and detailed as possible. I've reviewed the release notes closely and can confirm they are accurate and comprehensive.</p>
+<h4>Claude Fable 5 helped a lot</h4>
+<p>I released the first alpha of sqlite-utils 4.0 <a href="https://sqlite-utils.datasette.io/en/stable/changelog.html#a0-2025-05-08" target="_blank" rel="noopener noreferrer">over a year ago</a>. I've been dragging my heels on the stable release because of the amount of work it would take to track down and clean up the many other minor design flaws that a major version number allowed me to take on.</p>
+<p>Assistance from Claude Fable 5 (and to a lesser extent Opus 4.8 and GPT-5.5) gave me just the boost I needed to overcome inertia and make the most of the time I could afford to spend on this library.</p>
+<p>Fable has <em>really good taste</em> in API design, and is <a href="https://simonwillison.net/2026/Jun/11/fable-is-relentlessly-proactive/" target="_blank" rel="noopener noreferrer">relentlessly proactive</a> if you give it a more open goal. My most successful prompt was a review task that I issued against what I thought was the last release candidate:</p>
+<blockquote>
+<p><code>review the changes on main since the last tagged 3.x release - I am about to ship them as sqlite-utils 4.0, a stable version that promises no backwards-incompatible fixes for a very long time.</code></p>
+<p><code>review the changelog and upgrade guide, and write yourself scratch scripts to try out all of the new features in v4 - save those scripts but don't commit them</code></p>
+</blockquote>
+<p>I tried this with GPT-5.5 xhigh in Codex Desktop and Fable 5 in Claude Code.</p>
+<p>GPT-5.5 <a href="https://gist.github.com/simonw/823fdecc031371d56dce39537adc0096" target="_blank" rel="noopener noreferrer">wrote 5 Python scripts</a> and didn't turn up anything particularly interesting - its <a href="https://github.com/simonw/sqlite-utils/issues/769#issuecomment-4899982463" target="_blank" rel="noopener noreferrer">final report is here</a>.</p>
+<p>Fable 5 <a href="https://gist.github.com/simonw/95800bf584f8e437f1cf0d48d9ef81e6" target="_blank" rel="noopener noreferrer">wrote 12 scripts</a>, identified 4 release blockers and 10 additional issues <a href="https://github.com/simonw/sqlite-utils/issues/769#issuecomment-4900034150" target="_blank" rel="noopener noreferrer">in its report</a>, and built a neat <a href="https://gist.githubusercontent.com/simonw/95800bf584f8e437f1cf0d48d9ef81e6/raw/c43918b36a129bba1d2f2a129117aa11c85146c0/12_bug_repros.py" target="_blank" rel="noopener noreferrer">combined repro script</a>, which, when run, output the following:</p>
+<pre><code>=== 1. Failed db.execute() write leaves an implicit transaction open ===
+  in_transaction after failed write: True
+  BUG: table 'other' silently lost when connection closed
+
+=== 2. Leading ';' bypasses the query() first-token scanner ===
+  BUG: raised OperationalError: no such savepoint: sqlite_utils_query
+  BUG: row persisted despite rollback (count=1)
+
+=== 3. Rejected write PRAGMA via query() still takes effect ===
+  BUG: user_version=5 after 'rejected' statement (docs say no effect)
+
+=== 4. Implicit compound FK resolves pk columns in table order, not PK order ===
+  BUG: other_columns reported as ('b', 'a'), should be ('a', 'b')
+  BUG: transform of valid data raised IntegrityError: FOREIGN KEY constraint failed
+
+=== 5. ForeignKey (now a dataclass) is no longer hashable ===
+  BUG: cannot use 'sqlite_utils.db.ForeignKey' as a set element (unhashable type: 'ForeignKey')
+
+=== 6. Mixed ForeignKey objects and tuples in foreign_keys= rejected ===
+  BUG: foreign_keys= should be a list of tuples
+
+=== 7. insert --csv into an EXISTING table transforms its column types ===
+  BUG: existing zip '01234' is now 1234 (column type: int)
+
+=== 8. insert(pk=, alter=True) regression: InvalidColumns before alter runs ===
+  BUG: InvalidColumns: Invalid primary key column ['id'] for table t with columns ['a']
+
+=== 9. migrate --stop-before an already-applied migration applies everything ===
+  BUG: m2 was applied despite --stop-before m1 (m1 already applied)
+
+=== 10. ensure_autocommit_on() silently commits an open transaction ===
+  BUG: row survived rollback (count=1) - transaction was committed
+</code></pre>
+<p>I found myself agreeing with almost all of them. Here's <a href="https://github.com/simonw/sqlite-utils/pull/779" target="_blank" rel="noopener noreferrer">the PR with 16 commits</a> where we worked through them in turn.</p>
+<p>There's no doubt in my mind that sqlite-utils 4.0 is a significantly higher-quality release than if I had built it without the assistance of the latest frontier models.</p>
+    
+        <p>Tags: <a href="https://simonwillison.net/tags/schema-migrations" target="_blank" rel="noopener noreferrer">schema-migrations</a>, <a href="https://simonwillison.net/tags/projects" target="_blank" rel="noopener noreferrer">projects</a>, <a href="https://simonwillison.net/tags/sqlite" target="_blank" rel="noopener noreferrer">sqlite</a>, <a href="https://simonwillison.net/tags/ai" target="_blank" rel="noopener noreferrer">ai</a>, <a href="https://simonwillison.net/tags/sqlite-utils" target="_blank" rel="noopener noreferrer">sqlite-utils</a>, <a href="https://simonwillison.net/tags/annotated-release-notes" target="_blank" rel="noopener noreferrer">annotated-release-notes</a>, <a href="https://simonwillison.net/tags/generative-ai" target="_blank" rel="noopener noreferrer">generative-ai</a>, <a href="https://simonwillison.net/tags/llms" target="_blank" rel="noopener noreferrer">llms</a>, <a href="https://simonwillison.net/tags/ai-assisted-programming" target="_blank" rel="noopener noreferrer">ai-assisted-programming</a>, <a href="https://simonwillison.net/tags/anthropic" target="_blank" rel="noopener noreferrer">anthropic</a>, <a href="https://simonwillison.net/tags/claude" target="_blank" rel="noopener noreferrer">claude</a>, <a href="https://simonwillison.net/tags/agentic-engineering" target="_blank" rel="noopener noreferrer">agentic-engineering</a>, <a href="https://simonwillison.net/tags/claude-mythos-fable" target="_blank" rel="noopener noreferrer">claude-mythos-fable</a></p></div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://simonwillison.net/2026/Jul/7/sqlite-utils-4/#atom-everything" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button> <script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
