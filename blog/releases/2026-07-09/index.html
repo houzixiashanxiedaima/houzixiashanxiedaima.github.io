@@ -1,0 +1,243 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.0.5"><!-- Core SEO --><meta name="description" content="2026-07-09 GitHub Releases 日报：rclone/rclone、google-gemini/gemini-cli、imfile-io/imfile-desktop 等15个项目更新 | 首次发布 v1.74.4，包含若干改进和修复（详见 changelog） | 新增工具注册表发现功能"><meta name="keywords" content="releases, daily, automation, rclone, gemini-cli, imfile-desktop, App-Store-Connect-CLI, mise"><meta name="author" content="Release Bot"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/blog/releases/2026-07-09/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/blog/releases/2026-07-09/"><!-- Open Graph / Facebook --><meta property="og:type" content="article"><meta property="og:url" content="https://blog.yuyins.com/blog/releases/2026-07-09/"><meta property="og:title" content="GitHub Releases 日报 - 2026-07-09"><meta property="og:description" content="2026-07-09 GitHub Releases 日报：rclone/rclone、google-gemini/gemini-cli、imfile-io/imfile-desktop 等15个项目更新 | 首次发布 v1.74.4，包含若干改进和修复（详见 changelog） | 新增工具注册表发现功能"><meta property="og:image" content="https://blog.yuyins.com/images/covers/cover-2026-07-09.webp"><meta property="og:image:alt" content="2026-07-09 GitHub Releases 日报：rclone/rclone、google-gemini/gemini-cli、imfile-io/imfile-desktop 等15个项目更新 | 首次发布 v1.74.4，包含若干改进和修复（详见 changelog） | 新增工具注册表发现功能"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><meta property="article:section" content="开源追踪"><meta property="article:published_time" content="2026-07-09T08:00:00.000Z"><meta property="article:tag" content="releases"><meta property="article:tag" content="daily"><meta property="article:tag" content="automation"><meta property="article:tag" content="rclone"><meta property="article:tag" content="gemini-cli"><meta property="article:tag" content="imfile-desktop"><meta property="article:tag" content="App-Store-Connect-CLI"><meta property="article:tag" content="mise"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/blog/releases/2026-07-09/"><meta property="twitter:title" content="GitHub Releases 日报 - 2026-07-09"><meta property="twitter:description" content="2026-07-09 GitHub Releases 日报：rclone/rclone、google-gemini/gemini-cli、imfile-io/imfile-desktop 等15个项目更新 | 首次发布 v1.74.4，包含若干改进和修复（详见 changelog） | 新增工具注册表发现功能"><meta property="twitter:image" content="https://blog.yuyins.com/images/covers/cover-2026-07-09.webp"><title>GitHub Releases 日报 - 2026-07-09</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"GitHub Releases 日报 - 2026-07-09","description":"2026-07-09 GitHub Releases 日报：rclone/rclone、google-gemini/gemini-cli、imfile-io/imfile-desktop 等15个项目更新 | 首次发布 v1.74.4，包含若干改进和修复（详见 changelog） | 新增工具注册表发现功能","image":"https://blog.yuyins.com/images/covers/cover-2026-07-09.webp","datePublished":"2026-07-09T08:00:00.000Z","dateModified":"2026-07-09T08:00:00.000Z","author":{"@type":"Person","name":"Release Bot"},"publisher":{"@type":"Organization","name":"雅俗共赏","logo":{"@type":"ImageObject","url":"https://blog.yuyins.com/favicon.svg"}}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"开源追踪","item":"https://blog.yuyins.com/category/开源追踪"},{"@type":"ListItem","position":3,"name":"GitHub Releases 日报 - 2026-07-09","item":"https://blog.yuyins.com/blog/releases/2026-07-09/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><link rel="stylesheet" href="/_astro/_..B0JLgT-I.css"><link rel="stylesheet" href="/_astro/Layout.Dg50BzSv.css"><style>.tag[data-astro-cid-7t72llso]{background:color-mix(in srgb, var(--muted) 30%, transparent);color:var(--muted-foreground);border-radius:.375rem;align-items:center;gap:.25rem;padding:.125rem .5rem;font-size:.8125rem;line-height:1.5;text-decoration:none;display:inline-flex}.tag--interactive[data-astro-cid-7t72llso]{transition:background-color .2s,color .2s}.tag--interactive[data-astro-cid-7t72llso]:hover{background:color-mix(in srgb, var(--muted) 55%, transparent);color:var(--foreground)}.tag--active[data-astro-cid-7t72llso]{background:color-mix(in srgb, var(--accent) 14%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 78%, var(--foreground));font-weight:600}.tag[data-astro-cid-7t72llso]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.tags-list[data-astro-cid-cm3albtb]{flex-wrap:wrap;gap:.5rem;display:flex}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link nav-link--active" aria-current="page" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-09" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-09</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-07-09" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-07-09</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-08" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-08</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-07-08" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-07-08</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-07" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-07</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-06" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-06</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.PHDZRRIC.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <script type="module" src="/_astro/CodeCopyButton.astro_astro_type_script_index_0_lang.Cy26o95i.js"></script> <script type="module" src="/_astro/HeadingAnchor.astro_astro_type_script_index_0_lang.CacVAAhL.js"></script> <div id="image-lightbox" class="lightbox" hidden data-astro-cid-ot6ntcxl> <button id="lightbox-close" class="lightbox-close" aria-label="关闭" data-astro-cid-ot6ntcxl> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-ot6ntcxl> <line x1="18" y1="6" x2="6" y2="18" data-astro-cid-ot6ntcxl></line> <line x1="6" y1="6" x2="18" y2="18" data-astro-cid-ot6ntcxl></line> </svg> </button> <img id="lightbox-image" class="lightbox-image" src="" alt="" data-astro-cid-ot6ntcxl> </div> <script type="module" src="/_astro/ImageLightbox.astro_astro_type_script_index_0_lang.Builc05r.js"></script> <div class="blog-post-container" data-astro-cid-tldeq5d5> <article class="blog-post" data-pagefind-body data-astro-cid-tldeq5d5> <header class="article-header" data-astro-cid-tldeq5d5> <h1 data-astro-cid-tldeq5d5>GitHub Releases 日报 - 2026-07-09</h1> <div class="article-meta-row" data-astro-cid-tldeq5d5> <a href="/category/开源追踪" class="meta-category" data-astro-cid-tldeq5d5> 开源追踪 </a> <span class="meta-dot" data-astro-cid-tldeq5d5>•</span> <time datetime="2026-07-09T08:00:00.000Z" class="meta-item" data-astro-cid-tldeq5d5> 2026年7月9日 </time> <span class="meta-dot" data-astro-cid-tldeq5d5>•</span> <span class="meta-item" data-astro-cid-tldeq5d5>10 分钟阅读</span> </div> <p class="article-description" data-astro-cid-tldeq5d5>2026-07-09 GitHub Releases 日报：rclone/rclone、google-gemini/gemini-cli、imfile-io/imfile-desktop 等15个项目更新 | 首次发布 v1.74.4，包含若干改进和修复（详见 changelog） | 新增工具注册表发现功能</p> <div class="article-tags-row" data-astro-cid-tldeq5d5> <div class="tags-list" data-astro-cid-cm3albtb> <a href="/blog/tag/releases" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#releases </a><a href="/blog/tag/daily" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#daily </a><a href="/blog/tag/automation" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#automation </a><a href="/blog/tag/rclone" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#rclone </a><a href="/blog/tag/gemini-cli" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#gemini-cli </a><a href="/blog/tag/imfile-desktop" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#imfile-desktop </a><a href="/blog/tag/App-Store-Connect-CLI" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#App-Store-Connect-CLI </a><a href="/blog/tag/mise" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#mise </a> </div> </div> </header> <!-- Content --> <div class="article-content app-prose" data-astro-cid-tldeq5d5>  <h2 id="2026-07-09-更新摘要">2026-07-09 更新摘要</h2>
+<p><strong>统计信息</strong></p>
+<ul>
+<li>由 gpt-oss-120b (14), gemma-4-31b (1) 总结</li>
+<li>监控仓库: 17 个</li>
+<li>今日更新: 13 个项目 (15 个版本)</li>
+<li>生成时间: 2026-07-10 05:45:56 (北京时间)</li>
+</ul>
+<h3 id="rclonerclone-v1744-gpt-oss-120b"><a href="https://github.com/rclone/rclone/releases/tag/v1.74.4" rel="noopener noreferrer" target="_blank">rclone/rclone v1.74.4</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>首次发布 v1.74.4，包含若干改进和修复（详见 changelog）</li>
+</ul>
+<h3 id="google-geminigemini-cli-v0500-gpt-oss-120b"><a href="https://github.com/google-gemini/gemini-cli/releases/tag/v0.50.0" rel="noopener noreferrer" target="_blank">google-gemini/gemini-cli v0.50.0</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增工具注册表发现功能</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 npm ci 验证时忽略脚本、避免工作区二进制遮蔽、阻止错误的 NPM 发布并触发作业崩溃</li>
+</ul>
+<h3 id="imfile-ioimfile-desktop-v210-gpt-oss-120b"><a href="https://github.com/imfile-io/imfile-desktop/releases/tag/v2.1.0" rel="noopener noreferrer" target="_blank">imfile-io/imfile-desktop v2.1.0</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>升级依赖（electron 41.10.0、webpack-dev-server 5.2.6）</li>
+</ul>
+<h3 id="rorkaiapp-store-connect-cli-261-gpt-oss-120b"><a href="https://github.com/rorkai/App-Store-Connect-CLI/releases/tag/2.6.1" rel="noopener noreferrer" target="_blank">rorkai/App-Store-Connect-CLI 2.6.1</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>在应用墙新增 Swooni：关系追踪</li>
+<li>在应用墙新增 Capture GO - AI 与在线功能</li>
+<li>在应用墙新增 Velko：IPTV 播放器与电视指南</li>
+<li>遥测功能：发出已清理的失败参数</li>
+<li>添加元数据审批工作流</li>
+<li>升级 Go 工具链至 1.26.5</li>
+</ul>
+<h3 id="jdxmise-v202673---v202674-gpt-oss-120b"><a href="https://github.com/jdx/mise/releases" rel="noopener noreferrer" target="_blank">jdx/mise v2026.7.3 - v2026.7.4</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>mise bootstrap 与 dotfiles 正式稳定，脱离实验模式</li>
+<li>支持在 mise.run 安装脚本中跳过已存在的重新安装（MISE_INSTALL_SKIP_IF_EXISTS）</li>
+<li>安装路径检查仅针对已解析的路径，默认行为保持不变</li>
+<li>安装过程并行检测缺失版本，加速大型工具集的检测</li>
+<li>注册表 Scala 简写解析更新为官方 fork</li>
+<li>新增 Aqua Registry 包 sderosiaux/launchdeck、syntax-sh/lexicon-releases</li>
+<li>恢复 Linux arm64 glibc 兼容性，确保 arm64 tarball 可用</li>
+<li>新增插件声明系统依赖并通过 system_deps 设置控制行为，缺失依赖会在 doctor 与 bootstrap 中显示</li>
+<li>为 Homebrew Cask 引入生命周期钩子，支持预检 / 后检脚本并改进安装可靠性</li>
+<li>新增终端宽度覆盖选项，可通过 MISE_TERM_WIDTH 或 COLUMNS 强制设置输出宽度</li>
+<li>将大量工具（scala、groovy、mongodb、emsdk、teleport 等）迁移至 vfox 后端，提升注册表一致性</li>
+<li>改进源码编译工具的构建智能化，实现更高效的构建流程</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>Rust 后端在跳过安装前会查询 rustup，确保缺失组件 / 目标被重新安装</li>
+<li>task_source_files () 在使用使用参数和重新渲染脚本时恢复可用</li>
+<li>mise upgrade —minimum-release-age 不再误报 “新版本被忽略”</li>
+<li>构建时将 aarch64-unknown-linux-gnu 交叉镜像固定标签并加入 glibc 检查</li>
+<li>若干文档修复（bootstrap 页面、CLI 参考链接、样式一致性）</li>
+<li>修复升级时 mise upgrade —bump 重写锁文件条目导致平台元数据丢失的问题，现会重新锁定缺失平台信息的条目</li>
+<li>修复 Homebrew Cask 中二进制通过 pkg 安装后路径绝对路径的情况，现可正确安装并通过 caskroom 链接</li>
+<li>修复传统 vfox 插件下载位置，现存入 mise 的每工具下载目录并在安装后清理</li>
+<li>修复 Homebrew Cask Shim 未随 crate 发布导致的 cargo 验证失败</li>
+<li>文档更新：优化登录页文案和视觉</li>
+</ul>
+<h3 id="zed-industrieszed-v1100-gemma-4-31b"><a href="https://github.com/zed-industries/zed/releases/tag/v1.10.0" rel="noopener noreferrer" target="_blank">zed-industries/zed v1.10.0</a> <sup>gemma-4-31b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增 llama.cpp 作为语言模型提供商</li>
+<li>AI 代理支持排除项目规则文件以优化提交消息生成，并改进了线程摘要与标题生成</li>
+<li>OpenAI 和 OpenCode 兼容模式现支持最大推理级别 (max reasoning levels)</li>
+<li>新增 git.inline_blame.location 设置，可将当前行 blame 显示在状态栏或行内</li>
+<li>优化 Git 性能，防止多个远程操作同时启动，并改进了 diff 视图与行号颜色</li>
+<li>Go 语言新增内置类型和函数的高亮支持；Python 常量语义高亮得到改进</li>
+<li>支持 textDocument/semanticTokens 能力的动态注册</li>
+<li>协作面板新增自动观看按钮，可在通话时自动打开其他参与者的屏幕共享</li>
+<li>Vim/Helix 模式新增 z c 居中滚动及 alt-b/alt-e 语法节点跳转等快捷键</li>
+<li>新增 Markdown 预览字体大小独立设置及项目面板右键打开预览功能</li>
+<li>优化文件监听器事件批处理，提升高文件系统负载下的响应速度</li>
+<li>改进文本查找器，支持在匹配列打开文件并记忆上次查询与过滤器</li>
+<li>项目面板右键菜单新增全部展开 / 折叠选项及快捷键</li>
+<li>提升网络韧性，通过检测并丢弃陈旧 HTTP 连接来减少间歇性网络错误</li>
+<li>Windows 平台改进代理沙箱，增强对 Git 元数据的保护</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>默认禁用保存时格式化 (format-on-save)，仅对具有官方格式化程序的语言保持开启</li>
+<li>LLM 提供商、外部代理和 MCP 服务器的配置现已迁移至统一的设置编辑器中</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 Linux 终端进程跟踪导致的文件描述符泄漏及剪贴板失效问题</li>
+<li>修复 Git 仓库在文件系统强制重新扫描时被重复创建导致 UI 抖动的问题</li>
+<li>修复 MCP 服务器特定工具名称在 Anthropic/OpenAI 模型中导致错误的问题</li>
+<li>修复远程会话无法识别仅语言扩展提供的语言问题</li>
+<li>修复终端中右键与中键互换的问题</li>
+<li>修复 Markdown 表格在包含管道符的行内代码段中的渲染问题</li>
+<li>修复远程主机路径风格不同导致 “信任文件夹” 输入拒绝有效路径的问题</li>
+<li>修复多种 Code Lens 相关问题（动态注册不刷新、远程工作流不解析、折叠区域不隐藏）</li>
+<li>修复 Helix 模式在符号最后一个字符处重命名的 Bug</li>
+<li>修复远程项目重连或重启时 Git 提交消息被清除的问题</li>
+<li>修复 Linux Wayland 鼠标指针卡在加载状态的问题</li>
+<li>修复终端 copy_on_select 在点击抖动时覆盖剪贴板的问题</li>
+</ul>
+<h3 id="jandedobbeleeroh-my-posh-v29230-gpt-oss-120b"><a href="https://github.com/JanDeDobbeleer/oh-my-posh/releases/tag/v29.23.0" rel="noopener noreferrer" target="_blank">JanDeDobbeleer/oh-my-posh v29.23.0</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增 DVC 源代码控制支持的段</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复流式模式下在 shell 退出时未停止服务守护进程的问题</li>
+</ul>
+<h3 id="anomalycoopencode-v11716---v11717-gpt-oss-120b"><a href="https://github.com/anomalyco/opencode/releases" rel="noopener noreferrer" target="_blank">anomalyco/opencode v1.17.16 - v1.17.17</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增可关闭的标签页介绍弹窗，并刷新帮助入口</li>
+<li>更新子代理任务行，使其更贴近 v2 会话设计</li>
+<li>重新设计 v2 会话中的恢复停靠栏，以便更清晰的恢复操作</li>
+<li>新增 v2 免费模型选择器，可更快访问更多提供商</li>
+<li>新增在主页屏幕上打开项目所在文件夹的操作</li>
+<li>新增 Composer 添加菜单，可添加文件、命令、上下文和 Shell 模式且不丢失草稿文本</li>
+<li>新增在没有外部提供者时的新会话提供者设置提示</li>
+<li>新增记住审查面板模式和每会话选中文件的功能</li>
+<li>新增侧边面板的内联文件浏览标签，用于打开和预览文件</li>
+<li>更新桌面端翻译</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>改进 Meta 模型在推理变体和提供商请求中的处理</li>
+<li>修复模型选择器标签中下伸部分被截断的问题</li>
+<li>修复 Grok 模型推理变体暴露问题和 xAI 提示缓存路由及 PDF 支持</li>
+<li>修复 UI 相关问题：宽屏审查面板宽度、隐藏会话面板挂载导致的侧边栏错误、加载大补丁完整差异、去除命令面板首次闪烁、通过标签路由新会话快捷键…</li>
+</ul>
+<h3 id="lwouisalt-tab-macos-v1143-gpt-oss-120b"><a href="https://github.com/lwouis/alt-tab-macos/releases/tag/v11.4.3" rel="noopener noreferrer" target="_blank">lwouis/alt-tab-macos v11.4.3</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复激活应用时切换器中的窗口顺序混乱问题</li>
+<li>修复在非 Applications 文件夹启动时的罕见崩溃</li>
+<li>修复启动时的随机性崩溃</li>
+<li>修复显示后切换器内容闪烁的问题</li>
+<li>修复切换标签页后窗口顺序错误的问题</li>
+</ul>
+<h3 id="2dustv2rayn-7233-gpt-oss-120b"><a href="https://github.com/2dust/v2rayN/releases/tag/7.23.3" rel="noopener noreferrer" target="_blank">2dust/v2rayN 7.23.3</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>添加 Windows x86 发布文件</li>
+<li>新增印尼语 UI 本地化</li>
+<li>添加 GPG 密钥文件</li>
+<li>新增 Hysteria Realm 与 Gecko 支持</li>
+<li>新增全局分片 Fragment 设置</li>
+<li>在 Linux 与 macOS 上支持 xray tun（需最新版 core）</li>
+<li>启用 sing-box tun + xray core 时添加等待 core 就绪</li>
+</ul>
+<p><strong>安全修复</strong></p>
+<ul>
+<li>修复内置下载器导致的 MITM 中间人攻击安全漏洞，需立即升级</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>提升最低系统 / 运行时要求，可能需要用户升级环境</li>
+</ul>
+<h3 id="zephyrusozashboard-v3140-gpt-oss-120b"><a href="https://github.com/Zephyruso/zashboard/releases/tag/v3.14.0" rel="noopener noreferrer" target="_blank">Zephyruso/zashboard v3.14.0</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>实现确认对话框用于设置覆盖，并新增 ConfirmDialogHost 组件</li>
+<li>为代理组链添加展开按钮和 drill‑in 模态框</li>
+<li>重构图表数据处理以支持 HistoryPoint 结构，优化工具提示格式</li>
+<li>在设置同步和导入时加入确认对话框</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>若干布局与样式修复（调整 proxy‑group‑chain‑modal 高度类、移除 checkbox 的 toggle‑sm 类）</li>
+</ul>
+<h3 id="code-yeongyuoh-my-openagent-v4161-gpt-oss-120b"><a href="https://github.com/code-yeongyu/oh-my-openagent/releases/tag/v4.16.1" rel="noopener noreferrer" target="_blank">code-yeongyu/oh-my-openagent v4.16.1</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增 TUI 证据渲染，使用 xterm.js + node-pty 替代 tmux</li>
+<li>新增共享技能原语展示门并加入 UI/UX 数据库检查</li>
+<li>将 designpowers lane‑c 与可访问性 / 债务模式合并到默认前端流程</li>
+<li>新增前端绿地研究记录交付合约</li>
+<li>生成 omo.schema.json 带新鲜度门</li>
+<li>升级发布流水线，npm 锁定至 11.18.0 并硬化发布过程</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>重命名过渡更新，影响包检测、插件 / 配置兼容性及安装流程，需要迁移</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 ulw-loop 内存泄漏、fork‑bomb、账本膨胀及子进程卡住问题</li>
+<li>修复 Bun 运行时回归并通过 shim 正确路由调用</li>
+<li>修复 codex 中的钩子状态显示、Git Bash 钩子限制等若干错误</li>
+<li>修复运行时回退逻辑中的内部会话中止和子代理停滞问题</li>
+<li>修复 CLI 在插件版本不匹配时的警告</li>
+<li>修复 start‑work 模板中 Atlas 名称错误</li>
+<li>修复共享技能模块的指针、设计系统门控等问题</li>
+<li>若干文档、测试及 CI 稳定性修复</li>
+</ul>
+<h3 id="daeuniversedae-v200-gpt-oss-120b"><a href="https://github.com/daeuniverse/dae/releases/tag/v2.0.0" rel="noopener noreferrer" target="_blank">daeuniverse/dae v2.0.0</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>改进日志时间戳格式，使用 ForceFormatting</li>
+<li>增强控制平面功能并改进 CI 工作流</li>
+<li>为 Arch Linux 添加官方仓库安装指南</li>
+<li>支持 GORISCV64 变体的构建</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 GCC 15 上的 “bad CO-RE relocation” 问题，禁用不必要的 UAPI CO-RE</li>
+<li>更新 Dockerfile 中的 Go 版本至 1.26</li>
+<li>恢复 cmdline 解析以获取准确的进程名称</li>
+<li>当 bpf_get_current_task 不可用时回退使用 bpf_get_current_comm</li>
+<li>添加 IPv4 UDP 回退、出站、跟踪和连接状态的后续处理</li>
+<li>若干文档修复（修复贡献说明过时）</li>
+</ul>
+<h2 id="今日播客更新">今日播客更新</h2>
+<ul>
+<li><strong>三个火呛手</strong>: <a href="https://www.xiaoyuzhoufm.com/episode/6a4de8fe3fb7233cbf459a51?utm_source=rss" rel="noopener noreferrer" target="_blank">Vol.148 网红分两种：“网红” 和 “网红 er”</a></li>
+</ul>
+<p><strong>帮助我们改进</strong></p>
+<p>对今日摘要质量有建议？欢迎反馈！</p>
+<ul>
+<li><a href="https://github.com/houzixiashanxiedaima/AstroBlog/issues/new" rel="noopener noreferrer" target="_blank">反馈摘要质量</a></li>
+<li><a href="https://github.com/houzixiashanxiedaima/AstroBlog/issues/new" rel="noopener noreferrer" target="_blank">评价今日日报</a></li>
+</ul>
+<p>您的反馈将帮助我们优化 AI Prompt, 提升摘要准确性</p>  </div> <!-- Footer navigation --> <footer class="article-footer" data-astro-cid-tldeq5d5> <nav class="post-navigation" aria-label="Article navigation" data-astro-cid-tldeq5d5> <div class="nav-prev" data-astro-cid-tldeq5d5> <a href="/blog/ide-updates/2026-07-09" class="nav-link" data-astro-prefetch data-astro-cid-tldeq5d5> <span class="nav-label" data-astro-cid-tldeq5d5><span class="arrow-char" data-astro-cid-tldeq5d5>←</span> 上一篇</span> <span class="nav-title" data-astro-cid-tldeq5d5>IDE / SDK 更新 - 2026-07-09</span> </a> </div> <div class="nav-next" data-astro-cid-tldeq5d5>  </div> </nav> <div class="back-to-list" data-astro-cid-tldeq5d5> <a href="/" class="back-link" data-astro-prefetch data-astro-cid-tldeq5d5>← 返回文章列表</a> </div> </footer> </article> <!-- Table of Contents --> <aside class="toc-aside" data-astro-cid-tldeq5d5> <nav class="toc" aria-label="目录导航" data-astro-cid-p33bl5ka> <div class="toc-header-action" data-astro-cid-p33bl5ka> <a href="/" class="toc-action-link" data-astro-prefetch data-astro-cid-p33bl5ka> <span class="toc-action-icon" data-astro-cid-p33bl5ka>←</span> <span class="toc-action-text" data-astro-cid-p33bl5ka>返回列表</span> </a> </div> <ul class="toc-list" data-astro-cid-p33bl5ka> <li class="toc-item toc-item-3" data-slug="rclonerclone-v1744-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#rclonerclone-v1744-gpt-oss-120b" class="toc-link" data-slug="rclonerclone-v1744-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>rclone/rclone v1.74.4 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="google-geminigemini-cli-v0500-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#google-geminigemini-cli-v0500-gpt-oss-120b" class="toc-link" data-slug="google-geminigemini-cli-v0500-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>google-gemini/gemini-cli v0.50.0 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="imfile-ioimfile-desktop-v210-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#imfile-ioimfile-desktop-v210-gpt-oss-120b" class="toc-link" data-slug="imfile-ioimfile-desktop-v210-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>imfile-io/imfile-desktop v2.1.0 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="rorkaiapp-store-connect-cli-261-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#rorkaiapp-store-connect-cli-261-gpt-oss-120b" class="toc-link" data-slug="rorkaiapp-store-connect-cli-261-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>rorkai/App-Store-Connect-CLI 2.6.1 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="jdxmise-v202673---v202674-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#jdxmise-v202673---v202674-gpt-oss-120b" class="toc-link" data-slug="jdxmise-v202673---v202674-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>jdx/mise v2026.7.3 - v2026.7.4 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="zed-industrieszed-v1100-gemma-4-31b" data-astro-cid-p33bl5ka> <a href="#zed-industrieszed-v1100-gemma-4-31b" class="toc-link" data-slug="zed-industrieszed-v1100-gemma-4-31b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>zed-industries/zed v1.10.0 gemma-4-31b</span> </a> </li><li class="toc-item toc-item-3" data-slug="jandedobbeleeroh-my-posh-v29230-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#jandedobbeleeroh-my-posh-v29230-gpt-oss-120b" class="toc-link" data-slug="jandedobbeleeroh-my-posh-v29230-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>JanDeDobbeleer/oh-my-posh v29.23.0 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="anomalycoopencode-v11716---v11717-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#anomalycoopencode-v11716---v11717-gpt-oss-120b" class="toc-link" data-slug="anomalycoopencode-v11716---v11717-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>anomalyco/opencode v1.17.16 - v1.17.17 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="lwouisalt-tab-macos-v1143-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#lwouisalt-tab-macos-v1143-gpt-oss-120b" class="toc-link" data-slug="lwouisalt-tab-macos-v1143-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>lwouis/alt-tab-macos v11.4.3 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="2dustv2rayn-7233-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#2dustv2rayn-7233-gpt-oss-120b" class="toc-link" data-slug="2dustv2rayn-7233-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>2dust/v2rayN 7.23.3 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="zephyrusozashboard-v3140-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#zephyrusozashboard-v3140-gpt-oss-120b" class="toc-link" data-slug="zephyrusozashboard-v3140-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>Zephyruso/zashboard v3.14.0 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="code-yeongyuoh-my-openagent-v4161-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#code-yeongyuoh-my-openagent-v4161-gpt-oss-120b" class="toc-link" data-slug="code-yeongyuoh-my-openagent-v4161-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>code-yeongyu/oh-my-openagent v4.16.1 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="daeuniversedae-v200-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#daeuniversedae-v200-gpt-oss-120b" class="toc-link" data-slug="daeuniversedae-v200-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>daeuniverse/dae v2.0.0 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-2" data-slug="今日播客更新" data-astro-cid-p33bl5ka> <a href="#今日播客更新" class="toc-link" data-slug="今日播客更新" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>今日播客更新</span> </a> </li> </ul> <div class="toc-footer-action" data-astro-cid-p33bl5ka> <button type="button" class="toc-action-link" id="toc-back-to-top" aria-label="返回顶部" data-astro-cid-p33bl5ka> <span class="toc-action-icon" data-astro-cid-p33bl5ka>↑</span> <span class="toc-action-text" data-astro-cid-p33bl5ka>返回顶部</span> </button> </div> </nav> <script type="module" src="/_astro/TableOfContents.astro_astro_type_script_index_0_lang.0eCSG6rF.js"></script> </aside> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button> <script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
