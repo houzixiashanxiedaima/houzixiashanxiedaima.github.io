@@ -14,11 +14,11 @@
 
 <p>I scroll my own site a lot (probably more than is healthy) so why hadn't I noticed this bug?</p>
 
-<p>Because I scroll with my right thumb and the bug reporter uses their left. The "reply" link which was being triggered is on the left side of the page. A bug which won't be triggered by righteous people but infuriating to those who will surely be left behind after The Rapture™.</p>
+<p>Because I scroll on my phone's touchscreen with my right thumb and the bug reporter uses their left. The "reply" link which was being triggered is on the left side of the page. A bug which won't be triggered by righteous people but infuriating to those who will surely be left behind after The Rapture™.</p>
 
 <p>To be fair, <a href="https://core.trac.wordpress.org/ticket/46713" target="_blank" rel="noopener noreferrer">this bug was reported seven years ago</a> - but I guess the WordPress team have been too busy cleaning up after their mad God-Emperor to take a look at it.</p>
 
-<p>Back in 2017, a developer <a href="https://github.com/WordPress/wordpress-develop/commit/14dd35e62e1325ca1c6caef0a8623ce3f02d7da9" target="_blank" rel="noopener noreferrer">added a <code>touchstart</code> listener to link clicks</a>. I don't really understand why. At one point in history, browsers couldn't be sure if a touch event was the start of a <code>click</code> or a double-tap to zoom. So firing an even when a touch occurred on a link sort of made sense to avoid a 300ms delay.</p>
+<p>Back in 2017, a developer <a href="https://github.com/WordPress/wordpress-develop/commit/14dd35e62e1325ca1c6caef0a8623ce3f02d7da9" target="_blank" rel="noopener noreferrer">added a <code>touchstart</code> listener to link clicks</a>. I don't really understand why. At one point in history, browsers couldn't be sure if a touch event was the start of a <code>click</code> or a double-tap to zoom. So firing an event when a touch occurred on a link sort of made sense to avoid a 300ms delay.</p>
 
 <p>But that hadn't been the case for several years - <a href="https://developer.chrome.com/blog/300ms-tap-delay-gone-away" target="_blank" rel="noopener noreferrer">as this 2013 blog post makes clear</a>.  Even in 2015 <a href="https://github.com/ftlabs/fastclick" target="_blank" rel="noopener noreferrer">it was no longer an issue</a>.</p>
 
