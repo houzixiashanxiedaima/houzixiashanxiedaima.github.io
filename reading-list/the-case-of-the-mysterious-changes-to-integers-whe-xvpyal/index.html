@@ -1,0 +1,186 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.0.5"><!-- Core SEO --><meta name="description" content="Decoding where those integer came from.
+The post The case of the mysterious changes to integers when there shouldn&amp;#8217;t have been any code generation effect appeared first on The Old New Thing.
+"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/the-case-of-the-mysterious-changes-to-integers-whe-xvpyal/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/the-case-of-the-mysterious-changes-to-integers-whe-xvpyal/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/the-case-of-the-mysterious-changes-to-integers-whe-xvpyal/"><meta property="og:title" content="The case of the mysterious changes to integers when there shouldn’t have been any code generation effect"><meta property="og:description" content="Decoding where those integer came from.
+The post The case of the mysterious changes to integers when there shouldn&amp;#8217;t have been any code generation effect appeared first on The Old New Thing.
+"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="Decoding where those integer came from.
+The post The case of the mysterious changes to integers when there shouldn&amp;#8217;t have been any code generation effect appeared first on The Old New Thing.
+"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/the-case-of-the-mysterious-changes-to-integers-whe-xvpyal/"><meta property="twitter:title" content="The case of the mysterious changes to integers when there shouldn’t have been any code generation effect"><meta property="twitter:description" content="Decoding where those integer came from.
+The post The case of the mysterious changes to integers when there shouldn&amp;#8217;t have been any code generation effect appeared first on The Old New Thing.
+"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>The case of the mysterious changes to integers when there shouldn’t have been any code generation effect</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"The case of the mysterious changes to integers when there shouldn’t have been any code generation effect","item":"https://blog.yuyins.com/reading-list/the-case-of-the-mysterious-changes-to-integers-whe-xvpyal/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-k2qn5omv]{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip[data-astro-cid-k2qn5omv]:after{content:none!important}.chip--sm[data-astro-cid-k2qn5omv]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-k2qn5omv]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-k2qn5omv]{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}.chip--interactive[data-astro-cid-k2qn5omv]:hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}.chip--active[data-astro-cid-k2qn5omv],.chip[data-astro-cid-k2qn5omv].active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed[data-astro-cid-k2qn5omv]{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip[data-astro-cid-k2qn5omv]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.BkUna2jb.css"><style>.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem;font-style:italic}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;font-family:monospace;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-10" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-10</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-07-10" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-07-10</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-09" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-09</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-07-09" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-07-09</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-08" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-08</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-07-08" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-07-08</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.PHDZRRIC.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>The case of the mysterious changes to integers when there shouldn’t have been any code generation effect</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://devblogs.microsoft.com/oldnewthing" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag" data-astro-cid-k2qn5omv="true"> devblogs.microsoft.com/oldnewthing </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年7月10日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-veycvx62><p>A colleague made some code changes that should not have had any effect on the generated binary. Specifically, they migrated from <a href="https://github.com/tpn/winsdk-10/blob/9b69fd26ac0c7d0b83d378dba01080e93349c2ed/Include/10.0.16299.0/km/ndis.h#L1153" target="_blank" rel="noopener noreferrer"> the <code>NDIS_<wbr></wbr>STRING_<wbr></wbr>CONST</code> macro</a> to <a href="https://github.com/tpn/winsdk-10/blob/9b69fd26ac0c7d0b83d378dba01080e93349c2ed/Include/10.0.14393.0/shared/ntdef.h#L2037" target="_blank" rel="noopener noreferrer"> the more type-safe <code>RTL_<wbr></wbr>CONSTANT_<wbr></wbr>STRING</code> macro</a>. The two macros produce the same results at the end of the day, so the expectation was that this would not result in any change to the binary.</p>
+<p>But they found a change to the binary.</p>
+<p>Specifically, four functions changed, and what is particularly strange is that none of them involved the macro changes. Three of the functions are in one source file, and the fourth is in a source file that wasn’t even touched!</p>
+<p>The changes looked like this:</p>
+<table>
+<tbody>
+<tr>
+<th>Before</th>
+<th>After</th>
+</tr>
+<tr>
+<td>contoso!Evt­Wdf­Widget­Context­Cleanup</td>
+</tr>
+<tr>
+<td>mov rax, [contoso!WdfFunctions_01031]<br />
+lea rcx, [??_C@__0DK@MPBCIIPN@...]<br />
+mov [rsp+20h], rcx<br />
+mov r9d, <span>62Bh</span><br />
+mov r8d, 52467443h<br />
+mov rcx, [contoso!WdfDriverGlobals]<br />
+mov rdx, rbx<br />
+mov rax, [rax+670h]<br />
+call __guard_dispatch_call</td>
+<td>mov rax, [contoso!WdfFunctions_01031]<br />
+lea rcx, [??_C@__0DK@MPBCIIPN@...]<br />
+mov [rsp+20h], rcx<br />
+mov r9d, <span>62Ah</span><br />
+mov r8d, 52467443h<br />
+mov rcx, [contoso!WdfDriverGlobals]<br />
+mov rdx, rbx<br />
+mov rax, [rax+670h]<br />
+call __guard_dispatch_call</td>
+</tr>
+<tr>
+<td>contoso!Function2</td>
+</tr>
+<tr>
+<td>mov rax, [contoso!WdfFunctions_01031]<br />
+lea rcx, [??_C@__0DK@MPBCIIPN@...]<br />
+mov [rsp+20h], rcx<br />
+mov r9d, <span>616h</span><br />
+mov rcx, [contoso!WdfDriverGlobals]<br />
+mov r8d, 52467443h<br />
+mov rdx, rdi<br />
+mov rax, [rax+668h]<br />
+call __guard_dispatch_call</td>
+<td>mov rax, [contoso!WdfFunctions_01031]<br />
+lea rcx, [??_C@__0DK@MPBCIIPN@...]<br />
+mov [rsp+20h], rcx<br />
+mov r9d, <span>615h</span><br />
+mov rcx, [contoso!WdfDriverGlobals]<br />
+mov r8d, 52467443h<br />
+mov rdx, rdi<br />
+mov rax, [rax+668h]<br />
+call __guard_dispatch_call</td>
+</tr>
+<tr>
+<td>contoso!Function3</td>
+</tr>
+<tr>
+<td>mov rax, [contoso!WdfFunctions_01031]<br />
+lea rcx, [??_C@__0DK@MPBCIIPN@...]<br />
+mov [r11-20h], rcx<br />
+xor r8d, r8d<br />
+mov rcx, [contoso!WdfDriverGlobals]<br />
+mov r9d, <span>35Dh</span><br />
+mov rax, [rax+0DB0h]<br />
+call __guard_dispatch_call</td>
+<td>mov rax, [contoso!WdfFunctions_01031]<br />
+lea rcx, [??_C@__0DK@MPBCIIPN@...]<br />
+mov [r11-20h], rcx<br />
+xor r8d, r8d<br />
+mov rcx, [contoso!WdfDriverGlobals]<br />
+mov r9d, <span>35Ch</span><br />
+mov rax, [rax+0DB0h]<br />
+call __guard_dispatch_call</td>
+</tr>
+<tr>
+<td>contoso!Function4</td>
+</tr>
+<tr>
+<td>mov rax, [contoso!WdfFunctions_01031]<br />
+lea rcx, [??_C@__0DK@MPBCIIPN@...]<br />
+mov rdx, [rbp+8]<br />
+mov r9d, <span>377h</span><br />
+mov [rsp+20h], rcx<br />
+mov r8d, 49507443h<br />
+mov rcx, [contoso!WdfDriverGlobals]<br />
+mov rax, [rax+0DB8h]<br />
+call __guard_dispatch_call</td>
+<td>mov rax, [contoso!WdfFunctions_01031]<br />
+lea rcx, [??_C@__0DK@MPBCIIPN@...]<br />
+mov rdx, [rbp+8]<br />
+mov r9d, <span>376h</span><br />
+mov [rsp+20h], rcx<br />
+mov r8d, 49507443h<br />
+mov rcx, [contoso!WdfDriverGlobals]<br />
+mov rax, [rax+0DB8h]<br />
+call __guard_dispatch_call</td>
+</tr>
+</tbody>
+</table>
+<p>In all of the cases, the change is that a single integer changed to a value one smaller.</p>
+<p>My colleague asked an LLM to explain this change, and it suggested that the changes were related to control flow guard metadata. Does this make sense?</p>
+<p>It didn’t make sense to me, on two points. First, for the guard dispatch call, the only parameter to control flow guard is the rax register, which is the function being checked. All the other registers contain the parameters to the called function. Since the changes are to the r9d register, they are not related to control flow guard.</p>
+<p>Second, the control flow guard metadata is not stored in code. It’s stored <a href="https://devblogs.microsoft.com/oldnewthing/20251029-00/?p=111738" target="_blank" rel="noopener noreferrer"> as a data block inside the binary</a>.</p>
+<p>So what are we seeing?</p>
+<p>I took a look a <code>Evt­Wdf­Widget­Context­Cleanup</code>.</p>
+<pre>void EvtWdfWidgetContextCleanup(_In_ WDFOBJECT Object)
+{
+    auto widgetContext = GetContextFromWidgetHandle(Object);
+    if (widgetContext-&gt;NeedsDereference)
+    {
+        widgetContext-&gt;NeedsDereference = FALSE;
+        WdfObjectDereferenceWithTag(Object, CONTOSO_WIDGET_TAG);
+    }
+}
+</pre>
+<p>The compiler points to the <code>Wdf­Object­Dereference­With­Tag</code> as the location of the change. And we see that <a href="https://github.com/microsoft/Windows-Driver-Frameworks/blob/b6191d9543441329154da32f7ab9bdd97228dd3c/src/publicinc/wdf/kmdf/1.31/wdfobject.h#L848-L849" target="_blank" rel="noopener noreferrer"> it is defined as a macro</a>:</p>
+<pre>#define WdfObjectDereferenceWithTag(Handle, Tag) \
+        WdfObjectDereferenceActual(Handle, Tag, __LINE__, __FILE__)
+</pre>
+<p>which is itself <a href="https://github.com/microsoft/Windows-Driver-Frameworks/blob/b6191d9543441329154da32f7ab9bdd97228dd3c/src/publicinc/wdf/kmdf/1.31/wdfobject.h#L701-L715" target="_blank" rel="noopener noreferrer"> an inline function: </a></p>
+<pre>_IRQL_requires_max_(DISPATCH_LEVEL)
+VOID
+FORCEINLINE
+WdfObjectReferenceActual(
+    _In_
+    WDFOBJECT Handle,
+    _In_opt_
+    PVOID Tag,
+    _In_
+    LONG Line,
+    _In_z_
+    PCCH File
+    )
+{
+    ((PFN_WDFOBJECTREFERENCEACTUAL) WdfFunctions[WdfObjectReferenceActualTableIndex])
+        (WdfDriverGlobals, Handle, Tag, Line, File);
+}
+</pre>
+<p>The last little detail is that <a href="https://github.com/microsoft/Windows-Driver-Frameworks/blob/b6191d9543441329154da32f7ab9bdd97228dd3c/src/publicinc/wdf/umdf/1.31/wdf.h#L60" target="_blank" rel="noopener noreferrer"> <code>WdfFunctions</code> is a macro that expands to <code>WdfFunctions_01031</code></a>. The WDF header files give each version a unique name so that mismatched versions lead to a linker error rather than undefined behavior at runtime.</p>
+<p>Now we can see how this code maps to the compiler output.</p>
+<pre>    mov rax, [contoso!WdfFunctions_01031]   ; WdfFunctions
+    lea rcx, [??_C@__0DK@MPBCIIPN@...]      ; Address of something
+    mov [rsp+20h], rcx                      ; is the File parameter
+    mov r9d, 62Bh                           ; Line parameter
+    mov r8d, 52467443h                      ; Tag parameter
+    mov rcx, [contoso!WdfDriverGlobals]     ; hard-coded parameter
+    mov rdx, rbx                            ; Handle parameter
+    mov rax, [rax+670h]                     ; Load the function pointer
+    call __guard_dispatch_call              ; Validate and call¹
+</pre>
+<p>So the value that changed is the <i>line number</i>.</p>
+<p>I went back to the pull request and observed that the pull requested deleted a line from the source file.</p>
+<pre>#include &lt;strsafe.h&gt;
+<span>#include "stringutils.h"</span>
+</pre>
+<p>Part of the pull request included deleting the no-longer-needed header because it contained a private definition of the <code>NDIS_<wbr></wbr>STRING_<wbr></wbr>CONST</code> macro, which the code no longer uses.</p>
+<p>Deleting a line from the source file causes all the line numbers to shift by one!</p>
+<p>So what they were seeing was just a change to the line numbers. No change in functionality.</p>
+<p>If they really wanted to make this a “no binary effect” change, they could replace the <code>#include "stringutils.h</code> with a comment or just leave it as a blank line.</p>
+<p>Or they could just accept that line numbers can change when you change lines.</p>
+<p><b>Bonus chatter</b>: But wait, I said that three of the changes were in one file, the one with the deleted line, but a fourth was in a file that didn’t change at all. What’s that about?</p>
+<p>The fourth function contained a call to a function in the modified file, and link-time code generation decided to inline that call. The changed line number propagated into the inline function and resulted in a code generation change in a file that wasn’t even affected by the pull request.</p>
+<p>¹ Recall that <a href="https://devblogs.microsoft.com/oldnewthing/20260708-00/?p=112510" target="_blank" rel="noopener noreferrer"> in the validate-and-call pattern</a>, the function pointer is passed in the <code>rax</code> register, and everthing else is set up as if you were calling the function yourself.</p>
+<p>The post <a href="https://devblogs.microsoft.com/oldnewthing/20260710-00/?p=112514" target="_blank" rel="noopener noreferrer">The case of the mysterious changes to integers when there shouldn’t have been any code generation effect</a> appeared first on <a href="https://devblogs.microsoft.com/oldnewthing" target="_blank" rel="noopener noreferrer">The Old New Thing</a>.</p>
+</div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://devblogs.microsoft.com/oldnewthing/20260710-00/?p=112514" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button> <script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
