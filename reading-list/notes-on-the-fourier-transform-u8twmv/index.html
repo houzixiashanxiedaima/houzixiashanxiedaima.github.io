@@ -1,0 +1,436 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.0.5"><!-- Core SEO --><meta name="description" content="The Fourier series is a great tool for analyzing periodic functions. But
+what about functions that don’t repeat? We’ve
+seen
+that we can compute Fourier series for a non-periodic function defined
+on a "><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/notes-on-the-fourier-transform-u8twmv/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/notes-on-the-fourier-transform-u8twmv/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/notes-on-the-fourier-transform-u8twmv/"><meta property="og:title" content="Notes on the Fourier Transform"><meta property="og:description" content="The Fourier series is a great tool for analyzing periodic functions. But
+what about functions that don’t repeat? We’ve
+seen
+that we can compute Fourier series for a non-periodic function defined
+on a "><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="The Fourier series is a great tool for analyzing periodic functions. But
+what about functions that don’t repeat? We’ve
+seen
+that we can compute Fourier series for a non-periodic function defined
+on a "><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/notes-on-the-fourier-transform-u8twmv/"><meta property="twitter:title" content="Notes on the Fourier Transform"><meta property="twitter:description" content="The Fourier series is a great tool for analyzing periodic functions. But
+what about functions that don’t repeat? We’ve
+seen
+that we can compute Fourier series for a non-periodic function defined
+on a "><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Notes on the Fourier Transform</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Notes on the Fourier Transform","item":"https://blog.yuyins.com/reading-list/notes-on-the-fourier-transform-u8twmv/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-k2qn5omv]{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip[data-astro-cid-k2qn5omv]:after{content:none!important}.chip--sm[data-astro-cid-k2qn5omv]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-k2qn5omv]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-k2qn5omv]{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}.chip--interactive[data-astro-cid-k2qn5omv]:hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}.chip--active[data-astro-cid-k2qn5omv],.chip[data-astro-cid-k2qn5omv].active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed[data-astro-cid-k2qn5omv]{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip[data-astro-cid-k2qn5omv]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.AeWgxE49.css"><style>.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem;font-style:italic}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;font-family:monospace;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-07-16" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-07-16</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-15" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-15</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-07-15" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-07-15</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-14" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-14</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-07-14" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-07-14</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-13" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-13</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.PHDZRRIC.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>Notes on the Fourier Transform</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://eli.thegreenplace.net" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag" data-astro-cid-k2qn5omv="true"> eli.thegreenplace.net </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年7月15日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-veycvx62><p>The Fourier series is a great tool for analyzing periodic functions. But
+what about functions that don’t repeat? <a href="https://eli.thegreenplace.net/2026/notes-on-fourier-series/" target="_blank" rel="noopener noreferrer">We’ve
+seen</a>
+that we can compute Fourier series for a non-periodic function defined
+on a finite interval, as long as we don’t care about its behavior beyond
+that interval.</p>
+<p>Let’s extend this idea to functions that <em>never</em> repeat; that is,
+non-periodic functions defined on the interval (-\infty,\infty).</p>
+<div>
+<h2>Visualizing Fourier series for non-repeating functions</h2>
+<p>To motivate the subject ahead, let’s look back at the example used in
+the earlier <a href="https://eli.thegreenplace.net/2026/notes-on-fourier-series/" target="_blank" rel="noopener noreferrer">post about Fourier
+series</a>:</p>
+\[t(x)=
+\begin{cases}
+    x     &amp;  0 \leq x \leq 1 \\
+    2-x   &amp;  1 &lt; x \leq 2  \\
+\end{cases}\]
+<p>With an odd extension into [-2,0]. In that post, to make the
+Fourier series work, we assumed t(x) keeps repeating with a
+period 2L=4 on the entire x axis. Here, let’s face the
+reality that it does not - in fact - repeat, and observe how our Fourier
+series work out.</p>
+<p>Recall that the Fourier series approximating t(x) are the sine
+series (since it’s an odd function):</p>
+\[t(x)=\frac{8}{\pi^2}\bigg[ sin\frac{\pi x}{2}-\frac{1}{3^2} sin\frac{3\pi x}{2}+\frac{1}{5^2}sin\frac{5\pi x}{2}-\cdots\bigg]\]
+<p>The following visualization is interactive. By default, it shows
+t(x) (with its odd extension) and no Fourier series
+approximation. We’ll proceed by a series of steps and observe the
+outcome:</p>
+<div>
+  
+
+  <div>
+    <div>
+      <div>
+        n (terms in the Fourier series)
+        
+      </div>
+
+      <div>
+        L
+        
+      </div>
+
+      <div>
+        x min
+        
+      </div>
+
+      <div>
+        x max
+        
+      </div>
+    </div>
+  </div>
+
+  
+</div><p><strong>Step 1</strong>: set <img alt="n" src="https://eli.thegreenplace.net/images/math/d1854cae891ec7b29161ccaf79a24b00c274bdaa.png" /> to some non-zero number; already at 3, the
+approximation is very good.</p>
+<p>The frequency spacing is \frac{\pi}{L} (this is the coefficient
+of x in the sines). Note that the Fourier series repeats every
+2L, as expected.</p>
+<p><strong>Step 2</strong>: increase L to 6. This means our series are
+constructed assuming t(x) has a period of 12, not 4. Note how
+the Fourier series look now - they repeat every 12, and they don’t match
+t(x) as well as before. We can increase <img alt="n" src="https://eli.thegreenplace.net/images/math/d1854cae891ec7b29161ccaf79a24b00c274bdaa.png" /> to a higher
+number to make the match better. As L grows, the spacing between
+adjacent frequencies decreases.</p>
+<p><strong>Step 3</strong>: increase L to 10. We no longer see the repetitions,
+so feel free to increase the values of <em>x min</em> and <em>x max</em> until you do.
+Note again that we need to add more and more coefficients to match
+t(x) better with this larger L, and the spacing adjacent
+frequencies grows smaller.</p>
+<p>Increasing L means our function repeats at larger and larger
+intervals. The logical conclusion of this progression is to ask - what
+happens if the function <em>never</em> repeats, meaning
+L\rightarrow\infty? While not mathematically rigorous, the
+visual experiment here lets us make some conjectures: we’ll likely need
+an infinite number of coefficients for a good approximation, and
+moreover, the spacing between these coefficients will tend to zero.</p>
+<p>In other words, instead of a discrete set of coefficients, we’ll end up
+with a continuous line, or <em>function</em>. The function produced by this
+process is the Fourier transform of t(x), and the next section
+shows its mathematical derivation.</p>
+</div>
+<div>
+<h2>Fourier series with L\rightarrow\infty leading to Fourier transform</h2>
+<p>In these notes, we’ll be using the complex exponential formulation of
+Fourier series:</p>
+\[f(x)=\sum_{n=-\infty}^{\infty}C_n\cdot e^{in\pi x/L}\]
+<p>With:</p>
+\[C_n=\frac{1}{2L}\int_{-L}^{L}f(x)e^{-in\pi x/L}dx\]
+<p>We’re interested in a non-periodic <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" /> defined on the interval
+(-\infty,\infty). So we’ll be exploring the above equations for
+L\rightarrow\infty.</p>
+<p>First, let’s make a slight change of notation. Instead of writing
+formulae in terms of the period (2L), we’ll be using the n-th
+harmonic angular frequency w_n:</p>
+\[w_n=\frac{n\pi}{L}\]
+<p>So we can slightly rewrite our series as:</p>
+\[f(x)=\sum_{n=-\infty}^{\infty}C_n\cdot e^{i w_n x}=\sum_{n=-\infty}^{\infty}C_n\cdot e^{i\cdot n \Delta w x}\]
+<p>Using \Delta w as the difference between two consecutive
+frequencies:</p>
+\[\Delta w=w_n-w_{n-1}=\frac{n\pi}{L}-\frac{(n-1)\pi}{L}=\frac{\pi}{L}\]
+<p>Using this notation, C_n is expressed as:</p>
+\[C_n=\frac{\Delta w}{2\pi}\int_{-\pi/\Delta w}^{\pi/\Delta w}f(x)e^{-i\cdot n \Delta w x}dx\]
+<p>So far there are no new insights here, just some new notation. Now we’re
+going to use it to facilitate the next step.</p>
+<p>Since L\rightarrow \infty, then \Delta w\rightarrow 0.
+Let’s calculate the limit of the Fourier series representation of
+<img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" /> when \Delta w\rightarrow 0:</p>
+\[f(x)=\lim_{\Delta w\rightarrow 0}\sum_{n=-\infty}^{\infty}C_n\cdot e^{i\cdot n \Delta w x}\]
+<p>And substitute the latest C_n into this equation, changing its
+dummy integration variable from x to t to avoid
+confusion <a href="#footnote-1" target="_blank" rel="noopener noreferrer">[1]</a></p>
+\[f(x)=\lim_{\Delta w\rightarrow 0}\sum_{n=-\infty}^{\infty}\left[\frac{\Delta w}{2\pi}\int_{-\pi/\Delta w}^{\pi/\Delta w}f(t)e^{-i\cdot n \Delta w t}dt\right]\cdot e^{i\cdot n \Delta w x}\]
+<p>Reordering slightly, and also replacing n\Delta w by w_n
+in the complex exponents:</p>
+\[f(x)=\frac{1}{2\pi}\lim_{\Delta w\rightarrow 0}\sum_{n=-\infty}^{\infty}\left[\int_{-\pi/\Delta w}^{\pi/\Delta w}f(t)e^{-i\cdot w_n t}dt\right]\cdot e^{i\cdot w_n x}\Delta w\]
+<p>Looking at the limit with the sum carefully, this is a Riemann sum (see
+Appendix A)! w_n is the "sampled" version of <img alt="w" src="https://eli.thegreenplace.net/images/math/aff024fe4ab0fece4091de044c58c9ae4233383a.png" />, and
+\Delta w\rightarrow 0. We can therefore replace it by an
+integral, changing w_n to <img alt="w" src="https://eli.thegreenplace.net/images/math/aff024fe4ab0fece4091de044c58c9ae4233383a.png" /> and \Delta w to
+dw <a href="#footnote-2" target="_blank" rel="noopener noreferrer">[2]</a>:</p>
+\[f(x)=\frac{1}{2\pi}\int_{-\infty}^{\infty}\left[\int_{-\infty}^{\infty}f(t)e^{-i\cdot wt}dt\right]\cdot e^{i\cdot w x}dw\]
+<p>The inner integral is called the <em>Fourier transform</em> of <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" /> and
+denoted <a href="#footnote-3" target="_blank" rel="noopener noreferrer">[3]</a>:</p>
+\[\boxed{\hat{f}(w)=\mathcal{F}\left[f(x)\right]=\int_{-\infty}^{\infty}f(x)e^{-i\cdot wx}dx}\]
+<p>And the full equation for <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" /> is then the <em>inverse</em> Fourier
+transform:</p>
+\[\boxed{f(x)=\mathcal{F}^{-1}\left[\hat{f}(w)\right]=\frac{1}{2\pi}\int_{-\infty}^{\infty}\hat{f}(w)e^{i\cdot w x}dw}\]
+</div>
+<div>
+<h2>Example calculation of Fourier transform</h2>
+<p>Let’s take our favorite odd triangular pulse example and calculate its
+Fourier transform. The function’s mathematical definition and plot are
+shown earlier in this post. Note that we’re not extending this function
+periodically - it’s zero beyond the range [-2,2]; this is
+exactly why we need the Fourier transform here - as we’ve seen, Fourier
+series won’t do because the function they reconstruct eventually starts
+repeating.</p>
+<p>We’re looking to find:</p>
+\[\hat{t}(w)=\int_{-\infty}^{\infty}t(x)e^{-iwx}dx\]
+<p>To calculate the integral, let’s decompose the complex exponent using
+Euler’s formula:</p>
+\[\hat{t}(w)=\int_{-\infty}^{\infty}t(x)cos(wx)dx-i\int_{-\infty}^{\infty}t(x)sin(wx)dx\]
+<p>Since our t(x) is odd, the <a href="https://eli.thegreenplace.net/2025/notes-on-even-and-odd-functions/" target="_blank" rel="noopener noreferrer">first integral is
+zero</a>.
+Also t(x)sin(wx) is even, so we can write:</p>
+\[\hat{t}(w)=-2i\int_{0}^{\infty}t(x)sin(wx)dx\]
+<p>We’ve already calculated a very similar integral in the <a href="https://eli.thegreenplace.net/2026/notes-on-fourier-series/" target="_blank" rel="noopener noreferrer">post on Fourier
+series</a>,
+so let’s just skip to the result:</p>
+\[\hat{t}(w)=-2i\cdot\frac{2\cdot sin(w)-sin(2w)}{w^2}\]
+<p>The only remaining difficulty is its value at 0, which seems undefined
+at first (division by zero). However, note that as
+w\rightarrow 0, the numerator also tends to 0, so we can use
+L’Hopital’s rule (twice!) to find that:</p>
+\[\lim_{w\rightarrow 0} \hat{t}(w)=0\]
+<p>Therefore:</p>
+\[\hat{t}(w)=
+\begin{cases}
+    -2i\cdot\frac{2\cdot sin(w)-sin(2w)}{w^2}     &amp;  w\neq 0 \\
+0   &amp;  w=0  \\
+\end{cases}\]
+<p>This function is complex-valued; in fact, it’s purely imaginary. How do
+we visualize it? A common way to visualize complex-valued functions is
+by plotting their magnitude and phase separately.</p>
+<p>The magnitude of \hat{t}(w) is:</p>
+\[|\hat{t}(w)|=\sqrt{\hat{t}(w)\cdot\hat{t}(w)^*}=2\left|\frac{2\cdot sin(w)-sin(2w)}{w^2} \right|\]
+<p>Since \hat{t}(w) is purely imaginary, there are only two options
+for the phase:</p>
+<p>When the numerator is positive, we get a negative imaginary number with
+phase -\pi/2, and when the numerator is negative, we get a
+positive imaginary number with phase \pi/2. Finally, when
+\hat{t}(w)=0 (which happens at w=0, by our earlier
+analysis, but also whenever <img alt="w" src="https://eli.thegreenplace.net/images/math/aff024fe4ab0fece4091de044c58c9ae4233383a.png" /> is a whole multiple of
+\pi), the phase is undefined.</p>
+<p>Here’s the magnitude and phase of \hat{t}(w) plotted against
+<img alt="w" src="https://eli.thegreenplace.net/images/math/aff024fe4ab0fece4091de044c58c9ae4233383a.png" />:</p>
+<img alt="Magnitude and phase of the fourier transform of t(x)" src="https://eli.thegreenplace.net/images/2026/ft-triangle.png" />
+<p>It is common to talk about \hat{t}(w) as the <em>frequency domain</em>
+representation of t(x).</p>
+</div>
+<div>
+<h2>The frequency domain representation of functions</h2>
+<p>When the functions we’re working with have <em>time</em> as their domain (e.g.
+the x in t(x) represents time), which is often the case
+in the study of signals and systems, the Fourier transform can be seen
+as computing the <em>frequency domain</em> representation of the function.</p>
+<p>Here’s the Fourier transform formula again:</p>
+\[\hat{f}(w)=\mathcal{F}\left[f(x)\right]=\int_{-\infty}^{\infty}f(x)e^{-i\cdot wx}dx\]
+<p>It takes <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" /> - the <em>time domain</em> representation of a function,
+and converts it to \hat{f}(w) - a <em>frequency domain</em>
+representation. For well-behaved functions, these two representations
+are dual - each one describes the function completely, just in a
+different way.</p>
+<p>To convert back from a frequency domain representation to the time
+domain, we use the inverse Fourier transform:</p>
+\[\mathcal{F}^{-1}\left[\hat{f}(w)\right]=\frac{1}{2\pi}\int_{-\infty}^{\infty}\hat{f}(w)e^{i\cdot w x}dw\]
+<p>While a time-domain plot (t(x)) shows how a signal changes over
+time, a frequency-domain plot (\hat{t}(w)) shows how the signal
+is distributed across all possible frequencies. Moreover, as we’ve seen,
+\hat{t}(w) is complex valued. Each frequency therefore has both
+a magnitude and a phase: the magnitude tells us how strongly that
+frequency contributes, while the phase tells us how that component is
+shifted.</p>
+<p>The frequency domain is extremely useful in signal analysis; for
+example, when designing filters.</p>
+<p>The Fourier transform also has a number of properties that are very
+useful in signal analysis and processing. But first, let’s discuss what
+a "well-behaved function" means for the purpose of applying Fourier
+transforms.</p>
+</div>
+<div>
+<h2>Existence condition for the Fourier transform</h2>
+<p>The simplest existence condition for Fourier transforms is absolute
+integrability (also known as Lebesgue integrable):</p>
+\[\int_{-\infty}^{\infty}|f(x)|dx&lt;\infty\]
+<p>With this condition, \hat{f}(w) exists on the entire <img alt="w" src="https://eli.thegreenplace.net/images/math/aff024fe4ab0fece4091de044c58c9ae4233383a.png" />
+domain, is continuous and vanishes (tends to 0) as
+|w|\rightarrow\infty  <a href="#footnote-4" target="_blank" rel="noopener noreferrer">[4]</a>.</p>
+<p>While this condition is sufficient, it’s not necessary; there are less
+well-behaved functions that also have Fourier transforms defined with
+some limitations. In these notes, we’re mostly interested in
+well-behaved functions that are used in real-world engineering, so we
+won’t discuss the other cases.</p>
+<p>Another assumption commonly made for real-world functions is that they
+vanish (tend to 0) as |x|\rightarrow\infty. While this is not a
+direct outcome of absolute integrability <a href="#footnote-5" target="_blank" rel="noopener noreferrer">[5]</a>, it’s a reasonable
+assumption in engineering. After all, real-world signals have finite
+energies.</p>
+<p>Intuitively, when we also assume <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" /> is <a href="https://en.wikipedia.org/wiki/Uniform_continuity" target="_blank" rel="noopener noreferrer">uniformly
+continuous</a>, the
+assumption of vanishing at |x|\rightarrow\infty is a logical
+conclusion, because otherwise how can the total area for |f(x)|
+be finite?</p>
+<p>An important outcome of this discussion is that the Fourier transform is
+unsuitable for periodic functions. Functions that repeat at intervals
+<em>are not absolute integrable</em>. For periodic functions, we use Fourier
+series.</p>
+</div>
+<div>
+<h2>Some useful properties of Fourier transforms</h2>
+<p><strong>Linearity</strong></p>
+<p>The Fourier transform is a linear operator, because the integral is
+linear:</p>
+\[\begin{aligned}
+    \mathcal{F}\left[\alpha f(x)+\beta g(x)\right]&amp;=\int_{-\infty}^{\infty}\alpha f(x)e^{-i\cdot wx}dx+\int_{-\infty}^{\infty}\beta g(x)e^{-i\cdot wx}dx\\
+    &amp;=\alpha\int_{-\infty}^{\infty}f(x)e^{-i\cdot wx}dx+\beta\int_{-\infty}^{\infty}g(x)e^{-i\cdot wx}dx\\
+    &amp;=\alpha\mathcal{F}\left[f(x)\right]+\beta\mathcal{F}\left[g(x)\right]
+\end{aligned}\]
+<p>So is the inverse Fourier transform; it’s similarly easy to show that:</p>
+\[\mathcal{F}^{-1}\left[\alpha\hat{f}(w)+\beta\hat{g}(w)\right]=
+\alpha\mathcal{F}^{-1}\left[\hat{f}(w)\right]+\beta\mathcal{F}^{-1}\left[\hat{g}(w)\right]\]
+<p><strong>Scaling</strong></p>
+<p>If we scale the domain of a function by a constant, its transform
+changes only slightly:</p>
+\[\mathcal{F}\left[f(ax)\right]=\int_{-\infty}^{\infty}f(ax)e^{-i\cdot wx}dx\]
+<p>Let’s do the variable substitution u=ax:</p>
+\[\mathcal{F}\left[f(ax)\right]=\frac{1}{a}\int_{-\infty}^{\infty}f(u)e^{-i\cdot \frac{wu}{a}}du\]
+<p>This is the Fourier transform evaluated at \frac{w}{a}, so:</p>
+\[\mathcal{F}\left[f(ax)\right]=\frac{1}{a}\hat{f}\left(\frac{w}{a}\right)\]
+<p>There’s one small caveat here; when a is negative, the integral
+bounds should be flipped, causing a minus sign in front of the
+transform. So we can write:</p>
+\[\mathcal{F}\left[f(ax)\right]=\frac{1}{|a|}\hat{f}\left(\frac{w}{a}\right)\]
+<p>Which works for any a\ne 0.</p>
+<p>This property is intuitive when thinking about signals: suppose
+a&gt;0, then f(ax) means the signal is <em>compressed</em> in the
+time domain by a factor a. The scaling property says that the
+frequency domain is <em>expanded</em> using the same factor; in other words,
+the higher frequencies become more prominent because we need sharper
+transitions to represent the compressed signal.</p>
+<p><strong>Time shifting</strong></p>
+<p>What happens to the Fourier transform if we time-shift the input signal
+by some constant: f(x-x_0). By definition:</p>
+\[\mathcal{F}\left[f(x-x_0)\right]=\int_{-\infty}^{\infty}f(x-x_0)e^{-i\cdot wx}dx\]
+<p>Substituting u=x-x_0, we get du=dx, so:</p>
+\[\begin{aligned}
+    \mathcal{F}\left[f(x-x_0)\right]&amp;=\int_{-\infty}^{\infty}f(u)e^{-i\cdot w(u+x_0)}du\\
+    &amp;=e^{-iwx_0}\int_{-\infty}^{\infty}f(u)e^{-i\cdot wu}du\\
+    &amp;=e^{-iwx_0}\mathcal{F}\left[f(x)\right]
+\end{aligned}\]
+<p><strong>Transform of a derivative</strong></p>
+<p>An extremely useful property that’s often employed in the solution of
+partial differential equations; let’s calculate the Fourier transform of
+the derivative of <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" />:</p>
+\[\mathcal{F}\left[f'(x)\right]=\int_{-\infty}^{\infty}f'(x)e^{-i\cdot wx}dx\]
+<p>We’ll use integration by parts, where dv=f'(x) and
+u=e^{-i\cdot wx}. Therefore, v=f(x) and
+du=-iw\cdot e^{-i\cdot wx}:</p>
+\[\mathcal{F}\left[f'(x)\right]=\left[f(x)e^{-i\cdot wx}\right]^{\infty}_{-\infty}-\int_{-\infty}^{\infty}f(x)(-iw\cdot e^{-i\cdot wx})dx\]
+<p>Recall the assumption made in the "Existence condition..." section about
+<img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" /> vanishing at infinities. So the first part of the equation
+above is zero, and we’re left with:</p>
+\[\begin{aligned}
+    \mathcal{F}\left[f'(x)\right]&amp;=-\int_{-\infty}^{\infty}f(x)(-iw\cdot
+    e^{-i\cdot wx})dx\\
+    &amp;=iw\int_{-\infty}^{\infty}f(x)e^{-i\cdot wx}dx\\
+    &amp;=iw\cdot\mathcal{F}\left[f(x)\right]
+\end{aligned}\]
+<p><strong>Transform of convolution</strong></p>
+<p>The convolution between two continuous functions <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" /> and
+g(x) is defined as:</p>
+\[(f\ast g)(x)=\int_{-\infty}^{\infty}f(\xi)g(x-\xi)d\xi\]
+<p>Let’s calculate the Fourier transform of this function:</p>
+\[\begin{aligned}
+    \mathcal{F}\left[(f\ast g)(x)\right]&amp;=\int_{-\infty}^{\infty}e^{-i\cdot wx}\left[\int_{-\infty}^{\infty}f(\xi)g(x-\xi)d\xi\right]dx\\
+    &amp;=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}e^{-i\cdot wx}f(\xi)g(x-\xi)d\xi\ dx
+\end{aligned}\]
+<p>This step of combining the integrals into a double integral, as well as
+the next step (changing the order of integration) is possible due to
+<a href="https://en.wikipedia.org/wiki/Fubini%27s_theorem" target="_blank" rel="noopener noreferrer">Fubini’s theorem</a>
+and our assumption that <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" /> and g(x) are Lebesgue
+integrable.</p>
+<p>Switch order of integration:</p>
+\[\mathcal{F}\left[(f\ast g)(x)\right]=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}e^{-i\cdot wx}f(\xi)g(x-\xi)dx\ d\xi\]
+<p>Now, f(\xi) in the inner integral doesn’t depend on x,
+so we can pull it out:</p>
+\[\mathcal{F}\left[(f\ast g)(x)\right]=\int_{-\infty}^{\infty}f(\xi)\int_{-\infty}^{\infty}e^{-i\cdot wx}g(x-\xi)dx\ d\xi\]
+<p>The inner integral is just the Fourier transform of a time-shifted
+g(x-\xi), so we can write:</p>
+\[\mathcal{F}\left[(f\ast g)(x)\right]=\int_{-\infty}^{\infty}f(\xi)e^{-i\cdot w\xi}\mathcal{F}\left[g(x)\right]d\xi=\mathcal{F}\left[g(x)\right]\int_{-\infty}^{\infty}e^{-i\cdot w\xi}f(\xi)d\xi\]
+<p>And the remaining integral is the Fourier transform of <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" />, so:</p>
+\[\mathcal{F}\left[(f\ast g)(x)\right]=\mathcal{F}\left[f\right]\cdot\mathcal{F}\left[g\right]\]
+<p>Convolution in the time domain translates to multiplication in the
+frequency domain! This result is so important in signal processing that
+it’s called <em>the convolution theorem</em>.</p>
+</div>
+<div>
+<h2>Appendix A: Riemann sum and the definite integral</h2>
+<p>Suppose we have some function <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" /> and we want to know the area
+bounded between this function’s graph and the x axis in a
+certain interval [a,b]. One way to do this is to take a
+<a href="https://en.wikipedia.org/wiki/Partition_of_an_interval" target="_blank" rel="noopener noreferrer">partition</a>
+of the interval:</p>
+\[a=x_0&lt;x_1&lt;\cdots&lt;x_{n-1}&lt;x_n=b\]
+<p>And calculate the area under <img alt="f" src="https://eli.thegreenplace.net/images/math/4a0a19218e082a343a1b17e5333409af9d98f0f5.png" /> for every element of the
+partition. We can then approximate such sub-areas by rectangles, as
+follows:</p>
+<img alt="Riemann sum plot" src="https://eli.thegreenplace.net/images/2026/riemann-sum.png" />
+<p>We’ll denote the area of each rectangle as
+f(x^*_i)\cdot\Delta x:</p>
+<ul>
+<li>\Delta x=(b-a)/n is the width of one interval (assuming a
+uniform partition, but the math works just as well for non-uniform
+ones).</li>
+<li>x^*_i is some value in the interval [x_{i-1},x_i].</li>
+</ul>
+<p>There are many ways to choose which point of the interval
+[x_{i-1},x_i] to denote as x^*_i: left point
+(x_{i-1}), right point (<img alt="x_i" src="https://eli.thegreenplace.net/images/math/34e03e6559b14df9fe5a97bbd2ed10109dfebbd3.png" />), mid-point between the two
+(which is what our plot shows) or anything in between. The distinction
+doesn’t really matter for our purpose, as we will soon see.</p>
+<p>We can approximate the area under the curve of <img alt="f" src="https://eli.thegreenplace.net/images/math/4a0a19218e082a343a1b17e5333409af9d98f0f5.png" /> in the interval
+[a,b] with the <strong>Riemann sum</strong>, using a uniform partition:</p>
+\[S=\sum_{i=1}^{n}f(x^*_i)\Delta x\]
+<p>If <img alt="f" src="https://eli.thegreenplace.net/images/math/4a0a19218e082a343a1b17e5333409af9d98f0f5.png" /> is continuous on [a,b], then as
+n\rightarrow \infty:</p>
+\[S=\lim_{n\rightarrow \infty}\sum_{i=1}^{n}f(x^*_i)\Delta x=\int_{a}^{b}f(x)dx\]
+<p>This is known as the <strong>Riemann integral</strong>, or just the definite
+integral. The limit is why the exact choice of x^*_i doesn’t
+matter: as n\rightarrow\infty we have
+\Delta x\rightarrow 0, and all points within
+[x_{i-1}, x_i] are equally good.</p>
+<hr />
+<table>
+<colgroup><col></col><col></col></colgroup>
+<tbody>
+<tr><td><a href="#footnote-reference-1" target="_blank" rel="noopener noreferrer">[1]</a></td><td>Note that C_n is not a function of x; in its
+definition, x only serves as a dummy integration variable and
+can be called anything we choose. When we substitute C_n into
+the equation for <img alt="f(x)" src="https://eli.thegreenplace.net/images/math/3e03f4706048fbc6c5a252a85d066adf107fcc1f.png" />, which <em>is</em> a function of x, we
+have to be careful. Thus the renaming.</td></tr>
+</tbody>
+</table>
+<table>
+<colgroup><col></col><col></col></colgroup>
+<tbody>
+<tr><td><a href="#footnote-reference-2" target="_blank" rel="noopener noreferrer">[2]</a></td><td>Note we apply the limit; therefore, the bounds of the inner integral
+(in the square brackets) are now also between -\infty and
+\infty</td></tr>
+</tbody>
+</table>
+<table>
+<colgroup><col></col><col></col></colgroup>
+<tbody>
+<tr><td><a href="#footnote-reference-3" target="_blank" rel="noopener noreferrer">[3]</a></td><td>We change the dummy integration variable back to x here, for
+consistency. Once again, since x is just the integration
+variable and the integral is definite, the final result doesn’t
+depend on x. It’s a function of <img alt="w" src="https://eli.thegreenplace.net/images/math/aff024fe4ab0fece4091de044c58c9ae4233383a.png" />.</td></tr>
+</tbody>
+</table>
+<table>
+<colgroup><col></col><col></col></colgroup>
+<tbody>
+<tr><td><a href="#footnote-reference-4" target="_blank" rel="noopener noreferrer">[4]</a></td><td>The vanishing at infinity part is the Riemann-Lebesgue lemma; you can
+find a proof on Wikipedia</td></tr>
+</tbody>
+</table>
+<table>
+<colgroup><col></col><col></col></colgroup>
+<tbody>
+<tr><td><a href="#footnote-reference-5" target="_blank" rel="noopener noreferrer">[5]</a></td><td>A pathological absolute-integrable function can have spikes at
+infinity but still have a finite total area.</td></tr>
+</tbody>
+</table>
+</div></div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://eli.thegreenplace.net/2026/notes-on-the-fourier-transform/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button> <script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
