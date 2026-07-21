@@ -1,0 +1,250 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.0.5"><!-- Core SEO --><meta name="description" content="2026-07-21 GitHub Releases 日报：PowerShell/PowerShell、NousResearch/hermes-agent、Homebrew/brew 等14个项目更新 | 构建和打包流程改进：更新发布分支、避免对公共 feed 调用凭证提供程序、将 NuGet 发布拆分为独立阶段"><meta name="keywords" content="releases, daily, automation, PowerShell, hermes-agent, brew, pi, android-remove-unused-resources-plugin"><meta name="author" content="Release Bot"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/blog/releases/2026-07-21/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/blog/releases/2026-07-21/"><!-- Open Graph / Facebook --><meta property="og:type" content="article"><meta property="og:url" content="https://blog.yuyins.com/blog/releases/2026-07-21/"><meta property="og:title" content="GitHub Releases 日报 - 2026-07-21"><meta property="og:description" content="2026-07-21 GitHub Releases 日报：PowerShell/PowerShell、NousResearch/hermes-agent、Homebrew/brew 等14个项目更新 | 构建和打包流程改进：更新发布分支、避免对公共 feed 调用凭证提供程序、将 NuGet 发布拆分为独立阶段"><meta property="og:image" content="https://blog.yuyins.com/images/covers/cover-2026-07-21.webp"><meta property="og:image:alt" content="2026-07-21 GitHub Releases 日报：PowerShell/PowerShell、NousResearch/hermes-agent、Homebrew/brew 等14个项目更新 | 构建和打包流程改进：更新发布分支、避免对公共 feed 调用凭证提供程序、将 NuGet 发布拆分为独立阶段"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><meta property="article:section" content="开源追踪"><meta property="article:published_time" content="2026-07-21T08:00:00.000Z"><meta property="article:tag" content="releases"><meta property="article:tag" content="daily"><meta property="article:tag" content="automation"><meta property="article:tag" content="PowerShell"><meta property="article:tag" content="hermes-agent"><meta property="article:tag" content="brew"><meta property="article:tag" content="pi"><meta property="article:tag" content="android-remove-unused-resources-plugin"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/blog/releases/2026-07-21/"><meta property="twitter:title" content="GitHub Releases 日报 - 2026-07-21"><meta property="twitter:description" content="2026-07-21 GitHub Releases 日报：PowerShell/PowerShell、NousResearch/hermes-agent、Homebrew/brew 等14个项目更新 | 构建和打包流程改进：更新发布分支、避免对公共 feed 调用凭证提供程序、将 NuGet 发布拆分为独立阶段"><meta property="twitter:image" content="https://blog.yuyins.com/images/covers/cover-2026-07-21.webp"><title>GitHub Releases 日报 - 2026-07-21</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"GitHub Releases 日报 - 2026-07-21","description":"2026-07-21 GitHub Releases 日报：PowerShell/PowerShell、NousResearch/hermes-agent、Homebrew/brew 等14个项目更新 | 构建和打包流程改进：更新发布分支、避免对公共 feed 调用凭证提供程序、将 NuGet 发布拆分为独立阶段","image":"https://blog.yuyins.com/images/covers/cover-2026-07-21.webp","datePublished":"2026-07-21T08:00:00.000Z","dateModified":"2026-07-21T08:00:00.000Z","author":{"@type":"Person","name":"Release Bot"},"publisher":{"@type":"Organization","name":"雅俗共赏","logo":{"@type":"ImageObject","url":"https://blog.yuyins.com/favicon.svg"}}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"开源追踪","item":"https://blog.yuyins.com/category/开源追踪"},{"@type":"ListItem","position":3,"name":"GitHub Releases 日报 - 2026-07-21","item":"https://blog.yuyins.com/blog/releases/2026-07-21/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><link rel="stylesheet" href="/_astro/_..B0JLgT-I.css"><link rel="stylesheet" href="/_astro/Layout.DeTr-JHh.css"><style>.tag[data-astro-cid-7t72llso]{background:color-mix(in srgb, var(--muted) 30%, transparent);color:var(--muted-foreground);border-radius:.375rem;align-items:center;gap:.25rem;padding:.125rem .5rem;font-size:.8125rem;line-height:1.5;text-decoration:none;display:inline-flex}.tag--interactive[data-astro-cid-7t72llso]{transition:background-color .2s,color .2s}.tag--interactive[data-astro-cid-7t72llso]:hover{background:color-mix(in srgb, var(--muted) 55%, transparent);color:var(--foreground)}.tag--active[data-astro-cid-7t72llso]{background:color-mix(in srgb, var(--accent) 14%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 78%, var(--foreground));font-weight:600}.tag[data-astro-cid-7t72llso]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.tags-list[data-astro-cid-cm3albtb]{flex-wrap:wrap;gap:.5rem;display:flex}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link nav-link--active" aria-current="page" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-21" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-21</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-07-21" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-07-21</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-20" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-20</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-19" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-19</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-18" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-18</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-07-18" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-07-18</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.PHDZRRIC.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <script type="module" src="/_astro/CodeCopyButton.astro_astro_type_script_index_0_lang.Cy26o95i.js"></script> <script type="module" src="/_astro/HeadingAnchor.astro_astro_type_script_index_0_lang.CacVAAhL.js"></script> <div id="image-lightbox" class="lightbox" hidden data-astro-cid-ot6ntcxl> <button id="lightbox-close" class="lightbox-close" aria-label="关闭" data-astro-cid-ot6ntcxl> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-ot6ntcxl> <line x1="18" y1="6" x2="6" y2="18" data-astro-cid-ot6ntcxl></line> <line x1="6" y1="6" x2="18" y2="18" data-astro-cid-ot6ntcxl></line> </svg> </button> <img id="lightbox-image" class="lightbox-image" src="" alt="" data-astro-cid-ot6ntcxl> </div> <script type="module" src="/_astro/ImageLightbox.astro_astro_type_script_index_0_lang.Builc05r.js"></script> <div class="blog-post-container" data-astro-cid-tldeq5d5> <article class="blog-post" data-pagefind-body data-astro-cid-tldeq5d5> <header class="article-header" data-astro-cid-tldeq5d5> <h1 data-astro-cid-tldeq5d5>GitHub Releases 日报 - 2026-07-21</h1> <div class="article-meta-row" data-astro-cid-tldeq5d5> <a href="/category/开源追踪" class="meta-category" data-astro-cid-tldeq5d5> 开源追踪 </a> <span class="meta-dot" data-astro-cid-tldeq5d5>•</span> <time datetime="2026-07-21T08:00:00.000Z" class="meta-item" data-astro-cid-tldeq5d5> 2026年7月21日 </time> <span class="meta-dot" data-astro-cid-tldeq5d5>•</span> <span class="meta-item" data-astro-cid-tldeq5d5>12 分钟阅读</span> </div> <p class="article-description" data-astro-cid-tldeq5d5>2026-07-21 GitHub Releases 日报：PowerShell/PowerShell、NousResearch/hermes-agent、Homebrew/brew 等14个项目更新 | 构建和打包流程改进：更新发布分支、避免对公共 feed 调用凭证提供程序、将 NuGet 发布拆分为独立阶段</p> <div class="article-tags-row" data-astro-cid-tldeq5d5> <div class="tags-list" data-astro-cid-cm3albtb> <a href="/blog/tag/releases" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#releases </a><a href="/blog/tag/daily" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#daily </a><a href="/blog/tag/automation" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#automation </a><a href="/blog/tag/PowerShell" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#PowerShell </a><a href="/blog/tag/hermes-agent" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#hermes-agent </a><a href="/blog/tag/brew" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#brew </a><a href="/blog/tag/pi" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#pi </a><a href="/blog/tag/android-remove-unused-resources-plugin" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#android-remove-unused-resources-plugin </a> </div> </div> </header> <!-- Content --> <div class="article-content app-prose" data-astro-cid-tldeq5d5>  <h2 id="2026-07-21-更新摘要">2026-07-21 更新摘要</h2>
+<p><strong>统计信息</strong></p>
+<ul>
+<li>由 gpt-oss-120b (11), gemma-4-31b (3) 总结</li>
+<li>监控仓库: 16 个</li>
+<li>今日更新: 11 个项目 (14 个版本)</li>
+<li>生成时间: 2026-07-22 05:28:54 (北京时间)</li>
+</ul>
+<h3 id="powershellpowershell-v7418---v764-gpt-oss-120b"><a href="https://github.com/PowerShell/PowerShell/releases" rel="noopener noreferrer" target="_blank">PowerShell/PowerShell v7.4.18 - v7.6.4</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>构建和打包流程改进：更新发布分支，避免对公共 feed 调用凭证提供程序</li>
+<li>将 NuGet 发布拆分为独立阶段，并在推送 git tag 后下载 deb_arm 包以供 PMC 发布</li>
+<li>更新 CI 工作流以支持 servicing-* 分支</li>
+<li>构建和打包改进：更新发布分支</li>
+<li>在 Wix 公共 feed 中避免调用凭据提供程序</li>
+<li>在推送 git tag 后，将 NuGet 发布拆分为独立阶段</li>
+<li>构建和打包流程改进：更新发布分支、避免对公共 feed 调用凭证提供程序、将 NuGet 发布拆分为独立阶段</li>
+<li>CI 工作流更新：新增对 servicing-* 分支的测试目标</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>在展开 CAB 前验证路径，防止无效路径导致错误</li>
+</ul>
+<h3 id="nousresearchhermes-agent-v2026720-gpt-oss-120b"><a href="https://github.com/NousResearch/hermes-agent/releases/tag/v2026.7.20" rel="noopener noreferrer" target="_blank">NousResearch/hermes-agent v2026.7.20</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>首次响应时间大幅提升，冷启动延迟从约 4.3 秒降至约 0.9 秒，约 80% 减少，适用于所有平台。</li>
+<li>桌面应用性能提升，Markdown 拆分器 CPU 使用降低 14 倍，增量块词法解析并虚拟化审阅面板。</li>
+<li>TUI 增量渲染流式 Markdown，提升大段对话的流畅度。</li>
+<li>新增 Fireworks AI、DeepInfra、Upstage Solar 等模型提供商，支持费用估算和缓存选择器。</li>
+<li>引入可插拔 SecretSource 接口，支持 Bitwarden 与 1Password 等密钥管理。</li>
+<li>新增 CLI 命令 /model —once，实现一次性模型覆盖并自动恢复。</li>
+<li>会话导出支持 Markdown、QMD、HTML、prompt-only、trace 等格式，并可上传至 HuggingFace。</li>
+<li>网关功能增强：持久交付账本、基于配置文件的路由以及多路复用配置。</li>
+<li>消息平台新增内联选择器（Telegram、Discord、Matrix）及 WhatsApp 原生投票、位置、丰富元数据。</li>
+<li>桌面应用采用布局树模型的可贡献 shell，插件化 i18n 本地化支持。</li>
+<li>新增能力页面，将技能、工具、MCP 集中展示并提供响应式导航。</li>
+<li>Web Dashboard 增加内存提供者切换、会话安全导入、WhatsApp 配对及 Telegram Bot 设置等功能。</li>
+<li>CLI 与 TUI 新增 /subscription 与 /topup 计费命令。</li>
+<li>工具系统与 MCP 更新：新增 Blender 工具、改进 mcp__server__tool 命名、OAuth 回调端口竞争解决。</li>
+<li>统一的 reasoning_effort 与 MoA 配置，支持 per-model、per-task、per-slot 细粒度控制。</li>
+</ul>
+<p><strong>安全修复</strong></p>
+<ul>
+<li>Vertex 凭证 / 项目 / 区域解析通过配置文件密钥范围硬化，子进程环境变量被剥离。</li>
+<li>六项 P1 安全硬化 PR 包括浏览器防护、媒体锚定、.env 锁定、委托 ACP 传输等。</li>
+<li>SecretSource 接口实现安全密钥管理，支持 Bitwarden 与 1Password。</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>若干回滚与未发布功能已移除，确保系统稳定性。</li>
+</ul>
+<h3 id="homebrewbrew-6012-gemma-4-31b"><a href="https://github.com/Homebrew/brew/releases/tag/6.0.12" rel="noopener noreferrer" target="_blank">Homebrew/brew 6.0.12</a> <sup>gemma-4-31b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>更新内置 portable-ruby 至 4.0.6</li>
+<li>优化下载流程，跳过相同文件的重复校验和验证</li>
+<li>为所有用户启用 Cask FFI 助手</li>
+<li>为 brew doctor 命令新增 JSON 输出方法</li>
+<li>默认扫描已安装的 kegs 并报告未信任 tap 的跳过情况</li>
+<li>优化依赖递归扩展，使用统一缓存</li>
+<li>改进 Cask 迁移验证，跳过 API 回退并报告失败</li>
+<li>增强安装步骤的沙箱化处理及相关操作（包括 copy, inreplace 等）</li>
+<li>优化 Cask 语言变体序列化</li>
+<li>更新大量文档，包括 FAQ、安装指南、平台支持、壳层补全及维护者政策</li>
+</ul>
+<p><strong>安全修复</strong></p>
+<ul>
+<li>将漏洞咨询数据库仓库重命名为 Homebrew/advisory-database</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复从 API 中移除的 Cask 卸载问题</li>
+<li>修复 tap-new 生成的工作流中无效的任务级选项</li>
+<li>修复组件顺序自动修正问题</li>
+<li>修复 Cask Cookbook 中的开发命令路径</li>
+<li>修复 GitHub API 变更导致的 attestation 问题</li>
+<li>修复 Cask 隔离模式在复制 xattrs 时错误启用开发者模式的问题</li>
+<li>修复瓶装软件（bottle）清单下载失败被静默忽略的问题</li>
+<li>修复 CodeQL 解析器导致路径名语法失败的问题</li>
+</ul>
+<h3 id="earendil-workspi-v0810-gpt-oss-120b"><a href="https://github.com/earendil-works/pi/releases/tag/v0.81.0" rel="noopener noreferrer" target="_blank">earendil-works/pi v0.81.0</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增本地 llama.cpp 模型管理，可连接 router、搜索下载 Hugging Face 模型并实时加载 / 卸载。</li>
+<li>完整的 provider 扩展支持，注册 pi‑ai 提供商并提供认证、模型刷新、过滤和自定义流式。</li>
+<li>新增 Qwen Token Plan 提供商，包括国际版和中国版，支持区域端点和 API‑Key 认证。</li>
+<li>扩展使用计量，工具、压缩和分支摘要的使用量持久化并计入会话总计。</li>
+<li>新增 RPC 命令 get_available_thinking_levels 及对应客户端方法。</li>
+<li>从包根导出消息和工具执行生命周期事件类型。</li>
+<li>支持内置 llama.cpp router，提供 /login 连接设置、/llama 模型搜索下载及实时进度。</li>
+<li>为完整的 pi‑ai provider 添加扩展注册，支持本地认证、模型刷新、过滤和流式行为。</li>
+<li>使用统计计入持久化会话、页脚总计和会话统计。</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>更新 brace‑expansion 依赖至 5.0.7。</li>
+<li>修复持久化远程模型目录升级后被覆盖、网络刷新移至交互 / RPC 模式以及下载进度更新问题。</li>
+<li>修复继承的 API‑Key 凭证、跨提供商工具调用 ID 重复、Kimi K3 思考层级及别名、OpenCode Go 模型路由等认证相关问题。</li>
+<li>修复终端关闭光标恢复、ANSI 文本换行对 CRLF/CR 的处理以及编辑器粘贴注册表损坏问题。</li>
+<li>修复无会话 OpenAI Codex WebSocket 使用 UUIDv7、GPT‑5.6 Codex 默认 272K 上下文、压缩期间消息排队行为。</li>
+<li>修复读取工具错误高亮、提示模板默认参数、Kimi Coding 成本显示以及 OpenAI Responses 早期流自动重试等会话处理问题。</li>
+</ul>
+<h3 id="irgalyandroid-remove-unused-resources-plugin-v250-gpt-oss-120b"><a href="https://github.com/irgaly/android-remove-unused-resources-plugin/releases/tag/v2.5.0" rel="noopener noreferrer" target="_blank">irgaly/android-remove-unused-resources-plugin v2.5.0</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>添加示例文件 unused_layout.xml</li>
+<li>示例项目 compileSdk 与 targetSdk 升至 37</li>
+<li>将 JVM 工具链升级至 17</li>
+<li>升级依赖（gradle.android 9.3.0、gradle 9.6.1、compose-bom 2026.06.01…</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>CI 改进：git commit 添加签名</li>
+<li>更新 README 文档</li>
+</ul>
+<h3 id="ekkolearnaihermes-studio-hermes-0190-runtime---v0632-gpt-oss-120b"><a href="https://github.com/EKKOLearnAI/hermes-studio/releases" rel="noopener noreferrer" target="_blank">EKKOLearnAI/hermes-studio hermes-0.19.0-runtime - v0.6.32</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增基于游标的会话压缩功能</li>
+<li>新增全局会话分类</li>
+<li>新增面向个人资料的技能包指令</li>
+<li>新增 Hermes 中间消息及单聊后台任务</li>
+<li>将桌面窗口控制集成到页面标题栏</li>
+<li>将 Windows 桌面窗口框架改为方形</li>
+<li>将默认 Hermes Runtime 升级至 0.19.0</li>
+<li>支持在群聊房间设置中更新邀请码</li>
+<li>简化 Ekko 内存生命周期管理</li>
+<li>新增 Hermes 中间助手消息</li>
+<li>链接中间消息变更片段</li>
+<li>启用后台委托</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复群聊中 @mention 在 CJK 或非空白字符后未触发的问题</li>
+<li>修复工作流在交接时未保留桥接运行来源的错误</li>
+<li>修复会话搜索匹配不准确的问题</li>
+<li>修复工作流中对 Coding Agent 协议范围覆盖的错误</li>
+<li>修复 Claude 加密思考续写恢复失败的问题</li>
+<li>修复 Windows 安装程序卸载回归导致的错误</li>
+<li>修复 Hermes 中间输出问题</li>
+</ul>
+<h3 id="hugohe3ppt-master-v410-gemma-4-31b"><a href="https://github.com/hugohe3/ppt-master/releases/tag/v4.1.0" rel="noopener noreferrer" target="_blank">hugohe3/ppt-master v4.1.0</a> <sup>gemma-4-31b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>恢复 AI 创作自由度：移除颜色数量限制、固定行高比例及强制性的图像布局规则</li>
+<li>增强视觉表现力：Executor 现在支持可见的构建菜单，涵盖渐变、阴影、玻璃拟态及多种艺术风格</li>
+<li>优化决策流程：明确 Strategist（准备）与 Executor（实现）的分工，提升原生对象（图表 / 表格）的转换逻辑</li>
+<li>改进规划产物生成：恢复全文档编写模式，一次性生成完整的 design_spec.md 和 spec_lock.md</li>
+<li>增强图表检索：引入语义回退机制（semantic_fallback），在词法匹配失效时提供完整注册表审查</li>
+<li>支持自定义创意方向：spec_lock.md 现在接受可选的目录引用列表以实现自定义视觉风格</li>
+<li>优化主题研究：改为由结果关键事实缺失驱动的补缺模式，并延迟图像获取至最终确认后</li>
+<li>更新文档：重构路线图，并在 README 中推荐 Kimi K3 为默认模型，Claude 为备选</li>
+<li>优化确认机制：支持通道中立的决策确认（兼容 Confirm UI 和对话界面）</li>
+<li>增强裁剪策略：在 §VIII 中新增明确的裁剪策略列（no-crop 或 adaptive）</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 v4 版本架构清理导致的提示词过度压缩问题，恢复 AI 的设计权限与范围</li>
+<li>修复 project_manager.py 验证逻辑，使其仅针对模式验证规划产物而非重新打开 UI</li>
+<li>修复孤立锁（Orphan locks）的重建机制，并对齐恢复指南</li>
+</ul>
+<h3 id="jandedobbeleeroh-my-posh-v29340-gpt-oss-120b"><a href="https://github.com/JanDeDobbeleer/oh-my-posh/releases/tag/v29.34.0" rel="noopener noreferrer" target="_blank">JanDeDobbeleer/oh-my-posh v29.34.0</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增 fish 壳支持显示完整 vi 模式细节</li>
+</ul>
+<h3 id="usefulsoftwarecoexecutor-v1535-gpt-oss-120b"><a href="https://github.com/UsefulSoftwareCo/executor/releases/tag/v1.5.35" rel="noopener noreferrer" target="_blank">UsefulSoftwareCo/executor v1.5.35</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>升级依赖（@executor-js/sdk 1.5.35、@executor-js/runtime-quickjs 1.5.35…</li>
+</ul>
+<h3 id="dmtrkovalenkofff-v0101-gpt-oss-120b"><a href="https://github.com/dmtrKovalenko/fff/releases/tag/v0.10.1" rel="noopener noreferrer" target="_blank">dmtrKovalenko/fff v0.10.1</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>提供 npm 包、Rust crate、Python wheel 多语言发行版</li>
+<li>新增 Neovim Lua 插件（.so/.dylib/.dll）</li>
+<li>新增 C FFI 库，支持 Bun、Node、Python</li>
+<li>新增 MCP 服务器二进制 fff-mcp-{target}</li>
+<li>新增 Android arm64（Termux）支持</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>若干修复：MCP 使用绝对路径、Bun 运行时加载 fff-bun、Windows 跨卷路径处理</li>
+</ul>
+<h3 id="jdxmise-v2026711-gemma-4-31b"><a href="https://github.com/jdx/mise/releases/tag/v2026.7.11" rel="noopener noreferrer" target="_blank">jdx/mise v2026.7.11</a> <sup>gemma-4-31b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>配置结构化工具定义现在统一支持 version, path, prefix 和 ref 选择器</li>
+<li>新增 mise bootstrap repos update 和 exec 命令，支持显式更新和执行引导仓库命令</li>
+<li>新增 opt-in 浮动注册表 (registry_floating)，可获取最新的注册表元数据</li>
+<li>为 cargo, npm, go, gem, pipx 和 dotnet 后端新增精确版本快速路径，跳过远程版本列表获取以提升安装速度</li>
+<li>支持 vfox Lua 插件作为系统包管理器，新增 [bootstrap.plugins] 配置及相关命令</li>
+<li>优化 Shell 激活流程，跳过重复的初始提示钩子，减少启动时的进程开销</li>
+<li>优化启动性能，减少配置查找时的 glob 模式编译，每次调用约节省 2ms</li>
+<li>通过 PGO 优化 linux-x64 和 macos-arm64 二进制文件，热路径性能提升约 10%</li>
+<li>优化后端存档提取和 macOS hdiutil/pkgutil 等待机制，避免并行安装时阻塞下载进度</li>
+<li>将 tokio 工作线程默认上限设为 16，避免多核机器上线程池过大</li>
+<li>统一 tar 提取与验证实现，移除系统 tar 回退，确保跨平台行为一致</li>
+<li>注册表更新：新增 zmx，docker-compose 切换至 github 后端，eza 切换至 vfox 后端</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>配置验证更加严格：弃用 env 指令别名、env.mise 指令及实验性 monorepo root 键，非字符串 postinstall 钩子将被拒绝</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复远程 HTTP 和 Git 任务文件的 #MISE 标头解析问题，使其支持元数据覆盖</li>
+<li>修复全局或系统配置加载的文件任务未被正确视为全局任务的问题</li>
+<li>修复 mise —env watch 未能将选定环境传播至被监听任务的问题</li>
+<li>修复 HTTP 后端安装的原始可执行文件权限不足（改为 0755）导致无法打开输入文件的问题</li>
+<li>修复 Java 最新版本选择逻辑，优先选择基础供应商变体</li>
+<li>修复 bootstrap 中 systemd 定时器无法通过裸 TOML 键引用托管服务的问题</li>
+<li>修复 Homebrew Casks 声明 auto_updates 时导致安装失败的问题</li>
+<li>修复 macOS 默认值处理中缺失键或域导致初始化报错的问题</li>
+<li>修复 Windows 上 mise uninstall 未能清理悬空运行时版本指针文件的问题</li>
+<li>修复网络不可用时的快速失败机制，优化 DNS 解析失败处理和超时限制</li>
+<li>修复 dry run 模式下仍会产生副作用（如执行安装钩子）的问题</li>
+<li>修复多种后端版本检测问题，包括不带分隔符的预发布版本和 cargo 稀疏索引发现</li>
+<li>修复 JSON Schema 错误，提升编辑器对配置文件的验证准确性</li>
+<li>修复 lockfile 在处理平台特定工具选项变体时被折叠的问题</li>
+<li>修复多种配置验证问题，包括弃用 env 指令别名及拒绝非字符串 postinstall 钩子</li>
+</ul>
+<h2 id="今日播客更新">今日播客更新</h2>
+<ul>
+<li><strong>得体广播站</strong>: <a href="https://www.xiaoyuzhoufm.com/episode/6a5e415d6356eb2d9be5a6f6?utm_source=rss" rel="noopener noreferrer" target="_blank">Ep42. 我闪躲，我回避，实在不行就放弃！</a></li>
+</ul>
+<p><strong>帮助我们改进</strong></p>
+<p>对今日摘要质量有建议？欢迎反馈！</p>
+<ul>
+<li><a href="https://github.com/houzixiashanxiedaima/AstroBlog/issues/new" rel="noopener noreferrer" target="_blank">反馈摘要质量</a></li>
+<li><a href="https://github.com/houzixiashanxiedaima/AstroBlog/issues/new" rel="noopener noreferrer" target="_blank">评价今日日报</a></li>
+</ul>
+<p>您的反馈将帮助我们优化 AI Prompt, 提升摘要准确性</p>  </div> <!-- Footer navigation --> <footer class="article-footer" data-astro-cid-tldeq5d5> <nav class="post-navigation" aria-label="Article navigation" data-astro-cid-tldeq5d5> <div class="nav-prev" data-astro-cid-tldeq5d5> <a href="/blog/ide-updates/2026-07-21" class="nav-link" data-astro-prefetch data-astro-cid-tldeq5d5> <span class="nav-label" data-astro-cid-tldeq5d5><span class="arrow-char" data-astro-cid-tldeq5d5>←</span> 上一篇</span> <span class="nav-title" data-astro-cid-tldeq5d5>IDE / SDK 更新 - 2026-07-21</span> </a> </div> <div class="nav-next" data-astro-cid-tldeq5d5>  </div> </nav> <div class="back-to-list" data-astro-cid-tldeq5d5> <a href="/" class="back-link" data-astro-prefetch data-astro-cid-tldeq5d5>← 返回文章列表</a> </div> </footer> </article> <!-- Table of Contents --> <aside class="toc-aside" data-astro-cid-tldeq5d5> <nav class="toc" aria-label="目录导航" data-astro-cid-p33bl5ka> <div class="toc-header-action" data-astro-cid-p33bl5ka> <a href="/" class="toc-action-link" data-astro-prefetch data-astro-cid-p33bl5ka> <span class="toc-action-icon" data-astro-cid-p33bl5ka>←</span> <span class="toc-action-text" data-astro-cid-p33bl5ka>返回列表</span> </a> </div> <ul class="toc-list" data-astro-cid-p33bl5ka> <li class="toc-item toc-item-3" data-slug="powershellpowershell-v7418---v764-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#powershellpowershell-v7418---v764-gpt-oss-120b" class="toc-link" data-slug="powershellpowershell-v7418---v764-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>PowerShell/PowerShell v7.4.18 - v7.6.4 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="nousresearchhermes-agent-v2026720-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#nousresearchhermes-agent-v2026720-gpt-oss-120b" class="toc-link" data-slug="nousresearchhermes-agent-v2026720-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>NousResearch/hermes-agent v2026.7.20 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="homebrewbrew-6012-gemma-4-31b" data-astro-cid-p33bl5ka> <a href="#homebrewbrew-6012-gemma-4-31b" class="toc-link" data-slug="homebrewbrew-6012-gemma-4-31b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>Homebrew/brew 6.0.12 gemma-4-31b</span> </a> </li><li class="toc-item toc-item-3" data-slug="earendil-workspi-v0810-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#earendil-workspi-v0810-gpt-oss-120b" class="toc-link" data-slug="earendil-workspi-v0810-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>earendil-works/pi v0.81.0 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="irgalyandroid-remove-unused-resources-plugin-v250-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#irgalyandroid-remove-unused-resources-plugin-v250-gpt-oss-120b" class="toc-link" data-slug="irgalyandroid-remove-unused-resources-plugin-v250-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>irgaly/android-remove-unused-resources-plugin v2.5.0 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="ekkolearnaihermes-studio-hermes-0190-runtime---v0632-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#ekkolearnaihermes-studio-hermes-0190-runtime---v0632-gpt-oss-120b" class="toc-link" data-slug="ekkolearnaihermes-studio-hermes-0190-runtime---v0632-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>EKKOLearnAI/hermes-studio hermes-0.19.0-runtime - v0.6.32 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="hugohe3ppt-master-v410-gemma-4-31b" data-astro-cid-p33bl5ka> <a href="#hugohe3ppt-master-v410-gemma-4-31b" class="toc-link" data-slug="hugohe3ppt-master-v410-gemma-4-31b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>hugohe3/ppt-master v4.1.0 gemma-4-31b</span> </a> </li><li class="toc-item toc-item-3" data-slug="jandedobbeleeroh-my-posh-v29340-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#jandedobbeleeroh-my-posh-v29340-gpt-oss-120b" class="toc-link" data-slug="jandedobbeleeroh-my-posh-v29340-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>JanDeDobbeleer/oh-my-posh v29.34.0 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="usefulsoftwarecoexecutor-v1535-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#usefulsoftwarecoexecutor-v1535-gpt-oss-120b" class="toc-link" data-slug="usefulsoftwarecoexecutor-v1535-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>UsefulSoftwareCo/executor v1.5.35 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="dmtrkovalenkofff-v0101-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#dmtrkovalenkofff-v0101-gpt-oss-120b" class="toc-link" data-slug="dmtrkovalenkofff-v0101-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>dmtrKovalenko/fff v0.10.1 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="jdxmise-v2026711-gemma-4-31b" data-astro-cid-p33bl5ka> <a href="#jdxmise-v2026711-gemma-4-31b" class="toc-link" data-slug="jdxmise-v2026711-gemma-4-31b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>jdx/mise v2026.7.11 gemma-4-31b</span> </a> </li><li class="toc-item toc-item-2" data-slug="今日播客更新" data-astro-cid-p33bl5ka> <a href="#今日播客更新" class="toc-link" data-slug="今日播客更新" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>今日播客更新</span> </a> </li> </ul> <div class="toc-footer-action" data-astro-cid-p33bl5ka> <button type="button" class="toc-action-link" id="toc-back-to-top" aria-label="返回顶部" data-astro-cid-p33bl5ka> <span class="toc-action-icon" data-astro-cid-p33bl5ka>↑</span> <span class="toc-action-text" data-astro-cid-p33bl5ka>返回顶部</span> </button> </div> </nav> <script type="module" src="/_astro/TableOfContents.astro_astro_type_script_index_0_lang.0eCSG6rF.js"></script> </aside> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button> <script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
