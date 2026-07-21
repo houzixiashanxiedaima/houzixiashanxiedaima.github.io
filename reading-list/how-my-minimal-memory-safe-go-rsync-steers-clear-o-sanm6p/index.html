@@ -107,8 +107,8 @@ The corresponding code can be seen below:
 </span></span></code></pre></div><p>Most importantly, note that <code>sum2</code> field is filled with <code>s-&gt;s2length</code> bytes. <code>sum2</code> always has a size of 16:
 <a href="https://github.com/RsyncProject/rsync/blob/9615a2492bbf96bc145e738ebff55bbb91e0bbee/rsync.h#L955-L962" target="_blank" rel="noopener noreferrer">rsync.h</a></p>
 <div><pre><code><span><span><span>#define SUM_LENGTH 16
-</span></span></span><span><span><span></span><span>// …
-</span></span></span><span><span><span></span><span>struct</span> sum_buf {
+</span></span></span><span><span><span>// …
+</span></span></span><span><span><span>struct</span> sum_buf {
 </span></span><span><span>    OFF_T offset;           <span>/**&lt; offset in file of this chunk */</span>
 </span></span><span><span>    int32 len;              <span>/**&lt; length of chunk of file */</span>
 </span></span><span><span>    uint32 sum1;            <span>/**&lt; simple checksum */</span>
@@ -129,13 +129,13 @@ The corresponding code can be seen below:
 <div><pre><code><span><span><span>#define MD4_DIGEST_LEN 16
 </span></span></span><span><span><span>#define MD5_DIGEST_LEN 16
 </span></span></span><span><span><span>#if defined SHA512_DIGEST_LENGTH
-</span></span></span><span><span><span></span>  <span>#define MAX_DIGEST_LEN SHA512_DIGEST_LENGTH
+</span></span></span><span><span>  <span>#define MAX_DIGEST_LEN SHA512_DIGEST_LENGTH
 </span></span></span><span><span><span>#elif defined SHA256_DIGEST_LENGTH
-</span></span></span><span><span><span></span>  <span>#define MAX_DIGEST_LEN SHA256_DIGEST_LENGTH
+</span></span></span><span><span>  <span>#define MAX_DIGEST_LEN SHA256_DIGEST_LENGTH
 </span></span></span><span><span><span>#elif defined SHA_DIGEST_LENGTH
-</span></span></span><span><span><span></span>  <span>#define MAX_DIGEST_LEN SHA_DIGEST_LENGTH
+</span></span></span><span><span>  <span>#define MAX_DIGEST_LEN SHA_DIGEST_LENGTH
 </span></span></span><span><span><span>#else
-</span></span></span><span><span><span></span>  <span>#define MAX_DIGEST_LEN MD5_DIGEST_LEN </span><span>/* 16 bytes */</span><span>
+</span></span></span><span><span>  <span>#define MAX_DIGEST_LEN MD5_DIGEST_LEN </span><span>/* 16 bytes */</span><span>
 </span></span></span><span><span><span>#endif
 </span></span></span></code></pre></div><p><code>SHA256</code> support is common and sets the <code>MAX_DIGEST_LENGTH</code> value to 64. As a
 result, an attacker can write up to 48 bytes past the <code>sum2</code> buffer limit.</p>
@@ -161,15 +161,15 @@ bounds</a>
 by changing the code like so and running the tests:</p>
 <div><pre><code><span><span><span>diff --git i/types.go w/types.go
 </span></span></span><span><span><span>index 5601697..899fcb8 100644
-</span></span></span><span><span><span></span><span>--- i/types.go
-</span></span></span><span><span><span></span><span>+++ w/types.go
-</span></span></span><span><span><span></span><span>@@ -59,7 +59,7 @@ func (sh *SumHead) WriteTo(c *rsyncwire.Conn) error {
-</span></span></span><span><span><span></span> 	var buf rsyncwire.Buffer
+</span></span></span><span><span><span>--- i/types.go
+</span></span></span><span><span><span>+++ w/types.go
+</span></span></span><span><span><span>@@ -59,7 +59,7 @@ func (sh *SumHead) WriteTo(c *rsyncwire.Conn) error {
+</span></span></span><span><span> 	var buf rsyncwire.Buffer
 </span></span><span><span> 	buf.WriteInt32(sh.ChecksumCount)
 </span></span><span><span> 	buf.WriteInt32(sh.BlockLength)
 </span></span><span><span><span>-	buf.WriteInt32(sh.ChecksumLength)
-</span></span></span><span><span><span></span><span>+	buf.WriteInt32(512 /*sh.ChecksumLength*/)
-</span></span></span><span><span><span></span> 	buf.WriteInt32(sh.RemainderLength)
+</span></span></span><span><span><span>+	buf.WriteInt32(512 /*sh.ChecksumLength*/)
+</span></span></span><span><span> 	buf.WriteInt32(sh.RemainderLength)
 </span></span><span><span> 	return c.WriteString(buf.String())
 </span></span><span><span> }
 </span></span></code></pre></div><p>As expected, the Go runtime panics with the following message:</p>
@@ -487,33 +487,33 @@ git checkout v0.2.7
 <li>
 <p>Patch the code as follows to undo the fix and execute the attack:</p>
 <div><pre><code><span><span><span>diff --git i/internal/nofollow/nofollow_unix.go w/internal/nofollow/nofollow_unix.go
-</span></span></span><span><span><span></span><span>--- i/internal/nofollow/nofollow_unix.go
-</span></span></span><span><span><span></span><span>+++ w/internal/nofollow/nofollow_unix.go
-</span></span></span><span><span><span></span><span>@@ -2,8 +2,6 @@
-</span></span></span><span><span><span></span>
+</span></span></span><span><span><span>--- i/internal/nofollow/nofollow_unix.go
+</span></span></span><span><span><span>+++ w/internal/nofollow/nofollow_unix.go
+</span></span></span><span><span><span>@@ -2,8 +2,6 @@
+</span></span></span><span><span>
 </span></span><span><span> package nofollow
 </span></span><span><span>
 </span></span><span><span><span>-import "golang.org/x/sys/unix"
 </span></span></span><span><span><span>-
-</span></span></span><span><span><span></span> // Maybe resolves to unix.O_NOFOLLOW on unix systems,
+</span></span></span><span><span> // Maybe resolves to unix.O_NOFOLLOW on unix systems,
 </span></span><span><span> // 0 on other platforms.
 </span></span><span><span><span>-const Maybe = unix.O_NOFOLLOW
-</span></span></span><span><span><span></span><span>+const Maybe = 0 // unix.O_NOFOLLOW
-</span></span></span><span><span><span></span>
+</span></span></span><span><span><span>+const Maybe = 0 // unix.O_NOFOLLOW
+</span></span></span><span><span>
 </span></span><span><span><span>diff --git i/internal/sender/do.go w/internal/sender/do.go
-</span></span></span><span><span><span></span><span>--- i/internal/sender/do.go
-</span></span></span><span><span><span></span><span>+++ w/internal/sender/do.go
-</span></span></span><span><span><span></span><span>@@ -2,6 +2,8 @@ package sender
-</span></span></span><span><span><span></span>
+</span></span></span><span><span><span>--- i/internal/sender/do.go
+</span></span></span><span><span><span>+++ w/internal/sender/do.go
+</span></span></span><span><span><span>@@ -2,6 +2,8 @@ package sender
+</span></span></span><span><span>
 </span></span><span><span> import (
 </span></span><span><span> 	"fmt"
 </span></span><span><span><span>+	"os"
 </span></span></span><span><span><span>+	"path/filepath"
-</span></span></span><span><span><span></span> 	"sort"
+</span></span></span><span><span> 	"sort"
 </span></span><span><span>
 </span></span><span><span> 	"github.com/gokrazy/rsync/internal/log"
 </span></span><span><span><span>@@ -55,6 +57,15 @@ func (st *Transfer) Do(crd *rsyncwire.CountingReader, cwr *rsyncwire.CountingWri
-</span></span></span><span><span><span></span> 		st.Logger.Printf("file list sent")
+</span></span></span><span><span> 		st.Logger.Printf("file list sent")
 </span></span><span><span> 	}
 </span></span><span><span>
 </span></span><span><span><span>+	// HACK: swap out the passwd file with a symlink to /etc/passwd
@@ -525,7 +525,7 @@ git checkout v0.2.7
 </span></span></span><span><span><span>+	}
 </span></span></span><span><span><span>+	st.Logger.Printf("HACK: swapped passwd file for symlink")
 </span></span></span><span><span><span>+
-</span></span></span><span><span><span></span> 	// Sort the file list. The client sorts, so we need to sort, too (in the
+</span></span></span><span><span> 	// Sort the file list. The client sorts, so we need to sort, too (in the
 </span></span><span><span> 	// same way!), otherwise our indices do not match what the client will
 </span></span><span><span> 	// request.
 </span></span></code></pre></div></li>
@@ -722,88 +722,88 @@ validates the attacker-supplied data.</p>
 the application logic that using Go could not have prevented.</li>
 </ul>
 <table>
-  <thead>
-      <tr>
-          <th>CVE number</th>
-          <th>Cause</th>
-          <th>Risk (C)</th>
-          <th>Does Go help?</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>2024-12084</td>
-          <td>insufficient validation</td>
-          <td>Heap Buffer Overflow</td>
-          <td>✅ bounds check (panics!)</td>
-      </tr>
-      <tr>
-          <td>2024-12085</td>
-          <td>insufficient validation</td>
-          <td>Info Leak</td>
-          <td>✅ zero init</td>
-      </tr>
-      <tr>
-          <td>2024-12086</td>
-          <td>missing validation</td>
-          <td>Arbitrary File Leak</td>
-          <td>✅ <code>os.Root</code></td>
-      </tr>
-      <tr>
-          <td>2024-12087</td>
-          <td>insufficient validation</td>
-          <td>Write Arbitrary Files</td>
-          <td>✅ <code>os.Root</code></td>
-      </tr>
-      <tr>
-          <td>2024-12088</td>
-          <td>insufficient validation</td>
-          <td>Create Arbitrary Symlinks</td>
-          <td>✅ <code>os.Root</code></td>
-      </tr>
-      <tr>
-          <td>2024-12747</td>
-          <td>TOCTOU</td>
-          <td>Leak Privileged Files</td>
-          <td>✅ <code>os.Root</code></td>
-      </tr>
-      <tr>
-          <td>2026-29518</td>
-          <td>TOCTOU</td>
-          <td>Leak Privileged Files</td>
-          <td>✅ <code>os.Root</code></td>
-      </tr>
-      <tr>
-          <td>2026-43617</td>
-          <td>missing validation</td>
-          <td>Deny List Ineffective</td>
-          <td>❌ logic bug</td>
-      </tr>
-      <tr>
-          <td>2026-43618</td>
-          <td>insufficient validation</td>
-          <td>Info Leak</td>
-          <td>✅ bounds check (panics!)</td>
-      </tr>
-      <tr>
-          <td>2026-43619</td>
-          <td>TOCTOU</td>
-          <td>Leak Privileged Files</td>
-          <td>✅ <code>os.Root</code></td>
-      </tr>
-      <tr>
-          <td>2026-43620</td>
-          <td>insufficient validation</td>
-          <td>crash (DOS)</td>
-          <td>✅ bounds check (panics!)</td>
-      </tr>
-      <tr>
-          <td>2026-45232</td>
-          <td>missing validation</td>
-          <td>Memory Write</td>
-          <td>✅ bounds check (panics!)</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>CVE number</th>
+					<th>Cause</th>
+					<th>Risk (C)</th>
+					<th>Does Go help?</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>2024-12084</td>
+					<td>insufficient validation</td>
+					<td>Heap Buffer Overflow</td>
+					<td>✅ bounds check (panics!)</td>
+			</tr>
+			<tr>
+					<td>2024-12085</td>
+					<td>insufficient validation</td>
+					<td>Info Leak</td>
+					<td>✅ zero init</td>
+			</tr>
+			<tr>
+					<td>2024-12086</td>
+					<td>missing validation</td>
+					<td>Arbitrary File Leak</td>
+					<td>✅ <code>os.Root</code></td>
+			</tr>
+			<tr>
+					<td>2024-12087</td>
+					<td>insufficient validation</td>
+					<td>Write Arbitrary Files</td>
+					<td>✅ <code>os.Root</code></td>
+			</tr>
+			<tr>
+					<td>2024-12088</td>
+					<td>insufficient validation</td>
+					<td>Create Arbitrary Symlinks</td>
+					<td>✅ <code>os.Root</code></td>
+			</tr>
+			<tr>
+					<td>2024-12747</td>
+					<td>TOCTOU</td>
+					<td>Leak Privileged Files</td>
+					<td>✅ <code>os.Root</code></td>
+			</tr>
+			<tr>
+					<td>2026-29518</td>
+					<td>TOCTOU</td>
+					<td>Leak Privileged Files</td>
+					<td>✅ <code>os.Root</code></td>
+			</tr>
+			<tr>
+					<td>2026-43617</td>
+					<td>missing validation</td>
+					<td>Deny List Ineffective</td>
+					<td>❌ logic bug</td>
+			</tr>
+			<tr>
+					<td>2026-43618</td>
+					<td>insufficient validation</td>
+					<td>Info Leak</td>
+					<td>✅ bounds check (panics!)</td>
+			</tr>
+			<tr>
+					<td>2026-43619</td>
+					<td>TOCTOU</td>
+					<td>Leak Privileged Files</td>
+					<td>✅ <code>os.Root</code></td>
+			</tr>
+			<tr>
+					<td>2026-43620</td>
+					<td>insufficient validation</td>
+					<td>crash (DOS)</td>
+					<td>✅ bounds check (panics!)</td>
+			</tr>
+			<tr>
+					<td>2026-45232</td>
+					<td>missing validation</td>
+					<td>Memory Write</td>
+					<td>✅ bounds check (panics!)</td>
+			</tr>
+	</tbody>
 </table>
 <h3>gokrazy/rsync verdict</h3>
 <p>Aside from being written in Go, another key difference between gokrazy/rsync and
@@ -822,88 +822,88 @@ details.</li>
 <p>Let’s have a look at whether gokrazy/rsync was affected by each CVE at the time
 of publishing:</p>
 <table>
-  <thead>
-      <tr>
-          <th>CVE number</th>
-          <th>Cause</th>
-          <th>gokrazy/rsync impl?</th>
-          <th>gokrazy/rsync affected?</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>2024-12084</td>
-          <td>insufficient validation</td>
-          <td>yes</td>
-          <td>⚠️ panic</td>
-      </tr>
-      <tr>
-          <td>2024-12085</td>
-          <td>insufficient validation</td>
-          <td>no (proto 30)</td>
-          <td>✅ not vuln</td>
-      </tr>
-      <tr>
-          <td>2024-12086</td>
-          <td>missing validation</td>
-          <td>no (proto 29)</td>
-          <td>✅ not vuln</td>
-      </tr>
-      <tr>
-          <td>2024-12087</td>
-          <td>insufficient validation</td>
-          <td>no (<code>inc-rec</code>)</td>
-          <td>✅ not vuln</td>
-      </tr>
-      <tr>
-          <td>2024-12088</td>
-          <td>insufficient validation</td>
-          <td>no (<code>safe-links</code>)</td>
-          <td>✅ not vuln</td>
-      </tr>
-      <tr>
-          <td>2024-12747</td>
-          <td>TOCTOU</td>
-          <td>yes</td>
-          <td>❌ vuln</td>
-      </tr>
-      <tr>
-          <td>2026-29518</td>
-          <td>TOCTOU</td>
-          <td>yes</td>
-          <td>⚠️ patched</td>
-      </tr>
-      <tr>
-          <td>2026-43617</td>
-          <td>missing validation</td>
-          <td>no (host deny lists)</td>
-          <td>✅ not vuln</td>
-      </tr>
-      <tr>
-          <td>2026-43618</td>
-          <td>insufficient validation</td>
-          <td>no (compression)</td>
-          <td>✅ not vuln</td>
-      </tr>
-      <tr>
-          <td>2026-43619</td>
-          <td>TOCTOU</td>
-          <td>yes</td>
-          <td>⚠️ patched</td>
-      </tr>
-      <tr>
-          <td>2026-43620</td>
-          <td>insufficient validation</td>
-          <td>no (<code>inc-rec</code>)</td>
-          <td>✅ not vuln</td>
-      </tr>
-      <tr>
-          <td>2026-45232</td>
-          <td>missing validation</td>
-          <td>no (proxy)</td>
-          <td>✅ not vuln</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>CVE number</th>
+					<th>Cause</th>
+					<th>gokrazy/rsync impl?</th>
+					<th>gokrazy/rsync affected?</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>2024-12084</td>
+					<td>insufficient validation</td>
+					<td>yes</td>
+					<td>⚠️ panic</td>
+			</tr>
+			<tr>
+					<td>2024-12085</td>
+					<td>insufficient validation</td>
+					<td>no (proto 30)</td>
+					<td>✅ not vuln</td>
+			</tr>
+			<tr>
+					<td>2024-12086</td>
+					<td>missing validation</td>
+					<td>no (proto 29)</td>
+					<td>✅ not vuln</td>
+			</tr>
+			<tr>
+					<td>2024-12087</td>
+					<td>insufficient validation</td>
+					<td>no (<code>inc-rec</code>)</td>
+					<td>✅ not vuln</td>
+			</tr>
+			<tr>
+					<td>2024-12088</td>
+					<td>insufficient validation</td>
+					<td>no (<code>safe-links</code>)</td>
+					<td>✅ not vuln</td>
+			</tr>
+			<tr>
+					<td>2024-12747</td>
+					<td>TOCTOU</td>
+					<td>yes</td>
+					<td>❌ vuln</td>
+			</tr>
+			<tr>
+					<td>2026-29518</td>
+					<td>TOCTOU</td>
+					<td>yes</td>
+					<td>⚠️ patched</td>
+			</tr>
+			<tr>
+					<td>2026-43617</td>
+					<td>missing validation</td>
+					<td>no (host deny lists)</td>
+					<td>✅ not vuln</td>
+			</tr>
+			<tr>
+					<td>2026-43618</td>
+					<td>insufficient validation</td>
+					<td>no (compression)</td>
+					<td>✅ not vuln</td>
+			</tr>
+			<tr>
+					<td>2026-43619</td>
+					<td>TOCTOU</td>
+					<td>yes</td>
+					<td>⚠️ patched</td>
+			</tr>
+			<tr>
+					<td>2026-43620</td>
+					<td>insufficient validation</td>
+					<td>no (<code>inc-rec</code>)</td>
+					<td>✅ not vuln</td>
+			</tr>
+			<tr>
+					<td>2026-45232</td>
+					<td>missing validation</td>
+					<td>no (proxy)</td>
+					<td>✅ not vuln</td>
+			</tr>
+	</tbody>
 </table>
 <p>To be clear: all known vulnerabilities are fixed in gokrazy/rsync! The table
 above documents what the state was at the time when each CVE was published. In
@@ -941,7 +941,7 @@ role/protocol layering:</p>
 
 
 
-<a href="https://michael.stapelberg.ch/posts/2026-05-24-minimal-memory-safe-go-rsync-vulns/rsync-combinations.png" target="_blank" rel="noopener noreferrer"><img src="https://michael.stapelberg.ch/posts/2026-05-24-minimal-memory-safe-go-rsync-vulns/rsync-combinations_hu_b1c2c5d30df87dad.png" alt="diagram showing 4 different rsync setups: (1) rsync --daemon (2) rsync -e ssh; rsync://server/module/dir (3) rsync server:/some/path (4) rsync /src" title="diagram showing 4 different rsync setups: (1) rsync --daemon (2) rsync -e ssh; rsync://server/module/dir (3) rsync server:/some/path (4) rsync /src" width="600" height="547" /></a>
+<a href="https://michael.stapelberg.ch/posts/2026-05-24-minimal-memory-safe-go-rsync-vulns/rsync-combinations.png" target="_blank" rel="noopener noreferrer"><img src="https://michael.stapelberg.ch/posts/2026-05-24-minimal-memory-safe-go-rsync-vulns/rsync-combinations_hu_676301528b69c19f.png" alt="diagram showing 4 different rsync setups: (1) rsync --daemon (2) rsync -e ssh; rsync://server/module/dir (3) rsync server:/some/path (4) rsync /src" title="diagram showing 4 different rsync setups: (1) rsync --daemon (2) rsync -e ssh; rsync://server/module/dir (3) rsync server:/some/path (4) rsync /src" width="600" height="547" /></a>
 
 
 

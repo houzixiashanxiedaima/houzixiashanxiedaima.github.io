@@ -34,9 +34,9 @@ print(tre.regex())
 <pre>(?:java|type)script</pre>
 <h2>HCPCS examples</h2>
 <p>As mentioned at the top of the post, ripgrep failed to search on a list of ICD-10 codes. The list of HCPCS codes is about 10x smaller, and more compressible. Ripgrep was able to fit all HCPCS codes into a single regex and was able to search the test file much faster than grep. The command</p>
-<pre>grep -w -F -o -f icd10codes.txt notes.txt</pre>
+<pre>grep -w -F -o -f hcpcs.txt notes.txt</pre>
 <p>took 73.426 seconds to execute, while the command</p>
-<pre>rg -w -F -o -f icd10codes.txt notes.txt</pre>
+<pre>rg -w -F -o -f hcpsc.txt notes.txt</pre>
 <p>took 0.078 seconds, three orders of magnitude faster.</p>
 <p>The following code will read a list of HCPCS codes from a file and create a regular expression.</p>
 <pre>tre = TRE()

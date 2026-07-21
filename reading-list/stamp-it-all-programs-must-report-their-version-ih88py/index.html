@@ -40,7 +40,7 @@ dishwasher:</p>
 
 
 
-<a href="https://michael.stapelberg.ch/posts/2026-04-05-stamp-it-all-programs-must-report-their-version/2026-04-04-feuermurmel-dishwasher-versioning.jpg" target="_blank" rel="noopener noreferrer"><img src="https://michael.stapelberg.ch/posts/2026-04-05-stamp-it-all-programs-must-report-their-version/2026-04-04-feuermurmel-dishwasher-versioning_hu_9dd1db4e61dd3ec0.jpg" alt="a dishwasher, with many precise bits of version information" title="a dishwasher, with many precise bits of version information" width="600" height="450" /></a>
+<a href="https://michael.stapelberg.ch/posts/2026-04-05-stamp-it-all-programs-must-report-their-version/2026-04-04-feuermurmel-dishwasher-versioning.jpg" target="_blank" rel="noopener noreferrer"><img src="https://michael.stapelberg.ch/posts/2026-04-05-stamp-it-all-programs-must-report-their-version/2026-04-04-feuermurmel-dishwasher-versioning_hu_c593ca2b227d5973.jpg" alt="a dishwasher, with many precise bits of version information" title="a dishwasher, with many precise bits of version information" width="600" height="450" /></a>
 
 
 
@@ -656,7 +656,7 @@ and no VCS buildinfo, because it currently suffers from the same gap as Nix:</p>
 
 
 
-<a href="https://michael.stapelberg.ch/posts/2026-04-05-stamp-it-all-programs-must-report-their-version/2026-03-29-gokrazy-scan2drive-rsync.png" target="_blank" rel="noopener noreferrer"><img src="https://michael.stapelberg.ch/posts/2026-04-05-stamp-it-all-programs-must-report-their-version/2026-03-29-gokrazy-scan2drive-rsync_hu_16984c2d1be3db9c.png" alt="gokrazy scan2drive rsync" title="gokrazy scan2drive rsync" width="600" height="433" /></a>
+<a href="https://michael.stapelberg.ch/posts/2026-04-05-stamp-it-all-programs-must-report-their-version/2026-03-29-gokrazy-scan2drive-rsync.png" target="_blank" rel="noopener noreferrer"><img src="https://michael.stapelberg.ch/posts/2026-04-05-stamp-it-all-programs-must-report-their-version/2026-03-29-gokrazy-scan2drive-rsync_hu_8f704022ad0a233b.png" alt="gokrazy scan2drive rsync" title="gokrazy scan2drive rsync" width="600" height="433" /></a>
 
 
 
@@ -671,38 +671,38 @@ extracts the revision from the Go module version of the main module
 <p>What are the other cases? These examples illustrate the scenarios I usually deal
 with:</p>
 <table>
-  <thead>
-      <tr>
-          <th>source (built from)</th>
-          <th>buildinfo (stamped into program)</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>directory (no git)</td>
-          <td>module <code>(devel)</code></td>
-      </tr>
-      <tr>
-          <td>Go module</td>
-          <td>module <code>v0.3.1-0.20260105212325-5347ac5f5bcb</code></td>
-      </tr>
-      <tr>
-          <td>directory (git)</td>
-          <td>module <code>v0.0.0-20260131174001-ccb1d233f2a4+dirty</code></td>
-      </tr>
-      <tr>
-          <td></td>
-          <td><code>vcs.revision=ccb1d233f2a43e9118b9146b3c9a5ded1efb7551</code></td>
-      </tr>
-      <tr>
-          <td></td>
-          <td><code>vcs.time=2026-01-31T17:40:01Z</code></td>
-      </tr>
-      <tr>
-          <td></td>
-          <td><code>vcs.modified=true</code></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>source (built from)</th>
+					<th>buildinfo (stamped into program)</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>directory (no git)</td>
+					<td>module <code>(devel)</code></td>
+			</tr>
+			<tr>
+					<td>Go module</td>
+					<td>module <code>v0.3.1-0.20260105212325-5347ac5f5bcb</code></td>
+			</tr>
+			<tr>
+					<td>directory (git)</td>
+					<td>module <code>v0.0.0-20260131174001-ccb1d233f2a4+dirty</code></td>
+			</tr>
+			<tr>
+					<td></td>
+					<td><code>vcs.revision=ccb1d233f2a43e9118b9146b3c9a5ded1efb7551</code></td>
+			</tr>
+			<tr>
+					<td></td>
+					<td><code>vcs.time=2026-01-31T17:40:01Z</code></td>
+			</tr>
+			<tr>
+					<td></td>
+					<td><code>vcs.modified=true</code></td>
+			</tr>
+	</tbody>
 </table>
 
 
@@ -715,12 +715,12 @@ with:</p>
 Go code to programmatically read the version
 <div><pre><code><span><span><span>package</span><span> </span>version<span>
 </span></span></span><span><span><span>
-</span></span></span><span><span><span></span><span>import</span><span> </span>(<span>
+</span></span></span><span><span><span>import</span><span> </span>(<span>
 </span></span></span><span><span><span>	</span><span>"runtime/debug"</span><span>
 </span></span></span><span><span><span>	</span><span>"strings"</span><span>
-</span></span></span><span><span><span></span>)<span>
+</span></span></span><span><span>)<span>
 </span></span></span><span><span><span>
-</span></span></span><span><span><span></span><span>func</span><span> </span><span>readParts</span>()<span> </span>(revision<span> </span><span>string</span>,<span> </span>modified,<span> </span>ok<span> </span><span>bool</span>)<span> </span>{<span>
+</span></span></span><span><span><span>func</span><span> </span><span>readParts</span>()<span> </span>(revision<span> </span><span>string</span>,<span> </span>modified,<span> </span>ok<span> </span><span>bool</span>)<span> </span>{<span>
 </span></span></span><span><span><span>	</span>info,<span> </span>ok<span> </span><span>:=</span><span> </span>debug.<span>ReadBuildInfo</span>()<span>
 </span></span></span><span><span><span>	</span><span>if</span><span> </span>!ok<span> </span>{<span>
 </span></span></span><span><span><span>		</span><span>return</span><span> </span><span>""</span>,<span> </span><span>false</span>,<span> </span><span>false</span><span>
@@ -740,9 +740,9 @@ Go code to programmatically read the version
 </span></span></span><span><span><span>		</span><span>return</span><span> </span>v[idx<span>+</span><span>1</span>:],<span> </span><span>false</span>,<span> </span><span>true</span><span>
 </span></span></span><span><span><span>	</span>}<span>
 </span></span></span><span><span><span>	</span><span>return</span><span> </span><span>"&lt;BUG&gt;"</span>,<span> </span><span>false</span>,<span> </span><span>false</span><span>
-</span></span></span><span><span><span></span>}<span>
+</span></span></span><span><span>}<span>
 </span></span></span><span><span><span>
-</span></span></span><span><span><span></span><span>func</span><span> </span><span>Read</span>()<span> </span><span>string</span><span> </span>{<span>
+</span></span></span><span><span><span>func</span><span> </span><span>Read</span>()<span> </span><span>string</span><span> </span>{<span>
 </span></span></span><span><span><span>	</span>revision,<span> </span>modified,<span> </span>ok<span> </span><span>:=</span><span> </span><span>readParts</span>()<span>
 </span></span></span><span><span><span>	</span><span>if</span><span> </span>!ok<span> </span>{<span>
 </span></span></span><span><span><span>		</span><span>return</span><span> </span><span>"&lt;not okay&gt;"</span><span>
@@ -753,7 +753,7 @@ Go code to programmatically read the version
 </span></span></span><span><span><span>	</span>}<span>
 </span></span></span><span><span><span>
 </span></span></span><span><span><span>	</span><span>return</span><span> </span><span>"https://github.com/gokrazy/tools/commit/"</span><span> </span><span>+</span><span> </span>revision<span> </span><span>+</span><span> </span>modifiedSuffix<span>
-</span></span></span><span><span><span></span>}<span>
+</span></span></span><span><span>}<span>
 </span></span></span></code></pre></div>
 <p>This is what it looks like in practice:</p>
 <pre><code>% go install github.com/gokrazy/tools/cmd/gok@latest
