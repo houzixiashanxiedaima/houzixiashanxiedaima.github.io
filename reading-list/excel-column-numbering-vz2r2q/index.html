@@ -30,6 +30,7 @@ def num_to_label(n):
         letters.append(ordinal_to_letter(remainder + 1))
     return ''.join(reversed(letters))
 </pre>
+<p>Here’s an <a href="https://www.johndcook.com/excel_labels.html" target="_blank" rel="noopener noreferrer">online calculator</a> based on the code above.</p>
 <h2>Tests</h2>
 <p>The following code verifies the assertions above about the maximum number of Excel columns over time.</p>
 <pre>assert(num_to_label(256) == "IV")

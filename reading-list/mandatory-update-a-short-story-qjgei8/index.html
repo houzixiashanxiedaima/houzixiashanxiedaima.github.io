@@ -52,7 +52,7 @@
 <p>"Bet," Julian says. And a moment later, "Okay sweet, I'm connected."</p>
 <p>So far, the Car Hacking Village is <em>by far</em> my least favorite part about DEF CON. And Julian Cross is an asshole. He's a VP? I wouldn't be surprised if he knows my father personally, or if he's just as full of shit about his tech skills as my father is. Hmm...</p>
 <p>On a whim, I walk away like I'm leaving the Car Hacking Village, but I angle myself so I can look at Julian's laptop screen. He's got an Alex Jones video on Rumble open in a Chrome tab.</p>
-<p>I find an open table a few feet away and pull out my laptop. I switch my WiFi device to monitor mode and open WireShark, capturing traffic on <em>DefCon-Open</em>. I filter the traffic by DNS so I can see the domain names that people are loading. A few DNS queries for subdomains of <em>rumble.com</em> scroll bar. <em>Got you, asshole</em>. I note his local IP address.</p>
+<p>I find an open table a few feet away and pull out my laptop. I switch my WiFi device to monitor mode and open WireShark, capturing traffic on <em>DefCon-Open</em>. I filter the traffic by DNS so I can see the domain names that people are loading. A few DNS queries for subdomains of <em>rumble.com</em> scroll by. <em>Got you, asshole</em>. I note his local IP address.</p>
 <p><em>But I should mention, it's</em> really <em>technical.</em> I repeat his words in my head as I connect to the open network myself and then run an nmap scan against his laptop.</p>
 <p>Two hours later, I capture the biggest flag of my entire fucking life! I popped a shell on his laptop, and now I can browse his filesystem, download his data, and run whatever programs I want. <em>Slay!</em></p>
 <p>The nmap scan showed me that Mister VP of Engineering Infrastructure is running Windows, and he sure has a lot of ports open on his laptop – he must have disabled his Windows Firewall. It turns out, he's running software called XAMPP, which sets up an Apache, PHP and MySQL environment for developers.</p>
@@ -171,18 +171,18 @@
 <p>I order a Moscow Mule. When the bartender hands me the drink, I start systematically circling the room, sipping my cocktail, looking for Julian.</p>
 <p>It takes over half an hour of searching – it's 1am at this point – before I finally see him. He's extremely drunk, standing with a group of dudes, talking to a girl.</p>
 <p>"How you liking your first DEF CON?" he asks the girl, his voice a little slurred. He's standing uncomfortably close to her.</p>
-<p>I look him over and don't immediately see any keys on his belt. But he has one hand a jacket that's laying over the side of a couch, his other hand holding a beer. I bet this is his jacket.</p>
+<p>I look him over and don't immediately see any keys on his belt. But he has one hand on a jacket that's laying over the side of a couch, his other hand holding a beer. I bet this is his jacket.</p>
 <p>Without thinking it through, I finish off my Moscow Mule in one big sip, and smash my body into his arm, knocking his beer to the ground.</p>
 <p>"Oh my god, I'm so sorry!" I say quickly. "I can be pretty clumsy when I'm drunk. Hey, let me get you another beer!"</p>
 <p>While he's looking down at the beer that's now soaking his clothes, I grab his jacket and speed off towards the bar. "Uh, sure," he calls after me.</p>
 <p>While waiting in line at the bar, my heart pounding, I search his jacket pockets. There it is, a keyring. With a Yubikey on it. I remove the Yubikey and pocket it, putting the rest of the keys back where they were. I order two beers at the bar.</p>
 <p>I toss Julian's jacket back on the couch right before he sees me, and then I hand him the beer. "Sorry again about that," I say. "Hey, cheers!" and we clink glasses.</p>
 <p>"Eh, it's fine. Hey, you're that chick from yesterday!" he says, recognizing me. "Your boyfriend was gonna play CTF or something, right?"</p>
-<p>"Yup, that's me," I say. "CTF is <em>definitely</em> way to technical for me." I giggle, trying not to gag. "Ok well have a good evening!" I say, and hurry off to the opposite side of the bar.</p>
+<p>"Yup, that's me," I say. "CTF is <em>definitely</em> way too technical for me." I giggle, trying not to gag. "Ok well have a good evening!" I say, and hurry off to the opposite side of the bar.</p>
 <p>I take a sip of my beer, and then pull the Yubikey out of my pocket, cupping it in my hand, and look down at it. <em>Holy fucking shit, I can't believe that worked.</em></p>
-<p>Well, it's now it or never.</p>
+<p>Well, it's now or never.</p>
 <p>I find a corner of the club that's already occupied by a few hackers nerding out on their laptops. I squeeze into the one empty seat, place my beer on the low table in front of me, and pull out my own laptop.</p>
-<p>I plug in Yubikey. I type the command to create the signed git tag, take a deep breath, and press enter. A dialog appears saying, "Please enter your PIN (3 tries remaining):"</p>
+<p>I plug in the Yubikey. I type the command to create the signed git tag, take a deep breath, and press enter. A dialog appears saying, "Please enter your PIN (3 tries remaining):"</p>
 <p><em>Fuck.</em> Of course, his Yubikey is protected by a PIN. And if I guess wrong three times, it permanently locks. What am I gonna do?</p>
 <p><em>Think, Nyx.</em> I glance across the party and spot Julian, now typing on his phone. People re-use PINs all the time. Maybe Julian's Yubikey PIN is the same as the passcode he uses to unlock his phone. I need to watch him unlock his phone. With any luck, he'll use a passcode instead of biometrics, and with even more luck, he'll be the kind of guy that reuses passwords.</p>
 <p>I spend the next 10 minutes preparing a really simple plan. This probably won't work, but it's the only idea I have.</p>
@@ -191,7 +191,7 @@
 <p>But I don't press enter just yet.</p>
 <p>My open laptop in hand, I shove my way through the crowd until I'm standing right behind Julian. He's holding his phone in his hand, but not looking at it. I pull out my phone, open the camera app, and start recording a video, and then I press enter.</p>
 <p>Julian's phone buzzes, and he glances down at it. He puts his phone to his face, sees there's a notification, and types in a passcode. Is that <em>really</em> his passcode? He starts typing a response.</p>
-<p>It took me rewatching the video a few times to be sure, and yup, he passcode is 2-4-6-8-1-0.</p>
+<p>It took me rewatching the video a few times to be sure, and yup, his passcode is 2-4-6-8-1-0.</p>
 <p>I walk a few feet away until I find a table I can put my laptop down. Without waiting, I run the command to create a signed git tag again. "Please enter your PIN (3 tries remaining):"</p>
 <p>I type 246810, press enter, and the command completes successfully.</p>
 <p>I push my commit to GitHub.</p>
@@ -201,7 +201,7 @@
 
 <p>It's Sunday morning, and everyone is talking about the Volta hack.</p>
 <p>Not just the DEF CON crowd. I mean <em>everyone</em>. The bellhop at my hotel. Random tourists on the street. And yes, the DEF CON hackers too.</p>
-<p>Every single Volta in the world, all nine millions of them, are <em>bricked</em>. Volta doesn't have a plan for fixing them yet. It's looking like the only way to get the cars working again is to physically tow each one to a Volta dealership.</p>
+<p>Every single Volta in the world, all nine million of them, are <em>bricked</em>. Volta doesn't have a plan for fixing them yet. It's looking like the only way to get the cars working again is to physically tow each one to a Volta dealership.</p>
 <p>There's a flood of messages in my Bug Bounty Besties group about it, but I just stay silent. People are talking about it in other Signal groups I'm part of too. It's on the front page of Reddit. It's at the top of Google News.</p>
 <p>I walk into the Car Hacking Village, and hundreds of people are clustered around the Volta Model Z. I elbow my way to the front and lean in so I can see the display.</p>
 <p>When the infotainment system boots, it normally shows a Volta for a second, and then continues the boot process. Now, though, it just shows the image that I chose, and it aborts the boot process, leaving the car broken.</p>
