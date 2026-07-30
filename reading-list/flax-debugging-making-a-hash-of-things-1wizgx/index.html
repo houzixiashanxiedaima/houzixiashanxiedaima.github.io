@@ -1,0 +1,343 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.1.5"><!-- Core SEO --><meta name="description" content="I was debugging an issue with a JAX/Flax NNX training loop the other day, and found a neat
+little trick to help debug it.  Specifically, I wanted to see if the issue
+was with my model, my loss functio"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/flax-debugging-making-a-hash-of-things-1wizgx/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/flax-debugging-making-a-hash-of-things-1wizgx/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/flax-debugging-making-a-hash-of-things-1wizgx/"><meta property="og:title" content="Flax debugging: making a hash of things"><meta property="og:description" content="I was debugging an issue with a JAX/Flax NNX training loop the other day, and found a neat
+little trick to help debug it.  Specifically, I wanted to see if the issue
+was with my model, my loss functio"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="I was debugging an issue with a JAX/Flax NNX training loop the other day, and found a neat
+little trick to help debug it.  Specifically, I wanted to see if the issue
+was with my model, my loss functio"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/flax-debugging-making-a-hash-of-things-1wizgx/"><meta property="twitter:title" content="Flax debugging: making a hash of things"><meta property="twitter:description" content="I was debugging an issue with a JAX/Flax NNX training loop the other day, and found a neat
+little trick to help debug it.  Specifically, I wanted to see if the issue
+was with my model, my loss functio"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Flax debugging: making a hash of things</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Flax debugging: making a hash of things","item":"https://blog.yuyins.com/reading-list/flax-debugging-making-a-hash-of-things-1wizgx/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-k2qn5omv]{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip[data-astro-cid-k2qn5omv]:after{content:none!important}.chip--sm[data-astro-cid-k2qn5omv]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-k2qn5omv]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-k2qn5omv]{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}.chip--interactive[data-astro-cid-k2qn5omv]:hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}.chip--active[data-astro-cid-k2qn5omv],.chip[data-astro-cid-k2qn5omv].active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed[data-astro-cid-k2qn5omv]{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip[data-astro-cid-k2qn5omv]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.b182zHy5.css"><style>.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem;font-style:italic}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;font-family:monospace;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-07-30" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-07-30</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-29" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-29</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-28" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-28</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-07-28" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-07-28</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-27" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-27</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-26" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-26</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.PHDZRRIC.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>Flax debugging: making a hash of things</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://gilesthomas.com/" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag" data-astro-cid-k2qn5omv="true"> gilesthomas.com </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年6月17日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-veycvx62><p>I was debugging an issue with a JAX/Flax NNX training loop the other day, and found a neat
+little trick to help debug it.  Specifically, I wanted to see if the issue
+was with my model, my loss function, my optimiser settings, or the "plumbing" of the
+training loop itself -- were gradients actually coming through and being applied to the parameters?</p>
+
+<p>I could print out the loss and the gradients, but printing out the parameters to see
+if they were changing was unhelpful -- any given update might only change a small number
+of parameters, or might change them such a small amount that I'd not notice -- especially given
+that the model had 77 million of them!</p>
+
+<p>Let's take a look.</p>
+<h3>The world's worst LLM</h3>
+
+<p>I am building an LLM from scratch in JAX and Flax NNX, and at this stage I'm trying to
+get the training loop right.  As a simple test, I've just implemented the "shell" of
+the LLM -- the token embeddings on the input side, and the final linear layer for an
+output head, wired directly together.  My plan was to train that so that given a sequence, instead of predicting
+next tokens for each position, it would "predict" the sequence itself -- that is, I might
+train it with the input</p>
+
+<div>
+<pre><span></span><code><span>The fat cat sat on the mat</span>
+</code></pre>
+</div>
+
+<p>...and the target</p>
+
+<div>
+<pre><span></span><code><span>The fat cat sat on the mat</span>
+</code></pre>
+</div>
+
+<p>...rather than the normal setup for an LLM, where you feed it</p>
+
+<div>
+<pre><span></span><code><span>The fat cat sat on the</span>
+</code></pre>
+</div>
+
+<p>...and give it targets of</p>
+
+<div>
+<pre><span></span><code><span>fat cat sat on the mat</span>
+</code></pre>
+</div>
+
+<p>So, in LLM terms, I'd be training a model to project from vocab space to a learned embedding
+space where each token had a distinct-enough embedding for the output head to be able
+to reliably project back to logits in vocab space.  There's
+<a href="https://www.gilesthomas.com/2025/05/llm-from-scratch-15-from-context-vectors-to-logits" target="_blank" rel="noopener noreferrer">a bit of background here if that was all Greek to you</a>.</p>
+
+<p>Here's the core part of the code I was working with, the <code>train_step</code> function, which
+seems to be the traditional JAX name for the JITted part of your code that does the
+forward pass through the model, works out the gradients, and then applies them to update
+the model:</p>
+
+<div>
+<pre><span></span><code><span>@jax</span><span>.</span><span>jit</span>
+<span>def</span><span> </span><span>train_step</span><span>(</span><span>model</span><span>,</span> <span>optimizer</span><span>,</span> <span>inputs</span><span>,</span> <span>targets</span><span>):</span>
+    <span>loss</span><span>,</span> <span>grads</span> <span>=</span> <span>nnx</span><span>.</span><span>value_and_grad</span><span>(</span><span>calculate_loss</span><span>)(</span><span>model</span><span>,</span> <span>inputs</span><span>,</span> <span>targets</span><span>)</span>
+    <span>optimizer</span><span>.</span><span>update</span><span>(</span><span>model</span><span>,</span> <span>grads</span><span>)</span>
+    <span>return</span> <span>loss</span>
+</code></pre>
+</div>
+
+<p>I'd based it on the <a href="https://flax.readthedocs.io/en/stable/#basic-usage" target="_blank" rel="noopener noreferrer">"Basic Usage" example</a> that's
+currently right there on the front page of the Flax site.  Seasoned Flax veterans will probably
+spot the issue right away, but it wasn't obvious to me -- so it was time to dig in.</p>
+
+<h3>Dealing with loss</h3>
+
+<p>The problem was that loss was not dropping -- indeed, taken to two decimal places, it was stuck at 10.82. The digits
+to the right of that changed for each batch, but the first four did not.  Now, this model was
+using the GPT-2 tokeniser, and 10.82 is exactly the loss that you'd expect if the model
+was essentially guessing randomly -- if you convert it to
+<a href="https://www.gilesthomas.com/2025/10/llm-from-scratch-21-perplexed-by-perplexity" target="_blank" rel="noopener noreferrer">perplexity</a> by
+calculating e10.82, you get about 50,011 -- which is very close to the GPT-2
+vocab size of 50,257.  Perplexity is, loosely, the number of tokens that the model
+was trying to choose between for a typical input -- so a perplexity equal to the vocab size
+is what you'd expect of a random model that is getting it right about one in 50,257
+times.</p>
+
+<p>That said, getting that loss consistently was a solid validation of my loss function!
+It's vanishingly unlikely that it would have been getting that specific number so consistently
+if I'd made a mess of that.  The tiny variations I was seeing in the third and subsequent
+decimal places would make sense, as they could easily be due to the variations in the
+contents of the different batches.</p>
+
+<h3>Gradient descent into madness</h3>
+
+<p>So was it that the gradients were somehow zero, or NaNs, or something else that couldn't
+be usefully applied to the model by the optimiser?  I printed them out in the <code>train_step</code>
+function (removing the <code>jit</code> decorator, as otherwise the <code>print</code>s would only get executed
+in the initial JIT pass through the function to compile it -- not when it had actual data <sup><a href="https://www.gilesthomas.com/2026/06/hashing-jax-parameters#fn-1" target="_blank" rel="noopener noreferrer">1</a></sup>).</p>
+
+<p>The result was values like this:</p>
+
+<div>
+<pre><span></span><code><span>State({</span>
+<span>  'output_head': {</span>
+<span>    'kernel': Param( # 38,597,376 (154.4 MB)</span>
+<span>      value=Array([[-2.6879393e-06, -1.2799728e-04,  2.6441864e-09, ...,</span>
+<span>              -1.0780521e-09, -1.9232946e-09,  1.2057198e-04],</span>
+<span>             [ 7.2428256e-06, -9.0873800e-05,  1.9621261e-08, ...,</span>
+<span>               1.9959407e-08,  2.0515712e-08, -1.1401048e-06],</span>
+<span>             [-2.4080187e-05,  1.0717572e-04, -4.7910085e-09, ...,</span>
+<span>              -7.3136892e-09, -5.4990306e-09,  1.4717734e-04],</span>
+<span>             ...,</span>
+<span>             [ 1.9500087e-05,  1.4264552e-05, -3.0880422e-08, ...,</span>
+<span>              -3.0595814e-08, -3.7087858e-08, -1.2066610e-06],</span>
+<span>             [ 1.8085115e-05,  7.6247423e-05, -3.0720415e-08, ...,</span>
+<span>              -3.1052533e-08, -3.1693808e-08, -9.7857817e-05],</span>
+<span>             [ 5.2281484e-06, -1.4398852e-04,  6.2573882e-08, ...,</span>
+<span>               5.5977843e-08,  6.6571232e-08, -1.0639715e-05]], dtype=float32)</span>
+<span>    )</span>
+<span>  },</span>
+<span>  ...</span>
+</code></pre>
+</div>
+
+<p>Those looked plausible enough -- pretty small, but not so tiny that I'd expect them
+to have no effect at all with my learning rate of 0.0014.  It was time to dig into
+the training loop's plumbing.</p>
+
+<h3>Plumbing the depths</h3>
+
+<p>The obvious suspect was the update step -- was that call to <code>optimizer.update</code> actually changing
+the parameters at all?  Flax's NNX API is a bit odd compared to the normal
+<a href="https://www.gilesthomas.com/2026/05/on-first-looking-into-jax" target="_blank" rel="noopener noreferrer">JAX functional way of doing things</a>.
+In vanilla JAX code you would expect to do something like this to apply gradients:</p>
+
+<div>
+<pre><span></span><code>    <span>new_parameters</span> <span>=</span> <span>jax</span><span>.</span><span>tree</span><span>.</span><span>map</span><span>(</span>
+        <span>lambda</span> <span>p</span><span>,</span> <span>g</span><span>:</span> <span>p</span> <span>-</span> <span>g</span> <span>*</span> <span>learning_rate</span><span>,</span>
+        <span>old_parameters</span><span>,</span>
+        <span>grads</span><span>,</span>
+    <span>)</span>
+</code></pre>
+</div>
+
+<p>That is, you get the new parameters by applying a transformation to the old ones.</p>
+
+<p>NNX, by contrast, is more PyTorch-flavoured.  It updates the parameters in-place,
+using a function with a side effect of mutating one of its parameters:</p>
+
+<div>
+<pre><span></span><code><span>optimizer</span><span>.</span><span>update</span><span>(</span><span>model</span><span>,</span> <span>grads</span><span>)</span>
+</code></pre>
+</div>
+
+<p>...rather than something more functional like this imaginary API:</p>
+
+<div>
+<pre><span></span><code><span>model</span> <span>=</span> <span>optimizer</span><span>.</span><span>apply</span><span>(</span><span>model</span><span>,</span> <span>grads</span><span>)</span>
+</code></pre>
+</div>
+
+<p>I could easily imagine that I'd got something wrong that would break that in-place update, as it has
+the feel of something that would have to be quite delicately implemented on top of a
+functional system like JAX.</p>
+
+<p>But how could I see whether the parameters were changing, when there were 77 million
+of them and they would be being updated (based on gradients like -2.6879393e-06 and
+a learning rate of 1.4e-3) in the ninth decimal place or beyond?  Printing the arrays out
+was a non-starter!</p>
+
+<h3>Hashing it out</h3>
+
+<p>After a little thought, I realised that the solution was to use hashes.  Even tiny
+changes in the parameters' values would change their hashes drastically.  So if the parameters
+were not being updated, as I suspected, I'd see constant hashes.  If they were being updated,
+even by a minuscule amount, then the hashes would change.</p>
+
+<p><a href="https://github.com/jax-ml/jax/discussions/8352" target="_blank" rel="noopener noreferrer">This GitHub discussion</a> pointed me
+in the right direction: if I could get the parameters as pure JAX arrays, I could do this:</p>
+
+<div>
+<pre><span></span><code><span>print</span><span>(</span><span>hash</span><span>(</span><span>np</span><span>.</span><span>asarray</span><span>(</span><span>some_array</span><span>)</span><span>.</span><span>tobytes</span><span>()))</span>
+</code></pre>
+</div>
+
+<p>...where <code>np</code> is just <code>numpy</code>.  That would produce a hash that was stable for the life of
+this run -- the same parameters would always have the same hash, and different ones would
+differ, just as we want.  It could vary from run to run (Python uses different hash seeds in
+each new interpreter), but that wouldn't matter for
+this kind of debugging.</p>
+
+<p>I wasn't sure what the structure of my Flax model's parameters was, but printing them out
+in the training loop told me:</p>
+
+<div>
+<pre><span></span><code><span>Embed( # Param: 38,597,376 (154.4 MB)</span>
+<span>  embedding=Param( # 38,597,376 (154.4 MB)</span>
+<span>    value=Array(shape=(50257, 768), dtype=dtype('float32'))</span>
+<span>  ),</span>
+<span>  ...</span>
+<span>)</span>
+<span>Linear( # Param: 38,597,376 (154.4 MB)</span>
+<span>  kernel=Param( # 38,597,376 (154.4 MB)</span>
+<span>    value=Array(shape=(768, 50257), dtype=dtype('float32'))</span>
+<span>  ),</span>
+<span>  ...</span>
+<span>)</span>
+</code></pre>
+</div>
+
+<p>So, guided by that, I added these lines to the training loop:</p>
+
+<div>
+<pre><span></span><code><span>print</span><span>(</span><span>hash</span><span>(</span><span>np</span><span>.</span><span>asarray</span><span>(</span><span>model</span><span>.</span><span>token_embedding</span><span>.</span><span>embedding</span><span>.</span><span>value</span><span>)</span><span>.</span><span>tobytes</span><span>()))</span>
+<span>print</span><span>(</span><span>hash</span><span>(</span><span>np</span><span>.</span><span>asarray</span><span>(</span><span>model</span><span>.</span><span>output_head</span><span>.</span><span>kernel</span><span>.</span><span>value</span><span>)</span><span>.</span><span>tobytes</span><span>()))</span>
+</code></pre>
+</div>
+
+<p>Obviously copying the arrays around and converting them like that would slow things
+down, but for debugging purposes, it looked solid.</p>
+
+<p>I kicked off the training loop, and the problem was clear:</p>
+
+<div>
+<pre><span></span><code><span>  0%|                         | 43/530640 [00:06&lt;13:39:02, 10.80it/s, loss=10.824, tps=43,576]</span>
+<span>5694185712877458479</span>
+<span>-5759723708627894111</span>
+<span>  0%|                         | 43/530640 [00:06&lt;13:39:02, 10.80it/s, loss=10.824, tps=43,897]</span>
+<span>5694185712877458479</span>
+<span>-5759723708627894111</span>
+</code></pre>
+</div>
+
+<p>...and so on.  The hashes were not changing, so the model's parameters were not being
+updated, even by a tiny amount. Gotcha!</p>
+
+<p>The problem turned out, as I had suspected, to be related to the in-place updates that
+NNX does.  Like I said earlier, I'd based my training loop on the "Basic Usage" example on the Flax site --
+but I'd messed up one important thing.  I had this:</p>
+
+<div>
+<pre><span></span><code><span>@jax</span><span>.</span><span>jit</span>
+<span>def</span><span> </span><span>train_step</span><span>(</span><span>model</span><span>,</span> <span>optimizer</span><span>,</span> <span>inputs</span><span>,</span> <span>targets</span><span>):</span>
+    <span>loss</span><span>,</span> <span>grads</span> <span>=</span> <span>nnx</span><span>.</span><span>value_and_grad</span><span>(</span><span>calculate_loss</span><span>)(</span><span>model</span><span>,</span> <span>inputs</span><span>,</span> <span>targets</span><span>)</span>
+    <span>optimizer</span><span>.</span><span>update</span><span>(</span><span>model</span><span>,</span> <span>grads</span><span>)</span>
+    <span>return</span> <span>loss</span>
+</code></pre>
+</div>
+
+<p>...and they had this:</p>
+
+<div>
+<pre><span></span><code><span>@nnx</span><span>.</span><span>jit</span>  <span># automatic state propagation</span>
+<span>def</span><span> </span><span>train_step</span><span>(</span><span>model</span><span>,</span> <span>optimizer</span><span>,</span> <span>x</span><span>,</span> <span>y</span><span>):</span>
+  <span>loss_fn</span> <span>=</span> <span>lambda</span> <span>model</span><span>:</span> <span>((</span><span>model</span><span>(</span><span>x</span><span>)</span> <span>-</span> <span>y</span><span>)</span> <span>**</span> <span>2</span><span>)</span><span>.</span><span>mean</span><span>()</span>
+  <span>loss</span><span>,</span> <span>grads</span> <span>=</span> <span>nnx</span><span>.</span><span>value_and_grad</span><span>(</span><span>loss_fn</span><span>)(</span><span>model</span><span>)</span>
+  <span>optimizer</span><span>.</span><span>update</span><span>(</span><span>model</span><span>,</span> <span>grads</span><span>)</span>  <span># in-place updates</span>
+  <span>return</span> <span>loss</span>
+</code></pre>
+</div>
+
+<p>You can see a number of differences -- for example, they're baking the inputs and targets into
+the lambda they're using for the loss function through a lexical closure, and that means
+that they're only passing in the model to the version of it wrapped in <code>value_and_grad</code>.  But
+none of that matters!   The real difference is actually nicely highlighted with a comment,
+but I'd completely managed to miss it.  Right at the start, where I had <code>@jax.jit</code>, they had this:</p>
+
+<div>
+<pre><span></span><code><span>@nnx</span><span>.</span><span>jit</span>  <span># automatic state propagation</span>
+</code></pre>
+</div>
+
+<p>It 100% makes sense that in order to support this kind of non-functional, in-place
+updating of the model's parameters, you have to have a modified version of the JIT
+decorator.  And I was just using the standard, functional pure-JAX one.</p>
+
+<p>Fixing that fixed the problem:</p>
+
+<div>
+<pre><span></span><code><span>  0%|                         | 1/530640 [00:06&lt;903:18:25,  6.13s/it, loss=10.824, tps=1,003]</span>
+<span>5024998356359528747</span>
+<span>-4835662927486742764</span>
+<span>  0%|                         | 2/530640 [00:06&lt;397:16:33,  2.70s/it, loss=10.785, tps=1,914]</span>
+<span>6231090084827524676</span>
+<span>8293831317336780907</span>
+<span>  0%|                         | 3/530640 [00:06&lt;228:14:32,  1.55s/it, loss=10.741, tps=2,791]</span>
+<span>7896237091035346857</span>
+<span>-7117477486466304738</span>
+</code></pre>
+</div>
+
+<p>The hashes were changing!  And even better, if you scroll to the right you'll see
+that loss was slowly dropping.  After 10k or so iterations, I was seeing 0.000: I had my do-nothing "LLM"
+working.</p>
+
+<h3>Wrapping up</h3>
+
+<p>A satisfying debugging journey -- and while I don't think I'll make this specific
+mistake in the future, I think that the parameter-hashing trick is actually a really useful
+trick for the toolbox.  If you're uncertain as to whether your parameters are being
+updated, just looking at them probably won't help.  But looking at their hashes can help
+you find out whether anything is changing.</p>
+
+<p>And I think that the pattern that I used to zoom in on it is a useful one, too.  I always
+track loss, so it's a good starting point (indeed, seeing that it wasn't falling was what
+told me that something was going wrong).  But checking that it has a sane -- or ideally, as
+in this case, a meaningful -- value is a nice sanity check that we have a working loss function
+and a model that isn't doing something completely pathological.  Moving on from there to
+checking that some kind of gradients are flowing through is a solid next move (and might
+become increasingly interesting with deeper models where <a href="https://www.gilesthomas.com/2026/02/llm-from-scratch-32b-interventions-gradient-clipping" target="_blank" rel="noopener noreferrer">they can vanish or explode</a>).
+Then finally we can check the parameters -- in particular, are they changing? <sup><a href="https://www.gilesthomas.com/2026/06/hashing-jax-parameters#fn-2" target="_blank" rel="noopener noreferrer">2</a></sup></p>
+
+<p>Let's see how many new tricks I pick up as I work through this LLM project.</p>
+
+<div>
+<hr />
+<ol>
+<li>
+<p>I always forget that <code>jax.debug.print</code> exists -- I could have used that instead,
+and kept the JIT. <a href="https://www.gilesthomas.com/2026/06/hashing-jax-parameters#fnref-1" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+
+<li>
+<p>Something's slightly broken in my brain and I keep reading that as "is our parameters
+changing" <a href="https://www.goodreads.com/quotes/273762-rarely-is-the-question-asked-is-our-children-learning" target="_blank" rel="noopener noreferrer">in George W. Bush's voice</a>.  Maybe I can stop that from happening by inflicting it on
+my readers instead.  You're welcome. <a href="https://www.gilesthomas.com/2026/06/hashing-jax-parameters#fnref-2" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+</ol>
+</div></div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://www.gilesthomas.com/2026/06/hashing-jax-parameters" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button> <script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
