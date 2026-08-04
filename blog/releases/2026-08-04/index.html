@@ -1,0 +1,342 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.1.5"><!-- Core SEO --><meta name="description" content="2026-08-04 GitHub Releases 日报：callstack/agent-device、srwi/EverythingToolbar、herdrdev/herdr 等20个项目更新 | 新增发布完整性强制检查，包装若包含私有 @agent-device/* 导入将失败"><meta name="keywords" content="releases, daily, automation, agent-device, EverythingToolbar, herdr, freellmapi, maxun"><meta name="author" content="Release Bot"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/blog/releases/2026-08-04/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/blog/releases/2026-08-04/"><!-- Open Graph / Facebook --><meta property="og:type" content="article"><meta property="og:url" content="https://blog.yuyins.com/blog/releases/2026-08-04/"><meta property="og:title" content="GitHub Releases 日报 - 2026-08-04"><meta property="og:description" content="2026-08-04 GitHub Releases 日报：callstack/agent-device、srwi/EverythingToolbar、herdrdev/herdr 等20个项目更新 | 新增发布完整性强制检查，包装若包含私有 @agent-device/* 导入将失败"><meta property="og:image" content="https://blog.yuyins.com/images/covers/cover-2026-08-04.webp"><meta property="og:image:alt" content="2026-08-04 GitHub Releases 日报：callstack/agent-device、srwi/EverythingToolbar、herdrdev/herdr 等20个项目更新 | 新增发布完整性强制检查，包装若包含私有 @agent-device/* 导入将失败"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><meta property="article:section" content="开源追踪"><meta property="article:published_time" content="2026-08-04T08:00:00.000Z"><meta property="article:tag" content="releases"><meta property="article:tag" content="daily"><meta property="article:tag" content="automation"><meta property="article:tag" content="agent-device"><meta property="article:tag" content="EverythingToolbar"><meta property="article:tag" content="herdr"><meta property="article:tag" content="freellmapi"><meta property="article:tag" content="maxun"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/blog/releases/2026-08-04/"><meta property="twitter:title" content="GitHub Releases 日报 - 2026-08-04"><meta property="twitter:description" content="2026-08-04 GitHub Releases 日报：callstack/agent-device、srwi/EverythingToolbar、herdrdev/herdr 等20个项目更新 | 新增发布完整性强制检查，包装若包含私有 @agent-device/* 导入将失败"><meta property="twitter:image" content="https://blog.yuyins.com/images/covers/cover-2026-08-04.webp"><title>GitHub Releases 日报 - 2026-08-04</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"GitHub Releases 日报 - 2026-08-04","description":"2026-08-04 GitHub Releases 日报：callstack/agent-device、srwi/EverythingToolbar、herdrdev/herdr 等20个项目更新 | 新增发布完整性强制检查，包装若包含私有 @agent-device/* 导入将失败","image":"https://blog.yuyins.com/images/covers/cover-2026-08-04.webp","datePublished":"2026-08-04T08:00:00.000Z","dateModified":"2026-08-04T08:00:00.000Z","author":{"@type":"Person","name":"Release Bot"},"publisher":{"@type":"Organization","name":"雅俗共赏","logo":{"@type":"ImageObject","url":"https://blog.yuyins.com/favicon.svg"}}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"开源追踪","item":"https://blog.yuyins.com/category/开源追踪"},{"@type":"ListItem","position":3,"name":"GitHub Releases 日报 - 2026-08-04","item":"https://blog.yuyins.com/blog/releases/2026-08-04/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><link rel="stylesheet" href="/_astro/_..V5w2bvzs.css"><link rel="stylesheet" href="/_astro/Layout.Cueednxa.css"><style>.tag[data-astro-cid-7t72llso]{background:color-mix(in srgb, var(--muted) 30%, transparent);color:var(--muted-foreground);border-radius:.375rem;align-items:center;gap:.25rem;padding:.125rem .5rem;font-size:.8125rem;line-height:1.5;text-decoration:none;display:inline-flex}.tag--interactive[data-astro-cid-7t72llso]{transition:background-color .2s,color .2s}.tag--interactive[data-astro-cid-7t72llso]:hover{background:color-mix(in srgb, var(--muted) 55%, transparent);color:var(--foreground)}.tag--active[data-astro-cid-7t72llso]{background:color-mix(in srgb, var(--accent) 14%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 78%, var(--foreground));font-weight:600}.tag[data-astro-cid-7t72llso]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.tags-list[data-astro-cid-cm3albtb]{flex-wrap:wrap;gap:.5rem;display:flex}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link nav-link--active" aria-current="page" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-04" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-04</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-08-04" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-08-04</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-03" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-03</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-02" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-02</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-01" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-01</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-07-31" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-07-31</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.PHDZRRIC.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <script type="module" src="/_astro/CodeCopyButton.astro_astro_type_script_index_0_lang.Cy26o95i.js"></script> <script type="module" src="/_astro/HeadingAnchor.astro_astro_type_script_index_0_lang.CacVAAhL.js"></script> <div id="image-lightbox" class="lightbox" hidden data-astro-cid-ot6ntcxl> <button id="lightbox-close" class="lightbox-close" aria-label="关闭" data-astro-cid-ot6ntcxl> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-ot6ntcxl> <line x1="18" y1="6" x2="6" y2="18" data-astro-cid-ot6ntcxl></line> <line x1="6" y1="6" x2="18" y2="18" data-astro-cid-ot6ntcxl></line> </svg> </button> <img id="lightbox-image" class="lightbox-image" src="" alt="" data-astro-cid-ot6ntcxl> </div> <script type="module" src="/_astro/ImageLightbox.astro_astro_type_script_index_0_lang.Builc05r.js"></script> <div class="blog-post-container" data-astro-cid-tldeq5d5> <article class="blog-post" data-pagefind-body data-astro-cid-tldeq5d5> <header class="article-header" data-astro-cid-tldeq5d5> <h1 data-astro-cid-tldeq5d5>GitHub Releases 日报 - 2026-08-04</h1> <div class="article-meta-row" data-astro-cid-tldeq5d5> <a href="/category/开源追踪" class="meta-category" data-astro-cid-tldeq5d5> 开源追踪 </a> <span class="meta-dot" data-astro-cid-tldeq5d5>•</span> <time datetime="2026-08-04T08:00:00.000Z" class="meta-item" data-astro-cid-tldeq5d5> 2026年8月4日 </time> <span class="meta-dot" data-astro-cid-tldeq5d5>•</span> <span class="meta-item" data-astro-cid-tldeq5d5>16 分钟阅读</span> </div> <p class="article-description" data-astro-cid-tldeq5d5>2026-08-04 GitHub Releases 日报：callstack/agent-device、srwi/EverythingToolbar、herdrdev/herdr 等20个项目更新 | 新增发布完整性强制检查，包装若包含私有 @agent-device/* 导入将失败</p> <div class="article-tags-row" data-astro-cid-tldeq5d5> <div class="tags-list" data-astro-cid-cm3albtb> <a href="/blog/tag/releases" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#releases </a><a href="/blog/tag/daily" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#daily </a><a href="/blog/tag/automation" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#automation </a><a href="/blog/tag/agent-device" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#agent-device </a><a href="/blog/tag/EverythingToolbar" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#EverythingToolbar </a><a href="/blog/tag/herdr" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#herdr </a><a href="/blog/tag/freellmapi" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#freellmapi </a><a href="/blog/tag/maxun" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#maxun </a> </div> </div> </header> <!-- Content --> <div class="article-content app-prose" data-astro-cid-tldeq5d5>  <h2 id="2026-08-04-更新摘要">2026-08-04 更新摘要</h2>
+<p><strong>统计信息</strong></p>
+<ul>
+<li>由 gpt-oss-120b (15), Qwen/Qwen3.5-27B (1), gemma-4-31b (1), glm-4.7-flash (1), 本地降级 (2) 总结</li>
+<li>监控仓库: 18 个</li>
+<li>今日更新: 16 个项目 (20 个版本)</li>
+<li>生成时间: 2026-08-05 05:34:55 (北京时间)</li>
+</ul>
+<h3 id="callstackagent-device-v0205-gpt-oss-120b"><a href="https://github.com/callstack/agent-device/releases/tag/v0.20.5" rel="noopener noreferrer" target="_blank">callstack/agent-device v0.20.5</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增发布完整性强制检查，包装若包含私有 @agent-device/* 导入将失败</li>
+<li>将原生 .ad 重放迁移至 @agent-device/ad-replay 包，降低守护进程耦合</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 0.20.4 包装回归导致缺失 @agent-device/ad-script 包的问题，并防止未解析的工作区导入被发布</li>
+</ul>
+<h3 id="srwieverythingtoolbar-300-gpt-oss-120b"><a href="https://github.com/srwi/EverythingToolbar/releases/tag/3.0.0" rel="noopener noreferrer" target="_blank">srwi/EverythingToolbar 3.0.0</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增任务栏搜索框，嵌入 Windows 11 默认任务栏</li>
+<li>支持 Everything 1.5 SDK，搜索结果列出性能大幅提升</li>
+<li>当 Everything 未启动时，工具栏等待其可用再显示结果</li>
+<li>“禁用动画” 设置现覆盖所有剩余动画</li>
+<li>工具提示已统一主题匹配界面风格</li>
+<li>自定义操作规则改为首个匹配即生效，正则表达式不再被拒绝</li>
+<li>搜索查询不再阻塞 UI 线程</li>
+<li>对结果列表、图标加载、窗口动画进行多项性能优化</li>
+<li>通过 Crowdin 改进了多语言翻译</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>若干修复（全局快捷键、管理员运行项、更新通知横幅、任务栏固定图标、设置崩溃、过滤器加载）</li>
+</ul>
+<h3 id="herdrdevherdr-v080-gpt-oss-120b"><a href="https://github.com/herdrdev/herdr/releases/tag/v0.8.0" rel="noopener noreferrer" target="_blank">herdrdev/herdr v0.8.0</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增 herdr —skill 参数，可打印运行时捆绑的代理技能</li>
+<li>新增 ui.pane_scrollbars = false，隐藏终端面板滚动条并回收列宽</li>
+<li>新增 ui.tab_bar_position = “bottom”，将桌面标签栏置于终端面板下方</li>
+<li>新增键绑定帮助的实时过滤，支持 /、Backspace、Ctrl+U</li>
+<li>新增对 Windows 的 experimental.switch_ascii_input_source_in_prefix 支持，兼容韩文输入法</li>
+<li>新增 Grok CLI 会话报告与 grok —resume 本地恢复功能</li>
+<li>新增 Antigravity CLI 会话报告与 agy —conversation 本地恢复功能</li>
+<li>新增空闲交替屏幕代理的自动文本历史读取，并在收集后恢复视口</li>
+<li>新增 workspace.move_block、workspace.reordered 事件以及原子工作树组重新排序</li>
+<li>新增简体中文 README</li>
+<li>改进代理状态指示器在侧边栏、导航器和移动端使用统一标记，消除持续旋转渲染</li>
+<li>隐藏面板输出不再触发不必要的 TUI 渲染，提升性能</li>
+<li>Windows 预览下载现在在同一压缩包中包含 Herdr 与现代 ConPTY 运行时</li>
+<li>工作树的父子节点在侧边栏保持打包在一起，重新排序时亦如此</li>
+<li>文档现在区分稳定、预览和不可变版本的快照</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>实验选项已从 Settings TUI 中移除，需通过配置文件手动设置</li>
+<li>仓库和安装链接已迁移至 herdrdev/herdr，需更新对应 URL</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复面板应用在外观变化、光暗查询、XTWINOPS 查询、图形保持等方面的渲染和响应问题</li>
+<li>修复 Windows 代理检测、启动、退出以及会话恢复的多项问题，包括跨进程边界、登录 shell、PowerShell 参数等</li>
+<li>修复剪贴板行为：复制到远程隧道、空写入不清除内容、复制选择行为等</li>
+<li>修复键盘输入处理：Escape、Shift+Enter、Ctrl+_、物理键记录、重复键等在 Windows 和 Kitty-keyboard 应用中的行为</li>
+<li>修复工作区和工作树的排序、标签、关闭、焦点以及 Git 发现相关的渲染和状态问题</li>
+<li>修复 CLI 与 API 的错误处理：JSON 标志兼容性、服务器未运行错误、非 UTF-8 参数错误等</li>
+<li>修复 Nix 构建、依赖打包以及技能安装时的仓库复制问题</li>
+<li>修复其他细节：复制模式跨长 CJK 行、系统通知 MP3 播放、客户端在 SIGHUP/SIGTERM 时恢复终端状态等</li>
+</ul>
+<h3 id="tashfeenahmedfreellmapi-v067-gpt-oss-120b"><a href="https://github.com/tashfeenahmed/freellmapi/releases/tag/v0.6.7" rel="noopener noreferrer" target="_blank">tashfeenahmed/freellmapi v0.6.7</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>支持一次管理单个密钥，而非整个平台</li>
+<li>可在自定义端点直接添加密钥，无需先注册模型</li>
+<li>自定义端点在仪表盘导入 / 导出后保持</li>
+<li>自定义端点表单中填写的显示名称会被实际应用</li>
+<li>可单独复制列表中的单个密钥，需重新验证密码</li>
+<li>在 Embeddings、Image、Audio 页签新增本月使用量卡片</li>
+<li>使用量条在为零时仍显示，并改名为 “Monthly usage”</li>
+<li>访问仪表盘时会记住上次选择的时间范围</li>
+<li>提供中文 README、install.md、api.md 等文档</li>
+<li>附带桌面安装程序（Windows、macOS）</li>
+</ul>
+<p><strong>安全修复</strong></p>
+<ul>
+<li>修复仪表盘在非 TLS 环境下因 CSP 导致的加载错误，提升安全上下文</li>
+<li>将 Cross-Origin-Opener-Policy 与 Origin-Agent-Cluster 仅在 TLS 或回环地址发送，防止信息泄露</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>复制按钮在不安全来源下改为使用旧版复制并在失败时提示</li>
+<li>通过服务器日志中的代码重置忘记的仪表盘密码</li>
+<li>为需要 multipart/form-data 的 Cloudflare 图像模型添加相应支持</li>
+<li>统一在仪表盘、桌面托盘和容器中显示正确的发布版本号</li>
+<li>更新发布文件携带 latest.yml/latest-mac.yml，供更新器读取</li>
+<li>重试预算提示文字已修改，不再暗示取消进行中的请求</li>
+</ul>
+<h3 id="getmaxunmaxun-v0045-gpt-oss-120b"><a href="https://github.com/getmaxun/maxun/releases/tag/v0.0.45" rel="noopener noreferrer" target="_blank">getmaxun/maxun v0.0.45</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增对 CSV 与 XLSX 文件的文档解析支持</li>
+<li>支持 CSV、XLSX、PDF 文档的 AI 摘要生成功能</li>
+<li>为文档解析添加摘要输出格式</li>
+<li>新增 API 路由以调度机器人运行</li>
+<li>将文档代理状态端点链接至 BYOP</li>
+<li>将 auth proxy 设置说明迁移至文档</li>
+<li>升级依赖（sharp 升至 0.35.3，xlsx 外部化至 CDN）</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 MUI 图标样式、服务器在快速丢弃录音时崩溃、文档 LLM 后处理、模型配置校验、暗模式下时钟图标不可见等问题</li>
+<li>修复依赖不一致问题</li>
+</ul>
+<h3 id="nousresearchhermes-agent-v202683-qwenqwen35-27b"><a href="https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.3" rel="noopener noreferrer" target="_blank">NousResearch/hermes-agent v2026.8.3</a> <sup>Qwen/Qwen3.5-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增流式对话语音模式，支持打断（barge-in）与逐句合成</li>
+<li>新增免提唤醒词功能，支持自定义开放词汇唤醒与多配置文件路由</li>
+<li>语音功能扩展至 WhatsApp、飞书、钉钉、LINE、QQ、微信等平台，支持自动 TTS 回复</li>
+<li>STT 完全可配置化，新增 OpenAI gpt-transcribe 支持与语言解析统一</li>
+<li>新增主动工具结果修剪与每轮微压缩机制，优化大窗口模型上下文管理</li>
+<li>新增 Ghost-skill 防御机制，防止关键技能被误删并优化压缩超时处理</li>
+<li>新增 Prompt 缓存优化，支持 Anthropic 原生缓存与 DeepSeek 网关缓存</li>
+<li>新增审批历史建议功能，支持智能策略配置与连续拒绝熔断机制</li>
+<li>新增 Docker/podman 守护进程重定向命令需审批，限制失控循环次数</li>
+<li>新增终端输出截断恢复、目录变更提示及 Patch 编辑诊断功能</li>
+<li>新增 Vercel AI Gateway 提供商与 Vercel Sandbox 后端支持</li>
+<li>新增 Gemini 3.1 Pro、3.6 Flash、Claude Opus-5 及 DeepSeek v4-flash 模型支持</li>
+<li>新增命令助手密钥源、一键令牌轮换与 Bitwarden 加密缓存支持</li>
+<li>新增 Artifacts 功能，支持版本化卡片、沙箱预览与右侧边栏查看器</li>
+<li>新增 Plugin SDK，包含 Kanban 桌面插件、widget-app SDK 及布局引擎</li>
+</ul>
+<p><strong>安全修复</strong></p>
+<ul>
+<li>修复 Iron-proxy 凭据注入出口防火墙问题</li>
+<li>修复 DNS 固定 SSRF 安全获取与 Slack CDN 白名单问题</li>
+<li>修复配置键红化模式中的 ReDoS 漏洞</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复全双工语音中断在生成和播放期间的问题</li>
+<li>修复桌面端停止操作错误触发下一个排队提示的问题</li>
+<li>修复分支在新聊天中重启丢失问题</li>
+<li>修复虚假远程网关重新认证与跨会话编辑器泄漏问题</li>
+<li>修复 STT 语言识别错误分类问题</li>
+</ul>
+<h3 id="jdxmise-v202681-gpt-oss-120b"><a href="https://github.com/jdx/mise/releases/tag/v2026.8.1" rel="noopener noreferrer" target="_blank">jdx/mise v2026.8.1</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>实验性任务输出缓存支持远程共享，采用本地优先、远程提升并镜像写入。</li>
+<li>任务缓存可通过 token 文件或 GitHub Actions OIDC 进行认证请求。</li>
+<li>新增 task.cache_max_size 与 task.cache_max_age 设置，限制缓存大小和年龄。</li>
+<li>新增 mise cache task 与 mise cache clear —task，可检查并按任务清除缓存。</li>
+<li>新增 mise run —task-cache-explain，展示任务缓存键的结构化信息。</li>
+<li>缓存工件进行校验和验证，加载时审计缓存声明。</li>
+<li>实验性 mise run —affected，仅运行受 Git 更改影响的任务。</li>
+<li>配置写入标志 —file 与 —path 互换，所有写配置命令均可使用。</li>
+<li>mise upgrade —no-prune 保留被替换的版本，兼容外部引用。</li>
+<li>Windows 环境下 PATH 超长警告，避免 cmd.exe 隐式丢失变量。</li>
+<li>vfox Lua 插件支持 strip_components=1 以及排序的文件操作，简化归档解压。</li>
+<li>工具版本可包含冒号，模板解析不再失败。</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>若干修复（配置写入、升级、安装、brew、pipx、prune、任务、schema、文档）</li>
+</ul>
+<h3 id="steipetecodexbar-v0470-gemma-4-31b"><a href="https://github.com/steipete/CodexBar/releases/tag/v0.47.0" rel="noopener noreferrer" target="_blank">steipete/CodexBar v0.47.0</a> <sup>gemma-4-31b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增 Notion AI 商业版和企业版工作区配额追踪，支持滚动和计费周期窗口</li>
+<li>Notion AI 新增基于实际日历月的进度估算</li>
+<li>新增可选的 iCloud 同步功能，支持跨 Mac 同步配置和使用快照（密钥端到端加密）</li>
+<li>z.ai 新增 7 天和 30 天模型使用量图表及详细提示</li>
+<li>新增全局低功耗模式，限制自动刷新频率以节省资源</li>
+<li>新增 CLI 命令 codexbar hooks watch，支持实时监控配额状态并触发钩子</li>
+<li>Claude 新增紧凑型多账号菜单，支持快速切换并直观显示账号健康状态</li>
+<li>菜单栏优化：所有多账号列表现均支持紧凑布局，并恢复进度偏差显示</li>
+</ul>
+<p><strong>安全修复</strong></p>
+<ul>
+<li>增强权限管理：Augment 及 Factory/Cursor 会话文件现仅限所有者读写 (0600)</li>
+<li>优化进程检查机制：使用 libproc 替代 ps/lsof，消除 macOS 频繁的权限请求提示</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 Notion AI 无法正确识别工作区 ID 和手动 Cookie 的问题</li>
+<li>修复多个月度计费供应商（Notion AI, Amp, MiMo 等）的进度计算逻辑，使其匹配实际日历周期</li>
+<li>修复 Cursor 额外用量设置及不支持的额度占位符问题</li>
+<li>修复 Doubao 账户同时订阅 Agent 和 Coding 计划时的显示问题</li>
+<li>修复 Ollama 钥匙串访问拒绝时的引导路径</li>
+<li>修复 Codex 缺失父级发现时的性能问题，减少刷新时的扫描频率</li>
+<li>修复 Claude 在禁用钥匙串时的冷启动加载问题</li>
+<li>修复多种供应商（z.ai, Kimi, Grok, MiMo, StepFun）的速率窗口和历史数据填充问题</li>
+<li>修复 OpenCode Go 读取本地历史时产生 SQLite 侧边文件的问题</li>
+<li>修复 Linux 平台 glibc 的 posix_spawn 兼容性问题</li>
+<li>修复菜单切换时的闪烁、空白行及工具提示残留等 UI 问题</li>
+<li>修复 Alibaba 个人 Token 计划的认证及会话保持问题</li>
+<li>修复 CLI 设置 API 密钥时的错误提示，引导用户正确区分 codex 和 openai 供应商</li>
+</ul>
+<h3 id="fishjarkiss-translator-v2029---v2030-gpt-oss-120b"><a href="https://github.com/fishjar/kiss-translator/releases" rel="noopener noreferrer" target="_blank">fishjar/kiss-translator v2.0.29 - v2.0.30</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>默认 Gemini 接口模型升级为 Gemini 3.6 Flash，支持按模型配置思考模式并提供降级提示</li>
+<li>优化 Firefox 扩展快捷键设置引导，避免跳转至不支持的管理页面</li>
+<li>新增 OrcaRouter 翻译接口，支持 OpenAI 兼容请求、流式输出、批量翻译与推理强度配置</li>
+<li>将默认翻译接口切换为腾讯翻译</li>
+<li>优化 OpenRouter 应用归因、模型列表去重及 Gemini Interactions API 响应解析和重试</li>
+<li>新增目标语言忽略规则，目标语言相同或纯数字时不显示划词翻译按钮，中文默认显示</li>
+<li>划词翻译新增双击触发模式并优化编辑元素识别、按钮定位及全屏视频悬浮按钮隐藏</li>
+<li>新增原文包裹与样式选项，翻译仅显示模式下可在悬停气泡查看原文</li>
+<li>规则新增持久化纯文本翻译选项，悬浮翻译按钮支持站点例外显示规则</li>
+<li>优化输入框换行保留逻辑并新增批量翻译并发控制</li>
+<li>字幕功能新增自动翻译开关、缓存字幕轨道、自动收藏字幕单词</li>
+<li>Playground 新增合并单行换行选项并补充字幕分段测试样本</li>
+<li>增加字幕断句测试功能</li>
+<li>选词收藏新增自动收藏选项，词典提示词模式说明更清晰</li>
+<li>设置页优先使用浏览器原生 API，回退至扩展页面，支持多站点 Options 页和版本检测地址</li>
+<li>Web 构建生成 version.txt，内置规则仅生成规则 JSON，版本检测失败自动回退到 GitHub</li>
+<li>改进 Firefox 内容脚本注入、油猴流式响应兼容性、Trusted Types 回退及悬停译文等多项 UI / 兼容性提升</li>
+</ul>
+<p><strong>安全修复</strong></p>
+<ul>
+<li>升级依赖以修复 CVE-2026-9277 安全漏洞</li>
+<li>升级依赖以修复 CVE-2026-25896 安全漏洞</li>
+<li>同步加密密码支持本地重置，并加强密码轮换的安全校验</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 AI 断句索引偏移导致的字幕时间轴不同步问题</li>
+</ul>
+<h3 id="anomalycoopencode-v11812---v11813-gpt-oss-120b"><a href="https://github.com/anomalyco/opencode/releases" rel="noopener noreferrer" target="_blank">anomalyco/opencode v1.18.12 - v1.18.13</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>本地化更多桌面 UI 文本，包括原生菜单、更新对话框和帮助内容</li>
+<li>在应用和会话视图中添加早期的从右到左布局支持</li>
+<li>添加基于语言环境的复数规则，使翻译的计数和摘要正确</li>
+<li>扩展翻译覆盖范围，新增更多桌面语言支持</li>
+<li>感谢社区贡献者 @amypoolside 添加 Poolside 提供者设置文档</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>GitHub 拉取请求审查现在在上下文中包含拉取请求编号和 URL</li>
+<li>修复多个标签、抽屉、调整大小和标题栏交互中的从右到左布局问题</li>
+<li>修复共享的从右到左 UI 行为，如方向图标和抽屉位置</li>
+<li>没有标题的会话现在回退到生成的名称而不是显示为空白</li>
+<li>将 markdown 解析移至主线程以保持渲染消息时应用更响应</li>
+<li>修复 Azure GPT-5.5+ 在启用推理时的完成请求失败问题</li>
+<li>减少在草稿包含大图片或附件时的 composer 卡顿</li>
+<li>让项目搜索匹配任何已知的最近项目，而不只前五个</li>
+<li>在同一回合恢复流式时，清除时间线中的过期助手错误</li>
+<li>跳过对 v2 服务器的旧版配置读取，以避免虚假配置加载问题</li>
+</ul>
+<h3 id="mihonappmihon-v0203-glm-47-flash"><a href="https://github.com/mihonapp/mihon/releases/tag/v0.20.3" rel="noopener noreferrer" target="_blank">mihonapp/mihon v0.20.3</a> <sup>glm-4.7-flash</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>支持开发，请考虑在 Patreon 或 OpenCollective 上赞助</li>
+</ul>
+<h3 id="huolalatechpage-spy-web-v248-本地降级"><a href="https://github.com/HuolalaTech/page-spy-web/releases/tag/v2.4.8" rel="noopener noreferrer" target="_blank">HuolalaTech/page-spy-web v2.4.8</a> <sup>本地降级</sup></h3>
+<p><em>本次更新暂无详细说明，请查看原始 Release Notes</em></p>
+<h3 id="jesseduffieldlazygit-v0640-gpt-oss-120b"><a href="https://github.com/jesseduffield/lazygit/releases/tag/v0.64.0" rel="noopener noreferrer" target="_blank">jesseduffield/lazygit v0.64.0</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>并发模型全面重构，无已知数据竞争，操作更流畅</li>
+<li>在分支面板中显示 Pull Request 的 Github 检查状态</li>
+<li>长时间操作时显示 spinner 提示</li>
+<li>支持 {{diffContext}} 模板变量用于外部 diff 命令</li>
+<li>UI 细节优化：自动滚动、鼠标拖拽创建范围选择、拖拽重新排序提交 / 待办</li>
+<li>自定义 pager 配置改名为 diff renderer</li>
+<li>滚动滚轮浏览超长 diff 更平滑</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复多项问题，包括状态卡住、合并冲突、侧边面板渲染、git 命令输出噪声、Ctrl+Z 卡顿、并发仓库切换、Windows 全屏崩溃、文件多选、绝对路径检测…</li>
+</ul>
+<h3 id="jandedobbeleeroh-my-posh-v3050-gpt-oss-120b"><a href="https://github.com/JanDeDobbeleer/oh-my-posh/releases/tag/v30.5.0" rel="noopener noreferrer" target="_blank">JanDeDobbeleer/oh-my-posh v30.5.0</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增原生 cursor_style 配置选项</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复配置器应用链接格式错误</li>
+<li>在无 TTY 环境下正确使用 COLUMNS 回退</li>
+<li>在 cmd、bash、nushell 中重置 .Executed 状态</li>
+</ul>
+<h3 id="ekkolearnaihermes-studio-hermes-0200-runtime---v0638-gpt-oss-120b"><a href="https://github.com/EKKOLearnAI/hermes-studio/releases" rel="noopener noreferrer" target="_blank">EKKOLearnAI/hermes-studio hermes-0.20.0-runtime - v0.6.38</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>恢复 Hermes 0.19.0 网站兼容性</li>
+<li>澄清 Hermes Agent 版本和更新信息</li>
+<li>重建群聊代理运行时并优化房间历史</li>
+<li>新增 MiniMax OAuth 登录并实现运行时凭证刷新</li>
+<li>为 MCU 添加自动监听模式</li>
+<li>将 MCU 全局代理切换至 Ekko 语音模式</li>
+<li>减少工作区树缩进以提升界面可读性</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 Windows Runtime Python 主目录问题</li>
+<li>修复 macOS 26 签名钥匙串严格模式兼容性、配置文件导入导出时间、归档处理、桥接模型推理覆盖、TTS 不返回 MP3 的供应商兼容性…</li>
+</ul>
+<h3 id="christitustechwinutil-260804-gpt-oss-120b"><a href="https://github.com/ChrisTitusTech/winutil/releases/tag/26.08.04" rel="noopener noreferrer" target="_blank">ChrisTitusTech/winutil 26.08.04</a> <sup>gpt-oss-120b</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>恢复文档类别及其对应应用</li>
+<li>恢复原生窗口动画并支持自定义标题栏点击检测</li>
+<li>在启动页添加移动端导航</li>
+<li>改进 UI 复选框与切换状态同步</li>
+<li>支持 GitHub 下载指定资产和标签</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复提升权限时的 windev 预发行版问题</li>
+<li>修复弹出安装绑定、对话框标题、预设切换、单选组、JSON 及测试相关错误</li>
+</ul>
+<h2 id="今日播客更新">今日播客更新</h2>
+<ul>
+<li><strong>得体广播站</strong>: <a href="https://www.xiaoyuzhoufm.com/episode/6a715f35ab3a91c24a0f6f54?utm_source=rss" rel="noopener noreferrer" target="_blank">Ep44. 你的癖好我的癖好，好像不一样！</a></li>
+</ul>
+<p><strong>帮助我们改进</strong></p>
+<p>对今日摘要质量有建议？欢迎反馈！</p>
+<ul>
+<li><a href="https://github.com/houzixiashanxiedaima/AstroBlog/issues/new" rel="noopener noreferrer" target="_blank">反馈摘要质量</a></li>
+<li><a href="https://github.com/houzixiashanxiedaima/AstroBlog/issues/new" rel="noopener noreferrer" target="_blank">评价今日日报</a></li>
+</ul>
+<p>您的反馈将帮助我们优化 AI Prompt, 提升摘要准确性</p>  </div> <!-- Footer navigation --> <footer class="article-footer" data-astro-cid-tldeq5d5> <nav class="post-navigation" aria-label="Article navigation" data-astro-cid-tldeq5d5> <div class="nav-prev" data-astro-cid-tldeq5d5> <a href="/blog/ide-updates/2026-08-04" class="nav-link" data-astro-prefetch data-astro-cid-tldeq5d5> <span class="nav-label" data-astro-cid-tldeq5d5><span class="arrow-char" data-astro-cid-tldeq5d5>←</span> 上一篇</span> <span class="nav-title" data-astro-cid-tldeq5d5>IDE / SDK 更新 - 2026-08-04</span> </a> </div> <div class="nav-next" data-astro-cid-tldeq5d5>  </div> </nav> <div class="back-to-list" data-astro-cid-tldeq5d5> <a href="/" class="back-link" data-astro-prefetch data-astro-cid-tldeq5d5>← 返回文章列表</a> </div> </footer> </article> <!-- Table of Contents --> <aside class="toc-aside" data-astro-cid-tldeq5d5> <nav class="toc" aria-label="目录导航" data-astro-cid-p33bl5ka> <div class="toc-header-action" data-astro-cid-p33bl5ka> <a href="/" class="toc-action-link" data-astro-prefetch data-astro-cid-p33bl5ka> <span class="toc-action-icon" data-astro-cid-p33bl5ka>←</span> <span class="toc-action-text" data-astro-cid-p33bl5ka>返回列表</span> </a> </div> <ul class="toc-list" data-astro-cid-p33bl5ka> <li class="toc-item toc-item-3" data-slug="callstackagent-device-v0205-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#callstackagent-device-v0205-gpt-oss-120b" class="toc-link" data-slug="callstackagent-device-v0205-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>callstack/agent-device v0.20.5 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="srwieverythingtoolbar-300-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#srwieverythingtoolbar-300-gpt-oss-120b" class="toc-link" data-slug="srwieverythingtoolbar-300-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>srwi/EverythingToolbar 3.0.0 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="herdrdevherdr-v080-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#herdrdevherdr-v080-gpt-oss-120b" class="toc-link" data-slug="herdrdevherdr-v080-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>herdrdev/herdr v0.8.0 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="tashfeenahmedfreellmapi-v067-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#tashfeenahmedfreellmapi-v067-gpt-oss-120b" class="toc-link" data-slug="tashfeenahmedfreellmapi-v067-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>tashfeenahmed/freellmapi v0.6.7 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="getmaxunmaxun-v0045-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#getmaxunmaxun-v0045-gpt-oss-120b" class="toc-link" data-slug="getmaxunmaxun-v0045-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>getmaxun/maxun v0.0.45 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="nousresearchhermes-agent-v202683-qwenqwen35-27b" data-astro-cid-p33bl5ka> <a href="#nousresearchhermes-agent-v202683-qwenqwen35-27b" class="toc-link" data-slug="nousresearchhermes-agent-v202683-qwenqwen35-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>NousResearch/hermes-agent v2026.8.3 Qwen/Qwen3.5-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="jdxmise-v202681-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#jdxmise-v202681-gpt-oss-120b" class="toc-link" data-slug="jdxmise-v202681-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>jdx/mise v2026.8.1 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="steipetecodexbar-v0470-gemma-4-31b" data-astro-cid-p33bl5ka> <a href="#steipetecodexbar-v0470-gemma-4-31b" class="toc-link" data-slug="steipetecodexbar-v0470-gemma-4-31b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>steipete/CodexBar v0.47.0 gemma-4-31b</span> </a> </li><li class="toc-item toc-item-3" data-slug="fishjarkiss-translator-v2029---v2030-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#fishjarkiss-translator-v2029---v2030-gpt-oss-120b" class="toc-link" data-slug="fishjarkiss-translator-v2029---v2030-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>fishjar/kiss-translator v2.0.29 - v2.0.30 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="anomalycoopencode-v11812---v11813-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#anomalycoopencode-v11812---v11813-gpt-oss-120b" class="toc-link" data-slug="anomalycoopencode-v11812---v11813-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>anomalyco/opencode v1.18.12 - v1.18.13 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="mihonappmihon-v0203-glm-47-flash" data-astro-cid-p33bl5ka> <a href="#mihonappmihon-v0203-glm-47-flash" class="toc-link" data-slug="mihonappmihon-v0203-glm-47-flash" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>mihonapp/mihon v0.20.3 glm-4.7-flash</span> </a> </li><li class="toc-item toc-item-3" data-slug="huolalatechpage-spy-web-v248-本地降级" data-astro-cid-p33bl5ka> <a href="#huolalatechpage-spy-web-v248-本地降级" class="toc-link" data-slug="huolalatechpage-spy-web-v248-本地降级" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>HuolalaTech/page-spy-web v2.4.8 本地降级</span> </a> </li><li class="toc-item toc-item-3" data-slug="jesseduffieldlazygit-v0640-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#jesseduffieldlazygit-v0640-gpt-oss-120b" class="toc-link" data-slug="jesseduffieldlazygit-v0640-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>jesseduffield/lazygit v0.64.0 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="jandedobbeleeroh-my-posh-v3050-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#jandedobbeleeroh-my-posh-v3050-gpt-oss-120b" class="toc-link" data-slug="jandedobbeleeroh-my-posh-v3050-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>JanDeDobbeleer/oh-my-posh v30.5.0 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="ekkolearnaihermes-studio-hermes-0200-runtime---v0638-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#ekkolearnaihermes-studio-hermes-0200-runtime---v0638-gpt-oss-120b" class="toc-link" data-slug="ekkolearnaihermes-studio-hermes-0200-runtime---v0638-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>EKKOLearnAI/hermes-studio hermes-0.20.0-runtime - v0.6.38 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-3" data-slug="christitustechwinutil-260804-gpt-oss-120b" data-astro-cid-p33bl5ka> <a href="#christitustechwinutil-260804-gpt-oss-120b" class="toc-link" data-slug="christitustechwinutil-260804-gpt-oss-120b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>ChrisTitusTech/winutil 26.08.04 gpt-oss-120b</span> </a> </li><li class="toc-item toc-item-2" data-slug="今日播客更新" data-astro-cid-p33bl5ka> <a href="#今日播客更新" class="toc-link" data-slug="今日播客更新" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>今日播客更新</span> </a> </li> </ul> <div class="toc-footer-action" data-astro-cid-p33bl5ka> <button type="button" class="toc-action-link" id="toc-back-to-top" aria-label="返回顶部" data-astro-cid-p33bl5ka> <span class="toc-action-icon" data-astro-cid-p33bl5ka>↑</span> <span class="toc-action-text" data-astro-cid-p33bl5ka>返回顶部</span> </button> </div> </nav> <script type="module" src="/_astro/TableOfContents.astro_astro_type_script_index_0_lang.0eCSG6rF.js"></script> </aside> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button> <script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
