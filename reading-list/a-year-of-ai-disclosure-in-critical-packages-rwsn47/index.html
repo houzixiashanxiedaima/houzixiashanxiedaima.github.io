@@ -1,0 +1,309 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.1.6"><!-- Core SEO --><meta name="description" content="Stephen O’Grady’s RedMonk analysis of who is writing open source code looked at commits to fifteen large projects during the first half of 2026 and counted two forms of declared AI involvement: a know"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/a-year-of-ai-disclosure-in-critical-packages-rwsn47/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/a-year-of-ai-disclosure-in-critical-packages-rwsn47/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/a-year-of-ai-disclosure-in-critical-packages-rwsn47/"><meta property="og:title" content="A year of AI disclosure in critical packages"><meta property="og:description" content="Stephen O’Grady’s RedMonk analysis of who is writing open source code looked at commits to fifteen large projects during the first half of 2026 and counted two forms of declared AI involvement: a know"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="Stephen O’Grady’s RedMonk analysis of who is writing open source code looked at commits to fifteen large projects during the first half of 2026 and counted two forms of declared AI involvement: a know"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/a-year-of-ai-disclosure-in-critical-packages-rwsn47/"><meta property="twitter:title" content="A year of AI disclosure in critical packages"><meta property="twitter:description" content="Stephen O’Grady’s RedMonk analysis of who is writing open source code looked at commits to fifteen large projects during the first half of 2026 and counted two forms of declared AI involvement: a know"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>A year of AI disclosure in critical packages</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"A year of AI disclosure in critical packages","item":"https://blog.yuyins.com/reading-list/a-year-of-ai-disclosure-in-critical-packages-rwsn47/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-k2qn5omv]{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip[data-astro-cid-k2qn5omv]:after{content:none!important}.chip--sm[data-astro-cid-k2qn5omv]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-k2qn5omv]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-k2qn5omv]{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}.chip--interactive[data-astro-cid-k2qn5omv]:hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}.chip--active[data-astro-cid-k2qn5omv],.chip[data-astro-cid-k2qn5omv].active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed[data-astro-cid-k2qn5omv]{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip[data-astro-cid-k2qn5omv]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.DCQ1fzw1.css"><style>.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem;font-style:italic}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;font-family:monospace;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-06" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-06</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-08-06" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-08-06</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-05" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-05</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-08-05" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-08-05</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-04" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-04</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-08-04" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-08-04</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.PHDZRRIC.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>A year of AI disclosure in critical packages</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://nesbitt.io/" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag" data-astro-cid-k2qn5omv="true"> nesbitt.io </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年8月6日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-veycvx62><p>Stephen O’Grady’s <a href="https://redmonk.com/sogrady/2026/07/30/writing-open-source/" target="_blank" rel="noopener noreferrer">RedMonk analysis of who is writing open source code</a> looked at commits to fifteen large projects during the first half of 2026 and counted two forms of declared AI involvement: a known autonomous agent as the commit author, or a known AI identity in a <code>Co-Authored-By</code> trailer. The result was under one percent, framed as a floor.</p>
+
+<p>I ran a wider version of the same measurement over the <a href="https://packages.ecosyste.ms/" target="_blank" rel="noopener noreferrer">packages.ecosyste.ms</a> critical set: 5,682 GitHub repositories behind the most-depended-on packages across sixteen registries, using the <a href="https://github.com/chaoss/disclosure" target="_blank" rel="noopener noreferrer">CHAOSS disclosure</a> library to detect four kinds of explicit signal instead of two. Over the same six months the rate was 4.13%. Over the year ending 29 July 2026 it was 2.93% (17,279 of 589,798 non-merge commits), rising from 0.48% last August to 5.32% this July.</p>
+
+<p>These are counts of commits where someone left an explicit marker in git metadata. Undeclared use is not measured, and a commit is one unit regardless of whether it changed one line or ten thousand.</p>
+
+<h2>Sample selection versus detector choice</h2>
+
+<p>Running my scanner against RedMonk’s fifteen repositories with only their two signals found 94 matches in 23,346 first-half commits including merges, or 0.40%, against RedMonk’s “~24K commits” and a match count “in the dozens”. Excluding merges leaves 17,323 commits and the same 94 matches, or 0.54%; <code>espressif/esp-idf</code> and <code>openssl/openssl</code> supply 71 of them, matching RedMonk’s reported 73% concentration in two projects.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>sample and signals</th>
+      <th>commits</th>
+      <th>marked</th>
+      <th>share</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>RedMonk 15, agent author or known AI co-author</td>
+      <td>17,323</td>
+      <td>94</td>
+      <td>0.54%</td>
+    </tr>
+    <tr>
+      <td>RedMonk 15, all validated disclosure signals</td>
+      <td>17,323</td>
+      <td>182</td>
+      <td>1.05%</td>
+    </tr>
+    <tr>
+      <td>Critical GitHub set, agent author or known AI co-author</td>
+      <td>308,354</td>
+      <td>11,002</td>
+      <td>3.57%</td>
+    </tr>
+    <tr>
+      <td>Critical GitHub set, all validated disclosure signals</td>
+      <td>308,354</td>
+      <td>12,720</td>
+      <td>4.13%</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Adding the two extra signal types moved the rate by about half a percentage point on either sample. Changing the sample moved it by three points. RedMonk’s fifteen were chosen by contributor-base size with, in O’Grady’s words, a deliberate bias towards C; the critical package set is whatever sits at the top of each registry’s dependency graph, which pulls in a lot of smaller, newer, company-run repositories.</p>
+
+<h2>What I counted</h2>
+
+<p>The critical snapshot contained 8,605 packages, with repository URLs and metadata pulled from the same package cache I built for <a href="https://nesbitt.io/2026/05/08/weekend-at-bernies.html" target="_blank" rel="noopener noreferrer">Weekend at Bernie’s</a>. Merging packages that share a repository, following renames, restricting to GitHub, and dropping malformed URLs left 5,707 candidates. 5,682 cloned successfully; the other 25 were deleted or private. 3,533 had at least one non-merge commit in the year ending 29 July 2026.</p>
+
+<p>Each repository was cloned bare with a tree filter and a shallow date boundary, streamed through the disclosure library, and deleted. The full pass transferred about 1 GB and the retained checkpoint is 16 MB of per-repository summaries and matched commit SHAs.</p>
+
+<p>Rename following checks GitHub’s stable repository ID as well as the redirect. The npm package <code>base</code> still lists <code>node-base/base</code> as its repository. GitHub reused the org name, so that path now redirects to the Base blockchain monorepo, which would have contributed 3,135 commits and 273 AI signals to a nine-year-old npm utility. The ID check excluded it.</p>
+
+<p>Every non-merge commit was checked for:</p>
+
+<ul>
+  <li>a known AI agent as author or committer</li>
+  <li>a known AI identity in <code>Co-Authored-By</code></li>
+  <li>an <code>Assisted-By</code> trailer naming an AI tool or model</li>
+  <li>a tool-specific attribution format that disclosure supports</li>
+</ul>
+
+<p>Merges are excluded so projects that squash, rebase, or merge count on the same basis. Commits are bucketed by committer time, when the change landed on the current branch. Mentions of tool names in ordinary commit prose are ignored. <code>Assisted-By</code> values are validated because the trailer is also used for people: raw matches included <code>Assisted-By: Daniel Stenberg</code> and <code>Assisted-By: Automated Tooling, Human Reviewed.</code> The clones did not fetch <code>refs/notes/ai</code>, so declarations recorded as git notes are absent.</p>
+
+<h2>Over the year</h2>
+
+<p><img alt="Line chart of monthly explicit AI signals. Total signals rise from 0.48% in August 2025 to 5.32% in July 2026. Declared assistance supplies nearly all of the increase, while autonomous-agent identities end close to where they began after varying during the year." src="https://nesbitt.io/data/ai-contributions/monthly-disclosure.svg" /></p>
+
+<p>The monthly rate passed 3% in February and 5% in March, then held between 4.58% and 5.32% through July. Counting repositories instead of commits, a signal appeared in 41 of the 1,734 repositories with commits in August 2025 (2.4%) and 276 of 1,793 in July 2026 (15.4%).</p>
+
+<p>Of the 17,279 findings, 4,625 carry only an autonomous-agent identity, 12,628 carry only a declared-assistance signal, and 26 carry both. Declared assistance went from 0.08% of commits in August to 4.92% in July. Agent authorship started at 0.40% and ended at 0.41%, peaking at 1.33% in between; 4,613 of those commits have GitHub Copilot’s agent as author, 38 have Devin’s, and Claude, Cursor, Codex, and Amazon Q account for 25 between them. Copilot agent commits reached 745 in March across 85 repositories and fell to 208 across 35 in July, with individual projects running the agent in short bursts: <code>pycqa/isort</code> had 49 in March and none after, <code>azure/azure-sdk-for-net</code> had 275 in February and 28 in March.</p>
+
+<p>The February and March step in the total is Claude Code <code>Co-Authored-By</code> trailers. Those went from 97 commits in December to 325, 753, and 2,037 over the following three months, and from 39 distinct repositories to 190. Cursor’s co-author trailers rose from 1 to 48 over the same months and Copilot’s from 1 to 2, so the step is specific to one tool rather than a general change in disclosure practice. Anthropic released <a href="https://www.anthropic.com/news/claude-opus-4-6" target="_blank" rel="noopener noreferrer">Claude Opus 4.6</a> on 5 February and <a href="https://www.anthropic.com/news/claude-sonnet-4-6" target="_blank" rel="noopener noreferrer">Sonnet 4.6</a> on 17 February; March is the first full month with both available.</p>
+
+<p>The findings carry 231 distinct declared tool strings across 17,392 occurrences. Grouping them by client family, and separately by model or provider where no client is named:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>declared as</th>
+      <th>occurrences</th>
+      <th>share</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Claude Code</td>
+      <td>9,974</td>
+      <td>57.35%</td>
+    </tr>
+    <tr>
+      <td>GitHub Copilot</td>
+      <td>4,857</td>
+      <td>27.93%</td>
+    </tr>
+    <tr>
+      <td>Cursor</td>
+      <td>773</td>
+      <td>4.44%</td>
+    </tr>
+    <tr>
+      <td>Codex</td>
+      <td>236</td>
+      <td>1.36%</td>
+    </tr>
+    <tr>
+      <td>OpenCode</td>
+      <td>69</td>
+      <td>0.40%</td>
+    </tr>
+    <tr>
+      <td>Claude or Anthropic (model only)</td>
+      <td>1,135</td>
+      <td>6.53%</td>
+    </tr>
+    <tr>
+      <td>OpenAI or GPT (model only)</td>
+      <td>118</td>
+      <td>0.68%</td>
+    </tr>
+    <tr>
+      <td>Gemini or Google (model only)</td>
+      <td>70</td>
+      <td>0.40%</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The raw declared strings are in the summary JSON; the grouping is mine and a value naming two clients counts in both.</p>
+
+<p>At the repository level, 687 of the 3,533 active repositories recorded at least one signal over the year, so the median active repository’s rate is zero. The ten repositories with the most findings account for 40.8% of the total and the top hundred for 84.9%.</p>
+
+
+
+<h2>By ecosystem</h2>
+
+<p><code>go-git</code> shows what the extra detectors add in one repository: 269 of its 731 commits carry a validated signal, 12 of which match RedMonk’s narrow rules. The rest are <code>Assisted-By</code> trailers and tool attributions.</p>
+
+<p>Nine of the sixteen ecosystems had at least 30,000 commits in the window:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>package ecosystem</th>
+      <th>commits</th>
+      <th>validated share</th>
+      <th>repositories</th>
+      <th>with instructions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>NuGet</td>
+      <td>41,523</td>
+      <td>6.84%</td>
+      <td>74</td>
+      <td>40.54%</td>
+    </tr>
+    <tr>
+      <td>npm</td>
+      <td>87,357</td>
+      <td>3.72%</td>
+      <td>1,578</td>
+      <td>3.11%</td>
+    </tr>
+    <tr>
+      <td>RubyGems</td>
+      <td>40,889</td>
+      <td>3.59%</td>
+      <td>670</td>
+      <td>6.12%</td>
+    </tr>
+    <tr>
+      <td>Conda</td>
+      <td>144,227</td>
+      <td>3.31%</td>
+      <td>264</td>
+      <td>12.12%</td>
+    </tr>
+    <tr>
+      <td>Go</td>
+      <td>34,117</td>
+      <td>3.07%</td>
+      <td>545</td>
+      <td>5.87%</td>
+    </tr>
+    <tr>
+      <td>PyPI</td>
+      <td>124,641</td>
+      <td>2.57%</td>
+      <td>451</td>
+      <td>12.42%</td>
+    </tr>
+    <tr>
+      <td>Cargo</td>
+      <td>30,620</td>
+      <td>1.96%</td>
+      <td>570</td>
+      <td>2.46%</td>
+    </tr>
+    <tr>
+      <td>Packagist</td>
+      <td>37,267</td>
+      <td>1.73%</td>
+      <td>547</td>
+      <td>10.24%</td>
+    </tr>
+    <tr>
+      <td>Maven</td>
+      <td>100,539</td>
+      <td>1.60%</td>
+      <td>273</td>
+      <td>16.12%</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The other seven, from CocoaPods at 13,581 commits down to Julia at 682, are in the summary JSON. Julia’s 51 findings in 682 commits give it the highest rate in the set at 7.47%, on the smallest sample.</p>
+
+<p>NuGet’s 6.84% is a Microsoft deployment. Repositories under <code>aspnet</code>, <code>azure</code>, <code>azuread</code>, <code>dotnet</code>, <code>microsoft</code>, and <code>nuget</code> supplied 2,716 of the 2,842 NuGet findings (95.6%), and 2,634 of those are autonomous-agent identities. Remove those owners and NuGet falls to 126 findings in 14,283 commits, or 0.88%, below Maven. I have only run that owner exclusion for NuGet; the per-repository CSV has what’s needed to do it for the others.</p>
+
+<h2>Instruction files</h2>
+
+<p>A separate pass over the same 5,682 default-branch heads checked for committed instructions to coding agents: <code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>GEMINI.md</code>, and the documented Copilot, Cursor, Cline, Windsurf, and Continue rule paths. 353 repositories (6.21%) have at least one, holding 1,091 files between them. A file’s presence records that someone set up guidance for an agent; it attributes nothing to any commit.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>instruction type</th>
+      <th>repositories</th>
+      <th>share of scanned repositories</th>
+      <th>files</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>AGENTS.md</code></td>
+      <td>240</td>
+      <td>4.22%</td>
+      <td>571</td>
+    </tr>
+    <tr>
+      <td><code>CLAUDE.md</code></td>
+      <td>204</td>
+      <td>3.59%</td>
+      <td>340</td>
+    </tr>
+    <tr>
+      <td>GitHub Copilot instructions</td>
+      <td>84</td>
+      <td>1.48%</td>
+      <td>154</td>
+    </tr>
+    <tr>
+      <td>Cursor rules</td>
+      <td>11</td>
+      <td>0.19%</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <td><code>GEMINI.md</code></td>
+      <td>8</td>
+      <td>0.14%</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>Cline rules</td>
+      <td>1</td>
+      <td>0.02%</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>Windsurf rules</td>
+      <td>0</td>
+      <td>0%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>Continue rules</td>
+      <td>0</td>
+      <td>0%</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img alt="Line chart of the cumulative share of critical GitHub repositories with a current AI instruction file. The share rises from 0.07% in March 2025 to 6.21% in July 2026, with the fastest growth during 2026." src="https://nesbitt.io/data/ai-contributions/instruction-file-adoption.svg" /></p>
+
+<p>Each repository is counted once, in the month its earliest surviving instruction file was added, so Cypress with 118 files counts the same as a project with one. Only files present on current heads are visible, so anything added and later deleted is absent from the timeline.</p>
+
+<p>228 of the 353 repositories also have a disclosed commit in the year. 94 of those added their earliest instruction file before their first disclosed commit, 98 added it after, and 36 on the same day; the median gap is zero. The other 125 have an instruction file and no disclosed commit in the window.</p>
+
+<h2>Data</h2>
+
+<p>The scanner and report generator are at <a href="https://github.com/andrew/critical-ai-scan" target="_blank" rel="noopener noreferrer">andrew/critical-ai-scan</a>. The <a href="https://github.com/andrew/critical-ai-scan/blob/main/data/critical-github-summary.json" target="_blank" rel="noopener noreferrer">summary JSON</a> has the overall, monthly, ecosystem, signal, tool, and leading-repository counts. The <a href="https://github.com/andrew/critical-ai-scan/blob/main/data/critical-github-repositories.csv" target="_blank" rel="noopener noreferrer">repository CSV</a> has one row per successful scan with the exact default-branch head used, so individual cases can be checked without recloning. The <a href="https://github.com/andrew/critical-ai-scan/blob/main/data/critical-github-instructions.json" target="_blank" rel="noopener noreferrer">instruction-file report</a> lists every matched path with its category and the commit that added it.</p></div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://nesbitt.io/2026/08/06/a-year-of-ai-disclosure-in-critical-packages.html" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button> <script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>

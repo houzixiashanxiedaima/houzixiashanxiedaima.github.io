@@ -1,0 +1,180 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.1.6"><!-- Core SEO --><meta name="description" content="
+
+  Zig’s Io.Threaded is Neat
+  Aug 6, 2026
+
+std.Io.Threaded
+is one of the implementations of Zig’s new Io interface that enables concurrency. This is a boring
+“just use threads” impl. I personally fi"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/zigs-iothreaded-is-neat-3bz5n8/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/zigs-iothreaded-is-neat-3bz5n8/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/zigs-iothreaded-is-neat-3bz5n8/"><meta property="og:title" content="Zig's Io.Threaded is Neat"><meta property="og:description" content="
+
+  Zig’s Io.Threaded is Neat
+  Aug 6, 2026
+
+std.Io.Threaded
+is one of the implementations of Zig’s new Io interface that enables concurrency. This is a boring
+“just use threads” impl. I personally fi"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="
+
+  Zig’s Io.Threaded is Neat
+  Aug 6, 2026
+
+std.Io.Threaded
+is one of the implementations of Zig’s new Io interface that enables concurrency. This is a boring
+“just use threads” impl. I personally fi"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/zigs-iothreaded-is-neat-3bz5n8/"><meta property="twitter:title" content="Zig's Io.Threaded is Neat"><meta property="twitter:description" content="
+
+  Zig’s Io.Threaded is Neat
+  Aug 6, 2026
+
+std.Io.Threaded
+is one of the implementations of Zig’s new Io interface that enables concurrency. This is a boring
+“just use threads” impl. I personally fi"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Zig&#39;s Io.Threaded is Neat</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Zig's Io.Threaded is Neat","item":"https://blog.yuyins.com/reading-list/zigs-iothreaded-is-neat-3bz5n8/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-k2qn5omv]{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip[data-astro-cid-k2qn5omv]:after{content:none!important}.chip--sm[data-astro-cid-k2qn5omv]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-k2qn5omv]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-k2qn5omv]{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}.chip--interactive[data-astro-cid-k2qn5omv]:hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}.chip--active[data-astro-cid-k2qn5omv],.chip[data-astro-cid-k2qn5omv].active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed[data-astro-cid-k2qn5omv]{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip[data-astro-cid-k2qn5omv]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.DCQ1fzw1.css"><style>.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem;font-style:italic}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;font-family:monospace;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-06" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-06</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-08-06" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-08-06</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-05" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-05</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-08-05" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-08-05</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-04" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-04</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-08-04" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-08-04</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.PHDZRRIC.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>Zig&#39;s Io.Threaded is Neat</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://matklad.github.io/" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag" data-astro-cid-k2qn5omv="true"> matklad.github.io </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年8月6日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-veycvx62>
+<header>
+  <h1>Zig’s Io.Threaded is Neat</h1>
+  <time>Aug 6, 2026</time>
+</header>
+<p><a href="https://codeberg.org/ziglang/zig/src/commit/16b42da3fd359bf5ae602aa0153e3ec1d6d14822/lib/std/Io/Threaded.zig" target="_blank" rel="noopener noreferrer">std.Io.Threaded</a>
+is one of the implementations of Zig’s new <code>Io</code> interface that enables concurrency. This is a boring
+“just use threads” impl. I personally find it neat though — it does this weird thing that
+<a href="https://github.com/matklad/jthread-rs#jthread" target="_blank" rel="noopener noreferrer">I wanted to do for ages</a>, that to my knowledge no
+one else is doing properly, and implements it better than I thought to be possible.</p>
+<p><code>Io.Threaded</code> uses blocking syscalls and fully supports cancelation.</p>
+<section>
+
+<h2><a href="https://matklad.github.io/2026/08/06/neat-io-threaded.html#Concurrency-vs-Parallelism" target="_blank" rel="noopener noreferrer">Concurrency vs Parallelism</a></h2>
+<p>Quoting <a href="https://www.tedinski.com/2018/10/16/concurrency-vs-parallelism.html" target="_blank" rel="noopener noreferrer">@tedinski</a>,</p>
+<ul>
+<li>
+Concurrency is about handling (asynchronous, nondeterministic) events.
+</li>
+<li>
+Parallelism is about using hardware resources to do more at the same time.
+</li>
+</ul>
+<p>I think this definition is correct, but doesn’t provide useful intuition directly. Concurrency is
+the same thing as state transducers? Yes, obviously, but not really illuminating as to how you’d
+program the thing.</p>
+<p>For intuition, I like these two litmus tests. <em>First</em>, parallelism is deterministic or
+“declarative”:</p>
+
+<figure>
+
+
+<pre><code><span><span>use</span> rayon::prelude::*;</span>
+<span><span>fn</span> <span>sum_of_squares</span>(input: &amp;[<span>i32</span>]) <span>-&gt;</span> <span>i32</span> {</span>
+<span>    input.<span>par_iter</span>()</span>
+<span>         .<span>map</span>(|i| i * i)</span>
+<span>         .<span>sum</span>()</span>
+<span>}</span></code></pre>
+
+</figure>
+<p>You describe how to split the problem into independent partitions, and implement a function to
+process one partition at a time . It’s platform’s job to verify the partitioning to be correct
+(non-racy), process all partitions, and yield control back once that is done.</p>
+<p><em>Second</em>, concurrency invariably involves cancelation. Whenever you have two asynchronous
+computations happening at the same time, there comes a moment when one computation becomes aware
+that the second computation is no longer necessary, and must be canceled, actively. In general, it
+is not possible to just wait until the other computation completes: often, the reason why you want
+to cancel it in the first place is precisely because you’ve learned that it <em>can’t</em> complete (e.g.,
+it is waiting for a message it will never receive).</p>
+<p>And that is the problem with</p>
+</section>
+<section>
+
+<h2><a href="https://matklad.github.io/2026/08/06/neat-io-threaded.html#Just-Use-Threads" target="_blank" rel="noopener noreferrer">Just Use Threads</a></h2>
+<p>Well, there are more, the chief being that, while you totally <em>can</em> spawn many threads, this often
+requires system-wide configuration change, which is a non-starter for most application. But absence
+of cancelation really makes you hit a wall sooner or later. The problem are syscalls. It’s easy
+enough, in any loopy code, to do something like</p>
+
+<figure>
+
+
+<pre><code><span><span>while</span> (<span>true</span>) {</span>
+<span>    <span>if</span> (is_canceled()) <span>return</span> <span>error</span>.Canceld; <span>/// Easy!</span></span>
+<span>    ...</span>
+<span>}</span></code></pre>
+
+</figure>
+<p>But, the thread is instead blocked inside the syscall in the kernel, programming language APIs
+generally doesn’t give any way to unblock it:</p>
+
+<figure>
+
+
+<pre><code><span><span>const</span> read_size = <span>try</span> read(fd, buffer); <span>// ???</span></span></code></pre>
+
+</figure>
+<p>Wouldn’t it be cool if we could just use standard OS threads, blocking APIs, avoid new shinies like
+io_uring, but still get to cancel any work reliably? That’s exactly what Zig’s <code>std.Io.Threaded</code>
+provides.</p>
+</section>
+<section>
+
+<h2><a href="https://matklad.github.io/2026/08/06/neat-io-threaded.html#SIGIO" target="_blank" rel="noopener noreferrer">SIGIO</a></h2>
+<p>The way this works on POSIX is a bit cursed. Turns out, the kernel actually provides a roundabout
+way to cancel a blocking syscall — signals. When a thread is blocked in the kernel, and a signal
+is delivered to the thread, the thread is woken up and the syscall returns <code>EINTR</code>. It is customary
+to just
+<a href="https://github.com/rust-lang/rust/blob/f73951df0a5566d94d13b7954acd9f4ab1fa3734/library/alloc/src/io/copy/generic.rs#L240-L244" target="_blank" rel="noopener noreferrer">loop re-try the syscall</a>
+in such cases, but one doesn’t have to.</p>
+<p>By itself, signals are not a cancelation mechanism — signaling a thread is inherently racy, the
+signal might get delivered before the relevant syscall starts, or after it finishes. Conversely, a
+syscall might get interrupted by signal unrelated to cancelation.</p>
+<p>The actual protocol is that the canceling thread sets a flag in shared memory to request
+cancelation, and then signals the cancelee, in a loop, until the cancelation is acknowledged (a
+different value for a flag in the shared memory). Upon receiving <code>EINTR</code> from a syscall, the thread
+potentially being canceled checks the vale of the flag and either retries the syscall, or
+acknowledges the cancelation and begins unwinding. See
+<a href="https://codeberg.org/ziglang/zig/src/commit/16b42da3fd359bf5ae602aa0153e3ec1d6d14822/lib/std/Io/Threaded.zig#L1266" target="_blank" rel="noopener noreferrer"><code>signalCanceledSyscall</code></a>
+and, eg
+<a href="https://codeberg.org/ziglang/zig/src/commit/16b42da3fd359bf5ae602aa0153e3ec1d6d14822/lib/std/Io/Threaded.zig#L10000-L10014" target="_blank" rel="noopener noreferrer"><code>fileReadPositionalPosix</code></a>
+for the two halves of the protocol.</p>
+<p>On the user-side, cancelation request is materialized as <code>error.Canceled</code>. Error management as a
+feature is a combination of cancelation,
+<a href="https://matklad.github.io/2025/11/06/error-codes-for-control-flow.html" target="_blank" rel="noopener noreferrer">branching, and reporting</a>,
+and Zig implements the first two. Cancelation isn’t an error <em>not</em> because it is
+<a href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p1677r2.pdf" target="_blank" rel="noopener noreferrer">serendipitous success</a>, but
+because, vice versa, an error is a cancelation plus a payload.</p>
+<p>On Windows, there’s a much more direct
+<code>NtCancelSynchronousIoFile</code>
+Love the name!. In general, between fibers, IO Completion Ports, Job objects, and this, it seems
+that NT has a better thought through concurrency story than Unix.</p>
+</section>
+<section>
+
+<h2><a href="https://matklad.github.io/2026/08/06/neat-io-threaded.html#Prior-Art" target="_blank" rel="noopener noreferrer">Prior Art</a></h2>
+<p>In Java, there’s a similarly looking thread interruption mechanism. Critically, it doesn’t support
+interrupting syscalls: <code>IOException</code> and <code>InterruptedException</code> are both checked and unrelated,
+meaning that IOing functions are not interruptible. In Zig, reader and writer interfaces completely
+type erase errors and therefore support cancelation, though this requires some extra care to handle
+correctly, on top of the usual <a href="https://www.youtube.com/watch?v=f30PceqQWko" target="_blank" rel="noopener noreferrer">don’t forget to flush</a>.</p>
+<p><code>pthread_cancel</code> implements a similar signal+flag machinery. However, it doesn’t integrate with
+language-level cancelation (<code>try</code>, <code>defer</code>) which makes post-cancelation cleanup cumbersome and
+slow. More generally, a lot of angst around concurrency steams from a fact that it falls exactly
+into the twilight zone between the kernel, the runtime, and the language. There’s almost (interrupts
+excepted) no concurrency on the CPU, it’s an illusion with a mixed authorship. The language is
+usually the better equipped one to tackle the problem, but, traditionally, it is handled by the
+kernel and libc, with adverse effects on language design.</p>
+<p>Another problem with <code>pthread_cancel</code> is that it tears down the entire thread, which would be an OK
+thing to do if threads were cheap. However, creating threads is still slow, and the configured
+system limit for a number of threads is typically low, so its usually a good idea to pool OS
+threads. Zig’s <code>Io</code> solves this problem ingeniously, separating, at the interface level,
+“may run concurrently” from “must run concurrently”:</p>
+<p><a href="https://kristoff.it/blog/asynchrony-is-not-concurrency/" target="_blank" rel="noopener noreferrer">https://kristoff.it/blog/asynchrony-is-not-concurrency/</a></p>
+<p>This achieves an effect similar to that of <a href="https://en.cppreference.com/cpp/thread/async#Launch_policies" target="_blank" rel="noopener noreferrer"><code>std::launch</code>
+<code>policy</code></a> (item 36 in effective modern
+C++, if you have that around). By naming what is happening (<code>io.async</code> vs <code>io.concurrent</code>), Zig
+makes it easier to understand what is actually going on, and also gets more precise signatures
+(<code>concurrent</code> is always fallible, <code>async</code> never is). Of course <code>concurrent</code> is backed by a thread
+pool, falling back on spawning a fresh thread only when the pool is exhausted.</p>
+</section>
+</div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://matklad.github.io/2026/08/06/neat-io-threaded.html" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button> <script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
