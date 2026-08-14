@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.2.1"><!-- Core SEO --><meta name="description" content="Another RAII-style wrapper.
+The post A little helper class for managing &amp;lt;CODE&amp;gt;LPPROC_&amp;lt;WBR&amp;gt;THREAD_&amp;lt;WBR&amp;gt;ATTRIBUTE_&amp;lt;WBR&amp;gt;LIST&amp;lt;/CODE&amp;gt;s appeared first on The Old New Thing.
+"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/a-little-helper-class-for-managing-lpproc_thread_a-crtqv/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/a-little-helper-class-for-managing-lpproc_thread_a-crtqv/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/a-little-helper-class-for-managing-lpproc_thread_a-crtqv/"><meta property="og:title" content="A little helper class for managing LPPROC_THREAD_ATTRIBUTE_LISTs"><meta property="og:description" content="Another RAII-style wrapper.
+The post A little helper class for managing &amp;lt;CODE&amp;gt;LPPROC_&amp;lt;WBR&amp;gt;THREAD_&amp;lt;WBR&amp;gt;ATTRIBUTE_&amp;lt;WBR&amp;gt;LIST&amp;lt;/CODE&amp;gt;s appeared first on The Old New Thing.
+"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="Another RAII-style wrapper.
+The post A little helper class for managing &amp;lt;CODE&amp;gt;LPPROC_&amp;lt;WBR&amp;gt;THREAD_&amp;lt;WBR&amp;gt;ATTRIBUTE_&amp;lt;WBR&amp;gt;LIST&amp;lt;/CODE&amp;gt;s appeared first on The Old New Thing.
+"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/a-little-helper-class-for-managing-lpproc_thread_a-crtqv/"><meta property="twitter:title" content="A little helper class for managing LPPROC_THREAD_ATTRIBUTE_LISTs"><meta property="twitter:description" content="Another RAII-style wrapper.
+The post A little helper class for managing &amp;lt;CODE&amp;gt;LPPROC_&amp;lt;WBR&amp;gt;THREAD_&amp;lt;WBR&amp;gt;ATTRIBUTE_&amp;lt;WBR&amp;gt;LIST&amp;lt;/CODE&amp;gt;s appeared first on The Old New Thing.
+"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>A little helper class for managing LPPROC_THREAD_ATTRIBUTE_LISTs</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"A little helper class for managing LPPROC_THREAD_ATTRIBUTE_LISTs","item":"https://blog.yuyins.com/reading-list/a-little-helper-class-for-managing-lpproc_thread_a-crtqv/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-k2qn5omv]{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip[data-astro-cid-k2qn5omv]:after{content:none!important}.chip--sm[data-astro-cid-k2qn5omv]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-k2qn5omv]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-k2qn5omv]{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}.chip--interactive[data-astro-cid-k2qn5omv]:hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}.chip--active[data-astro-cid-k2qn5omv],.chip[data-astro-cid-k2qn5omv].active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed[data-astro-cid-k2qn5omv]{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip[data-astro-cid-k2qn5omv]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.D3bg_hVW.css"><style>.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem;font-style:italic}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;font-family:monospace;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-14" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-14</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-13" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-13</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-08-13" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-08-13</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-12" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-12</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-08-12" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-08-12</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-11" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-11</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.PHDZRRIC.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>A little helper class for managing LPPROC_THREAD_ATTRIBUTE_LISTs</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://devblogs.microsoft.com/oldnewthing" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag" data-astro-cid-k2qn5omv="true"> devblogs.microsoft.com/oldnewthing </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年8月13日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-veycvx62><p>The <code>LPPROC_<wbr></wbr>THREAD_<wbr></wbr>ATTRIBUTE_<wbr></wbr>LIST</code> is a bit annoying to manage. You have to allocate memory for it yourself, but you don’t know how much; you have to ask <code>Initialize­Proc­Thread­Attribute­List</code>. And then when you’re done, you have to call <code>Delete­Proc­Thread­Attribute­List</code> before freeing the memory.</p>
+<p>We suffered through this when <a href="https://devblogs.microsoft.com/oldnewthing/20111216-00/?p=8873" target="_blank" rel="noopener noreferrer"> we controlled which handles are inherited by a new process</a>. <a href="https://devblogs.microsoft.com/oldnewthing/20130426-00/?p=4543" target="_blank" rel="noopener noreferrer"> I wrote a helper function</a> to try to make it easier, by taking the attributes as a separate parameter beyond the parameters to <code>Create­Process</code> but I’m not sure if it was entirely successful.</p>
+<p>Here’s another try, this time building on the Windows Implementation Library.</p>
+<pre>namespace details
+{
+    inline void FreeProcThreadAttributeList(
+        _Pre_valid_ _Frees_ptr_ LPPROC_THREAD_ATTRIBUTE_LIST list)
+    {
+        ::DeleteProcThreadAttributeList(list);
+        ::HeapFree(::GetProcessHeap(), 0, list);
+    }
+};
+
+using unique_proc_thread_attribute_list = wil::unique_any&lt;LPPROC_THREAD_ATTRIBUTE_LIST,
+    decltype(&amp;details::FreeProcThreadAttributeList), details::FreeProcThreadAttributeList&gt;;
+
+HRESULT make_proc_thread_attribute_list_nothrow(
+    DWORD attributeCount, _Out_ LPPROC_THREAD_ATTRIBUTE_LIST* result)
+{
+    *result = nullptr;
+    SIZE_T size = 0;
+    InitializeProcThreadAttributeList(nullptr, attributeCount, 0, &amp;size);
+    auto p = wil::unique_process_heap_ptr&lt;std::remove_pointer_t&lt;LPPROC_THREAD_ATTRIBUTE_LIST&gt;&gt;(
+        static_cast&lt;LPPROC_THREAD_ATTRIBUTE_LIST&gt;(::HeapAlloc(::GetProcessHeap(), 0, size)));
+    RETURN_IF_NULL_ALLOC(p);
+    RETURN_IF_WIN32_BOOL_FALSE(InitializeProcThreadAttributeList(p.get(), attributeCount, 0, &amp;size));
+    *result = p.release();
+    return S_OK;
+}
+
+unique_proc_thread_attribute_list make_proc_thread_attribute_list(DWORD attributeCount)
+{
+    unique_proc_thread_attribute_list result;
+    THROW_IF_FAILED(make_proc_thread_attribute_list_nothrow(attributeCount, result.put()));
+    return result;
+}
+</pre>
+<p>We start by declaring a helper function that cleans up an <code>LPPROC_<wbr></wbr>THREAD_<wbr></wbr>ATTRIBUTE_<wbr></wbr>LIST</code> by deleting the contents, and then freeing the buffer. We use that to define a <code>unique_<wbr></wbr>proc_<wbr></wbr>thread_<wbr></wbr>attribute_<wbr></wbr>list</code> which holds a heap-allocated pointer that has been initialized as a <code>LPPROC_<wbr></wbr>THREAD_<wbr></wbr>ATTRIBUTE_<wbr></wbr>LIST</code>.</p>
+<p>The first helper function is the nonthrowing version: it asks for the required size of a <code>LPPROC_<wbr></wbr>THREAD_<wbr></wbr>ATTRIBUTE_<wbr></wbr>LIST</code> for the specified number of attributes, then allocates that much memory on the heap, storing it in a <code>unique_<wbr></wbr>process_<wbr></wbr>heap_<wbr></wbr>ptr</code> so that it will be freed if we fail to initialize it. Declaring that <code>unique_<wbr></wbr>process_<wbr></wbr>heap_<wbr></wbr>ptr</code> is a bit of a pain because we want it to be a “unique pointer to whatever it is that <code>LPPROC_<wbr></wbr>THREAD_<wbr></wbr>ATTRIBUTE_<wbr></wbr>LIST</code> points to.” It’s also annoying that we have to repeat ourselves in both the template type parameter as well as in the cast of the heap-allocated pointer, because CTAD doesn’t work here.</p>
+<p>After we allocate the memory, we try to initialize it. If that fails (and I can’t imagine why), we propagate the error, and the RAII type frees the (uninitialized) heap memory.</p>
+<p>If initialization succeeds, we return the pointer to the caller, who now takes responsibility for freeing it.</p>
+<p>Note that the temporary holding place has to be a <code>unique_<wbr></wbr>process_<wbr></wbr>heap_<wbr></wbr>ptr</code> and not a <code>unique_<wbr></wbr>proc_<wbr></wbr>thread_<wbr></wbr>attribute_<wbr></wbr>list</code>: If the initialization fails, we must not call <code>Delete­Proc­Thread­Attribute­List</code>, so we have to hold the heap pointer in something that won’t try to call <code>Delete­Proc­Thread­Attribute­List</code>.</p>
+<p>We can easily use the nonthrowing version to build a throwing version.</p>
+<p>My next idea was to let you pass the attributes you want to pre-fill into the attribute list.</p>
+<pre>struct proc_thread_attribute {
+   template&lt;typename T = void&gt;
+   proc_thread_attribute(DWORD_PTR attribute, T* value, SIZE_T size = sizeof(T)) :
+      attribute(attribute), value(value), size(size) {
+   }
+
+   DWORD_PTR attribute;
+   PVOID value;
+   SIZE_T size;
+};
+
+template&lt;typename C&gt;
+HRESULT update_proc_thread_attribute_list_nothrow(
+    LPPROC_THREAD_ATTRIBUTE_LIST list, C&amp;&amp; attributes)
+{
+    for (auto&amp;&amp; attribute : attributes) {
+        RETURN_IF_WIN32_BOOL_FALSE(
+            UpdateProcThreadAttribute(list, 0, attribute.attribute,
+                attribute.value, attribute.size, nullptr, nullptr));
+    }
+    return S_OK;
+}
+
+template&lt;typename C&gt;
+void update_proc_thread_attribute_list(
+    LPPROC_THREAD_ATTRIBUTE_LIST list, C&amp;&amp; attributes)
+{
+    THROW_IF_FAILED(update_proc_thread_attribute_list_nothrow(
+        list, std::forward&lt;C&gt;(attributes)));
+}
+</pre>
+<p>The container parameter can be anything iterable whose value type has <code>attribute</code>, <code>value</code>, and <code>size</code> members. It’s probably a collection of <code>proc_<wbr></wbr>thread_<wbr></wbr>attribute</code>s, but it doesn’t have to be. (Maybe it’s a collection of things derived from <code>proc_<wbr></wbr>thread_<wbr></wbr>attribute</code>.)</p>
+<p>We can add this to our <code>make_<wbr></wbr>proc_<wbr></wbr>thread_<wbr></wbr>attribute_<wbr></wbr>list</code> function so that callers can pass in a list of attributes they want, and we’ll make a list that holds them all. And as an extra bonus, you can request room for additional attributes beyond those in the collection you passed in. For example, you might have some attributes that you always use, and then some others you decide on dynamically.</p>
+<pre>// No changes to this function
+HRESULT make_proc_thread_attribute_list_nothrow(
+    DWORD attributeCount, _Out_ LPPROC_THREAD_ATTRIBUTE_LIST* result)
+{
+    *result = nullptr;
+    SIZE_T size = 0;
+    InitializeProcThreadAttributeList(nullptr, attributeCount, 0, &amp;size);
+    auto p = wil::unique_process_heap_ptr&lt;std::remove_pointer_t&lt;LPPROC_THREAD_ATTRIBUTE_LIST&gt;&gt;(
+        static_cast&lt;LPPROC_THREAD_ATTRIBUTE_LIST&gt;(::HeapAlloc(::GetProcessHeap(), 0, size)));
+    RETURN_IF_NULL_ALLOC(p);
+    RETURN_IF_WIN32_BOOL_FALSE(InitializeProcThreadAttributeList(p.get(), attributeCount, 0, &amp;size));
+    *result = p.release();
+    return S_OK;
+}
+
+// New overload that takes a list of attributes to preload,
+// with room for any additional attributes you want to add later.
+
+template&lt;typename C&gt;
+HRESULT make_proc_thread_attribute_list_nothrow(
+    C&amp;&amp; attributes, DWORD extraAttributeCount,
+    _Out_ LPPROC_THREAD_ATTRIBUTE_LIST* result)
+{
+    *result = nullptr;
+    unique_proc_thread_attribute_list list;
+    RETURN_IF_FAILED(make_proc_thread_attribute_list_nothrow(
+        static_cast&lt;DWORD&gt;(attributes.size()) + extraAttributeCount,
+        list.put()));
+    RETURN_IF_FAILED(update_proc_thread_attribute_list_nothrow(
+        list.get(), std::forward&lt;C&gt;(attributes)));
+
+    *result = list.release();
+    return S_OK;
+}
+
+// New overload that takes a list of attributes to preload,
+// with no room for more.
+
+template&lt;typename C&gt;
+std::enable_if_t&lt;!std::is_integral_v&lt;C&gt;, HRESULT&gt;
+    make_proc_thread_attribute_list_nothrow(
+        C&amp;&amp; attributes,
+        _Out_ LPPROC_THREAD_ATTRIBUTE_LIST* result)
+{
+    return make_proc_thread_attribute_list_nothrow(
+        std::forward&lt;C&gt;(attributes), 0, result);
+}
+</pre>
+<p>Note that without the <code>std::enable_if_t</code> on the third overload, we would have an ambiguity if somebody called <code>make_<wbr></wbr>proc_<wbr></wbr>thread_<wbr></wbr>attribute_<wbr></wbr>list_<wbr></wbr>nothrow(1, p)</code> because the parameter <code>1</code> would satisfy both the <code>DWORD</code> parameter from the first overload as well as matching the third overload with <code>C = int</code>. To force the third one to be rejected, we use SFINAE to make the return type a substitution failure if the parameter is integral.</p>
+<p>We can then build a throwing version out of the nonthrowing version.</p>
+<pre>unique_proc_thread_attribute_list
+    make_proc_thread_attribute_list(DWORD attributeCount)
+{
+    unique_proc_thread_attribute_list result;
+    THROW_IF_FAILED(make_proc_thread_attribute_list_nothrow(
+        attributeCount, result.put()));
+    return result;
+}
+
+template&lt;typename C = std::initializer_list&lt;proc_thread_attribute&gt;&gt;
+std::enable_if_t&lt;!std::is_integral_v&lt;C&gt;, unique_proc_thread_attribute_list&gt;
+    make_proc_thread_attribute_list(
+        C&amp;&amp; attributes, DWORD extraAttributeCount = 0)
+{
+    unique_proc_thread_attribute_list result;
+    THROW_IF_FAILED(make_proc_thread_attribute_list_nothrow(
+        std::forward&lt;C&gt;(attributes), extraAttributeCount,
+        result.put()));
+    return result;
+}
+</pre>
+<p>We use a defaulted parameter to collapse the “collection initializer” and “collection initializer with additional space” overloads into one. We still need to use SFINAE to avoid an ambiguity that tries to treat a sole integer parameter as a collection.</p>
+<p>You can use this to build process/thread attribute lists at one go.</p>
+<pre>HANDLE handles[2] = { handle1, handle2 };
+DWORD protection = PROTECTION_LEVEL_SAME;
+auto list = make_proc_thread_attribute_list({
+    { PROC_THREAD_ATTRIBUTE_HANDLE_LIST, &amp;handles, sizeof(handles) },
+    { PROC_THREAD_ATTRIBUTE_PROTECTION_LEVEL, &amp;protection, sizeof(protection) },
+});
+</pre>
+<p>Or you can build it up with some premade attributes, and others that you add conditionally:</p>
+<pre>HANDLE handles[2] = { handle1, handle2 };
+DWORD protection = PROTECTION_LEVEL_SAME;
+auto list = make_proc_thread_attribute_list({
+    { PROC_THREAD_ATTRIBUTE_HANDLE_LIST, &amp;handles, sizeof(handles) },
+    { PROC_THREAD_ATTRIBUTE_PROTECTION_LEVEL, &amp;protection, sizeof(protection) },
+}, 1); // "1" leaves room for one more attribute
+if (job != nullptr) {
+    UpdateProcThreadAttribute(list.get(),
+        PROC_THREAD_ATTRIBUTE_JOB_LIST,
+        &amp;job, sizeof(job), nullptr, nullptr);
+}
+</pre>
+<p>The post <a href="https://devblogs.microsoft.com/oldnewthing/20260813-00/?p=112611" target="_blank" rel="noopener noreferrer">A little helper class for managing &lt;CODE&gt;LPPROC_&lt;WBR&gt;THREAD_&lt;WBR&gt;ATTRIBUTE_&lt;WBR&gt;LIST&lt;/CODE&gt;s</a> appeared first on <a href="https://devblogs.microsoft.com/oldnewthing" target="_blank" rel="noopener noreferrer">The Old New Thing</a>.</p>
+</div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://devblogs.microsoft.com/oldnewthing/20260813-00/?p=112611" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button> <script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
