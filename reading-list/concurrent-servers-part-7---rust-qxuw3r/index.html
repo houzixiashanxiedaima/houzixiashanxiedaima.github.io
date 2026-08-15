@@ -1,0 +1,598 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.2.1"><!-- Core SEO --><meta name="description" content="This is part 7 in a series of posts on writing concurrent network servers.
+In this part, we discuss how the challenges described in earlier parts are
+tackled in the Rust programming language.
+All post"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/concurrent-servers-part-7---rust-qxuw3r/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/concurrent-servers-part-7---rust-qxuw3r/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/concurrent-servers-part-7---rust-qxuw3r/"><meta property="og:title" content="Concurrent Servers: Part 7 - Rust"><meta property="og:description" content="This is part 7 in a series of posts on writing concurrent network servers.
+In this part, we discuss how the challenges described in earlier parts are
+tackled in the Rust programming language.
+All post"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="This is part 7 in a series of posts on writing concurrent network servers.
+In this part, we discuss how the challenges described in earlier parts are
+tackled in the Rust programming language.
+All post"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/concurrent-servers-part-7---rust-qxuw3r/"><meta property="twitter:title" content="Concurrent Servers: Part 7 - Rust"><meta property="twitter:description" content="This is part 7 in a series of posts on writing concurrent network servers.
+In this part, we discuss how the challenges described in earlier parts are
+tackled in the Rust programming language.
+All post"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Concurrent Servers: Part 7 - Rust</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Concurrent Servers: Part 7 - Rust","item":"https://blog.yuyins.com/reading-list/concurrent-servers-part-7---rust-qxuw3r/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-k2qn5omv]{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip[data-astro-cid-k2qn5omv]:after{content:none!important}.chip--sm[data-astro-cid-k2qn5omv]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-k2qn5omv]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-k2qn5omv]{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}.chip--interactive[data-astro-cid-k2qn5omv]:hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}.chip--active[data-astro-cid-k2qn5omv],.chip[data-astro-cid-k2qn5omv].active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed[data-astro-cid-k2qn5omv]{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip[data-astro-cid-k2qn5omv]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.B2tVeu6z.css"><style>.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem;font-style:italic}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;font-family:monospace;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-08-16" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-08-16</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-15" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-15</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-14" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-14</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-13" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-13</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-08-13" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-08-13</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-12" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-12</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.PHDZRRIC.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>Concurrent Servers: Part 7 - Rust</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://eli.thegreenplace.net/" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag" data-astro-cid-k2qn5omv="true"> eli.thegreenplace.net </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年8月16日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-veycvx62><p>This is part 7 in a series of posts on writing concurrent network servers.
+In this part, we discuss how the challenges described in earlier parts are
+tackled in the Rust programming language.</p>
+<p>All posts in the series:</p>
+<ul>
+<li><a href="https://eli.thegreenplace.net/2017/concurrent-servers-part-1-introduction/" target="_blank" rel="noopener noreferrer">Part 1 - Introduction</a></li>
+<li><a href="https://eli.thegreenplace.net/2017/concurrent-servers-part-2-threads/" target="_blank" rel="noopener noreferrer">Part 2 - Threads</a></li>
+<li><a href="https://eli.thegreenplace.net/2017/concurrent-servers-part-3-event-driven/" target="_blank" rel="noopener noreferrer">Part 3 - Event-driven</a></li>
+<li><a href="https://eli.thegreenplace.net/2017/concurrent-servers-part-4-libuv/" target="_blank" rel="noopener noreferrer">Part 4 - libuv</a></li>
+<li><a href="https://eli.thegreenplace.net/2017/concurrent-servers-part-5-redis-case-study/" target="_blank" rel="noopener noreferrer">Part 5 - Redis case study</a></li>
+<li><a href="https://eli.thegreenplace.net/2018/concurrent-servers-part-6-callbacks-promises-and-asyncawait/" target="_blank" rel="noopener noreferrer">Part 6 - Callbacks, Promises and async/await</a></li>
+<li>Part 7 - Rust (this part)</li>
+</ul>
+<p>Several years have passed since the previous parts were published. I've recently
+went over them to make sure the information presented is still relevant and
+all the code samples build and run using modern toolchains. I strongly
+recommend reviewing the previous parts before reading this one.</p>
+<p>This post assumes a basic familiarity with the Rust programming language. It
+will only explain Rust constructs when we encounter code that wouldn't appear in
+an introductory book or tutorial.</p>
+<div>
+<h2>Setting the baseline - a sequential state machine server</h2>
+<p>The first few parts in the series focused on a socket server that implements
+a simple state machine protocol. See <a href="https://eli.thegreenplace.net/2017/concurrent-servers-part-1-introduction/" target="_blank" rel="noopener noreferrer">part 1</a>
+for a complete description of the protocol. Let's start by showing how this
+protocol is implemented in a basic sequential Rust server:</p>
+<div><pre><span></span><span>use</span><span> </span><span>async_socket_server</span>::<span>serve_connection</span><span>;</span><span></span>
+<span>use</span><span> </span><span>std</span>::<span>net</span>::<span>TcpListener</span><span>;</span><span></span>
+
+<span>fn</span> <span>main</span><span>()</span><span> </span>-&gt; <span>std</span>::<span>io</span>::<span>Result</span><span>&lt;</span><span>()</span><span>&gt;</span><span> </span><span>{</span><span></span>
+<span>    </span><span>let</span><span> </span><span>port</span><span> </span><span>=</span><span> </span><span>match</span><span> </span><span>std</span>::<span>env</span>::<span>args</span><span>().</span><span>nth</span><span>(</span><span>1</span><span>)</span><span> </span><span>{</span><span></span>
+<span>        </span><span>Some</span><span>(</span><span>s</span><span>)</span><span> </span><span>=&gt;</span><span> </span><span>s</span><span>,</span><span></span>
+<span>        </span><span>None</span><span> </span><span>=&gt;</span><span> </span><span>"9090"</span><span>.</span><span>to_string</span><span>(),</span><span></span>
+<span>    </span><span>};</span><span></span>
+<span>    </span><span>let</span><span> </span><span>addr</span><span> </span><span>=</span><span> </span><span>format!</span><span>(</span><span>"127.0.0.1:{port}"</span><span>);</span><span></span>
+
+<span>    </span><span>let</span><span> </span><span>listener</span><span> </span><span>=</span><span> </span><span>TcpListener</span>::<span>bind</span><span>(</span><span>addr</span><span>)</span><span>?</span><span>;</span><span></span>
+<span>    </span><span>println!</span><span>(</span><span>"Serving on port {port}"</span><span>);</span><span></span>
+
+<span>    </span><span>loop</span><span> </span><span>{</span><span></span>
+<span>        </span><span>let</span><span> </span><span>(</span><span>stream</span><span>,</span><span> </span><span>addr</span><span>)</span><span> </span><span>=</span><span> </span><span>listener</span><span>.</span><span>accept</span><span>()</span><span>?</span><span>;</span><span></span>
+<span>        </span><span>println!</span><span>(</span><span>"connection received from {}"</span><span>,</span><span> </span><span>addr</span><span>);</span><span></span>
+<span>        </span><span>if</span><span> </span><span>let</span><span> </span><span>Err</span><span>(</span><span>e</span><span>)</span><span> </span><span>=</span><span> </span><span>serve_connection</span><span>(</span><span>stream</span><span>)</span><span> </span><span>{</span><span></span>
+<span>            </span><span>eprintln!</span><span>(</span><span>"error serving connection: {}"</span><span>,</span><span> </span><span>e</span><span>);</span><span></span>
+<span>        </span><span>}</span><span> </span><span>else</span><span> </span><span>{</span><span></span>
+<span>            </span><span>println!</span><span>(</span><span>"peer done {addr}"</span><span>);</span><span></span>
+<span>        </span><span>}</span><span></span>
+<span>    </span><span>}</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>With the function serve_connection defined as:</p>
+<div><pre><span></span><span>pub</span><span> </span><span>enum</span> <span>ProcessingState</span><span> </span><span>{</span><span></span>
+<span>    </span><span>WaitForMsg</span><span>,</span><span></span>
+<span>    </span><span>InMsg</span><span>,</span><span></span>
+<span>}</span><span></span>
+
+<span>pub</span><span> </span><span>fn</span> <span>serve_connection</span><span>(</span><span>mut</span><span> </span><span>stream</span>: <span>TcpStream</span><span>)</span><span> </span>-&gt; <span>std</span>::<span>io</span>::<span>Result</span><span>&lt;</span><span>()</span><span>&gt;</span><span> </span><span>{</span><span></span>
+<span>    </span><span>stream</span><span>.</span><span>write_all</span><span>(</span><span>b"*"</span><span>)</span><span>?</span><span>;</span><span></span>
+
+<span>    </span><span>let</span><span> </span><span>mut</span><span> </span><span>state</span><span> </span><span>=</span><span> </span><span>ProcessingState</span>::<span>WaitForMsg</span><span>;</span><span></span>
+<span>    </span><span>let</span><span> </span><span>mut</span><span> </span><span>buf</span><span> </span><span>=</span><span> </span><span>[</span><span>0</span><span>u8</span><span>;</span><span> </span><span>1024</span><span>];</span><span></span>
+<span>    </span><span>loop</span><span> </span><span>{</span><span></span>
+<span>        </span><span>let</span><span> </span><span>n</span><span> </span><span>=</span><span> </span><span>stream</span><span>.</span><span>read</span><span>(</span><span>&amp;</span><span>mut</span><span> </span><span>buf</span><span>)</span><span>?</span><span>;</span><span></span>
+<span>        </span><span>if</span><span> </span><span>n</span><span> </span><span>==</span><span> </span><span>0</span><span> </span><span>{</span><span></span>
+<span>            </span><span>// Connection closed by the client.</span>
+<span>            </span><span>break</span><span>;</span><span></span>
+<span>        </span><span>}</span><span></span>
+
+<span>        </span><span>for</span><span> </span><span>byte</span><span> </span><span>in</span><span> </span><span>&amp;</span><span>buf</span><span>[</span><span>..</span><span>n</span><span>]</span><span> </span><span>{</span><span></span>
+<span>            </span><span>match</span><span> </span><span>state</span><span> </span><span>{</span><span></span>
+<span>                </span><span>ProcessingState</span>::<span>WaitForMsg</span><span> </span><span>=&gt;</span><span> </span><span>{</span><span></span>
+<span>                    </span><span>if</span><span> </span><span>*</span><span>byte</span><span> </span><span>==</span><span> </span><span>b'^'</span><span> </span><span>{</span><span></span>
+<span>                        </span><span>state</span><span> </span><span>=</span><span> </span><span>ProcessingState</span>::<span>InMsg</span><span>;</span><span></span>
+<span>                    </span><span>}</span><span></span>
+<span>                </span><span>}</span><span></span>
+<span>                </span><span>ProcessingState</span>::<span>InMsg</span><span> </span><span>=&gt;</span><span> </span><span>{</span><span></span>
+<span>                    </span><span>if</span><span> </span><span>*</span><span>byte</span><span> </span><span>==</span><span> </span><span>b'$'</span><span> </span><span>{</span><span></span>
+<span>                        </span><span>state</span><span> </span><span>=</span><span> </span><span>ProcessingState</span>::<span>WaitForMsg</span><span>;</span><span></span>
+<span>                    </span><span>}</span><span> </span><span>else</span><span> </span><span>{</span><span></span>
+<span>                        </span><span>let</span><span> </span><span>newbyte</span><span> </span><span>=</span><span> </span><span>byte</span><span>.</span><span>wrapping_add</span><span>(</span><span>1</span><span>);</span><span></span>
+<span>                        </span><span>stream</span><span>.</span><span>write_all</span><span>(</span><span>&amp;</span><span>[</span><span>newbyte</span><span>])</span><span>?</span><span>;</span><span></span>
+<span>                    </span><span>}</span><span></span>
+<span>                </span><span>}</span><span></span>
+<span>            </span><span>}</span><span></span>
+<span>        </span><span>}</span><span></span>
+<span>    </span><span>}</span><span></span>
+
+<span>    </span><span>Ok</span><span>(())</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>As a reminder, this server version is <em>sequential</em> because it accepts clients
+one by one; the main loop blocks on serve_connection until it's done (the
+client closes the connection), and only then goes back to accept the next
+client.</p>
+</div>
+<div>
+<h2>One thread per client</h2>
+<p>Clearly, handling clients one by one won't do. In
+<a href="https://eli.thegreenplace.net/2017/concurrent-servers-part-2-threads/" target="_blank" rel="noopener noreferrer">part 2</a>,
+we've discussed approaches that use OS threads to handle clients concurrently.
+Let's start with the unbounded one-thread-per-client solution in Rust:</p>
+<div><pre><span></span><span>use</span><span> </span><span>async_socket_server</span>::<span>serve_connection</span><span>;</span><span></span>
+<span>use</span><span> </span><span>std</span>::<span>{</span><span>net</span>::<span>TcpListener</span><span>,</span><span> </span><span>thread</span><span>};</span><span></span>
+
+<span>fn</span> <span>main</span><span>()</span><span> </span>-&gt; <span>std</span>::<span>io</span>::<span>Result</span><span>&lt;</span><span>()</span><span>&gt;</span><span> </span><span>{</span><span></span>
+<span>    </span><span>let</span><span> </span><span>port</span><span> </span><span>=</span><span> </span><span>match</span><span> </span><span>std</span>::<span>env</span>::<span>args</span><span>().</span><span>nth</span><span>(</span><span>1</span><span>)</span><span> </span><span>{</span><span></span>
+<span>        </span><span>Some</span><span>(</span><span>s</span><span>)</span><span> </span><span>=&gt;</span><span> </span><span>s</span><span>,</span><span></span>
+<span>        </span><span>None</span><span> </span><span>=&gt;</span><span> </span><span>"9090"</span><span>.</span><span>to_string</span><span>(),</span><span></span>
+<span>    </span><span>};</span><span></span>
+<span>    </span><span>let</span><span> </span><span>addr</span><span> </span><span>=</span><span> </span><span>format!</span><span>(</span><span>"127.0.0.1:{port}"</span><span>);</span><span></span>
+
+<span>    </span><span>let</span><span> </span><span>listener</span><span> </span><span>=</span><span> </span><span>TcpListener</span>::<span>bind</span><span>(</span><span>addr</span><span>)</span><span>?</span><span>;</span><span></span>
+<span>    </span><span>println!</span><span>(</span><span>"Serving on port {port}"</span><span>);</span><span></span>
+
+<span>    </span><span>loop</span><span> </span><span>{</span><span></span>
+<span>        </span><span>let</span><span> </span><span>(</span><span>stream</span><span>,</span><span> </span><span>addr</span><span>)</span><span> </span><span>=</span><span> </span><span>listener</span><span>.</span><span>accept</span><span>()</span><span>?</span><span>;</span><span></span>
+<span>        </span><span>println!</span><span>(</span><span>"connection received from {}"</span><span>,</span><span> </span><span>addr</span><span>);</span><span></span>
+
+<span>        </span><span>let</span><span> </span><span>res</span><span> </span><span>=</span><span> </span><span>thread</span>::<span>Builder</span>::<span>new</span><span>().</span><span>spawn</span><span>(</span><span>move</span><span> </span><span>||</span><span> </span><span>{</span><span></span>
+<span>            </span><span>if</span><span> </span><span>let</span><span> </span><span>Err</span><span>(</span><span>e</span><span>)</span><span> </span><span>=</span><span> </span><span>serve_connection</span><span>(</span><span>stream</span><span>)</span><span> </span><span>{</span><span></span>
+<span>                </span><span>eprintln!</span><span>(</span><span>"error serving connection: {}"</span><span>,</span><span> </span><span>e</span><span>);</span><span></span>
+<span>            </span><span>}</span><span> </span><span>else</span><span> </span><span>{</span><span></span>
+<span>                </span><span>println!</span><span>(</span><span>"peer done {addr}"</span><span>);</span><span></span>
+<span>            </span><span>}</span><span></span>
+<span>        </span><span>});</span><span></span>
+
+<span>        </span><span>if</span><span> </span><span>let</span><span> </span><span>Err</span><span>(</span><span>e</span><span>)</span><span> </span><span>=</span><span> </span><span>res</span><span> </span><span>{</span><span></span>
+<span>            </span><span>eprintln!</span><span>(</span><span>"error spawning thread: {}"</span><span>,</span><span> </span><span>e</span><span>);</span><span></span>
+<span>        </span><span>}</span><span></span>
+<span>    </span><span>}</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>The spawn method returns a Result&lt;JoinHandle&lt;T&gt;&gt;; on success, we allow
+the handle to be dropped at the end of the loop iteration. In Rust, this
+<em>detaches</em> the thread; we don't actually wait for it to complete. This
+is reasonable for our code sample, because the loop is <em>infinite</em>; it never
+terminates anyway. The potential for runaway threads is just one of the issues
+with the unbounded threads approach discussed in part 2. The solution is to use
+a fixed thread pool.</p>
+</div>
+<div>
+<h2>Thread pool</h2>
+<p>Before diving into the code, a quick note on the design: the thread pool is
+a fixed set of threads that await "jobs" and handle them to completion. In our
+case a "job" is serve_connection for a specific client. There are many ways
+to implement a thread pool; for our use case, I went with a set of threads that
+all get a shared <em>channel</em> to which the main thread sends jobs. A worker thread
+picks up the next job from the channel, serves it to completion, and goes back
+to waiting for the next job. Here's how this looks in code:</p>
+<div><pre><span></span><span>struct</span> <span>Job</span><span> </span><span>{</span><span></span>
+<span>    </span><span>stream</span>: <span>TcpStream</span><span>,</span><span></span>
+<span>    </span><span>addr</span>: <span>SocketAddr</span><span>,</span><span></span>
+<span>}</span><span></span>
+
+<span>fn</span> <span>worker</span><span>(</span><span>receiver</span>: <span>Receiver</span><span>&lt;</span><span>Job</span><span>&gt;</span><span>)</span><span> </span><span>{</span><span></span>
+<span>    </span><span>while</span><span> </span><span>let</span><span> </span><span>Ok</span><span>(</span><span>job</span><span>)</span><span> </span><span>=</span><span> </span><span>receiver</span><span>.</span><span>recv</span><span>()</span><span> </span><span>{</span><span></span>
+<span>        </span><span>if</span><span> </span><span>let</span><span> </span><span>Err</span><span>(</span><span>e</span><span>)</span><span> </span><span>=</span><span> </span><span>serve_connection</span><span>(</span><span>job</span><span>.</span><span>stream</span><span>)</span><span> </span><span>{</span><span></span>
+<span>            </span><span>eprintln!</span><span>(</span><span>"error serving connection from {}: {}"</span><span>,</span><span> </span><span>job</span><span>.</span><span>addr</span><span>,</span><span> </span><span>e</span><span>);</span><span></span>
+<span>        </span><span>}</span><span> </span><span>else</span><span> </span><span>{</span><span></span>
+<span>            </span><span>println!</span><span>(</span><span>"peer done {}"</span><span>,</span><span> </span><span>job</span><span>.</span><span>addr</span><span>);</span><span></span>
+<span>        </span><span>}</span><span></span>
+<span>    </span><span>}</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>What is Receiver? It's a type from the crossbeam_channel crate:</p>
+<div><pre><span></span><span>use</span><span> </span><span>crossbeam_channel</span>::<span>{</span><span>Receiver</span><span>,</span><span> </span><span>bounded</span><span>};</span><span></span>
+</pre></div>
+<p>Rust's builtin channels in std are <em>mpsc</em> - multi producer, single consumer,
+but what we need for our job queue is a channel that supports multiple consumers
+(the worker threads). While std does have <a href="https://doc.rust-lang.org/std/sync/mpmc/fn.channel.html" target="_blank" rel="noopener noreferrer">mpmc</a>,
+this is an experimental API only available in nightly versions at the time of
+writing. Therefore, I've opted to include the crossbeam_channel crate that
+provides well-tested mpmc channels for this sample <a href="https://eli.thegreenplace.net/2026/concurrent-servers-part-7-rust/#footnote-1" target="_blank" rel="noopener noreferrer">[1]</a>.</p>
+<p>And here's the main function:</p>
+<div><pre><span></span><span>use</span><span> </span><span>async_socket_server</span>::<span>serve_connection</span><span>;</span><span></span>
+<span>use</span><span> </span><span>crossbeam_channel</span>::<span>{</span><span>Receiver</span><span>,</span><span> </span><span>bounded</span><span>};</span><span></span>
+<span>use</span><span> </span><span>std</span>::<span>{</span><span></span>
+<span>    </span><span>io</span><span>,</span><span></span>
+<span>    </span><span>net</span>::<span>{</span><span>SocketAddr</span><span>,</span><span> </span><span>TcpListener</span><span>,</span><span> </span><span>TcpStream</span><span>},</span><span></span>
+<span>    </span><span>thread</span><span>,</span><span></span>
+<span>};</span><span></span>
+
+<span>const</span><span> </span><span>NUM_WORKERS</span>: <span>usize</span> <span>=</span><span> </span><span>256</span><span>;</span><span></span>
+<span>const</span><span> </span><span>JOB_QUEUE_CAPACITY</span>: <span>usize</span> <span>=</span><span> </span><span>NUM_WORKERS</span><span>;</span><span></span>
+
+<span>fn</span> <span>main</span><span>()</span><span> </span>-&gt; <span>io</span>::<span>Result</span><span>&lt;</span><span>()</span><span>&gt;</span><span> </span><span>{</span><span></span>
+<span>    </span><span>let</span><span> </span><span>port</span><span> </span><span>=</span><span> </span><span>match</span><span> </span><span>std</span>::<span>env</span>::<span>args</span><span>().</span><span>nth</span><span>(</span><span>1</span><span>)</span><span> </span><span>{</span><span></span>
+<span>        </span><span>Some</span><span>(</span><span>s</span><span>)</span><span> </span><span>=&gt;</span><span> </span><span>s</span><span>,</span><span></span>
+<span>        </span><span>None</span><span> </span><span>=&gt;</span><span> </span><span>"9090"</span><span>.</span><span>to_string</span><span>(),</span><span></span>
+<span>    </span><span>};</span><span></span>
+<span>    </span><span>let</span><span> </span><span>addr</span><span> </span><span>=</span><span> </span><span>format!</span><span>(</span><span>"127.0.0.1:{port}"</span><span>);</span><span></span>
+
+<span>    </span><span>let</span><span> </span><span>listener</span><span> </span><span>=</span><span> </span><span>TcpListener</span>::<span>bind</span><span>(</span><span>addr</span><span>)</span><span>?</span><span>;</span><span></span>
+<span>    </span><span>println!</span><span>(</span><span>"Serving on port {port}"</span><span>);</span><span></span>
+
+<span>    </span><span>let</span><span> </span><span>(</span><span>tx</span><span>,</span><span> </span><span>rx</span><span>)</span><span> </span><span>=</span><span> </span><span>bounded</span>::<span>&lt;</span><span>Job</span><span>&gt;</span><span>(</span><span>JOB_QUEUE_CAPACITY</span><span>);</span><span></span>
+<span>    </span><span>for</span><span> </span><span>_</span><span> </span><span>in</span><span> </span><span>0</span><span>..</span><span>NUM_WORKERS</span><span> </span><span>{</span><span></span>
+<span>        </span><span>let</span><span> </span><span>receiver</span><span> </span><span>=</span><span> </span><span>rx</span><span>.</span><span>clone</span><span>();</span><span></span>
+<span>        </span><span>thread</span>::<span>Builder</span>::<span>new</span><span>().</span><span>spawn</span><span>(</span><span>move</span><span> </span><span>||</span><span> </span><span>worker</span><span>(</span><span>receiver</span><span>))</span><span>?</span><span>;</span><span></span>
+<span>    </span><span>}</span><span></span>
+<span>    </span><span>drop</span><span>(</span><span>rx</span><span>);</span><span></span>
+
+<span>    </span><span>loop</span><span> </span><span>{</span><span></span>
+<span>        </span><span>let</span><span> </span><span>(</span><span>stream</span><span>,</span><span> </span><span>addr</span><span>)</span><span> </span><span>=</span><span> </span><span>listener</span><span>.</span><span>accept</span><span>()</span><span>?</span><span>;</span><span></span>
+<span>        </span><span>println!</span><span>(</span><span>"connection received from {addr}"</span><span>);</span><span></span>
+
+<span>        </span><span>// A full queue blocks this loop, preventing it from accepting more</span>
+<span>        </span><span>// connections until a worker becomes available.</span>
+<span>        </span><span>if</span><span> </span><span>tx</span><span>.</span><span>send</span><span>(</span><span>Job</span><span> </span><span>{</span><span> </span><span>stream</span><span>,</span><span> </span><span>addr</span><span> </span><span>}).</span><span>is_err</span><span>()</span><span> </span><span>{</span><span></span>
+<span>            </span><span>return</span><span> </span><span>Err</span><span>(</span><span>io</span>::<span>Error</span>::<span>other</span><span>(</span><span>"all connection workers stopped"</span><span>));</span><span></span>
+<span>        </span><span>}</span><span></span>
+<span>    </span><span>}</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>Note that our job channel is <em>bounded</em> - it has a fixed size. This helps
+naturally implement a <em>backpressure</em> mechanism - if too many clients connect,
+the following clients will have to wait - the main loop blocks on tx.send
+and won't accept additional clients on the socket until jobs are cleared
+from the channel.</p>
+</div>
+<div>
+<h2>Asynchronous, event-driven server</h2>
+<p>In parts 4, 5 and 6 of the series we've discussed <em>event-driven</em>, or
+<em>asynchronous</em> servers. Let's see how it's done in Rust. Specifically,
+<a href="https://eli.thegreenplace.net/2018/concurrent-servers-part-6-callbacks-promises-and-asyncawait/" target="_blank" rel="noopener noreferrer">part 6</a>
+presented a gradation from callbacks to promises to async/await mechanisms;
+Rust supports all of these and - as you'd expect - modern code is usually
+written with async/await while hiding all the details of promises (called
+<em>futures</em> in Rust) underneath.</p>
+<p>Without further ado, here's our simple state machine protocol in asynchronous
+Rust:</p>
+<div><pre><span></span><span>use</span><span> </span><span>async_socket_server</span>::<span>ProcessingState</span><span>;</span><span></span>
+<span>use</span><span> </span><span>tokio</span>::<span>io</span>::<span>{</span><span>self</span><span>,</span><span> </span><span>AsyncReadExt</span><span>,</span><span> </span><span>AsyncWriteExt</span><span>};</span><span></span>
+<span>use</span><span> </span><span>tokio</span>::<span>net</span>::<span>TcpListener</span><span>;</span><span></span>
+
+<span>#[tokio::main]</span><span></span>
+<span>async</span><span> </span><span>fn</span> <span>main</span><span>()</span><span> </span>-&gt; <span>io</span>::<span>Result</span><span>&lt;</span><span>()</span><span>&gt;</span><span> </span><span>{</span><span></span>
+<span>    </span><span>let</span><span> </span><span>port</span><span> </span><span>=</span><span> </span><span>match</span><span> </span><span>std</span>::<span>env</span>::<span>args</span><span>().</span><span>nth</span><span>(</span><span>1</span><span>)</span><span> </span><span>{</span><span></span>
+<span>        </span><span>Some</span><span>(</span><span>s</span><span>)</span><span> </span><span>=&gt;</span><span> </span><span>s</span><span>,</span><span></span>
+<span>        </span><span>None</span><span> </span><span>=&gt;</span><span> </span><span>"9090"</span><span>.</span><span>to_string</span><span>(),</span><span></span>
+<span>    </span><span>};</span><span></span>
+<span>    </span><span>let</span><span> </span><span>addr</span><span> </span><span>=</span><span> </span><span>format!</span><span>(</span><span>"127.0.0.1:{port}"</span><span>);</span><span></span>
+
+<span>    </span><span>let</span><span> </span><span>listener</span><span> </span><span>=</span><span> </span><span>TcpListener</span>::<span>bind</span><span>(</span><span>addr</span><span>).</span><span>await</span><span>?</span><span>;</span><span></span>
+<span>    </span><span>println!</span><span>(</span><span>"Serving on port {port}"</span><span>);</span><span></span>
+
+<span>    </span><span>loop</span><span> </span><span>{</span><span></span>
+<span>        </span><span>let</span><span> </span><span>(</span><span>socket</span><span>,</span><span> </span><span>addr</span><span>)</span><span> </span><span>=</span><span> </span><span>listener</span><span>.</span><span>accept</span><span>().</span><span>await</span><span>?</span><span>;</span><span></span>
+<span>        </span><span>println!</span><span>(</span><span>"connection received from {addr:?}"</span><span>);</span><span></span>
+
+<span>        </span><span>tokio</span>::<span>spawn</span><span>(</span><span>async</span><span> </span><span>move</span><span> </span><span>{</span><span></span>
+<span>            </span><span>if</span><span> </span><span>let</span><span> </span><span>Err</span><span>(</span><span>e</span><span>)</span><span> </span><span>=</span><span> </span><span>serve_connection_async</span><span>(</span><span>socket</span><span>).</span><span>await</span><span> </span><span>{</span><span></span>
+<span>                </span><span>eprintln!</span><span>(</span><span>"error serving connection from {addr:?}: {e}"</span><span>);</span><span></span>
+<span>            </span><span>}</span><span> </span><span>else</span><span> </span><span>{</span><span></span>
+<span>                </span><span>println!</span><span>(</span><span>"peer done {addr:?}"</span><span>);</span><span></span>
+<span>            </span><span>}</span><span></span>
+<span>        </span><span>});</span><span></span>
+<span>    </span><span>}</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>Rust takes an interesting approach to async programming: it supports some of its
+fundamental building blocks (like futures and the async and await
+keywords) in the core language, but leaves the actual async engine
+implementation (the thing that implements the event loop) to external crates. By
+far the most popular crate for async programming in Rust is is <a href="https://tokio.rs/" target="_blank" rel="noopener noreferrer">tokio</a>, so that's what we're using here.</p>
+<p>After reading the JS code in part 6, the Rust snippet above should appear fairly
+familiar, except perhaps the explicit tokio task "spawn". Instead of enqueuing a
+callback on the connection returned by listener.accept, the code spawns a
+tokio task, which can be seen as a <a href="https://en.wikipedia.org/wiki/Green_thread" target="_blank" rel="noopener noreferrer">green thread</a>, and hence uses similar
+terminology <a href="https://eli.thegreenplace.net/2026/concurrent-servers-part-7-rust/#footnote-2" target="_blank" rel="noopener noreferrer">[2]</a>. These tasks must not issue blocking calls; therefore,
+they are supposed to use tokio's I/O utilities instead of the usual, blocking
+std utilities. In fact, we have to implement an async version of
+serve_connection to make this work:</p>
+<div><pre><span></span><span>async</span><span> </span><span>fn</span> <span>serve_connection_async</span><span>(</span><span>mut</span><span> </span><span>stream</span>: <span>tokio</span>::<span>net</span>::<span>TcpStream</span><span>)</span><span> </span>-&gt; <span>std</span>::<span>io</span>::<span>Result</span><span>&lt;</span><span>()</span><span>&gt;</span><span> </span><span>{</span><span></span>
+<span>    </span><span>stream</span><span>.</span><span>write_all</span><span>(</span><span>b"*"</span><span>).</span><span>await</span><span>?</span><span>;</span><span></span>
+
+<span>    </span><span>let</span><span> </span><span>mut</span><span> </span><span>state</span><span> </span><span>=</span><span> </span><span>ProcessingState</span>::<span>WaitForMsg</span><span>;</span><span></span>
+<span>    </span><span>let</span><span> </span><span>mut</span><span> </span><span>buf</span><span> </span><span>=</span><span> </span><span>[</span><span>0</span><span>u8</span><span>;</span><span> </span><span>1024</span><span>];</span><span></span>
+<span>    </span><span>loop</span><span> </span><span>{</span><span></span>
+<span>        </span><span>let</span><span> </span><span>n</span><span> </span><span>=</span><span> </span><span>stream</span><span>.</span><span>read</span><span>(</span><span>&amp;</span><span>mut</span><span> </span><span>buf</span><span>).</span><span>await</span><span>?</span><span>;</span><span></span>
+<span>        </span><span>if</span><span> </span><span>n</span><span> </span><span>==</span><span> </span><span>0</span><span> </span><span>{</span><span></span>
+<span>            </span><span>// Connection closed by the client.</span>
+<span>            </span><span>break</span><span>;</span><span></span>
+<span>        </span><span>}</span><span></span>
+
+<span>        </span><span>for</span><span> </span><span>byte</span><span> </span><span>in</span><span> </span><span>&amp;</span><span>buf</span><span>[</span><span>..</span><span>n</span><span>]</span><span> </span><span>{</span><span></span>
+<span>            </span><span>match</span><span> </span><span>state</span><span> </span><span>{</span><span></span>
+<span>                </span><span>ProcessingState</span>::<span>WaitForMsg</span><span> </span><span>=&gt;</span><span> </span><span>{</span><span></span>
+<span>                    </span><span>if</span><span> </span><span>*</span><span>byte</span><span> </span><span>==</span><span> </span><span>b'^'</span><span> </span><span>{</span><span></span>
+<span>                        </span><span>state</span><span> </span><span>=</span><span> </span><span>ProcessingState</span>::<span>InMsg</span><span>;</span><span></span>
+<span>                    </span><span>}</span><span></span>
+<span>                </span><span>}</span><span></span>
+<span>                </span><span>ProcessingState</span>::<span>InMsg</span><span> </span><span>=&gt;</span><span> </span><span>{</span><span></span>
+<span>                    </span><span>if</span><span> </span><span>*</span><span>byte</span><span> </span><span>==</span><span> </span><span>b'$'</span><span> </span><span>{</span><span></span>
+<span>                        </span><span>state</span><span> </span><span>=</span><span> </span><span>ProcessingState</span>::<span>WaitForMsg</span><span>;</span><span></span>
+<span>                    </span><span>}</span><span> </span><span>else</span><span> </span><span>{</span><span></span>
+<span>                        </span><span>let</span><span> </span><span>newbyte</span><span> </span><span>=</span><span> </span><span>byte</span><span>.</span><span>wrapping_add</span><span>(</span><span>1</span><span>);</span><span></span>
+<span>                        </span><span>stream</span><span>.</span><span>write_all</span><span>(</span><span>&amp;</span><span>[</span><span>newbyte</span><span>]).</span><span>await</span><span>?</span><span>;</span><span></span>
+<span>                    </span><span>}</span><span></span>
+<span>                </span><span>}</span><span></span>
+<span>            </span><span>}</span><span></span>
+<span>        </span><span>}</span><span></span>
+<span>    </span><span>}</span><span></span>
+
+<span>    </span><span>Ok</span><span>(())</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>Note how similar this code is to serve_connection from earlier; the only
+real differences are the await calls on socket reads and writes <a href="https://eli.thegreenplace.net/2026/concurrent-servers-part-7-rust/#footnote-3" target="_blank" rel="noopener noreferrer">[3]</a>,
+and the types involved. For example, instead of a <span>std::net::TcpStream</span> used
+in the synchronous samples, here we're using <span>tokio::net::TcpStream</span>. Tokio
+has an underlying dependency called <a href="https://github.com/tokio-rs/mio" target="_blank" rel="noopener noreferrer">mio</a> to
+handle non-blocking APIs for all kinds of I/O. It wraps OS-specific event loops
+like epoll to do so efficiently.</p>
+</div>
+<div>
+<h2>Asynchronous primality testing servers</h2>
+<p>While most of the series has been using a simple state machine server as the
+driving example, part 6 switched focus to a server for primality testing which
+simulates long compute tasks. Let's see how this is done in Rust with tokio:</p>
+<div><pre><span></span><span>use</span><span> </span><span>tokio</span>::<span>io</span>::<span>{</span><span>self</span><span>,</span><span> </span><span>AsyncReadExt</span><span>,</span><span> </span><span>AsyncWriteExt</span><span>};</span><span></span>
+<span>use</span><span> </span><span>tokio</span>::<span>net</span>::<span>TcpListener</span><span>;</span><span></span>
+
+<span>#[tokio::main]</span><span></span>
+<span>async</span><span> </span><span>fn</span> <span>main</span><span>()</span><span> </span>-&gt; <span>io</span>::<span>Result</span><span>&lt;</span><span>()</span><span>&gt;</span><span> </span><span>{</span><span></span>
+<span>    </span><span>let</span><span> </span><span>port</span><span> </span><span>=</span><span> </span><span>match</span><span> </span><span>std</span>::<span>env</span>::<span>args</span><span>().</span><span>nth</span><span>(</span><span>1</span><span>)</span><span> </span><span>{</span><span></span>
+<span>        </span><span>Some</span><span>(</span><span>s</span><span>)</span><span> </span><span>=&gt;</span><span> </span><span>s</span><span>,</span><span></span>
+<span>        </span><span>None</span><span> </span><span>=&gt;</span><span> </span><span>"8070"</span><span>.</span><span>to_string</span><span>(),</span><span></span>
+<span>    </span><span>};</span><span></span>
+<span>    </span><span>let</span><span> </span><span>addr</span><span> </span><span>=</span><span> </span><span>format!</span><span>(</span><span>"127.0.0.1:{port}"</span><span>);</span><span></span>
+
+<span>    </span><span>let</span><span> </span><span>listener</span><span> </span><span>=</span><span> </span><span>TcpListener</span>::<span>bind</span><span>(</span><span>addr</span><span>).</span><span>await</span><span>?</span><span>;</span><span></span>
+<span>    </span><span>println!</span><span>(</span><span>"Serving on port {port}"</span><span>);</span><span></span>
+
+<span>    </span><span>loop</span><span> </span><span>{</span><span></span>
+<span>        </span><span>let</span><span> </span><span>(</span><span>socket</span><span>,</span><span> </span><span>addr</span><span>)</span><span> </span><span>=</span><span> </span><span>listener</span><span>.</span><span>accept</span><span>().</span><span>await</span><span>?</span><span>;</span><span></span>
+<span>        </span><span>println!</span><span>(</span><span>"connection received from {addr:?}"</span><span>);</span><span></span>
+
+<span>        </span><span>tokio</span>::<span>spawn</span><span>(</span><span>async</span><span> </span><span>move</span><span> </span><span>{</span><span></span>
+<span>            </span><span>if</span><span> </span><span>let</span><span> </span><span>Err</span><span>(</span><span>e</span><span>)</span><span> </span><span>=</span><span> </span><span>serve_client</span><span>(</span><span>socket</span><span>).</span><span>await</span><span> </span><span>{</span><span></span>
+<span>                </span><span>eprintln!</span><span>(</span><span>"error serving connection from {addr:?}: {e}"</span><span>);</span><span></span>
+<span>            </span><span>}</span><span> </span><span>else</span><span> </span><span>{</span><span></span>
+<span>                </span><span>println!</span><span>(</span><span>"peer done {addr:?}"</span><span>);</span><span></span>
+<span>            </span><span>}</span><span></span>
+<span>        </span><span>});</span><span></span>
+<span>    </span><span>}</span><span></span>
+<span>}</span><span></span>
+
+<span>async</span><span> </span><span>fn</span> <span>serve_client</span><span>(</span><span>mut</span><span> </span><span>stream</span>: <span>tokio</span>::<span>net</span>::<span>TcpStream</span><span>)</span><span> </span>-&gt; <span>std</span>::<span>io</span>::<span>Result</span><span>&lt;</span><span>()</span><span>&gt;</span><span> </span><span>{</span><span></span>
+<span>    </span><span>let</span><span> </span><span>mut</span><span> </span><span>buf</span><span> </span><span>=</span><span> </span><span>[</span><span>0</span><span>u8</span><span>;</span><span> </span><span>1024</span><span>];</span><span></span>
+
+<span>    </span><span>loop</span><span> </span><span>{</span><span></span>
+<span>        </span><span>let</span><span> </span><span>n</span><span> </span><span>=</span><span> </span><span>stream</span><span>.</span><span>read</span><span>(</span><span>&amp;</span><span>mut</span><span> </span><span>buf</span><span>).</span><span>await</span><span>?</span><span>;</span><span></span>
+<span>        </span><span>if</span><span> </span><span>n</span><span> </span><span>==</span><span> </span><span>0</span><span> </span><span>{</span><span></span>
+<span>            </span><span>// Connection closed by the client.</span>
+<span>            </span><span>return</span><span> </span><span>Ok</span><span>(());</span><span></span>
+<span>        </span><span>}</span><span></span>
+
+<span>        </span><span>// Parse read buf into u64.</span>
+<span>        </span><span>let</span><span> </span><span>num</span><span> </span><span>=</span><span> </span><span>std</span>::<span>str</span>::<span>from_utf8</span><span>(</span><span>&amp;</span><span>buf</span><span>[</span><span>..</span><span>n</span><span>])</span><span></span>
+<span>            </span><span>.</span><span>map_err</span><span>(</span><span>|</span><span>error</span><span>|</span><span> </span><span>io</span>::<span>Error</span>::<span>new</span><span>(</span><span>io</span>::<span>ErrorKind</span>::<span>InvalidData</span><span>,</span><span> </span><span>error</span><span>))</span><span>?</span><span></span>
+<span>            </span><span>.</span><span>trim</span><span>()</span><span></span>
+<span>            </span><span>.</span><span>parse</span>::<span>&lt;</span><span>u64</span><span>&gt;</span><span>()</span><span></span>
+<span>            </span><span>.</span><span>map_err</span><span>(</span><span>|</span><span>error</span><span>|</span><span> </span><span>io</span>::<span>Error</span>::<span>new</span><span>(</span><span>io</span>::<span>ErrorKind</span>::<span>InvalidData</span><span>,</span><span> </span><span>error</span><span>))</span><span>?</span><span>;</span><span></span>
+
+<span>        </span><span>let</span><span> </span><span>answer</span><span> </span><span>=</span><span> </span><span>if</span><span> </span><span>isprime</span><span>(</span><span>num</span><span>,</span><span> </span><span>true</span><span>)</span><span> </span><span>{</span><span></span>
+<span>            </span><span>"prime"</span><span></span>
+<span>        </span><span>}</span><span> </span><span>else</span><span> </span><span>{</span><span></span>
+<span>            </span><span>"composite"</span><span></span>
+<span>        </span><span>};</span><span></span>
+<span>        </span><span>stream</span><span></span>
+<span>            </span><span>.</span><span>write_all</span><span>((</span><span>answer</span><span>.</span><span>to_string</span><span>()</span><span> </span><span>+</span><span> </span><span>"</span><span>\n</span><span>"</span><span>).</span><span>as_bytes</span><span>())</span><span></span>
+<span>            </span><span>.</span><span>await</span><span>?</span><span>;</span><span></span>
+<span>    </span><span>}</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>This code is very similar to the previous snippet conceptually; isprime
+is:</p>
+<div><pre><span></span><span>// Check if n is prime, returning a boolean. The delay parameter is optional;</span>
+<span>// if true, the function will block for n milliseconds before computing the</span>
+<span>// answer. This is useful for simulating a long-running computation.</span>
+<span>fn</span> <span>isprime</span><span>(</span><span>n</span>: <span>u64</span><span>,</span><span> </span><span>delay</span>: <span>bool</span><span>)</span><span> </span>-&gt; <span>bool</span> <span>{</span><span></span>
+<span>    </span><span>if</span><span> </span><span>delay</span><span> </span><span>{</span><span></span>
+<span>        </span><span>std</span>::<span>thread</span>::<span>sleep</span><span>(</span><span>std</span>::<span>time</span>::<span>Duration</span>::<span>from_millis</span><span>(</span><span>n</span><span>));</span><span></span>
+<span>    </span><span>}</span><span></span>
+
+<span>    </span><span>if</span><span> </span><span>n</span><span> </span><span>&lt;</span><span> </span><span>2</span><span> </span><span>{</span><span></span>
+<span>        </span><span>return</span><span> </span><span>false</span><span>;</span><span></span>
+<span>    </span><span>}</span><span></span>
+<span>    </span><span>if</span><span> </span><span>n</span><span> </span><span>%</span><span> </span><span>2</span><span> </span><span>==</span><span> </span><span>0</span><span> </span><span>{</span><span></span>
+<span>        </span><span>return</span><span> </span><span>n</span><span> </span><span>==</span><span> </span><span>2</span><span>;</span><span></span>
+<span>    </span><span>}</span><span></span>
+
+<span>    </span><span>let</span><span> </span><span>mut</span><span> </span><span>r</span><span> </span><span>=</span><span> </span><span>3</span><span>;</span><span></span>
+<span>    </span><span>while</span><span> </span><span>r</span><span> </span><span>*</span><span> </span><span>r</span><span> </span><span>&lt;=</span><span> </span><span>n</span><span> </span><span>{</span><span></span>
+<span>        </span><span>if</span><span> </span><span>n</span><span> </span><span>%</span><span> </span><span>r</span><span> </span><span>==</span><span> </span><span>0</span><span> </span><span>{</span><span></span>
+<span>            </span><span>return</span><span> </span><span>false</span><span>;</span><span></span>
+<span>        </span><span>}</span><span></span>
+<span>        </span><span>r</span><span> </span><span>+=</span><span> </span><span>2</span><span>;</span><span></span>
+<span>    </span><span>}</span><span></span>
+<span>    </span><span>true</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>Note that this sample demonstrates a job that can block (simulated with
+a sleep in this case). This can be
+problematic in an async context, as the <a href="https://docs.rs/tokio/latest/tokio/task/index.html#blocking-and-yielding" target="_blank" rel="noopener noreferrer">tokio documentation explains</a>.</p>
+<p>One potential solution would
+be to dispatch a blocking task to a separate thread pool and use <a href="https://docs.rs/tokio/1.53.1/tokio/sync/" target="_blank" rel="noopener noreferrer">tokio
+channels</a> to communicate with it;
+this is similar to the approach we've taken in the thread pool sample above.</p>
+<p>Part 6 also included a version of this server that caches data on a local
+Redis instance; the goal was to demonstrate the complexity of event-driven code
+when additional layers of callbacks are added and how async/await can help
+mitigate that. Here's our Rust version of this server, using the redis crate
+(that has a tokio component enabled explicitly to support async calls):</p>
+<div><pre><span></span><span>use</span><span> </span><span>redis</span>::<span>AsyncTypedCommands</span><span>;</span><span></span>
+<span>use</span><span> </span><span>redis</span>::<span>aio</span>::<span>MultiplexedConnection</span><span>;</span><span></span>
+<span>use</span><span> </span><span>tokio</span>::<span>io</span>::<span>{</span><span>self</span><span>,</span><span> </span><span>AsyncReadExt</span><span>,</span><span> </span><span>AsyncWriteExt</span><span>};</span><span></span>
+<span>use</span><span> </span><span>tokio</span>::<span>net</span>::<span>TcpListener</span><span>;</span><span></span>
+
+<span>#[derive(Clone)]</span><span></span>
+<span>struct</span> <span>AppState</span><span> </span><span>{</span><span></span>
+<span>    </span><span>redis_connection</span>: <span>MultiplexedConnection</span><span>,</span><span></span>
+<span>}</span><span></span>
+
+<span>const</span><span> </span><span>REDIS_URL</span>: <span>&amp;</span><span>str</span> <span>=</span><span> </span><span>"redis://127.0.0.1"</span><span>;</span><span></span>
+
+<span>#[tokio::main]</span><span></span>
+<span>async</span><span> </span><span>fn</span> <span>main</span><span>()</span><span> </span>-&gt; <span>io</span>::<span>Result</span><span>&lt;</span><span>()</span><span>&gt;</span><span> </span><span>{</span><span></span>
+<span>    </span><span>let</span><span> </span><span>port</span><span> </span><span>=</span><span> </span><span>match</span><span> </span><span>std</span>::<span>env</span>::<span>args</span><span>().</span><span>nth</span><span>(</span><span>1</span><span>)</span><span> </span><span>{</span><span></span>
+<span>        </span><span>Some</span><span>(</span><span>s</span><span>)</span><span> </span><span>=&gt;</span><span> </span><span>s</span><span>,</span><span></span>
+<span>        </span><span>None</span><span> </span><span>=&gt;</span><span> </span><span>"8070"</span><span>.</span><span>to_string</span><span>(),</span><span></span>
+<span>    </span><span>};</span><span></span>
+<span>    </span><span>let</span><span> </span><span>addr</span><span> </span><span>=</span><span> </span><span>format!</span><span>(</span><span>"127.0.0.1:{port}"</span><span>);</span><span></span>
+
+<span>    </span><span>let</span><span> </span><span>app_state</span><span> </span><span>=</span><span> </span><span>AppState</span><span> </span><span>{</span><span></span>
+<span>        </span><span>redis_connection</span>: <span>{</span><span></span>
+<span>            </span><span>redis</span>::<span>Client</span>::<span>open</span><span>(</span><span>REDIS_URL</span><span>)</span><span></span>
+<span>                </span><span>.</span><span>map_err</span><span>(</span><span>io</span>::<span>Error</span>::<span>other</span><span>)</span><span>?</span><span></span>
+<span>                </span><span>.</span><span>get_multiplexed_async_connection</span><span>()</span><span></span>
+<span>                </span><span>.</span><span>await</span><span></span>
+<span>                </span><span>.</span><span>map_err</span><span>(</span><span>io</span>::<span>Error</span>::<span>other</span><span>)</span><span>?</span><span></span>
+<span>        </span><span>},</span><span></span>
+<span>    </span><span>};</span><span></span>
+
+<span>    </span><span>let</span><span> </span><span>listener</span><span> </span><span>=</span><span> </span><span>TcpListener</span>::<span>bind</span><span>(</span><span>addr</span><span>).</span><span>await</span><span>?</span><span>;</span><span></span>
+<span>    </span><span>println!</span><span>(</span><span>"Serving on port {port}"</span><span>);</span><span></span>
+
+<span>    </span><span>loop</span><span> </span><span>{</span><span></span>
+<span>        </span><span>let</span><span> </span><span>(</span><span>socket</span><span>,</span><span> </span><span>addr</span><span>)</span><span> </span><span>=</span><span> </span><span>listener</span><span>.</span><span>accept</span><span>().</span><span>await</span><span>?</span><span>;</span><span></span>
+<span>        </span><span>println!</span><span>(</span><span>"connection received from {addr:?}"</span><span>);</span><span></span>
+<span>        </span><span>let</span><span> </span><span>app_state</span><span> </span><span>=</span><span> </span><span>app_state</span><span>.</span><span>clone</span><span>();</span><span></span>
+
+<span>        </span><span>tokio</span>::<span>spawn</span><span>(</span><span>async</span><span> </span><span>move</span><span> </span><span>{</span><span></span>
+<span>            </span><span>if</span><span> </span><span>let</span><span> </span><span>Err</span><span>(</span><span>e</span><span>)</span><span> </span><span>=</span><span> </span><span>serve_client</span><span>(</span><span>socket</span><span>,</span><span> </span><span>app_state</span><span>).</span><span>await</span><span> </span><span>{</span><span></span>
+<span>                </span><span>eprintln!</span><span>(</span><span>"error serving connection from {addr:?}: {e}"</span><span>);</span><span></span>
+<span>            </span><span>}</span><span> </span><span>else</span><span> </span><span>{</span><span></span>
+<span>                </span><span>println!</span><span>(</span><span>"peer done {addr:?}"</span><span>);</span><span></span>
+<span>            </span><span>}</span><span></span>
+<span>        </span><span>});</span><span></span>
+<span>    </span><span>}</span><span></span>
+<span>}</span><span></span>
+
+<span>async</span><span> </span><span>fn</span> <span>serve_client</span><span>(</span><span></span>
+<span>    </span><span>mut</span><span> </span><span>stream</span>: <span>tokio</span>::<span>net</span>::<span>TcpStream</span><span>,</span><span></span>
+<span>    </span><span>mut</span><span> </span><span>app_state</span>: <span>AppState</span><span>,</span><span></span>
+<span>)</span><span> </span>-&gt; <span>std</span>::<span>io</span>::<span>Result</span><span>&lt;</span><span>()</span><span>&gt;</span><span> </span><span>{</span><span></span>
+<span>    </span><span>let</span><span> </span><span>mut</span><span> </span><span>buf</span><span> </span><span>=</span><span> </span><span>[</span><span>0</span><span>u8</span><span>;</span><span> </span><span>1024</span><span>];</span><span></span>
+
+<span>    </span><span>loop</span><span> </span><span>{</span><span></span>
+<span>        </span><span>let</span><span> </span><span>n</span><span> </span><span>=</span><span> </span><span>stream</span><span>.</span><span>read</span><span>(</span><span>&amp;</span><span>mut</span><span> </span><span>buf</span><span>).</span><span>await</span><span>?</span><span>;</span><span></span>
+<span>        </span><span>if</span><span> </span><span>n</span><span> </span><span>==</span><span> </span><span>0</span><span> </span><span>{</span><span></span>
+<span>            </span><span>// Connection closed by the client.</span>
+<span>            </span><span>return</span><span> </span><span>Ok</span><span>(());</span><span></span>
+<span>        </span><span>}</span><span></span>
+
+<span>        </span><span>// Parse read buf into u64.</span>
+<span>        </span><span>let</span><span> </span><span>num</span><span> </span><span>=</span><span> </span><span>std</span>::<span>str</span>::<span>from_utf8</span><span>(</span><span>&amp;</span><span>buf</span><span>[</span><span>..</span><span>n</span><span>])</span><span></span>
+<span>            </span><span>.</span><span>map_err</span><span>(</span><span>|</span><span>error</span><span>|</span><span> </span><span>io</span>::<span>Error</span>::<span>new</span><span>(</span><span>io</span>::<span>ErrorKind</span>::<span>InvalidData</span><span>,</span><span> </span><span>error</span><span>))</span><span>?</span><span></span>
+<span>            </span><span>.</span><span>trim</span><span>()</span><span></span>
+<span>            </span><span>.</span><span>parse</span>::<span>&lt;</span><span>u64</span><span>&gt;</span><span>()</span><span></span>
+<span>            </span><span>.</span><span>map_err</span><span>(</span><span>|</span><span>error</span><span>|</span><span> </span><span>io</span>::<span>Error</span>::<span>new</span><span>(</span><span>io</span>::<span>ErrorKind</span>::<span>InvalidData</span><span>,</span><span> </span><span>error</span><span>))</span><span>?</span><span>;</span><span></span>
+
+<span>        </span><span>// Try the redis cache first. If found in cache, send the cached</span>
+<span>        </span><span>// answer.</span>
+<span>        </span><span>let</span><span> </span><span>cachekey</span><span> </span><span>=</span><span> </span><span>format!</span><span>(</span><span>"primecache:{num}"</span><span>);</span><span></span>
+<span>        </span><span>match</span><span> </span><span>app_state</span><span>.</span><span>redis_connection</span><span>.</span><span>get</span><span>(</span><span>cachekey</span><span>.</span><span>clone</span><span>()).</span><span>await</span><span> </span><span>{</span><span></span>
+<span>            </span><span>Ok</span><span>(</span><span>Some</span><span>(</span><span>cached</span><span>))</span><span> </span><span>=&gt;</span><span> </span><span>{</span><span></span>
+<span>                </span><span>stream</span><span>.</span><span>write_all</span><span>((</span><span>cached</span><span>.</span><span>clone</span><span>()</span><span> </span><span>+</span><span> </span><span>"</span><span>\n</span><span>"</span><span>).</span><span>as_bytes</span><span>()).</span><span>await</span><span>?</span><span>;</span><span></span>
+<span>                </span><span>println!</span><span>(</span><span>"cached num {num} is {cached}"</span><span>);</span><span></span>
+<span>                </span><span>continue</span><span>;</span><span></span>
+<span>            </span><span>}</span><span></span>
+<span>            </span><span>Ok</span><span>(</span><span>None</span><span>)</span><span> </span><span>=&gt;</span><span> </span><span>{</span><span></span>
+<span>                </span><span>// Not found in cache, continue to compute.</span>
+<span>            </span><span>}</span><span></span>
+<span>            </span><span>Err</span><span>(</span><span>error</span><span>)</span><span> </span><span>=&gt;</span><span> </span><span>{</span><span></span>
+<span>                </span><span>return</span><span> </span><span>Err</span><span>(</span><span>io</span>::<span>Error</span>::<span>other</span><span>(</span><span>error</span><span>));</span><span></span>
+<span>            </span><span>}</span><span></span>
+<span>        </span><span>}</span><span></span>
+
+<span>        </span><span>let</span><span> </span><span>answer</span><span> </span><span>=</span><span> </span><span>if</span><span> </span><span>isprime</span><span>(</span><span>num</span><span>,</span><span> </span><span>true</span><span>)</span><span> </span><span>{</span><span></span>
+<span>            </span><span>"prime"</span><span></span>
+<span>        </span><span>}</span><span> </span><span>else</span><span> </span><span>{</span><span></span>
+<span>            </span><span>"composite"</span><span></span>
+<span>        </span><span>};</span><span></span>
+
+<span>        </span><span>// Save answer in cache and send it to the client.</span>
+<span>        </span><span>app_state</span><span></span>
+<span>            </span><span>.</span><span>redis_connection</span><span></span>
+<span>            </span><span>.</span><span>set</span><span>(</span><span>cachekey</span><span>,</span><span> </span><span>answer</span><span>)</span><span></span>
+<span>            </span><span>.</span><span>await</span><span></span>
+<span>            </span><span>.</span><span>map_err</span><span>(</span><span>io</span>::<span>Error</span>::<span>other</span><span>)</span><span>?</span><span>;</span><span></span>
+<span>        </span><span>stream</span><span></span>
+<span>            </span><span>.</span><span>write_all</span><span>((</span><span>answer</span><span>.</span><span>to_string</span><span>()</span><span> </span><span>+</span><span> </span><span>"</span><span>\n</span><span>"</span><span>).</span><span>as_bytes</span><span>())</span><span></span>
+<span>            </span><span>.</span><span>await</span><span>?</span><span>;</span><span></span>
+<span>    </span><span>}</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>Notes:</p>
+<ul>
+<li>Because of the <a href="https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/" target="_blank" rel="noopener noreferrer">function color problem</a>,
+the redis crate has a connection constructor specifically for
+async: get_multiplexed_async_connection.</li>
+<li>Here we have an example of shared state between tokio tasks - the Redis
+connection. Note that we don't require any particular synchronization because
+MultiplexedConnection is Clone; cloning it to different tasks is
+safe - and in fact that's what we do for each new task. There's no magic here;
+if you look inside MultiplexedConnection, you'll see that it already
+has all the synchronization mechanisms implemented internally, as needed.</li>
+<li>Due to the magic of async/await, the code in serve_client is nice
+and linear. We simply await on the Redis call, and once it's back we
+continue with the rest of the handler. Since we're using an async Redis
+connection, in case waiting is required, control
+will be ceded to some other task that's not currently blocked on I/O.</li>
+</ul>
+<p>In conclusion, while Rust provides excellent support for async programming,
+it doesn't solve its inherent issues like function colors and the need for
+careful separation between blocking and non-blocking tasks. These issues are
+typically surmountable with some extra care, and async programming with Tokio
+in Rust is very popular due to its performance benefits.</p>
+</div>
+<div>
+<h2>Code</h2>
+<p>All the code for this post is available <a href="https://github.com/eliben/code-for-blog/tree/main/2026/async-socket-server" target="_blank" rel="noopener noreferrer">on GitHub</a>.</p>
+<hr />
+<table>
+<colgroup><col /><col /></colgroup>
+<tbody>
+<tr><td><a href="https://eli.thegreenplace.net/2026/concurrent-servers-part-7-rust/#footnote-reference-1" target="_blank" rel="noopener noreferrer">[1]</a></td><td>Rust makes a conscious design choice to keep its standard library
+minimal. In part 2, we've used Python's builtin stdlib thread pools;
+Rust also has several crates that implement thread pools, but I decided
+against using them because they obscure the underlying working of the
+code too much. Our sample implements a simple thread pool, but
+unfortunately still has to reach for an external crate to use a
+well-supported multi-consumer channel mechanism.</td></tr>
+</tbody>
+</table>
+<table>
+<colgroup><col /><col /></colgroup>
+<tbody>
+<tr><td><a href="https://eli.thegreenplace.net/2026/concurrent-servers-part-7-rust/#footnote-reference-2" target="_blank" rel="noopener noreferrer">[2]</a></td><td>tokio is quite sophisticated; it manages a thread pool with an efficient
+work-stealing mechanism, onto which new tasks are spawned. Therefore,
+all shared data must be protected with mutexes or other synchronization
+primitives, and Rust's traits like Send and Sync play an
+important role, where applicable.</td></tr>
+</tbody>
+</table>
+<table>
+<colgroup><col /><col /></colgroup>
+<tbody>
+<tr><td><a href="https://eli.thegreenplace.net/2026/concurrent-servers-part-7-rust/#footnote-reference-3" target="_blank" rel="noopener noreferrer">[3]</a></td><td>Having to code this alternative just for the sake of async invocation
+is a classical example of the
+<a href="https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/" target="_blank" rel="noopener noreferrer">function color problem</a>.</td></tr>
+</tbody>
+</table>
+</div></div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://eli.thegreenplace.net/2026/concurrent-servers-part-7-rust/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button> <script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
