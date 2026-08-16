@@ -9,11 +9,10 @@
 <pre>    from scipy.stats import binom
     print(binom.cdf(k, n, p))</pre>
 <p>For example, if there is a 10% chance that each bit will flip, there’s a 98.8% chance that 7 or fewer bits out of 32 will flip.</p>
-<p>However this only gives a <strong>lower bound</strong> on the probability of correcting an error. If eight bits flip in transit, we cannot tell with certainty which codeword was sent, but that doesn’t mean all possibilities are equally likely. Here things get messier. For the Hadamard code mentioned above, there’s a 50-50 chance of being able to recover a pixel transmitted with 8 flipped bits in the corresponding code word. The probability of correct recovery gets smaller with more corruption, but it doesn’t go to zero.</p>
+<p>However this only gives a <strong>lower bound</strong> on the probability of correcting an error. If eight bits flip in transit, we cannot tell with certainty which codeword was sent, but there will be a couple possibilities that stand out. We’ll have to guess, but we’ve narrowed down the possibilities. With even more flipped bits, there’s always a chance of recovering the original data. Still, the lower bound captures most of the probability of recovery.</p>
 <p>Now suppose you’re given a desired error recovery rate and have to determine what value of <em>p</em> it can sustain. For example, someone might say they want a 98.8% chance of recovering a pixel correctly, and you could come back and say <em>p</em> must be less than or equal to 0.1. This would be a conservative answer because as discussed above, <em>p</em> = 0.1 gives a pixel recovery probability of something more than 98.8, though it’s messy to calculate how much more.</p>
 <p>You could solve for <em>p</em> by trial and error, or you could use some more sophisticated math to compute <em>p</em> directly. Given a probability <em>F</em>, you can solve for <em>p</em> such that the probability of up to <em>k</em> successes out of <em>n</em> trials using the inverse of the regularized incomplete beta function.</p>
-<pre>
-from scipy.special import betaincinv
+<pre>from scipy.special import betaincinv
 p = 1 - betaincinv(n - k, k + 1, F)
 </pre>
 <p>Calculating <em>F</em> given <em>n</em>, <em>k</em>, and <em>p</em> could be a homework exercise in an introductory probability course. Solving for <em>p</em> given <em>F</em>, <em>n</em>, and <em>k</em> either requires some numerical programming or special functions and so would be a more challenging problem.</p>
