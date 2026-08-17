@@ -411,9 +411,14 @@ each node in step P1. This ensures that the prover is not changing colors
 around mid-round. This relies on the verifier and the prover using the same
 hash function (and the same hash seed if using <code>hash</code>).</p>
 
+<p>The verifier must also check that the colors of the two nodes at each end of
+the edge is a member of the publicly agreed on color set. Otherwise, the prover
+could color every node a different color.</p>
+
 <div><div><pre><code><span># Only verifier
 </span><span>for</span> <span>(</span><span>node</span><span>,</span> <span>(</span><span>color</span><span>,</span> <span>nonce</span><span>))</span> <span>in</span> <span>revealed</span><span>.</span><span>items</span><span>():</span>
     <span>assert</span> <span>hashed_coloring</span><span>[</span><span>node</span><span>]</span> <span>==</span> <span>hash</span><span>((</span><span>color</span><span>,</span> <span>nonce</span><span>)),</span> <span>f</span><span>"Hash mismatch!"</span>
+    <span>assert</span> <span>color</span> <span>in</span> <span>all_colors</span><span>,</span> <span>f</span><span>"Invalid color </span><span>{</span><span>color</span><span>}</span><span>!"</span>
 </code></pre></div></div>
 
 <p>The verifier can then inspect that the two color values are different. This
@@ -421,7 +426,7 @@ gives a small amount of credence (<code>1/|E|</code> because you know something 
 edge now) that the graph is 3-colored appropriately because the prover had no
 way of knowing which edge the verifier would want to inspect.</p>
 
-<p>If either of these two conditions doesn’t check out, the verifier <em>rejects</em>.</p>
+<p>If any of these conditions don’t check out, the verifier <em>rejects</em>.</p>
 
 <h2>Probabilities</h2>
 
