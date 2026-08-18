@@ -1,0 +1,234 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.2.2"><!-- Core SEO --><meta name="description" content="This month npm stopped accepting bypass-2FA tokens for account-governance actions, one of the steps in the plan GitHub set out last September to close the remaining routes that let a reusable credenti"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/two-factor-authentication-across-package-registrie-qtw0zk/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/two-factor-authentication-across-package-registrie-qtw0zk/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/two-factor-authentication-across-package-registrie-qtw0zk/"><meta property="og:title" content="Two-Factor Authentication Across Package Registries"><meta property="og:description" content="This month npm stopped accepting bypass-2FA tokens for account-governance actions, one of the steps in the plan GitHub set out last September to close the remaining routes that let a reusable credenti"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="This month npm stopped accepting bypass-2FA tokens for account-governance actions, one of the steps in the plan GitHub set out last September to close the remaining routes that let a reusable credenti"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/two-factor-authentication-across-package-registrie-qtw0zk/"><meta property="twitter:title" content="Two-Factor Authentication Across Package Registries"><meta property="twitter:description" content="This month npm stopped accepting bypass-2FA tokens for account-governance actions, one of the steps in the plan GitHub set out last September to close the remaining routes that let a reusable credenti"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Two-Factor Authentication Across Package Registries</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Two-Factor Authentication Across Package Registries","item":"https://blog.yuyins.com/reading-list/two-factor-authentication-across-package-registrie-qtw0zk/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-k2qn5omv]{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip[data-astro-cid-k2qn5omv]:after{content:none!important}.chip--sm[data-astro-cid-k2qn5omv]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-k2qn5omv]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-k2qn5omv]{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}.chip--interactive[data-astro-cid-k2qn5omv]:hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}.chip--active[data-astro-cid-k2qn5omv],.chip[data-astro-cid-k2qn5omv].active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed[data-astro-cid-k2qn5omv]{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip[data-astro-cid-k2qn5omv]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.Dt715w5s.css"><style>.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem;font-style:italic}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;font-family:monospace;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-08-18" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-08-18</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-17" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-17</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-16" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-16</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-08-16" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-08-16</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-15" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-15</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-14" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-14</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.PHDZRRIC.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>Two-Factor Authentication Across Package Registries</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://nesbitt.io/" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag" data-astro-cid-k2qn5omv="true"> nesbitt.io </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年8月18日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-veycvx62><p>This month npm <a href="https://docs.npmjs.com/about-two-factor-authentication/" target="_blank" rel="noopener noreferrer">stopped accepting</a> bypass-2FA tokens for account-governance actions, one of the steps in <a href="https://github.blog/security/supply-chain-security/our-plan-for-a-more-secure-npm-supply-chain/" target="_blank" rel="noopener noreferrer">the plan GitHub set out last September</a> to close the remaining routes that let a reusable credential bypass 2FA on npm. I went through the other <a href="https://packages.ecosyste.ms/registries" target="_blank" rel="noopener noreferrer">registries ecosyste.ms tracks</a> with more than ten thousand packages to see where each is on the same question, and the answer mostly follows from whose accounts a registry uses, an axis I’d left out when <a href="https://nesbitt.io/2025/12/29/categorizing-package-registries.html" target="_blank" rel="noopener noreferrer">categorising registries</a> last year: its own, an OAuth provider’s, a git forge’s, or none.</p>
+
+<h2>Registries with their own accounts</h2>
+
+<p>npm, PyPI, RubyGems, Packagist, Docker Hub, Hex.pm, Clojars, Hackage, and CPAN’s <a href="https://pause.perl.org/" target="_blank" rel="noopener noreferrer">PAUSE</a> each have a username-and-password identity system of their own, so 2FA on each has been implemented separately with its own enforcement policy. PyPI is the only one where enforcement is complete: 2FA has been <a href="https://blog.pypi.org/posts/2024-01-01-2fa-enforced/" target="_blank" rel="noopener noreferrer">mandatory for every account</a> since 1 January 2024, with TOTP and WebAuthn both accepted, after a run-up that included <a href="https://pypi.org/security-key-giveaway/" target="_blank" rel="noopener noreferrer">distributing 4,000 hardware keys</a> to maintainers of top projects in 2022. Publishing to npm requires either 2FA or a granular access token carrying a bypass flag. This month’s change closes the bypass for account-governance actions, and the September 2025 plan proposes removing it for local publishing as well, though that step has not yet landed. Mandatory enrolment on npm has run in cohorts since 2022: <a href="https://github.blog/security/supply-chain-security/top-100-npm-package-maintainers-require-2fa-additional-security/" target="_blank" rel="noopener noreferrer">top 100 by dependents</a> in February, <a href="https://github.blog/changelog/2022-05-31-top-500-npm-package-maintainers-now-require-2fa/" target="_blank" rel="noopener noreferrer">top 500</a> in May, then <a href="https://github.blog/open-source/enrolling-npm-publishers-enhanced-login-verification-two-factor-authentication-enforcement/" target="_blank" rel="noopener noreferrer">high-impact packages</a> at a million weekly downloads or 500 dependents.</p>
+
+<p><a href="https://guides.rubygems.org/setting-up-multifactor-authentication/" target="_blank" rel="noopener noreferrer">RubyGems</a> supports WebAuthn and TOTP and has <a href="https://blog.rubygems.org/2022/08/15/requiring-mfa-on-popular-gems.html" target="_blank" rel="noopener noreferrer">required it since August 2022</a> for owners of any gem with more than 180 million total downloads, with a per-gem <code>rubygems_mfa_required</code> metadata flag for maintainers who want to opt the rest of their co-owners in. TOTP has been <a href="https://github.com/composer/packagist/pull/1031" target="_blank" rel="noopener noreferrer">available on Packagist</a> since 2019, and the Packagist team’s <a href="https://blog.packagist.com/an-update-on-composer-packagist-supply-chain-security/" target="_blank" rel="noopener noreferrer">May 2026 post</a> sets out mandatory MFA across packagist.org as the direction, with organisation-level enforcement and a requirement on maintainers of larger packages as the concrete first steps.</p>
+
+<p><a href="https://docs.docker.com/security/2fa/" target="_blank" rel="noopener noreferrer">Docker Hub</a>, <a href="https://hex.pm/blog/announcing-two-factor-auth" target="_blank" rel="noopener noreferrer">Hex.pm</a>, and <a href="https://github.com/clojars/clojars-web/wiki/Two-Factor-Auth" target="_blank" rel="noopener noreferrer">Clojars</a> each support TOTP as an account option with no mandate, WebAuthn is not available on any of the three, and SMS is not a supported second factor anywhere in this group. Hackage has an <a href="https://github.com/haskell/hackage-server/issues/1265" target="_blank" rel="noopener noreferrer">open issue</a> from November 2023 with a volunteer to implement it, and PAUSE authenticates uploads with a password and sends a notification email on every upload as the check on unexpected activity.</p>
+
+<h2>Registries that delegate identity to a platform</h2>
+
+<p><a href="https://crates.io/" target="_blank" rel="noopener noreferrer">crates.io</a> authenticates exclusively through GitHub OAuth, so a crates.io login carries whatever protections the GitHub account behind it has, and the same is true of <a href="https://dart.dev/tools/pub/publishing" target="_blank" rel="noopener noreferrer">pub.dev</a> against Google accounts and the public <a href="https://developer.hashicorp.com/terraform/registry/modules/publish" target="_blank" rel="noopener noreferrer">Terraform Registry</a> against GitHub. There has been <a href="https://github.com/rust-lang/crates.io/discussions/4200" target="_blank" rel="noopener noreferrer">discussion</a> of having crates.io refuse logins from GitHub accounts without 2FA enabled, which the GitHub API exposes, but it has not been implemented. <a href="https://github.com/rust-lang/rfcs/pull/3946" target="_blank" rel="noopener noreferrer">RFC 3946</a>, accepted in May, introduces a crates.io-native username so that an account’s identity is no longer its GitHub username, and the <a href="https://blog.rust-lang.org/2026/07/13/crates-io-development-update/" target="_blank" rel="noopener noreferrer">July 2026 development update</a> reports the implementation as started, which opens the way for other identity providers and would move crates.io towards the first group.</p>
+
+<p><a href="https://learn.microsoft.com/en-us/nuget/nuget-org/individual-accounts" target="_blank" rel="noopener noreferrer">NuGet.org</a> delegates authentication to Microsoft and Azure AD accounts and has <a href="https://devblogs.microsoft.com/dotnet/requiring-two-factor-authentication-on-nuget-org/" target="_blank" rel="noopener noreferrer">required 2FA on the linked identity</a> for new accounts since 8 March 2022, with existing accounts phased in over the following two months: sign-in to NuGet.org redirects to the Microsoft 2FA enrolment screen for any account without it, without changing that account’s global 2FA setting. That makes NuGet the earlier of the two registries in this survey with a universal requirement, and the requirement is NuGet.org’s own policy applied through an identity system it does not run.</p>
+
+<p>Sonatype’s <a href="https://central.sonatype.org/register/central-portal/" target="_blank" rel="noopener noreferrer">Central Publisher Portal</a> for Maven Central, which replaced the old OSSRH JIRA-based signup, supports GitHub and Google social login alongside a portal-native username and password. There is no second factor on the portal’s own login, so a Central account has 2FA only to the extent that a linked GitHub or Google account does, and Sonatype’s 2FA support elsewhere in its product line does not extend to Central. Maven Central separately requires every published artifact to be <a href="https://central.sonatype.org/publish/requirements/gpg/" target="_blank" rel="noopener noreferrer">PGP-signed</a>, which is a control on the artifact rather than the account.</p>
+
+<h2>Registries that are a git repository</h2>
+
+<p>Homebrew, conda-forge, Spack, nixpkgs, Guix, and Julia’s <a href="https://github.com/JuliaRegistries/General" target="_blank" rel="noopener noreferrer">General registry</a> keep their package definitions <a href="https://nesbitt.io/2025/12/24/package-managers-keep-using-git-as-a-database.html" target="_blank" rel="noopener noreferrer">in a git repository</a> and accept new packages and version bumps as pull requests, so there is no separate registry publisher account and any second factor is on the forge account instead. GitHub Actions, where an action is <a href="https://nesbitt.io/2025/12/06/github-actions-package-manager.html" target="_blank" rel="noopener noreferrer">any repository with an <code>action.yml</code></a>, works the same way with the marketplace listing on top. For the ones hosted on GitHub the effective policy is GitHub’s contributor 2FA programme, on which GitHub reported in <a href="https://github.blog/2024-04-24-securing-millions-of-developers-through-2fa/" target="_blank" rel="noopener noreferrer">April 2024</a> that 95% of the users targeted through 2023 had enrolled, with the requirement applied to groups selected by “the impact of their user privileges or specific actions they took” rather than to every account, so whether a homebrew-core or conda-forge committer is subject to mandatory 2FA is determined by GitHub’s targeting rather than by anything the registry sets. A committer to one of these repositories necessarily contributes code on GitHub and so falls within the programme’s selection criteria, unlike a crates.io or Terraform Registry publisher who only needs a GitHub login and may hold an account the programme has not reached. Guix has been <a href="https://guix.gnu.org/blog/2025/migrating-to-codeberg/" target="_blank" rel="noopener noreferrer">hosted on Codeberg</a> since May 2025, where <a href="https://docs.codeberg.org/security/2fa/" target="_blank" rel="noopener noreferrer">TOTP and WebAuthn</a> are available with no mandate.</p>
+
+<h2>Email-gated and account-free</h2>
+
+<p><a href="https://cran.r-project.org/submit.html" target="_blank" rel="noopener noreferrer">CRAN</a> accepts submissions through a web form and email confirmation with human review of every package, CocoaPods trunk authenticates with an <a href="https://guides.cocoapods.org/making/getting-setup-with-trunk.html" target="_blank" rel="noopener noreferrer">emailed session token</a>, and neither has an account database that a second factor would attach to. Trunk is <a href="https://blog.cocoapods.org/CocoaPods-Specs-Repo/" target="_blank" rel="noopener noreferrer">scheduled</a> to stop accepting new podspecs on 2 December 2026 after a read-only trial in the first week of November, which will make the question moot for that registry. The Go module proxy and the Swift Package Index have no publisher accounts at all: <a href="https://proxy.golang.org/" target="_blank" rel="noopener noreferrer">proxy.golang.org</a> is a caching mirror of module versions fetched from their VCS hosts, and the <a href="https://swiftpackageindex.com/" target="_blank" rel="noopener noreferrer">Swift Package Index</a> is a discovery layer over repositories it does not host.</p>
+
+<h2>Publishing from CI</h2>
+
+<p>A CI job cannot tap a security key, so publishing from CI on any registry that enforces 2FA at publish time requires a path other than an interactive login. Long-lived API tokens with the 2FA check waived have been that path historically, as with npm’s bypass flag and RubyGems’ automation-scoped keys, and the current round of changes on both registries is narrowing it. Trusted publishing replaces the stored token with a short-lived OIDC token that the registry verifies against a pre-registered CI workflow, so the credential is bound to the workflow that built the artifact and no maintainer credential is involved in the publish. <a href="https://docs.pypi.org/trusted-publishers/" target="_blank" rel="noopener noreferrer">PyPI</a> added it in April 2023, followed by <a href="https://blog.rubygems.org/2023/12/14/trusted-publishing.html" target="_blank" rel="noopener noreferrer">RubyGems</a> in December 2023, <a href="https://github.blog/security/supply-chain-security/our-plan-for-a-more-secure-npm-supply-chain/" target="_blank" rel="noopener noreferrer">npm</a> and <a href="https://blog.rust-lang.org/2025/07/11/crates-io-development-update-2025-07/" target="_blank" rel="noopener noreferrer">crates.io</a> in 2025, and <a href="https://dart.dev/tools/pub/automated-publishing" target="_blank" rel="noopener noreferrer">pub.dev</a> for GitHub Actions and Google Cloud.</p>
+
+<p>npm’s <a href="https://github.blog/changelog/2026-05-22-staged-publishing-and-new-install-time-controls-for-npm/" target="_blank" rel="noopener noreferrer">staged publishing</a>, generally available since npm CLI 11.15.0 in May 2026, instead keeps the second factor with a human by splitting the operation in two: <a href="https://docs.npmjs.com/staged-publishing/" target="_blank" rel="noopener noreferrer"><code>npm stage publish</code></a> uploads the tarball to a holding area with any token and no 2FA prompt, and the version becomes installable only after a maintainer approves it through a separate 2FA challenge on the CLI or the website. The approval step applies regardless of which token staged the upload, including one issued over OIDC, so a human 2FA challenge sits between CI and the public index even when the pipeline authenticated with trusted publishing. Packagist’s planned FIDO2-confirmed release step applies the same design to git tags, and a <a href="https://discuss.python.org/t/pre-pep-staged-releases-separated-from-pep-694/107804" target="_blank" rel="noopener noreferrer">pre-PEP discussion</a> opened in June proposes splitting staged releases out of <a href="https://peps.python.org/pep-0694/" target="_blank" rel="noopener noreferrer">PEP 694</a> as a standalone feature for PyPI.</p>
+
+<h2>Summary</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>packages</th>
+      <th>account model</th>
+      <th>2FA methods</th>
+      <th>required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>npm</td>
+      <td>5,745,146</td>
+      <td>native</td>
+      <td>WebAuthn, TOTP</td>
+      <td>publish; cohorts since 2022</td>
+    </tr>
+    <tr>
+      <td>Go proxy</td>
+      <td>2,281,772</td>
+      <td>none</td>
+      <td>n/a</td>
+      <td>n/a</td>
+    </tr>
+    <tr>
+      <td>Docker Hub</td>
+      <td>1,002,426</td>
+      <td>native</td>
+      <td>TOTP</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <td>PyPI</td>
+      <td>928,948</td>
+      <td>native</td>
+      <td>WebAuthn, TOTP</td>
+      <td>all users since Jan 2024</td>
+    </tr>
+    <tr>
+      <td>NuGet</td>
+      <td>840,288</td>
+      <td>Microsoft account</td>
+      <td>via MSA/AAD</td>
+      <td>all users since Mar 2022</td>
+    </tr>
+    <tr>
+      <td>Maven Central</td>
+      <td>615,793</td>
+      <td>native / GitHub / Google</td>
+      <td>none native</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <td>Packagist</td>
+      <td>510,123</td>
+      <td>native</td>
+      <td>TOTP</td>
+      <td>direction set May 2026</td>
+    </tr>
+    <tr>
+      <td>crates.io</td>
+      <td>325,536</td>
+      <td>GitHub</td>
+      <td>via GitHub</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <td>RubyGems</td>
+      <td>211,106</td>
+      <td>native</td>
+      <td>WebAuthn, TOTP</td>
+      <td>&gt;180M downloads</td>
+    </tr>
+    <tr>
+      <td>nixpkgs</td>
+      <td>153,297</td>
+      <td>GitHub PRs</td>
+      <td>via GitHub</td>
+      <td>contributor cohorts</td>
+    </tr>
+    <tr>
+      <td>CocoaPods</td>
+      <td>102,418</td>
+      <td>email token</td>
+      <td>none</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <td>pub.dev</td>
+      <td>88,115</td>
+      <td>Google account</td>
+      <td>via Google</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <td>CPAN</td>
+      <td>41,333</td>
+      <td>native</td>
+      <td>none</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <td>GitHub Actions</td>
+      <td>32,727</td>
+      <td>GitHub</td>
+      <td>via GitHub</td>
+      <td>contributor cohorts</td>
+    </tr>
+    <tr>
+      <td>Guix</td>
+      <td>32,281</td>
+      <td>Codeberg PRs</td>
+      <td>via Codeberg</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <td>CRAN</td>
+      <td>29,558</td>
+      <td>email form</td>
+      <td>none</td>
+      <td>n/a</td>
+    </tr>
+    <tr>
+      <td>Terraform Registry</td>
+      <td>23,429</td>
+      <td>GitHub</td>
+      <td>via GitHub</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <td>Hex.pm</td>
+      <td>22,730</td>
+      <td>native</td>
+      <td>TOTP</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <td>Clojars</td>
+      <td>22,298</td>
+      <td>native</td>
+      <td>TOTP</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <td>conda-forge</td>
+      <td>20,636</td>
+      <td>GitHub PRs</td>
+      <td>via GitHub</td>
+      <td>contributor cohorts</td>
+    </tr>
+    <tr>
+      <td>Hackage</td>
+      <td>19,403</td>
+      <td>native</td>
+      <td>none</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <td>Swift Package Index</td>
+      <td>14,112</td>
+      <td>none</td>
+      <td>n/a</td>
+      <td>n/a</td>
+    </tr>
+    <tr>
+      <td>Julia General</td>
+      <td>13,730</td>
+      <td>GitHub PRs</td>
+      <td>via GitHub</td>
+      <td>contributor cohorts</td>
+    </tr>
+    <tr>
+      <td>Homebrew</td>
+      <td>9,483</td>
+      <td>GitHub PRs</td>
+      <td>via GitHub</td>
+      <td>contributor cohorts</td>
+    </tr>
+    <tr>
+      <td>Spack</td>
+      <td>9,300</td>
+      <td>GitHub PRs</td>
+      <td>via GitHub</td>
+      <td>contributor cohorts</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Package counts from <a href="https://packages.ecosyste.ms/registries" target="_blank" rel="noopener noreferrer">ecosyste.ms</a>, August 2026. Distribution repositories (Debian, Ubuntu, Alpine, and similar) are omitted since publication goes through distribution maintainers rather than upstream authors.</p></div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://nesbitt.io/2026/08/18/two-factor-authentication-across-package-registries.html" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button> <script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
