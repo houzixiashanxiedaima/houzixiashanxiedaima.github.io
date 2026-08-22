@@ -119,9 +119,9 @@ fundamentally racy, and I didn’t do the messy platform-specific work of making
 area to the luxurious comforts of an Emacs buffer, is that right now rust-analyzer is a bit
 like that half-drawn horse meme, except that it’s only the head half of the
 horse.</p>
-<p>One Big Idea of IntelliJ is that it’s PSI API (essentially AST with resolved
-types) is really an interface, and there are multiple provides. And in a typical
-usage, there’s at least three backends in play:</p>
+<p>One Big Idea of IntelliJ is that its PSI API (essentially AST with resolved
+types) is really an interface, and there are multiple providers. And in a typical
+usage, there’re at least three backends in play:</p>
 <ul>
 <li>
 For the files opened in the editor, actively modified by the user, the PSI is
@@ -135,7 +135,7 @@ new file, its PSI transparently switches from stubs to syntax tree.
 </li>
 <li>
 For dependencies, the PSI is often backed by the compiled .class files,
-produced by javac. If you navigate there, the IDE just decompiles stuff four
+produced by javac. If you navigate there, the IDE just decompiles stuff for
 you! Super cool!
 </li>
 </ul>

@@ -1,0 +1,430 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.2.4"><!-- Core SEO --><meta name="description" content="This is part 8 in a series of posts on writing concurrent network servers. In
+this part, we'll switch to Go and see how it tackles the challenges described
+earlier in the series.
+All posts in the seri"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/concurrent-servers-part-8---go-e7zy7w/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/concurrent-servers-part-8---go-e7zy7w/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/concurrent-servers-part-8---go-e7zy7w/"><meta property="og:title" content="Concurrent Servers: Part 8 - Go"><meta property="og:description" content="This is part 8 in a series of posts on writing concurrent network servers. In
+this part, we'll switch to Go and see how it tackles the challenges described
+earlier in the series.
+All posts in the seri"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="This is part 8 in a series of posts on writing concurrent network servers. In
+this part, we'll switch to Go and see how it tackles the challenges described
+earlier in the series.
+All posts in the seri"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/concurrent-servers-part-8---go-e7zy7w/"><meta property="twitter:title" content="Concurrent Servers: Part 8 - Go"><meta property="twitter:description" content="This is part 8 in a series of posts on writing concurrent network servers. In
+this part, we'll switch to Go and see how it tackles the challenges described
+earlier in the series.
+All posts in the seri"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Concurrent Servers: Part 8 - Go</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Concurrent Servers: Part 8 - Go","item":"https://blog.yuyins.com/reading-list/concurrent-servers-part-8---go-e7zy7w/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-k2qn5omv]{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip[data-astro-cid-k2qn5omv]:after{content:none!important}.chip--sm[data-astro-cid-k2qn5omv]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-k2qn5omv]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-k2qn5omv]{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}.chip--interactive[data-astro-cid-k2qn5omv]:hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}.chip--active[data-astro-cid-k2qn5omv],.chip[data-astro-cid-k2qn5omv].active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed[data-astro-cid-k2qn5omv]{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip[data-astro-cid-k2qn5omv]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.CGyApSUP.css"><style>.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem;font-style:italic}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;font-family:monospace;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-22" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-22</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-08-22" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-08-22</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-21" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-21</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-08-21" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-08-21</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-20" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-20</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-08-20" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-08-20</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.PHDZRRIC.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>Concurrent Servers: Part 8 - Go</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://eli.thegreenplace.net/" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag" data-astro-cid-k2qn5omv="true"> eli.thegreenplace.net </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年8月22日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-veycvx62><p>This is part 8 in a series of posts on writing concurrent network servers. In
+this part, we'll switch to Go and see how it tackles the challenges described
+earlier in the series.</p>
+<p>All posts in the series:</p>
+<ul>
+<li><a href="https://eli.thegreenplace.net/2017/concurrent-servers-part-1-introduction/" target="_blank" rel="noopener noreferrer">Part 1 - Introduction</a></li>
+<li><a href="https://eli.thegreenplace.net/2017/concurrent-servers-part-2-threads/" target="_blank" rel="noopener noreferrer">Part 2 - Threads</a></li>
+<li><a href="https://eli.thegreenplace.net/2017/concurrent-servers-part-3-event-driven/" target="_blank" rel="noopener noreferrer">Part 3 - Event-driven</a></li>
+<li><a href="https://eli.thegreenplace.net/2017/concurrent-servers-part-4-libuv/" target="_blank" rel="noopener noreferrer">Part 4 - libuv</a></li>
+<li><a href="https://eli.thegreenplace.net/2017/concurrent-servers-part-5-redis-case-study/" target="_blank" rel="noopener noreferrer">Part 5 - Redis case study</a></li>
+<li><a href="https://eli.thegreenplace.net/2018/concurrent-servers-part-6-callbacks-promises-and-asyncawait/" target="_blank" rel="noopener noreferrer">Part 6 - Callbacks, Promises and async/await</a></li>
+<li><a href="https://eli.thegreenplace.net/2026/concurrent-servers-part-7-rust/" target="_blank" rel="noopener noreferrer">Part 7 - Rust</a></li>
+<li>Part 8 - Go (this part)</li>
+</ul>
+<p>This post assumes a basic familiarity with the Go programming language.</p>
+<div>
+<h2>Sequential state machine server</h2>
+<p>As before, we'll start with a sequential server for the basic state machine
+protocol presented in <a href="https://eli.thegreenplace.net/2017/concurrent-servers-part-1-introduction/" target="_blank" rel="noopener noreferrer">part 1</a>.</p>
+<p>This is the main function:</p>
+<div><pre><span></span><span>func</span><span> </span><span>main</span><span>()</span><span> </span><span>{</span><span></span>
+<span>  </span><span>port</span><span> </span><span>:=</span><span> </span><span>"9090"</span><span></span>
+<span>  </span><span>if</span><span> </span><span>len</span><span>(</span><span>os</span><span>.</span><span>Args</span><span>)</span><span> </span><span>&gt;=</span><span> </span><span>2</span><span> </span><span>{</span><span></span>
+<span>    </span><span>port</span><span> </span><span>=</span><span> </span><span>os</span><span>.</span><span>Args</span><span>[</span><span>1</span><span>]</span><span></span>
+<span>  </span><span>}</span><span></span>
+<span>  </span><span>log</span><span>.</span><span>Println</span><span>(</span><span>"Serving on port"</span><span>,</span><span> </span><span>port</span><span>)</span><span></span>
+
+<span>  </span><span>listener</span><span>,</span><span> </span><span>err</span><span> </span><span>:=</span><span> </span><span>net</span><span>.</span><span>Listen</span><span>(</span><span>"tcp"</span><span>,</span><span> </span><span>":"</span><span>+</span><span>port</span><span>)</span><span></span>
+<span>  </span><span>if</span><span> </span><span>err</span><span> </span><span>!=</span><span> </span><span>nil</span><span> </span><span>{</span><span></span>
+<span>    </span><span>log</span><span>.</span><span>Fatal</span><span>(</span><span>"Error listening:"</span><span>,</span><span> </span><span>err</span><span>)</span><span></span>
+<span>  </span><span>}</span><span></span>
+<span>  </span><span>defer</span><span> </span><span>listener</span><span>.</span><span>Close</span><span>()</span><span></span>
+
+<span>  </span><span>for</span><span> </span><span>{</span><span></span>
+<span>    </span><span>conn</span><span>,</span><span> </span><span>err</span><span> </span><span>:=</span><span> </span><span>listener</span><span>.</span><span>Accept</span><span>()</span><span></span>
+<span>    </span><span>if</span><span> </span><span>err</span><span> </span><span>!=</span><span> </span><span>nil</span><span> </span><span>{</span><span></span>
+<span>      </span><span>log</span><span>.</span><span>Printf</span><span>(</span><span>"Error accepting connection: %v"</span><span>,</span><span> </span><span>err</span><span>)</span><span></span>
+<span>      </span><span>continue</span><span></span>
+<span>    </span><span>}</span><span></span>
+<span>    </span><span>log</span><span>.</span><span>Println</span><span>(</span><span>"connection received from"</span><span>,</span><span> </span><span>conn</span><span>.</span><span>RemoteAddr</span><span>())</span><span></span>
+
+<span>    </span><span>if</span><span> </span><span>err</span><span> </span><span>:=</span><span> </span><span>server</span><span>.</span><span>ServeSerialProtocol</span><span>(</span><span>conn</span><span>);</span><span> </span><span>err</span><span> </span><span>!=</span><span> </span><span>nil</span><span> </span><span>{</span><span></span>
+<span>      </span><span>log</span><span>.</span><span>Printf</span><span>(</span><span>"Error serving %v: %v"</span><span>,</span><span> </span><span>conn</span><span>.</span><span>RemoteAddr</span><span>(),</span><span> </span><span>err</span><span>)</span><span></span>
+<span>    </span><span>}</span><span> </span><span>else</span><span> </span><span>{</span><span></span>
+<span>      </span><span>log</span><span>.</span><span>Println</span><span>(</span><span>"peer done"</span><span>,</span><span> </span><span>conn</span><span>.</span><span>RemoteAddr</span><span>())</span><span></span>
+<span>    </span><span>}</span><span></span>
+<span>  </span><span>}</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>As in the previous parts, the server is "infinite"; it never stops serving new
+connections until it's explicitly killed.</p>
+<p>This is the function implementing the protocol for a single client; it takes
+a net.Conn value that represents a socket with a client connected on the
+other end:</p>
+<div><pre><span></span><span>type</span><span> </span><span>processingState</span><span> </span><span>int</span><span></span>
+
+<span>const</span><span> </span><span>(</span><span></span>
+<span>  </span><span>waitForMsg</span><span> </span><span>processingState</span><span> </span><span>=</span><span> </span><span>iota</span><span></span>
+<span>  </span><span>inMsg</span><span></span>
+<span>)</span><span></span>
+
+<span>// ServeSerialProtocol serves our serial protocol to a single TCP connection.</span><span></span>
+<span>func</span><span> </span><span>ServeSerialProtocol</span><span>(</span><span>conn</span><span> </span><span>net</span><span>.</span><span>Conn</span><span>)</span><span> </span><span>error</span><span> </span><span>{</span><span></span>
+<span>  </span><span>defer</span><span> </span><span>conn</span><span>.</span><span>Close</span><span>()</span><span></span>
+
+<span>  </span><span>if</span><span> </span><span>_</span><span>,</span><span> </span><span>err</span><span> </span><span>:=</span><span> </span><span>conn</span><span>.</span><span>Write</span><span>([]</span><span>byte</span><span>{</span><span>'*'</span><span>});</span><span> </span><span>err</span><span> </span><span>!=</span><span> </span><span>nil</span><span> </span><span>{</span><span></span>
+<span>    </span><span>return</span><span> </span><span>err</span><span></span>
+<span>  </span><span>}</span><span></span>
+
+<span>  </span><span>var</span><span> </span><span>state</span><span> </span><span>processingState</span><span> </span><span>=</span><span> </span><span>waitForMsg</span><span></span>
+<span>  </span><span>buf</span><span> </span><span>:=</span><span> </span><span>make</span><span>([]</span><span>byte</span><span>,</span><span> </span><span>1024</span><span>)</span><span></span>
+<span>  </span><span>for</span><span> </span><span>{</span><span></span>
+<span>    </span><span>n</span><span>,</span><span> </span><span>err</span><span> </span><span>:=</span><span> </span><span>conn</span><span>.</span><span>Read</span><span>(</span><span>buf</span><span>)</span><span></span>
+<span>    </span><span>for</span><span> </span><span>_</span><span>,</span><span> </span><span>b</span><span> </span><span>:=</span><span> </span><span>range</span><span> </span><span>buf</span><span>[:</span><span>n</span><span>]</span><span> </span><span>{</span><span></span>
+<span>      </span><span>switch</span><span> </span><span>state</span><span> </span><span>{</span><span></span>
+<span>      </span><span>case</span><span> </span><span>waitForMsg</span><span>:</span><span></span>
+<span>        </span><span>if</span><span> </span><span>b</span><span> </span><span>==</span><span> </span><span>'^'</span><span> </span><span>{</span><span></span>
+<span>          </span><span>state</span><span> </span><span>=</span><span> </span><span>inMsg</span><span></span>
+<span>        </span><span>}</span><span></span>
+<span>      </span><span>case</span><span> </span><span>inMsg</span><span>:</span><span></span>
+<span>        </span><span>if</span><span> </span><span>b</span><span> </span><span>==</span><span> </span><span>'$'</span><span> </span><span>{</span><span></span>
+<span>          </span><span>state</span><span> </span><span>=</span><span> </span><span>waitForMsg</span><span></span>
+<span>        </span><span>}</span><span> </span><span>else</span><span> </span><span>{</span><span></span>
+<span>          </span><span>var</span><span> </span><span>bb</span><span> </span><span>byte</span><span> </span><span>=</span><span> </span><span>byte</span><span>(</span><span>b</span><span>)</span><span> </span><span>+</span><span> </span><span>1</span><span></span>
+<span>          </span><span>if</span><span> </span><span>_</span><span>,</span><span> </span><span>err</span><span> </span><span>:=</span><span> </span><span>conn</span><span>.</span><span>Write</span><span>([]</span><span>byte</span><span>{</span><span>bb</span><span>});</span><span> </span><span>err</span><span> </span><span>!=</span><span> </span><span>nil</span><span> </span><span>{</span><span></span>
+<span>            </span><span>return</span><span> </span><span>err</span><span></span>
+<span>          </span><span>}</span><span></span>
+<span>        </span><span>}</span><span></span>
+<span>      </span><span>}</span><span></span>
+<span>    </span><span>}</span><span></span>
+
+<span>    </span><span>// Check error after processing the bytes received along with it.</span><span></span>
+<span>    </span><span>if</span><span> </span><span>err</span><span> </span><span>!=</span><span> </span><span>nil</span><span> </span><span>{</span><span></span>
+<span>      </span><span>if</span><span> </span><span>errors</span><span>.</span><span>Is</span><span>(</span><span>err</span><span>,</span><span> </span><span>io</span><span>.</span><span>EOF</span><span>)</span><span> </span><span>||</span><span> </span><span>errors</span><span>.</span><span>Is</span><span>(</span><span>err</span><span>,</span><span> </span><span>net</span><span>.</span><span>ErrClosed</span><span>)</span><span> </span><span>{</span><span></span>
+<span>        </span><span>return</span><span> </span><span>nil</span><span></span>
+<span>      </span><span>}</span><span> </span><span>else</span><span> </span><span>{</span><span></span>
+<span>        </span><span>return</span><span> </span><span>err</span><span></span>
+<span>      </span><span>}</span><span></span>
+<span>    </span><span>}</span><span></span>
+<span>  </span><span>}</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+</div>
+<div>
+<h2>One goroutine per client</h2>
+<p>Rather than directly exposing OS threads, the Go runtime implements its own
+M:N scheduling of lightweight <em>goroutines</em> on top of OS threads. Using
+goroutines in Go is cheap - both in terms of syntax and developer effort, and in
+terms of <a href="https://eli.thegreenplace.net/2018/measuring-context-switching-and-memory-overheads-for-linux-threads/" target="_blank" rel="noopener noreferrer">system resources</a>.</p>
+<p>Here's a version of our serial protocol server that serves clients concurrently
+by launching a goroutine for each client. The part of the code that's different
+from the previous sample is highlighted:</p>
+<div><pre><span></span><span>func</span><span> </span><span>main</span><span>()</span><span> </span><span>{</span><span></span>
+<span>  </span><span>port</span><span> </span><span>:=</span><span> </span><span>"9090"</span><span></span>
+<span>  </span><span>if</span><span> </span><span>len</span><span>(</span><span>os</span><span>.</span><span>Args</span><span>)</span><span> </span><span>&gt;=</span><span> </span><span>2</span><span> </span><span>{</span><span></span>
+<span>    </span><span>port</span><span> </span><span>=</span><span> </span><span>os</span><span>.</span><span>Args</span><span>[</span><span>1</span><span>]</span><span></span>
+<span>  </span><span>}</span><span></span>
+<span>  </span><span>log</span><span>.</span><span>Println</span><span>(</span><span>"Serving on port"</span><span>,</span><span> </span><span>port</span><span>)</span><span></span>
+
+<span>  </span><span>listener</span><span>,</span><span> </span><span>err</span><span> </span><span>:=</span><span> </span><span>net</span><span>.</span><span>Listen</span><span>(</span><span>"tcp"</span><span>,</span><span> </span><span>":"</span><span>+</span><span>port</span><span>)</span><span></span>
+<span>  </span><span>if</span><span> </span><span>err</span><span> </span><span>!=</span><span> </span><span>nil</span><span> </span><span>{</span><span></span>
+<span>    </span><span>log</span><span>.</span><span>Fatal</span><span>(</span><span>"Error listening:"</span><span>,</span><span> </span><span>err</span><span>)</span><span></span>
+<span>  </span><span>}</span><span></span>
+<span>  </span><span>defer</span><span> </span><span>listener</span><span>.</span><span>Close</span><span>()</span><span></span>
+
+<span>  </span><span>for</span><span> </span><span>{</span><span></span>
+<span>    </span><span>conn</span><span>,</span><span> </span><span>err</span><span> </span><span>:=</span><span> </span><span>listener</span><span>.</span><span>Accept</span><span>()</span><span></span>
+<span>    </span><span>if</span><span> </span><span>err</span><span> </span><span>!=</span><span> </span><span>nil</span><span> </span><span>{</span><span></span>
+<span>      </span><span>log</span><span>.</span><span>Printf</span><span>(</span><span>"Error accepting connection: %v"</span><span>,</span><span> </span><span>err</span><span>)</span><span></span>
+<span>      </span><span>continue</span><span></span>
+<span>    </span><span>}</span><span></span>
+<span>    </span><span>log</span><span>.</span><span>Println</span><span>(</span><span>"connection received from"</span><span>,</span><span> </span><span>conn</span><span>.</span><span>RemoteAddr</span><span>())</span><span></span>
+
+<span><span>    </span><span>go</span><span> </span><span>func</span><span>()</span><span> </span><span>{</span><span></span>
+</span><span>      </span><span>if</span><span> </span><span>err</span><span> </span><span>:=</span><span> </span><span>server</span><span>.</span><span>ServeSerialProtocol</span><span>(</span><span>conn</span><span>);</span><span> </span><span>err</span><span> </span><span>!=</span><span> </span><span>nil</span><span> </span><span>{</span><span></span>
+<span>        </span><span>log</span><span>.</span><span>Printf</span><span>(</span><span>"Error serving %v: %v"</span><span>,</span><span> </span><span>conn</span><span>.</span><span>RemoteAddr</span><span>(),</span><span> </span><span>err</span><span>)</span><span></span>
+<span>      </span><span>}</span><span> </span><span>else</span><span> </span><span>{</span><span></span>
+<span>        </span><span>log</span><span>.</span><span>Println</span><span>(</span><span>"peer done"</span><span>,</span><span> </span><span>conn</span><span>.</span><span>RemoteAddr</span><span>())</span><span></span>
+<span>      </span><span>}</span><span></span>
+<span><span>    </span><span>}()</span><span></span>
+</span><span>  </span><span>}</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>The concurrent modification in this case is particularly simple because the
+server is infinite; there's no point waiting for these goroutines to finish
+(and hence no need for a <a href="https://pkg.go.dev/sync#WaitGroup" target="_blank" rel="noopener noreferrer">sync.WaitGroup</a>).
+The parameters for server.ServeSerialProtocol are lexically captured from
+the enclosing scope and its return value is handled by the surrounding closure.</p>
+<p>Because goroutines are very cheap, this server is very unlikely to run out
+of resources due to launching too many goroutines; in fact, it will probably
+run out of something else - like file descriptors for sockets - first. However,
+sometimes it's still useful to limit the degree of concurrency - even
+in Go, and we'll discuss some approaches to do so in the following sections.</p>
+</div>
+<div>
+<h2>Limiting concurrency with a semaphore</h2>
+<p>Here are some scenarios in which it makes sense to limit the degree of
+concurrency in Go programs, even though goroutines are cheap to launch and
+operate:</p>
+<ul>
+<li>Tasks may be compute intensive, and the CPU capacity of any server is inherently
+limited. If too many concurrent goroutines compete for limited CPUs, they
+will all make very little progress. It may make more sense to have fewer tasks
+that complete in a reasonable time.</li>
+<li>Protecting potentially limited downstream resources, such as concurrent
+DB connections or other services. For example, if the server has to send
+requests to other services for each task, and these are rate-limited,
+concurrency will have to be carefully managed.</li>
+<li>Security reasons when work is dictated by clients; malicious clients can
+overload and crash a service that's too eager to serve, making it unavailable
+for legitimate clients.</li>
+</ul>
+<p>Let's switch to the primality testing server from <a href="https://eli.thegreenplace.net/2017/concurrent-servers-part-4-libuv/" target="_blank" rel="noopener noreferrer">part 4</a> for the rest of the
+post, because it represents a somewhat more realistic workload.
+As a reminder: the server receives numbers, simulates blocking
+by sleeping, and returns "prime" or "composite". The unbounded
+one-goroutine-per-client version looks <a href="https://github.com/eliben/code-for-blog/tree/main/2026/async-socket-server-go/cmd/prime-server-unbounded" target="_blank" rel="noopener noreferrer">almost identical</a>
+to the previous code sample, except that the goroutine invocation calls another
+function:</p>
+<div><pre><span></span><span>go</span><span> </span><span>func</span><span>()</span><span> </span><span>{</span><span></span>
+<span>  </span><span>if</span><span> </span><span>err</span><span> </span><span>:=</span><span> </span><span>server</span><span>.</span><span>ServePrimeProtocol</span><span>(</span><span>conn</span><span>);</span><span> </span><span>err</span><span> </span><span>!=</span><span> </span><span>nil</span><span> </span><span>{</span><span></span>
+<span>    </span><span>log</span><span>.</span><span>Printf</span><span>(</span><span>"Error serving %v: %v"</span><span>,</span><span> </span><span>conn</span><span>.</span><span>RemoteAddr</span><span>(),</span><span> </span><span>err</span><span>)</span><span></span>
+<span>  </span><span>}</span><span> </span><span>else</span><span> </span><span>{</span><span></span>
+<span>    </span><span>log</span><span>.</span><span>Println</span><span>(</span><span>"peer done"</span><span>,</span><span> </span><span>conn</span><span>.</span><span>RemoteAddr</span><span>())</span><span></span>
+<span>  </span><span>}</span><span></span>
+<span>}()</span><span></span>
+</pre></div>
+<p>Where ServePrimeProtocol is <a href="https://eli.thegreenplace.net/2026/concurrent-servers-part-8-go/#footnote-1" target="_blank" rel="noopener noreferrer">[1]</a>:</p>
+<div><pre><span></span><span>// ServePrimeProtocol serves our prime protocol to a single TCP connection.</span><span></span>
+<span>func</span><span> </span><span>ServePrimeProtocol</span><span>(</span><span>conn</span><span> </span><span>net</span><span>.</span><span>Conn</span><span>)</span><span> </span><span>error</span><span> </span><span>{</span><span></span>
+<span>  </span><span>defer</span><span> </span><span>conn</span><span>.</span><span>Close</span><span>()</span><span></span>
+<span>  </span><span>buf</span><span> </span><span>:=</span><span> </span><span>make</span><span>([]</span><span>byte</span><span>,</span><span> </span><span>1024</span><span>)</span><span></span>
+
+<span>  </span><span>for</span><span> </span><span>{</span><span></span>
+<span>    </span><span>n</span><span>,</span><span> </span><span>readerr</span><span> </span><span>:=</span><span> </span><span>conn</span><span>.</span><span>Read</span><span>(</span><span>buf</span><span>)</span><span></span>
+<span>    </span><span>if</span><span> </span><span>n</span><span> </span><span>&gt;</span><span> </span><span>0</span><span> </span><span>{</span><span></span>
+<span>      </span><span>// Parse the read buffer to an i64</span><span></span>
+<span>      </span><span>num</span><span>,</span><span> </span><span>err</span><span> </span><span>:=</span><span> </span><span>strconv</span><span>.</span><span>ParseInt</span><span>(</span><span>strings</span><span>.</span><span>TrimSpace</span><span>(</span><span>string</span><span>(</span><span>buf</span><span>[:</span><span>n</span><span>])),</span><span> </span><span>10</span><span>,</span><span> </span><span>64</span><span>)</span><span></span>
+<span>      </span><span>if</span><span> </span><span>err</span><span> </span><span>!=</span><span> </span><span>nil</span><span> </span><span>{</span><span></span>
+<span>        </span><span>return</span><span> </span><span>err</span><span></span>
+<span>      </span><span>}</span><span></span>
+
+<span>      </span><span>response</span><span> </span><span>:=</span><span> </span><span>"composite"</span><span></span>
+<span>      </span><span>if</span><span> </span><span>isPrime</span><span>(</span><span>num</span><span>,</span><span> </span><span>true</span><span>)</span><span> </span><span>{</span><span></span>
+<span>        </span><span>response</span><span> </span><span>=</span><span> </span><span>"prime"</span><span></span>
+<span>      </span><span>}</span><span></span>
+<span>      </span><span>if</span><span> </span><span>_</span><span>,</span><span> </span><span>err</span><span> </span><span>:=</span><span> </span><span>conn</span><span>.</span><span>Write</span><span>([]</span><span>byte</span><span>(</span><span>response</span><span> </span><span>+</span><span> </span><span>"\n"</span><span>));</span><span> </span><span>err</span><span> </span><span>!=</span><span> </span><span>nil</span><span> </span><span>{</span><span></span>
+<span>        </span><span>return</span><span> </span><span>err</span><span></span>
+<span>      </span><span>}</span><span></span>
+<span>    </span><span>}</span><span></span>
+
+<span>    </span><span>if</span><span> </span><span>readerr</span><span> </span><span>!=</span><span> </span><span>nil</span><span> </span><span>{</span><span></span>
+<span>      </span><span>if</span><span> </span><span>errors</span><span>.</span><span>Is</span><span>(</span><span>readerr</span><span>,</span><span> </span><span>io</span><span>.</span><span>EOF</span><span>)</span><span> </span><span>||</span><span> </span><span>errors</span><span>.</span><span>Is</span><span>(</span><span>readerr</span><span>,</span><span> </span><span>net</span><span>.</span><span>ErrClosed</span><span>)</span><span> </span><span>{</span><span></span>
+<span>        </span><span>return</span><span> </span><span>nil</span><span></span>
+<span>      </span><span>}</span><span></span>
+<span>      </span><span>return</span><span> </span><span>readerr</span><span></span>
+<span>    </span><span>}</span><span></span>
+<span>  </span><span>}</span><span></span>
+<span>}</span><span></span>
+
+<span>// isPrime returns true if n is prime, false otherwise. If delay is true, it</span><span></span>
+<span>// will sleep for n milliseconds before calculating.</span><span></span>
+<span>func</span><span> </span><span>isPrime</span><span>(</span><span>n</span><span> </span><span>int64</span><span>,</span><span> </span><span>delay</span><span> </span><span>bool</span><span>)</span><span> </span><span>bool</span><span> </span><span>{</span><span></span>
+<span>  </span><span>if</span><span> </span><span>delay</span><span> </span><span>{</span><span></span>
+<span>    </span><span>time</span><span>.</span><span>Sleep</span><span>(</span><span>time</span><span>.</span><span>Duration</span><span>(</span><span>n</span><span>)</span><span> </span><span>*</span><span> </span><span>time</span><span>.</span><span>Millisecond</span><span>)</span><span></span>
+<span>  </span><span>}</span><span></span>
+
+<span>  </span><span>if</span><span> </span><span>n</span><span> </span><span>&lt;</span><span> </span><span>2</span><span> </span><span>{</span><span></span>
+<span>    </span><span>return</span><span> </span><span>false</span><span></span>
+<span>  </span><span>}</span><span></span>
+<span>  </span><span>if</span><span> </span><span>n</span><span>%</span><span>2</span><span> </span><span>==</span><span> </span><span>0</span><span> </span><span>{</span><span></span>
+<span>    </span><span>return</span><span> </span><span>n</span><span> </span><span>==</span><span> </span><span>2</span><span></span>
+<span>  </span><span>}</span><span></span>
+<span>  </span><span>for</span><span> </span><span>i</span><span> </span><span>:=</span><span> </span><span>int64</span><span>(</span><span>3</span><span>);</span><span> </span><span>i</span><span>*</span><span>i</span><span> </span><span>&lt;=</span><span> </span><span>n</span><span>;</span><span> </span><span>i</span><span> </span><span>+=</span><span> </span><span>2</span><span> </span><span>{</span><span></span>
+<span>    </span><span>if</span><span> </span><span>n</span><span>%</span><span>i</span><span> </span><span>==</span><span> </span><span>0</span><span> </span><span>{</span><span></span>
+<span>      </span><span>return</span><span> </span><span>false</span><span></span>
+<span>    </span><span>}</span><span></span>
+<span>  </span><span>}</span><span></span>
+<span>  </span><span>return</span><span> </span><span>true</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>The simplest way to limit concurrency in Go is by using a counting semaphore,
+implemented with a channel:</p>
+<div><pre><span></span><span>func</span><span> </span><span>main</span><span>()</span><span> </span><span>{</span><span></span>
+<span>  </span><span>port</span><span> </span><span>:=</span><span> </span><span>"8070"</span><span></span>
+<span>  </span><span>if</span><span> </span><span>len</span><span>(</span><span>os</span><span>.</span><span>Args</span><span>)</span><span> </span><span>&gt;=</span><span> </span><span>2</span><span> </span><span>{</span><span></span>
+<span>    </span><span>port</span><span> </span><span>=</span><span> </span><span>os</span><span>.</span><span>Args</span><span>[</span><span>1</span><span>]</span><span></span>
+<span>  </span><span>}</span><span></span>
+<span>  </span><span>log</span><span>.</span><span>Println</span><span>(</span><span>"Serving on port"</span><span>,</span><span> </span><span>port</span><span>)</span><span></span>
+
+<span>  </span><span>listener</span><span>,</span><span> </span><span>err</span><span> </span><span>:=</span><span> </span><span>net</span><span>.</span><span>Listen</span><span>(</span><span>"tcp"</span><span>,</span><span> </span><span>":"</span><span>+</span><span>port</span><span>)</span><span></span>
+<span>  </span><span>if</span><span> </span><span>err</span><span> </span><span>!=</span><span> </span><span>nil</span><span> </span><span>{</span><span></span>
+<span>    </span><span>log</span><span>.</span><span>Fatal</span><span>(</span><span>"Error listening:"</span><span>,</span><span> </span><span>err</span><span>)</span><span></span>
+<span>  </span><span>}</span><span></span>
+<span>  </span><span>defer</span><span> </span><span>listener</span><span>.</span><span>Close</span><span>()</span><span></span>
+
+<span>  </span><span>maxConcurrency</span><span> </span><span>:=</span><span> </span><span>runtime</span><span>.</span><span>NumCPU</span><span>()</span><span></span>
+<span>  </span><span>sem</span><span> </span><span>:=</span><span> </span><span>make</span><span>(</span><span>chan</span><span> </span><span>struct</span><span>{},</span><span> </span><span>maxConcurrency</span><span>)</span><span></span>
+
+<span>  </span><span>for</span><span> </span><span>{</span><span></span>
+<span>    </span><span>conn</span><span>,</span><span> </span><span>err</span><span> </span><span>:=</span><span> </span><span>listener</span><span>.</span><span>Accept</span><span>()</span><span></span>
+<span>    </span><span>if</span><span> </span><span>err</span><span> </span><span>!=</span><span> </span><span>nil</span><span> </span><span>{</span><span></span>
+<span>      </span><span>log</span><span>.</span><span>Printf</span><span>(</span><span>"Error accepting connection: %v"</span><span>,</span><span> </span><span>err</span><span>)</span><span></span>
+<span>      </span><span>continue</span><span></span>
+<span>    </span><span>}</span><span></span>
+<span>    </span><span>log</span><span>.</span><span>Println</span><span>(</span><span>"connection received from"</span><span>,</span><span> </span><span>conn</span><span>.</span><span>RemoteAddr</span><span>())</span><span></span>
+
+<span>    </span><span>// Acquire a token from the semaphore to limit concurrency.</span><span></span>
+<span>    </span><span>sem</span><span> </span><span>&lt;-</span><span> </span><span>struct</span><span>{}{}</span><span></span>
+
+<span>    </span><span>go</span><span> </span><span>func</span><span>()</span><span> </span><span>{</span><span></span>
+<span>      </span><span>// Return the token when done serving the connection.</span><span></span>
+<span>      </span><span>defer</span><span> </span><span>func</span><span>()</span><span> </span><span>{</span><span> </span><span>&lt;-</span><span>sem</span><span> </span><span>}()</span><span></span>
+
+<span>      </span><span>if</span><span> </span><span>err</span><span> </span><span>:=</span><span> </span><span>server</span><span>.</span><span>ServePrimeProtocol</span><span>(</span><span>conn</span><span>);</span><span> </span><span>err</span><span> </span><span>!=</span><span> </span><span>nil</span><span> </span><span>{</span><span></span>
+<span>        </span><span>log</span><span>.</span><span>Printf</span><span>(</span><span>"Error serving %v: %v"</span><span>,</span><span> </span><span>conn</span><span>.</span><span>RemoteAddr</span><span>(),</span><span> </span><span>err</span><span>)</span><span></span>
+<span>      </span><span>}</span><span> </span><span>else</span><span> </span><span>{</span><span></span>
+<span>        </span><span>log</span><span>.</span><span>Println</span><span>(</span><span>"peer done"</span><span>,</span><span> </span><span>conn</span><span>.</span><span>RemoteAddr</span><span>())</span><span></span>
+<span>      </span><span>}</span><span></span>
+<span>    </span><span>}()</span><span></span>
+<span>  </span><span>}</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>The channel sem serves as a semaphore; note that it's a bounded channel
+with a maximal size. A token is acquired by sending to the channel, and released
+by receiving from the channel. When the channel is full, the send operation
+sem &lt;- <span>struct{}{}</span> blocks until a token was removed by some other goroutine
+<a href="https://eli.thegreenplace.net/2026/concurrent-servers-part-8-go/#footnote-2" target="_blank" rel="noopener noreferrer">[2]</a>.</p>
+<p>The type of the channel is struct{} which means "empty", or "no data". This
+is idiomatic in Go for channels that are used solely for their semantics, not
+to send/receive any actual data.</p>
+</div>
+<div>
+<h2>Worker pool</h2>
+<p>Since launching goroutines is cheap and limiting concurrency is easy as shown
+above, the "worker pool" pattern is often unnecessary for scenarios like our
+server. Still, it has occasional uses (such as when workers have to maintain
+some non-trivial state across tasks) so it's worth discussing it here.</p>
+<p>Here's a variant of our primality testing server that uses a worker pool:</p>
+<div><pre><span></span><span>func</span><span> </span><span>worker</span><span>(</span><span>jobs</span><span> </span><span>&lt;-</span><span>chan</span><span> </span><span>net</span><span>.</span><span>Conn</span><span>)</span><span> </span><span>{</span><span></span>
+<span>  </span><span>for</span><span> </span><span>conn</span><span> </span><span>:=</span><span> </span><span>range</span><span> </span><span>jobs</span><span> </span><span>{</span><span></span>
+<span>    </span><span>if</span><span> </span><span>err</span><span> </span><span>:=</span><span> </span><span>server</span><span>.</span><span>ServePrimeProtocol</span><span>(</span><span>conn</span><span>);</span><span> </span><span>err</span><span> </span><span>!=</span><span> </span><span>nil</span><span> </span><span>{</span><span></span>
+<span>      </span><span>log</span><span>.</span><span>Printf</span><span>(</span><span>"Error serving %v: %v"</span><span>,</span><span> </span><span>conn</span><span>.</span><span>RemoteAddr</span><span>(),</span><span> </span><span>err</span><span>)</span><span></span>
+<span>    </span><span>}</span><span> </span><span>else</span><span> </span><span>{</span><span></span>
+<span>      </span><span>log</span><span>.</span><span>Println</span><span>(</span><span>"peer done"</span><span>,</span><span> </span><span>conn</span><span>.</span><span>RemoteAddr</span><span>())</span><span></span>
+<span>    </span><span>}</span><span></span>
+<span>  </span><span>}</span><span></span>
+<span>}</span><span></span>
+
+<span>func</span><span> </span><span>main</span><span>()</span><span> </span><span>{</span><span></span>
+<span>  </span><span>port</span><span> </span><span>:=</span><span> </span><span>"8070"</span><span></span>
+<span>  </span><span>if</span><span> </span><span>len</span><span>(</span><span>os</span><span>.</span><span>Args</span><span>)</span><span> </span><span>&gt;=</span><span> </span><span>2</span><span> </span><span>{</span><span></span>
+<span>    </span><span>port</span><span> </span><span>=</span><span> </span><span>os</span><span>.</span><span>Args</span><span>[</span><span>1</span><span>]</span><span></span>
+<span>  </span><span>}</span><span></span>
+<span>  </span><span>log</span><span>.</span><span>Println</span><span>(</span><span>"Serving on port"</span><span>,</span><span> </span><span>port</span><span>)</span><span></span>
+
+<span>  </span><span>listener</span><span>,</span><span> </span><span>err</span><span> </span><span>:=</span><span> </span><span>net</span><span>.</span><span>Listen</span><span>(</span><span>"tcp"</span><span>,</span><span> </span><span>":"</span><span>+</span><span>port</span><span>)</span><span></span>
+<span>  </span><span>if</span><span> </span><span>err</span><span> </span><span>!=</span><span> </span><span>nil</span><span> </span><span>{</span><span></span>
+<span>    </span><span>log</span><span>.</span><span>Fatal</span><span>(</span><span>"Error listening:"</span><span>,</span><span> </span><span>err</span><span>)</span><span></span>
+<span>  </span><span>}</span><span></span>
+<span>  </span><span>defer</span><span> </span><span>listener</span><span>.</span><span>Close</span><span>()</span><span></span>
+
+<span>  </span><span>// The channel is unbuffered, so it will block when there are no available</span><span></span>
+<span>  </span><span>// workers to accept a new connection.</span><span></span>
+<span>  </span><span>jobs</span><span> </span><span>:=</span><span> </span><span>make</span><span>(</span><span>chan</span><span> </span><span>net</span><span>.</span><span>Conn</span><span>)</span><span></span>
+<span>  </span><span>maxConcurrency</span><span> </span><span>:=</span><span> </span><span>runtime</span><span>.</span><span>NumCPU</span><span>()</span><span></span>
+<span>  </span><span>for</span><span> </span><span>i</span><span> </span><span>:=</span><span> </span><span>0</span><span>;</span><span> </span><span>i</span><span> </span><span>&lt;</span><span> </span><span>maxConcurrency</span><span>;</span><span> </span><span>i</span><span>++</span><span> </span><span>{</span><span></span>
+<span>    </span><span>go</span><span> </span><span>worker</span><span>(</span><span>jobs</span><span>)</span><span></span>
+<span>  </span><span>}</span><span></span>
+
+<span>  </span><span>for</span><span> </span><span>{</span><span></span>
+<span>    </span><span>conn</span><span>,</span><span> </span><span>err</span><span> </span><span>:=</span><span> </span><span>listener</span><span>.</span><span>Accept</span><span>()</span><span></span>
+<span>    </span><span>if</span><span> </span><span>err</span><span> </span><span>!=</span><span> </span><span>nil</span><span> </span><span>{</span><span></span>
+<span>      </span><span>log</span><span>.</span><span>Printf</span><span>(</span><span>"Error accepting connection: %v"</span><span>,</span><span> </span><span>err</span><span>)</span><span></span>
+<span>      </span><span>continue</span><span></span>
+<span>    </span><span>}</span><span></span>
+<span>    </span><span>log</span><span>.</span><span>Println</span><span>(</span><span>"connection received from"</span><span>,</span><span> </span><span>conn</span><span>.</span><span>RemoteAddr</span><span>())</span><span></span>
+
+<span>    </span><span>jobs</span><span> </span><span>&lt;-</span><span> </span><span>conn</span><span></span>
+<span>  </span><span>}</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>A fixed number of worker goroutines is launched; these goroutines all receive
+"jobs" from the same channel. In the Accept loop, each client connection
+is sent to this channel as a new job and is picked up by the next available
+worker. As mentioned before, you would typically see a sync.WaitGroup
+somewhere to ensure clean shutdown of goroutines, but in our case it isn't
+necessary because we have a server that never exits.</p>
+</div>
+<div>
+<h2>Async?</h2>
+<p>Do programmers have to resort to async / event-driven programming in Go? In
+my experience, almost never. Go was designed from the bottom up to be
+suitable for large-scale concurrency; goroutines are very cheap to create, have a
+tiny memory footprint and switching happens very quickly, all in user space.
+Measurements I ran <a href="https://eli.thegreenplace.net/2018/measuring-context-switching-and-memory-overheads-for-linux-threads/" target="_blank" rel="noopener noreferrer">back in 2018</a>
+have shown switching times of ~170 ns, as compared to 1-2 microseconds for threads
+on Linux.</p>
+<p>Moreover, Go already uses event-driven loops like epoll underneath for I/O.
+Goroutines that wait for I/O like sockets are effectively "parked" and consume
+no resources (beyond their small memory footprint); they are woken up by
+Go's runtime when their I/O descriptors are ready - this is very similar to how
+asynchronous programming works!</p>
+<p>That said, some people certainly do try to stretch their resources even more
+with direct asynchronous programming in Go when <em>millions</em> of streams are
+handled concurrently. All I'll say is that this is very rare, and an
+overwhelming majority of users never have to do this.</p>
+</div>
+<div>
+<h2>Conclusion</h2>
+<p>In 2018, I wrote a post named <a href="https://eli.thegreenplace.net/2018/go-hits-the-concurrency-nail-right-on-the-head/" target="_blank" rel="noopener noreferrer">Go hits the concurrency nail right on the head</a>,
+and after several more years of active coding, I fully stand behind that statement.
+Go is extremely powerful and ergonomic for concurrent programs; while other environments
+go to great lengths to implement async-await style event loops in libraries,
+in Go it's already baked into the core language and runtime. You want
+event-driven I/O with very lightweight green threads that can also execute
+blocking tasks without worrying about the <a href="https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/" target="_blank" rel="noopener noreferrer">function coloring problem</a>?
+Go has you covered.</p>
+</div>
+<div>
+<h2>Code</h2>
+<p>All the code for this post is available <a href="https://github.com/eliben/code-for-blog/tree/main/2026/async-socket-server-go" target="_blank" rel="noopener noreferrer">on GitHub</a>.</p>
+<hr />
+<table>
+<colgroup><col /><col /></colgroup>
+<tbody>
+<tr><td><a href="https://eli.thegreenplace.net/2026/concurrent-servers-part-8-go/#footnote-reference-1" target="_blank" rel="noopener noreferrer">[1]</a></td><td><p>Careful readers will note two issues with this code: (1) the protocol
+assumes the complete number is read from the socket in a single conn.Read
+call, and there's no framing - separation between distinct numbers;
+(2) the prime checking loop uses i*i which may overflow for large
+numbers.</p>
+<p>These issues are consistent across all the versions of the prime server
+in C, Python, JavaScript and Rust in earlier parts, because my focus was
+on the simplest possible code to demonstrate a point about concurrency.</p>
+</td></tr>
+</tbody>
+</table>
+<table>
+<colgroup><col /><col /></colgroup>
+<tbody>
+<tr><td><a href="https://eli.thegreenplace.net/2026/concurrent-servers-part-8-go/#footnote-reference-2" target="_blank" rel="noopener noreferrer">[2]</a></td><td>Exercise: note that our semaphore protects the entire ServePrimeProtocol,
+meaning that a malicious (or incompetent) client can connect and idle
+without sending any requests, thus reducing our concurrent capacity by 1.
+Adjust the code to move the semaphore around the prime calculation itself,
+so only this part is bounded.</td></tr>
+</tbody>
+</table>
+</div></div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://eli.thegreenplace.net/2026/concurrent-servers-part-8-go/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button> <script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
