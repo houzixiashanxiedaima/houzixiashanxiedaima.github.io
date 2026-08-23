@@ -4,40 +4,32 @@
   pi-web-access：访问网络资源
   pi-mcp-adapter：访问 MCP
   pi-grok-cli：访问 Grok API，蓝 V 必备
-  pi-rewind：每次 AI 输出的时候都备份一下代码
+  pi-input-history：保存和浏览输入历史
   pi-powerline-footer：底部显示一些彩色的好看信息
-
-
 "><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/pi-agent--asawdi/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/pi-agent--asawdi/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/pi-agent--asawdi/"><meta property="og:title" content="Pi Agent 编程插件列表"><meta property="og:description" content="我玩了一下午，发现下面这几个插件配合最完美，上一版有兼容性问题。
 
 
   pi-web-access：访问网络资源
   pi-mcp-adapter：访问 MCP
   pi-grok-cli：访问 Grok API，蓝 V 必备
-  pi-rewind：每次 AI 输出的时候都备份一下代码
+  pi-input-history：保存和浏览输入历史
   pi-powerline-footer：底部显示一些彩色的好看信息
-
-
 "><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="我玩了一下午，发现下面这几个插件配合最完美，上一版有兼容性问题。
 
 
   pi-web-access：访问网络资源
   pi-mcp-adapter：访问 MCP
   pi-grok-cli：访问 Grok API，蓝 V 必备
-  pi-rewind：每次 AI 输出的时候都备份一下代码
+  pi-input-history：保存和浏览输入历史
   pi-powerline-footer：底部显示一些彩色的好看信息
-
-
 "><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/pi-agent--asawdi/"><meta property="twitter:title" content="Pi Agent 编程插件列表"><meta property="twitter:description" content="我玩了一下午，发现下面这几个插件配合最完美，上一版有兼容性问题。
 
 
   pi-web-access：访问网络资源
   pi-mcp-adapter：访问 MCP
   pi-grok-cli：访问 Grok API，蓝 V 必备
-  pi-rewind：每次 AI 输出的时候都备份一下代码
+  pi-input-history：保存和浏览输入历史
   pi-powerline-footer：底部显示一些彩色的好看信息
-
-
 "><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Pi Agent 编程插件列表</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Pi Agent 编程插件列表","item":"https://blog.yuyins.com/reading-list/pi-agent--asawdi/"}]}]}</script><!-- 初始化配色方案 --><script>
 			document.documentElement.setAttribute('data-color', 'stone-amber');
 		</script><style>.chip[data-astro-cid-k2qn5omv]{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip[data-astro-cid-k2qn5omv]:after{content:none!important}.chip--sm[data-astro-cid-k2qn5omv]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-k2qn5omv]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-k2qn5omv]{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}.chip--interactive[data-astro-cid-k2qn5omv]:hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}.chip--active[data-astro-cid-k2qn5omv],.chip[data-astro-cid-k2qn5omv].active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed[data-astro-cid-k2qn5omv]{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip[data-astro-cid-k2qn5omv]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -48,11 +40,9 @@
   <li><code>pi-web-access</code>：访问网络资源</li>
   <li><code>pi-mcp-adapter</code>：访问 MCP</li>
   <li><code>pi-grok-cli</code>：访问 Grok API，蓝 V 必备</li>
-  <li><code>pi-rewind</code>：每次 AI 输出的时候都备份一下代码</li>
+  <li><code>pi-input-history</code>：保存和浏览输入历史</li>
   <li><code>pi-powerline-footer</code>：底部显示一些彩色的好看信息</li>
-</ol>
-
-<p><img alt="Pi Agent 编程插件列表" src="https://manateelazycat.github.io/pics/pi-agent-plugin-list/pi-agent-plugins.png" /></p></div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://manateelazycat.github.io/2026/08/22/pi-agent-plugin-list/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+</ol></div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://manateelazycat.github.io/2026/08/22/pi-agent-plugin-list/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
 阅读原文 ↗
 </a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
 &copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>

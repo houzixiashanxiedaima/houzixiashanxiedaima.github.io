@@ -1,0 +1,159 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.2.4"><!-- Core SEO --><meta name="description" content="I&amp;#8217;m no stranger to pushing hardware past its limits. For example, seven years ago, I tracked down an issue that prevented 16 GB of RAM being used in a motherboard that only supported 8. It ended"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/fixing-an-emachines-el1200-bios-bug-with-claude-ce62fh/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/fixing-an-emachines-el1200-bios-bug-with-claude-ce62fh/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/fixing-an-emachines-el1200-bios-bug-with-claude-ce62fh/"><meta property="og:title" content="Fixing an eMachines EL1200 BIOS bug with Claude"><meta property="og:description" content="I&amp;#8217;m no stranger to pushing hardware past its limits. For example, seven years ago, I tracked down an issue that prevented 16 GB of RAM being used in a motherboard that only supported 8. It ended"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="I&amp;#8217;m no stranger to pushing hardware past its limits. For example, seven years ago, I tracked down an issue that prevented 16 GB of RAM being used in a motherboard that only supported 8. It ended"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/fixing-an-emachines-el1200-bios-bug-with-claude-ce62fh/"><meta property="twitter:title" content="Fixing an eMachines EL1200 BIOS bug with Claude"><meta property="twitter:description" content="I&amp;#8217;m no stranger to pushing hardware past its limits. For example, seven years ago, I tracked down an issue that prevented 16 GB of RAM being used in a motherboard that only supported 8. It ended"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Fixing an eMachines EL1200 BIOS bug with Claude</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Fixing an eMachines EL1200 BIOS bug with Claude","item":"https://blog.yuyins.com/reading-list/fixing-an-emachines-el1200-bios-bug-with-claude-ce62fh/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-k2qn5omv]{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip[data-astro-cid-k2qn5omv]:after{content:none!important}.chip--sm[data-astro-cid-k2qn5omv]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-k2qn5omv]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-k2qn5omv]{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}.chip--interactive[data-astro-cid-k2qn5omv]:hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}.chip--active[data-astro-cid-k2qn5omv],.chip[data-astro-cid-k2qn5omv].active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed[data-astro-cid-k2qn5omv]{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip[data-astro-cid-k2qn5omv]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.CGyApSUP.css"><style>.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem;font-style:italic}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;font-family:monospace;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-23" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-23</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-22" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-22</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-08-22" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-08-22</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-21" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-21</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-08-21" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-08-21</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-20" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-20</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.PHDZRRIC.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>Fixing an eMachines EL1200 BIOS bug with Claude</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://downtowndougbrown.com/" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag" data-astro-cid-k2qn5omv="true"> downtowndougbrown.com </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年8月24日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-veycvx62>
+<p>I’m no stranger to pushing hardware past its limits. For example, seven years ago, <a target="_blank" rel="noopener noreferrer" href="https://www.downtowndougbrown.com/2019/04/adventures-of-putting-16-gb-of-ram-in-a-motherboard-that-doesnt-support-it/">I tracked down an issue that prevented 16 GB of RAM being used in a motherboard that only supported 8</a>. It ended up being a one-line GRUB hack to fix one of the ACPI tables that was mistakenly overlapping a PCI memory region with the RAM region and causing Windows to bluescreen.</p>
+
+
+
+<p>Around the same timeframe, I began cobbling together another computer using a motherboard from an eMachines EL1200. The EL1200 was a cheap machine that came out in 2008. I found the motherboard on eBay for next to nothing, and it was also easy to find an Athlon X2 4850e to go with it. This particular motherboard only officially supports 2 GB of RAM in each of its two slots for a total of 4 GB, but I knew that 4 GB DDR2 sticks existed, so I went ahead and tried to put 8 GB in it. Why not? They were easy to find and inexpensive.</p>
+
+
+
+<p>The 8 GB of RAM worked perfectly fine and I was able to boot into Linux. This honestly didn’t surprise me too much. I ran memory tests and they all came back perfect. The computer worked great with 8 GB of RAM.</p>
+
+
+
+<p>Then, I tried to enter the BIOS setup by pressing F2 at startup when the eMachines splash screen came up:</p>
+
+
+
+<span></span>
+
+
+
+<figure><a target="_blank" rel="noopener noreferrer" href="https://www.downtowndougbrown.com/wp-content/uploads/2026/08/splash.png"><img width="1024" height="576" alt="" src="https://www.downtowndougbrown.com/wp-content/uploads/2026/08/splash-1024x576.png" /></a></figure>
+
+
+
+<p>The screen went black, and then just sat there with a flashing white cursor in the upper-left corner. I wasn’t able to break it out of this hang with any special keystrokes. It was completely frozen. I could only get past it by rebooting. I figured that the only weird thing I had done was go past the maximum RAM requirements, so I tried putting in two 2 GB sticks instead. With only 4 GB of RAM installed, I was able to get into the Phoenix Award BIOS with no trouble.</p>
+
+
+
+<figure><a target="_blank" rel="noopener noreferrer" href="https://www.downtowndougbrown.com/wp-content/uploads/2026/08/biosmain.png"><img width="1024" height="576" alt="" src="https://www.downtowndougbrown.com/wp-content/uploads/2026/08/biosmain-1024x576.png" /></a></figure>
+
+
+
+<p>Very interesting! So the motherboard <em>pretty much</em> worked fine with 8 GB of RAM, but something caused it to fail to enter the BIOS with that much memory installed.</p>
+
+
+
+<p>I tried a few different BIOS updates I found online for this motherboard. None of them would allow me to enter the setup with 8 GB of RAM installed. I left it alone for a while, and then on a whim I thought I’d try some BIOS hacking. I used CBROM32 to integrate a newer AGESA that I extracted from a different motherboard’s BIOS. My hypothesis was maybe the AGESA in my BIOS was too old. Long story short, I somehow successfully managed to integrate the newer AGESA without bricking the board, but it didn’t change the 8 GB behavior at all.</p>
+
+
+
+<p>That’s where I left this project in 2021. It’s been one of those things on my list of “hey, that would be cool to look into” ideas, but I just couldn’t bring myself to go into a crazy in-depth investigation to track down this particular bug. The older I get, the more exhausting it is to spend hours staring at assembly code. It’s hard on the eyes. Also, maybe I would have been more motivated to tinker with it if the motherboard had a socketed ROM chip I could easily swap in and out, but this one doesn’t. It’s a SOIC chip soldered on.</p>
+
+
+
+<p>Fast forward to 2026. Agentic AI is moving forward at a blazing fast pace. I’ve had some success with fixing bugs and reverse-engineering things with Claude Code, so I thought this would be a great task to try throwing at it. Can Claude fix a BIOS bug?</p>
+
+
+
+<p>I started with this prompt to Opus 5:</p>
+
+
+
+<blockquote>
+<p>The .bin file is a BIOS dump from an eMachines EL1200. It officially supports 4 GB of RAM, but I put 8 in it and it still boots fine with 8. But…if I try to go into the BIOS setup it hangs unless I drop it back down to 4. Can you figure out why the BIOS setup hangs with 8 GB of RAM? It should be possible to fix.</p>
+</blockquote>
+
+
+
+<p>A little over a half hour later, Claude spit back to me a write-up about the issue along with a patched BIOS image to try. It also corrected me by letting me know that the BIOS would still hang like this even if there was only a single 4 GB stick in it. The only working 4 GB configuration was two separate 2 GB sticks. I tested with a single 4 GB module and verified that it was totally right.</p>
+
+
+
+<p>I flashed it to the machine with flashrom:</p>
+
+
+
+<pre>$ sudo flashrom --programmer internal -w /tmp/newbios.bin<br />flashrom v0.9.9-r1954 on Linux 5.4.0-42-generic (x86_64)<br />flashrom is free software, get the source code at https://flashrom.org<br /><br />Calibrating delay loop... OK.<br />DMI table is broken (bogus header)!<br />Found chipset "NVIDIA MCP61".<br />Enabling flash write... OK.<br />Found Macronix flash chip "MX25L8005/MX25L8006E/MX25L8008E/MX25V8005" (1024 kB, SPI) mapped at physical address 0x00000000fff00000.<br />Reading old flash chip contents... done.<br />Erasing and writing flash chip... Erase/write done.<br />Verifying flash... VERIFIED.</pre>
+
+
+
+<p>I rebooted, and…the new BIOS spit out by Claude completely bricked it. The CPU fan would turn on and then nothing. No monitor signal or anything.</p>
+
+
+
+<p>Sweet. Was this whole experiment worthless? I can imagine the blog post title now. “Claude turned my computer into a fancy paperweight.” Did I just prove that AI is garbage? Not really. It’s all part of how AI is best used for tasks: give it a feedback loop and let it iterate. I told it what happened, and 6 minutes later it realized the mistake: it had shifted the location of a few modules (MEMINIT.BIN, HT.DLL, HT32GATE.BIN) that aren’t supposed to be moved around on the flash chip, at least not without updating some pointers. When it was patching the bug, it didn’t re-compress the section it patched; it just shifted everything after it out of the way to make room for an uncompressed version instead. This was what completely broke it.</p>
+
+
+
+<p>It offered to figure out how to compress the patched section and ensure those other modules wouldn’t be shifted around. I told it to go for it. 10 minutes later, it had written its own LH5 compressor and spit out a new BIOS image to test.</p>
+
+
+
+<p>This time around, I asked it to do more review and testing of its work, because I knew it would be difficult to keep recovering the BIOS after a brick. It didn’t find anything wrong during review, but the process it followed was kind of fun to follow along with. It wrote a very simple x86 interpreter in Python, tested the routine that it patched to make sure it no longer crashed with 8 GB of RAM, and then tested its new compressed module against the BIOS’s own decompressor code to make sure it was compatible. With that, I was ready for a re-test.</p>
+
+
+
+<p>First, I had to unbrick the motherboard. That ended up being a little more difficult than I had hoped, but it was manageable. Unlike <a target="_blank" rel="noopener noreferrer" href="https://www.downtowndougbrown.com/2021/12/upgrading-a-motherboards-bios-uefi-the-hard-way/">my last experiment with flashing a BIOS using a SOIC clip</a>, this one didn’t work with the chip mounted directly on the board. My trusty CH341A programmer just wouldn’t detect the chip. It also kept cutting out and disconnecting and reconnecting. It was acting like it was being asked to supply too much current.</p>
+
+
+
+<p>I ended up having to lift the flash chip’s VCC pin from the motherboard while heating it with my soldering iron. Then I stuck a piece of Kapton tape underneath to isolate it from the board. This is something you have to do occasionally if a motherboard doesn’t have something like a diode or transistor isolating the chip from its power rail. With that little tweak in place, the CH341A programmer recognized the chip and was able to flash it. I also could have just removed the entire chip with hot air instead, but it was really close to a bunch of plastic like the battery holder and a SATA connector.</p>
+
+
+
+<p>Anyway, I reflashed it with my original BIOS backup (to guarantee I would unbrick the computer), soldered the pin back down, booted it up successfully, and then flashed Claude’s second attempt to the board using flashrom.</p>
+
+
+
+<p>After rebooting, it came up with the splash screen, so that was good news. I pressed F2 to enter Setup. And…it worked! I was able to see my 8 GB of RAM reported in the Standard CMOS Features subpage.</p>
+
+
+
+<figure><a target="_blank" rel="noopener noreferrer" href="https://www.downtowndougbrown.com/wp-content/uploads/2026/08/biosstandardfeatures.png"><img width="1024" height="576" alt="" src="https://www.downtowndougbrown.com/wp-content/uploads/2026/08/biosstandardfeatures-1024x576.png" /></a></figure>
+
+
+
+<p>Claude successfully found and fixed the BIOS bug that had been crawling around in the back of my mind, occasionally bothering me for 7 years. With very little input from me, I might add.</p>
+
+
+
+<p>You might be wondering: what <em>was</em> the bug that it found, anyway?</p>
+
+
+
+<p>The problem was in a small chunk of code in awardext.rom that is used for displaying the amount of memory on the Standard CMOS Features page depicted above:</p>
+
+
+
+<pre>DIMM1                   4096MB<br />DIMM2                   4096MB<br />Total Memory            8192MB</pre>
+
+
+
+<p>The function’s purpose is to take the number of megabytes of RAM in each slot, and convert it to text drawn on the screen. Converting a number to text is a simple algorithm, which entails repeatedly dividing by 10 and looking at the remainder each time to determine digits to draw from right to left.</p>
+
+
+
+<p>The DIMM1 and DIMM2 lines were using an 8-bit divide instruction, which takes a value in the 16-bit register AX, divides it by an 8-bit value in another register, and puts the resulting quotient and remainder into AX’s 8-bit halves AL and AH, respectively. This means the quotient needs to fit inside of 8 bits. The first divide to get the last digit, if you have a 2 GB stick installed, is 2048/10 = quotient 204, remainder 8. 204 fits in 8 bits, so there’s no problem. On the other hand, if you have a 4 GB stick installed, it’s 4096/10 = quotient 409, remainder 6. 409 doesn’t fit in 8 bits. <a target="_blank" rel="noopener noreferrer" href="https://www.felixcloutier.com/x86/div">Here is some documentation about the DIV instruction</a>, explaining that a #DE exception occurs if the quotient is too large to fit in the destination register. That’s what Claude correctly guessed was happening.</p>
+
+
+
+<p>Astute readers may be thinking: but even with 2 GB sticks, the Total Memory line would be affected! The total is 4 GB! But nope, the Total Memory line was already using a 16-bit divide instruction that was immune to this problem. Claude’s fix was simply to patch the calculations for DIMM1 and DIMM2 to use the same 16-bit divide, being as clever and compact as possible so that it could be crammed into the same routine without shifting everything around to make room for it.</p>
+
+
+
+<p>So yeah, that’s the bug. I expected it to be something much deeper, but it was simple. An exception caused by a number-to-string conversion that wasn’t expected to handle large numbers. Interestingly enough, the main page doesn’t show the RAM totals at all, so it must have been arranging the text strings even before entering the Standard CMOS Features subpage.</p>
+
+
+
+<p>Some research reveals that it’s fairly common in the BIOS modding community to make patches to the awardext.rom module, although most of the Google results I found were for fixing a 64 GB hard drive size limit. It wouldn’t surprise me if one of the experts out there already knows all about this RAM bug. Nothing obvious showed up for me during searches about this bug.</p>
+
+
+
+<p>Does this actually count as a project accomplished by me? Not really. I only gave it some simple guidance and tested what it told me to test. But regardless, this result is absolutely incredible and worth a writeup to tell the story. It fixed a freaking BIOS for me! It knew exactly where to look for the bug, found it, and patched it. It almost worked on the first try, but it made a very silly mistake that was correctable. In hindsight, the bug was very simple, but it still probably would have taken me weeks to figure out. It diagnosed the problem in a matter of minutes. Yes, it took longer than that because I had to be a human feedback loop, and it screwed something up the first time, but isn’t this amazing regardless? I am confident I never would have found the time to look into this myself. Too many project ideas, not enough time, and it’s so low on the priority list.</p>
+
+
+
+<p>I’m well aware that a faction of my readership will be upset about this post. How many gallons of water did I waste performing this experiment on what is essentially a scrap computer by today’s standards? Have I sold out to our new AI overlords? Not entirely. I wrote this entire post by hand using my own brain, as always. But I also believe that it’s important to open your mind, experiment, push the limits, and find out what is possible with new technologies. My takeaway from all of this is that debugging and reverse engineering has never been so easily accessible as it is today. That’s kind of terrifying, but also pretty cool.</p>
+</div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://www.downtowndougbrown.com/2026/08/fixing-an-emachines-el1200-bios-bug-with-claude/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button> <script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
