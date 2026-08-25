@@ -1,0 +1,222 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.2.4"><!-- Core SEO --><meta name="description" content="I’ve been reading through the recent run of incidents where package-manager infrastructure was the attack surface, as one does on a Sunday afternoon. One question I kept coming back to was whether the"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/hardening-the-override-flag-rm9rpy/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/hardening-the-override-flag-rm9rpy/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/hardening-the-override-flag-rm9rpy/"><meta property="og:title" content="Hardening the Override Flag"><meta property="og:description" content="I’ve been reading through the recent run of incidents where package-manager infrastructure was the attack surface, as one does on a Sunday afternoon. One question I kept coming back to was whether the"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="I’ve been reading through the recent run of incidents where package-manager infrastructure was the attack surface, as one does on a Sunday afternoon. One question I kept coming back to was whether the"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/hardening-the-override-flag-rm9rpy/"><meta property="twitter:title" content="Hardening the Override Flag"><meta property="twitter:description" content="I’ve been reading through the recent run of incidents where package-manager infrastructure was the attack surface, as one does on a Sunday afternoon. One question I kept coming back to was whether the"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Hardening the Override Flag</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Hardening the Override Flag","item":"https://blog.yuyins.com/reading-list/hardening-the-override-flag-rm9rpy/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-k2qn5omv]{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip[data-astro-cid-k2qn5omv]:after{content:none!important}.chip--sm[data-astro-cid-k2qn5omv]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-k2qn5omv]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-k2qn5omv]{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}.chip--interactive[data-astro-cid-k2qn5omv]:hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}.chip--active[data-astro-cid-k2qn5omv],.chip[data-astro-cid-k2qn5omv].active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed[data-astro-cid-k2qn5omv]{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip[data-astro-cid-k2qn5omv]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.CQyyXwaV.css"><style>.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem;font-style:italic}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;font-family:monospace;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link nav-link--active" aria-current="page" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/podcasts" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 播客 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-08-26" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-08-26</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-25" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-25</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-08-25" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-08-25</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-24" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-24</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-23" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-23</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-08-22" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-08-22</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.PHDZRRIC.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>Hardening the Override Flag</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://nesbitt.io/" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag" data-astro-cid-k2qn5omv="true"> nesbitt.io </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年8月25日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-veycvx62><p>I’ve been reading through the recent run of incidents where package-manager infrastructure was the attack surface, as one does on a Sunday afternoon. One question I kept coming back to was whether the tools have any defences at the flag and config level. Every package manager has an override that turns off a check: <code>--allow-unauthenticated</code>, <code>--break-system-packages</code>, <code>--ignore-scripts</code>, an env var that points the resolver at a different registry. If a compromised install script can pass those as easily as a person at a keyboard can, the check does very little. So I went looking at how command-line tools more generally handle their dangerous overrides, <code>sudo</code> and <code>curl</code> and <code>rm</code> and the rest, and the catalogue got long enough to write up on its own.</p>
+
+<h2>Names and channels</h2>
+
+<p>GNU rm goes back and re-reads <code>argv</code> after option parsing has finished. getopt_long accepts any unambiguous prefix of a long option, which would make <code>--no-p</code> a valid spelling of <code>--no-preserve-root</code>, so rm <a href="https://github.com/coreutils/coreutils/blob/master/src/rm.c" target="_blank" rel="noopener noreferrer">checks the literal string</a> and rejects anything shorter with “you may not abbreviate the –no-preserve-root option”. <code>--preserve-root</code> has been the default <a href="https://lists.gnu.org/archive/html/bug-coreutils/2006-08/msg00354.html" target="_blank" rel="noopener noreferrer">since 2006</a>, and the override requires the full flag every time, on top of whatever the argument parser does. It’s easy to miss when reimplementing: uutils, the Rust coreutils rewrite, <a href="https://github.com/uutils/coreutils/issues/10188" target="_blank" rel="noopener noreferrer">accepted <code>--n</code> until March 2026</a>.</p>
+
+<p>A long name with no short form is the most common hardening on an override flag, and the one most package managers reach for. apt has <code>--allow-remove-essential</code>, <code>--allow-downgrades</code>, <code>--allow-change-held-packages</code> and <code>--allow-unauthenticated</code>, all long-only, <a href="https://manpages.debian.org/unstable/apt/apt-get.8.en.html" target="_blank" rel="noopener noreferrer">split out from a blanket <code>--force-yes</code> in apt 1.1</a>. pnpm 10 disables install scripts by default and calls the global re-enable <a href="https://pnpm.io/settings/build" target="_blank" rel="noopener noreferrer"><code>dangerouslyAllowAllBuilds</code></a>. hdparm gates its drive-destroying operations behind <a href="https://sourceforge.net/projects/hdparm/files/hdparm/" target="_blank" rel="noopener noreferrer"><code>--yes-i-know-what-i-am-doing</code>, and the worst of them behind <code>--please-destroy-my-drive</code> as well</a>. The name is the warning, and someone reviewing a script or a diff will read past <code>-f</code> but stop on <code>--allow-remove-essential</code>.</p>
+
+<p>apt also used a typed confirmation phrase for essential-package removal until 2021: print the warning, require <code>Yes, do as I say!</code> character-for-character before proceeding. Typing the translated phrase in Chinese locales <a href="https://bugs.debian.org/234886" target="_blank" rel="noopener noreferrer">required an input method that was unavailable at a bare console</a>, so apt 0.5.23 stopped translating it for zh_*. The check <a href="https://lists.debian.org/deity/2012/10/msg00042.html" target="_blank" rel="noopener noreferrer">ran regardless of TTY</a>, so <code>echo 'Yes, do as I say!' | apt-get ...</code> worked. In November 2021 a Pop!_OS packaging conflict made <code>apt install steam</code> propose removing the desktop environment, the prompt appeared <a href="https://www.youtube.com/watch?v=0506yDSgU7M&amp;t=597s" target="_blank" rel="noopener noreferrer">in a Linus Tech Tips video</a>, and the phrase got typed anyway. <a href="https://salsa.debian.org/apt-team/apt/-/merge_requests/199" target="_blank" rel="noopener noreferrer">apt 2.3.12</a> replaced the prompt with a hard error two weeks later; the NEWS entry credits Linus Tech Tips and System76 by name.</p>
+
+<p><a href="https://peps.python.org/pep-0668/" target="_blank" rel="noopener noreferrer">PEP 668</a> says the escape hatch for externally-managed environments “should not be something as simple as a <code>--force</code> flag”, and pip’s <code>--break-system-packages</code>, <a href="https://github.com/pypa/pip/pull/11780" target="_blank" rel="noopener noreferrer">added in 23.0.1</a>, is long-only with an error message that takes half a screen to steer users away. But pip maps every long option to both an environment variable and a config-file key automatically, with no per-option opt-out. <code>PIP_BREAK_SYSTEM_PACKAGES=1</code> in <code>.bashrc</code> or <code>break-system-packages = true</code> in <code>pip.conf</code> sets it permanently, and the <a href="https://github.com/pypa/pip/blob/main/tests/functional/test_pep668.py" target="_blank" rel="noopener noreferrer">pip test suite itself</a> has to clear the env var to test the un-overridden path.</p>
+
+<p>Node.js tags each option individually in <a href="https://github.com/nodejs/node/blob/main/src/node_options.cc" target="_blank" rel="noopener noreferrer"><code>src/node_options.cc</code></a> as either <code>kAllowedInEnvvar</code> or <code>kDisallowedInEnvvar</code>, and exits with an error if a disallowed one arrives through <code>NODE_OPTIONS</code>. <code>--eval</code>, <code>--print</code>, <code>--interactive</code> and anything that names a script to run are on the <a href="https://nodejs.org/api/cli.html#node_optionsoptions" target="_blank" rel="noopener noreferrer">disallowed list</a>, and the <a href="https://github.com/nodejs/node/pull/12028" target="_blank" rel="noopener noreferrer">PR that introduced the mechanism</a> put <code>--tls-cipher-list</code> there too with the one-line rationale “Disallowed because of security concerns”. cargo’s config reference marks registry <code>[source]</code> replacement and <code>[patch]</code> tables the same way, <a href="https://doc.rust-lang.org/cargo/reference/config.html" target="_blank" rel="noopener noreferrer">“Environment: not supported”</a>, so pointing a build at a different crate source takes a file on disk rather than an exported variable. npm 12 restricts a different channel: passing <code>--allow-scripts</code> on the command line in a project-scoped install throws <a href="https://github.com/npm/cli/pull/9424" target="_blank" rel="noopener noreferrer"><code>EALLOWSCRIPTS</code></a>, forcing the policy into <code>package.json</code> where it’s checked in and reviewed.</p>
+
+<p>Daniel Stenberg made the case against relying on names alone in 2017, when a curl user <a href="https://curl.se/mail/archive-2017-04/0002.html" target="_blank" rel="noopener noreferrer">proposed</a> deprecating <code>-k</code> and keeping only <code>--insecure</code>, on the grounds that a two-character flag is hard to spot in a script and easy to insert. Stenberg <a href="https://curl.se/mail/archive-2017-04/0004.html" target="_blank" rel="noopener noreferrer">declined</a>: the misuse comes from copy-paste, users transplant <code>-k</code> from a Stack Overflow answer without reading it, and they’d transplant <code>--insecure</code> just as readily. Adding a warning would produce fatigue rather than caution. curl 8.x still accepts <code>-k</code>, though the equivalent <code>CURL_INSECURE</code> environment variable is absent; every entry in the man page’s <a href="https://curl.se/docs/manpage.html#ENVIRONMENT" target="_blank" rel="noopener noreferrer">ENVIRONMENT section</a> leaves verification on.</p>
+
+<h2>Preconditions and scope</h2>
+
+<p><code>git push --force-with-lease</code> attaches a precondition rather than relying on spelling: override only if the remote ref matches what I last fetched, so a force-push fails if someone else pushed in the meantime. That check turned out to have a hole: editors with background auto-fetch update the tracking ref without the user seeing the new commits, so the lease matches even though the user’s mental model is stale. git 2.30 added <a href="https://git-scm.com/docs/git-push#Documentation/git-push.txt---force-if-includes" target="_blank" rel="noopener noreferrer"><code>--force-if-includes</code></a>, which additionally requires the remote tip to appear in the local branch’s reflog, so a fetched-but-unread commit still blocks the push.</p>
+
+<p><code>go get -insecure</code> applied to everything the command touched, and Go 1.17 <a href="https://go.dev/doc/go1.17" target="_blank" rel="noopener noreferrer">removed it</a> in favour of <a href="https://go.dev/ref/mod#environment-variables" target="_blank" rel="noopener noreferrer"><code>GOINSECURE</code></a>, which takes a comma-separated list of module path globs so unverified fetches only apply to matching paths. pacman made the same move: the boolean <code>--force</code> that overrode file-conflict checks was removed in 5.1 and replaced with <a href="https://man.archlinux.org/man/pacman.8" target="_blank" rel="noopener noreferrer"><code>--overwrite &lt;glob&gt;</code></a>, which has to name what it’s clobbering. Nix’s <a href="https://nixos.org/manual/nixpkgs/stable/#sec-allow-insecure" target="_blank" rel="noopener noreferrer"><code>permittedInsecurePackages</code></a> requires the versioned package name, <code>openssl-1.1.1w</code> rather than <code>openssl</code>, so when the version changes the exception stops matching and the build fails again until someone re-approves it. Composer 2.2’s <a href="https://getcomposer.org/doc/06-config.md#allow-plugins" target="_blank" rel="noopener noreferrer"><code>allow-plugins</code></a> is a per-plugin map in <code>composer.json</code> rather than a global switch. cargo’s <code>[patch]</code> table is per-crate.</p>
+
+<p><code>systemctl reboot --force</code> skips the orderly shutdown of units, and passing <code>--force</code> twice <a href="https://www.freedesktop.org/software/systemd/man/latest/systemctl.html#-f" target="_blank" rel="noopener noreferrer">skips systemd itself</a>, issuing the <code>reboot(2)</code> syscall directly from the systemctl process so it works even when PID 1 has hung.</p>
+
+<p>Ceph’s pool-deletion command stacks three mechanisms: <code>ceph osd pool delete NAME NAME --yes-i-really-really-mean-it</code>, with the pool name given twice, and the monitor on the server side still refuses unless <a href="https://docs.ceph.com/en/latest/rados/operations/pools/#deleting-a-pool" target="_blank" rel="noopener noreferrer"><code>mon_allow_pool_delete</code></a> is set to true in its configuration.</p>
+
+<h2>Out of band</h2>
+
+<p>Docker keeps <a href="https://docs.docker.com/reference/cli/dockerd/" target="_blank" rel="noopener noreferrer"><code>insecure-registries</code></a> in the daemon config only, so pulling from an unverified registry means reconfiguring the daemon. A git server with <a href="https://git-scm.com/docs/git-config#Documentation/git-config.txt-receivedenyNonFastForwards" target="_blank" rel="noopener noreferrer"><code>receive.denyNonFastForwards</code></a> or <code>receive.denyDeletes</code> set rejects a force-push regardless of what flags the client sent. Homebrew’s <code>HOMEBREW_FORBIDDEN_FORMULAE</code> and siblings let an admin block installs, and <code>HOMEBREW_FORBIDDEN_OWNER</code> <a href="https://docs.brew.sh/Manpage#environment" target="_blank" rel="noopener noreferrer">names who set the policy</a> so the error message tells the user who to ask rather than what to type. Set in <code>/etc/homebrew/brew.env</code> alongside <a href="https://github.com/Homebrew/brew/pull/15787" target="_blank" rel="noopener noreferrer"><code>HOMEBREW_SYSTEM_ENV_TAKES_PRIORITY</code></a>, the system file is applied after the user’s shell environment and overrides it, so a value exported in the shell is discarded.</p>
+
+<p><code>csrutil disable</code> has always required booting to Recovery. <code>spctl --master-disable</code> used to turn off Gatekeeper from a normal terminal, but on macOS 15 it <a href="https://derflounder.wordpress.com/2024/09/23/spctl-command-line-tool-no-longer-able-to-manage-gatekeeper-on-macos-sequoia/" target="_blank" rel="noopener noreferrer">prints “This operation is no longer supported”</a> and directs the user to System Settings; a persistent global disable now needs an MDM configuration profile or an interactive System Settings change rather than a scriptable command.</p>
+
+<p>sudo’s credential cache expires instead of requiring a separate channel: <a href="https://www.sudo.ws/docs/man/sudoers.man/" target="_blank" rel="noopener noreferrer">five minutes by default</a> per terminal. <code>Set-ExecutionPolicy -Scope Process</code> in PowerShell lasts for the shell session, and GitHub’s sudo mode for sensitive account settings re-prompts after a couple of hours. Ceph’s <code>injectargs</code>, which is how you set <code>mon_allow_pool_delete</code> without a monitor restart, is cleared when the monitor restarts. Putting the examples against the same six properties:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Long name, no short form</th>
+      <th>No env-var route</th>
+      <th>Must name target</th>
+      <th>Lapses</th>
+      <th>Checks state</th>
+      <th>Out of band</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>rm --no-preserve-root</code></td>
+      <td>✓</td>
+      <td>✓</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>pip <code>--break-system-packages</code></td>
+      <td>✓</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>apt <code>--allow-remove-essential</code></td>
+      <td>✓</td>
+      <td>✓</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>pnpm <code>dangerouslyAllowAllBuilds</code></td>
+      <td>✓</td>
+      <td>✓</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>curl <code>-k</code> / <code>--insecure</code></td>
+      <td> </td>
+      <td>✓</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>cargo <code>[source]</code> replacement</td>
+      <td> </td>
+      <td>✓</td>
+      <td>✓</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>git <code>--force-with-lease</code></td>
+      <td>✓</td>
+      <td>✓</td>
+      <td> </td>
+      <td> </td>
+      <td>✓</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>pacman <code>--overwrite &lt;glob&gt;</code></td>
+      <td>✓</td>
+      <td>✓</td>
+      <td>✓</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Go <code>GOINSECURE</code></td>
+      <td> </td>
+      <td> </td>
+      <td>✓</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Composer <code>allow-plugins</code></td>
+      <td> </td>
+      <td>✓</td>
+      <td>✓</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Nix <code>permittedInsecurePackages</code></td>
+      <td> </td>
+      <td> </td>
+      <td>✓</td>
+      <td>✓</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>sudo credential cache</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td>✓</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Docker <code>insecure-registries</code></td>
+      <td> </td>
+      <td> </td>
+      <td>✓</td>
+      <td> </td>
+      <td> </td>
+      <td>✓</td>
+    </tr>
+    <tr>
+      <td>git <code>receive.denyNonFastForwards</code></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td>✓</td>
+    </tr>
+    <tr>
+      <td>Homebrew <code>FORBIDDEN_*</code> + system priority</td>
+      <td> </td>
+      <td> </td>
+      <td>✓</td>
+      <td> </td>
+      <td> </td>
+      <td>✓</td>
+    </tr>
+    <tr>
+      <td>macOS <code>csrutil disable</code></td>
+      <td>✓</td>
+      <td>✓</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td>✓</td>
+    </tr>
+    <tr>
+      <td>Ceph pool delete</td>
+      <td>✓</td>
+      <td>✓</td>
+      <td>✓</td>
+      <td>✓</td>
+      <td> </td>
+      <td>✓</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Threat models</h2>
+
+<p>A long unabbreviatable flag catches a fat-fingered <code>-f</code> and stands out to a reviewer skimming a diff. A TTY check blocks <code>yes | tool</code>, server-side config ignores whatever flags the client sent, and a typed phrase, on apt’s evidence, stops very little. Refusing an env-var route stops a poisoned parent process, and for package managers specifically that parent is often something the tool itself just installed.</p>
+
+<p>An npm postinstall script, a <code>setup.py</code>, a <code>build.rs</code>, a Homebrew formula’s <code>install</code> block: all of these run with the package manager’s environment and all of them can invoke the package manager again, or export variables that the next invocation will read. When <a href="https://socket.dev/blog/mastra-npm-packages-compromised" target="_blank" rel="noopener noreferrer">140 <code>@mastra/*</code> npm packages were compromised in June 2026</a> the injected payload set <code>NODE_TLS_REJECT_UNAUTHORIZED=0</code> in its own process before phoning home, because Node reads that from the environment unconditionally. In <a href="https://www.qualys.com/2024/11/19/needrestart/needrestart.txt" target="_blank" rel="noopener noreferrer">CVE-2024-48990</a> <code>needrestart</code>, running as root, inherited <code>PYTHONPATH</code> from the unprivileged processes it was inspecting and executed attacker code with it. Homebrew’s <code>bin/brew</code> <a href="https://github.com/Homebrew/brew/pull/1753" target="_blank" rel="noopener noreferrer">re-executes itself through <code>env -i</code></a> with a fixed allowlist before any formula code runs, and separately <a href="https://github.com/Homebrew/brew/blob/master/Library/Homebrew/extend/ENV/sensitive.rb" target="_blank" rel="noopener noreferrer">strips anything matching <code>token</code>, <code>key</code>, <code>password</code>, <code>cookie</code> or <code>auth</code></a> from the environment before evaluating tap Ruby. Node’s <code>kDisallowedInEnvvar</code> list, cargo’s env-unsupported <code>[source]</code> table, and npm’s <code>EALLOWSCRIPTS</code> all guard against the case where the package manager’s caller is itself a package.</p>
+
+<p>A global <code>NIXPKGS_ALLOW_INSECURE=1</code> or <code>GOINSECURE=*</code> applies to every dependency resolved from that point on, including transitive ones pulled in by other packages. Nix’s version-pinned entries mean an exception granted for <code>openssl-1.1.1w</code> stops applying when a dependency bumps to a newer vulnerable build, and an entry in Composer’s <code>allow-plugins</code> map for <code>phpstan/extension-installer</code> applies to that plugin alone. A boolean override reaches everything downstream of it; a named one reaches what it names.</p>
+
+<p>pip’s PEP 668 error message ends with “You can override this, at the risk of breaking your Python installation or OS, by passing –break-system-packages.” apt’s error, when <code>-y</code> is passed, reads “Essential packages were removed and -y was used without –allow-remove-essential”, while the interactive error a human at a terminal sees omits the flag, so of apt’s two code paths the automated one is the one told how to bypass. pip’s message and apt’s <code>-y</code> message both spell out the next command for anything that parses error output and retries: a CI wrapper, a <code>build.rs</code> shelling out to the system package manager, a provisioning script, or increasingly an agent that reads stderr as instructions.</p></div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://nesbitt.io/2026/08/25/hardening-the-override-flag.html" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button> <script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
