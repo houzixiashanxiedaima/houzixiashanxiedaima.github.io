@@ -6,6 +6,9 @@
 <h4>ChatGPT Work is actually two products</h4>
 <p>The more interesting version of ChatGPT Work is the one that runs in the cloud. This can be accessed via <a href="https://www.chatgpt.com/" target="_blank" rel="noopener noreferrer">chatgpt.com</a> or through the ChatGPT mobile apps. Let's call it <strong>Work Cloud</strong>.</p>
 <p>If you install the ChatGPT desktop app - the app that used to be called Codex - you gain access to a thing called ChatGPT Work that can access files and run programs directly on your computer. Let's call that one <strong>Work Local</strong>. This one feels more like regular Codex re-skinned to be less intimidating to non-software-developers.</p>
+
+<p>(<strong>Update</strong>: Work Cloud is also available from the ChatGPT desktop app, via a <a href="https://bsky.app/profile/jkwim.bsky.social/post/3mueurvkss52h" target="_blank" rel="noopener noreferrer">Where should this chat run?</a> dropdown.)</p>
+
 <p>For the rest of this article I'm going to talk exclusively about Work Cloud.</p>
 <h4>Work is for paid subscribers only</h4>
 <p>Right now, ChatGPT Work (in both flavors) is available only to $20/month and up subscribers. Free users and $8/month Go users do not have access.</p>
@@ -105,8 +108,44 @@
 <p>Shortly after publishing this article I had an idea. I started a fresh Work session and prompted:</p>
 <blockquote><p><code>Build a site that lists every one of your tools - nearly grouped into categories - and for each one explain what it does. Try to exactly duplicate arguments and tool descriptions where possible. Design aesthetic should be technical docs, minimal flare</code></p></blockquote>
 <p><a href="https://codex-tool-reference.simonw.chatgpt.site/" target="_blank" rel="noopener noreferrer">Here's the site it built</a>, which includes details of 223 registered tools - though 6 of those are from my own personal MCPs served via <a href="https://simonwillison.net/2026/Jul/31/stateless-mcp/#datasette-mcp" target="_blank" rel="noopener noreferrer">datasette-mcp</a>.</p>
+
+<h4>And a whole lot of Skills</h4>
+<p>I noticed that the only browser-related tool in the list was <a href="https://codex-tool-reference.simonw.chatgpt.site/#tool-web-run" target="_blank" rel="noopener noreferrer">web.run</a>, which has methods for running searches, opening URLs, and clicking links, but didn't look like the full story in regards to headless browser automation.</p>
+<p>This made me suspicious that something was missing, so I told the ChatGPT Work session that built that tools reference site:</p>
+<blockquote>
+<p><code>Add full copies of every skill to the website (separate pages linked to from the homepage)</code></p>
+</blockquote>
+<p>It turns out ChatGPT Work uses <a href="https://codex-tool-reference.simonw.chatgpt.site/#skills" target="_blank" rel="noopener noreferrer">a lot of skills</a> - 44 in fact!</p>
+<p>The <a href="https://codex-tool-reference.simonw.chatgpt.site/skills/control-browser" target="_blank" rel="noopener noreferrer">control-browser skill</a> explains how the browser works:</p>
+<blockquote>
+<p>Run browser setup code through the Node REPL <code>js</code> tool. In this environment the callable tool id typically appears as <code>mcp__node_repl__js</code>. [...]</p>
+<p>The ability to interact directly with the browser is exposed through the <code>browser-client</code> runtime via the <code>agent.browsers.*</code> API. Before trying to interact with it, you MUST emit and read the complete documentation returned by <code>await browser.documentation()</code> in one go.</p>
+</blockquote>
+<p>So I told Work:</p>
+<blockquote>
+<p>Add the full output of await browser.documentation() to the bottom of the /skills/control-browser page</p>
+</blockquote>
+<p>And now you can read that <a href="https://codex-tool-reference.simonw.chatgpt.site/skills/control-browser#browser-documentation" target="_blank" rel="noopener noreferrer">on /skills/control-browser</a> as well.</p>
+<p>A few more interesting Skills:</p>
+<ul>
+<li>
+<a href="https://codex-tool-reference.simonw.chatgpt.site/skills/documents" target="_blank" rel="noopener noreferrer">documents</a> for creating <code>.docx</code> files</li>
+<li>
+<a href="https://codex-tool-reference.simonw.chatgpt.site/skills/imagegen" target="_blank" rel="noopener noreferrer">imagegen</a> with tips on creating images with the <code>image_gen</code> tool</li>
+<li>
+<a href="https://codex-tool-reference.simonw.chatgpt.site/skills/pdf" target="_blank" rel="noopener noreferrer">pdf</a> for both reading and rendering PDFs</li>
+<li>
+<a href="https://codex-tool-reference.simonw.chatgpt.site/skills/spreadsheets" target="_blank" rel="noopener noreferrer">Spreadsheets</a> for manipulating <code>.xlsx</code>, <code>.xls</code>, <code>.csv</code>, <code>.tsv</code>
+</li>
+<li>
+<a href="https://codex-tool-reference.simonw.chatgpt.site/skills/sites-sites-building" target="_blank" rel="noopener noreferrer">sites:sites-building</a> for creating ChatGPT Sites</li>
+<li>
+<a href="https://codex-tool-reference.simonw.chatgpt.site/skills/openai-docs" target="_blank" rel="noopener noreferrer">openai-docs</a> for answering questions about itself</li>
+<li>
+<a href="https://codex-tool-reference.simonw.chatgpt.site/skills/data-analytics-build-dashboard" target="_blank" rel="noopener noreferrer">data-analytics:build-dashboard</a> for building data dashboards</li>
+</ul>
     
-        <p>Tags: <a href="https://simonwillison.net/tags/ai" target="_blank" rel="noopener noreferrer">ai</a>, <a href="https://simonwillison.net/tags/openai" target="_blank" rel="noopener noreferrer">openai</a>, <a href="https://simonwillison.net/tags/generative-ai" target="_blank" rel="noopener noreferrer">generative-ai</a>, <a href="https://simonwillison.net/tags/chatgpt" target="_blank" rel="noopener noreferrer">chatgpt</a>, <a href="https://simonwillison.net/tags/llms" target="_blank" rel="noopener noreferrer">llms</a>, <a href="https://simonwillison.net/tags/code-interpreter" target="_blank" rel="noopener noreferrer">code-interpreter</a>, <a href="https://simonwillison.net/tags/lethal-trifecta" target="_blank" rel="noopener noreferrer">lethal-trifecta</a>, <a href="https://simonwillison.net/tags/general-agents" target="_blank" rel="noopener noreferrer">general-agents</a></p></div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://simonwillison.net/2026/Aug/30/understanding-chatgpt-work/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+        <p>Tags: <a href="https://simonwillison.net/tags/ai" target="_blank" rel="noopener noreferrer">ai</a>, <a href="https://simonwillison.net/tags/openai" target="_blank" rel="noopener noreferrer">openai</a>, <a href="https://simonwillison.net/tags/generative-ai" target="_blank" rel="noopener noreferrer">generative-ai</a>, <a href="https://simonwillison.net/tags/chatgpt" target="_blank" rel="noopener noreferrer">chatgpt</a>, <a href="https://simonwillison.net/tags/llms" target="_blank" rel="noopener noreferrer">llms</a>, <a href="https://simonwillison.net/tags/code-interpreter" target="_blank" rel="noopener noreferrer">code-interpreter</a>, <a href="https://simonwillison.net/tags/lethal-trifecta" target="_blank" rel="noopener noreferrer">lethal-trifecta</a>, <a href="https://simonwillison.net/tags/skills" target="_blank" rel="noopener noreferrer">skills</a>, <a href="https://simonwillison.net/tags/general-agents" target="_blank" rel="noopener noreferrer">general-agents</a></p></div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://simonwillison.net/2026/Aug/30/understanding-chatgpt-work/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
 阅读原文 ↗
 </a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
 &copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
