@@ -1,0 +1,259 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.2.10"><!-- Core SEO --><meta name="description" content="If you&amp;#039;re reading this, you&amp;#039;ve probably been hitting your head against a brick wall trying to parse and decipher the new HTTP Signatures sent by Mastodon and other Fediverse servers.  This i"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/a-reasonably-practical-guide-to-validating-rfc-942-6k8uyi/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/a-reasonably-practical-guide-to-validating-rfc-942-6k8uyi/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/a-reasonably-practical-guide-to-validating-rfc-942-6k8uyi/"><meta property="og:title" content="A reasonably practical guide to validating RFC 9421 HTTP Signatures for ActivityPub in PHP"><meta property="og:description" content="If you&amp;#039;re reading this, you&amp;#039;ve probably been hitting your head against a brick wall trying to parse and decipher the new HTTP Signatures sent by Mastodon and other Fediverse servers.  This i"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="If you&amp;#039;re reading this, you&amp;#039;ve probably been hitting your head against a brick wall trying to parse and decipher the new HTTP Signatures sent by Mastodon and other Fediverse servers.  This i"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/a-reasonably-practical-guide-to-validating-rfc-942-6k8uyi/"><meta property="twitter:title" content="A reasonably practical guide to validating RFC 9421 HTTP Signatures for ActivityPub in PHP"><meta property="twitter:description" content="If you&amp;#039;re reading this, you&amp;#039;ve probably been hitting your head against a brick wall trying to parse and decipher the new HTTP Signatures sent by Mastodon and other Fediverse servers.  This i"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>A reasonably practical guide to validating RFC 9421 HTTP Signatures for ActivityPub in PHP</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"A reasonably practical guide to validating RFC 9421 HTTP Signatures for ActivityPub in PHP","item":"https://blog.yuyins.com/reading-list/a-reasonably-practical-guide-to-validating-rfc-942-6k8uyi/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-k2qn5omv]{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip[data-astro-cid-k2qn5omv]:after{content:none!important}.chip--sm[data-astro-cid-k2qn5omv]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-k2qn5omv]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-k2qn5omv]{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}.chip--interactive[data-astro-cid-k2qn5omv]:hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}.chip--active[data-astro-cid-k2qn5omv],.chip[data-astro-cid-k2qn5omv].active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed[data-astro-cid-k2qn5omv]{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip[data-astro-cid-k2qn5omv]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.aid2Kqwe.css"><style>.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem;font-style:italic}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;font-family:monospace;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link nav-link--active" aria-current="page" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/podcasts" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 播客 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-09-04" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-09-04</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-09-03" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-09-03</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-09-03" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-09-03</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-09-02" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-09-02</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-09-02" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-09-02</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-09-01" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-09-01</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.PHDZRRIC.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>A reasonably practical guide to validating RFC 9421 HTTP Signatures for ActivityPub in PHP</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://shkspr.mobi/" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag" data-astro-cid-k2qn5omv="true"> shkspr.mobi </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年9月3日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-veycvx62><p>If you're reading this, you've probably been hitting your head against a brick wall trying to parse and decipher the new HTTP Signatures sent by Mastodon and other Fediverse servers.</p>
+
+<p>This is a basic and somewhat incomplete guide to accepting these signatures. I'm sure there are various gotchas, but it works with the signatures I've seen in the wild.</p>
+
+<h2><a href="https://shkspr.mobi/blog/2026/09/a-reasonably-practical-guide-to-validating-rfc-9421-http-signatures-for-activitypub-in-php/#shut-up-and-show-me-the-code" target="_blank" rel="noopener noreferrer">Shut Up And Show Me The Code!</a></h2>
+
+<p>OK, wow, no need to be a dick about it! Here's how I validated a real signature that my server received.</p>
+
+<pre><code>$verified = openssl_verify(
+    data:       '"@method": POST
+"@target-uri": https://example.viii.fi/inbox
+"content-digest": sha-256=:tFdB/ENGczHMlZMDb66pXoUi2d0OqH2iBHdnN/WV1mc=:
+"@signature-params": ("@method" "@target-uri" "content-digest");created=1787780262;keyid="https://mastodon.social/users/Edent#main-key"',
+    signature:  base64_decode( "sIfmNsM/Q8iG6AJlne1IkZVjQSVFDEYIPsnoSOXQY+W3Eb4+SOn9o4J5SQmFOP+Jecjf3ioFwUdsrFjAGkUUOHPvSbNWkGKtNuGm+C6r3aI3JBCFGPqX3ITgZYV76CF7JJJ5hPGaG8YH/XdmxVIeFfD3M39FQCncMyyq7xJJvwKKP1mzS5s1vNQie8hbQ9owRjtqvoWcmM9GEYCUHNcMPLjZc+CBrj8sfBbNTYgIFI4UtirOaRJvYymxXjmXuzeVYxQujMjAjgobxQ8QFv0zlYsHk+gS5EYyafpJG9zmfCFSoF9+ZwqKNADmuADbISD9LZIH/bmkPoNXhxaeFPqYog==" ),
+    public_key: "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsYMEs4waqk/6gaS+xn1T\nYygElTtNIFNkBcEdEBMaeoGVhyZiVKtSjJCS4z+X+394PKvcfSTcFILIt2GI2jOB\nHD0M2fFgxc8mmdSdCQkgEh9jF3bFI3kopDvzYf726iioYKlHXKpfPKvFt7EJgKH7\naCtS25NQkek3YUd6y3VBcT3R6Xhze9P3QNoZMIsFXklgXDKj+EllfbUqLf1vxt3s\nmD9ETxy2bJi9FheE0uY2WhARn49XAvwczM5Wzt+zqxVEtgpi5v2+ZZAVKhDnJkiC\nCCuI6hrSnKNIx/5mSlX0a0S5h5d03djrCkYsqmwelu01rhOXP2grsz4BXp0y2wrO\n3QIDAQAB\n-----END PUBLIC KEY-----\n",
+    algorithm:  "sha256"
+);
+
+echo $verified;
+</code></pre>
+
+<p>Copy and paste that into PHP and you should see that <code>$verified</code> is true.</p>
+
+<h2><a href="https://shkspr.mobi/blog/2026/09/a-reasonably-practical-guide-to-validating-rfc-9421-http-signatures-for-activitypub-in-php/#now-explain-the-code" target="_blank" rel="noopener noreferrer">NOW EXPLAIN THE CODE</a></h2>
+
+<p>Say please.</p>
+
+<h2><a href="https://shkspr.mobi/blog/2026/09/a-reasonably-practical-guide-to-validating-rfc-9421-http-signatures-for-activitypub-in-php/#please" target="_blank" rel="noopener noreferrer">PLEASE!!!</a></h2>
+
+<p>Along with the message sent to your server, you will have received HTTP headers like this:</p>
+
+<pre><code>content-digest: sha-256=:tFdB/ENGczHMlZMDb66pXoUi2d0OqH2iBHdnN/WV1mc=:
+signature: sig1=:sIfmNsM/Q8iG6AJlne1IkZVjQSVFDEYIPsnoSOXQY+W3Eb4+SOn9o4J5SQmFOP+Jecjf3ioFwUdsrFjAGkUUOHPvSbNWkGKtNuGm+C6r3aI3JBCFGPqX3ITgZYV76CF7JJJ5hPGaG8YH/XdmxVIeFfD3M39FQCncMyyq7xJJvwKKP1mzS5s1vNQie8hbQ9owRjtqvoWcmM9GEYCUHNcMPLjZc+CBrj8sfBbNTYgIFI4UtirOaRJvYymxXjmXuzeVYxQujMjAjgobxQ8QFv0zlYsHk+gS5EYyafpJG9zmfCFSoF9+ZwqKNADmuADbISD9LZIH/bmkPoNXhxaeFPqYog==:
+signature-input: sig1=("@method" "@target-uri" "content-digest");created=1787780262;keyid="https://mastodon.social/users/Edent#main-key"
+</code></pre>
+
+<p>The <code>signature-input</code> tells you how to construct a "Signature Base". You have to build a text string which places the various components in the order specified and separated with a newline:</p>
+
+<pre><code>"@method": POST
+"@target-uri": https://example.viii.fi/inbox
+"content-digest": sha-256=:tFdB/ENGczHMlZMDb66pXoUi2d0OqH2iBHdnN/WV1mc=:
+"@signature-params": ("@method" "@target-uri" "content-digest");created=1787780262;keyid="https://mastodon.social/users/Edent#main-key"
+</code></pre>
+
+<p>Where <code>@method</code> is the HTTP method used to send data to your server (usually <code>GET</code> or <code>POST</code>), and <code>@target-uri</code> is the URl the message was sent to (usually your inbox).</p>
+
+<p>The <code>publicKey</code> is slightly trickier. As you can see, the <code>signature-input</code> ends with <code>keyid="https://mastodon.social/users/Edent#main-key</code></p>
+
+<p>If you make a signed request to that URl, you'll get back an ActivityPub Actor document. It will look something like this:</p>
+
+<pre><code>{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    "https://w3id.org/security/v1",
+  ],
+  "id": "https://mastodon.social/users/Edent",
+  "webfinger": "Edent@mastodon.social",
+  "type": "Person",
+  "name": "Terence Eden",
+  "publicKey": {
+    "id": "https://mastodon.social/users/Edent#main-key",
+    "owner": "https://mastodon.social/users/Edent",
+    "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsYMEs4waqk/6gaS+xn1T\nYygElTtNIFNkBcEdEBMaeoGVhyZiVKtSjJCS4z+X+394PKvcfSTcFILIt2GI2jOB\nHD0M2fFgxc8mmdSdCQkgEh9jF3bFI3kopDvzYf726iioYKlHXKpfPKvFt7EJgKH7\naCtS25NQkek3YUd6y3VBcT3R6Xhze9P3QNoZMIsFXklgXDKj+EllfbUqLf1vxt3s\nmD9ETxy2bJi9FheE0uY2WhARn49XAvwczM5Wzt+zqxVEtgpi5v2+ZZAVKhDnJkiC\nCCuI6hrSnKNIx/5mSlX0a0S5h5d03djrCkYsqmwelu01rhOXP2grsz4BXp0y2wrO\n3QIDAQAB\n-----END PUBLIC KEY-----\n"
+  },
+</code></pre>
+
+<p>The <code>publicKeyPem</code> is the string you need. There's no need to convert the <code>\n</code> to literal newlines.</p>
+
+<h2><a href="https://shkspr.mobi/blog/2026/09/a-reasonably-practical-guide-to-validating-rfc-9421-http-signatures-for-activitypub-in-php/#is-that-it" target="_blank" rel="noopener noreferrer">Is that it?</a></h2>
+
+<p>Not quite! All we've done so far is verify the headers. It is possible that these are genuine headers but attached to a fraudulent body.</p>
+
+<p>This takes us back to the header <code>"content-digest": sha-256=:tFdB/ENGczHMlZMDb66pXoUi2d0OqH2iBHdnN/WV1mc=:</code></p>
+
+<p>That says that the body of the message sent has a Base64 encoded SHA256 hash of <code>tFdB/ENGczHMlZMDb66pXoUi2d0OqH2iBHdnN/WV1mc=</code>.</p>
+
+<p>To calculate your own content digest in PHP:</p>
+
+<pre><code>$digestCalculated = base64_encode(
+    hash(
+        algo: "sha256",
+        data: $body,
+        binary: true
+    )
+);
+</code></pre>
+
+<p>Does your digest match the one sent along with the headers? If not, something dodgy is going on.</p>
+
+<h2><a href="https://shkspr.mobi/blog/2026/09/a-reasonably-practical-guide-to-validating-rfc-9421-http-signatures-for-activitypub-in-php/#putting-it-all-together" target="_blank" rel="noopener noreferrer">Putting it all together</a></h2>
+
+<p>The steps are:</p>
+
+<ol>
+<li>Get the headers.</li>
+<li>Get the body.</li>
+<li>From the headers' <code>content-digest</code> extract the algorithm and hash.</li>
+<li>Using the body, calculate your own hash using the algorithm from <code>content-digest</code>.</li>
+<li>Does your hash match the sent hash? If not, stop. If so, proceed.</li>
+<li>From the headers' <code>signature</code> extract the base64 encoded signature.</li>
+<li>From the headers' <code>signature-input</code> extract the signature-input string.</li>
+<li>From the signature-input string extract the order of the Signature Base.</li>
+<li>Construct the Signature Base.</li>
+<li>From the signature-input string extract the keyid.</li>
+<li>Get the Public Key from the keyid.</li>
+<li>Use <code>openssl_verify()</code> to verify the Signature Base and the base64 decoded signature, against the Public Key using SHA256.</li>
+</ol>
+
+<p>Note, <a href="https://docs.joinmastodon.org/spec/security/#http-message-signatures" target="_blank" rel="noopener noreferrer">Mastodon <em>only</em> uses SHA256</a>.  I think it should explicitly say which algorithm it is using <a href="https://github.com/mastodon/mastodon/issues/29905#issuecomment-5440336919" target="_blank" rel="noopener noreferrer">and have raised the issue</a>.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/09/a-reasonably-practical-guide-to-validating-rfc-9421-http-signatures-for-activitypub-in-php/#in-code-form" target="_blank" rel="noopener noreferrer">In Code Form</a></h3>
+
+<p>This is how you do it in PHP. Please read this carefully as there are some hard-coded assumptions.</p>
+
+<pre><code>&lt;?php
+
+//  Validate the Digest.
+//  It is the hash of the raw input string, in binary, encoded as base64.
+
+//  The format is content-digest =&gt; &lt;algorithm&gt;=:&lt;base64 encoded hash&gt;:
+$digestString = $headers["content-digest"];
+//  The Base64 encoding may have multiple `=` at the end. So split this at the first `=`.
+$digestData = explode( separator: "=", string: $digestString, limit: 2 );
+
+//  Hashes are in lowercase, but have a `-` in their name.
+//  This is not what hash_algos() expects.
+$digestAlgorithm = str_replace( search: "-", replace: "", subject: $digestData[0] );
+
+//  The hash is surrounded by `:` characters.
+$digestHash = str_replace( search: ":", replace: "", subject: $digestData[1] );
+
+//  Check if the hash algorithm is one known about to PHP.
+//  If not, reject and record an error.
+if ( !in_array( needle:$digestAlgorithm, haystack: hash_algos() ) ) {
+    return false;
+}
+
+//  Manually calculate the digest based on the data sent.
+$digestCalculated = base64_encode( hash( algo: $digestAlgorithm, data: $input, binary: true ) );
+
+//  Does our calculation match what was sent?
+if ( !( $digestCalculated == $digestHash ) ) {
+    return false;
+}
+
+//  The signature format is signature =&gt; &lt;signature name&gt;=:&lt;base64 encoded hash&gt;:
+$signatureString = $headers["signature"];
+//  The Base64 encoding may have multiple `=` at the end. So split this at the first `=`.
+$signatureData = explode( separator: "=", string: $signatureString, limit: 2 );
+$signatureName = $signatureData[0];
+
+//  The signature is surrounded by `:` characters.
+$signatureB64 = str_replace( search: ":", replace: "", subject: $signatureData[1] );
+
+//  The signature-input format is complicated!
+$signatureInputString = $headers["signature-input"];
+
+//  Get the parameters. Assume there is only one signature.
+$signatureParamsString = explode( separator: "=", string: $signatureInputString, limit: 2 )[1];
+
+//  Get the different elements of the signature.
+$signatureInputData = explode( separator: ";", string: $signatureInputString );
+
+//  Construct the data.
+$signatureInput = [];
+foreach( $signatureInputData as $signatureInputParts ) {
+    $partsData = explode( separator: "=", string: $signatureInputParts );
+    //  Strip quotes from keyid and parentheses from sig1.
+    if ( "keyid" == $partsData[0] ) {
+        $partsData[1] = str_replace( search: "\"", replace: "", subject: $partsData[1] );
+    }
+
+    if ( $signatureName == $partsData[0] ) {
+        $partsData[1] = str_replace( search: ["(", ")"], replace: "", subject: $partsData[1] );
+    }
+
+    $signatureInput[ $partsData[0] ] = $partsData[1] ;
+}
+
+$signatureStructure = $signatureInput[$signatureName];
+$signatureKeyID     = $signatureInput["keyid"];
+
+//  Remove quotes.
+$signatureStructure = str_replace( search: "\"", replace: "", subject: $signatureStructure );
+$signatureStructureData = explode( separator: " ", string: $signatureStructure );
+
+//  https://www.rfc-editor.org/info/rfc9421/#section-2.5
+$signatureBase = "";
+foreach ( $signatureStructureData as $signatureStructureParts ) {
+    if ( "@method" == $signatureStructureParts ) {
+        //  https://www.rfc-editor.org/info/rfc9421/#name-method
+        $signatureBase .= "\"@method\": " . $_SERVER["REQUEST_METHOD"] . "\n";
+    }
+    if ( "@target-uri" == $signatureStructureParts ) {
+        //  https://www.rfc-editor.org/info/rfc9421/#section-2.2.2
+        //  Change the domain name to your own.
+        $signatureBase .= "\"@target-uri\": https://EXAMPLE.COM" . $_SERVER["REQUEST_URI"] . "\n";
+    }
+    if ( "content-digest" == $signatureStructureParts ) {
+        $signatureBase .= "\"content-digest\": $digestString\n";
+    }
+}
+
+//  https://victoronsoftware.com/posts/http-message-signatures/#how-the-signature-is-created
+$signatureBase .= "\"@signature-params\": $signatureParamsString";
+
+//  Get the signing user's public key.
+//  This is usually in the form `https://example.com/user/username#main-key`
+//  This is to differentiate if the user has multiple keys.
+//  This may need to be a signed request. You will need to write your own getDataFromURl() function to get the sending user's key.
+$userData  = getDataFromURl( $signatureKeyID );
+$publicKey = $userData["publicKey"]["publicKeyPem"];
+
+//  Verify the request
+$verified = openssl_verify(
+    data:       $signatureBase,
+    signature:  base64_decode( $signatureB64 ),
+    public_key: $publicKey,
+    algorithm:  $digestAlgorithm
+);
+
+//  Convert the result to boolean.
+if ( $verified === 1 ) {
+    $verified = true;
+} elseif ( $verified === 0 ) {
+    $verified = false;
+} else {
+    $verified = null;
+}
+
+return $verified;
+</code></pre>
+
+<h2><a href="https://shkspr.mobi/blog/2026/09/a-reasonably-practical-guide-to-validating-rfc-9421-http-signatures-for-activitypub-in-php/#further-reading" target="_blank" rel="noopener noreferrer">Further Reading</a></h2>
+
+<ul>
+<li><a href="https://www.rfc-editor.org/info/rfc9421/" target="_blank" rel="noopener noreferrer">RFC 9421 HTTP Message Signatures</a></li>
+<li><a href="https://victoronsoftware.com/posts/http-message-signatures/" target="_blank" rel="noopener noreferrer">Understanding HTTP message signatures: A developer's guide</a></li>
+<li><a href="https://www.otoroshi.io/docs/tutorials/http-message-signatures-rfc9421/" target="_blank" rel="noopener noreferrer">Sign and verify HTTP messages (RFC 9421)</a></li>
+<li><a href="https://darutk.medium.com/verification-of-http-message-signatures-501bbdc7dfec" target="_blank" rel="noopener noreferrer">Verification of HTTP Message Signatures</a></li>
+<li><a href="https://github.com/macgirvin/HTTP-Message-Signer" target="_blank" rel="noopener noreferrer">HTTP-Message-Signer in PHP</a></li>
+</ul>
+
+<h2><a href="https://shkspr.mobi/blog/2026/09/a-reasonably-practical-guide-to-validating-rfc-9421-http-signatures-for-activitypub-in-php/#thanks-to-nlnet" target="_blank" rel="noopener noreferrer">Thanks to NLnet</a></h2>
+
+<p>This blog post was funded in part by the work I'm doing for my NLnet NGI0 grant. Thanks!</p>
+
+<p><a href="https://nlnet.nl/project/ActivityBot/" target="_blank" rel="noopener noreferrer"><img alt="NLnet logo." width="900" height="200" src="https://shkspr.mobi/blog/wp-content/uploads/2026/08/NGI-logos.webp" /></a></p>
+<img alt="" width="1" height="1" src="https://shkspr.mobi/blog/wp-content/themes/edent-wordpress-theme/info/okgo.php?ID=74429&amp;HTTP_REFERER=RSS" /></div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://shkspr.mobi/blog/2026/09/a-reasonably-practical-guide-to-validating-rfc-9421-http-signatures-for-activitypub-in-php/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button> <script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
