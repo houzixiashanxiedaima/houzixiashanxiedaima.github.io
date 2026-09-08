@@ -1,0 +1,193 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.3.1"><!-- Core SEO --><meta name="description" content="Here&amp;#039;s a problem that I&amp;#039;ve found with ActivityBot - my little ActivityPub server. Sometimes it receives messages which were originally sent months ago. Why does that happen and is it risky t"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/activitypub---is-it-worth-defending-against-replay-w1tkbw/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/activitypub---is-it-worth-defending-against-replay-w1tkbw/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/activitypub---is-it-worth-defending-against-replay-w1tkbw/"><meta property="og:title" content="ActivityPub - Is it worth defending against replay attacks and message/signature time skew?"><meta property="og:description" content="Here&amp;#039;s a problem that I&amp;#039;ve found with ActivityBot - my little ActivityPub server. Sometimes it receives messages which were originally sent months ago. Why does that happen and is it risky t"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="Here&amp;#039;s a problem that I&amp;#039;ve found with ActivityBot - my little ActivityPub server. Sometimes it receives messages which were originally sent months ago. Why does that happen and is it risky t"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/activitypub---is-it-worth-defending-against-replay-w1tkbw/"><meta property="twitter:title" content="ActivityPub - Is it worth defending against replay attacks and message/signature time skew?"><meta property="twitter:description" content="Here&amp;#039;s a problem that I&amp;#039;ve found with ActivityBot - my little ActivityPub server. Sometimes it receives messages which were originally sent months ago. Why does that happen and is it risky t"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>ActivityPub - Is it worth defending against replay attacks and message/signature time skew?</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"ActivityPub - Is it worth defending against replay attacks and message/signature time skew?","item":"https://blog.yuyins.com/reading-list/activitypub---is-it-worth-defending-against-replay-w1tkbw/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-k2qn5omv]{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip[data-astro-cid-k2qn5omv]:after{content:none!important}.chip--sm[data-astro-cid-k2qn5omv]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-k2qn5omv]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-k2qn5omv]{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}.chip--interactive[data-astro-cid-k2qn5omv]:hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}.chip--active[data-astro-cid-k2qn5omv],.chip[data-astro-cid-k2qn5omv].active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed[data-astro-cid-k2qn5omv]{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip[data-astro-cid-k2qn5omv]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.DtsX2iU-.css"><style>.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem;font-style:italic}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;font-family:monospace;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link nav-link--active" aria-current="page" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/podcasts" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 播客 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-09-09" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-09-09</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-09-08" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-09-08</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-09-07" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-09-07</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-09-06" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-09-06</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-09-05" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-09-05</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-09-04" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-09-04</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.PHDZRRIC.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>ActivityPub - Is it worth defending against replay attacks and message/signature time skew?</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://shkspr.mobi/" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag" data-astro-cid-k2qn5omv="true"> shkspr.mobi </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年9月8日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-veycvx62><p>Here's a problem that I've found with <a href="https://gitlab.com/edent/activity-bot/" target="_blank" rel="noopener noreferrer">ActivityBot</a> - my little ActivityPub server. Sometimes it receives messages which were originally sent <em>months</em> ago. Why does that happen and is it risky to accept and process them?</p>
+
+<p>My tl;dr is that it <em>probably</em> isn't worth worrying about. But I'd love someone to tell me why I'm wrong.</p>
+
+<p>Here's my thinking:</p>
+
+<p></p><nav><menu><li><h2><a href="https://shkspr.mobi/blog/2026/09/activitypub-is-it-worth-defending-against-replay-attacks-and-message-signature-time-skew/#table-of-contents" target="_blank" rel="noopener noreferrer">Table of Contents</a></h2><menu><li><a href="https://shkspr.mobi/blog/2026/09/activitypub-is-it-worth-defending-against-replay-attacks-and-message-signature-time-skew/#causes" target="_blank" rel="noopener noreferrer">Causes</a></li><li><a href="https://shkspr.mobi/blog/2026/09/activitypub-is-it-worth-defending-against-replay-attacks-and-message-signature-time-skew/#is-that-a-problem" target="_blank" rel="noopener noreferrer">Is that a problem?</a></li><li><a href="https://shkspr.mobi/blog/2026/09/activitypub-is-it-worth-defending-against-replay-attacks-and-message-signature-time-skew/#what-are-we-trying-to-protect-against" target="_blank" rel="noopener noreferrer">What are we trying to protect against?</a></li><li><a href="https://shkspr.mobi/blog/2026/09/activitypub-is-it-worth-defending-against-replay-attacks-and-message-signature-time-skew/#putting-it-all-together" target="_blank" rel="noopener noreferrer">Putting it all together</a></li><li><a href="https://shkspr.mobi/blog/2026/09/activitypub-is-it-worth-defending-against-replay-attacks-and-message-signature-time-skew/#no-youre-wrong-and-i-can-prove-it" target="_blank" rel="noopener noreferrer">No! You're wrong and I can prove it!</a></li></menu></li></menu></nav><p></p>
+
+<h2><a href="https://shkspr.mobi/blog/2026/09/activitypub-is-it-worth-defending-against-replay-attacks-and-message-signature-time-skew/#causes" target="_blank" rel="noopener noreferrer">Causes</a></h2>
+
+<p>All ActivityPub messages should have a "published" timestamp in their body. Some will have an "updated" timestamp. That tells you, unsurprisingly, when the message is alleged to have been originally published or updated. That time might be very different to the time you receive the message.</p>
+
+<p>There are, I think, three different reasons why a server might receive a message which has an out-of-date timestamp.</p>
+
+<p>The first is that sometimes servers are just slow. Processing thousands of messages at the same time means that some of those messages take a while to send.  <a href="https://shkspr.mobi/blog/2023/09/how-far-did-my-post-go-on-the-fediverse/" target="_blank" rel="noopener noreferrer">ActivityPub is one big chain-mail</a> so it can take several minutes for a message to be sent to all your followers.</p>
+
+<p>Similarly, your server might be slow. If it doesn't acknowledge receipt of a message, the original server will try sending it again. Sometimes that can take a while.</p>
+
+<p>Finally, some servers take a relaxed view of standards. They send an update to an old message but keep the original publication date. Ideally, they'd use an "updated" timestamp but quite often they don't.</p>
+
+<p>For the purposes of checking the legitimacy of the message, <strong>you do not need to check when a message says it was published or updated</strong>. You might want to check it isn't an <em>obviously</em> bogus date like far in the future or impossibly far in the past - but that's up to you.</p>
+
+<p>It is normal that your server receives messages which appear to have been published at a totally different time from now.</p>
+
+<h2><a href="https://shkspr.mobi/blog/2026/09/activitypub-is-it-worth-defending-against-replay-attacks-and-message-signature-time-skew/#is-that-a-problem" target="_blank" rel="noopener noreferrer">Is that a problem?</a></h2>
+
+<p><em>Probably</em> not.</p>
+
+<p>As described above, there are various reasons why a message may be delayed in transit - or may appear to come from the distant past.</p>
+
+<p>What we <em>can</em> check is when the message was cryptographically signed by the sending server. This is independent of its published or updated timestamp.</p>
+
+<p>HTTP requests to your server will have a <code>date</code> header which looks like <code>Tue, 01 Sep 2026 15:54:21 GMT</code> - this is in the slightly peculiar and Anglocentric <a href="https://www.rfc-editor.org/info/rfc5322/#section-3.3" target="_blank" rel="noopener noreferrer">RFC 5322 format</a>.</p>
+
+<p>New style RFC 9421 headers will also have a <code>signature-input</code> header which will contain something like <code>created=1788278061</code>. That uses the slightly obscure <a href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_16" target="_blank" rel="noopener noreferrer">UNIX / POSIX time</a> which counts seconds since the "Epoch" of 1st January 1970.</p>
+
+<p>If you <a href="https://www.epochconverter.com/" target="_blank" rel="noopener noreferrer">convert the UNIX time</a> to something more modern, you should get an <em>identical</em> value to the <code>date</code> header.</p>
+
+<p>But that isn't always the case. For example, <a href="https://www.rfc-editor.org/rfc/rfc9421.html#:~:text=Tue%2C%2020%20Apr%202021%2002%3A07%3A55%20GMT,-Content%2DType" target="_blank" rel="noopener noreferrer">the RFC 9421 standard gives this example</a>:</p>
+
+<pre><code>Date: Tue, 20 Apr 2021 02:07:55 GMT
+"@signature-params": ("@method" "@authority" "@path" \
+  "content-digest" "content-length" "content-type")\
+  ;created=1618884473;keyid="test-key-rsa-pss"
+</code></pre>
+
+<p>Converting <code>1618884473</code> to normal time gives Tue, 20 Apr 2021 02:07:<strong>53</strong> - a two second difference.</p>
+
+<p>If the <code>date</code> and <code>created</code> values differ significantly - that may indicate that the message is untrustworthy. Or that there was a delay between the signing and the sending.</p>
+
+<p>The spec says:</p>
+
+<blockquote><p>The Date header field value represents the timestamp of the HTTP message. However, the creation time of the signature itself is encoded in the created signature parameter. These two values can be different, depending on how the signature and the HTTP message are created and serialized. Applications processing signatures for valid time windows should use the created signature parameter for such calculations. An application could also put limits on how much skew there is between the Date field and the created signature parameter, in order to limit the application of a generated signature to different HTTP messages.</p>
+
+<p><a href="https://www.rfc-editor.org/rfc/rfc9421.html#section-7.2.4" target="_blank" rel="noopener noreferrer">7.2.4. Choosing Signature Parameters and Derived Components over HTTP Fields</a></p></blockquote>
+
+<p>But, of course, it doesn't tell you how much skew is problematic. It's up to you how much skew you're prepared to accept.</p>
+
+<p>So that's the difference between the sent time and the signed time. The next time to check is your own. As we've discussed, sometimes servers are slow sending things out. Would you accept a request that was signed five minutes ago? Five days ago? Five months ago? What amount of difference is dangerous?</p>
+
+<p>Here's what various services and sages have to say:</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/09/activitypub-is-it-worth-defending-against-replay-attacks-and-message-signature-time-skew/#mastodon" target="_blank" rel="noopener noreferrer">Mastodon</a></h3>
+
+<blockquote><p>The request contains a Date header. Compare it with current date and time within a reasonable time window to prevent replay attacks.</p>
+
+<p><a href="https://blog.joinmastodon.org/2018/07/how-to-make-friends-and-verify-requests/" target="_blank" rel="noopener noreferrer">How to make friends and verify requests</a></p></blockquote>
+
+<p>What is "reasonable"? The <a href="https://github.com/mastodon/mastodon/blob/89bc0eb42609463d4b11e1604dacc37332a0f5ab/app/lib/signed_request.rb#L5" target="_blank" rel="noopener noreferrer">source code</a> suggests one hour.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/09/activitypub-is-it-worth-defending-against-replay-attacks-and-message-signature-time-skew/#grishka" target="_blank" rel="noopener noreferrer">Grishka</a></h3>
+
+<blockquote><p>Time in the Date header must differ from the recipient server’s clock by no more than 30 seconds</p>
+
+<p><a href="https://grishka.me/blog/activitypub-from-scratch/" target="_blank" rel="noopener noreferrer">A bare-minimum ActivityPub server from scratch</a></p></blockquote>
+
+<h3><a href="https://shkspr.mobi/blog/2026/09/activitypub-is-it-worth-defending-against-replay-attacks-and-message-signature-time-skew/#evan-prodromou" target="_blank" rel="noopener noreferrer">Evan Prodromou</a></h3>
+
+<blockquote><p><code>static #maxDateDiff = 5 * 60 * 1000 // 5 minutes</code></p>
+
+<p><a href="https://github.com/evanp/activitypub-bot/blob/main/lib%2Fhttpsignatureauthenticator.js#L8" target="_blank" rel="noopener noreferrer">activitypub-bot</a></p></blockquote>
+
+<h3><a href="https://shkspr.mobi/blog/2026/09/activitypub-is-it-worth-defending-against-replay-attacks-and-message-signature-time-skew/#swicg" target="_blank" rel="noopener noreferrer">SWICG</a></h3>
+
+<blockquote><p>The standards don't give a concrete time window to use for this comparison. In practice, an hour plus a few minutes buffer in either direction may be a good value, to account for both clock skew and differences in time zone/daylight savings time configuration across systems.</p>
+
+<p><a href="https://swicg.github.io/activitypub-http-signature/#how-to-verify-a-signature" target="_blank" rel="noopener noreferrer">How To Verify a Signature</a></p></blockquote>
+
+<h3><a href="https://shkspr.mobi/blog/2026/09/activitypub-is-it-worth-defending-against-replay-attacks-and-message-signature-time-skew/#others" target="_blank" rel="noopener noreferrer">Others</a></h3>
+
+<p>Without naming names, it looks like a bunch of popular servers don't check whether there's a significant difference between the date the request was signed and the date it was received.</p>
+
+<h3><a href="https://shkspr.mobi/blog/2026/09/activitypub-is-it-worth-defending-against-replay-attacks-and-message-signature-time-skew/#summary" target="_blank" rel="noopener noreferrer">Summary</a></h3>
+
+<p>Various documents and implementations recommend anything between 30 seconds to "a bit more than 60 minutes". Or they just ignore any date difference.</p>
+
+<p>What's the right answer? What happens if the signed date is significantly different from the current date?</p>
+
+<h2><a href="https://shkspr.mobi/blog/2026/09/activitypub-is-it-worth-defending-against-replay-attacks-and-message-signature-time-skew/#what-are-we-trying-to-protect-against" target="_blank" rel="noopener noreferrer">What are we trying to protect against?</a></h2>
+
+<p>Replay Attacks. Suppose someone is listening to the communications between the sending server and your server. They copy the message that is sent to you. Later they send it again!</p>
+
+<p>At this point, you might be thinking "so what?" and… I'm inclined to agree with you!</p>
+
+<p>What's the worst that could happen if you received the same message multiple times? Two things that I can think of.</p>
+
+<p>Firstly, it might <em>not</em> be the same message. It is possible to send a new message but with old headers. An attacker could make someone post "I hate Taylor Swift" against their will and watch as legions of fans disembowel the victim.</p>
+
+<p>Except, I don't think this is likely. The signature in the header contains a hash of the message being sent. If you are properly validating the signature, a changed message will have a different hash from the one in the original message. You don't need to check timestamps, you just need to check if the hashes match.</p>
+
+<p>Secondly, <a href="https://www.freecodecamp.org/news/idempotence-explained" target="_blank" rel="noopener noreferrer">idempotence</a>. That's a fancy word for "pressing the button multiple times should only result in one action".</p>
+
+<p>What happens if a user appears to send you multiple "like" messages for a single post? You only record one like.</p>
+
+<p>What if they send multiple messages with the same content? Well, each will have a unique ID in the message - so you only post it once.</p>
+
+<p>What if they send multiple <em>anythings</em>? I can't think of any ActivityPub action which would not be idempotent.</p>
+
+<p>About the worst thing I can think of is this:</p>
+
+<ul>
+<li>Alice sends a message to you saying "I want to follow Bob".</li>
+<li>Mallory intercepts this message.</li>
+<li>You record Alice is now following Bob.</li>
+<li>Alice sends a message to you saying "I want to <em>unfollow</em> Bob".</li>
+<li>You record the severed relationship.</li>
+<li>Mallory replays the original follow message.</li>
+<li>You record Alice is now following Bob.</li>
+</ul>
+
+<p>It's also possible the following could happen:</p>
+
+<ul>
+<li>Alice posts a message saying "I love The Beatles".</li>
+<li>You record Alice's message and display it on the timeline.</li>
+<li>Alice updates her post to say "I love the Rolling Stones".</li>
+<li>Mallory intercepts this message.</li>
+<li>You record Alice's updated message and display the new version on the timeline.</li>
+<li>Alice updates her post yet again to say "I love the Spice Girls".</li>
+<li>You record Alice's updated message and display the new version on the timeline.</li>
+<li>Mallory replays the original update message.</li>
+<li>You now display that Alice loves the Stones rather than Spice Girls.</li>
+</ul>
+
+<p>Perhaps the same can happen with like/unlike, block/unblock, boost/unboost.</p>
+
+<p>But none of that is significantly prevented by checking the date.</p>
+
+<p>Ultimately, it is up to your sever to check the unique ID of each message and refuse to action any repeated messages. You may not want to trust the unique ID which is sent with the message. If that's the case, you can calculate your own - perhaps using a hash of the contents, the signature, or some other process which will generate an ID based on the message.</p>
+
+<h2><a href="https://shkspr.mobi/blog/2026/09/activitypub-is-it-worth-defending-against-replay-attacks-and-message-signature-time-skew/#putting-it-all-together" target="_blank" rel="noopener noreferrer">Putting it all together</a></h2>
+
+<p>Here's what you need to do to prevent replay attacks:</p>
+
+<ol>
+<li>Independently calculate the hash of the message received.</li>
+<li>Validate that your calculated hash matches the hash sent in the message's HTTP headers.
+
+<ul>
+<li>If not, this is a potential replay attack and the message must be ignored.</li>
+</ul></li>
+<li>Verify that the signature received in the message's HTTP headers includes the message hash and is cryptographically valid.
+
+<ul>
+<li>If not, the signature is invalid  and the message must be ignored.</li>
+</ul></li>
+<li>Has the received message's unique ID already been processed?
+
+<ul>
+<li>If so, refuse to process it again.</li>
+</ul></li>
+</ol>
+
+<p>I don't see what checking the timestamp of the HTTP signature has to do with anything. Someone who has access to the original messages and their headers could send them milliseconds after the original delivery.</p>
+
+<p>I think it is probably <em>pragmatic</em> to give messages 60ish minutes grace before dropping them. Delays happen, but anything more significant than an hour <em>might</em> indicate a attack. But, equally, might just mean that the Internet is having a slow day.</p>
+
+<p>If you are correctly checking signatures and hashes, I don't think you need to worry about skew between signature date and delivery date.</p>
+
+<h2><a href="https://shkspr.mobi/blog/2026/09/activitypub-is-it-worth-defending-against-replay-attacks-and-message-signature-time-skew/#no-youre-wrong-and-i-can-prove-it" target="_blank" rel="noopener noreferrer">No! You're wrong and I can prove it!</a></h2>
+
+<p>Please tell me where I have erred! Stick a comment in the box or drop me an email. If I've made a massive or subtle mistake, I'd love to know what.</p>
+<img alt="" width="1" height="1" src="https://shkspr.mobi/blog/wp-content/themes/edent-wordpress-theme/info/okgo.php?ID=74622&amp;HTTP_REFERER=RSS" /></div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://shkspr.mobi/blog/2026/09/activitypub-is-it-worth-defending-against-replay-attacks-and-message-signature-time-skew/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文 ↗
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button> <script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
