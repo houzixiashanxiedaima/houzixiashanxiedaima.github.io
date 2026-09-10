@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.3.1"><!-- Core SEO --><meta name="description" content="It’s been a long while since I announced updates in knitr last time, so I’m writing this post to cover notable changes in knitr v1.46–v1.52. For the full changelog, please see the release notes on Git"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/a-review-of-knitr-updates-from-2024-to-2026-u584k0/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/a-review-of-knitr-updates-from-2024-to-2026-u584k0/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/a-review-of-knitr-updates-from-2024-to-2026-u584k0/"><meta property="og:title" content="A Review of **knitr** Updates from 2024 to 2026"><meta property="og:description" content="It’s been a long while since I announced updates in knitr last time, so I’m writing this post to cover notable changes in knitr v1.46–v1.52. For the full changelog, please see the release notes on Git"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="It’s been a long while since I announced updates in knitr last time, so I’m writing this post to cover notable changes in knitr v1.46–v1.52. For the full changelog, please see the release notes on Git"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/a-review-of-knitr-updates-from-2024-to-2026-u584k0/"><meta property="twitter:title" content="A Review of **knitr** Updates from 2024 to 2026"><meta property="twitter:description" content="It’s been a long while since I announced updates in knitr last time, so I’m writing this post to cover notable changes in knitr v1.46–v1.52. For the full changelog, please see the release notes on Git"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>A Review of **knitr** Updates from 2024 to 2026</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"A Review of **knitr** Updates from 2024 to 2026","item":"https://blog.yuyins.com/reading-list/a-review-of-knitr-updates-from-2024-to-2026-u584k0/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-k2qn5omv]{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip[data-astro-cid-k2qn5omv]:after{content:none!important}.chip--sm[data-astro-cid-k2qn5omv]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-k2qn5omv]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-k2qn5omv]{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}.chip--interactive[data-astro-cid-k2qn5omv]:hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}.chip--active[data-astro-cid-k2qn5omv],.chip[data-astro-cid-k2qn5omv].active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed[data-astro-cid-k2qn5omv]{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip[data-astro-cid-k2qn5omv]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.CWnAZWFx.css"><style>.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem;font-style:italic}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;font-family:monospace;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link nav-link--active" aria-current="page" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/podcasts" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 播客 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-09-11" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-09-11</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-09-10" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-09-10</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-09-10" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-09-10</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-09-09" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-09-09</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-09-09" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-09-09</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-09-08" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-09-08</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.BLFvh4tx.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>A Review of **knitr** Updates from 2024 to 2026</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://yihui.org/" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag" data-astro-cid-k2qn5omv="true"> 谢益辉 </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年9月9日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-veycvx62><p>It’s been a long while since I announced updates in <strong>knitr</strong> last time, so I’m writing this post to cover notable changes in <strong>knitr</strong> v1.46–v1.52. For the full changelog, please see the <a href="https://github.com/yihui/knitr/releases" target="_blank" rel="noopener noreferrer">release notes</a> on GitHub. I hope you will find this 3-year review helpful.</p>
+<h2>knitr 1.46 (2024-04-06)</h2>
+<h3>New chunk option <code>tab.cap</code></h3>
+<p>You can now set the table caption in the chunk header instead of inside <code>kable()</code>, e.g.,</p>
+<pre><code>```{r tab.cap="Motor Trend car data (first six rows)"}
+knitr::kable(head(mtcars))
+```
+</code></pre>
+<p>Previously you had to write <code>knitr::kable(head(mtcars), caption = "...")</code>, which is inconvenient when you want to keep chunk options together and the R code clean (<a href="https://github.com/yihui/knitr/issues/1679" target="_blank" rel="noopener noreferrer">#1679</a>).</p>
+<h3><code>spin()</code> recognizes <code># %%</code> and <code>#|</code></h3>
+<p>Two more chunk delimiters work in <code>spin()</code> now. For example, a VS Code / Jupyter-style script:</p>
+<pre><code># My report
+
+# %%
+plot(cars)
+
+# %% results="hide"
+invisible(summary(cars))
+</code></pre>
+<p>And Quarto-style pipe comments:</p>
+<pre><code>#| label: fig-cars
+#| fig-cap: "Speed vs. distance"
+plot(cars)
+</code></pre>
+<p>Both can be spun into a document with <code>knitr::spin("script.R")</code>. The old <code>#-</code> delimiter no longer works; please use <code>#+</code> or any of the above new delimiters (<a href="https://github.com/yihui/knitr/issues/2307" target="_blank" rel="noopener noreferrer">#2307</a>, <a href="https://github.com/yihui/knitr/issues/2320" target="_blank" rel="noopener noreferrer">#2320</a>).</p>
+<h3>Chunk hooks accept <code>...</code></h3>
+<p>Before, every chunk hook had to declare arguments <code>before</code>, <code>options</code>, <code>envir</code>, and <code>name</code> explicitly, e.g.,</p>
+<pre><code># old: had to list explicitly
+knitr::knit_hooks$set(my_hook = function(before, options, envir, name) {
+  if (before) cat("starting\n")
+})
+</code></pre>
+<p>Now <code>...</code> can be used to capture all and <strong>knitr</strong> will pass all arguments implicitly to <code>...</code> (if your hook doesn’t support any of these arguments, they will be silently dropped):</p>
+<pre><code>knitr::knit_hooks$set(my_hook = function(before, ...) {
+  if (before) cat("starting\n")
+})
+</code></pre>
+<h3>PNG optimization for package vignettes</h3>
+<p>If <code>optipng</code> or <code>pngquant</code> is on your <code>PATH</code>, vignette PNG plots are automatically compressed during <code>R CMD build</code>. No code change needed—just install the tools. PNG plots on CRAN are <a href="https://bsky.app/profile/yihui.org/post/3mkg5i5ju7k2e" target="_blank" rel="noopener noreferrer">often surprisingly large</a>; for vignettes with several plots this can meaningfully reduce the installed package size.</p>
+<h3>Breaking: unbalanced chunk fences are errors</h3>
+<p>Any chunk header/footer mismatch now throws an error, e.g.,</p>
+<pre><code>````{r}
+1 + 1
+```
+</code></pre>
+<p>The opening fence has four backticks; the closing fence must match exactly (<a href="https://github.com/yihui/knitr/issues/2306" target="_blank" rel="noopener noreferrer">#2306</a>).</p>
+<h3>Breaking: vignettes tangled during <code>R CMD check</code></h3>
+<p><strong>knitr</strong> no longer skips tangling vignettes during <code>R CMD check</code>. The tangled R script is then run, so check failures can now come from the vignette code rather than the vignette build. CRAN sets <code>_R_CHECK_VIGNETTES_SKIP_RUN_MAYBE_=true</code> so this mostly affects non-CRAN checks (e.g., GitHub Actions). Add that environment variable to your workflow if you want the old behavior.</p>
+<h2>knitr 1.47 (2024-05-29)</h2>
+<h3>Limit <code>kable()</code> rows via global option</h3>
+<p>Large data frames accidentally passed to <code>kable()</code> can generate enormous tables. Set a global cap if you want to prevent an accidental huge table, e.g.,</p>
+<pre><code>options(knitr.kable.max_rows = 30)
+knitr::kable(big_df)  # only first 30 rows rendered, rest silently dropped
+</code></pre>
+<h2>knitr 1.48 (2024-07-08)</h2>
+<p>This release contains bug fixes only, to which you don’t need to pay attention.</p>
+<h2>knitr 1.49 (2024-11-08)</h2>
+<h3>Disable in-chunk references with <code>ref.chunk = FALSE</code></h3>
+<p><strong>knitr</strong>’s <code>&lt;&lt;label&gt;&gt;</code> syntax for <a href="https://pkg.yihui.org/rmarkdown-cookbook/reuse-chunks.html" target="_blank" rel="noopener noreferrer">reusing chunk code</a> silently mangles R code that legitimately uses <code>&lt;&lt;</code>/<code>&gt;&gt;</code> as delimiters—for example, <code>glue::glue()</code> variants that change the open/close markers:</p>
+<pre><code>myglue &lt;- function(..., .envir = parent.frame()) {
+  glue(..., .open = "&lt;&lt;", .close = "&gt;&gt;", .envir = .envir)
+}
+x &lt;- "&lt;&lt;NAME&gt;&gt; &lt;- function(x) { &lt;&lt;BODY&gt;&gt; }"
+</code></pre>
+<p>Any <code>&lt;&lt;...&gt;&gt;</code> pattern on its own line gets silently removed by <strong>knitr</strong>, so <code>x</code> ends up with missing lines in the knitted output. Set <code>ref.chunk = FALSE</code> to turn off that substitution for the affected chunk (<a href="https://github.com/yihui/knitr/issues/2360" target="_blank" rel="noopener noreferrer">#2360</a>), e.g.,</p>
+<pre><code>```{r ref.chunk=FALSE}
+...
+x &lt;- "&lt;&lt;NAME&gt;&gt; &lt;- function(x) { &lt;&lt;BODY&gt;&gt; }"
+```
+</code></pre>
+<h3><code>fig.alt</code> for LaTeX</h3>
+<p>Alt text for figures now works in LaTeX output, e.g.,</p>
+<pre><code>```{r fig.alt="A scatter plot of speed versus stopping distance"}
+plot(cars)
+```
+</code></pre>
+<p><strong>knitr</strong> emits <code>\includegraphics[alt={A scatter plot...}]{...}</code>, which is supported by recent versions of LaTeX and enables accessible PDFs (<a href="https://github.com/yihui/knitr/issues/2378" target="_blank" rel="noopener noreferrer">#2378</a>).</p>
+<h3>Custom evaluation environment</h3>
+<p><code>knit_global()</code> now accepts an environment argument, so you can redirect all chunk evaluation to a custom environment. For example, the recommended pattern saves and restores the old environment:</p>
+<pre><code>new_env &lt;- new.env(parent = globalenv())
+old_env &lt;- knitr::knit_global(new_env)
+on.exit(knitr::knit_global(old_env), add = TRUE)
+knitr::knit("report.Rmd")  # all chunks evaluated in new_env
+</code></pre>
+<p>This is useful for packages like <a href="https://github.com/yihui/knitr/pull/2358" target="_blank" rel="noopener noreferrer"><strong>multiverse</strong></a> that need to execute chunks in separate environments per analysis rather than the shared global environment.</p>
+<h2>knitr 1.50 (2025-03-16)</h2>
+<h3>Precise line numbers for inline code errors</h3>
+<p>Previously, an error in an inline expression like <code>`r log(-1)`</code> reported the line range of the surrounding paragraph. Now it points to the exact line, making it much faster to locate the offending expression in a long document (<a href="https://github.com/yihui/knitr/issues/2387" target="_blank" rel="noopener noreferrer">#2387</a>).</p>
+<h3>Error tracebacks in <code>R CMD build</code></h3>
+<p>When a vignette fails to build, the full R traceback is now printed. Before, you only got the error message and had to reproduce the failure interactively to see where it came from (<a href="https://github.com/yihui/knitr/issues/2390" target="_blank" rel="noopener noreferrer">#2390</a>).</p>
+<h3><code>kable()</code> column alignment for Org Mode</h3>
+<p>Alignment specifiers now render correctly in Org Mode output, e.g.,</p>
+<pre><code>knitr::kable(head(iris), format = "org", align = c("l","r","r","r","l"))
+</code></pre>
+<p>Previously the alignment was ignored and all columns appeared left-aligned (<a href="https://github.com/yihui/knitr/issues/2391" target="_blank" rel="noopener noreferrer">#2391</a>).</p>
+<h3><code>combine_words()</code> and <code>write_bib()</code> moved to xfun</h3>
+<p>Both functions gained a proper home in <strong>xfun</strong> (my base for miscellaneous functions), e.g.,</p>
+<pre><code>xfun::join_words(c("apples", "oranges", "bananas"))
+# "apples, oranges, and bananas"
+
+xfun::pkg_bib(c("knitr", "rmarkdown"), file = "refs.bib")
+</code></pre>
+<p>The <strong>knitr</strong> versions (<code>combine_words()</code>, <code>write_bib()</code>) remain as wrappers and are not deprecated, but new code should prefer the <strong>xfun</strong> versions.</p>
+<h2>knitr 1.51 (2025-12-20)</h2>
+<h3>OpenTelemetry tracing</h3>
+<p>With <strong>otel</strong> / <strong>otelsdk</strong> installed and a tracer configured, knitting automatically emits spans you can send to any OpenTelemetry backend, e.g.,</p>
+<pre><code>library(otelsdk)
+# configure your exporter, then:
+knitr::knit("report.Rmd")
+# → spans: "knitr processing", "knitr output", one "knit" span per chunk
+</code></pre>
+<p>Each per-chunk span records the chunk label and engine, so you can profile which chunks are slow in a large document (<a href="https://github.com/yihui/knitr/issues/2422" target="_blank" rel="noopener noreferrer">#2422</a>).</p>
+<h3>Before/after-knit hooks</h3>
+<p>You can run setup or teardown code around the entire knit, not just around each chunk, e.g.,</p>
+<pre><code>knitr::knit_hooks$set(
+  before.knit = function() {
+    con &lt;&lt;- DBI::dbConnect(RSQLite::SQLite(), "data.db")
+  },
+  after.knit = function() {
+    DBI::dbDisconnect(con)
+  }
+)
+</code></pre>
+<p>(<a href="https://github.com/yihui/knitr/issues/2223" target="_blank" rel="noopener noreferrer">#2223</a>, <a href="https://github.com/yihui/knitr/issues/2419" target="_blank" rel="noopener noreferrer">#2419</a>)</p>
+<h3><code>fig.alt = ''</code> emits empty alt attribute</h3>
+<p>Setting <code>fig.alt = ""</code> now produces <code>&lt;img alt="" ...&gt;</code> instead of omitting the attribute entirely. Use <code>fig.alt = NA</code> to omit it, e.g.,</p>
+<pre><code># decorative image: alt="" tells screen readers to skip it
+knitr::opts_chunk$set(fig.alt = "")   # → &lt;img alt="" ...&gt;
+
+# no attribute at all (old behavior for empty alt):
+knitr::opts_chunk$set(fig.alt = NA)   # → &lt;img ...&gt; (no alt)
+</code></pre>
+<p>The distinction matters for accessibility audits: <code>alt=""</code> explicitly marks a figure as decorative; a missing <code>alt</code> is flagged as an error by most tools (<a href="https://github.com/yihui/knitr/issues/2415" target="_blank" rel="noopener noreferrer">#2415</a>).</p>
+<h2>knitr 1.52 (2026-09-06)</h2>
+<h3>New chunk option <code>fig.note</code></h3>
+<p>Add a source note or explanatory note below a figure, separate from the caption, e.g.,</p>
+<pre><code>```{r fig.cap="US population", fig.note="Source: US Census Bureau"}
+plot(uspop)
+```
+</code></pre>
+<p>For HTML this becomes <code>&lt;p class="figure-note"&gt;Source: US Census Bureau&lt;/p&gt;</code> inside the figure <code>&lt;div&gt;</code>, which you can style with CSS. For LaTeX it emits <code>\figurenote{Source: US Census Bureau}</code> inside the figure environment (you can redefine that command in the preamble, e.g., to use <strong>floatrow</strong>’s <code>\floatfoot</code>). Typst output is also supported (<a href="https://github.com/yihui/knitr/issues/2022" target="_blank" rel="noopener noreferrer">#2022</a>).</p>
+<h3>Typst support: <code>.Rtyp</code> input and <code>knitr::rtyp</code> vignette engine</h3>
+<p>I wrote a <a href="https://yihui.org/en/2026/04/knitr-typst/" target="_blank" rel="noopener noreferrer">dedicated post</a> about this feature. In short, you can now write R + Typst documents with a <code>.Rtyp</code> extension and knit them like R Markdown, e.g.,</p>
+<pre><code>knitr::knit("report.Rtyp")          # → report.typ
+knitr::knit2pdf("report.Rtyp")      # → report.pdf (via Typst)
+</code></pre>
+<p>I’m not sure how many people would actually use this at all, but at least I’m glad that <a href="https://bsky.app/profile/f2harrell.bsky.social/post/3muuyuutgbk2o" target="_blank" rel="noopener noreferrer">Frank Harrell</a> has been exploring his exciting new journey with the Typst support in <strong>knitr</strong> (<a href="https://github.com/yihui/knitr/issues/2401" target="_blank" rel="noopener noreferrer">#2401</a>, <a href="https://github.com/yihui/knitr/issues/2283" target="_blank" rel="noopener noreferrer">#2283</a>).</p>
+<p>A new vignette engine means packages can ship Typst vignettes with just two lines in <code>DESCRIPTION</code>:</p>
+<pre><code>VignetteBuilder: knitr
+Suggests: knitr
+</code></pre>
+<p>and a vignette header:</p>
+<pre><code>%\VignetteEngine{knitr::rtyp}
+%\VignetteIndexEntry{My Typst Vignette}
+</code></pre>
+<p>(<a href="https://github.com/yihui/knitr/issues/2447" target="_blank" rel="noopener noreferrer">#2447</a>)</p>
+<h3><code>hook_plot_tex()</code> respects <code>animation.hook</code></h3>
+<p>Previously only <code>hook_plot_html()</code> was extensible via <code>animation.hook</code> / <code>animation.fun</code>. Now the LaTeX hook respects the same option, e.g., to use <strong>xmpmulti</strong> for Beamer overlays instead of <strong>animate</strong>:</p>
+<pre><code>knitr::opts_chunk$set(
+  animation.hook = function(x, options) {
+    # use \multiinclude from xmpmulti for Beamer overlays
+    paste0("\\multiinclude[format=png]{", xfun::sans_ext(x[1]), "}")
+  }
+)
+</code></pre>
+<p>Without this change, LaTeX animations were locked to the <strong>animate</strong> package (<a href="https://github.com/yihui/knitr/issues/2452" target="_blank" rel="noopener noreferrer">#2452</a>).</p>
+<h3>WebP figures via <code>ragg::agg_webp()</code></h3>
+<p>For example:</p>
+<pre><code>knitr::opts_chunk$set(dev = "agg_webp", fig.ext = "webp")
+</code></pre>
+<p>Requires <strong>ragg</strong> &gt;= 1.5.0. WebP is typically 25–35% smaller than PNG at equivalent visual quality, useful for HTML reports where file size matters (<a href="https://github.com/yihui/knitr/issues/2434" target="_blank" rel="noopener noreferrer">#2434</a>).</p>
+<h3><code>dev.args</code> works with <code>gridSVG</code></h3>
+<p>For example:</p>
+<pre><code>knitr::opts_chunk$set(
+  dev = "gridSVG",
+  dev.args = list(strict = FALSE, pointsize = 12)
+)
+</code></pre>
+<p><strong>knitr</strong> now routes <code>strict</code> to <code>gridSVG::grid.export()</code> and <code>pointsize</code> to <code>grDevices::svg()</code>, so you no longer need a custom hook just to pass options to <code>gridSVG</code> (<a href="https://github.com/yihui/knitr/issues/2450" target="_blank" rel="noopener noreferrer">#2450</a>, <a href="https://github.com/yihui/knitr/issues/2451" target="_blank" rel="noopener noreferrer">#2451</a>).</p>
+<h3>Bug fix: captions dropped for multi-figure chunks</h3>
+<p>When a single chunk produced more than one figure with captions, only the first caption survived because Pandoc treated consecutive images in one paragraph as inline (uncaptioned) images. <strong>knitr</strong> now inserts a blank line between captioned figures, e.g.,</p>
+<pre><code>```{r fig.cap=c("First plot","Second plot")}
+plot(cars)
+plot(pressure)
+```
+</code></pre>
+<p>Both captions now appear correctly in HTML and PDF output (<a href="https://github.com/yihui/knitr/issues/2032" target="_blank" rel="noopener noreferrer">#2032</a>, <a href="https://github.com/yihui/knitr/issues/1524" target="_blank" rel="noopener noreferrer">#1524</a>, <a href="https://github.com/yihui/knitr/issues/1760" target="_blank" rel="noopener noreferrer">#1760</a>).</p>
+<h3>Bug fix: <code>include_graphics()</code> paths when output dir differs</h3>
+<p>For example:</p>
+<pre><code># Rendered with rmarkdown::render("report.Rmd", output_dir = "docs/")
+knitr::include_graphics("images/fig1.png")
+</code></pre>
+<p>Previously this produced a broken path in the output because <strong>knitr</strong> resolved the path relative to the input directory, not the output directory. It now uses the output directory communicated by <strong>rmarkdown</strong> &gt;= 2.32 (<a href="https://github.com/yihui/knitr/issues/2171" target="_blank" rel="noopener noreferrer">#2171</a>).</p>
+<h3><code>knit2html()</code> and friends use litedown directly</h3>
+<p><code>knit2html()</code>, <code>stitch()</code>, <code>knit_rd()</code>, and the <code>knitr::knitr</code> vignette engine now call <code>litedown::mark()</code> directly instead of going through the <strong>markdown</strong> package. This is potentially a breaking change. Previously, <code>markdown::mark()</code> silently fixed several common problems in vignette YAML headers before handing off to <strong>litedown</strong>; now those fixes no longer happen. If your vignette was relying on that silent repair, it will break. Specifically:</p>
+<ol>
+<li>
+<p><strong><code>yes</code>/<code>no</code> in YAML.</strong> YAML boolean values must be <code>true</code>/<code>false</code> in litedown. If your vignette header contains e.g. <code>toc: yes</code>, change it to <code>toc: true</code>.</p>
+</li>
+<li>
+<p><strong><code>bibliography</code> without rbibutils.</strong> If your YAML has a <code>bibliography:</code> field but the <strong>rbibutils</strong> package is not installed, <code>markdown::mark()</code> would skip the field silently during <code>R CMD check</code>. Now you will get an error, so add <strong>rbibutils</strong> to <code>Suggests</code> in <code>DESCRIPTION</code> if you use bibliography in vignettes.</p>
+</li>
+<li>
+<p><strong>List items with <code>- </code> in YAML.</strong> litedown uses a different YAML syntax than standard YAML for lists. Items starting with <code>- </code> at the beginning of a line are not supported; see the <a href="https://yihui.org/litedown/#sec:yaml-syntax" target="_blank" rel="noopener noreferrer">litedown YAML syntax</a> for alternatives.</p>
+</li>
+</ol>
+<p>For packages using the <code>knitr::knitr</code> vignette engine, also update <code>DESCRIPTION</code> to depend on <strong>litedown</strong> instead of <strong>markdown</strong>, e.g.,</p>
+<pre><code>Suggests: litedown
+</code></pre>
+<p>or if you need the bibliography support:</p>
+<pre><code>Suggests: litedown, rbibutils
+</code></pre>
+<h2>Acknowledgements</h2>
+<p>Thanks to all contributors who filed issues or submitted pull requests for these releases: Abhraneel Sarma (<a href="https://github.com/abhsarma" target="_blank" rel="noopener noreferrer">@abhsarma</a>), <a href="https://github.com/aksigkvgithub" target="_blank" rel="noopener noreferrer">@aksigkvgithub</a>, Arnaud Gallou (<a href="https://github.com/arnaudgallou" target="_blank" rel="noopener noreferrer">@arnaudgallou</a>), <a href="https://github.com/atusy" target="_blank" rel="noopener noreferrer">@atusy</a>, Sebastian Meyer (<a href="https://github.com/bastistician" target="_blank" rel="noopener noreferrer">@bastistician</a>), <a href="https://github.com/blset" target="_blank" rel="noopener noreferrer">@blset</a>, Alex Reinhart (<a href="https://github.com/capnrefsmmat" target="_blank" rel="noopener noreferrer">@capnrefsmmat</a>), Christophe Dervieux (<a href="https://github.com/cderv" target="_blank" rel="noopener noreferrer">@cderv</a>), Patrick R (<a href="https://github.com/codeZeilen" target="_blank" rel="noopener noreferrer">@codeZeilen</a>), David Cser (<a href="https://github.com/dcser123" target="_blank" rel="noopener noreferrer">@dcser123</a>), Deepayan Sarkar (<a href="https://github.com/deepayan" target="_blank" rel="noopener noreferrer">@deepayan</a>), <a href="https://github.com/DeliciousRoastPotato" target="_blank" rel="noopener noreferrer">@DeliciousRoastPotato</a>, <a href="https://github.com/dlampart" target="_blank" rel="noopener noreferrer">@dlampart</a>, David Kaplan (<a href="https://github.com/dmkaplan2000" target="_blank" rel="noopener noreferrer">@dmkaplan2000</a>), Chao Cheng (<a href="https://github.com/fenguoerbian" target="_blank" rel="noopener noreferrer">@fenguoerbian</a>), Florian Kohrt (<a href="https://github.com/fkohrt" target="_blank" rel="noopener noreferrer">@fkohrt</a>), Floris Vanderhaeghe (<a href="https://github.com/florisvdh" target="_blank" rel="noopener noreferrer">@florisvdh</a>), Garrick Aden-Buie (<a href="https://github.com/gadenbuie" target="_blank" rel="noopener noreferrer">@gadenbuie</a>), <a href="https://github.com/ggrothendieck" target="_blank" rel="noopener noreferrer">@ggrothendieck</a>, Hadley Wickham (<a href="https://github.com/hadley" target="_blank" rel="noopener noreferrer">@hadley</a>), Watal M. Iwasaki (<a href="https://github.com/heavywatal" target="_blank" rel="noopener noreferrer">@heavywatal</a>), Hedvig Skirgård (<a href="https://github.com/HedvigS" target="_blank" rel="noopener noreferrer">@HedvigS</a>), Doug Hemken (<a href="https://github.com/Hemken" target="_blank" rel="noopener noreferrer">@Hemken</a>), Michael Higgins (<a href="https://github.com/Higgs32584" target="_blank" rel="noopener noreferrer">@Higgs32584</a>), Jameel Alsalam (<a href="https://github.com/jameelalsalam" target="_blank" rel="noopener noreferrer">@jameelalsalam</a>), Jennifer Bryan (<a href="https://github.com/jennybc" target="_blank" rel="noopener noreferrer">@jennybc</a>), Jeroen Ooms (<a href="https://github.com/jeroen" target="_blank" rel="noopener noreferrer">@jeroen</a>), Johan Larsson (<a href="https://github.com/jolars" target="_blank" rel="noopener noreferrer">@jolars</a>), Kevin Ushey (<a href="https://github.com/kevinushey" target="_blank" rel="noopener noreferrer">@kevinushey</a>), <a href="https://github.com/knokknok" target="_blank" rel="noopener noreferrer">@knokknok</a>, Kyle F Butts (<a href="https://github.com/kylebutts" target="_blank" rel="noopener noreferrer">@kylebutts</a>), Lee Mendelowitz (<a href="https://github.com/LeeMendelowitz" target="_blank" rel="noopener noreferrer">@LeeMendelowitz</a>), Leonidas Zhak (<a href="https://github.com/LeonidasZhak" target="_blank" rel="noopener noreferrer">@LeonidasZhak</a>), L. Sandig (<a href="https://github.com/lsandig" target="_blank" rel="noopener noreferrer">@lsandig</a>), Markus Schlegel (<a href="https://github.com/markschl" target="_blank" rel="noopener noreferrer">@markschl</a>), Max Schmit (<a href="https://github.com/maxschmi" target="_blank" rel="noopener noreferrer">@maxschmi</a>), <a href="https://github.com/mbs2016" target="_blank" rel="noopener noreferrer">@mbs2016</a>, <a href="https://github.com/mclements" target="_blank" rel="noopener noreferrer">@mclements</a>, Matthew Michalska-Smith (<a href="https://github.com/mjsmith037" target="_blank" rel="noopener noreferrer">@mjsmith037</a>), Nicolás A. Méndez (<a href="https://github.com/naikymen" target="_blank" rel="noopener noreferrer">@naikymen</a>), Nan Xiao (<a href="https://github.com/nanxstats" target="_blank" rel="noopener noreferrer">@nanxstats</a>), Olivia Box Power (<a href="https://github.com/Olivia-Box-Power" target="_blank" rel="noopener noreferrer">@Olivia-Box-Power</a>), Ott Toomet (<a href="https://github.com/otoomet" target="_blank" rel="noopener noreferrer">@otoomet</a>), Sebastian Kopf (<a href="https://github.com/sebkopf" target="_blank" rel="noopener noreferrer">@sebkopf</a>), <a href="https://github.com/shangeconnew" target="_blank" rel="noopener noreferrer">@shangeconnew</a>, Charlie Gao (<a href="https://github.com/shikokuchuo" target="_blank" rel="noopener noreferrer">@shikokuchuo</a>), Toby Dylan Hocking (<a href="https://github.com/tdhock" target="_blank" rel="noopener noreferrer">@tdhock</a>), Felix Turbanisch (<a href="https://github.com/turbanisch" target="_blank" rel="noopener noreferrer">@turbanisch</a>), Ulrik Lyngs (<a href="https://github.com/ulyngs" target="_blank" rel="noopener noreferrer">@ulyngs</a>).</p>
+<p>It’s kind of hard to believe that <strong>knitr</strong> is almost 15 years old now. It has accompanied me for more than 1/3 of my life. Needless to say, this project wouldn’t be possible without the support from the wider R community, especially the 2500+ GitHub issues/PRs these years. If there’s anything else you need, please always feel free to file new issues, comment on/upvote old issues, or send pull requests: <a href="https://github.com/yihui/knitr" target="_blank" rel="noopener noreferrer">https://github.com/yihui/knitr</a> Thank you!</p>
+
+        
+        
+        </div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://yihui.org/en/2026/09/knitr-news/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button> <script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
