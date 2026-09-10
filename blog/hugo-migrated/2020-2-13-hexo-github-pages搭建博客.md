@@ -13,7 +13,7 @@ category: Android
 
 将由Hexo生成的静态页面托管到Github Pages上，即可实现简单的个人博客或是项目介绍页面，那么接下来就来看看具体的操作步骤。
 
-![](https://i.loli.net/2020/04/15/DNjXiwZC51ekBy8.png)
+![Hexo GitHub Pages 配置示意图](https://i.loli.net/2020/04/15/DNjXiwZC51ekBy8.png)
 
 <!--more-->
 
