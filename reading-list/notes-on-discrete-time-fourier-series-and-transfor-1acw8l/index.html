@@ -1,0 +1,376 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.3.2"><!-- Core SEO --><meta name="description" content="The following are my notes on discrete-time Fourier series (DTFS), as
+well as the discrete-time Fourier transform (DTFT). These topics serve
+as an important theoretical underpinning to the digital pro"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/notes-on-discrete-time-fourier-series-and-transfor-1acw8l/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/notes-on-discrete-time-fourier-series-and-transfor-1acw8l/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/notes-on-discrete-time-fourier-series-and-transfor-1acw8l/"><meta property="og:title" content="Notes on discrete-time Fourier series and transform"><meta property="og:description" content="The following are my notes on discrete-time Fourier series (DTFS), as
+well as the discrete-time Fourier transform (DTFT). These topics serve
+as an important theoretical underpinning to the digital pro"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="The following are my notes on discrete-time Fourier series (DTFS), as
+well as the discrete-time Fourier transform (DTFT). These topics serve
+as an important theoretical underpinning to the digital pro"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/notes-on-discrete-time-fourier-series-and-transfor-1acw8l/"><meta property="twitter:title" content="Notes on discrete-time Fourier series and transform"><meta property="twitter:description" content="The following are my notes on discrete-time Fourier series (DTFS), as
+well as the discrete-time Fourier transform (DTFT). These topics serve
+as an important theoretical underpinning to the digital pro"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Notes on discrete-time Fourier series and transform</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Notes on discrete-time Fourier series and transform","item":"https://blog.yuyins.com/reading-list/notes-on-discrete-time-fourier-series-and-transfor-1acw8l/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip[data-astro-cid-k2qn5omv]{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip[data-astro-cid-k2qn5omv]:after{content:none!important}.chip--sm[data-astro-cid-k2qn5omv]{padding:.25rem .625rem;font-size:.8125rem}.chip--md[data-astro-cid-k2qn5omv]{padding:.375rem .875rem;font-size:.875rem}.chip--interactive[data-astro-cid-k2qn5omv]{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}.chip--interactive[data-astro-cid-k2qn5omv]:hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}.chip--active[data-astro-cid-k2qn5omv],.chip[data-astro-cid-k2qn5omv].active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed[data-astro-cid-k2qn5omv]{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip[data-astro-cid-k2qn5omv]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.DMu3QgLh.css"><style>.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem;font-style:italic}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;font-family:monospace;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link nav-link--active" aria-current="page" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/podcasts" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 播客 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-09-20" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-09-20</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-09-19" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-09-19</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-09-19" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-09-19</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-09-18" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-09-18</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-09-18" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-09-18</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-09-17" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-09-17</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.BLFvh4tx.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>Notes on discrete-time Fourier series and transform</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://eli.thegreenplace.net/" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag" data-astro-cid-k2qn5omv="true"> eli.thegreenplace.net </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年9月20日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" data-astro-cid-veycvx62><p>The following are my notes on discrete-time Fourier series (DTFS), as
+well as the discrete-time Fourier transform (DTFT). These topics serve
+as an important theoretical underpinning to the digital processing of
+signals by computers using the DFT (which will be covered in a future
+post).</p>
+<p>For discrete-time signals, we use the square bracket notation to
+denote samples: x[n] is the n-th sample of signal
+x.</p>
+<p>We’ll say that a discrete-time (just <em>discrete</em> from this point on, for
+brevity) signal is periodic with period N if:</p>
+\[x[n]=x[n+N]\qquad\forall{n}\]
+<p>When talking about <a href="https://eli.thegreenplace.net/2026/notes-on-fourier-series/" target="_blank" rel="noopener noreferrer">continuous-time Fourier
+series</a>,
+we started with real trigonometric functions and later moved to complex
+exponentials. Here, we’ll just go ahead and start directly with
+(discrete) complex exponentials - converting between the two
+representations isn’t difficult and can be done as needed (Appendix C in
+this post demonstrates it).</p>
+<p>We’ll be dealing with the following family of signals <a href="https://eli.thegreenplace.net/2026/notes-on-discrete-time-fourier-series-and-transform/#footnote-1" target="_blank" rel="noopener noreferrer">[1]</a>:</p>
+\[\phi_k[n]=e^{ikw_0n}=e^{ik(2\pi/N)n}\qquad \forall k\in\mathbb{Z}\]
+<p>These are discrete complex exponentials that are periodic with period N.
+w_0=\frac{2\pi}{N} is the <em>angular frequency</em>. As discussed in
+Appendix A, there are only N such distinct signals, since:</p>
+\[\phi_k[n]=\phi_{k+N}[n]\qquad\forall{k}\]
+<div>
+<h2>Coefficients of discrete-time Fourier series</h2>
+<p>We’ll want to consider the representation of an arbitrary N-periodic
+x[n] by a linear combination of \phi_k[n]:</p>
+\[x[n]=\sum_{k=\langle N\rangle}a_k\phi_k[n]\]
+<p>The notation k=\langle N\rangle means k runs over any
+sequence of N consecutive integers. Since there are only
+N distinct signals \phi_k, the order of summation
+doesn’t matter - as long as all of them are used. So it could go from 0
+to N-1, or from 1 to N, or from 2 to N+1, and so
+on. All of these orders will enumerate all distinct \phi_k.</p>
+<p>Going back to our linear combination:</p>
+\[x[n]=\sum_{k=\langle N\rangle}a_k\phi_k[n]=\sum_{k=\langle N\rangle}a_ke^{ikw_0n}\]
+<p>This is the discrete-time Fourier series (DTFS) representation of
+x[n] and the coefficients a_k are the Fourier series
+coefficients. Note that there are no convergence issues as in the
+continuous case, because we’re dealing with a finite sum.</p>
+<p>To find the coefficients a_k, we’ll proceed in a way that’s
+somewhat similar to the continuous case. Multiply both sides of the
+equation above by e^{-ir(2\pi/N)n} and sum over N terms:</p>
+\[\sum_{n=\langle N\rangle}x[n]e^{-ir(2\pi/N)n}=
+\sum_{n=\langle N\rangle}\sum_{k=\langle N\rangle}a_ke^{i(k-r)(2\pi/N)n}\]
+<p>Interchanging the order of summation on the right-hand side:</p>
+\[\sum_{n=\langle N\rangle}x[n]e^{-ir(2\pi/N)n}=
+\sum_{k=\langle N\rangle}a_k\sum_{n=\langle N\rangle}e^{i(k-r)(2\pi/N)n}\]
+<p>By Appendix B, the inner sum on the right-hand side is equal to
+N when N\mid r-k and to 0 otherwise. Without loss of
+generality - since we iterate over N consecutive values - let’s
+just assume this happens in our sum when r=k (and therefore
+r-k=0, which is an integer multiple of N).</p>
+<p>So our equation becomes:</p>
+\[\sum_{n=\langle N\rangle}x[n]e^{-ir(2\pi/N)n}=a_r N\]
+<p>Or:</p>
+\[a_r=\frac{1}{N}\sum_{n=\langle N\rangle}x[n]e^{-ir(2\pi/N)n}\]
+<p>To conclude, the Fourier decomposition of a periodic discrete signal
+x[n] into periodic complex exponentials is:</p>
+\[\boxed{
+\begin{aligned}
+    x[n]&amp;=\sum_{k=\langle N\rangle}a_k e^{ik(2\pi/N)n}\\
+    \vspace{2pt}\\
+    a_k&amp;=\frac{1}{N}\sum_{n=\langle N\rangle}x[n]e^{-ik(2\pi/N)n}
+\end{aligned}
+}\]
+</div>
+<div>
+<h2>Example: revisiting the triangular function</h2>
+<p>Let’s revisit the triangular function t(x) from <a href="https://eli.thegreenplace.net/2026/notes-on-fourier-series" target="_blank" rel="noopener noreferrer">the post on
+Fourier
+series</a>.
+Here, we’ll be using the following <em>sampled</em> version:</p>
+<div>
+  
+  Your browser does not support the HTML5 canvas tag.
+  
+</div><p>The sampling is done with 12 samples per period of 4. The spacing
+between two samples is \Delta x=\frac{1}{3}. Another way to
+express it:</p>
+\[t_d[n]=t(n/3)\]
+<p>Substituting this into the definition of t(x), we get:</p>
+\[t_d[n]=
+\begin{cases}
+    \frac{n}{3}     &amp;  0 \leq n \leq 3 \\
+    2-\frac{n}{3}   &amp;  3 &lt; n \leq 6  \\
+\end{cases}\]
+<p>We then do an odd extension <a href="https://eli.thegreenplace.net/2026/notes-on-discrete-time-fourier-series-and-transform/#footnote-2" target="_blank" rel="noopener noreferrer">[2]</a> to the range n=[6..12), and
+repeat it with period N=12.</p>
+<p>Using considerations similar to the <a href="https://eli.thegreenplace.net/2026/notes-on-fourier-series/" target="_blank" rel="noopener noreferrer">continuous time
+case</a>,
+because our function is odd we just need a sine series here:</p>
+\[t_d[n]=\sum_{k=1}^{5}b_k sin\frac{k\pi n}{6}\]
+<p>The five terms correspond to the five pairs of nonzero-frequency
+indices; see Appendix C.</p>
+<p>And the coefficients are:</p>
+\[b_k=\frac{1}{6}\sum_{n=0}^{11}t_d[n]sin\frac{k\pi n}{6}\\\]
+<p>We can run this sum over half the period, because the terms at <img alt="n" src="https://eli.thegreenplace.net/images/math/d1854cae891ec7b29161ccaf79a24b00c274bdaa.png" />
+and 12-n are equal (both t_d[n] and the sine change
+signs). Also, the terms at n=0 and n=6 vanish because
+t_d[0]=t_d[6]=0:</p>
+\[b_k=\frac{1}{3}\sum_{n=1}^{5}t_d[n]sin\frac{k\pi n}{6}\\\]
+<p>Looking at the values of t_d:</p>
+\[b_1=\frac{1}{3}\left(\frac{1}{3}sin\frac{\pi}{6}+\frac{2}{3}sin\frac{2\pi}{6}+sin\frac{3\pi}{6}+\frac{2}{3}sin\frac{4\pi}{6}+\frac{1}{3}sin\frac{\pi}{6}\right)=\frac{4+2\sqrt{3}}{9}\]
+<p>We can similarly calculate all b_k until k=5:</p>
+\[\begin{aligned}
+    b_1&amp;=\frac{4+2\sqrt{3}}{9}\\
+    b_2&amp;=0\\
+    b_3&amp;=-\frac{1}{9}\\
+    b_4&amp;=0\\
+    b_5&amp;=\frac{4-2\sqrt{3}}{9}\\
+\end{aligned}\]
+<p>The resulting Fourier series is therefore:</p>
+\[t_d[n]=\frac{4+2\sqrt{3}}{9}sin\frac{\pi n}{6}-\frac{1}{9}sin\frac{\pi n}{2}+\frac{4-2\sqrt{3}}{9}sin\frac{5\pi n}{6}\]
+<p>You can use the following interactive plot to explore this approximation
+to the discrete triangle function t_d[n]:</p>
+<div>
+
+Your browser does not support the HTML5 canvas tag.
+
+<div>
+  Terms in the Fourier series
+    
+      
+      
+      
+    
+  
+</div>
+</div><p>The dropdown box selects how many of the terms in the series shown above
+to plot. The orange crosses show where the series’ values at the integer
+indices are, and the orange line is interpolated to better visualize the
+sine waves being added. Note that when all the coefficients are used,
+the DTFS <em>exactly</em> reconstructs the input signal.</p>
+</div>
+<div>
+<h2>Discrete-time Fourier Transform (DTFT)</h2>
+<p>In the post on <a href="https://eli.thegreenplace.net/2026/notes-on-the-fourier-transform/" target="_blank" rel="noopener noreferrer">the Fourier
+Transform</a>
+we’ve seen how non-periodic signals can be represented in the frequency
+domain by taking the Fourier series and calculating them at the limit
+L\rightarrow\infty. Here, we’ll do something similar for
+discrete signals.</p>
+<p>Suppose we have a non-periodic discrete signal x[n] of finite
+duration (it’s zero outside a finite range of indices). Here’s a sample
+plot:</p>
+<div>
+  
+  Your browser does not support the HTML5 canvas tag.
+  
+</div><p>The bottom half is x_N[n] - a periodic signal, one period
+(N) of which is equal to x[n]. We choose M large
+enough that x[n]=0 outside [-M,M] and set
+N=2M+1.</p>
+<p>Since x_N is periodic, we can represent it with DTFS <a href="https://eli.thegreenplace.net/2026/notes-on-discrete-time-fourier-series-and-transform/#footnote-3" target="_blank" rel="noopener noreferrer">[3]</a>:</p>
+\[\begin{aligned}
+    x_N[n]&amp;=\sum_{k=-M}^{M}a_k e^{ik(2\pi/N)n}\\
+    a_k&amp;=\frac{1}{N}\sum_{n=-M}^{M}x[n]e^{-ik(2\pi/N)n}
+\end{aligned}\]
+<p>We’ll use the notation of angular frequency:</p>
+\[\Delta w=\frac{2\pi}{N}\qquad w_k=k\Delta w\]
+<p>Then:</p>
+\[\begin{aligned}
+    x_N[n]&amp;=\sum_{k=-M}^{M}a_k e^{i w_k n}\\
+    a_k&amp;=\frac{1}{N}\sum_{n=-M}^{M}x[n]e^{-i w_k n}
+\end{aligned}\]
+<p>Now the critical part; since x[n] is zero outside
+[-M,M], extending the summation to all integers does not change
+its value:</p>
+\[a_k=\frac{1}{N}\sum_{n=-\infty}^{\infty}x[n]e^{-i w_k n}\]
+<p>We’ll define the following <em>continuous</em> function with variable
+<img alt="w" src="https://eli.thegreenplace.net/images/math/aff024fe4ab0fece4091de044c58c9ae4233383a.png" />:</p>
+\[X(w)=\sum_{n=-\infty}^{\infty}x[n]e^{-i w n}\]
+<p>Then at points w_k:</p>
+\[a_k=\frac{1}{N}X(w_k)\]
+<p>The function X(w) is the discrete-time Fourier transform (DTFT)
+of x[n]. The inverse DTFT process reconstructs x[n] from
+X(w), by substituting a_k back into the DTFS:</p>
+\[x_N[n]=\sum_{k=-M}^{M}\frac{1}{N}X(w_k) e^{i w_k n}\]
+<p>By our definition of \Delta w, we have:</p>
+\[\frac{1}{N}=\frac{\Delta w}{2\pi}\]
+<p>Therefore:</p>
+\[x_N[n]=\frac{1}{2\pi}\sum_{k=-M}^{M}X(w_k) e^{i w_k n}\Delta w\]
+<p>Just like in the continuous case, we recognize the sum as a <em>Riemann
+sum</em>. Let M\rightarrow\infty. The spacing \Delta w tends
+to zero, and we can rewrite the sum as an integral:</p>
+\[x[n]=\lim_{M\rightarrow\infty}x_N[n]=\frac{1}{2\pi}\int_{-\pi}^{\pi}X(w)e^{iwn}dw\]
+<p>To conclude, the DTFT and inverse DTFT pair are:</p>
+\[\boxed{
+    \begin{aligned}
+        X(w)&amp;=\sum_{n=-\infty}^{\infty}x[n]e^{-i w n}\\
+        \vspace{2pt}\\
+        x[n]&amp;=\frac{1}{2\pi}\int_{-\pi}^{\pi}X(w)e^{iwn}dw
+    \end{aligned}
+}\]
+<p>X(w) is a continuous, periodic function with period
+2\pi, because:</p>
+\[\begin{aligned}
+    X(w+2\pi)&amp;=\sum_{n=-\infty}^{\infty}x[n]e^{-i (w+2\pi) n}\\
+    &amp;=\sum_{n=-\infty}^{\infty}x[n]e^{-i w n}e^{-i 2\pi n}\\
+    &amp;=\sum_{n=-\infty}^{\infty}x[n]e^{-i w n}=X(w)\\
+\end{aligned}\]
+<p>Therefore, it’s enough to run the integral on any interval of length
+2\pi.</p>
+<p>The DTFS and DTFT are closely related. Starting with a finite-duration
+signal x[n], we form a periodic signal by repeating a block of
+N samples containing it. Its DTFS coefficients are equally
+spaced, scaled samples of the DTFT:</p>
+\[a_k=\frac{1}{N}X\left(\frac{2\pi k}{N}\right)\]
+<p>The relation is similar to the one between Fourier series and the
+Fourier transform in the continuous case.</p>
+<p>The DTFT also has useful properties similar to the continuous Fourier
+transform: linearity, time shifting, the convolution theorem etc, but we
+won’t spend time on them here.</p>
+</div>
+<div>
+<h2>Appendix A: Discrete-time complex exponentials</h2>
+<p>Discrete-time complex exponentials have the form e^{iw_0n} where
+w_0 is the <em>angular frequency</em>. The discrete nature of these
+functions leads to some interesting outcomes; for example, consider the
+exponential with angular frequency w_0+2\pi:</p>
+\[e^{i(w_0+2\pi)n}=e^{iw_0n}e^{i2\pi n}=e^{iw_0n}\]
+<p>Therefore, the exponential at w_0+2\pi is <em>exactly the same</em> as
+the exponential at w_0. In considering discrete complex
+exponentials, we need only choose w_0 from a range of length
+2\pi.</p>
+<p>Another interesting aspect of these functions concerns their
+periodicity. In order for e^{iw_0n} to be periodic with some
+positive integer period N, the following must hold:</p>
+\[e^{iw_0(n+N)}=e^{iw_0n}\]
+<p>In other words:</p>
+\[e^{iw_0N}=1\]
+<p>So w_0N itself must be an integral multiple of 2\pi. For
+some integer k:</p>
+\[w_0N=k\cdot(2\pi)\Longrightarrow w_0=\frac{k2\pi}{N}\]
+<p>For a fixed positive integer N, let’s consider all complex
+exponentials for which N is a period:</p>
+\[\phi_k[n]=e^{ik(2\pi/N)n}\qquad \forall k\in\mathbb{Z}\]
+<p>But earlier we’ve said that all complex exponentials with angular
+frequencies 2\pi apart are identical. This means that the set
+above consists of only N distinct exponentials. We can choose
+any starting k and get distinct signals with k,
+k+1, k+2 and so on until k+N-1. After that, they
+begin repeating: \phi_N[n]=\phi_0[n] and so on.</p>
+<p>All of this is very different from the continuous case, where t
+is a real number. The signals e^{iw_0t} and
+e^{i(w_0+2\pi)t} agree only at integer values of t, so
+they are distinct functions of t\in\mathbb{R}. Consequently, for
+a fixed positive period <img alt="T" src="https://eli.thegreenplace.net/images/math/c2c53d66948214258a26ca9ca845d7ac0c17f8e7.png" />, the continuous-time exponentials
+e^{ik(2\pi/T)t} are distinct for every integer k, giving
+infinitely many distinct signals.</p>
+</div>
+<div>
+<h2>Appendix B: Sum of consecutive complex exponentials</h2>
+<p>Let’s consider the following discrete function, defined by a sum:</p>
+\[A[k]=\sum_{n=0}^{N-1}e^{i(2\pi/N)kn}\]
+<p>We’ll want to consider two cases:</p>
+<p>(1) When k is an integer multiple of N: k=rN for
+some integer r (for example k=0, k=N,
+k=-2N etc.)</p>
+<p>In this case, the sum becomes:</p>
+\[A[k]=\sum_{n=0}^{N-1}e^{i(2\pi/N)rNn}=\sum_{n=0}^{N-1}e^{i2\pi rn}\]
+<p>Since both r and <img alt="n" src="https://eli.thegreenplace.net/images/math/d1854cae891ec7b29161ccaf79a24b00c274bdaa.png" /> are integers, the exponent is an
+integer multiple of 2\pi i, so:</p>
+\[A[k]=\sum_{n=0}^{N-1}1=N\]
+<p>(2) When k is not an integer multiple of N, let’s do a
+variable change p=n+1:</p>
+\[A[k]=\sum_{p=1}^{N}e^{i(2\pi/N)k(p-1)}\]
+<p>We can now use the finite sum formula for a geometric progression with
+the common ratio r=e^{i(2\pi/N)k}; the sum is:</p>
+\[S_N=\frac{1-r^N}{1-r}\]
+<p>Note that r\neq 1 because k is not an integer multiple
+of N. However:</p>
+\[r^N=e^{i(2\pi/N)kN}=1\]
+<p>Therefore:</p>
+\[A[k]=S_N=0\]
+<p>While these calculations demonstrate the sums from n=0 to
+N-1, they work exactly the same for any N consecutive
+indices, because the summand is periodic in <img alt="n" src="https://eli.thegreenplace.net/images/math/d1854cae891ec7b29161ccaf79a24b00c274bdaa.png" /> with period
+N. Therefore:</p>
+\[A[k]=\sum_{n=\langle N\rangle}e^{i(2\pi/N)kn}=
+\begin{cases}
+    N      &amp; N\mid k\\
+    0      &amp; \text{otherwise}
+\end{cases}\]
+</div>
+<div>
+<h2>Appendix C: Sine series decomposition of t_d[n]</h2>
+<p>Using the formula for DTFS developed earlier in the post:</p>
+\[\begin{aligned}
+    a_k&amp;=\frac{1}{12}\sum_{n=0}^{11}t_d[n]e^{-ik(\pi/6)n}\\
+    &amp;=\frac{1}{12}\sum_{n=0}^{11}t_d[n]cos\frac{k\pi n}{6}-i\frac{1}{12}\sum_{n=0}^{11}t_d[n]sin\frac{k\pi n}{6}\\
+\end{aligned}\]
+<p>Recall that t_d[n] is odd over the full range n=[0..12).
+Specifically, since the cosine is an even function, we have for any
+m:</p>
+\[\begin{aligned}
+    t_d[12-m]&amp;=-t_d[m]\\
+    cos\frac{k\pi(12-m)}{6}&amp;=cos(2\pi k -\frac{k\pi m}{6})=cos\frac{k\pi m}{6}\\
+\end{aligned}\]
+<p>Therefore the cosine terms cancel out throughout the period; term 1 is
+the same as negative term 11, etc.</p>
+<p>We’re left with the sines:</p>
+\[a_k=-i\frac{1}{12}\sum_{n=0}^{11}t_d[n]sin\frac{k\pi n}{6}\]
+<p>All coefficients are purely imaginary. For convenience, let’s write:</p>
+\[\begin{aligned}
+    b_k&amp;=\frac{1}{6}\sum_{n=0}^{11}t_d[n]sin\frac{k\pi n}{6}\\
+    a_k&amp;=\frac{-i b_k}{2}\\
+\end{aligned}\]
+<p>Let’s turn back to the Fourier reconstruction formula:</p>
+\[t_d[n]=\sum_{k=\langle N\rangle}a_k e^{ik(2\pi/N)n}\]
+<p>And pair up exponentials at k with ones at 12-k:</p>
+\[e^{i(12-k)\pi n/6}=e^{i2\pi n}e^{-ikn\pi/6}=e^{-ikn\pi/6}\]
+<p>Also, since t_d[n] are real, the conjugate of a_k is:</p>
+\[a_{12-k}=a_k^*=\frac{ib_k}{2}\]
+<p>So adding the paired exponentials with their coefficients and using
+Euler’s formula:</p>
+\[\begin{aligned}
+    a_ke^{i k\pi n/6}+a_{12-k}e^{-i k\pi n/6}&amp;=-\frac{ib_k}{2}e^{i k\pi n/6}+\frac{ib_k}{2}e^{-i k\pi n/6}\\
+    &amp;=b_k\frac{e^{i k\pi n/6}-e^{-i k\pi n/6}}{2i}\\
+    &amp;=b_k sin\frac{k\pi n}{6}
+\end{aligned}\]
+<p>Therefore:</p>
+\[t_d[n]=\sum_{k=0}^{11}a_k e^{ik(2\pi/N)n}=\sum_{k=1}^{5}b_k sin\frac{k\pi n}{6}\]
+<p>We don’t include the terms at k=0 and k=6, because
+a_0=a_6=0 (sine of an integral multiple of \pi).</p>
+<hr />
+<table>
+<colgroup><col /><col /></colgroup>
+<tbody>
+<tr><td><a href="https://eli.thegreenplace.net/2026/notes-on-discrete-time-fourier-series-and-transform/#footnote-reference-1" target="_blank" rel="noopener noreferrer">[1]</a></td><td>There are a lot of symbols used in this equation. <img alt="n" src="https://eli.thegreenplace.net/images/math/d1854cae891ec7b29161ccaf79a24b00c274bdaa.png" /> is the
+"time" index of the signal x[n] - its domain; k
+enumerates the k-th function \phi_k from a family of
+functions - each \phi_k[n] is a function of <img alt="n" src="https://eli.thegreenplace.net/images/math/d1854cae891ec7b29161ccaf79a24b00c274bdaa.png" />;
+N is the period; <img alt="i" src="https://eli.thegreenplace.net/images/math/042dc4512fa3d391c5170cf3aa61e6a638f84342.png" /> is the imaginary unit.</td></tr>
+</tbody>
+</table>
+<table>
+<colgroup><col /><col /></colgroup>
+<tbody>
+<tr><td><a href="https://eli.thegreenplace.net/2026/notes-on-discrete-time-fourier-series-and-transform/#footnote-reference-2" target="_blank" rel="noopener noreferrer">[2]</a></td><td>The odd extension may be slightly confusing because we don’t use
+negative indices. But indices are arbitrary! In our case, within a
+single period index -n is equivalent to 12-n; if we
+consider one period around the halfway point of n=6, it’s
+easy to see that the function is indeed odd.</td></tr>
+</tbody>
+</table>
+<table>
+<colgroup><col /><col /></colgroup>
+<tbody>
+<tr><td><a href="https://eli.thegreenplace.net/2026/notes-on-discrete-time-fourier-series-and-transform/#footnote-reference-3" target="_blank" rel="noopener noreferrer">[3]</a></td><td>Note that we use x[n], not x_N[n] in the summation
+for a_k. This is because within the chosen range they are
+equal.</td></tr>
+</tbody>
+</table>
+</div>
+</div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://eli.thegreenplace.net/2026/notes-on-discrete-time-fourier-series-and-transform/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button> <script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
