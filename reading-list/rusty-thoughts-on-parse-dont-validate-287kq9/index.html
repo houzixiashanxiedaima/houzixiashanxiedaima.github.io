@@ -1,0 +1,306 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.3.4"><!-- Core SEO --><meta name="description" content="Like many programmers, I find Alexis King's Parse, don't validate
+article fascinating, because it gives a name to an idiom that seems familiar and
+important - one I've observed and used in the past wi"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/rusty-thoughts-on-parse-dont-validate-287kq9/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/rusty-thoughts-on-parse-dont-validate-287kq9/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/rusty-thoughts-on-parse-dont-validate-287kq9/"><meta property="og:title" content="Rusty thoughts on &quot;Parse, don't validate&quot;"><meta property="og:description" content="Like many programmers, I find Alexis King's Parse, don't validate
+article fascinating, because it gives a name to an idiom that seems familiar and
+important - one I've observed and used in the past wi"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="Like many programmers, I find Alexis King's Parse, don't validate
+article fascinating, because it gives a name to an idiom that seems familiar and
+important - one I've observed and used in the past wi"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/rusty-thoughts-on-parse-dont-validate-287kq9/"><meta property="twitter:title" content="Rusty thoughts on &quot;Parse, don't validate&quot;"><meta property="twitter:description" content="Like many programmers, I find Alexis King's Parse, don't validate
+article fascinating, because it gives a name to an idiom that seems familiar and
+important - one I've observed and used in the past wi"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Rusty thoughts on &quot;Parse, don&#39;t validate&quot;</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Rusty thoughts on \"Parse, don't validate\"","item":"https://blog.yuyins.com/reading-list/rusty-thoughts-on-parse-dont-validate-287kq9/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip:after{content:none!important}.chip--sm{padding:.25rem .625rem;font-size:.8125rem}.chip--md{padding:.375rem .875rem;font-size:.875rem}.chip--interactive{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}@media (hover:hover){.chip--interactive:not(.chip--active):not(.active):hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}}.chip--active,.chip.active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.CnoqupXc.css"><style>.article-content{max-width:none}.article-content:lang(en){letter-spacing:0}.article-content:lang(en) pre{letter-spacing:var(--ls-body)}.article-content code:not(pre *){background:color-mix(in srgb, var(--muted) 30%, transparent);color:var(--foreground);border:0;border-radius:.2em;padding:.05em .3em;font-size:.875em;display:inline}.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.article-content table{max-width:100%;display:block;overflow-x:auto}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent-hover)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent-hover);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link nav-link--active" aria-current="page" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/podcasts" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 播客 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-09-26" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-09-26</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-09-26" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-09-26</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-09-25" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-09-25</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-09-25" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-09-25</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-09-24" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-09-24</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-09-24" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-09-24</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.CSOHzgZl.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>Rusty thoughts on &quot;Parse, don&#39;t validate&quot;</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://eli.thegreenplace.net/" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag"> eli.thegreenplace.net </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年9月26日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" lang="zh-CN" data-astro-cid-veycvx62><p>Like many programmers, I find Alexis King's <a href="https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/" target="_blank" rel="noopener noreferrer">Parse, don't validate</a>
+article fascinating, because it gives a name to an idiom that seems familiar and
+important - one I've observed and used in the past without naming it explicitly.
+This post is a review of the "Parse, don't validate" pattern applied to the Rust
+programming language (the original post uses Haskell). I was particularly
+interested in finding educational examples of this pattern in the Rust standard
+library and other well-known projects.</p>
+<p>Without repeating the original article (please read it first!), here's the
+gist of it.</p>
+<p>Consider the venerable Vec; its first method returns <span>Option&lt;&amp;T&gt;</span>.
+Why? Because a vector is not guaranteed to have any elements in it, so what
+to do if first is invoked on an empty one? Returning an Option in this
+case is idiomatic in Rust <a href="https://eli.thegreenplace.net/2026/rusty-thoughts-on-parse-dont-validate/#footnote-1" target="_blank" rel="noopener noreferrer">[1]</a>, with convenient syntax sugar for accepting
+the result of functions that return Option and deciding what to do next.</p>
+<p>So what's the issue?</p>
+<p>Imagine we have a function to read some configuration paths from an env var,
+while enforcing the invariant that the list can't be empty:</p>
+<div><pre><span></span><span>use</span><span> </span><span>anyhow</span>::<span>{</span><span>Result</span><span>,</span><span> </span><span>ensure</span><span>};</span><span></span>
+
+<span>fn</span> <span>get_configuration_directories</span><span>()</span><span> </span>-&gt; <span>Result</span><span>&lt;</span><span>Vec</span><span>&lt;</span><span>PathBuf</span><span>&gt;&gt;</span><span> </span><span>{</span><span></span>
+<span>    </span><span>let</span><span> </span><span>value</span><span> </span><span>=</span><span> </span><span>env</span>::<span>var</span><span>(</span><span>"CONFIG_DIRS"</span><span>).</span><span>context</span><span>(</span><span>"could not read CONFIG_DIRS"</span><span>)</span><span>?</span><span>;</span><span></span>
+
+<span>    </span><span>let</span><span> </span><span>directories</span>: <span>Vec</span><span>&lt;</span><span>PathBuf</span><span>&gt;</span><span> </span><span>=</span><span> </span><span>value</span><span></span>
+<span>        </span><span>.</span><span>split</span><span>(</span><span>','</span><span>)</span><span></span>
+<span>        </span><span>.</span><span>map</span><span>(</span><span>str</span>::<span>trim</span><span>)</span><span></span>
+<span>        </span><span>.</span><span>map</span><span>(</span><span>PathBuf</span>::<span>from</span><span>)</span><span></span>
+<span>        </span><span>.</span><span>collect</span><span>();</span><span></span>
+
+<span>    </span><span>ensure</span><span>!</span><span>(</span><span>!</span><span>directories</span><span>.</span><span>is_empty</span><span>(),</span><span> </span><span>"empty CONFIG_DIRS"</span><span>);</span><span></span>
+<span>    </span><span>Ok</span><span>(</span><span>directories</span><span>)</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>So far, so good. Now let's take a typical usage of this function:</p>
+<div><pre><span></span><span>fn</span> <span>main</span><span>()</span><span> </span>-&gt; <span>Result</span><span>&lt;</span><span>()</span><span>&gt;</span><span> </span><span>{</span><span></span>
+<span>    </span><span>let</span><span> </span><span>config_dirs</span><span> </span><span>=</span><span> </span><span>get_configuration_directories</span><span>()</span><span>?</span><span>;</span><span></span>
+
+<span>    </span><span>match</span><span> </span><span>config_dirs</span><span>.</span><span>first</span><span>()</span><span> </span><span>{</span><span></span>
+<span>        </span><span>Some</span><span>(</span><span>cache_dir</span><span>)</span><span> </span><span>=&gt;</span><span> </span><span>initialize_cache</span><span>(</span><span>cache_dir</span><span>),</span><span></span>
+<span>        </span><span>None</span><span> </span><span>=&gt;</span><span> </span><span>unreachable!</span><span>(</span><span>"already checked that CONFIG_DIRS is non-empty"</span><span>),</span><span></span>
+<span>    </span><span>}</span><span></span>
+
+<span>    </span><span>Ok</span><span>(())</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>Once get_configuration_directories returns a successful result,
+we are guaranteed that the vector isn't empty. And yet, if we want to get the
+first element of this vector, we have to use the first method that returns
+<span>Option&lt;&amp;T&gt;</span>. We are therefore forced - again - to handle a potentially
+empty case (where the option is None).</p>
+<p>As the original article states, this has a number of problems with code clarity,
+potential performance implications and a ticking time bomb if the invariant
+is ever changed in get_configuration_directories.</p>
+<p>The core issue is that Vec is fundamentally a type that can be empty; we
+can carry along a "This one can't be empty, pinky promise!" comment on all the
+relevant code, but it's not formally checked by anything.</p>
+<div>
+<h2>A type for "non-empty" vector</h2>
+<p>The solution is leveraging the type system to enforce a newly established
+invariant. We can use a separate type for "a vector that cannot be empty";
+in fact, such types already exist in several Rust crates - for example
+<a href="https://docs.rs/nonempty/latest/nonempty/" target="_blank" rel="noopener noreferrer">nonempty</a>:</p>
+<div><pre><span></span><span>pub</span><span> </span><span>struct</span> <span>NonEmpty</span><span>&lt;</span><span>T</span><span>&gt;</span><span> </span><span>{</span><span></span>
+<span>    </span><span>pub</span><span> </span><span>head</span>: <span>T</span><span>,</span><span></span>
+<span>    </span><span>pub</span><span> </span><span>tail</span>: <span>Vec</span><span>&lt;</span><span>T</span><span>&gt;</span><span>,</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>This type has no constructor that permits "no elements"; its new takes
+one element, and its first method returns &amp;T without an Option:</p>
+<div><pre><span></span><span>pub</span><span> </span><span>const</span><span> </span><span>fn</span> <span>new</span><span>(</span><span>e</span>: <span>T</span><span>)</span><span> </span>-&gt; <span>Self</span><span> </span><span>{</span><span></span>
+<span>    </span><span>Self</span>::<span>singleton</span><span>(</span><span>e</span><span>)</span><span></span>
+<span>}</span><span></span>
+
+<span>pub</span><span> </span><span>const</span><span> </span><span>fn</span> <span>singleton</span><span>(</span><span>head</span>: <span>T</span><span>)</span><span> </span>-&gt; <span>Self</span><span> </span><span>{</span><span></span>
+<span>    </span><span>NonEmpty</span><span> </span><span>{</span><span></span>
+<span>        </span><span>head</span><span>,</span><span></span>
+<span>        </span><span>tail</span>: <span>Vec</span>::<span>new</span><span>(),</span><span></span>
+<span>    </span><span>}</span><span></span>
+<span>}</span><span></span>
+
+<span>pub</span><span> </span><span>const</span><span> </span><span>fn</span> <span>first</span><span>(</span><span>&amp;</span><span>self</span><span>)</span><span> </span>-&gt; <span>&amp;</span><span>T</span><span> </span><span>{</span><span></span>
+<span>    </span><span>&amp;</span><span>self</span><span>.</span><span>head</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>The rest of the crate deals with making NonEmpty behave as close as possible
+to a normal Vec, by implementing many useful traits, as well as conversions
+like:</p>
+<div><pre><span></span><span>pub</span><span> </span><span>fn</span> <span>from_vec</span><span>(</span><span>mut</span><span> </span><span>vec</span>: <span>Vec</span><span>&lt;</span><span>T</span><span>&gt;</span><span>)</span><span> </span>-&gt; <span>Option</span><span>&lt;</span><span>NonEmpty</span><span>&lt;</span><span>T</span><span>&gt;&gt;</span><span> </span><span>{</span><span></span>
+<span>    </span><span>if</span><span> </span><span>vec</span><span>.</span><span>is_empty</span><span>()</span><span> </span><span>{</span><span></span>
+<span>        </span><span>None</span><span></span>
+<span>    </span><span>}</span><span> </span><span>else</span><span> </span><span>{</span><span></span>
+<span>        </span><span>let</span><span> </span><span>head</span><span> </span><span>=</span><span> </span><span>vec</span><span>.</span><span>remove</span><span>(</span><span>0</span><span>);</span><span></span>
+<span>        </span><span>Some</span><span>(</span><span>NonEmpty</span><span> </span><span>{</span><span> </span><span>head</span><span>,</span><span> </span><span>tail</span>: <span>vec</span><span> </span><span>})</span><span></span>
+<span>    </span><span>}</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>Let's see how our get_configuration_directories function would look if it
+returned a NonEmpty instead of a plain Vec:</p>
+<div><pre><span></span><span>fn</span> <span>get_configuration_directories</span><span>()</span><span> </span>-&gt; <span>Result</span><span>&lt;</span><span>NonEmpty</span><span>&lt;</span><span>PathBuf</span><span>&gt;&gt;</span><span> </span><span>{</span><span></span>
+<span>    </span><span>let</span><span> </span><span>value</span><span> </span><span>=</span><span> </span><span>env</span>::<span>var</span><span>(</span><span>"CONFIG_DIRS"</span><span>).</span><span>context</span><span>(</span><span>"could not read CONFIG_DIRS"</span><span>)</span><span>?</span><span>;</span><span></span>
+
+<span>    </span><span>let</span><span> </span><span>directories</span><span> </span><span>=</span><span> </span><span>value</span><span></span>
+<span>        </span><span>.</span><span>split</span><span>(</span><span>','</span><span>)</span><span></span>
+<span>        </span><span>.</span><span>map</span><span>(</span><span>str</span>::<span>trim</span><span>)</span><span></span>
+<span>        </span><span>.</span><span>map</span><span>(</span><span>PathBuf</span>::<span>from</span><span>)</span><span></span>
+<span>        </span><span>.</span><span>collect</span><span>();</span><span></span>
+
+<span>    </span><span>let</span><span> </span><span>Some</span><span>(</span><span>directories</span><span>)</span><span> </span><span>=</span><span> </span><span>NonEmpty</span>::<span>from_vec</span><span>(</span><span>directories</span><span>)</span><span> </span><span>else</span><span> </span><span>{</span><span></span>
+<span>        </span><span>bail</span><span>!</span><span>(</span><span>"CONFIG_DIRS cannot be empty"</span><span>);</span><span></span>
+<span>    </span><span>};</span><span></span>
+
+<span>    </span><span>Ok</span><span>(</span><span>directories</span><span>)</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>Note the use of <span>NonEmpty::from_vec</span> here - this is where the invariant is
+established. Now a successful result is NonEmpty, not just Vec. The
+client code looks like:</p>
+<div><pre><span></span><span>fn</span> <span>main</span><span>()</span><span> </span>-&gt; <span>Result</span><span>&lt;</span><span>()</span><span>&gt;</span><span> </span><span>{</span><span></span>
+<span>    </span><span>let</span><span> </span><span>config_dirs</span><span> </span><span>=</span><span> </span><span>get_configuration_directories</span><span>()</span><span>?</span><span>;</span><span></span>
+
+<span>    </span><span>initialize_cache</span><span>(</span><span>config_dirs</span><span>.</span><span>first</span><span>())</span><span>?</span><span>;</span><span></span>
+<span>    </span><span>Ok</span><span>(())</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>There's no need to check if the returned value is empty again; this is enforced
+by the type system!</p>
+<p>This is where the parse vs. validate terminology of the original article comes
+from. When get_configuration_directories returned a Vec, it simply
+validated it. But when it returns a NonEmpty - the vector is transformed
+into another entity which carries additional meaning. If we treat the concept
+of parsing in the most generic sense - "transforming data from one format to
+another", this fits.</p>
+<p>To mention a less artificial example, the
+<a href="https://github.com/rustcoreutils/posixutils-rs" target="_blank" rel="noopener noreferrer">Rust rewrite of core POSIX utilities</a>
+uses NonEmpty in several places <a href="https://eli.thegreenplace.net/2026/rusty-thoughts-on-parse-dont-validate/#footnote-2" target="_blank" rel="noopener noreferrer">[2]</a>. For example, when constructing a
+shell pipeline:</p>
+<div><pre><span></span><span>pub</span><span> </span><span>struct</span> <span>Pipeline</span><span> </span><span>{</span><span></span>
+<span>    </span><span>pub</span><span> </span><span>commands</span>: <span>NonEmpty</span><span>&lt;</span><span>Command</span><span>&gt;</span><span>,</span><span></span>
+<span>    </span><span>pub</span><span> </span><span>negate_status</span>: <span>bool</span><span>,</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>The command parser's code:</p>
+<div><pre><span></span><span>fn</span> <span>parse_pipeline</span><span>(</span><span>&amp;</span><span>mut</span><span> </span><span>self</span><span>,</span><span> </span><span>alias_table</span>: <span>&amp;</span><span>AliasTable</span><span>)</span><span> </span>-&gt; <span>ParseResult</span><span>&lt;</span><span>Option</span><span>&lt;</span><span>Pipeline</span><span>&gt;&gt;</span><span> </span><span>{</span><span></span>
+<span>    </span><span>// pipeline = "!" command ("|" linebreak command)*</span>
+<span>    </span><span>let</span><span> </span><span>negate_status</span><span> </span><span>=</span><span> </span><span>self</span><span>.</span><span>match_alternatives</span><span>(</span><span>&amp;</span><span>[</span><span>CommandToken</span>::<span>Bang</span><span>])</span><span>?</span><span>.</span><span>is_some</span><span>();</span><span></span>
+<span>    </span><span>let</span><span> </span><span>mut</span><span> </span><span>commands</span><span> </span><span>=</span><span> </span><span>if</span><span> </span><span>let</span><span> </span><span>Some</span><span>(</span><span>command</span><span>)</span><span> </span><span>=</span><span> </span><span>self</span><span>.</span><span>parse_command</span><span>(</span><span>alias_table</span><span>)</span><span>?</span><span> </span><span>{</span><span></span>
+<span>        </span><span>NonEmpty</span>::<span>new</span><span>(</span><span>command</span><span>)</span><span></span>
+<span>    </span><span>}</span><span> </span><span>else</span><span> </span><span>{</span><span></span>
+<span>        </span><span>return</span><span> </span><span>Ok</span><span>(</span><span>None</span><span>);</span><span></span>
+<span>    </span><span>};</span><span></span>
+
+<span>    </span><span>// ...</span>
+</pre></div>
+<p>A valid Pipeline is only returned if there are some commands in the
+parsed AST. Otherwise, it just returns None. Once this is done, the client
+code can use commands.first() without having to worry about the
+possibility of it returning None.</p>
+</div>
+<div>
+<h2>Gradual parsing and type refinement</h2>
+<p>A somewhat more interesting example can be found in the source code of
+<a href="https://github.com/rust-lang/rust-analyzer" target="_blank" rel="noopener noreferrer">rust-analyzer</a>. This project
+has a type that represents an absolute filesystem path:</p>
+<div><pre><span></span><span>pub</span><span> </span><span>struct</span> <span>AbsPathBuf</span><span>(</span><span>Utf8PathBuf</span><span>);</span><span></span>
+</pre></div>
+<p>Instead of carrying around a regular path, the absoluteness is recorded in
+the type once the initial parsing and validation is done:</p>
+<div><pre><span></span><span>impl</span><span> </span><span>TryFrom</span><span>&lt;</span><span>Utf8PathBuf</span><span>&gt;</span><span> </span><span>for</span><span> </span><span>AbsPathBuf</span><span> </span><span>{</span><span></span>
+<span>    </span><span>type</span> <span>Error</span><span> </span><span>=</span><span> </span><span>Utf8PathBuf</span><span>;</span><span></span>
+<span>    </span><span>fn</span> <span>try_from</span><span>(</span><span>path_buf</span>: <span>Utf8PathBuf</span><span>)</span><span> </span>-&gt; <span>Result</span><span>&lt;</span><span>AbsPathBuf</span><span>,</span><span> </span><span>Utf8PathBuf</span><span>&gt;</span><span> </span><span>{</span><span></span>
+<span>        </span><span>if</span><span> </span><span>!</span><span>path_buf</span><span>.</span><span>is_absolute</span><span>()</span><span> </span><span>{</span><span></span>
+<span>            </span><span>return</span><span> </span><span>Err</span><span>(</span><span>path_buf</span><span>);</span><span></span>
+<span>        </span><span>}</span><span></span>
+<span>        </span><span>Ok</span><span>(</span><span>AbsPathBuf</span><span>(</span><span>path_buf</span><span>))</span><span></span>
+<span>    </span><span>}</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>Subsequent code doesn't have to validate the the path is absolute. The type
+enforces it.</p>
+<p>Note also that AbsPathBuf wraps Utf8PathBuf, not PathBuf.
+Utf8PathBuf is itself a custom, "parsed" type refinement from the
+<a href="https://docs.rs/camino/latest/camino/" target="_blank" rel="noopener noreferrer">camino crate</a>. Regular paths in the
+Rust standard library aren't guaranteed to be valid UTF-8, so they cannot be
+easily converted to a String (which has to be valid UTF-8 in Rust);
+<span>camino::Utf8PathBuf</span> establishes validity on construction, and can then
+be converted to a string with just:</p>
+<div><pre><span></span><span>fn</span> <span>as_str</span><span>(</span><span>&amp;</span><span>self</span><span>)</span><span> </span>-&gt; <span>&amp;</span><span>str</span> <span>{</span><span></span>
+<span>  </span><span>..</span><span>.</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>So we have an example of gradual parsing and type refinement here:</p>
+<div><pre><span></span>std::path::PathBuf
+
+      |
+      |   prove UTF-8
+      |
+      V
+
+camino::Utf8PathBuf
+
+      |
+      |   prove absolute
+      |
+      V
+
+rust-analyzer's paths::AbsPathBuf
+</pre></div>
+</div>
+<div>
+<h2>Non-zero integers</h2>
+<p>Rust has a generic type called <a href="https://doc.rust-lang.org/std/num/struct.NonZero.html" target="_blank" rel="noopener noreferrer">NonZero</a>,
+to describe unsigned numeric quantities that are known to be non-zero.</p>
+<p>For example, <span>thread::available_parallelism</span> is defined as:</p>
+<div><pre><span></span><span>pub</span><span> </span><span>fn</span> <span>available_parallelism</span><span>()</span><span> </span>-&gt; <span>Result</span><span>&lt;</span><span>NonZero</span><span>&lt;</span><span>usize</span><span>&gt;&gt;</span><span></span>
+</pre></div>
+<p>If the call is successful, it returns a NonZero&lt;usize&gt;, which is like
+a normal usize with the restriction that it's not zero. Client code doesn't
+have to keep checking whether the parallelism is 0 - it's enshrined in the type
+system.</p>
+<p>Rust defines the <a href="https://doc.rust-lang.org/std/primitive.u32.html#impl-Div%3CNonZero%3Cu32%3E%3E-for-u32" target="_blank" rel="noopener noreferrer">division operator</a>
+with NonZero&lt;usize&gt; in the denominator as an operation that "cannot panic".</p>
+<p>NonZero has an additional advantage: zero is an invalid value for the
+type, so Rust can use the zero bit pattern to represent None. Consequently,
+Option&lt;NonZeroUsize&gt; is <a href="https://doc.rust-lang.org/std/option/index.html#representation" target="_blank" rel="noopener noreferrer">guaranteed to have the same size</a> and alignment as
+NonZeroUsize itself (and as usize). This can avoid the extra storage
+that an Option&lt;usize&gt; would generally require.</p>
+</div>
+<div>
+<h2>Parsing JSON</h2>
+<p>A common example of the "parse, don't validate" idiom appears in deserializing
+data from a JSON string. Rust's serde crate enables us to do the parsing,
+with validated decisions encoded into the type system, e.g.:</p>
+<div><pre><span></span><span>#[derive(Debug, Deserialize)]</span><span></span>
+<span>struct</span> <span>Config</span><span> </span><span>{</span><span></span>
+<span>    </span><span>name</span>: <span>String</span><span>,</span><span></span>
+<span>    </span><span>workers</span>: <span>NonZeroUsize</span><span>,</span><span></span>
+<span>    </span><span>mode</span>: <span>Mode</span><span>,</span><span></span>
+<span>}</span><span></span>
+
+<span>#[derive(Debug, Deserialize)]</span><span></span>
+<span>#[serde(rename_all = </span><span>"snake_case"</span><span>)]</span><span></span>
+<span>enum</span> <span>Mode</span><span> </span><span>{</span><span></span>
+<span>    </span><span>Fast</span><span>,</span><span></span>
+<span>    </span><span>Safe</span><span>,</span><span></span>
+<span>}</span><span></span>
+</pre></div>
+<p>And then later:</p>
+<div><pre><span></span><span>let</span><span> </span><span>input</span><span> </span><span>=</span><span> </span><span>r#"</span>
+<span>     {</span>
+<span>         "name": "compiler",</span>
+<span>         "workers": 4,</span>
+<span>         "mode": "fast"</span>
+<span>     }</span>
+<span> "#</span><span>;</span><span></span>
+
+<span> </span><span>let</span><span> </span><span>config</span>: <span>Config</span><span> </span><span>=</span><span> </span><span>serde_json</span>::<span>from_str</span><span>(</span><span>input</span><span>)</span><span>?</span><span>;</span><span></span>
+</pre></div>
+<p>There is a lot happening behind the scenes:</p>
+<ul>
+<li>The types of all fields are enforced (e.g. "name" cannot be an array).</li>
+<li>The mode is validated to be one of the enum values of Mode.</li>
+<li>workers is validated to be a non-zero integer, because of the
+NonZeroUsize field type.</li>
+</ul>
+<p>We take code like this for granted these days, but it's still a great example
+of the pattern discussed in this post. Once the parser converted mode into
+the Mode enum, no further validation is required.</p>
+<p>In dynamic languages like Python and JS, the process is usually much more
+manual. Python's json.loads gives us a dictionary, and it's up to the user
+to validate its contents. Libraries like Pydantic permit an approach closer to
+Rust's, but they're not universally used.</p>
+<hr />
+<table>
+<colgroup><col /><col /></colgroup>
+<tbody>
+<tr><td><a href="https://eli.thegreenplace.net/2026/rusty-thoughts-on-parse-dont-validate/#footnote-reference-1" target="_blank" rel="noopener noreferrer">[1]</a></td><td>Other languages - like Go or Python - have a runtime check that raises
+some sort of exception or panic when lst[0] is accessed on an empty
+list or slice.</td></tr>
+</tbody>
+</table>
+<table>
+<colgroup><col /><col /></colgroup>
+<tbody>
+<tr><td><a href="https://eli.thegreenplace.net/2026/rusty-thoughts-on-parse-dont-validate/#footnote-reference-2" target="_blank" rel="noopener noreferrer">[2]</a></td><td>The project implements its own NonEmpty, without relying on the
+nonempty crate, but all the points in this post apply.</td></tr>
+</tbody>
+</table>
+</div>
+</div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://eli.thegreenplace.net/2026/rusty-thoughts-on-parse-dont-validate/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button><script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
