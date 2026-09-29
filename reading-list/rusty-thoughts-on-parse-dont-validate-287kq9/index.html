@@ -284,9 +284,15 @@ Rust's, but they're not universally used.</p>
 <table>
 <colgroup><col /><col /></colgroup>
 <tbody>
-<tr><td><a href="https://eli.thegreenplace.net/2026/rusty-thoughts-on-parse-dont-validate/#footnote-reference-1" target="_blank" rel="noopener noreferrer">[1]</a></td><td>Other languages - like Go or Python - have a runtime check that raises
+<tr><td><a href="https://eli.thegreenplace.net/2026/rusty-thoughts-on-parse-dont-validate/#footnote-reference-1" target="_blank" rel="noopener noreferrer">[1]</a></td><td><p>Other languages - like Go or Python - don't have a dedicated first
+method or function, and instead have the programmer rely on a
+runtime check that raises
 some sort of exception or panic when lst[0] is accessed on an empty
-list or slice.</td></tr>
+list or slice.</p>
+<p>This is not by mistakel these methods / functions were not added to
+Go and Python precisely because their semantics are tricky to narrow
+down without a type like Option.</p>
+</td></tr>
 </tbody>
 </table>
 <table>

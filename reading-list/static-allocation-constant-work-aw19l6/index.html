@@ -144,7 +144,7 @@ more <code>Order</code> could cause kernel’s OOM killer to terminate the entir
 matching engine, losing the other million orders, or, better yet, to kill the
 supervisor process so that you can’t even restart.</p>
 <p>Static allocation gives you peace of mind. The system might fail to start if you
-don’t have enough memory, but, if it did start, you can be rest assured that it
+don’t have enough memory, but, if it did start, you can rest assured that it
 would handle overload gracefully, continuing to render the service while you are
 provisioning a beefier machine.</p>
 </section>
@@ -208,13 +208,13 @@ amount of orders, by introducing a no-op, neutral order:</p>
 <p>One benefit here is cognitive, you no longer think in terms of creating and
 destroying orders. Instead, the orders merely circulate in the system according
 to the law of the conservation of the number of orders. It becomes harder to
-loose track of an order if you must always pay attention not only to where the
+lose track of an order if you must always pay attention not only to where the
 order goes, but also to where it came from. You explicitly write state
 transition functions for each <em>pair</em> of states, and that makes it easier to
-exhaustively enumerate all the cases. And you double check that with asserting,
+exhaustively enumerate all the cases. And you double-check that with asserting,
 at every point, that the state is what you expect it to be (and then you DST the
 asserts) .</p>
-<p>Another benefit is code simplification and predictability. You no longer need to
+<p>Another benefit is code-simplification and predictability. You no longer need to
 track a separate collection of “live” orders. Instead, you always iterate the
 full set, doing no-ops for reserved. This feels wasteful: should we make the
 code run faster when there are few orders? But consider this: by specifying the
@@ -232,7 +232,7 @@ way to break when reaching the limit.</p>
 <span>}</span></code></pre>
 
 </figure>
-<p>is much easier for compiler to vectorize, and for CPU Cache to prefetch, than
+<p>is much easier for a compiler to vectorize, and for a CPU Cache to prefetch, than
 this:</p>
 
 <figure>
@@ -263,7 +263,7 @@ search loop with an early return:</p>
 that theres a <em>unique</em> matching item:</p>
 <p><a href="https://github.com/tigerbeetle/tigerbeetle/blob/0.17.9/src/vsr/grid.zig#L715-L725" target="_blank" rel="noopener noreferrer">https://github.com/tigerbeetle/tigerbeetle/blob/0.17.9/src/vsr/grid.zig#L715-L725</a></p>
 <hr />
-<p>As usual, this is <em>a</em> trick which is useful to have in your arsenal, but it
+<p>As usual, this is <em>a</em> trick that is useful to have in your arsenal, but it
 isn’t a universal solution to all programming’s problems.</p>
 </section>
 

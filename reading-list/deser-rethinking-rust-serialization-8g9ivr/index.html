@@ -1,0 +1,438 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.3.4"><!-- Core SEO --><meta name="description" content="Serde is an amazing serialization library for Rust and it
+has been a huge reason why I felt productive with it for years.  However already
+while at Sentry I got quite frustrated with some of the limit"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/deser-rethinking-rust-serialization-8g9ivr/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/deser-rethinking-rust-serialization-8g9ivr/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/deser-rethinking-rust-serialization-8g9ivr/"><meta property="og:title" content="Deser: Rethinking Rust Serialization"><meta property="og:description" content="Serde is an amazing serialization library for Rust and it
+has been a huge reason why I felt productive with it for years.  However already
+while at Sentry I got quite frustrated with some of the limit"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="Serde is an amazing serialization library for Rust and it
+has been a huge reason why I felt productive with it for years.  However already
+while at Sentry I got quite frustrated with some of the limit"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/deser-rethinking-rust-serialization-8g9ivr/"><meta property="twitter:title" content="Deser: Rethinking Rust Serialization"><meta property="twitter:description" content="Serde is an amazing serialization library for Rust and it
+has been a huge reason why I felt productive with it for years.  However already
+while at Sentry I got quite frustrated with some of the limit"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Deser: Rethinking Rust Serialization</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Deser: Rethinking Rust Serialization","item":"https://blog.yuyins.com/reading-list/deser-rethinking-rust-serialization-8g9ivr/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip:after{content:none!important}.chip--sm{padding:.25rem .625rem;font-size:.8125rem}.chip--md{padding:.375rem .875rem;font-size:.875rem}.chip--interactive{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}@media (hover:hover){.chip--interactive:not(.chip--active):not(.active):hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}}.chip--active,.chip.active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.CnoqupXc.css"><style>.article-content{max-width:none}.article-content:lang(en){letter-spacing:0}.article-content:lang(en) pre{letter-spacing:var(--ls-body)}.article-content code:not(pre *){background:color-mix(in srgb, var(--muted) 30%, transparent);color:var(--foreground);border:0;border-radius:.2em;padding:.05em .3em;font-size:.875em;display:inline}.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.article-content table{max-width:100%;display:block;overflow-x:auto}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent-hover)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent-hover);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link nav-link--active" aria-current="page" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/podcasts" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 播客 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-09-30" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-09-30</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-09-29" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-09-29</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-09-29" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-09-29</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-09-28" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-09-28</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-09-27" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-09-27</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-09-26" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-09-26</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.CSOHzgZl.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>Deser: Rethinking Rust Serialization</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://lucumr.pocoo.org/" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag"> lucumr.pocoo.org </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年9月29日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" lang="zh-CN" data-astro-cid-veycvx62><p><a href="https://serde.rs/" target="_blank" rel="noopener noreferrer">Serde</a> is an amazing serialization library for Rust and it
+has been a huge reason why I felt productive with it for years.  However already
+while at Sentry I got quite frustrated with some of the limitations with it but
+actually replacing Serde is tricky because of the might that it has in the
+ecosystem.  Also because it’s quite hard to actually do better without also
+making some potentially painful compromises.</p>
+<p>Here are three examples of Serde corner cases that show poor interactions of
+Serde features or unexpected limitations:</p>
+A number that is a map
+<p>An internally tagged enum, with <code>serde_json</code>‘s <code>arbitrary_precision</code> feature
+turned on:</p>
+<div><pre><span></span><span>#[derive(Deserialize)]</span>
+<span>#[serde(tag = </span><span>"type"</span><span>)]</span>
+<span>enum</span><span> </span><span>Shape</span><span> </span><span>{</span>
+<span>    </span><span>Circle</span><span> </span><span>{</span><span> </span><span>radius</span><span>:</span><span> </span><span>f64</span><span> </span><span>},</span>
+<span>}</span>
+
+<span>serde_json</span><span>::</span><span>from_str</span><span>::</span><span>&lt;</span><span>Shape</span><span>&gt;</span><span>(</span><span>r#"{"type": "Circle", "radius": 1.5}"#</span><span>)</span>
+<span>// error: invalid type: map, expected f64</span>
+</pre></div>
+<p>Serde’s data model has no place for arbitrary precision numbers, so <code>serde_json</code>
+uses in-band signalling with a map with a magic key.  The enum has to buffer the
+fields until it has seen the tag, and the buffer does not know about the magic
+key.  Because Cargo features are unified, it’s enough for any crate in your
+dependency graph to turn the feature on.</p>
+
+Flattening breaks integer keys
+<div><pre><span></span><span>#[derive(Deserialize)]</span>
+<span>struct</span><span> </span><span>Stats</span><span> </span><span>{</span>
+<span>    </span><span>scores</span><span>:</span><span> </span><span>HashMap</span><span>&lt;</span><span>u32</span><span>,</span><span> </span><span>u32</span><span>&gt;</span><span>,</span>
+<span>}</span>
+
+<span>#[derive(Deserialize)]</span>
+<span>struct</span><span> </span><span>Report</span><span> </span><span>{</span>
+<span>    </span><span>name</span><span>:</span><span> </span><span>String</span><span>,</span>
+<span>    </span><span>#[serde(flatten)]</span>
+<span>    </span><span>stats</span><span>:</span><span> </span><span>Stats</span><span>,</span>
+<span>}</span>
+
+<span>serde_json</span><span>::</span><span>from_str</span><span>::</span><span>&lt;</span><span>Report</span><span>&gt;</span><span>(</span><span>r#"{"name": "x", "scores": {"42": 23}}"#</span><span>)</span>
+<span>// error: invalid type: string "42", expected u32 at line 1 column 35</span>
+</pre></div>
+<p><code>Stats</code> on its own parses <code>{"scores": {"42": 23}}</code> just fine.  JSON keys are
+always strings, and <code>serde_json</code> only turns them into integers if the type asks
+for one.  However once <code>flatten</code> buffers the value, <code>"42"</code> is just a string.
+The error also points at the end of the document rather than at the key.</p>
+
+Adapters do not compose
+<div><pre><span></span><span>fn</span><span> </span><span>from_hex</span><span>&lt;'</span><span>de</span><span>,</span><span> </span><span>D</span><span>:</span><span> </span><span>Deserializer</span><span>&lt;'</span><span>de</span><span>&gt;&gt;</span><span>(</span><span>d</span><span>:</span><span> </span><span>D</span><span>)</span><span> </span><span>-&gt;</span><span> </span><span>Result</span><span>&lt;</span><span>u32</span><span>,</span><span> </span><span>D</span><span>::</span><span>Error</span><span>&gt;</span><span> </span><span>{</span><span> </span><span>..</span><span>.</span><span> </span><span>}</span>
+
+<span>#[derive(Deserialize)]</span>
+<span>struct</span><span> </span><span>Theme</span><span> </span><span>{</span>
+<span>    </span><span>#[serde(deserialize_with = </span><span>"from_hex"</span><span>)]</span>
+<span>    </span><span>primary</span><span>:</span><span> </span><span>u32</span><span>,</span>
+<span>    </span><span>#[serde(deserialize_with = </span><span>"from_hex"</span><span>)]</span>
+<span>    </span><span>accent</span><span>:</span><span> </span><span>Option</span><span>&lt;</span><span>u32</span><span>&gt;</span><span>,</span>
+<span>}</span>
+
+<span>//error[E0308]: `?` operator has incompatible types</span>
+<span>//  |</span>
+<span>//  |     #[serde(deserialize_with = "from_hex")]</span>
+<span>//  |                                ^^^^^^^^^^ expected `Option&lt;u32&gt;`, found `u32`</span>
+<span>//  |</span>
+<span>//help: try wrapping the expression in `Some`</span>
+<span>//  |</span>
+<span>//  |     #[serde(deserialize_with = Some("from_hex"))]</span>
+<span>//  |                                +++++          +</span>
+</pre></div>
+<p>A function cannot be passed as a type parameter, so there is no way to apply
+<code>from_hex</code> to the inside of an <code>Option</code>, a <code>Vec</code> or a map.  You write another
+function for every wrapper, and once you have <code>from_opt_hex</code> the field is no
+longer optional unless you also remember to add <code>#[serde(default)]</code>.</p>
+
+<p>None of these are bugs that are easy to fix in Serde.  They fall out of its
+design, and that design is protected by Serde’s stability guarantees.</p>
+<p>Back in 2022 I started an experiment called
+<a href="https://github.com/mitsuhiko/deser" target="_blank" rel="noopener noreferrer">Deser</a>.  It’s a serialization library for
+Rust that takes the user experience of <a href="https://serde.rs/" target="_blank" rel="noopener noreferrer">Serde</a> and puts it on
+top of a completely different architecture inspired by
+<a href="https://github.com/dtolnay/miniserde" target="_blank" rel="noopener noreferrer">miniserde</a>.  I never really finished it
+and it sat around for a few years.  I picked it back up, and it has now reached
+a point where I think it’s worth looking at.  Even just to inspire others to
+see if they want to explore the space.</p>
+<h2>The Name And Idea</h2>
+<p>The name is Serde with its two halves swapped.  Deser is Serde but the other way
+around.  In Serde, a type drives the deserialization process: a <code>Deserialize</code>
+impl asks the deserializer for the kind of value it expects, the format calls
+back into a visitor.  Every nested value is handled by recursion which makes
+Serde deserialization inherently grow the stack with each level of nesting.</p>
+<p>Deser on the other hand turns this around and the format tells the type of the
+next value and pushes events into a sink.  When a sink hits the start of a
+nested value, it doesn’t call into it but hands back a new sink to a driver,
+which keeps all state on the heap (in fact, in an arena).  On the way out,
+emitters return their nested values instead of recursing into them.</p>
+<p>That also means that Deser cannot support formats like protobuf that are not
+self describing.  They are in fact quite intentionally left out of the design
+entirely.  Which is one way to say: if you want to “fix” Serde, you need to
+make some other compromises.</p>
+<p>Most of the reasons for Deser’s ideas go back to <a href="https://github.com/getsentry/relay" target="_blank" rel="noopener noreferrer">Sentry
+Relay</a>, which processes enormous amounts of
+untrusted JSON.  Over the years when I was at Sentry we ran into the same set of
+problems again and again, and many of them are not really bugs in Serde but
+consequences of its design.  Serde’s stability guarantees mean that a lot of
+them cannot be fixed without breaking every format and every hand written
+implementation.  Most of these problems come from three decisions:</p>
+<ol>
+<li>
+<p><strong>One set of traits for all formats.</strong>  Serde serves both self describing
+formats (JSON, YAML, TOML, …) and formats where the reader has to know the
+type upfront (postcard, bincode, protobuf, …).  That is incredibly useful,
+but it means that some features only work with some formats, and you find out
+at runtime.  In case of Serde it also has some odd wrinkles where a derived
+struct quietly accepts an array in place of an object in JSON for instance.</p>
+</li>
+<li>
+<p><strong>A fixed data model that loses information when buffering.</strong>  Internally
+tagged enums, untagged enums and <code>flatten</code> need to buffer values before
+they know what to do with them.  The buffer can’t hold everything the format
+knew, errors lose their location and extensions to the ecosystem rely on
+in-band signalling to express things such as arbitrary precision numbers.</p>
+</li>
+<li>
+<p><strong>Recursion on the call stack.</strong>  Every level of nesting uses stack space.
+Formats protect against this with a recursion limit, but the moment you go
+through a code path that doesn’t have one (writing, dynamic values), deeply
+nested data can take down your process.  It also means that a
+deserialization cannot be paused while you wait for more input.</p>
+</li>
+</ol>
+<p>Many of the corresponding Serde issues have been open for years, and I wrote
+about <a href="https://lucumr.pocoo.org/2021/11/14/abusing-serde/" target="_blank" rel="noopener noreferrer">abusing Serde</a> before.  People have tried
+different angles on this over the years.  Some went minimal and dropped most
+features to get fast compiles and no recursion.  dtolnay’s own
+<a href="https://github.com/dtolnay/miniserde" target="_blank" rel="noopener noreferrer">miniserde</a> is the best example of that,
+and deser’s trait design was originally modelled after it.  Other recent
+attempts went for runtime reflection, or for a new data model with a focus on
+binary formats.</p>
+<p>If you want to read up on all of the collected challenges with Serde’s design,
+I maintain <a href="https://github.com/mitsuhiko/deser/blob/main/SERDE.md" target="_blank" rel="noopener noreferrer">a lengthy list here</a>.</p>
+<h2>Dethroning Serde</h2>
+<p>First of all I don’t think it’s likely that one can replace Serde.  <a href="https://smallcultfollowing.com/babysteps/blog/2022/04/17/coherence-and-crate-level-where-clauses/" target="_blank" rel="noopener noreferrer">The orphan
+rule</a>
+entrenches Serde incredibly well in the ecosystem.  But some things are within
+the reach of a crate author’s control.  In case of Deser it’s completeness.</p>
+<p>Deser today implements all important self describing formats from YAML, JSON,
+TOML, CBOR, JSON5 and the likes, but also XML and plist to really close the gap.
+XML in particular is something Serde has declined to support, and it shows
+(more on that below).  At the very least format support should not be the
+reason not to use Deser.</p>
+<p>The second problem usually is that actually solving Serde’s issues comes at a
+significant cost in compile time and/or runtime performance.  Deser is no
+different.  While Deser’s compile times are a bit better than Serde’s, the
+binary bloat is quite a bit worse and the runtime performance is mixed.  It’s
+roughly comparable if you look at the numbers but depending on the format
+structure you are losing significantly from some of the tradeoffs.</p>
+<p>That said, it’s now in a state where it’s at least in principle a drop-in
+replacement where the tradeoffs might work well for users.</p>
+<h2>Deser’s Design</h2>
+<p>Deser does not try to be significantly different than Serde on the surface
+level.  For most uses you derive <code>Serialize</code> and <code>Deserialize</code> and then start
+using it with your format implementing crate of choice.  Most attributes are
+very similar, though they are taking Rust expressions instead of strings.</p>
+<div><pre><span></span><span>use</span><span> </span><span>deser</span><span>::{</span><span>Serialize</span><span>,</span><span> </span><span>Deserialize</span><span>};</span>
+
+<span>#[derive(Debug, Serialize, Deserialize)]</span>
+<span>#[deser(rename_all = </span><span>"camelCase"</span><span>)]</span>
+<span>pub</span><span> </span><span>struct</span><span> </span><span>Account</span><span> </span><span>{</span>
+<span>    </span><span>id</span><span>:</span><span> </span><span>u64</span><span>,</span>
+<span>    </span><span>account_holder</span><span>:</span><span> </span><span>String</span><span>,</span>
+<span>    </span><span>#[deser(default)]</span>
+<span>    </span><span>is_deactivated</span><span>:</span><span> </span><span>bool</span><span>,</span>
+<span>}</span>
+
+<span>let</span><span> </span><span>account</span><span>:</span><span> </span><span>Account</span><span> </span><span>=</span><span> </span><span>deser_json</span><span>::</span><span>from_str</span><span>(</span><span>json</span><span>)</span><span>?</span><span>;</span>
+</pre></div>
+<p>The difference in the design would become more apparent if you implement a
+serializer or deserializer yourself.  Instead of visitors that call into each
+other recursively, deserializing a type creates a
+<em>sink</em> which receives events that are directly emitted by the parser, and
+<em>serializing produces emitters</em> that hand out values.  Nested sinks and emitters
+are handed back to a driver, which keeps them on the heap.  This design, which is
+entirely stolen from miniserde, gives some interesting consequences:</p>
+<ul>
+<li><strong>No stack overflows.</strong>  You can arbitrarily nest structures without issues.
+For untrusted input you set limits with a layer, and you pick the number
+that you are comfortable with, which is independent of your stack space.</li>
+<li><strong>Suspendable.</strong>  Because the state lives in the driver, a deserialization
+can be fed input as it arrives.  It’s also <code>Send</code>, so it can move between
+threads while you wait on IO which makes it much nicer to use with tokio.
+Formats like JSON, CBOR and MessagePack can be parsed as a stream if you
+so desire.</li>
+<li><strong>An extensible data model.</strong>  The core data model is small and made of atoms,
+maps and sequences.  For all else, there are extension values (<code>DateTime</code>,
+<code>Uuid</code>, etc.) that also all carry a fallback for formats that don’t understand
+them.  Unlike Serde this means it does not rely on in-band signalling of
+objects with magic keys to smuggle values through.</li>
+<li><strong>Lossless buffering.</strong>  When a value has to be buffered (for instance because
+the tag of an internally tagged enum comes last), Deser records the events
+together with everything the format knew about them.  Protocol specific
+extension types or error locations all survive.</li>
+<li><strong>Layers</strong> are a middleware system that sit between the format and your types
+and can track things like paths, enforce safety limits, rename keys or redact
+values without having to touch specific code paths.</li>
+<li><strong>Native flattening</strong> that doesn’t buffer at all.</li>
+</ul>
+<p>On top of that are a lot of things that I just wanted to have:</p>
+<ul>
+<li>Allow enum tags to be of any type, not just strings</li>
+<li>Adapters that compose (<code>as = Option&lt;Vec&lt;DisplayFromStr&gt;&gt;</code>)</li>
+<li>Enabling validation as an adapter</li>
+<li>derive attributes that are real Rust expressions instead of strings</li>
+<li>bytes as a core functionality in the data model</li>
+<li>duplicate keys rejected by default and errors that point at the problem</li>
+</ul>
+<p>Here is a small configuration type that shows a few of these together:</p>
+<div><pre><span></span><span>use</span><span> </span><span>deser</span><span>::</span><span>adapters</span><span>::</span><span>DisplayFromStr</span><span>;</span>
+<span>use</span><span> </span><span>deser</span><span>::</span><span>de</span><span>::</span><span>Recording</span><span>;</span>
+<span>use</span><span> </span><span>deser</span><span>::{</span><span>Deserialize</span><span>,</span><span> </span><span>Serialize</span><span>};</span>
+<span>use</span><span> </span><span>deser_encoding</span><span>::</span><span>Hex</span><span>;</span>
+<span>use</span><span> </span><span>deser_validate</span><span>::{</span><span>Check</span><span>,</span><span> </span><span>NonEmpty</span><span>,</span><span> </span><span>Range</span><span>};</span>
+<span>use</span><span> </span><span>ipnet</span><span>::</span><span>IpNet</span><span>;</span>
+
+<span>#[derive(Debug, Serialize, Deserialize)]</span>
+<span>pub</span><span> </span><span>struct</span><span> </span><span>Config</span><span> </span><span>{</span>
+<span>    </span><span>// at least one 256-bit key, each written as hex</span>
+<span>    </span><span>#[deser(as = Check&lt;NonEmpty, Vec&lt;Hex&gt;&gt;)]</span>
+<span>    </span><span>secret_keys</span><span>:</span><span> </span><span>Vec</span><span>&lt;</span><span>[</span><span>u8</span><span>;</span><span> </span><span>32</span><span>]</span><span>&gt;</span><span>,</span>
+<span>    </span><span>// `IpNet` knows nothing about deser, but has `FromStr` and `Display`</span>
+<span>    </span><span>#[deser(as = Option&lt;Vec&lt;DisplayFromStr&gt;&gt;)]</span>
+<span>    </span><span>allowed_networks</span><span>:</span><span> </span><span>Option</span><span>&lt;</span><span>Vec</span><span>&lt;</span><span>IpNet</span><span>&gt;&gt;</span><span>,</span>
+<span>    </span><span>listeners</span><span>:</span><span> </span><span>Vec</span><span>&lt;</span><span>Listener</span><span>&gt;</span><span>,</span>
+<span>}</span>
+
+<span>#[derive(Debug, Serialize, Deserialize)]</span>
+<span>#[deser(tag = </span><span>"type"</span><span>, rename_all = </span><span>"snake_case"</span><span>)]</span>
+<span>pub</span><span> </span><span>enum</span><span> </span><span>Listener</span><span> </span><span>{</span>
+<span>    </span><span>Unix</span><span> </span><span>{</span><span> </span><span>path</span><span>:</span><span> </span><span>PathBuf</span><span> </span><span>},</span>
+<span>    </span><span>Tcp</span><span> </span><span>{</span>
+<span>        </span><span>host</span><span>:</span><span> </span><span>IpAddr</span><span>,</span>
+<span>        </span><span>#[deser(as = Check&lt;Range&lt;1, 65535&gt;&gt;)]</span>
+<span>        </span><span>port</span><span>:</span><span> </span><span>u16</span><span>,</span>
+<span>    </span><span>},</span>
+<span>    </span><span>// types this version does not know are kept and written back</span>
+<span>    </span><span>#[deser(other)]</span>
+<span>    </span><span>Other</span><span>(</span><span>#[deser(tag)]</span><span> </span><span>String</span><span>,</span><span> </span><span>Recording</span><span>),</span>
+<span>}</span>
+</pre></div>
+<p>Adapters are types, so <code>Hex</code> can go inside a <code>Vec</code>, and <code>DisplayFromStr</code> inside
+a <code>Vec</code> inside an <code>Option</code>.  Validators are adapters too, so
+<code>Check&lt;NonEmpty, Vec&lt;Hex&gt;&gt;</code> decodes the keys and then checks that there is at
+least one.  The catch-all variant keeps the tag and a recording of everything
+else in case someone wants to process it later.</p>
+<p>Errors are something I care a lot about, so here is what happens when a value
+is wrong:</p>
+<div><pre><span></span><span>secret_keys</span><span> </span><span>=</span><span> </span><span>[</span><span>"9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"</span><span>]</span>
+<span>allowed_networks</span><span> </span><span>=</span><span> </span><span>[</span><span>"10.0.0.0/8"</span><span>,</span><span> </span><span>"fd00::/8"</span><span>]</span>
+
+<span>[[listeners]]</span>
+<span>type</span><span> </span><span>=</span><span> </span><span>"unix"</span>
+<span>path</span><span> </span><span>=</span><span> </span><span>"/run/app.sock"</span>
+
+<span>[[listeners]]</span>
+<span>host</span><span> </span><span>=</span><span> </span><span>"127.0.0.1"</span>
+<span>port</span><span> </span><span>=</span><span> </span><span>0</span>
+<span>type</span><span> </span><span>=</span><span> </span><span>"tcp"</span>
+
+<span>[[listeners]]</span>
+<span>type</span><span> </span><span>=</span><span> </span><span>"quic"</span>
+<span>host</span><span> </span><span>=</span><span> </span><span>"::1"</span>
+<span>alpn</span><span> </span><span>=</span><span> </span><span>[</span><span>"h3"</span><span>]</span>
+</pre></div>
+<div><pre><span></span><span>let</span><span> </span><span>config</span><span>:</span><span> </span><span>Config</span><span> </span><span>=</span><span> </span><span>deser_toml</span><span>::</span><span>Deserializer</span><span>::</span><span>from_str</span><span>(</span><span>input</span><span>)</span>
+<span>    </span><span>.</span><span>deserialize_with</span><span>(</span><span>|</span><span>driver</span><span>|</span><span> </span><span>driver</span><span>.</span><span>push_layer</span><span>(</span><span>PathLayer</span><span>::</span><span>new</span><span>()))</span><span>?</span><span>;</span>
+</pre></div>
+<p>Note that here the tag of the internally tagged enum comes last which means that
+the values have to be buffered until the tag is known.  In Serde this is tricky
+and we would lose the location if we used some tricks to add it.  With Deser
+however, with the path layer enabled Deser you where in the structure the
+problem is:</p>
+<div><pre><span></span>Unexpected: invalid value: must be between 1 and 65535 at line 10 column 8 (path: listeners[1].port)
+</pre></div>
+<h2>Deser Meta Data</h2>
+<p>Deser really wants to be extensible, and XML is a more extreme example of the
+differences between Deser and Serde.  Here is an Atom entry that mixes in Dublin
+Core for the authors:</p>
+<div><pre><span></span><span>use</span><span> </span><span>chrono</span><span>::{</span><span>DateTime</span><span>,</span><span> </span><span>Utc</span><span>};</span>
+<span>use</span><span> </span><span>deser</span><span>::</span><span>Deserialize</span><span>;</span>
+<span>use</span><span> </span><span>deser_value</span><span>::</span><span>Value</span><span>;</span>
+<span>use</span><span> </span><span>deser_xml</span><span>::</span><span>DeserializerConfig</span><span>;</span>
+
+<span>deser_xml</span><span>::</span><span>namespace</span><span>!</span><span>(</span>
+<span>    </span><span>atom</span><span> </span><span>=</span><span> </span><span>"http://www.w3.org/2005/Atom"</span><span>,</span>
+<span>    </span><span>dc</span><span> </span><span>=</span><span> </span><span>"http://purl.org/dc/elements/1.1/"</span><span>,</span>
+<span>);</span>
+
+<span>#[derive(Debug, Deserialize)]</span>
+<span>struct</span><span> </span><span>Entry</span><span> </span><span>{</span>
+<span>    </span><span>#[deser(rename = atom!(</span><span>"title"</span><span>))]</span>
+<span>    </span><span>title</span><span>:</span><span> </span><span>String</span><span>,</span>
+<span>    </span><span>#[deser(rename = dc!(</span><span>"creator"</span><span>))]</span>
+<span>    </span><span>creators</span><span>:</span><span> </span><span>Vec</span><span>&lt;</span><span>String</span><span>&gt;</span><span>,</span>
+<span>    </span><span>#[deser(rename = atom!(</span><span>"updated"</span><span>))]</span>
+<span>    </span><span>updated</span><span>:</span><span> </span><span>DateTime</span><span>&lt;</span><span>Utc</span><span>&gt;</span><span>,</span>
+<span>}</span>
+
+<span>// entries we understand, and everything else is kept as it is</span>
+<span>#[derive(Debug, Deserialize)]</span>
+<span>#[deser(untagged)]</span>
+<span>enum</span><span> </span><span>Item</span><span> </span><span>{</span>
+<span>    </span><span>Entry</span><span>(</span><span>Entry</span><span>),</span>
+<span>    </span><span>Other</span><span>(</span><span>Value</span><span>),</span>
+<span>}</span>
+
+<span>let</span><span> </span><span>item</span><span>:</span><span> </span><span>Item</span><span> </span><span>=</span><span> </span><span>DeserializerConfig</span><span>::</span><span>new</span><span>()</span>
+<span>    </span><span>.</span><span>resolve_namespaces</span><span>(</span><span>true</span><span>)</span>
+<span>    </span><span>.</span><span>from_str</span><span>(</span><span>r#"</span>
+<span>        &lt;entry xmlns="http://www.w3.org/2005/Atom"</span>
+<span>               xmlns:d="http://purl.org/dc/elements/1.1/"&gt;</span>
+<span>          &lt;title&gt;Deser&lt;/title&gt;</span>
+<span>          &lt;d:creator&gt;John&lt;/d:creator&gt;</span>
+<span>          &lt;updated&gt;2026-09-29T21:00:00Z&lt;/updated&gt;</span>
+<span>          &lt;d:creator&gt;Jane&lt;/d:creator&gt;</span>
+<span>        &lt;/entry&gt;</span>
+<span>    "#</span><span>)</span><span>?</span><span>;</span>
+</pre></div>
+<p>XML uses namespaces which means that names need to be matched by their namespace,
+not by the prefix the document happens to use.  Here the document says <code>d:</code> and
+the type says <code>dc!</code>.  <code>atom!("title")</code> is just the string
+<code>{http://www.w3.org/2005/Atom}title</code>, which works because attributes are
+expressions.  The two creators are collected into one <code>Vec</code> even though there is
+another element between them, and the text of <code>updated</code> goes straight into a
+<code>chrono</code> datetime.  Because the enum is untagged, the entry has to be buffered
+before a variant is picked, and deser’s buffer keeps both creators.  So the
+result is an <code>Entry</code> with John and Jane.</p>
+<p>quick-xml, the most popular XML crate for Serde, drops the prefixes and ignores
+namespaces entirely, so a <code>&lt;x:title&gt;</code> from some other namespace is happily
+accepted as the title of the entry.  The split list part though is considerably
+worse.  A plain <code>Entry</code> fails with a duplicate field error for <code>creator</code>, unless
+you turn on the <code>overlapped-lists</code> feature (which, remember, is a global
+additive flag that any crate could set).  That feature makes quick-xml read
+ahead to the end of the element and buffer everything in between, without a
+limit unless you set one.</p>
+<p>But the feature only helps when quick-xml is hooked up to the struct directly
+and no buffering is taking place.  Wrap the struct in the untagged enum and
+Serde buffers the entry itself.  Read from that buffer, <code>Entry</code> sees <code>creator</code>
+twice and fails again.  The fallback is a map, which keeps only the last
+<code>creator</code>, and there is no error.  With or without the feature you get this:</p>
+<div><pre><span></span><span>Other</span><span>({</span><span>"creator"</span><span>:</span><span> </span><span>{</span><span>"$text"</span><span>:</span><span> </span><span>"Jane"</span><span>},</span><span> </span><span>"title"</span><span>:</span><span> </span><span>{</span><span>"$text"</span><span>:</span><span> </span><span>"Deser"</span><span>},</span><span> </span><span>..</span><span>.})</span>
+</pre></div>
+<p>Notice how John is gone.</p>
+<p>Format specific extension types such as TOML datetimes are another case.  TOML
+has them natively, Serde’s data model does not, so the <code>toml</code> crate passes them
+on as a map with a magic key.  In Deser a datetime is an extension value, which
+formats that know it keep and all others write as a string:</p>
+<div><pre><span></span><span>let</span><span> </span><span>value</span><span>:</span><span> </span><span>Value</span><span> </span><span>=</span><span> </span><span>deser_toml</span><span>::</span><span>from_str</span><span>(</span><span>"released = 2026-09-29T21:00:00+02:00"</span><span>)</span><span>?</span><span>;</span>
+
+<span>deser_json</span><span>::</span><span>to_string</span><span>(</span><span>&amp;</span><span>value</span><span>)</span><span>?</span><span>;</span>
+<span>// {"released":"2026-09-29T21:00:00+02:00"}</span>
+<span>deser_toml</span><span>::</span><span>to_string</span><span>(</span><span>&amp;</span><span>value</span><span>)</span><span>?</span><span>;</span>
+<span>// released = 2026-09-29T21:00:00+02:00</span>
+</pre></div>
+<p>The same with <code>serde_json::Value</code> gives you
+<code>{"released":{"$__toml_private_datetime":"2026-09-29T21:00:00+02:00"}}</code>, and
+reading the value into a <code>chrono::DateTime</code> fails outright with <code>invalid type: map, expected an RFC 3339 formatted date and time string</code>.</p>
+<h2>The Cost</h2>
+<p>So now that you know Deser is at least in theory cool, at what cost?</p>
+<p>It is not free.  The design relies on dynamic dispatch and on sinks and emitters
+that live on the heap, and that has considerable runtime overhead.  In my own
+measurements for JSON, Deser reads somewhere between 33% faster and 60% slower
+than <code>serde_json depending</code> on the data.  On average it’s about 10% slower for
+reading.  Writes are between three times as fast and 70% slower and a wash on
+average.  For YAML and TOML it’s noticeably faster than the Serde based crates,
+but that is more about the format implementations than the architecture.</p>
+<p>Compile times slightly are better, but not dramatically so.  Because it doesn’t
+monomorphize everything, release builds of derived code are about 2.3 times as
+fast as with Serde and that get a tiny bit better in practice for your own code
+as less recompilation is necessary.</p>
+<p>To make Deser’s design work at all, it also uses <code>unsafe</code> internally.  Most of
+this is to keep the chain of borrowed sinks on the heap.  I feel like this is
+fine in the days of Miri and agents, but I know it makes some folks uneasy.</p>
+<p>And well, the biggest cost is that it’s just not Serde.</p>
+<h2>How Much Is There?</h2>
+<p>Quite a lot actually which might be surprising.  In addition to the core
+there is support for <a href="https://github.com/mitsuhiko/deser/tree/main/deser-derive" target="_blank" rel="noopener noreferrer">derive</a>.</p>
+<p>It supports all flavorts of JSON you can think of:
+<a href="https://github.com/mitsuhiko/deser/tree/main/deser-json" target="_blank" rel="noopener noreferrer">JSON</a>,
+<a href="https://github.com/mitsuhiko/deser/tree/main/deser-jsonc" target="_blank" rel="noopener noreferrer">JSONC</a>,
+<a href="https://github.com/mitsuhiko/deser/tree/main/deser-json5" target="_blank" rel="noopener noreferrer">JSON5</a> and
+<a href="https://github.com/mitsuhiko/deser/tree/main/deser-hj" target="_blank" rel="noopener noreferrer">HJSON</a>.  (Fun fact here:
+they are all generated out of <a href="https://github.com/mitsuhiko/deser/tree/main/deser-template-json" target="_blank" rel="noopener noreferrer">one shared parser template</a>)
+For binary handling it supports
+<a href="https://github.com/mitsuhiko/deser/tree/main/deser-cbor" target="_blank" rel="noopener noreferrer">CBOR</a> and
+<a href="https://github.com/mitsuhiko/deser/tree/main/deser-msgpack" target="_blank" rel="noopener noreferrer">MessagePack</a>.
+Additionally it does
+<a href="https://github.com/mitsuhiko/deser/tree/main/deser-yaml" target="_blank" rel="noopener noreferrer">YAML</a> 1.1 and 1.2,
+<a href="https://github.com/mitsuhiko/deser/tree/main/deser-toml" target="_blank" rel="noopener noreferrer">TOML</a>,
+<a href="https://github.com/mitsuhiko/deser/tree/main/deser-xml" target="_blank" rel="noopener noreferrer">XML</a> and all three
+flavors of Apple’s <a href="https://github.com/mitsuhiko/deser/tree/main/deser-plist" target="_blank" rel="noopener noreferrer">plist</a>
+as well as <a href="https://github.com/mitsuhiko/deser/tree/main/deser-csv" target="_blank" rel="noopener noreferrer">CSV/TSV</a>,
+<a href="https://github.com/mitsuhiko/deser/tree/main/deser-urlencoded" target="_blank" rel="noopener noreferrer">urlencoded data</a> and
+<a href="https://github.com/mitsuhiko/deser/tree/main/deser-env" target="_blank" rel="noopener noreferrer">environment variables</a>.
+For more crazy contraptions you can
+<a href="https://github.com/mitsuhiko/deser/tree/main/deser-path" target="_blank" rel="noopener noreferrer">attach path info</a> or
+<a href="https://github.com/mitsuhiko/deser/tree/main/deser-location" target="_blank" rel="noopener noreferrer">capture location data</a>
+as well as support for
+<a href="https://github.com/mitsuhiko/deser/tree/main/deser-debug" target="_blank" rel="noopener noreferrer">debug printing</a>.
+You can perform <a href="https://github.com/mitsuhiko/deser/tree/main/deser-validate" target="_blank" rel="noopener noreferrer">validation</a>
+as you parse, opt into different
+<a href="https://github.com/mitsuhiko/deser/tree/main/deser-encoding" target="_blank" rel="noopener noreferrer">binary encodings</a>
+in addition to base64, you can
+<a href="https://github.com/mitsuhiko/deser/tree/main/deser-serde" target="_blank" rel="noopener noreferrer">bridge to serde</a> or
+capture
+<a href="https://github.com/mitsuhiko/deser/tree/main/deser-value" target="_blank" rel="noopener noreferrer">dynamic values</a>,
+<a href="https://github.com/mitsuhiko/deser/tree/main/deser-transcode" target="_blank" rel="noopener noreferrer">transcode</a>
+between formats or hook it up with
+<a href="https://github.com/mitsuhiko/deser/tree/main/deser-tokio" target="_blank" rel="noopener noreferrer">tokio</a>.</p>
+<p>For documentation see <a href="https://docs.rs/deser/latest/deser/" target="_blank" rel="noopener noreferrer">docs.rs/deser</a>
+and the code itself is <a href="https://github.com/mitsuhiko/deser" target="_blank" rel="noopener noreferrer">on GitHub</a> alongside
+<a href="https://github.com/mitsuhiko/deser/tree/main/examples" target="_blank" rel="noopener noreferrer">many examples</a>.</p>
+</div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://lucumr.pocoo.org/2026/9/29/deser/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button><script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
