@@ -8,14 +8,14 @@
 <p>You could think of ◇<em>p</em> as the points where we cannot rule out the possibility of <em>p</em> being true using open sets. If ◇<em>p</em> includes <em>x</em>, any open set containing <em>x</em> also contains part of ◇<em>p</em>, though it may also contain points outside of ◇<em>p.</em></p>
 <h2>Regularity</h2>
 <p>For any topology on <em>X</em>, the logic constructed above is normal. The axiom</p>
-<p>◇<em>p</em> ⇔ ¬ (□ ¬ <em>p</em>)</p>
+<p><img alt="\Diamond p \Leftrightarrow \lnot (\Box \lnot p)" height="18" width="121" src="https://www.johndcook.com/topmodal1.svg" /></p>
 <p>holds because the closure of a set is the complement of the interior of its complement [1].</p>
 <p>Note that this is a regularity result for the modal logic, not the topology. The topology could be arbitrary, and not necessarily regular or normal in the topological sense.</p>
 <h2>S4</h2>
 <p>The logic constructed above also satisfies a couple more axioms. We have</p>
-<p>□<em>p</em> → <em>p</em></p>
+<p><img alt="\Box p \to p" height="14" width="64" src="https://www.johndcook.com/topmodal2.svg" /></p>
 <p>because the interior of a set is a subset of the set, and</p>
-<p>□<em>p</em> → □□<em>p</em></p>
+<p><img alt="\Box p \to \Box\Box p" height="14" width="90" src="https://www.johndcook.com/topmodal3.svg" /></p>
 <p>because the interior of the interior of a set is simply the interior. This means the modal logic corresponding to a topology satisfies the S4 axioms. You could say S4 is the logic that corresponds to the McKinsey and Tarski logic of all topological spaces.</p>
 <h2>More logics and more topologies</h2>
 <p>So S4 is the logic that corresponds to <em>all</em> topologies. We could look at more restricted topologies and ask what are their corresponding logics. Or we could start with a modal logic and ask whether there’s a topology that models that logic.</p>
@@ -26,9 +26,9 @@
 <p>For the indiscrete topology, □<em>p</em> corresponds to a proposition holding everywhere and ◇<em>p</em> corresponds to it holding somewhere. If the topological space has infinitely many points, the corresponding modal logic is S5. [2]</p>
 <h3>Between S4 and S5</h3>
 <p>The cofinite topology on an infinite set <em>X</em> defines a set <em>U</em> to be open if the complement of <em>U</em> is finite. The McKinsey-Tarski logic of the cofinite topology is somewhere between S4 and S5. You can show that the formula</p>
-<p><em>p</em> ∧ ◇□<em>p</em> → □<em>p</em></p>
+<p><img alt="p \land \Diamond\Box p \to \Box p" height="17" width="126" src="https://www.johndcook.com/topmodal4.svg" /></p>
 <p>holds, which doesn’t hold in S4, and the formula</p>
-<p>◇<em>p</em> → □◇<em>p</em></p>
+<p><img alt="\Diamond p \to \Box\Diamond p" height="17" width="95" src="https://www.johndcook.com/topmodal5.svg" /></p>
 <p>does not hold, though it must hold in S5.</p>
 <h2>Related posts</h2>
 <ul>
