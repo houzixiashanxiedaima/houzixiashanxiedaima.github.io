@@ -1,0 +1,182 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.3.4"><!-- Core SEO --><meta name="description" content="They weren't defined, not even as undefined.
+The post How can undefined opcodes <CODE>ud0</CODE> and <CODE>ud1</CODE> have parameters? How undefined were they? appeared first on The Old New Thing.
+"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/how-can-undefined-opcodes-ud0-and-ud1-have-paramet-5c5iup/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/how-can-undefined-opcodes-ud0-and-ud1-have-paramet-5c5iup/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/how-can-undefined-opcodes-ud0-and-ud1-have-paramet-5c5iup/"><meta property="og:title" content="How can undefined opcodes ud0 and ud1 have parameters? How undefined were they?"><meta property="og:description" content="They weren't defined, not even as undefined.
+The post How can undefined opcodes <CODE>ud0</CODE> and <CODE>ud1</CODE> have parameters? How undefined were they? appeared first on The Old New Thing.
+"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="They weren't defined, not even as undefined.
+The post How can undefined opcodes <CODE>ud0</CODE> and <CODE>ud1</CODE> have parameters? How undefined were they? appeared first on The Old New Thing.
+"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/how-can-undefined-opcodes-ud0-and-ud1-have-paramet-5c5iup/"><meta property="twitter:title" content="How can undefined opcodes ud0 and ud1 have parameters? How undefined were they?"><meta property="twitter:description" content="They weren't defined, not even as undefined.
+The post How can undefined opcodes <CODE>ud0</CODE> and <CODE>ud1</CODE> have parameters? How undefined were they? appeared first on The Old New Thing.
+"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>How can undefined opcodes ud0 and ud1 have parameters? How undefined were they?</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"How can undefined opcodes ud0 and ud1 have parameters? How undefined were they?","item":"https://blog.yuyins.com/reading-list/how-can-undefined-opcodes-ud0-and-ud1-have-paramet-5c5iup/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip:after{content:none!important}.chip--sm{padding:.25rem .625rem;font-size:.8125rem}.chip--md{padding:.375rem .875rem;font-size:.875rem}.chip--interactive{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}@media (hover:hover){.chip--interactive:not(.chip--active):not(.active):hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}}.chip--active,.chip.active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.EijOSbcv.css"><style>.article-content{max-width:none}.article-content:lang(en){letter-spacing:0}.article-content:lang(en) pre{letter-spacing:var(--ls-body)}.article-content code:not(pre *){background:color-mix(in srgb, var(--muted) 30%, transparent);color:var(--foreground);border:0;border-radius:.2em;padding:.05em .3em;font-size:.875em;display:inline}.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.article-content table{max-width:100%;display:block;overflow-x:auto}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent-hover)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent-hover);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link nav-link--active" aria-current="page" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/podcasts" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 播客 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-10-09" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-10-09</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-10-08" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-10-08</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-10-08" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-10-08</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-10-07" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-10-07</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-10-07" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-10-07</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-10-06" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-10-06</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.CSOHzgZl.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>How can undefined opcodes ud0 and ud1 have parameters? How undefined were they?</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://devblogs.microsoft.com/oldnewthing" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag"> devblogs.microsoft.com/oldnewthing </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年10月7日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" lang="zh-CN" data-astro-cid-veycvx62><p>Gunnar Dalsnes wondered <a href="https://devblogs.microsoft.com/oldnewthing/20260910-00/?p=112689/&amp;commentid=144727#comment-144727" target="_blank" rel="noopener noreferrer"> how <code>ud0</code> and <code>ud1</code> could have parameters if they were undefined</a>? “Does it mean they were not completely undefined, just undocumented and not completely implemented?”</p>
+<p>The opcodes <code>ud0</code> and <code>ud1</code> have no definition, but that’s not the same as being architecturally an “undefined instruction”. They live in a purgatory where they were not assigned a meaning, but were also not officially declared to be meaningless.</p>
+<p>Originally, these byte sequences went through the instruction decoder and happened to slip through a few cracks before somebody finally noticed, “Wait a second, I don’t know how to execute this.”</p>
+<p>You can see this when you look at the instructions that are encoded as <code>00001111 11111xxx</code>, as of the Pentium III.</p>
+<table>
+<tbody>
+<tr>
+<th>Bits</th>
+<th>Bytes</th>
+<th>Opcode</th>
+<th>Operand 1</th>
+<th>Operand 2</th>
+<th>Meaning</th>
+</tr>
+<tr>
+<td>00001111 11111000</td>
+<td>0F F8</td>
+<td>PSUBB</td>
+<td>mm</td>
+<td>mm/m64</td>
+<td>Subtract packed bytes</td>
+</tr>
+<tr>
+<td>00001111 11111001</td>
+<td>0F F9</td>
+<td>PSUBW</td>
+<td>mm</td>
+<td>mm/m64</td>
+<td>Subtract packed words</td>
+</tr>
+<tr>
+<td>00001111 11111010</td>
+<td>0F FA</td>
+<td>PSUBD</td>
+<td>mm</td>
+<td>mm/m64</td>
+<td>Subtract packed dwords</td>
+</tr>
+<tr>
+<td>00001111 11111011</td>
+<td>0F FB</td>
+<td>No meaning assigned</td>
+</tr>
+<tr>
+<td>00001111 11111100</td>
+<td>0F FC</td>
+<td>PADDB</td>
+<td>mm</td>
+<td>mm/m64</td>
+<td>Add packed bytes</td>
+</tr>
+<tr>
+<td>00001111 11111101</td>
+<td>0F FD</td>
+<td>PADDW</td>
+<td>mm</td>
+<td>mm/m64</td>
+<td>Add packed words</td>
+</tr>
+<tr>
+<td>00001111 11111110</td>
+<td>0F FE</td>
+<td>PADDD</td>
+<td>mm</td>
+<td>mm/m64</td>
+<td>Add packed dwords</td>
+</tr>
+<tr>
+<td>00001111 11111111</td>
+<td>0F FF</td>
+<td>No meaning assigned</td>
+</tr>
+</tbody>
+</table>
+<p>The byte sequences <code>0F FB</code> and <code>0F FF</code> had yet to be assigned a meaning. You can see how the instruction decoder could take a shortcut and say, “Well, all the instructions in this range, or at least all the ones that I care about, take an mm registers and an mm/m64 operand, so I’ll just save myself some transistors and decode all of them with two parameters (mm, mm/m64).” And then after decoding, it would use bit 3 to decide whether to set up the arithmetic unit for an add or subtract, and it would use bits 0 and 1 to decide how to subdivide the bits into saturating units.</p>
+<p>And if you gave it a <code>0F FF</code>, it would be only in that last step that the decoder would realize “Oh dear, I don’t know what to do with a bit combination of 11. I’ll raise an invalid opcode instruction.”</p>
+<p>The invalid opcode instruction got raised <i>after</i> the operands were parsed.</p>
+<p>You can see the trouble that <code>0F FF</code> created when those empty slots started to get filled in by the SSE instructions.</p>
+<table>
+<tbody>
+<tr>
+<th>Bits</th>
+<th>Bytes</th>
+<th>Opcode</th>
+<th>Operand 1</th>
+<th>Operand 2</th>
+<th>Meaning</th>
+</tr>
+<tr>
+<td>00001111 11111000</td>
+<td>0F F8</td>
+<td>PSUBB</td>
+<td>mm</td>
+<td>mm/m64</td>
+<td>Subtract packed bytes</td>
+</tr>
+<tr>
+<td>00001111 11111001</td>
+<td>0F F9</td>
+<td>PSUBW</td>
+<td>mm</td>
+<td>mm/m64</td>
+<td>Subtract packed words</td>
+</tr>
+<tr>
+<td>00001111 11111010</td>
+<td>0F FA</td>
+<td>PSUBD</td>
+<td>mm</td>
+<td>mm/m64</td>
+<td>Subtract packed dwords</td>
+</tr>
+<tr>
+<td>00001111 11111011</td>
+<td>0F FB</td>
+<td>PSUBQ</td>
+<td>mm</td>
+<td>mm/m64</td>
+<td>Subtract packed qwords</td>
+</tr>
+<tr>
+<td>00001111 11111100</td>
+<td>0F FC</td>
+<td>PADDB</td>
+<td>mm</td>
+<td>mm/m64</td>
+<td>Add packed bytes</td>
+</tr>
+<tr>
+<td>00001111 11111101</td>
+<td>0F FD</td>
+<td>PADDW</td>
+<td>mm</td>
+<td>mm/m64</td>
+<td>Add packed words</td>
+</tr>
+<tr>
+<td>00001111 11111110</td>
+<td>0F FE</td>
+<td>PADDD</td>
+<td>mm</td>
+<td>mm/m64</td>
+<td>Add packed dwords</td>
+</tr>
+<tr>
+<td>00001111 11111111</td>
+<td>0F FF</td>
+<td>I want to put PADDQ here but I can’t</td>
+</tr>
+</tbody>
+</table>
+<p>the natural place to put the <code>PADDQ</code> instruction is <code>0F FF</code>, but people had already been using <code>0F FF</code> with the expectation that it raises an illegal instruction exception. Making it a valid instruction would break those programs, so Intel had to move <code>PADDQ</code> to the rather awkward location <code>0F D4</code>.</p>
+<p><b>Bonus chatter</b>: Undefined instructions with parameters are actually not uncommon. For example, on AArch64, <a href="https://devblogs.microsoft.com/oldnewthing/20220822-00/?p=107032" target="_blank" rel="noopener noreferrer"> there is a range of 65,536 instructions set aside as permanently undefined</a>, so the <code>udf</code> instruction takes a 16-bit immediate to specify which invalid opcode you want. The PDP-10 reserved opcode 000 as a permanently illegal instruction, and it carries a register and a memory address as parameters. (Because <i>all</i> PDP-10 instructions carry a register and a memory address as parameters.)</p>
+<p>There are also so-called “unofficial opcodes” which are instructions that are not part of the instruction set architecture, but for which people reverse-engineered a consistent behavior and began to rely on it. (The 6502 processor is <a href="https://www.pagetable.com/31" target="_blank" rel="noopener noreferrer"> well-known in nerd circles for having undergone this type of analysis</a>.) The <code>0F FF</code> is one of these “unofficial opcodes” that was popular enough that Intel felt pressure to maintain backward compatibility with it, even though it was never architecturally documented or supported.</p>
+<p><b>Bonus bonus chatter</b>: It appears that the mnemonic <code>ud1</code> was <a href="https://github.com/netwide-assembler/nasm/blob/nasm-0.98.x/CHANGES#L827-L831" target="_blank" rel="noopener noreferrer"> introduced by the nasm assembler</a>:</p>
+<pre>* Added the following new instructions: SYSENTER, SYSEXIT, FXSAVE,
+  FXRSTOR, UD1, UD2 (the latter two are two opcodes that Intel
+  guarantee will never be used; one of them is documented as UD2 in
+  Intel documentation, the other one just as "Undefined Opcode" --
+  <span>calling it UD1 seemed to make sense</span>.)
+</pre>
+<p>It seems obvious that <code>ud1</code> is also the name that Intel gave internally to that legacy instruction. Otherwise, there would be no need to call the new one <code>ud2</code>!</p>
+<p>The post <a href="https://devblogs.microsoft.com/oldnewthing/20261007-00/?p=112759/" target="_blank" rel="noopener noreferrer">How can undefined opcodes &lt;CODE&gt;ud0&lt;/CODE&gt; and &lt;CODE&gt;ud1&lt;/CODE&gt; have parameters? How undefined were they?</a> appeared first on <a href="https://devblogs.microsoft.com/oldnewthing" target="_blank" rel="noopener noreferrer">The Old New Thing</a>.</p>
+</div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://devblogs.microsoft.com/oldnewthing/20261007-00/?p=112759/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button><script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>

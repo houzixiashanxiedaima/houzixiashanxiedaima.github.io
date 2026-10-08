@@ -1,0 +1,267 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.3.4"><!-- Core SEO --><meta name="description" content="Monte Carlo simulations (or methods) is the technique of applying
+randomness and the Law of large numbers
+to the solution of various scientific and engineering problems. One of its
+first documented us"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/monte-carlo-simulations-xutj2o/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/monte-carlo-simulations-xutj2o/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/monte-carlo-simulations-xutj2o/"><meta property="og:title" content="Monte-Carlo simulations"><meta property="og:description" content="Monte Carlo simulations (or methods) is the technique of applying
+randomness and the Law of large numbers
+to the solution of various scientific and engineering problems. One of its
+first documented us"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="Monte Carlo simulations (or methods) is the technique of applying
+randomness and the Law of large numbers
+to the solution of various scientific and engineering problems. One of its
+first documented us"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/monte-carlo-simulations-xutj2o/"><meta property="twitter:title" content="Monte-Carlo simulations"><meta property="twitter:description" content="Monte Carlo simulations (or methods) is the technique of applying
+randomness and the Law of large numbers
+to the solution of various scientific and engineering problems. One of its
+first documented us"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Monte-Carlo simulations</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Monte-Carlo simulations","item":"https://blog.yuyins.com/reading-list/monte-carlo-simulations-xutj2o/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip:after{content:none!important}.chip--sm{padding:.25rem .625rem;font-size:.8125rem}.chip--md{padding:.375rem .875rem;font-size:.875rem}.chip--interactive{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}@media (hover:hover){.chip--interactive:not(.chip--active):not(.active):hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}}.chip--active,.chip.active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.EijOSbcv.css"><style>.article-content{max-width:none}.article-content:lang(en){letter-spacing:0}.article-content:lang(en) pre{letter-spacing:var(--ls-body)}.article-content code:not(pre *){background:color-mix(in srgb, var(--muted) 30%, transparent);color:var(--foreground);border:0;border-radius:.2em;padding:.05em .3em;font-size:.875em;display:inline}.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.article-content table{max-width:100%;display:block;overflow-x:auto}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent-hover)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent-hover);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link nav-link--active" aria-current="page" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/podcasts" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 播客 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-10-09" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-10-09</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-10-08" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-10-08</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-10-08" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-10-08</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-10-07" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-10-07</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-10-07" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-10-07</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-10-06" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-10-06</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.CSOHzgZl.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>Monte-Carlo simulations</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://eli.thegreenplace.net/" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag"> eli.thegreenplace.net </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年10月8日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" lang="zh-CN" data-astro-cid-veycvx62><p>Monte Carlo simulations (or <em>methods</em>) is the technique of applying
+randomness and the <a href="https://en.wikipedia.org/wiki/Law_of_large_numbers" target="_blank" rel="noopener noreferrer">Law of large numbers</a>
+to the solution of various scientific and engineering problems. One of its
+first documented uses was by Stanislaw Ulam and John von Neumann for nuclear
+weapon simulations after WWII <a href="https://eli.thegreenplace.net/2026/monte-carlo-simulations/#footnote-1" target="_blank" rel="noopener noreferrer">[1]</a>.</p>
+<p>In this post I want to provide examples of some simple uses of Monte Carlo
+simulations. We'll start with the classical example of calculating the value
+of \pi by throwing darts.</p>
+<div>
+<h2>Estimating pi</h2>
+<p>Suppose we take a square board and inscribe a quarter of a circle into it. We
+then proceed to throw darts at the board and record whether each dart hits
+inside or outside the quarter circle. Having thrown many such darts, we
+calculate the ratio of the darts inside the circle to the total number thrown.</p>
+<p>Assuming our darts are distributed uniformly over the
+square, by the Law of large numbers this ratio should approach the ratio of
+areas of the quarter circle A_{circ} to the full square A_{square}.</p>
+<p>With a square side length of 1, we have:</p>
+\[\frac{A_{circ}}{A_{square}}=\frac{\pi/4}{1}=\frac{\pi}{4}\]
+<p>Therefore:</p>
+\[\pi\approx 4\frac{\text{hits inside}}{\text{total throws}}\]
+<p>Here's a visualization:</p>
+
+
+<div>
+  
+    A quarter circle of radius 1 inside a unit square.
+  
+
+  <div>
+    <div>
+      <div>
+        
+          Samples 200
+        
+        
+        <div><span>10</span><span>1000</span></div>
+      </div>
+      Run
+    </div>
+
+    <p>
+      <span>π</span> ≈ <span>—</span>
+    </p>
+  </div>
+</div>
+
+<p>Change the number of samples (dart throws) and click "Run" to regenerate. The
+code is very simple - here's a slightly sanitized version:</p>
+<div><pre><span></span><span>const</span><span> </span><span>total</span><span> </span><span>=</span><span> </span><span>Number</span><span>(</span><span>samples</span><span>.</span><span>value</span><span>);</span><span></span>
+<span>let</span><span> </span><span>inside</span><span> </span><span>=</span><span> </span><span>0</span><span>;</span><span></span>
+<span>for</span><span> </span><span>(</span><span>let</span><span> </span><span>i</span><span> </span><span>=</span><span> </span><span>0</span><span>;</span><span> </span><span>i</span><span> </span><span>&lt;</span><span> </span><span>total</span><span>;</span><span> </span><span>i</span><span>++</span><span>)</span><span> </span><span>{</span><span></span>
+<span>  </span><span>const</span><span> </span><span>x</span><span> </span><span>=</span><span> </span><span>Math</span><span>.</span><span>random</span><span>();</span><span></span>
+<span>  </span><span>const</span><span> </span><span>y</span><span> </span><span>=</span><span> </span><span>Math</span><span>.</span><span>random</span><span>();</span><span></span>
+<span>  </span><span>const</span><span> </span><span>inCircle</span><span> </span><span>=</span><span> </span><span>x</span><span> </span><span>*</span><span> </span><span>x</span><span> </span><span>+</span><span> </span><span>y</span><span> </span><span>*</span><span> </span><span>y</span><span> </span><span>&lt;=</span><span> </span><span>1</span><span>;</span><span></span>
+<span>  </span><span>if</span><span> </span><span>(</span><span>inCircle</span><span>)</span><span> </span><span>inside</span><span>++</span><span>;</span><span></span>
+<span>}</span><span></span>
+<span>estimateValue</span><span> </span><span>=</span><span> </span><span>4</span><span> </span><span>*</span><span> </span><span>inside</span><span> </span><span>/</span><span> </span><span>total</span><span>;</span><span></span>
+</pre></div>
+<p>You'll notice that the estimate is relatively poor - even with 1000 samples - if
+you click "Run" several times, some numbers will be way off mark. While this
+method does estimate \pi, it's not a particularly <em>good</em> estimate. I
+find that running ~10 billion samples is necessary to estimate it to 4 digits
+after the decimal with reasonable reliability.</p>
+<p>In general, for independent trials like these, the typical sampling error
+decreases in proportion to 1/\sqrt{N}, where N is the number of trials.
+This means that halving the error requires four times as many samples.</p>
+<p>While the \pi estimation may seem whimsical, it's an example of an
+important class of problems to which Monte Carlo simulation is applied:
+numerical integration. Our simulation estimates the area
+under the quarter-circle curve, which is a definite integral.</p>
+<p>Many integrals are very difficult to solve analytically, and much research has
+been done in the area of numerical analysis to develop methods to calculate
+integrals. Monte Carlo methods are
+particularly useful for high-dimensional integrals, where other numerical
+methods can become prohibitively expensive.</p>
+</div>
+<div>
+<h2>Combinatorial simulation - the game of SET</h2>
+<p>A common use of Monte Carlo methods is estimating complex combinatorial
+calculations. These often don't have analytical solutions, and enumerating all
+options is intractable due to the scale of the numbers involved. As an example,
+let's consider <a href="https://en.wikipedia.org/wiki/Set_(card_game)" target="_blank" rel="noopener noreferrer">the game of SET</a>. Each SET card has four
+attributes:</p>
+<ol>
+<li>Number of shapes (1, 2 or 3)</li>
+<li>Color (Red, Green or Purple)</li>
+<li>Shape type (Oval, Diamond or Squiggle)</li>
+<li>Shading (Empty, Striped or Solid)</li>
+</ol>
+<p>And the goal is to find a "set" - three cards that are either all different or
+all the same <em>for each attribute separately</em>. As an example, here's
+a hand with a single set; see if you can find it <a href="https://eli.thegreenplace.net/2026/monte-carlo-simulations/#footnote-2" target="_blank" rel="noopener noreferrer">[2]</a>:</p>
+SET hand with a single set
+<p>And the next hand doesn't have any sets:</p>
+SET hand with no hands
+<p>Here's a question: given a freshly shuffled SET deck, what are the odds that
+the first 12 cards drawn will have no sets among them? This question is
+difficult to answer without using a computer.</p>
+<p>It's easy to calculate the number of ways to deal a 12-card hand from
+a deck of 81:</p>
+\[\binom{81}{12}=70,724,320,184,700\]
+<p>But how many of these hands have no sets? Enumerating 70 trillion SET hands
+and checking each one can take quite a while, and there is no straightforward
+counting formula to answer this question. Some clever methods can be employed to
+leverage symmetries and other mathematical properties of SET to cut down this
+search space considerably. Donald Knuth himself worked on this problem and came
+up with a neat program (<span>setset-all</span> on <a href="https://cs.stanford.edu/~knuth/programs.html" target="_blank" rel="noopener noreferrer">his programs page</a>) that found 2,284,535,476,080
+such hands. Therefore, the answer to our question is:</p>
+\[\frac{2,284,535,476,080}{70,724,320,184,700}\approx 0.0323\]
+<p>There's a 3.23% chance that a randomly drawn hand of 12 cards from a full deck
+of SET will have no set in it.</p>
+<p>Let's see how we can use a Monte Carlo simulation to answer this question
+with relatively small effort, without deep knowledge of the mathematical
+properties of SET that enable cutting down the search space Knuth-style.
+We can use the following pseudo-code:</p>
+<div><pre><span></span>C = 0
+run N times:
+  draw a random 12-card hand from a fresh deck
+  count sets in the hand
+  if no sets:
+    C += 1
+
+Estimated probability = C / N
+</pre></div>
+<p>After running 10 million simulated draws, I got an answer of 0.0323, which
+matches the real answer very closely.</p>
+<p>The Monte Carlo approach lets us solve rather complicated problems in a very
+simple way. Suppose we want to answer the same question for a hand of 15 cards;
+this would blow up the search space considerably - there are about 100x more
+ways to select 15-card hands than there are to select 12-card hands. But for
+a Monte Carlo simulation, we adjust one small parameter and get a very reliable
+<a href="https://eli.thegreenplace.net/2026/monte-carlo-simulations/#footnote-3" target="_blank" rel="noopener noreferrer">[3]</a> answer (about 0.00037, in case you were wondering).</p>
+</div>
+<div>
+<h2>Retirement projection</h2>
+<p>One domain where Monte Carlo simulations are ubiquitous is projections for
+retirement portfolios. Suppose someone prepares to retire with a total sum
+of 1 million dollars in their portfolio; they'd like to be able to draw
+$30,000 a year from the portfolio for their living expenses. Would that work?</p>
+<p>There's a large number of factors to take into account when analyzing this
+question, but for simplicity let's focus on just two: portfolio return and
+inflation. We can run a naive estimate, assuming average values: suppose an
+average yearly portfolio return of 4%, and average yearly inflation of 2% <a href="https://eli.thegreenplace.net/2026/monte-carlo-simulations/#footnote-4" target="_blank" rel="noopener noreferrer">[4]</a></p>
+<p>Let's denote our portfolio return as r=0.04, and inflation as
+q=0.02. Then the real return each year is:</p>
+\[r^{\mathrm{real}}=\frac{1+r}{1+q}-1\approx0.0196\]
+<p>Starting with $1,000,000, at the end of the year we'll have $1,019,600
+and then draw $30,000 for living expenses <a href="https://eli.thegreenplace.net/2026/monte-carlo-simulations/#footnote-5" target="_blank" rel="noopener noreferrer">[5]</a>, ending with $989,600. If we
+continue this way, the money runs out after ~55 years, which means that a
+person retiring at the age of 65 should be reasonably safe, right?</p>
+<p>But this is <em>very simplistic</em>; assuming just average returns is risky, because
+they do a poor job of representing reality, and many factors have uncertainty.
+For example, the sequence of returns matters a lot; a bad year (-10%) followed
+by a great year (+18%) would still count as "4% on average" but produces
+significantly less money than two consecutive +4% years.
+Inflation is also unpredictable, and sometimes
+correlated with portfolio returns; there could be bad years of high inflation and
+low / volatile returns that can wreak havoc on a portfolio.</p>
+<p>As we add factors (variance in yearly draws, mixed portfolios of stocks, bonds,
+real estate, life expectancy, unexpected events, changing tax laws etc.),
+relying on a single average estimate becomes increasingly more fraught. This
+is why Monte Carlo simulations are very popular in this domain: by drawing
+from reasonable distributions based on historical data, a Monte Carlo simulation
+can easily run a million different scenarios and provide estimates: for example,
+what are the odds of money running out before death.</p>
+<p>Here's a useful chart from a simulation I ran:</p>
+<img alt="Monte Carlo simulation of retirement, showing percentiles and odds of funds running out" src="https://eli.thegreenplace.net/images/2026/retirement-monte-carlo.png" />
+<p>In the top chart:</p>
+<ul>
+<li>The dashed line shows the constant assumptions mentioned before: what happens
+when yearly return is always 4% and inflation is always 2%.</li>
+<li>The shaded blue areas demonstrate the outcomes of 1,000,000 simulations where
+inflation and return numbers are drawn from reasonable normal distributions
+based on historical data. We see that in 25% of the cases, all money ran out
+by roughly 22 years.</li>
+</ul>
+<p>In the bottom chart:</p>
+<ul>
+<li>It's even easier to see how long the funds last; if we're interested in
+knowing, say, what are the odds that this plan will have enough money for
+30 years - the chart shows it's about 60% (since in 40% of the simulations
+the funds were depleted at this point).</li>
+</ul>
+<p>Looking a this simulation, under the current assumptions the plan sounds much
+riskier than the average assumption makes it appear. Assuming that a 65-y.o.
+person would plan for
+25 years of retirement until death, the ~30% odds of not having sufficient funds
+for this duration of time are sobering. Perhaps a change in plans is needed
+(such as a more frugal lifestyle or securing additional funds in some way).</p>
+<p>Retirement projection is only one of may ways in which Monte Carlo simulations
+are used for financial and economical applications; given the high uncertainty
+of these domains, it's very difficult to plan using analytical calculations.
+Company sales projections, growth projections, stock offering prices and much
+more uses Monte Carlo simulations to arrive at estimates with reasonable error
+bars.</p>
+</div>
+<div>
+<h2>Code</h2>
+<p>All the code for the explorations in this post is <a href="https://github.com/eliben/code-for-blog/tree/main/2026/monte-carlo" target="_blank" rel="noopener noreferrer">available on GitHub</a>.</p>
+<hr />
+<table>
+<colgroup><col /><col /></colgroup>
+<tbody>
+<tr><td><a href="https://eli.thegreenplace.net/2026/monte-carlo-simulations/#footnote-reference-1" target="_blank" rel="noopener noreferrer">[1]</a></td><td>While these techniques were conceptually understood much earlier, it's
+not surprising that their first real applications coincided with the
+development of the first digital computers. As we'll see later in the
+post, Monte Carlo simulations benefit from running large numbers of
+trials to get reasonable accuracy.</td></tr>
+</tbody>
+</table>
+<table>
+<colgroup><col /><col /></colgroup>
+<tbody>
+<tr><td><a href="https://eli.thegreenplace.net/2026/monte-carlo-simulations/#footnote-reference-2" target="_blank" rel="noopener noreferrer">[2]</a></td><td>The answer is: three empty red diamonds, three solid purple ovals, three
+striped green squiggles. Note that for each of the 4 SET attributes,
+these three cards are either all the same or all different.</td></tr>
+</tbody>
+</table>
+<table>
+<colgroup><col /><col /></colgroup>
+<tbody>
+<tr><td><a href="https://eli.thegreenplace.net/2026/monte-carlo-simulations/#footnote-reference-3" target="_blank" rel="noopener noreferrer">[3]</a></td><td>For the same number of trials, this estimate has greater relative
+uncertainty than the 12-card estimate, because we encounter far fewer
+hands without a set.</td></tr>
+</tbody>
+</table>
+<table>
+<colgroup><col /><col /></colgroup>
+<tbody>
+<tr><td><a href="https://eli.thegreenplace.net/2026/monte-carlo-simulations/#footnote-reference-4" target="_blank" rel="noopener noreferrer">[4]</a></td><td>For the examples in this post, we'll be using <em>real dollars</em>, or today's
+value of the money. We'll assume that the $30,000 yearly draw doesn't
+change and will instead apply inflation to the portfolio itself.</td></tr>
+</tbody>
+</table>
+<table>
+<colgroup><col /><col /></colgroup>
+<tbody>
+<tr><td><a href="https://eli.thegreenplace.net/2026/monte-carlo-simulations/#footnote-reference-5" target="_blank" rel="noopener noreferrer">[5]</a></td><td>More sophisticated simulations would let us control these parameters;
+for example, are the expense funds drawn at the beginning or end of each
+year, or distributed on a monthly basis?</td></tr>
+</tbody>
+</table>
+</div>
+</div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://eli.thegreenplace.net/2026/monte-carlo-simulations/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button><script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
