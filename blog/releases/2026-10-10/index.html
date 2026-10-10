@@ -1,0 +1,563 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.3.4"><!-- Core SEO --><meta name="description" content="2026-10-10 GitHub Releases 日报：callstack/agent-device、nicobailon/pi-web-access、code-yeongyu/oh-my-openagent 等23个项目更新 | 新增 TestMu AI 设备云提供商支持"><meta name="keywords" content="releases, daily, automation, agent-device, pi-web-access, oh-my-openagent, dashy, cc-switch"><meta name="author" content="Release Bot"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/blog/releases/2026-10-10/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/blog/releases/2026-10-10/"><!-- Open Graph / Facebook --><meta property="og:type" content="article"><meta property="og:url" content="https://blog.yuyins.com/blog/releases/2026-10-10/"><meta property="og:title" content="GitHub Releases 日报 - 2026-10-10"><meta property="og:description" content="2026-10-10 GitHub Releases 日报：callstack/agent-device、nicobailon/pi-web-access、code-yeongyu/oh-my-openagent 等23个项目更新 | 新增 TestMu AI 设备云提供商支持"><meta property="og:image" content="https://blog.yuyins.com/images/covers/cover-2026-10-10.webp"><meta property="og:image:alt" content="2026-10-10 GitHub Releases 日报：callstack/agent-device、nicobailon/pi-web-access、code-yeongyu/oh-my-openagent 等23个项目更新 | 新增 TestMu AI 设备云提供商支持"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><meta property="article:section" content="开源追踪"><meta property="article:published_time" content="2026-10-10T08:00:00.000Z"><meta property="article:tag" content="releases"><meta property="article:tag" content="daily"><meta property="article:tag" content="automation"><meta property="article:tag" content="agent-device"><meta property="article:tag" content="pi-web-access"><meta property="article:tag" content="oh-my-openagent"><meta property="article:tag" content="dashy"><meta property="article:tag" content="cc-switch"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/blog/releases/2026-10-10/"><meta property="twitter:title" content="GitHub Releases 日报 - 2026-10-10"><meta property="twitter:description" content="2026-10-10 GitHub Releases 日报：callstack/agent-device、nicobailon/pi-web-access、code-yeongyu/oh-my-openagent 等23个项目更新 | 新增 TestMu AI 设备云提供商支持"><meta property="twitter:image" content="https://blog.yuyins.com/images/covers/cover-2026-10-10.webp"><title>GitHub Releases 日报 - 2026-10-10</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"GitHub Releases 日报 - 2026-10-10","description":"2026-10-10 GitHub Releases 日报：callstack/agent-device、nicobailon/pi-web-access、code-yeongyu/oh-my-openagent 等23个项目更新 | 新增 TestMu AI 设备云提供商支持","image":"https://blog.yuyins.com/images/covers/cover-2026-10-10.webp","datePublished":"2026-10-10T08:00:00.000Z","dateModified":"2026-10-10T08:00:00.000Z","author":{"@type":"Person","name":"Release Bot"},"publisher":{"@type":"Organization","name":"雅俗共赏","logo":{"@type":"ImageObject","url":"https://blog.yuyins.com/favicon.svg"}}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"开源追踪","item":"https://blog.yuyins.com/category/开源追踪"},{"@type":"ListItem","position":3,"name":"GitHub Releases 日报 - 2026-10-10","item":"https://blog.yuyins.com/blog/releases/2026-10-10/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><link rel="stylesheet" href="/_astro/_..B0y3uL2u.css"><link rel="stylesheet" href="/_astro/Layout.eieEYguW.css"><style>.tag[data-astro-cid-7t72llso]{overflow-wrap:anywhere;background:color-mix(in srgb, var(--muted) 30%, transparent);min-width:0;max-width:100%;color:var(--muted-foreground);border-radius:.375rem;align-items:center;gap:.25rem;padding:.125rem .5rem;font-size:.8125rem;line-height:1.5;text-decoration:none;display:inline-flex}.tag--interactive[data-astro-cid-7t72llso]{transition:background-color .2s,color .2s}.tag--interactive[data-astro-cid-7t72llso]:hover{background:color-mix(in srgb, var(--muted) 55%, transparent);color:var(--foreground)}.tag--active[data-astro-cid-7t72llso]{background:color-mix(in srgb, var(--accent) 14%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 78%, var(--foreground));font-weight:600}.tag[data-astro-cid-7t72llso]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.tags-list[data-astro-cid-cm3albtb]{flex-wrap:wrap;gap:.5rem;display:flex}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link nav-link--active" aria-current="page" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/podcasts" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 播客 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <div id="search" data-astro-cid-ac66eqjo> <button id="search-button" class="search-toggle" aria-label="打开搜索" title="搜索 (⌘K)" data-astro-cid-ac66eqjo> <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></circle> <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" data-astro-cid-ac66eqjo></path> </svg> </button> <dialog id="search-dialog" class="search-dialog" data-astro-cid-ac66eqjo> <div class="search-dialog-card" data-astro-cid-ac66eqjo> <div class="search-input-row" data-astro-cid-ac66eqjo> <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-ac66eqjo> <circle cx="11" cy="11" r="8" data-astro-cid-ac66eqjo></circle><path d="m21 21-4.3-4.3" data-astro-cid-ac66eqjo></path> </svg> <div id="pagefind-ui" class="search-pagefind-slot" data-astro-cid-ac66eqjo></div> <div class="search-controls" data-astro-cid-ac66eqjo> <kbd class="search-kbd" data-astro-cid-ac66eqjo>ESC</kbd> <button id="close-search" class="search-dialog-close" type="button" aria-label="关闭搜索" data-astro-cid-ac66eqjo> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" data-astro-cid-ac66eqjo> <path d="M18 6 6 18" data-astro-cid-ac66eqjo></path><path d="m6 6 12 12" data-astro-cid-ac66eqjo></path> </svg> </button> </div> </div> <div id="search-suggestions" class="search-suggestions" data-astro-cid-ac66eqjo> <p class="search-suggestions-title" data-astro-cid-ac66eqjo>推荐阅读</p> <ul class="search-suggestions-list" data-astro-cid-ac66eqjo> <li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-10-10" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-10-10</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-10-10" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-10-10</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-10-09" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-10-09</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-10-09" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-10-09</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/releases/2026-10-08" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>GitHub Releases 日报 - 2026-10-08</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>开源追踪</span> </a> </li><li data-astro-cid-ac66eqjo> <a class="search-suggestion-item" href="/blog/ide-updates/2026-10-08" data-astro-cid-ac66eqjo> <span class="search-suggestion-title" data-astro-cid-ac66eqjo>IDE / SDK 更新 - 2026-10-08</span> <span class="search-suggestion-meta" data-astro-cid-ac66eqjo>IDE 更新</span> </a> </li> </ul> </div> </div> </dialog> </div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.CSOHzgZl.js"></script> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <script type="module" src="/_astro/CodeCopyButton.astro_astro_type_script_index_0_lang.C3I6XYwD.js"></script> <script type="module" src="/_astro/HeadingAnchor.astro_astro_type_script_index_0_lang.CacVAAhL.js"></script> <dialog id="image-lightbox" class="lightbox" aria-label="图片预览" data-astro-cid-ot6ntcxl> <button id="lightbox-close" class="lightbox-close" type="button" aria-label="关闭" data-astro-cid-ot6ntcxl> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-ot6ntcxl> <line x1="18" y1="6" x2="6" y2="18" data-astro-cid-ot6ntcxl></line> <line x1="6" y1="6" x2="18" y2="18" data-astro-cid-ot6ntcxl></line> </svg> </button> <img id="lightbox-image" class="lightbox-image" src="" alt="" data-astro-cid-ot6ntcxl> <p id="lightbox-error" class="lightbox-error" role="status" hidden data-astro-cid-ot6ntcxl>图片预览加载失败，请关闭后重试。</p> </dialog><script type="module" src="/_astro/ImageLightbox.astro_astro_type_script_index_0_lang.BAo0rMiG.js"></script> <div class="blog-post-container" data-astro-cid-tldeq5d5> <article class="blog-post blog-post--digest" data-pagefind-body data-astro-cid-tldeq5d5> <header class="article-header" data-astro-cid-tldeq5d5> <h1 data-astro-cid-tldeq5d5>GitHub Releases 日报 - 2026-10-10</h1> <div class="article-meta-row" data-astro-cid-tldeq5d5> <a href="/category/开源追踪" class="meta-category" data-astro-cid-tldeq5d5> 开源追踪 </a> <span class="meta-dot" data-astro-cid-tldeq5d5>•</span> <time datetime="2026-10-10T08:00:00.000Z" class="meta-item" data-astro-cid-tldeq5d5> 2026年10月10日 </time> <span class="meta-dot" data-astro-cid-tldeq5d5>•</span> <span class="meta-item" data-astro-cid-tldeq5d5>31 分钟阅读</span> </div> <p class="article-description" data-astro-cid-tldeq5d5>2026-10-10 GitHub Releases 日报：callstack/agent-device、nicobailon/pi-web-access、code-yeongyu/oh-my-openagent 等23个项目更新 | 新增 TestMu AI 设备云提供商支持</p> <div class="article-tags-row" data-astro-cid-tldeq5d5> <div class="tags-list" data-astro-cid-cm3albtb> <a href="/blog/tag/releases" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#releases </a><a href="/blog/tag/daily" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#daily </a><a href="/blog/tag/automation" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#automation </a><a href="/blog/tag/agent-device" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#agent-device </a><a href="/blog/tag/pi-web-access" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#pi-web-access </a><a href="/blog/tag/oh-my-openagent" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#oh-my-openagent </a><a href="/blog/tag/dashy" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#dashy </a><a href="/blog/tag/cc-switch" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#cc-switch </a> </div> </div> </header> <!-- Content --> <div class="article-content app-prose" lang="zh-CN" data-astro-cid-tldeq5d5>  <h3 id="callstackagent-device-v02123---v02124-qwenqwen38-27b"><a href="https://github.com/callstack/agent-device/releases" rel="noopener noreferrer" target="_blank">callstack/agent-device v0.21.23 - v0.21.24</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增 TestMu AI 设备云提供商支持</li>
+<li>iOS 新增仅观察快照功能，无需前台修复</li>
+<li>依赖图新增支配树、区域 SCC 及内聚报告摘要</li>
+<li>优化守护进程性能：延迟加载 Maestro 并限制入口预算</li>
+<li>新增通过 npm publish 发布公共工作区包</li>
+<li>支持在 Limrun 实例上按下 iOS Home 键</li>
+<li>支持在 Limrun 实例上读写 iOS 剪贴板</li>
+<li>在快照捕获中报告 Android 键盘区域</li>
+<li>重构代理架构，将守护进程代理移至 @agent-device/proxy 并支持任意传输协议</li>
+<li>从主入口点导出 Node 适配器</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>守护进程代理已移动至 @agent-device/proxy 包，需更新依赖引用</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 iOS 桥接快照中拒绝场景托管远程内容的问题</li>
+<li>修复 macOS 快照节点非有限 AX 矩形处理问题</li>
+<li>修复 iOS 填充后焦点读取记录 XCTest 失败的问题</li>
+<li>修复 Android close —shutdown 的 IME 恢复干扰设置刷新窗口的问题</li>
+<li>修复 Apple 应用无数据容器时 clear-app-state 拒绝逻辑</li>
+<li>修复 Apple Runner 构建后陈旧缓存键驱逐问题</li>
+<li>修复 Apple Runner 构建临时文件从缓存键中裁剪及打包隔离问题</li>
+<li>修复分层引擎从 OXC AST 解析静态导入的问题</li>
+<li>修复 IS 将模糊选择器匹配报告为歧义而非缺失的问题</li>
+<li>修复 Maestro 目标解析未命中时的类型化失败原因</li>
+<li>修复 Apple Runner 后台应用读取无需提升前台的问题</li>
+<li>修复守护进程在原生 Windows 主机上的可达性问题</li>
+<li>若干琐碎修复与重构（包括测试信号修正、文档措辞收紧、死代码清理等）</li>
+<li>修复 Apple runner 启动准入机制问题</li>
+<li>修复 SwiftUI 工具栏宿主覆盖其包含的 sheet 的问题</li>
+<li>修复 Android 测试 IME 提交到过期输入会话时的重新绑定问题</li>
+<li>保留 macOS 显式会话表面以改进录制功能</li>
+</ul>
+<h3 id="nicobailonpi-web-access-v0380-qwenqwen38-27b"><a href="https://github.com/nicobailon/pi-web-access/releases/tag/v0.38.0" rel="noopener noreferrer" target="_blank">nicobailon/pi-web-access v0.38.0</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增 Ceramic 关键词搜索提供商，需配置 ceramicApiKey 或 CERAMIC_API_KEY</li>
+<li>OpenAI web_search 默认切换至更经济的 Luna 模型（如 gpt-6-luna），成本降低约 20 倍</li>
+<li>支持无 API Key 的提供商（如 pi-multiprovider）使用回答模式和查询重写功能</li>
+<li>优化代理请求处理，保留原始方法、头部、请求体及 Content-Length，HEAD 请求保持为 HEAD</li>
+<li>修复多会话进程隔离问题，确保同一进程中不同 Pi 会话不再丢失搜索结果</li>
+<li>更新 @modelcontextprotocol/sdk 依赖版本以解决安全审计警告</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>OpenAI web_search 默认模型变更为 gpt-6-luna，如需使用旧模型需手动设置 openaiSearchModel</li>
+<li>搜索摘要和回答模式不再自行构建 OpenCode 请求头，改为传递会话 ID 由提供商处理</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复代理环境下 fetch 请求丢失自定义属性及 HEAD 请求被转为 GET 的问题</li>
+<li>修复无 API Key 模式下回答模式因缺少密钥而报错的问题</li>
+<li>修复 Parallel MCP 免费层级因 User-Agent 共享导致的速率限制错误</li>
+<li>调整 OpenCode 相关请求头发送逻辑，由 Pi 内置提供商负责添加会话头</li>
+</ul>
+<h3 id="code-yeongyuoh-my-openagent-v5129-qwenqwen38-27b"><a href="https://github.com/code-yeongyu/oh-my-openagent/releases/tag/v5.1.29" rel="noopener noreferrer" target="_blank">code-yeongyu/oh-my-openagent v5.1.29</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>修复快速模式会话中子任务和 Kibitzer 唤醒因模型不可用而失败的问题</li>
+<li>接受并记录以标准层级而非优先级启动的运行，不再拒绝</li>
+<li>tool_schema (“eval:environments”) 现在文档化了包安装及其环境超时设置</li>
+<li>Julia、Ruby 和 Python 单元格减少了固定工作：无全局遍历、无等待的 cwd stat、更精简的队列和捕获簿记</li>
+<li>桌面线程中创建的定时提示现在可以触发，—session、—resume 和 —continue 可以在新位置找到此类会话</li>
+<li>被其他活动进程持有的会话现在以类型化的 session_held 错误拒绝，而不是被打开两次</li>
+<li>后台子任务在父进程运行时不再保持挂起状态，而是立即恢复或结束</li>
+<li>dev 显示实时统计信息更加可靠</li>
+<li>冷页面加载首次统计刷新遇到上游故障时，现在回退到最后一组完整数据</li>
+<li>每小时汇总不再写入 ROLLUP_FIRST_DAY (2026-10-10) 之前的天数</li>
+<li>部署后保留管道外（仅分发原因）的首次部署已修复</li>
+<li>当冷隔离区刷新失败时，提供共享的最后已知良好统计副本</li>
+<li>CI 流程改进：检查提供的通道与桶指针匹配，验证 get.omo.dev 提供标签</li>
+<li>CI 流程改进：手动 omo-get 部署门控，没有账本或迁移时关闭失败</li>
+<li>CI 流程改进：实时部署目标为 Sisyphus Labs 账户；omo-get 拒绝待处理的 D1 迁移</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>自 5.1.25 以来，固定在 -fast 目录变体上的类别在启动后被拒绝的问题已修复</li>
+<li>Kibitzer 召回唤醒每次唤醒都失败的问题已修复</li>
+<li>内置快速优先链（quick、deep-low、deep-high、ultrabrain）静默跳过第一个模型的问题已修复</li>
+<li>工作流测试已恢复（之前提交为空）；仅在使用时报告豁免；切换摘要打印原因</li>
+<li>存储副本保留其年龄；格式错误的计数、描述和时间被忽略</li>
+<li>阶段 2 测试：仅列出 omo-test-session-manager-fallback-（审查）</li>
+<li>阶段 2 测试：缩小检查接受窄化；为 omo-opencode 列出 omo-test-session-manager-</li>
+<li>阶段 2 审查：抛出错误中的两条消息，双向创建者匹配，跳过自己的夹具</li>
+<li>阶段 2：使用表测试的共享匹配器，来自 hermetic-home 拆卸的两个错误，派生脚本，删除通用和重复条目</li>
+<li>CI 安装程序：运行后检查提供的通道与桶指针匹配，带有限等待</li>
+<li>CI 切换：安装程序镜像写入 Sisyphus Labs omo-releases 桶并证明 get.omo.dev 提供标签</li>
+<li>CI 切换：get.omo.dev 是目标 omo-get 的自定义域名，如实时一样</li>
+<li>CI 切换：Sisyphus Labs omo.dev 区域上目标 web 和 get Workers 的区域路由</li>
+<li>CI 切换：在 get.omo.dev 自定义域名上也按 id 命名目标区域</li>
+<li>内存工具操作使用支持模块的每测试根，而不是已删除的 roots 数组 (#9766 审查)</li>
+<li>CI 切换：作业摘要（dev 的摘要规则）；smokes 最多等待 5 分钟获取新的 workers.dev 脚本</li>
+<li>CI 切换：在其自己的步骤中部署（安装 / 构建无令牌）；smoke 证明 R2 源（审查第 2 轮）</li>
+<li>CI 切换：令牌仅在部署命令上；smoke R2 和 D1 读取（审查第 1 轮）</li>
+<li>CI 切换：omo.dev Workers 的阶段 1 目标部署（仅 workers.dev）</li>
+<li>测试：将模板字面量和连接临时名称派生到仅报告列表；解决 sg 助手的 omo- 前缀；shrink 脚本的 .d.mts (CI)</li>
+</ul>
+<h3 id="lissy93dashy-480-qwenqwen38-27b"><a href="https://github.com/lissy93/dashy/releases/tag/4.8.0" rel="noopener noreferrer" target="_blank">lissy93/dashy 4.8.0</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增项目别名功能，支持快速启动</li>
+<li>完善多语言本地化：新增土耳其语、印尼语、斯瓦希里语翻译，补全德语和意大利语翻译，修复挪威语登录欢迎占位符及土耳其语 APOD 翻译</li>
+<li>文档更新：新增 Hostinger 部署选项说明，补充 Dockerfile UID 修改相关文档</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复股票历史价格组件问题</li>
+<li>重构 Pi-Hole v6 组件以适配新版 API</li>
+<li>修复 APOD 组件在视频日、缺失字段及代理场景下的问题</li>
+<li>修复体育比分组件默认 API 密钥失效问题</li>
+<li>升级多项依赖（dompurify、fast-uri、@sentry/vue、vite-plugin-pwa 等）</li>
+</ul>
+<h3 id="farion1231cc-switch-v407---v408-deepseek-aideepseek-v4-flash"><a href="https://github.com/farion1231/cc-switch/releases" rel="noopener noreferrer" target="_blank">farion1231/cc-switch v4.0.7 - v4.0.8</a> <sup>deepseek-ai/DeepSeek-V4-Flash</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>设置 → 数据新增「打开日志」按钮，方便定位日志文件</li>
+<li>新增 Codex 历史会话压缩开关，可读取压缩后会话并显示占用空间</li>
+<li>额度显示可切换为「剩余」或「已用」，供应商卡片、授权中心和托盘同步</li>
+<li>直连和路由切换后提示重启 Codex，现已支持 Windows 平台</li>
+<li>设置页可从应用菜单滚动到对应配置条目并高亮边框</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>已添加的火山 Agent Plan 供应商不会自动修改，需手动将请求地址 /api/coding/v3 改为 /api/plan/v3</li>
+<li>升级后 Claude 缓存写入费用按正确价格计算，每日费用会变高（属于补算，非涨价）</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复只装 Codex 桌面版时聚合模式无法使用的问题</li>
+<li>修复官方模型列表读取失败时提示不明确且不消失的问题</li>
+<li>修复获取模型列表时不携带配置请求头导致网关拒绝的问题</li>
+<li>修复深色模式文字过亮刺眼的问题</li>
+<li>补充 v4.0.7 发布说明中压缩 Codex 历史会话的说明</li>
+<li>修正英文、日文等界面文案与实际显示名称不一致的问题</li>
+<li>修复同一 OpenAI 账号下 Plus 和 Team 工作区在 Codex 中切换失败</li>
+<li>修复 Codex 供应商地址写在 config.toml 顶层时保存被删除，现整理到 custom 中</li>
+<li>修复 Windows 用户名含中文时升级失败及打开终端读不到临时配置</li>
+<li>修复继续旧第三方会话时误报重启错误，改为提示新开会话</li>
+<li>修复 Claude 1 小时缓存写入按 5 分钟价格计费，现分开计价</li>
+<li>修复部分中转站缓存命中显示为 0，现读取 prompt_cache_hit_tokens 字段</li>
+<li>修复 Codex 会话导入缺失缓存写入（GPT-5.6/GPT-6）</li>
+<li>修复 Claude Sonnet 5.5 和 Haiku 5.5 费用记为 0，已补齐定价</li>
+<li>修复用量统计 Claude 页重复行记录，切换应用后旧行残留</li>
+<li>修复 OpenCode 额外选项值类型被错误转换，现保持原类型</li>
+<li>修复 OpenClaw 修改 User-Agent 时删除其他请求头，现仅改动该项</li>
+<li>修复火山 Agent Plan 预设地址错误，新增 Coding Plan 预设</li>
+<li>补充文档：聚合模式指南与多语手册增加 Codex 常见问题，统一会话历史说明仅限 CLI</li>
+</ul>
+<h3 id="kepanodefuddle-0195-deepseek-aideepseek-v4-flash"><a href="https://github.com/kepano/defuddle/releases/tag/0.19.5" rel="noopener noreferrer" target="_blank">kepano/defuddle 0.19.5</a> <sup>deepseek-ai/DeepSeek-V4-Flash</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>强化 Markdown 转义处理，覆盖链接、图片、脚注、引用、代码块与数学公式</li>
+<li>新增内容选择器无效时的自动内容检测与错误记录</li>
+<li>数学处理在核心版与完整版间共享，并新增两版本直接测试</li>
+<li>移除未使用代码，并在 CI 中加入未使用代码检查</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复懒加载图片显式源属性，防止文件名与无关元数据替换图片 URL</li>
+<li>保留屏幕阅读器文本（含混合数字与链接标签），移除冗余链接注释</li>
+<li>修复页面 ID 和类名含特殊字符时的提取问题，涵盖 Tailwind 类与 React 流式内容</li>
+<li>修复重试时整页回退覆盖已成功提取内容的问题，允许异步提取器先于回退运行</li>
+<li>修复克隆文档中元素创建问题，并保持 shadow DOM 与流式内容变更后选择器稳定</li>
+</ul>
+<h3 id="abue-ammartinycast-v01119-deepseek-aideepseek-v4-flash"><a href="https://github.com/abue-ammar/tinycast/releases/tag/v0.11.19" rel="noopener noreferrer" target="_blank">abue-ammar/tinycast v0.11.19</a> <sup>deepseek-ai/DeepSeek-V4-Flash</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增本地听写和扩展键盘快捷键能力</li>
+<li>新增禁用自动更新检查选项</li>
+<li>新增月 / 年计算器转换和日期时间回答（今 / 昨 / 明）</li>
+<li>新增全局麦克风静音系统动作</li>
+<li>新增快捷链接复制操作与编辑入口</li>
+<li>新增启动器表单（片段、快捷链接、自定义命令、事件）</li>
+<li>新增窗口命令别名字段（窗口、大小、布局、房间）</li>
+<li>支持扩展运行时 createRequire 和捆绑扩展依赖</li>
+<li>改进 AI Chat：支持关闭、切换窗口、切换聊天、整理输入栏</li>
+<li>改进 Notes：支持撤销 / 重做、外部编辑重载、窗口高度适配</li>
+<li>改进启动器：分类搜索增强、镜像快捷方式和别名</li>
+<li>改进计算器：↵ 将答案放入搜索栏，支持多个时间点</li>
+<li>多项界面优化（扩展提示截断、侧标签隐藏、对话框焦点等）</li>
+<li>保持应用排序与最新副本（会议时间、多版本应用）</li>
+<li>改进系统集成（锁定屏幕热键、保持摄像头预览、尊重窗口重开偏好）</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>移除 Raycast 扩展的 OAuth PKCE 支持及残留</li>
+<li>移除繁体中文表情关键词，可能影响相关搜索</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 Raycast 导入问题：保留固定剪贴板状态、支持符号链接脚本</li>
+<li>修复计算器错误（位字节转换和 X 前缀货币转换）</li>
+<li>修复挪威应用名本地化</li>
+<li>修复 Quicklink 相关问题（提示缺失、热键焦点）</li>
+<li>修复文件夹搜索缓冲分配和监听器接收器</li>
+<li>修复浏览器书签错误</li>
+<li>修复 X.com 陈旧 OAuth 锁恢复</li>
+<li>修复会议链接在 CRLF 处断开</li>
+<li>修复扩展导航中搜索状态及关闭菜单后的搜索焦点</li>
+<li>修复 Raycast Store 安装链接</li>
+<li>修复调色板菜单点击与裁剪问题</li>
+<li>修复 Docker 扩展 HTTP 经 Unix 套接字</li>
+<li>修复扩展文本粘贴进入调色板搜索</li>
+<li>同步异步 Swift 测试夹具</li>
+<li>修复实时听写模型下载进度</li>
+</ul>
+<h3 id="cherryhqcherry-studio-v215-deepseek-aideepseek-v4-flash"><a href="https://github.com/CherryHQ/cherry-studio/releases/tag/v2.1.5" rel="noopener noreferrer" target="_blank">CherryHQ/cherry-studio v2.1.5</a> <sup>deepseek-ai/DeepSeek-V4-Flash</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增远程附件功能，支持从移动设备向 Agent 会话上传图片和文件，单文件最大 1 GiB 且可断点续传</li>
+<li>新增企业微信和钉钉频道，支持扫码配置、Agent 对话、流式回复、通知和附件</li>
+<li>支持 MCP SDK v2，包含交互式请求、验证表单、取消操作和结构化结果</li>
+<li>Pi 运行时升级到 1.0，内置沙箱 Code Mode 与 MCP 支持</li>
+<li>系统医生新增 AI 分析，可读取诊断报告并给出可应用的受限修复</li>
+<li>改进移动端设备连接引导，支持平台专属下载和自动预览</li>
+<li>绘画功能优化：生成后自动收起提示栏，支持鼠标滚轮缩放和点击打开共享查看器</li>
+<li>支持 Claude Haiku 5.5，包含推理控制、更新后的 token 限制、定价和 Claude Code 可用性</li>
+<li>Composer 中在启用 MCP 工具时高亮 MCP 工具栏快捷方式</li>
+<li>新增自托管 Crawl4AI 作为 URL 抓取提供方，可配置 API 主机和可选 bearer token</li>
+<li>Windows 主窗口和分离窗口使用原生标题按钮，保留自定义标题栏和主题适配</li>
+<li>启用原生差分下载，有兼容缓存安装包时可减小更新体积</li>
+<li>改进文档预览，支持触摸缩放、更稳的 PowerPoint 幻灯片和更清晰的超限回退</li>
+<li>恢复 Agent 时一并恢复其会话，归档的任务 / 话题行显示所属 Agent 或助手</li>
+<li>Web 搜索新增自托管 Crawl4AI 作为 URL 拉取提供方</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>Pi 运行时升级到 1.0，自定义 Pi 脚本需更新为原生 codemode API</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 Agent 浏览器工具在切换会话或关闭标签时的超时问题</li>
+<li>修复工具拒绝原因被误认为工具输出，现在明确归为用户表述</li>
+<li>修复聊天中途失败时丢弃已流式内容的问题，现在与错误一并保留</li>
+<li>修复上下文压缩进度未在助手消息中显示的问题</li>
+<li>修复横向多模型回答阻止向上滚动的问题</li>
+<li>修复 ComfyUI 随机种子工作流每次运行输出相同图像的问题</li>
+<li>修复 ComfyUI 合作伙伴（API）节点因缺少提供方 API 密钥而失败的问题，现正确发送密钥</li>
+<li>修复 ComfyUI 工作流转换数值错误或无 no_prompt_node 而失败的问题</li>
+<li>修复完成通知不显示话题或会话名称及最终句子的问��</li>
+<li>全部通知偏好关闭时清除 macOS Dock 角标</li>
+<li>修复将单段斜杠文本（如 /jX_s）错误链接为文件路径的问题</li>
+<li>WebView 将原生用户代理限制为 Google 登录，其他请求保留清洗后的 UA</li>
+<li>修复兼容网关发出标记 SSE keep-alive 增量时对话失败的问题</li>
+<li>修复目标为 Windows 驱动器根目录时本地备份失败的问题</li>
+<li>修复微信凭据中畸形用户 ID 导致 Channels 设置渲染错误的问题</li>
+<li>修复自定义命令行工具名为 constructor 或 toString 时被误分类为内置 Code CLI 的问题</li>
+<li>修复 Markdown 表格中文件路径导致列折叠的问题</li>
+<li>修复频道上传文件与编辑器附件不对齐的问题</li>
+<li>修复 Linux Wayland 上提升主窗口时保持可见</li>
+<li>修复 Agent 右侧面板工作区树深度无限和 Files 入口逻辑问题</li>
+<li>修复 API 网关在 OpenAI 兼容适配器中报告推理 token 明细的问题</li>
+<li>修复 DeepSeek 测试框架接受 303 探测中相对和绝对 Location 的问题</li>
+<li>修复 API 网关拆分 Anthropic input_tokens 缓存读写的问题</li>
+<li>修复 API 网关在 Gemini 用量中报告缓存 prompt token 的问题</li>
+<li>修复 WebView 阻止非代理 WebRTC UDP 的问题</li>
+<li>修复 Responses 兼容适配器报告缓存 / 推理用量明细的问题</li>
+<li>修复 Pi 运行时在 rtk 重写前分类破坏性 bash 的问题</li>
+<li>修复文件默认打开对 OS 无法 chdir 的路径的防护</li>
+<li>修复 Agent 会话持久化后台终端回执的问题</li>
+<li>修复 Claude Code 别名槽命名及说明问题</li>
+<li>修复 Grok CLI 代理头和推理兼容性</li>
+<li>修复通过 NewAPI 适配器路由 AiOnly 模型的问题</li>
+<li>修复工具提示内容对指针事件惰性以打破悬停重新打开循环的问题</li>
+<li>修复 XLSX 预览解析稀疏行时只读取已存在单元格的问题</li>
+<li>修复 Agent 编辑未别名运行时保留 Claude Code 别名的问题</li>
+<li>修复 Windows 托盘图标使用稳定身份的问题</li>
+<li>修复二进制管理器暴露受管 Python 执行失败的问题</li>
+<li>修复 XLSX 预览阻止 ExcelJS 在加载时扩展声明范围的问题</li>
+<li>修复图像导出保留 SVG HTML 标签的问题</li>
+<li>修复在透传提供方上声明 Kimi 固定采样的问题</li>
+<li>修复技能详情离开时返回活动标签的问题</li>
+<li>修复 ComfyUI 按 ComfyUI 的方式读取和定位保存的工作流</li>
+<li>修复知识库 kb_read grep 模式改用 ripgrep</li>
+<li>修复 MCP 将工具结果媒体转发给支持模态的模型的问题</li>
+<li>修复 macOS 上全屏弹出覆盖保持完整的问题</li>
+<li>修复 MCP 设置导入服务器时启用而非探测禁用的问题</li>
+<li>修复渲染器正则中 README 和图片的指数回溯问题</li>
+<li>修复工具审批在每个运行时都要求技能安装审批的问题</li>
+<li>修复节点代理对有效请求目的地遵守绕过规则的问题</li>
+<li>修复聊天滚动方向边界问题的处理</li>
+<li>修复 API 网关保留 Responses 历史中的助手输出文本的问题</li>
+<li>修复 AI 运行时通过 message_delta 推进代理上下文用量环及事后回拉竞争的问题</li>
+<li>修复 Agent 工作区用首选编辑器打开文件夹的问题</li>
+<li>修复电子应用中 Chrome Web Store 导航崩溃的问题</li>
+<li>修复 OpenAI Responses 接受不带参数的 output_item.added 的问题</li>
+<li>修复 AI SDK 保留未指定的工具选择的问题</li>
+<li>修复流管理器在响应中途失败时保留流内容的问题</li>
+</ul>
+<h3 id="spacecowboyfeeder-2240-deepseek-aideepseek-v4-flash"><a href="https://github.com/spacecowboy/Feeder/releases/tag/2.24.0" rel="noopener noreferrer" target="_blank">spacecowboy/Feeder 2.24.0</a> <sup>deepseek-ai/DeepSeek-V4-Flash</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增按订阅源设置文章过滤规则</li>
+<li>在 pre 块内以等宽字体格式化文本，不仅限于代码块</li>
+<li>更新多语言翻译（法语、匈牙利语、德语、波兰语、爱沙尼亚语、简体中文、塞尔维亚语、乌克兰语、捷克语、意大利语、日语、土耳其语、繁体中文）</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>不再将订阅源 URL 更改为匹配 selfLink</li>
+<li>停止在 selfLink 于 http 与 https 间变化时更新订阅源 URL</li>
+</ul>
+<h3 id="othmanadiplanning-with-files-v3240-deepseek-aideepseek-v4-flash"><a href="https://github.com/OthmanAdi/planning-with-files/releases/tag/v3.24.0" rel="noopener noreferrer" target="_blank">OthmanAdi/planning-with-files v3.24.0</a> <sup>deepseek-ai/DeepSeek-V4-Flash</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增原生 Qoder CLI 支持，并减少 Claude Code 中重复的规划上下文</li>
+<li>Qoder 插件安装规划技能与七个生命周期钩子，启动器通过 Bash 使用隔离的 Python 启动</li>
+<li>Qoder 适配器将可选完成门映射到 CLI 的 Stop 退出码契约，并排除 Claude 特定命令提示</li>
+<li>Claude Code 插件与独立技能钩子在成功注入提示后抑制未变更的 PreToolUse 视图，变更视图仅刷新一次</li>
+<li>会话、代理、所选计划与渲染模式状态分离，计划暂时缺失时恢复也会重置状态</li>
+<li>纯文件 SessionStart 恢复使用隔离的 Python 启动子进程，防止 PYTHONPATH 启动代码加载</li>
+<li>完整测试流程在集成前及发布提交 7056ed2 上通过，覆盖 Linux、Windows、macOS 及 Pi、OpenCode、DSH 套件</li>
+<li>贡献者提交保留原始作者信息</li>
+</ul>
+<h3 id="nikkinikki-orgopenwrt-nikki-v1262-deepseek-aideepseek-v4-flash"><a href="https://github.com/nikkinikki-org/OpenWrt-nikki/releases/tag/v1.26.2" rel="noopener noreferrer" target="_blank">nikkinikki-org/OpenWrt-nikki v1.26.2</a> <sup>deepseek-ai/DeepSeek-V4-Flash</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>更新 mihomo-meta 至 v1.19.32</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 rpcd 在配置 TLS 监听地址时 API 请求未使用该地址的问题</li>
+<li>修复 load_profile 中读取 yq 输出不完整导致 Hijack 失败及 JSON 尾部多余数据的问题</li>
+</ul>
+<h3 id="lemonappdevkonsist-v0181-deepseek-aideepseek-v4-flash"><a href="https://github.com/LemonAppDev/konsist/releases/tag/v0.18.1" rel="noopener noreferrer" target="_blank">LemonAppDev/konsist v0.18.1</a> <sup>deepseek-ai/DeepSeek-V4-Flash</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>改进项目文件扫描逻辑，跳过隐藏目录以避免内存溢出</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>不再扫描隐藏目录（如 .git、.gradle、.idea 等）及 node_modules，可能影响依赖这些目录的扫描结果</li>
+<li>src 内名为 build 或 target 的包不再被排除在作用域之外，仅跳过 src 外部的构建输出目录</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 0.18.0 引入的 Kotlin 类型父类崩溃问题</li>
+<li>修复解析带构造参数或类型参数的 Kotlin 类型父类名称时的崩溃</li>
+<li>父类相关方法（hasParentOf、hasAllParentsOf 等）现在返回不含构造参数或委托的类型</li>
+<li>KoKotlinTypeDeclaration 的 sourceDeclaration 现在仅保留父类型</li>
+<li>修复文档中的代码片段拼写错误、失效示例及部署脚本</li>
+<li>移除示例标签提供者代码片段文件名中的 ‘sample’ 字样</li>
+<li>将 Konsist 版本从 0.18.0 更新至 0.18.1</li>
+</ul>
+<h3 id="steipetecodexbar-v0740-deepseek-aideepseek-v4-flash"><a href="https://github.com/steipete/CodexBar/releases/tag/v0.74.0" rel="noopener noreferrer" target="_blank">steipete/CodexBar v0.74.0</a> <sup>deepseek-ai/DeepSeek-V4-Flash</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>Ollama API-key 模式读取月度用量、重置和购买积分；浏览器模式解析信用钱包</li>
+<li>Langdock 支持 Chrome 和 Safari 配置文件；Cursor 在 Linux 上可用</li>
+<li>捆绑插件新增 Cosmic AI、Aerostack、Sail Research、Sofya、Tavily、Exa、Linkup、TinyApi 等提供商配额</li>
+<li>菜单栏新增 pace 符号翻转、跟随前台应用、按提供商着色并滚动溢出菜单</li>
+<li>Widgets 新增 Accounts 配额概览小组件，并在 macOS 15+ 显示分钟级实时日期</li>
+<li>Codex 账户在设置中显示各自缓存用量、错误和隐私标签，支持单独或全部刷新</li>
+<li>CLI 通过只读端点发现 token 和管理账户，提供稳定 ID 和隐私标签</li>
+<li>Usage &#x26; Spend 新增原生 Codex 会话吞吐、首 token 延迟和时长</li>
+<li>Hour 模式日导航和年度令牌活动更新性能大幅优化</li>
+<li>Linux 新增 opt-in 紧凑 Quick View 和 serve —all-accounts</li>
+<li>完成全部 23 种语言的本地化翻译，包括凭证提示、分享卡片和提供商设置</li>
+<li>HTTP dashboard 支持实时配置账户用量，默认私有标签，超时保留健康结果</li>
+<li>Homebrew 更新通知改进：自动检测新版、记住已提交通知并可点击跳转设置</li>
+<li>Omarchy 提供可选的会话、周和 pace 标签、每模型上限及提供商数量偏好</li>
+<li>Codex 新增只读核心解析器，为显式选择的管理账户提供最新凭证</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 Claude 外部登录后过期的缺失凭证错误，改为刷新引导</li>
+<li>修复 Linux 下 procfs 读取缓冲泄漏（每空子进程 4KB）</li>
+<li>修复 Linux 下已退出 RPC 子进程未释放，避免文件描述符耗尽</li>
+<li>修复 Codex 管理凭据家被其他账户引用时移除 / 修复保留</li>
+<li>修复 Codex 首次刷新认证错误显示及后续变更丢弃</li>
+<li>修复 Claude 历史缓存写入（减少克隆卷写入，保留原子替换）</li>
+<li>修复 Claude 内联 CLI 用量面板超过 50 行时会话配额保留</li>
+<li>修复 Ollama 信用钱包读取和余额显示</li>
+<li>修复 Usage &#x26; Spend 休眠中的历史追赶活动在刷新完成后清除</li>
+<li>修复菜单栏空设置占位在 macOS 27 创建持久 Dock 图标</li>
+<li>修复 Notion AI 大型工作区 / 成员列表超限时的用量恢复</li>
+<li>修复 Codex 忽略被注释的端点覆盖，避免禁用代理干扰</li>
+<li>修复 Pi 成本历史、CI 构建跳过、Homebrew 版本匹配等次要问题</li>
+</ul>
+<h3 id="jandedobbeleeroh-my-posh-v3170-deepseek-aideepseek-v4-flash"><a href="https://github.com/JanDeDobbeleer/oh-my-posh/releases/tag/v31.7.0" rel="noopener noreferrer" target="_blank">JanDeDobbeleer/oh-my-posh v31.7.0</a> <sup>deepseek-ai/DeepSeek-V4-Flash</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>CLI 新增报告前台命令状态的功能</li>
+</ul>
+<h3 id="groupultratelegram-search-v132-deepseek-aideepseek-v4-flash"><a href="https://github.com/groupultra/telegram-search/releases/tag/v1.3.2" rel="noopener noreferrer" target="_blank">groupultra/telegram-search v1.3.2</a> <sup>deepseek-ai/DeepSeek-V4-Flash</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>发送消息快捷键由 Enter 改为 Shift+Enter</li>
+<li>CLI 新增本地 Telegram 守护进程</li>
+<li>CLI 支持通过认证远程访问查询托管的 TGS</li>
+<li>客户端可恢复 WebSocket 连接及已保存会话</li>
+<li>核心支持按消息 ID 分页远程消息</li>
+<li>服务端将旧版 WebSocket 事件路由至 Eventa 周边</li>
+<li>服务端新增 REUSE_PORT 配置以兼容 Windows</li>
+<li>Web 端将搜索对话框结果限制在视口内</li>
+<li>Web 端保留搜索结果导航后的滚动位置</li>
+</ul>
+<h3 id="nicobailonpi-subagents-v0770-deepseek-aideepseek-v4-flash"><a href="https://github.com/nicobailon/pi-subagents/releases/tag/v0.77.0" rel="noopener noreferrer" target="_blank">nicobailon/pi-subagents v0.77.0</a> <sup>deepseek-ai/DeepSeek-V4-Flash</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>子代理运行成本大幅降低：工具 schema 与描述从约 18,700 字符降至 3,300 字符，bg_wait 从约 4,500 降至 1,100…</li>
+<li>长报告与指南页改为短预览加文件路径，减少父代理 token 消耗</li>
+<li>升级 pi-subagents 不再使恢复的会话丢失提示缓存，运行中的 Pi 升级不再导致子代理启动失败</li>
+<li>按名称直接启动代理，错误名称返回建议，省去先查询的额外回合</li>
+<li>新增内置并行工作流，无需脚本即可批量运行子代理</li>
+<li>后台子代理可运行在沙箱中，支持引导与结果保留</li>
+<li>终端通过 OSC 7501 协议显示每个运行的状态，Ghostty 等终端可展示</li>
+<li>为 tmux 用户提供内置检查器面板</li>
+<li>异步组件在编辑器下为每个运行显示多行状态，支持折叠与行布局</li>
+<li>子会话头部记录 parentSession 字段，便于关联启动会话</li>
+<li>子代理通知的 details.runs 现包含 runId、状态、时长与保存路径等元数据</li>
+<li>子代理工具 schema 精简为顶层列出常用字段，其余归入嵌套结构</li>
+<li>子代理工具描述精简至约 1,200 字符，每条规则只陈述一次</li>
+<li>bg_wait 工具描述与参数精简至约 1,100 字符，避免重复说明</li>
+<li>捆绑角色提示去除重复规则与监督指令，oracle、reviewer 等提示从 21,283 字符缩减</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>拒绝项目信任的会话现忽略项目代理、链与子代理设置，并拒绝 agentScope: project</li>
+<li>pi-intercom 用户需升级至匹配版本以修复双扩展同时唤醒父代理的问题</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复拒绝项目信任的会话仍读取项目子代理设置、模型与代理的问题</li>
+<li>修复拒绝信任时项目 settings.json 解析失败导致子代理发现失败，以及 agentExcludeDirs 隐藏用户代理的问题</li>
+<li>修复升级后子代理启动报 Extension path does not exist 或 MODULE_NOT_FOUND 的问题</li>
+<li>修复父代理被唤醒后无回复导致委托工作无人处理的问题，现会提示处理结果</li>
+<li>修复子代理通知与 intercom 消息同时到达时第二个扩展报 Agent is already processing 的错误，现共享一次唤醒</li>
+<li>修复阻塞 bg_wait 期间输入消息被排队至等待结束的问题，现可提前结束等待并返回运行中任务列表</li>
+<li>修复调度运行因异步运行器死亡而卡在 skipped_overlap 的问题，现重叠或恢复的调度会正确清理锁</li>
+</ul>
+<h3 id="ekkolearnaiekko-studio-v0733-deepseek-aideepseek-v4-flash"><a href="https://github.com/EKKOLearnAI/ekko-studio/releases/tag/v0.7.33" rel="noopener noreferrer" target="_blank">EKKOLearnAI/ekko-studio v0.7.33</a> <sup>deepseek-ai/DeepSeek-V4-Flash</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新建聊天改为响应式页面，使用 Agent 卡片选择助手并复用聊天输入框与会话设置</li>
+<li>新建聊天记住上次使用的模型、工作目录、启动方式和推理选项，方便连续创建会话</li>
+<li>Agent 卡片新增金色边框与玉色流光并统一卡片内部动画速度</li>
+<li>手机网页端侧边栏与 App 一致，宽度为屏幕 90%、最大 380px</li>
+<li>Studio 与桌面端同步更新至 0.7.33，前端更新日志补齐 11 种语言并保留最近三个版本</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 Agent 卡片循环切换时的缩放跳变及鼠标在列表外释放后的拖拽问题</li>
+<li>修复长数字、符号或空白文本导致 Token 计算卡顿、聊天无响应的问题</li>
+<li>完善上下文用量估算与自动压缩，计入工具调用和模型实际用量，修复工具组跨压缩边界无法压缩的问题</li>
+<li>修复编程 Agent 因依赖输出调试日志而中断聊天的问题，提高 DSH 和其他 ACP Agent 兼容性</li>
+<li>修复不同 Hermes 内核版本下澄清问题与回答回调的兼容性问题</li>
+</ul>
+<h3 id="ccusageccusage-v20028-deepseek-aideepseek-v4-flash"><a href="https://github.com/ccusage/ccusage/releases/tag/v20.0.28" rel="noopener noreferrer" target="_blank">ccusage/ccusage v20.0.28</a> <sup>deepseek-ai/DeepSeek-V4-Flash</sup></h3>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 CI 中发布 npm 任务等待 pnpm 构建的超时问题</li>
+</ul>
+<h3 id="obrasuperpowers-v700-deepseek-aideepseek-v4-flash"><a href="https://github.com/obra/superpowers/releases/tag/v7.0.0" rel="noopener noreferrer" target="_blank">obra/superpowers v7.0.0</a> <sup>deepseek-ai/DeepSeek-V4-Flash</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>从零重建头脑风暴，更好地引导用户明确需求并转成文字</li>
+<li>新头脑风暴技能通过提问和回放纠正理解，直至需求清晰</li>
+<li>头脑风暴根据工作规模匹配流程，从直接执行到完整设计</li>
+<li>新增 Antigravity 原生插件清单，支持 Marketplace 安装</li>
+<li>支持通过技能发现机制在 Antigravity 上引导初始化</li>
+<li>头脑风暴提供视觉伴侣，在需要视觉辅助时给出提示</li>
+<li>采用构建者检查取代规格文档评审，提前发现待澄清问题</li>
+<li>允许用户选择技术栈等决定权，未指定时采用合理默认值</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 Windows 钩子发现与 Git Bash 路径问题</li>
+<li>修复 SessionStart 在启动 PATH 异常时无法引导的问题</li>
+<li>修复 run-hook.cmd 无法找到用户级 Git 及误用 WSL 启动器</li>
+<li>修复 run-hook.cmd 忽略当前目录脚本并正确传递退出码</li>
+<li>修复 sdd-workspace 覆盖仓库 .gitignore 及 Windows 路径偏差</li>
+<li>修复 task-done 在测试命令静默通过时未记录完成</li>
+<li>修复代码审查示例中 base-SHA 命令受技能参数影响</li>
+<li>修复 Hermes 技能列表显示空白描述</li>
+<li>修复多层级诊断示例泄露机密值</li>
+</ul>
+<h3 id="jxxghpmoviepilot-v313-deepseek-aideepseek-v4-flash"><a href="https://github.com/jxxghp/MoviePilot/releases/tag/v3.1.3" rel="noopener noreferrer" target="_blank">jxxghp/MoviePilot v3.1.3</a> <sup>deepseek-ai/DeepSeek-V4-Flash</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增 Atlas Cloud 模型服务商和 Milkie 站点适配</li>
+<li>豆瓣、Bangumi 订阅可自动转换为 TMDB 条目</li>
+<li>新增歌词正文转简体中文选项，写入 LRC/TXT 时生效</li>
+<li>提升搜索和下载可靠性：重试时跳过过期任务、临时失败可重试，优化无结果冷却处理</li>
+<li>优化前端体验：重新设计媒体整理和文件管理界面，订阅卡片显示来源，支持忽略版本更新提示</li>
+</ul>
+<p><strong>安全修复</strong></p>
+<ul>
+<li>限制连续密码登录失败，防止暴力破解</li>
+<li>调整通配 CORS 凭据行为，禁用通配来源的凭据</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复暂停订阅后仍自动搜索和下载的问题</li>
+<li>修复插件包替换与导入并发问题</li>
+<li>修复添加下载的媒体上下文类型</li>
+<li>修复调度器保留已分发插件一次性任务的问题</li>
+<li>修复 Bangumi 日历封面改用 HTTPS</li>
+<li>修复从匹配下载器中移除已删除源的问题</li>
+<li>修复搜索忽略过期扫描重试次数的问题</li>
+<li>修复搜索重试时间戳类型分离</li>
+<li>修复工作流 fork 和旧 pickle 上下文共享问题</li>
+</ul>
+<h3 id="jdxmise-v2026107-deepseek-aideepseek-v4-flash"><a href="https://github.com/jdx/mise/releases/tag/v2026.10.7" rel="noopener noreferrer" target="_blank">jdx/mise v2026.10.7</a> <sup>deepseek-ai/DeepSeek-V4-Flash</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增后台自动更新：在激活的 shell 中按计划启动工具更新</li>
+<li>新增 tool_update.global_auto 设置，可对所有全局工具开启自动更新</li>
+<li>新增 mise upgrade —global 和 mise outdated —global，仅作用于全局与系统配置</li>
+<li>新增已验证的下载缓存，存储于 downloads-cas，复用前再次校验哈希</li>
+<li>下载支持条件请求（ETag/Last-Modified），304 时直接复用缓存文件</li>
+<li>固定校验和的工具可直接从缓存硬链接，无网络请求</li>
+<li>—locked 或 paranoid 模式下仅使用固定校验和的缓存，CI 可安全恢复缓存</li>
+<li>新增 download_cache_max_size 设置缓存上限（默认 2GiB，0 不限）</li>
+<li>npm 包未安装任何可执行文件时现在会触发警告</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>always_keep_download 已废弃，2026.11.0 起警告，2027.11.0 移除</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 2026.10.3 引入的 .env 解析回归，影响 [env]_.file 和 env_file</li>
+<li>修复单引号值中反斜杠字面量处理，Windows 路径正常加载</li>
+<li>修复相邻引号与非引号片段拼接，避免语法错误丢弃文件</li>
+<li>修复 mise run 在重新加载工具列表时偶发崩溃（Option::unwrap）</li>
+<li>修复 Windows 上 core.autocrlf=true 时 bootstrap repos status 误报脏仓库</li>
+<li>修复 Windows 上 mise dot apply 重定向目录 junction 符号链接失败</li>
+<li>修复 history.describe_command 对 variant 跟踪文件的支持</li>
+<li>修复 mise doctor 在 history.enabled=false 时显示 dotfiles 段，—json 补充字段</li>
+<li>修复 mise lock 应用 aqua registry 版本前缀，跳过平台条目时给出警告</li>
+<li>修复 rustup profile 别名 m/d/c 和空值的处理，未知名称报错</li>
+<li>修复 cargo 后端与 rust 插件并行安装时的锁竞争问题</li>
+<li>修复 self_update.auto 提示不再仅首次出现，直至启用或禁用提示</li>
+<li>修复 JSON schema 与实测值匹配，编辑器检查更准确</li>
+<li>修复任务数组可包含任务表、嵌套空列表被拒绝、[env] 组合校验等 schema 问题</li>
+</ul>
+<p><strong>帮助我们改进</strong></p>
+<p>对今日摘要质量有建议？欢迎反馈！</p>
+<ul>
+<li><a href="https://github.com/houzixiashanxiedaima/AstroBlog/issues/new" rel="noopener noreferrer" target="_blank">反馈摘要质量</a></li>
+<li><a href="https://github.com/houzixiashanxiedaima/AstroBlog/issues/new" rel="noopener noreferrer" target="_blank">评价今日日报</a></li>
+</ul>
+<p>您的反馈将帮助我们优化 AI Prompt, 提升摘要准确性</p>  </div> <!-- Footer navigation --> <footer class="article-footer" data-astro-cid-tldeq5d5> <nav class="post-navigation" aria-label="Article navigation" data-astro-cid-tldeq5d5> <div class="nav-prev" data-astro-cid-tldeq5d5> <a href="/blog/ide-updates/2026-10-10" class="nav-link" data-astro-prefetch data-astro-cid-tldeq5d5> <span class="nav-label" data-astro-cid-tldeq5d5><span class="arrow-char" data-astro-cid-tldeq5d5>←</span> 上一篇</span> <span class="nav-title" data-astro-cid-tldeq5d5>IDE / SDK 更新 - 2026-10-10</span> </a> </div> <div class="nav-next" data-astro-cid-tldeq5d5>  </div> </nav> <div class="back-to-list" data-astro-cid-tldeq5d5> <a href="/" class="back-link" data-astro-prefetch data-astro-cid-tldeq5d5>← 返回文章列表</a> </div> </footer> </article> <!-- Table of Contents --> <aside class="toc-aside" data-astro-cid-tldeq5d5> <nav class="toc" aria-label="目录导航" data-astro-cid-p33bl5ka> <div class="toc-header-action" data-astro-cid-p33bl5ka> <a href="/" class="toc-action-link" data-astro-prefetch data-astro-cid-p33bl5ka> <span class="toc-action-icon" data-astro-cid-p33bl5ka>←</span> <span class="toc-action-text" data-astro-cid-p33bl5ka>返回列表</span> </a> </div> <ul class="toc-list" data-astro-cid-p33bl5ka> <li class="toc-item toc-item-3" data-slug="callstackagent-device-v02123---v02124-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#callstackagent-device-v02123---v02124-qwenqwen38-27b" class="toc-link" data-slug="callstackagent-device-v02123---v02124-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>callstack/agent-device v0.21.23 - v0.21.24 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="nicobailonpi-web-access-v0380-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#nicobailonpi-web-access-v0380-qwenqwen38-27b" class="toc-link" data-slug="nicobailonpi-web-access-v0380-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>nicobailon/pi-web-access v0.38.0 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="code-yeongyuoh-my-openagent-v5129-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#code-yeongyuoh-my-openagent-v5129-qwenqwen38-27b" class="toc-link" data-slug="code-yeongyuoh-my-openagent-v5129-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>code-yeongyu/oh-my-openagent v5.1.29 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="lissy93dashy-480-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#lissy93dashy-480-qwenqwen38-27b" class="toc-link" data-slug="lissy93dashy-480-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>lissy93/dashy 4.8.0 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="farion1231cc-switch-v407---v408-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <a href="#farion1231cc-switch-v407---v408-deepseek-aideepseek-v4-flash" class="toc-link" data-slug="farion1231cc-switch-v407---v408-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>farion1231/cc-switch v4.0.7 - v4.0.8 deepseek-ai/DeepSeek-V4-Flash</span> </a> </li><li class="toc-item toc-item-3" data-slug="kepanodefuddle-0195-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <a href="#kepanodefuddle-0195-deepseek-aideepseek-v4-flash" class="toc-link" data-slug="kepanodefuddle-0195-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>kepano/defuddle 0.19.5 deepseek-ai/DeepSeek-V4-Flash</span> </a> </li><li class="toc-item toc-item-3" data-slug="abue-ammartinycast-v01119-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <a href="#abue-ammartinycast-v01119-deepseek-aideepseek-v4-flash" class="toc-link" data-slug="abue-ammartinycast-v01119-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>abue-ammar/tinycast v0.11.19 deepseek-ai/DeepSeek-V4-Flash</span> </a> </li><li class="toc-item toc-item-3" data-slug="cherryhqcherry-studio-v215-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <a href="#cherryhqcherry-studio-v215-deepseek-aideepseek-v4-flash" class="toc-link" data-slug="cherryhqcherry-studio-v215-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>CherryHQ/cherry-studio v2.1.5 deepseek-ai/DeepSeek-V4-Flash</span> </a> </li><li class="toc-item toc-item-3" data-slug="spacecowboyfeeder-2240-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <a href="#spacecowboyfeeder-2240-deepseek-aideepseek-v4-flash" class="toc-link" data-slug="spacecowboyfeeder-2240-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>spacecowboy/Feeder 2.24.0 deepseek-ai/DeepSeek-V4-Flash</span> </a> </li><li class="toc-item toc-item-3" data-slug="othmanadiplanning-with-files-v3240-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <a href="#othmanadiplanning-with-files-v3240-deepseek-aideepseek-v4-flash" class="toc-link" data-slug="othmanadiplanning-with-files-v3240-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>OthmanAdi/planning-with-files v3.24.0 deepseek-ai/DeepSeek-V4-Flash</span> </a> </li><li class="toc-item toc-item-3" data-slug="nikkinikki-orgopenwrt-nikki-v1262-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <a href="#nikkinikki-orgopenwrt-nikki-v1262-deepseek-aideepseek-v4-flash" class="toc-link" data-slug="nikkinikki-orgopenwrt-nikki-v1262-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>nikkinikki-org/OpenWrt-nikki v1.26.2 deepseek-ai/DeepSeek-V4-Flash</span> </a> </li><li class="toc-item toc-item-3" data-slug="lemonappdevkonsist-v0181-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <a href="#lemonappdevkonsist-v0181-deepseek-aideepseek-v4-flash" class="toc-link" data-slug="lemonappdevkonsist-v0181-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>LemonAppDev/konsist v0.18.1 deepseek-ai/DeepSeek-V4-Flash</span> </a> </li><li class="toc-item toc-item-3" data-slug="steipetecodexbar-v0740-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <a href="#steipetecodexbar-v0740-deepseek-aideepseek-v4-flash" class="toc-link" data-slug="steipetecodexbar-v0740-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>steipete/CodexBar v0.74.0 deepseek-ai/DeepSeek-V4-Flash</span> </a> </li><li class="toc-item toc-item-3" data-slug="jandedobbeleeroh-my-posh-v3170-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <a href="#jandedobbeleeroh-my-posh-v3170-deepseek-aideepseek-v4-flash" class="toc-link" data-slug="jandedobbeleeroh-my-posh-v3170-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>JanDeDobbeleer/oh-my-posh v31.7.0 deepseek-ai/DeepSeek-V4-Flash</span> </a> </li><li class="toc-item toc-item-3" data-slug="groupultratelegram-search-v132-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <a href="#groupultratelegram-search-v132-deepseek-aideepseek-v4-flash" class="toc-link" data-slug="groupultratelegram-search-v132-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>groupultra/telegram-search v1.3.2 deepseek-ai/DeepSeek-V4-Flash</span> </a> </li><li class="toc-item toc-item-3" data-slug="nicobailonpi-subagents-v0770-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <a href="#nicobailonpi-subagents-v0770-deepseek-aideepseek-v4-flash" class="toc-link" data-slug="nicobailonpi-subagents-v0770-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>nicobailon/pi-subagents v0.77.0 deepseek-ai/DeepSeek-V4-Flash</span> </a> </li><li class="toc-item toc-item-3" data-slug="ekkolearnaiekko-studio-v0733-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <a href="#ekkolearnaiekko-studio-v0733-deepseek-aideepseek-v4-flash" class="toc-link" data-slug="ekkolearnaiekko-studio-v0733-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>EKKOLearnAI/ekko-studio v0.7.33 deepseek-ai/DeepSeek-V4-Flash</span> </a> </li><li class="toc-item toc-item-3" data-slug="ccusageccusage-v20028-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <a href="#ccusageccusage-v20028-deepseek-aideepseek-v4-flash" class="toc-link" data-slug="ccusageccusage-v20028-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>ccusage/ccusage v20.0.28 deepseek-ai/DeepSeek-V4-Flash</span> </a> </li><li class="toc-item toc-item-3" data-slug="obrasuperpowers-v700-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <a href="#obrasuperpowers-v700-deepseek-aideepseek-v4-flash" class="toc-link" data-slug="obrasuperpowers-v700-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>obra/superpowers v7.0.0 deepseek-ai/DeepSeek-V4-Flash</span> </a> </li><li class="toc-item toc-item-3" data-slug="jxxghpmoviepilot-v313-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <a href="#jxxghpmoviepilot-v313-deepseek-aideepseek-v4-flash" class="toc-link" data-slug="jxxghpmoviepilot-v313-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>jxxghp/MoviePilot v3.1.3 deepseek-ai/DeepSeek-V4-Flash</span> </a> </li><li class="toc-item toc-item-3" data-slug="jdxmise-v2026107-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <a href="#jdxmise-v2026107-deepseek-aideepseek-v4-flash" class="toc-link" data-slug="jdxmise-v2026107-deepseek-aideepseek-v4-flash" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>jdx/mise v2026.10.7 deepseek-ai/DeepSeek-V4-Flash</span> </a> </li> </ul> <div class="toc-footer-action" data-astro-cid-p33bl5ka> <button type="button" class="toc-action-link" id="toc-back-to-top" aria-label="返回顶部" data-astro-cid-p33bl5ka> <span class="toc-action-icon" data-astro-cid-p33bl5ka>↑</span> <span class="toc-action-text" data-astro-cid-p33bl5ka>返回顶部</span> </button> </div> </nav><script type="module" src="/_astro/TableOfContents.astro_astro_type_script_index_0_lang.Dm6V_AxN.js"></script> </aside> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button><script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
