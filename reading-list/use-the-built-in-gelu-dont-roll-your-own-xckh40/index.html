@@ -1,0 +1,205 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.4.2"><!-- Core SEO --><meta name="description" content="Unsurprisingly, PyTorch's own built-in GELU function
+is faster than the hand-rolled one I've been using to date.  But I was surprised at
+how much faster using it made things when training my models.  "><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/use-the-built-in-gelu-dont-roll-your-own-xckh40/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/use-the-built-in-gelu-dont-roll-your-own-xckh40/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/use-the-built-in-gelu-dont-roll-your-own-xckh40/"><meta property="og:title" content="Use the built-in GELU, don't roll your own!"><meta property="og:description" content="Unsurprisingly, PyTorch's own built-in GELU function
+is faster than the hand-rolled one I've been using to date.  But I was surprised at
+how much faster using it made things when training my models.  "><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="Unsurprisingly, PyTorch's own built-in GELU function
+is faster than the hand-rolled one I've been using to date.  But I was surprised at
+how much faster using it made things when training my models.  "><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/use-the-built-in-gelu-dont-roll-your-own-xckh40/"><meta property="twitter:title" content="Use the built-in GELU, don't roll your own!"><meta property="twitter:description" content="Unsurprisingly, PyTorch's own built-in GELU function
+is faster than the hand-rolled one I've been using to date.  But I was surprised at
+how much faster using it made things when training my models.  "><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Use the built-in GELU, don&#39;t roll your own!</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Use the built-in GELU, don't roll your own!","item":"https://blog.yuyins.com/reading-list/use-the-built-in-gelu-dont-roll-your-own-xckh40/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip:after{content:none!important}.chip--sm{padding:.25rem .625rem;font-size:.8125rem}.chip--md{padding:.375rem .875rem;font-size:.875rem}.chip--interactive{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}@media (hover:hover){.chip--interactive:not(.chip--active):not(.active):hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}}.chip--active,.chip.active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.gNEZWljK.css"><style>.article-content{max-width:none}.article-content:lang(en){letter-spacing:0}.article-content:lang(en) pre{letter-spacing:var(--ls-body)}.article-content code:not(pre *){background:color-mix(in srgb, var(--muted) 30%, transparent);color:var(--foreground);border:0;border-radius:.2em;padding:.05em .3em;font-size:.875em;display:inline}.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.article-content table{max-width:100%;display:block;overflow-x:auto}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent-hover)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent-hover);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link nav-link--active" aria-current="page" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/podcasts" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 播客 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(function(){let e=async e=>{await(await e())()};(self.Astro||(self.Astro={})).load=e,window.dispatchEvent(new Event(`astro:load`))})();</script><script>(function(){function e(t){"@babel/helpers - typeof";return e=typeof Symbol==`function`&&typeof Symbol.iterator==`symbol`?function(e){return typeof e}:function(e){return e&&typeof Symbol==`function`&&e.constructor===Symbol&&e!==Symbol.prototype?`symbol`:typeof e},e(t)}function t(t,n){if(e(t)!=`object`||!t)return t;var r=t[Symbol.toPrimitive];if(r!==void 0){var i=r.call(t,n||`default`);if(e(i)!=`object`)return i;throw TypeError(`@@toPrimitive must return a primitive value.`)}return(n===`string`?String:Number)(t)}function n(n){var r=t(n,`string`);return e(r)==`symbol`?r:r+``}function r(e,t,r){return(t=n(t))in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}let i=/* @__PURE__ */ new Set([`__proto__`,`constructor`,`prototype`]);{let e={0:e=>a(e),1:e=>n(e),2:e=>new RegExp(e),3:e=>new Date(e),4:e=>new Map(n(e)),5:e=>new Set(n(e)),6:e=>BigInt(e),7:e=>new URL(e),8:e=>new Uint8Array(e),9:e=>new Uint16Array(e),10:e=>new Uint32Array(e),11:e=>1/0*e},t=t=>{let[n,r]=t;return n in e?e[n](r):void 0},n=e=>e.map(t),a=e=>typeof e!=`object`||!e?e:Object.fromEntries(Object.entries(e).map(([e,n])=>[e,t(n)]));class o extends HTMLElement{constructor(...e){super(...e),r(this,`Component`,void 0),r(this,`hydrator`,void 0),r(this,`hydrate`,async()=>{var e;if(!this.hydrator||!this.isConnected)return;let t=(e=this.parentElement)==null?void 0:e.closest(`astro-island[ssr]`);if(t){t.addEventListener(`astro:hydrate`,this.hydrate,{once:!0});return}let n=this.querySelectorAll(`astro-slot`),r={},i=this.querySelectorAll(`template[data-astro-template]`);for(let e of i){let t=e.closest(this.tagName);t!=null&&t.isSameNode(this)&&(r[e.getAttribute(`data-astro-template`)||`default`]=e.innerHTML,e.remove())}for(let e of n){let t=e.closest(this.tagName);t!=null&&t.isSameNode(this)&&(r[e.getAttribute(`name`)||`default`]=e.innerHTML)}let o;try{o=this.hasAttribute(`props`)?a(JSON.parse(this.getAttribute(`props`))):{}}catch(e){let t=this.getAttribute(`component-url`)||`<unknown>`,n=this.getAttribute(`component-export`);throw n&&(t+=` (export ${n})`),console.error(`[hydrate] Error parsing props for component ${t}`,this.getAttribute(`props`),e),e}await this.hydrator(this)(this.Component,o,r,{client:this.getAttribute(`client`)}),this.removeAttribute(`ssr`),this.dispatchEvent(new CustomEvent(`astro:hydrate`))}),r(this,`unmount`,()=>{this.isConnected||this.dispatchEvent(new CustomEvent(`astro:unmount`))})}disconnectedCallback(){document.removeEventListener(`astro:after-swap`,this.unmount),document.addEventListener(`astro:after-swap`,this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute(`await-children`)||document.readyState===`interactive`||document.readyState===`complete`)this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener(`DOMContentLoaded`,e),t.disconnect(),this.childrenConnectedCallback()},t=new MutationObserver(()=>{var t;((t=this.lastChild)==null?void 0:t.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue===`astro:end`&&(this.lastChild.remove(),e())});t.observe(this,{childList:!0}),document.addEventListener(`DOMContentLoaded`,e)}}async childrenConnectedCallback(){let e=this.getAttribute(`before-hydration-url`);e&&await import(e),this.start()}getRetryImportUrl(e){let t=new URL(e,document.baseURI);return t.searchParams.set(`astro-retry`,Date.now().toString()),t.toString()}async importWithRetry(e){try{return await import(e)}catch(t){return await new Promise(e=>setTimeout(e,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let t=this.getAttribute(`component-url`),n=new CustomEvent(`astro:hydration-error`,{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:t}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${t}`,e)}async start(){let e=JSON.parse(this.getAttribute(`opts`)),t=this.getAttribute(`client`);if(Astro[t]===void 0)window.addEventListener(`astro:${t}`,()=>this.start(),{once:!0});else try{await Astro[t](async()=>{let e=this.getAttribute(`renderer-url`);try{let[t,{default:n}]=await Promise.all([this.importWithRetry(this.getAttribute(`component-url`)),e?this.importWithRetry(e):Promise.resolve({default:()=>()=>{}})]),r=this.getAttribute(`component-export`)||`default`;if(r.includes(`.`)){this.Component=t;for(let e of r.split(`.`)){if(i.has(e)||!this.Component||typeof this.Component!=`object`&&typeof this.Component!=`function`||!Object.hasOwn(this.Component,e))throw Error(`Invalid component export path: ${r}`);this.Component=this.Component[e]}}else{if(i.has(r))throw Error(`Invalid component export path: ${r}`);this.Component=t[r]}return this.hydrator=n,this.hydrate}catch(e){return this.handleHydrationError(e),()=>{}}},e,this)}catch(e){this.handleHydrationError(e)}}attributeChangedCallback(){this.hydrate()}}r(o,`observedAttributes`,[`props`]),customElements.get(`astro-island`)||customElements.define(`astro-island`,o)}})();</script><script>window._$HY||(e=>{let t=e=>e&&e.hasAttribute&&(e.hasAttribute("data-hk")?e:t(e.host&&e.host.nodeType?e.host:e.parentNode));["click", "input"].forEach((o=>document.addEventListener(o,(o=>{if(!e.events)return;let s=t(o.composedPath&&o.composedPath()[0]||o.target);s&&!e.completed.has(s)&&e.events.push([s,o])}))))})(_$HY={events:[],completed:new WeakSet,r:{},fe(){}});</script><!--xs--><astro-island uid="Z2jH8p5" data-solid-render-id="s0" component-url="/_astro/SearchDialog.1o6q21a7.js" component-export="default" renderer-url="/_astro/client.DDRnOt_e.js" props="{&quot;recommendations&quot;:[1,[[0,{&quot;slug&quot;:[0,&quot;ide-updates/2026-10-24&quot;],&quot;title&quot;:[0,&quot;IDE / SDK 更新 - 2026-10-24&quot;],&quot;category&quot;:[0,&quot;IDE 更新&quot;]}],[0,{&quot;slug&quot;:[0,&quot;releases/2026-10-23&quot;],&quot;title&quot;:[0,&quot;GitHub Releases 日报 - 2026-10-23&quot;],&quot;category&quot;:[0,&quot;开源追踪&quot;]}],[0,{&quot;slug&quot;:[0,&quot;ide-updates/2026-10-23&quot;],&quot;title&quot;:[0,&quot;IDE / SDK 更新 - 2026-10-23&quot;],&quot;category&quot;:[0,&quot;IDE 更新&quot;]}],[0,{&quot;slug&quot;:[0,&quot;releases/2026-10-22&quot;],&quot;title&quot;:[0,&quot;GitHub Releases 日报 - 2026-10-22&quot;],&quot;category&quot;:[0,&quot;开源追踪&quot;]}],[0,{&quot;slug&quot;:[0,&quot;ide-updates/2026-10-22&quot;],&quot;title&quot;:[0,&quot;IDE / SDK 更新 - 2026-10-22&quot;],&quot;category&quot;:[0,&quot;IDE 更新&quot;]}],[0,{&quot;slug&quot;:[0,&quot;releases/2026-10-21&quot;],&quot;title&quot;:[0,&quot;GitHub Releases 日报 - 2026-10-21&quot;],&quot;category&quot;:[0,&quot;开源追踪&quot;]}]]],&quot;data-astro-cid-ac66eqjo&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;SearchDialog&quot;,&quot;value&quot;:true}" await-children><button data-hk="s00000" class="search-toggle" type="button" aria-label="打开搜索" title="搜索 (⌘K)"><svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"></circle><path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></button><dialog data-hk="s00001" class="search-dialog" aria-label="站内搜索"><div class="search-dialog-card"><div class="search-input-row"><svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg><div id="pagefind-ui" class="search-pagefind-slot"></div><div class="search-controls"><kbd class="search-kbd">ESC</kbd><button class="search-dialog-close" type="button" aria-label="关闭搜索"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div></div><!--$--><div data-hk="s000020" id="search-suggestions" class="search-suggestions"><p class="search-suggestions-title">推荐阅读</p><ul class="search-suggestions-list"><li data-hk="s0000210"><a class="search-suggestion-item" href="/blog/ide-updates/2026-10-24"><span class="search-suggestion-title">IDE / SDK 更新 - 2026-10-24</span><span class="search-suggestion-meta">IDE 更新</span></a></li><li data-hk="s0000211"><a class="search-suggestion-item" href="/blog/releases/2026-10-23"><span class="search-suggestion-title">GitHub Releases 日报 - 2026-10-23</span><span class="search-suggestion-meta">开源追踪</span></a></li><li data-hk="s0000212"><a class="search-suggestion-item" href="/blog/ide-updates/2026-10-23"><span class="search-suggestion-title">IDE / SDK 更新 - 2026-10-23</span><span class="search-suggestion-meta">IDE 更新</span></a></li><li data-hk="s0000213"><a class="search-suggestion-item" href="/blog/releases/2026-10-22"><span class="search-suggestion-title">GitHub Releases 日报 - 2026-10-22</span><span class="search-suggestion-meta">开源追踪</span></a></li><li data-hk="s0000214"><a class="search-suggestion-item" href="/blog/ide-updates/2026-10-22"><span class="search-suggestion-title">IDE / SDK 更新 - 2026-10-22</span><span class="search-suggestion-meta">IDE 更新</span></a></li><li data-hk="s0000215"><a class="search-suggestion-item" href="/blog/releases/2026-10-21"><span class="search-suggestion-title">GitHub Releases 日报 - 2026-10-21</span><span class="search-suggestion-meta">开源追踪</span></a></li></ul></div><!--/--></div></dialog><!--astro:end--></astro-island> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>Use the built-in GELU, don&#39;t roll your own!</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://gilesthomas.com/" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag"> gilesthomas.com </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年8月20日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" lang="zh-CN" data-astro-cid-veycvx62><p>Unsurprisingly, <a href="https://docs.pytorch.org/docs/2.13/generated/torch.nn.GELU.html" target="_blank" rel="noopener noreferrer">PyTorch's own built-in GELU function</a>
+is faster than the hand-rolled one I've been using to date.  But I was surprised at
+how <em>much</em> faster using it made things when training my models.  I discovered this
+accidentally just now while working on something unrelated, but am logging the details
+here for anyone else that might find it useful.</p>
+
+<p>The headline numbers: the same code, training the same model on the same data, ran
+at about:</p>
+
+<ul>
+<li>21,000 tokens per second using the hand-rolled GELU from <a href="https://sebastianraschka.com/" target="_blank" rel="noopener noreferrer">Sebastian Raschka</a>'s book
+"<a href="https://www.manning.com/books/build-a-large-language-model-from-scratch" target="_blank" rel="noopener noreferrer">Build a Large Language Model (from Scratch)</a>".</li>
+<li>25,000 tokens per second using PyTorch's built-in GELU with no arguments.</li>
+<li>25,000 tokens per second using the built-in GELU with <code>approximate="tanh"</code>, which
+uses the same maths as Raschka's version under the hood.</li>
+</ul>
+
+<p>That's a 20% increase in throughput for both of the built-in versions -- definitely nothing to be sneezed at.</p>
+
+<p>And what is particularly
+interesting is that there aren't that many GELUs going on -- it's a GPT-2 small-style
+model, with 12 layers.  So that's 12 GELUs handling tensors
+shaped <code>(batch_size, seq_len, 4 * d_emb)</code>, which is <code>(6, 1024, 3072)</code> for my training setup.
+Given that the rest of the model is doing all of the normal full attention stuff for GPT-2, it's
+<em>really</em> surprising that the GELUs alone must have been taking up so much of the time.  The throughput
+numbers mean that we must have been spending about 17% of our time on the extra overhead from the hand-rolled
+version, so that sets a lower bound for how much time the GELUs were taking up.</p>
+<p>Back when I was doing the "interventions" part of my <a href="https://www.gilesthomas.com/llm-from-scratch" target="_blank" rel="noopener noreferrer">LLM from scratch series</a>, training
+dozens of GPT-2 small-sized models in the cloud and on my local machines, to keep things simple I used
+the original model code from Raschka's book.
+That happens to have its own implementation of the GELU function --
+you can see <a href="https://github.com/gpjt/ddp-base-model-from-scratch/blob/16dd249447754c3a7be4f1212ccaf312c7416d92/gpt.py#L78" target="_blank" rel="noopener noreferrer">my copy here</a>.</p>
+
+<p>I'm not that sure why the hand-rolled version is in there -- he covers the maths, but the specific implementation isn't explained
+in that much depth, and it seems rather like boilerplate, just a "type this in and use it"
+kind of thing.  By contrast, for example, while he does explain the maths behind cross-entropy loss in similar detail,
+we use the built-in function for it rather than coding it up ourselves.</p>
+
+<p>When I switched to using JAX for <a href="https://www.gilesthomas.com/2026/07/llm-from-scratch-34b-building-and-training-gpt-2-small-in-jax" target="_blank" rel="noopener noreferrer">my own from-scratch implementation</a>,
+I decided to not bother porting the boilerplate, and just used <a href="https://docs.jax.dev/en/latest/_autosummary/jax.nn.gelu.html#jax.nn.gelu" target="_blank" rel="noopener noreferrer">JAX's own built-in version</a>.</p>
+
+<p>I was revisiting the PyTorch code -- I'm in the process of extending it with mixture-of-experts
+support, about which more in a later post -- and decided to switch from the hand-written GELU to the PyTorch one just to
+tidy things up a bit.
+I noticed something interesting -- my new MoE code suddenly seemed to speed up.</p>
+
+<p>Was that a mirage?  Or had I discovered part -- or even all -- of the reason why the
+JAX code was so much faster than the PyTorch code?  With PyTorch, I was typically
+getting training speeds of about 21,000 tokens per second, while in JAX I was getting 24,000 tps or so.
+I'd been chalking that up to JAX's JIT compilation, but could it have been just a result
+of a random implementation choice I'd made?</p>
+
+<p>I did three partial test training runs, letting each one run for 20 minutes to allow the
+training speed to settle down from any startup overhead.  Firstly, with the old
+hand-coded GELU:</p>
+
+<div>
+<pre><span></span><code>giles@poppy:~/Dev/ddp-base-model-from-scratch<span> </span><span>((</span>HEAD<span> </span>detached<span> </span>at<span> </span>16dd249<span>))</span>$<span> </span>uv<span> </span>run<span> </span>torchrun<span> </span>--nproc_per_node<span>=</span><span>1</span><span> </span>ddp_train.py<span> </span>1xrtx3090-baseline<span> </span>datasets/
+Fetching<span> </span><span>4</span><span> </span>files:<span> </span><span>100</span>%<span>|</span>███████████████████████████████████████████████████████████████████████████████████████████████████████████████████<span>|</span><span> </span><span>4</span>/4<span> </span><span>[</span><span>00</span>:00&lt;<span>00</span>:00,<span> </span><span>3173</span>.90it/s<span>]</span>
+Starting<span> </span>rank<span> </span><span>0</span><span> </span>training<span> </span>at<span> </span>global<span> </span>step<span> </span><span>0</span>
+<span>  </span><span>0</span>%<span>|</span><span>                                                                                                                  </span><span>|</span><span> </span><span>0</span>/33165<span> </span><span>[</span><span>00</span>:04&lt;?,<span> </span>?it/s,<span> </span><span>loss</span><span>=</span><span>10</span>.991,<span> </span><span>tps</span><span>=</span><span>19</span>,982<span>]</span>
+
+
+Checkpoint
+
+Continuing<span> </span>training
+<span>  </span><span>1</span>%<span>|</span>▊<span>                                                                                                     </span><span>|</span><span> </span><span>257</span>/33165<span> </span><span>[</span><span>20</span>:07&lt;<span>42</span>:53:57,<span>  </span><span>4</span>.69s/it,<span> </span><span>loss</span><span>=</span><span>6</span>.570,<span> </span><span>tps</span><span>=</span><span>20</span>,920<span>]</span>
+</code></pre>
+</div>
+
+<p>So it was getting 20,920 on average over those 257 global steps.  That speed was in line with <a href="https://www.gilesthomas.com/2026/04/llm-from-scratch-32k-interventions-training-our-best-model-locally-gradient-accumulation#the-new-local-baseline" target="_blank" rel="noopener noreferrer">the original run</a>
+of the configuration I was using.</p>
+
+<p>Next, I introduced the built-in PyTorch GELU with no arguments:</p>
+
+<div>
+<pre><span></span><code><span>-</span>
+<span>-class GELU(nn.Module):</span>
+<span>-</span>
+<span>-    def forward(self, x):</span>
+<span>-        return 0.5 * x * (1 + torch.tanh(torch.sqrt(torch.tensor(2.0 / torch.pi)) * (x + 0.044715 * torch.pow(x, 3))))</span>
+<span>-</span>
+<span>-</span>
+<span>-</span>
+<span> </span>class FeedForward(nn.Module):
+
+<span> </span>    def __init__(self, cfg):
+<span> </span>        super().__init__()
+<span> </span>        self.layers = nn.Sequential(
+<span> </span>            nn.Linear(cfg["emb_dim"], cfg["emb_dim"] * 4),
+<span>-            GELU(),</span>
+<span>+            nn.GELU(),</span>
+<span> </span>            nn.Linear(cfg["emb_dim"] * 4, cfg["emb_dim"])
+<span> </span>        )
+</code></pre>
+</div>
+
+<p>That does the full calculations for GELU, rather than using the <code>tanh</code>-based approximation that
+the hand-rolled code did.  After 20 minutes, it looked like this:</p>
+
+<div>
+<pre><span></span><code>giles@poppy:~/Dev/ddp-base-model-from-scratch<span> </span><span>(</span>main<span>)</span>$<span> </span>uv<span> </span>run<span> </span>torchrun<span> </span>--nproc_per_node<span>=</span><span>1</span><span> </span>ddp_train.py<span> </span>1xrtx3090-baseline<span> </span>datasets/
+Fetching<span> </span><span>4</span><span> </span>files:<span> </span><span>100</span>%<span>|</span>██████████████████████████████████████████████████████████████████████████████████████████████████████████████████<span>|</span><span> </span><span>4</span>/4<span> </span><span>[</span><span>00</span>:00&lt;<span>00</span>:00,<span> </span><span>11222</span>.22it/s<span>]</span>
+Starting<span> </span>rank<span> </span><span>0</span><span> </span>training<span> </span>at<span> </span>global<span> </span>step<span> </span><span>0</span>
+<span>  </span><span>0</span>%<span>|</span><span>                                                                                                                  </span><span>|</span><span> </span><span>0</span>/33165<span> </span><span>[</span><span>00</span>:04&lt;?,<span> </span>?it/s,<span> </span><span>loss</span><span>=</span><span>10</span>.991,<span> </span><span>tps</span><span>=</span><span>23</span>,953<span>]</span>
+
+
+Checkpoint
+
+Continuing<span> </span>training
+<span>  </span><span>1</span>%<span>|</span>▉<span>                                                                                                     </span><span>|</span><span> </span><span>307</span>/33165<span> </span><span>[</span><span>20</span>:00&lt;<span>35</span>:40:59,<span>  </span><span>3</span>.91s/it,<span> </span><span>loss</span><span>=</span><span>6</span>.331,<span> </span><span>tps</span><span>=</span><span>25</span>,134<span>]</span>
+</code></pre>
+</div>
+
+<p>So this time we were getting 25,134 tokens per second -- 20% faster!</p>
+
+<p>By default, PyTorch's GELU uses an exact calculation of the function -- the hand-written
+code from the book uses an approximation using <code>tanh</code>.  Luckily, you can get that same
+approximation from PyTorch:</p>
+
+<div>
+<pre><span></span><code><span> </span>        super().__init__()
+<span> </span>        self.layers = nn.Sequential(
+<span> </span>            nn.Linear(cfg["emb_dim"], cfg["emb_dim"] * 4),
+<span>-            nn.GELU(),</span>
+<span>+            nn.GELU(approximate="tanh"),</span>
+<span> </span>            nn.Linear(cfg["emb_dim"] * 4, cfg["emb_dim"])
+<span> </span>        )
+</code></pre>
+</div>
+
+<p>So, training with that for 20 minutes:</p>
+
+<div>
+<pre><span></span><code>giles@poppy:~/Dev/ddp-base-model-from-scratch<span> </span><span>(</span>main<span>)</span>$<span> </span>uv<span> </span>run<span> </span>torchrun<span> </span>--nproc_per_node<span>=</span><span>1</span><span> </span>ddp_train.py<span> </span>1xrtx3090-baseline<span> </span>datasets/
+Fetching<span> </span><span>4</span><span> </span>files:<span> </span><span>100</span>%<span>|</span>███████████████████████████████████████████████████████████████████████████████████████████████████████████████████<span>|</span><span> </span><span>4</span>/4<span> </span><span>[</span><span>00</span>:00&lt;<span>00</span>:00,<span> </span><span>4115</span>.09it/s<span>]</span>
+Starting<span> </span>rank<span> </span><span>0</span><span> </span>training<span> </span>at<span> </span>global<span> </span>step<span> </span><span>0</span>
+<span>  </span><span>0</span>%<span>|</span><span>                                                                                                                  </span><span>|</span><span> </span><span>0</span>/33165<span> </span><span>[</span><span>00</span>:04&lt;?,<span> </span>?it/s,<span> </span><span>loss</span><span>=</span><span>10</span>.991,<span> </span><span>tps</span><span>=</span><span>23</span>,875<span>]</span>
+
+
+Checkpoint
+
+Continuing<span> </span>training
+<span>  </span><span>1</span>%<span>|</span>▉<span>                                                                                                     </span><span>|</span><span> </span><span>307</span>/33165<span> </span><span>[</span><span>20</span>:00&lt;<span>35</span>:39:42,<span>  </span><span>3</span>.91s/it,<span> </span><span>loss</span><span>=</span><span>6</span>.332,<span> </span><span>tps</span><span>=</span><span>25</span>,142<span>]</span>
+</code></pre>
+</div>
+
+<p>25,142 tokens per second -- basically the same as the non-approximate version.</p>
+
+<p>So: switching to the built-in GELU made my PyTorch code run 20% faster, at about 25,000 tps
+rather than 21,000.</p>
+
+<p>My JAX code, which used JAX's built-in GELU, ran at around 24,000 tps.  I'd actually
+found that rather surprising, because in JAX I was training in full-fat 32-bit floating point, while in PyTorch I was using
+Automatic Mixed Precision (AMP) -- a special mode that allows it to use 16-bit calculations
+where it won't hurt the model much.</p>
+
+<p>I'd <a href="https://www.gilesthomas.com/2025/12/llm-from-scratch-28-training-a-base-model-from-scratch" target="_blank" rel="noopener noreferrer">found</a> that
+AMP gave PyTorch a huge speedup -- from 15,402 tps to 19,797 on one test.  So JAX without AMP
+being so much faster than PyTorch with AMP was a bit of a surprise.  Its JIT is pretty
+amazing, but I didn't expect it to be <em>that</em> much faster.</p>
+
+<p>Now I think that we have at least part of an explanation.  I was using JAX's
+built-in GELU (interestingly, with its default parameters, which means that it used the <code>tanh</code>
+approximation), but the PyTorch code was using the hand-rolled one, and that unduly
+penalised it and erased some of the gains it got from AMP.</p>
+
+<p>If I really wanted to dig into this, I suppose I might try JAX with a hand-rolled GELU
+to see what happened.  My guess is that because of its JIT, it might actually handle it
+better -- the whole hand-rolled thing could be compiled into one thing on the GPU.  Perhaps
+it would also be interesting to try the non-AMP PyTorch code with the built-in GELU.
+But I doubt that would really be the best use of my time (and my electricity bill),
+so I'll leave it here.</p>
+
+<p>On the other hand, I do intend to have a look at <code>torch.compile</code> in the future, to see
+what kind of speedup I can get from it.  And it might be able to compile and fuse together
+the hand-rolled GELU -- so that would be an interesting thing to experiment with in that
+post: does the built-in GELU advantage disappear if we're compiling?</p>
+
+<p>But anyway, for now, lesson learned: use built-in PyTorch modules when you can.
+It's a pretty obvious one ;-)</p>
+
+<p>[Update] On X, <a href="https://x.com/rasbt/status/2090254612557156587" target="_blank" rel="noopener noreferrer">Sebastian Raschka noted</a> that
+he used the approximate version of GELU in his code so that the models were compatible with the
+OpenAI weights -- they were trained with that version, so they may behave slightly differently
+if you use the "pure" version.  That's a great point, and so I've updated my own copy of the
+code to use <code>approximate="tanh"</code>.</p></div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://www.gilesthomas.com/2026/08/built-in-gelu" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button><script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>

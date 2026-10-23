@@ -1,0 +1,508 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.4.2"><!-- Core SEO --><meta name="description" content="Algorithmic and optimization playtime"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/solving-the-board-game-quoridor-cwpiyg/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/solving-the-board-game-quoridor-cwpiyg/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/solving-the-board-game-quoridor-cwpiyg/"><meta property="og:title" content="Solving the board game Quoridor"><meta property="og:description" content="Algorithmic and optimization playtime"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="Algorithmic and optimization playtime"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/solving-the-board-game-quoridor-cwpiyg/"><meta property="twitter:title" content="Solving the board game Quoridor"><meta property="twitter:description" content="Algorithmic and optimization playtime"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Solving the board game Quoridor</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Solving the board game Quoridor","item":"https://blog.yuyins.com/reading-list/solving-the-board-game-quoridor-cwpiyg/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip:after{content:none!important}.chip--sm{padding:.25rem .625rem;font-size:.8125rem}.chip--md{padding:.375rem .875rem;font-size:.875rem}.chip--interactive{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}@media (hover:hover){.chip--interactive:not(.chip--active):not(.active):hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}}.chip--active,.chip.active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.gNEZWljK.css"><style>.article-content{max-width:none}.article-content:lang(en){letter-spacing:0}.article-content:lang(en) pre{letter-spacing:var(--ls-body)}.article-content code:not(pre *){background:color-mix(in srgb, var(--muted) 30%, transparent);color:var(--foreground);border:0;border-radius:.2em;padding:.05em .3em;font-size:.875em;display:inline}.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.article-content table{max-width:100%;display:block;overflow-x:auto}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent-hover)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent-hover);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link nav-link--active" aria-current="page" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/podcasts" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 播客 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(function(){let e=async e=>{await(await e())()};(self.Astro||(self.Astro={})).load=e,window.dispatchEvent(new Event(`astro:load`))})();</script><script>(function(){function e(t){"@babel/helpers - typeof";return e=typeof Symbol==`function`&&typeof Symbol.iterator==`symbol`?function(e){return typeof e}:function(e){return e&&typeof Symbol==`function`&&e.constructor===Symbol&&e!==Symbol.prototype?`symbol`:typeof e},e(t)}function t(t,n){if(e(t)!=`object`||!t)return t;var r=t[Symbol.toPrimitive];if(r!==void 0){var i=r.call(t,n||`default`);if(e(i)!=`object`)return i;throw TypeError(`@@toPrimitive must return a primitive value.`)}return(n===`string`?String:Number)(t)}function n(n){var r=t(n,`string`);return e(r)==`symbol`?r:r+``}function r(e,t,r){return(t=n(t))in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}let i=/* @__PURE__ */ new Set([`__proto__`,`constructor`,`prototype`]);{let e={0:e=>a(e),1:e=>n(e),2:e=>new RegExp(e),3:e=>new Date(e),4:e=>new Map(n(e)),5:e=>new Set(n(e)),6:e=>BigInt(e),7:e=>new URL(e),8:e=>new Uint8Array(e),9:e=>new Uint16Array(e),10:e=>new Uint32Array(e),11:e=>1/0*e},t=t=>{let[n,r]=t;return n in e?e[n](r):void 0},n=e=>e.map(t),a=e=>typeof e!=`object`||!e?e:Object.fromEntries(Object.entries(e).map(([e,n])=>[e,t(n)]));class o extends HTMLElement{constructor(...e){super(...e),r(this,`Component`,void 0),r(this,`hydrator`,void 0),r(this,`hydrate`,async()=>{var e;if(!this.hydrator||!this.isConnected)return;let t=(e=this.parentElement)==null?void 0:e.closest(`astro-island[ssr]`);if(t){t.addEventListener(`astro:hydrate`,this.hydrate,{once:!0});return}let n=this.querySelectorAll(`astro-slot`),r={},i=this.querySelectorAll(`template[data-astro-template]`);for(let e of i){let t=e.closest(this.tagName);t!=null&&t.isSameNode(this)&&(r[e.getAttribute(`data-astro-template`)||`default`]=e.innerHTML,e.remove())}for(let e of n){let t=e.closest(this.tagName);t!=null&&t.isSameNode(this)&&(r[e.getAttribute(`name`)||`default`]=e.innerHTML)}let o;try{o=this.hasAttribute(`props`)?a(JSON.parse(this.getAttribute(`props`))):{}}catch(e){let t=this.getAttribute(`component-url`)||`<unknown>`,n=this.getAttribute(`component-export`);throw n&&(t+=` (export ${n})`),console.error(`[hydrate] Error parsing props for component ${t}`,this.getAttribute(`props`),e),e}await this.hydrator(this)(this.Component,o,r,{client:this.getAttribute(`client`)}),this.removeAttribute(`ssr`),this.dispatchEvent(new CustomEvent(`astro:hydrate`))}),r(this,`unmount`,()=>{this.isConnected||this.dispatchEvent(new CustomEvent(`astro:unmount`))})}disconnectedCallback(){document.removeEventListener(`astro:after-swap`,this.unmount),document.addEventListener(`astro:after-swap`,this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute(`await-children`)||document.readyState===`interactive`||document.readyState===`complete`)this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener(`DOMContentLoaded`,e),t.disconnect(),this.childrenConnectedCallback()},t=new MutationObserver(()=>{var t;((t=this.lastChild)==null?void 0:t.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue===`astro:end`&&(this.lastChild.remove(),e())});t.observe(this,{childList:!0}),document.addEventListener(`DOMContentLoaded`,e)}}async childrenConnectedCallback(){let e=this.getAttribute(`before-hydration-url`);e&&await import(e),this.start()}getRetryImportUrl(e){let t=new URL(e,document.baseURI);return t.searchParams.set(`astro-retry`,Date.now().toString()),t.toString()}async importWithRetry(e){try{return await import(e)}catch(t){return await new Promise(e=>setTimeout(e,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let t=this.getAttribute(`component-url`),n=new CustomEvent(`astro:hydration-error`,{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:t}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${t}`,e)}async start(){let e=JSON.parse(this.getAttribute(`opts`)),t=this.getAttribute(`client`);if(Astro[t]===void 0)window.addEventListener(`astro:${t}`,()=>this.start(),{once:!0});else try{await Astro[t](async()=>{let e=this.getAttribute(`renderer-url`);try{let[t,{default:n}]=await Promise.all([this.importWithRetry(this.getAttribute(`component-url`)),e?this.importWithRetry(e):Promise.resolve({default:()=>()=>{}})]),r=this.getAttribute(`component-export`)||`default`;if(r.includes(`.`)){this.Component=t;for(let e of r.split(`.`)){if(i.has(e)||!this.Component||typeof this.Component!=`object`&&typeof this.Component!=`function`||!Object.hasOwn(this.Component,e))throw Error(`Invalid component export path: ${r}`);this.Component=this.Component[e]}}else{if(i.has(r))throw Error(`Invalid component export path: ${r}`);this.Component=t[r]}return this.hydrator=n,this.hydrate}catch(e){return this.handleHydrationError(e),()=>{}}},e,this)}catch(e){this.handleHydrationError(e)}}attributeChangedCallback(){this.hydrate()}}r(o,`observedAttributes`,[`props`]),customElements.get(`astro-island`)||customElements.define(`astro-island`,o)}})();</script><script>window._$HY||(e=>{let t=e=>e&&e.hasAttribute&&(e.hasAttribute("data-hk")?e:t(e.host&&e.host.nodeType?e.host:e.parentNode));["click", "input"].forEach((o=>document.addEventListener(o,(o=>{if(!e.events)return;let s=t(o.composedPath&&o.composedPath()[0]||o.target);s&&!e.completed.has(s)&&e.events.push([s,o])}))))})(_$HY={events:[],completed:new WeakSet,r:{},fe(){}});</script><!--xs--><astro-island uid="Z2jH8p5" data-solid-render-id="s0" component-url="/_astro/SearchDialog.1o6q21a7.js" component-export="default" renderer-url="/_astro/client.DDRnOt_e.js" props="{&quot;recommendations&quot;:[1,[[0,{&quot;slug&quot;:[0,&quot;ide-updates/2026-10-24&quot;],&quot;title&quot;:[0,&quot;IDE / SDK 更新 - 2026-10-24&quot;],&quot;category&quot;:[0,&quot;IDE 更新&quot;]}],[0,{&quot;slug&quot;:[0,&quot;releases/2026-10-23&quot;],&quot;title&quot;:[0,&quot;GitHub Releases 日报 - 2026-10-23&quot;],&quot;category&quot;:[0,&quot;开源追踪&quot;]}],[0,{&quot;slug&quot;:[0,&quot;ide-updates/2026-10-23&quot;],&quot;title&quot;:[0,&quot;IDE / SDK 更新 - 2026-10-23&quot;],&quot;category&quot;:[0,&quot;IDE 更新&quot;]}],[0,{&quot;slug&quot;:[0,&quot;releases/2026-10-22&quot;],&quot;title&quot;:[0,&quot;GitHub Releases 日报 - 2026-10-22&quot;],&quot;category&quot;:[0,&quot;开源追踪&quot;]}],[0,{&quot;slug&quot;:[0,&quot;ide-updates/2026-10-22&quot;],&quot;title&quot;:[0,&quot;IDE / SDK 更新 - 2026-10-22&quot;],&quot;category&quot;:[0,&quot;IDE 更新&quot;]}],[0,{&quot;slug&quot;:[0,&quot;releases/2026-10-21&quot;],&quot;title&quot;:[0,&quot;GitHub Releases 日报 - 2026-10-21&quot;],&quot;category&quot;:[0,&quot;开源追踪&quot;]}]]],&quot;data-astro-cid-ac66eqjo&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;SearchDialog&quot;,&quot;value&quot;:true}" await-children><button data-hk="s00000" class="search-toggle" type="button" aria-label="打开搜索" title="搜索 (⌘K)"><svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"></circle><path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></button><dialog data-hk="s00001" class="search-dialog" aria-label="站内搜索"><div class="search-dialog-card"><div class="search-input-row"><svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg><div id="pagefind-ui" class="search-pagefind-slot"></div><div class="search-controls"><kbd class="search-kbd">ESC</kbd><button class="search-dialog-close" type="button" aria-label="关闭搜索"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div></div><!--$--><div data-hk="s000020" id="search-suggestions" class="search-suggestions"><p class="search-suggestions-title">推荐阅读</p><ul class="search-suggestions-list"><li data-hk="s0000210"><a class="search-suggestion-item" href="/blog/ide-updates/2026-10-24"><span class="search-suggestion-title">IDE / SDK 更新 - 2026-10-24</span><span class="search-suggestion-meta">IDE 更新</span></a></li><li data-hk="s0000211"><a class="search-suggestion-item" href="/blog/releases/2026-10-23"><span class="search-suggestion-title">GitHub Releases 日报 - 2026-10-23</span><span class="search-suggestion-meta">开源追踪</span></a></li><li data-hk="s0000212"><a class="search-suggestion-item" href="/blog/ide-updates/2026-10-23"><span class="search-suggestion-title">IDE / SDK 更新 - 2026-10-23</span><span class="search-suggestion-meta">IDE 更新</span></a></li><li data-hk="s0000213"><a class="search-suggestion-item" href="/blog/releases/2026-10-22"><span class="search-suggestion-title">GitHub Releases 日报 - 2026-10-22</span><span class="search-suggestion-meta">开源追踪</span></a></li><li data-hk="s0000214"><a class="search-suggestion-item" href="/blog/ide-updates/2026-10-22"><span class="search-suggestion-title">IDE / SDK 更新 - 2026-10-22</span><span class="search-suggestion-meta">IDE 更新</span></a></li><li data-hk="s0000215"><a class="search-suggestion-item" href="/blog/releases/2026-10-21"><span class="search-suggestion-title">GitHub Releases 日报 - 2026-10-21</span><span class="search-suggestion-meta">开源追踪</span></a></li></ul></div><!--/--></div></dialog><!--astro:end--></astro-island> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>Solving the board game Quoridor</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://grantslatton.com/" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag"> grantslatton.com </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年5月26日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" lang="zh-CN" data-astro-cid-veycvx62><h1>Solving Quoridor</h1>
+<p>This post significantly improves the state of the art in solving the board game Quoridor. I describe novel techniques that enable fully solving almost all board configurations with area ≤ 28 (e.g. 5x5, 8x3, 7x4, etc) for most wall counts on a consumer laptop.</p>
+<h2>Background</h2>
+<p>I was introduced to the board game <a href="https://en.wikipedia.org/wiki/Quoridor" target="_blank" rel="noopener noreferrer">Quoridor</a> back in 2014 and was immediately taken by it.</p>
+<p>I usually spend a weekend returning to Quoridor once every couple years, writing different forms of AI bots to play it. This last weekend, I made a breakthrough that enables both much stronger bots, and much more complete solving.</p>
+<p><img alt="Screenshot 2026-02-23 at 7.27.26 PM.png" src="https://grantslatton.com/images/b9d619bf531f0713.png" /></p>
+<h3>Rules</h3>
+<p>The game is pretty simple:</p>
+<ul>
+<li>Pawns start on opposite sides of the 9x9 board</li>
+<li>Your goal is to get your pawn to the far side</li>
+<li>You have 10 walls</li>
+<li>On your turn, you can move your pawn 1 square, or place a wall</li>
+<li>You can jump over the opponent's pawn</li>
+<li>You can't place a wall that makes it impossible for a pawn to get to its goal</li>
+</ul>
+<p>That last rule is where all the performance complexity comes from. You might be planning on blocking your friend's straight shot — making him take the long way around — but he places a wall that cuts off the long route, so now it's illegal for you to block the short route!</p>
+<p>The "pawn jumps over opponent's pawn" rule creates interesting <a href="https://en.wikipedia.org/wiki/Parity_(mathematics)" target="_blank" rel="noopener noreferrer">parity</a>/<a href="https://en.wikipedia.org/wiki/Zugzwang" target="_blank" rel="noopener noreferrer">zugzwang</a> situations.</p>
+<p>In addition to the typical 9x9 board with 10 walls, <a href="https://alife-robotics.co.jp/LP/2022/OS13-3.htm" target="_blank" rel="noopener noreferrer">many</a> <a href="https://ipsj-kyushu.jp/page/ronbun/hinokuni/1011/Papers/A23-1.pdf" target="_blank" rel="noopener noreferrer">papers</a> <a href="https://alife-robotics.co.jp/LP/2023/OS18-2.htm" target="_blank" rel="noopener noreferrer">have</a> <a href="https://www.jstage.jst.go.jp/article/jrnal/10/3/10_4/_article/-char/ja" target="_blank" rel="noopener noreferrer">analyzed</a> smaller boards and wall counts, since the full game is currently intractable.</p>
+<h2>Major Results</h2>
+<h3>Parity Advantage vs Tempo Advantage</h3>
+<p><a href="https://mathoverflow.net/q/132967" target="_blank" rel="noopener noreferrer">Many</a> have <a href="https://boardgamegeek.com/thread/604118/mirroring-second-player-advantage" target="_blank" rel="noopener noreferrer">speculated</a> that Quoridor might be a 2nd player win on odd-height boards due to pawn jump parity. This work shows that odd-height Quoridor boards are <em>not</em> always 2nd player wins.</p>
+<p>They <em>are</em> always 2nd player wins with few walls, but typically turn into 1st player wins at a sufficiently high wall count. For example, 5x5 is a 2nd player win at ≤4 walls per player, but 1st player win at &gt;4 walls.</p>
+<p>The intuition here is that odd-height boards have a jump parity advantage for 2nd player, but 1st player still has a tempo advantage, so a sufficient number of walls makes the 1st player tempo advantage dominate the 2nd player's jump advantage.</p>
+<p>There are a few notable exceptions discussed below.</p>
+<p>Relatedly, we find that even-height boards are uniformly 1st player wins at all wall counts because 1st player has the jump parity advantage <em>and</em> the tempo advantage.</p>
+<h3>Forced Draws</h3>
+<p>It <a href="https://boardgamegeek.com/thread/447889/draw-possible" target="_blank" rel="noopener noreferrer">was known</a> that forced draws by repetition were possible to contrive, but this work shows that the 8x3 board with 3 walls per player is a draw <em>from the starting position</em>.</p>
+<p>Both players must just dance left and right forever. If either player deviates from this repetition, the other player has a forced win, therefore the optimal strategy is draw by repetition.</p>
+<h3>Weird geometries</h3>
+<p>There are some geometries with outlier results. For example:</p>
+<p>4x7 is a 2nd player win for 0 or 1 wall, 1st player win for 2 walls, then back to 2nd player for 3 walls, then 1st player beyond that.</p>
+<p>7x3 never transitions into a 1st player win at any wall count.</p>
+<p>3x5 is a 2nd player win at all wall counts <em>except</em> 3</p>
+<p>8x3 is a 2nd player win at all wall counts except 3 (where it's a draw, as noted above).</p>
+<h3>Full results table</h3>
+<p>Note: even-heights omitted, they are all 1st player win at all wall counts and geometries.</p>
+<table><thead><tr><th>W x H</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></tr></thead><tbody>
+<tr><td>2 x 3</td><td>2</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>3 x 3</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td></tr>
+<tr><td>4 x 3</td><td>2</td><td>2</td><td>2</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>5 x 3</td><td>2</td><td>2</td><td>2</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>6 x 3</td><td>2</td><td>2</td><td>2</td><td>2</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>7 x 3</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td></tr>
+<tr><td>8 x 3</td><td>2</td><td>2</td><td>2</td><td>D</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td></tr>
+<tr><td>9 x 3</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>2 x 5</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td></tr>
+<tr><td>3 x 5</td><td>2</td><td>2</td><td>2</td><td>1</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td></tr>
+<tr><td>4 x 5</td><td>2</td><td>2</td><td>2</td><td>2</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>5 x 5</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>2 x 7</td><td>2</td><td>2</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>3 x 7</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>4 x 7</td><td>2</td><td>2</td><td>1</td><td>2</td><td>1</td><td>1</td><td>1</td><td>?</td><td>?</td><td>?</td><td>?</td></tr>
+<tr><td>2 x 9</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td></tr>
+<tr><td>3 x 9</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>1</td><td>1</td><td>1</td><td>1</td><td>?</td><td>?</td></tr>
+</tbody></table>
+<p>You can reproduce the results of this work by running the code in <a href="https://github.com/grantslatton/quoridor-solving" target="_blank" rel="noopener noreferrer">this repository</a>. The smaller configurations finish almost instantly, the largest ones in the table take up to 30 minutes on my M3 MacBook Pro. I have 128GB of RAM and the largest configurations use a sizeable chunk of that to store all the precomputed data and transposition table.</p>
+<h2>Complexity</h2>
+<p>Quoridor has two main complexifiers.</p>
+<p>The "illegal to fully block goal" rule makes enumerating legal moves hard. Naively, you have to do a pathfinding search for every candidate move. This means move generation is several orders of magnitude slower than a game like chess.</p>
+<p>Adding to this pain, the branching factor pretty high. On any given turn there are typically 4 pawn moves and about 100 possible wall moves. So not only are the wall moves super slow to check the legality of, there are also a ton of them.</p>
+<p>This huge branching factor makes naive alpha-beta <a href="https://en.wikipedia.org/wiki/Negamax" target="_blank" rel="noopener noreferrer">negamax</a> pretty weak. It takes a decent amount of work to get a bot searching to depth 6 or so.</p>
+<p>Beyond the giant branching factor, the <a href="https://en.wikipedia.org/wiki/Horizon_effect" target="_blank" rel="noopener noreferrer">horizon effect</a> is harder to deal with. In chess, you can deal with the horizon effect pretty easily with <a href="https://en.wikipedia.org/wiki/Quiescence_search" target="_blank" rel="noopener noreferrer">quiescence search</a> where you search only the "interesting" moves (i.e. captures, checks) until no such moves remain and the position is "quiet".</p>
+<p>In Quoridor, there are very few quiet positions because walls can be placed anywhere on the board at any time.</p>
+<p>In addition to not being able to look too deep, once you bottom-out on depth, evaluating a position is really hard. You have a short path, great. Can it be cut? Can you block it from being cut? You have walls, awesome — will you be able to effectively use them, or is your opponent in a safe-from-walls corridor? Etc.</p>
+<p>All these complexities make me think Quoridor would be really amenable to an <a href="https://en.wikipedia.org/wiki/AlphaZero" target="_blank" rel="noopener noreferrer">AlphaZero</a> type approach which shines on games with high branching factors and difficult evaluation functions.</p>
+<h2>Miscellaneous optimization tricks</h2>
+<p>A few tricks I've picked up over the years of hacking on Quoridor bots. Some are highly specific to Quoridor, others are well-known in e.g. the computer chess community. Not all of these were used or are applicable to the full solver, but are nonetheless interesting or applicable to a general Quoridor bot.</p>
+<h3>Wall legality heuristic</h3>
+<p>If you place a wall floating off in an open area, it's always possible to go around it, so no legality check is needed.</p>
+<p>Further, if you place a wall and it's only touching another wall (or board edge) at a single point, it's also always possible to go around it, so no legality check is needed.</p>
+<p>You only need to do a legality check if the wall touches another wall or edge at at least 2 of the 3 points the wall touches.</p>
+
+  Quoridor wall legality heuristic contact cases
+  One 9 by 9 Quoridor board showing candidate walls with zero, one, and two contacts.
+
+  
+    
+  
+
+  
+    
+      
+      
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    0 contacts
+    skip
+
+    
+    
+    
+    
+    1 contact
+    skip
+
+    
+    
+    
+    
+    
+    
+    2 contacts
+    path check!
+
+    
+  
+
+<h3>Most walls are legal</h3>
+<p>It's almost guaranteed your evaluation function uses path length as an input. This requires running a path algorithm.</p>
+<p>Since you are already going to do this for your leaf-node evaluation function, you should skip it during all move generation. Most moves are legal!</p>
+<p>Just recurse <em>assuming</em> all wall moves are legal, and if you discover at the leaf node that <em>whoops</em> we are in an illegal branch, that's fine, just return null instead of a score to mark that this node is invalid.</p>
+<p>If you're at an inner node and your very first child returns null, <em>then</em> do a path check to see if the inner node is illegal, and fast-return null if it is.</p>
+<p>This optimization only works because illegality is monotonic in Quoridor. Once you are in an illegal state, you cannot get to a legal state.</p>
+<h3>Bitboards</h3>
+<p>Standard Quoridor is a 9x9 cell board, but walls are length 2, so there are only 8x8 places to place a wall. This means you can represent all the horizontal walls as a 64 bit integer, and all the vertical walls as a 64 bit integer. Getting candidate wall moves can now be done with just a few ops.</p>
+<h3>Transposition</h3>
+<p>Transposition table is an easy 2x win. Add in horizontal symmetry for another 2x. You don't even really need to use <a href="https://en.wikipedia.org/wiki/Zobrist_hashing" target="_blank" rel="noopener noreferrer">Zobrist hashing</a> since the board state is so few bits, you can either use it as a key outright or hash it in just a few ops.</p>
+<h2>Solving</h2>
+<h3>Breakthrough optimization</h3>
+<p>There is one trick that makes solving boards like 5x5 Quoridor fast and easy, and it falls out of these two observations:</p>
+<ul>
+<li>There are only 2,532,560 total possible wall configurations on a 5x5 board</li>
+<li>If you have all the possible wall configurations, you can precompute legality bitboards for both players for all possible wall states</li>
+</ul>
+<p>That is, for each wall state, you floodfill from each player's goal row to make a mask that contains the set of legal cells that player's pawn can be on.</p>
+<p>This allows for extremely cheap legality checks. To check if a wall move is legal, you just look up the configuration in the table, and check that both players' pawns are on floodfilled cells.</p>
+<p>Below is an example of a board in a legal state vs illegal state from just one player's point of view.</p>
+
+  Floodfill mask lookup for Quoridor wall legality
+  Two 5 by 5 Quoridor boards. The left board is legal because the pawn is inside the floodfilled goal mask. The right board is illegal because the pawn is outside that mask.
+
+  
+    
+  
+
+  
+    Legal state
+    pawn is inside the precomputed mask
+
+    
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+
+    
+      
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+
+    
+    
+  
+
+  
+    Illegal state
+    pawn is outside the precomputed mask
+
+    
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+
+    
+      
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+    
+  
+
+<p>Combined with the other tricks, this allowed me to fully solve 5x5 Quoridor in just a few minutes on my laptop.</p>
+<p>Unfortunately this solution does not scale to the full 9x9 board which has 10<sup>20</sup> possible wall configurations.</p>
+<p>It's likely tractable to spend a few hundred dollars of cloud compute to solve the next frontier of board sizes if someone wants to throw money at the problem.</p>
+<p>6x6 is not really interesting since it's almost guaranteed to be a 1st player win due to even height, but e.g. 7x5 would probably be interesting.</p>
+
+  Wall Configurations by Board Size
+  Line graph showing log base 10 of wall configurations with at most 2N minus 1 walls for square boards from 2x2 through 9x9.
+
+  
+    
+  
+
+  Wall Configurations by Board Size
+
+  
+    
+    
+    
+    
+    
+
+    0
+    5
+    10
+    15
+    20
+
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+    Board Size
+    log10 wall configurations
+  
+
+<h3>Proof search</h3>
+<p><a href="https://alife-robotics.co.jp/LP/2022/OS13-3.htm" target="_blank" rel="noopener noreferrer">Previous</a> <a href="https://alife-robotics.co.jp/LP/2023/OS18-2.htm" target="_blank" rel="noopener noreferrer">work</a> <a href="https://www.jstage.jst.go.jp/article/jrnal/10/3/10_4/_article/-char/ja" target="_blank" rel="noopener noreferrer">has</a> largely focused on using <a href="https://www.chessprogramming.org/Retrograde_Analysis" target="_blank" rel="noopener noreferrer">retrograde analysis</a> to solve small Quoridor variants.</p>
+<p>This work largely uses an algorithm closely related to <a href="https://en.wikipedia.org/wiki/Proof-number_search" target="_blank" rel="noopener noreferrer">proof-number search</a> which, as far as I can find, appears to have never been applied to Quoridor.</p>
+<p>I was not aware of proof-number search before this work, and accidentally re-invented it by modifying the negamax algorithm until it was essentially a proof search.</p>
+<p>I had initially started with normal <a href="https://www.chessprogramming.org/Iterative_Deepening" target="_blank" rel="noopener noreferrer">iterative-deepening</a> negamax with (-∞, ∞) alpha-beta bounds and win/loss evaluation function, but you can get <em>significantly</em> more <a href="https://www.chessprogramming.org/Beta-Cutoff" target="_blank" rel="noopener noreferrer">beta-cutoffs</a> by initializing with (0, ∞) alpha-beta bounds.</p>
+<p>At each depth, you do a search assuming 1st player wins, and if that doesn't find a forced win, do a search assuming 2nd player wins, and if that doesn't find a forced win, try it all again at the next depth.</p>
+<p>Because of this structure, traditional alpha-beta techniques like <a href="https://www.chessprogramming.org/Move_Ordering" target="_blank" rel="noopener noreferrer">move ordering</a> can significantly speed up the search.</p>
+<p>I had gone into this conjecturing that this always terminates and there were no forced draws from the start position. I found the forced draw for 8x3 with 3 walls when the max depth kept ticking up indefinitely, then I added a retrograde solver fallback which proved the draw. The various optimizations mentioned in this work make retrograde analysis tractable for this size.</p>
+<h3>Additional implementation details</h3>
+<p>While precomputing all wall configurations and legality masks, you can squeeze out more performance by precomputing a bit more information for any wall configuration:</p>
+<ul>
+<li>All legal moves. Move generation is much cheaper with the legality masks, but you can still get a nice constant factor improvement by just precomputing it all upfront.</li>
+<li>Distance to goal. This is useful for move ordering which helps alpha-beta. You wanna try moves that help yourself or hurt your opponent first.</li>
+</ul>
+<h2>Future work</h2>
+<h3>Enumerating wall frontiers instead of whole wall configurations</h3>
+<p>You really shouldn't actually care about the <em>full</em> wall state. You really only care about the exact illegality frontier. That is, the minimal set of walls on the current board that causes the illegality.</p>
+
+  Quoridor illegality frontier
+  A 9 by 9 Quoridor board with a minimal teal wall frontier crossing the board and unrelated slate gray walls elsewhere.
+
+  
+    
+  
+
+  
+    
+      
+      
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+      
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+  
+
+<p>Because illegality is monotonic, once you have such a minimal set, any additional walls are not making the board "more illegal".</p>
+<p>So a better algorithm is to enumerate all possible such minimal illegality frontiers instead of all possible wall configurations. Then, implement some clever datastructure that can efficiently check if any illegality frontier is a subset of the current wall state.</p>
+<p>Unfortunately, this probably still isn't enough to solve 9x9 Quoridor, the branching factor is still too high even if you could do legality checks in 1 nanosecond.</p>
+<p>This method could probably be squeezed to scale to 6x6 or maybe even 7x7 though.</p>
+<h3>Enumerating all possible paths instead of walls</h3>
+<p>Rather than enumerating all possible wall configurations or frontiers, you can enumerate all possible paths, then perhaps there is a clever way to efficiently prune the set of valid paths given a current wall configuration. If the set of valid paths is empty, the state is illegal.</p>
+<p>I've thought less hard about this one but I feel there is probably something there. The number of possible paths from all squares is pretty tractable for 7x7 — just a few billion.</p>
+<h3>Divide-and-conquer tiles</h3>
+<p>There is probably something to be done where you divide the 9x9 board into smaller tiles, e.g. nine 3x3 tiles.</p>
+<p>Then you can precompute every possible tile. Each tile is keyed by its wall configuration + goal-reachability situation. A tile's goal-reachability situation is a function of its wall configuration + its neighbors' wall configurations and reachability situations.</p>
+<p>This turns your 9x9 pathfinding into a 3x3 pathfinding which should be around 10x faster. It's unclear to me if this is useful for solving, but is probably useful for playing.</p>
+<h2>Closing thoughts</h2>
+<p>I'll keep thinking about this problem in the shower every few months and hopefully have some more insights.</p>
+<p>It's interesting that the top LLMs — even tasked with grinding on this problem overnight in a harness — don't come close to this insight (tried with gpt-5.5-xhigh in codex CLI). It would be interesting to keep this as a private eval out of the training data, but publishing it is also valuable. It will be interesting to see if future LLMs can improve on this result.</p>
+<p>I did of course use coding agents to implement all the code for the most recent version of this project, after providing them the high-level insights described above. I've implemented enough Quoridor bitboards for one lifetime and wouldn't have spent such time revisiting this project without that accelerant.</p>
+<h3>Call for others</h3>
+<p>If any enterprising young person is confident they can train an AlphaZero style Quoridor bot for a few hundred dollars of cloud GPU, reach out to me with your proposal and I'd be interested in funding it. I'm really curious what superhuman Quoridor looks like.</p>
+<h2>Play</h2>
+
+  <div>
+    <div>
+      <div>
+        <section>
+          <div>
+            Quick config
+              
+                
+                
+                
+                
+                
+                
+              
+            
+            Width
+              
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+              
+            
+            Height
+              
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+              
+            
+            Walls each
+              
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+              
+            
+            Max depth
+              
+            
+            Think seconds
+              
+            
+            Player 1
+              
+                
+                
+              
+            
+            Player 2
+              
+                
+                
+              
+            
+          </div>
+        </section>
+
+        <section>
+          <div>
+            New game
+            Make bot move
+            Undo
+          </div>
+          <div>
+            <strong>Idle</strong>
+            <div>
+              <span>Configure a board and precompute the tables.</span>
+              <span></span>
+            </div>
+            <div><div></div></div>
+          </div>
+        </section>
+      </div>
+
+      <section>
+        
+      </section>
+    </div>
+  </div>
+  
+</div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://grantslatton.com/solving-quoridor" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button><script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
