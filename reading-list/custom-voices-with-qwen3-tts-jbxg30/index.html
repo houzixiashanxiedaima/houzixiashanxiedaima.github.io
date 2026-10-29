@@ -1,0 +1,207 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.4.2"><!-- Core SEO --><meta name="description" content="With my kids I’m currently building a little dungeron
+crawler and we’re trying to
+learn a bit about game
+development along the way.
+However given that we live in the modern times of increasing capabil"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/custom-voices-with-qwen3-tts-jbxg30/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/custom-voices-with-qwen3-tts-jbxg30/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/custom-voices-with-qwen3-tts-jbxg30/"><meta property="og:title" content="Custom Voices With Qwen3-TTS"><meta property="og:description" content="With my kids I’m currently building a little dungeron
+crawler and we’re trying to
+learn a bit about game
+development along the way.
+However given that we live in the modern times of increasing capabil"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="With my kids I’m currently building a little dungeron
+crawler and we’re trying to
+learn a bit about game
+development along the way.
+However given that we live in the modern times of increasing capabil"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/custom-voices-with-qwen3-tts-jbxg30/"><meta property="twitter:title" content="Custom Voices With Qwen3-TTS"><meta property="twitter:description" content="With my kids I’m currently building a little dungeron
+crawler and we’re trying to
+learn a bit about game
+development along the way.
+However given that we live in the modern times of increasing capabil"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Custom Voices With Qwen3-TTS</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Custom Voices With Qwen3-TTS","item":"https://blog.yuyins.com/reading-list/custom-voices-with-qwen3-tts-jbxg30/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip:after{content:none!important}.chip--sm{padding:.25rem .625rem;font-size:.8125rem}.chip--md{padding:.375rem .875rem;font-size:.875rem}.chip--interactive{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}@media (hover:hover){.chip--interactive:not(.chip--active):not(.active):hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}}.chip--active,.chip.active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.sXc9KWNJ.css"><style>.article-content{max-width:none}.article-content:lang(en){letter-spacing:0}.article-content:lang(en) pre{letter-spacing:var(--ls-body)}.article-content code:not(pre *){background:color-mix(in srgb, var(--muted) 30%, transparent);color:var(--foreground);border:0;border-radius:.2em;padding:.05em .3em;font-size:.875em;display:inline}.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.article-content table{max-width:100%;display:block;overflow-x:auto}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent-hover)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent-hover);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link nav-link--active" aria-current="page" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/podcasts" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 播客 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(function(){let e=async e=>{await(await e())()};(self.Astro||(self.Astro={})).load=e,window.dispatchEvent(new Event(`astro:load`))})();</script><script>(function(){function e(t){"@babel/helpers - typeof";return e=typeof Symbol==`function`&&typeof Symbol.iterator==`symbol`?function(e){return typeof e}:function(e){return e&&typeof Symbol==`function`&&e.constructor===Symbol&&e!==Symbol.prototype?`symbol`:typeof e},e(t)}function t(t,n){if(e(t)!=`object`||!t)return t;var r=t[Symbol.toPrimitive];if(r!==void 0){var i=r.call(t,n||`default`);if(e(i)!=`object`)return i;throw TypeError(`@@toPrimitive must return a primitive value.`)}return(n===`string`?String:Number)(t)}function n(n){var r=t(n,`string`);return e(r)==`symbol`?r:r+``}function r(e,t,r){return(t=n(t))in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}let i=/* @__PURE__ */ new Set([`__proto__`,`constructor`,`prototype`]);{let e={0:e=>a(e),1:e=>n(e),2:e=>new RegExp(e),3:e=>new Date(e),4:e=>new Map(n(e)),5:e=>new Set(n(e)),6:e=>BigInt(e),7:e=>new URL(e),8:e=>new Uint8Array(e),9:e=>new Uint16Array(e),10:e=>new Uint32Array(e),11:e=>1/0*e},t=t=>{let[n,r]=t;return n in e?e[n](r):void 0},n=e=>e.map(t),a=e=>typeof e!=`object`||!e?e:Object.fromEntries(Object.entries(e).map(([e,n])=>[e,t(n)]));class o extends HTMLElement{constructor(...e){super(...e),r(this,`Component`,void 0),r(this,`hydrator`,void 0),r(this,`hydrate`,async()=>{var e;if(!this.hydrator||!this.isConnected)return;let t=(e=this.parentElement)==null?void 0:e.closest(`astro-island[ssr]`);if(t){t.addEventListener(`astro:hydrate`,this.hydrate,{once:!0});return}let n=this.querySelectorAll(`astro-slot`),r={},i=this.querySelectorAll(`template[data-astro-template]`);for(let e of i){let t=e.closest(this.tagName);t!=null&&t.isSameNode(this)&&(r[e.getAttribute(`data-astro-template`)||`default`]=e.innerHTML,e.remove())}for(let e of n){let t=e.closest(this.tagName);t!=null&&t.isSameNode(this)&&(r[e.getAttribute(`name`)||`default`]=e.innerHTML)}let o;try{o=this.hasAttribute(`props`)?a(JSON.parse(this.getAttribute(`props`))):{}}catch(e){let t=this.getAttribute(`component-url`)||`<unknown>`,n=this.getAttribute(`component-export`);throw n&&(t+=` (export ${n})`),console.error(`[hydrate] Error parsing props for component ${t}`,this.getAttribute(`props`),e),e}await this.hydrator(this)(this.Component,o,r,{client:this.getAttribute(`client`)}),this.removeAttribute(`ssr`),this.dispatchEvent(new CustomEvent(`astro:hydrate`))}),r(this,`unmount`,()=>{this.isConnected||this.dispatchEvent(new CustomEvent(`astro:unmount`))})}disconnectedCallback(){document.removeEventListener(`astro:after-swap`,this.unmount),document.addEventListener(`astro:after-swap`,this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute(`await-children`)||document.readyState===`interactive`||document.readyState===`complete`)this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener(`DOMContentLoaded`,e),t.disconnect(),this.childrenConnectedCallback()},t=new MutationObserver(()=>{var t;((t=this.lastChild)==null?void 0:t.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue===`astro:end`&&(this.lastChild.remove(),e())});t.observe(this,{childList:!0}),document.addEventListener(`DOMContentLoaded`,e)}}async childrenConnectedCallback(){let e=this.getAttribute(`before-hydration-url`);e&&await import(e),this.start()}getRetryImportUrl(e){let t=new URL(e,document.baseURI);return t.searchParams.set(`astro-retry`,Date.now().toString()),t.toString()}async importWithRetry(e){try{return await import(e)}catch(t){return await new Promise(e=>setTimeout(e,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let t=this.getAttribute(`component-url`),n=new CustomEvent(`astro:hydration-error`,{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:t}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${t}`,e)}async start(){let e=JSON.parse(this.getAttribute(`opts`)),t=this.getAttribute(`client`);if(Astro[t]===void 0)window.addEventListener(`astro:${t}`,()=>this.start(),{once:!0});else try{await Astro[t](async()=>{let e=this.getAttribute(`renderer-url`);try{let[t,{default:n}]=await Promise.all([this.importWithRetry(this.getAttribute(`component-url`)),e?this.importWithRetry(e):Promise.resolve({default:()=>()=>{}})]),r=this.getAttribute(`component-export`)||`default`;if(r.includes(`.`)){this.Component=t;for(let e of r.split(`.`)){if(i.has(e)||!this.Component||typeof this.Component!=`object`&&typeof this.Component!=`function`||!Object.hasOwn(this.Component,e))throw Error(`Invalid component export path: ${r}`);this.Component=this.Component[e]}}else{if(i.has(r))throw Error(`Invalid component export path: ${r}`);this.Component=t[r]}return this.hydrator=n,this.hydrate}catch(e){return this.handleHydrationError(e),()=>{}}},e,this)}catch(e){this.handleHydrationError(e)}}attributeChangedCallback(){this.hydrate()}}r(o,`observedAttributes`,[`props`]),customElements.get(`astro-island`)||customElements.define(`astro-island`,o)}})();</script><script>window._$HY||(e=>{let t=e=>e&&e.hasAttribute&&(e.hasAttribute("data-hk")?e:t(e.host&&e.host.nodeType?e.host:e.parentNode));["click", "input"].forEach((o=>document.addEventListener(o,(o=>{if(!e.events)return;let s=t(o.composedPath&&o.composedPath()[0]||o.target);s&&!e.completed.has(s)&&e.events.push([s,o])}))))})(_$HY={events:[],completed:new WeakSet,r:{},fe(){}});</script><!--xs--><astro-island uid="uiS3H" data-solid-render-id="s0" component-url="/_astro/SearchDialog.1o6q21a7.js" component-export="default" renderer-url="/_astro/client.DDRnOt_e.js" props="{&quot;recommendations&quot;:[1,[[0,{&quot;slug&quot;:[0,&quot;ide-updates/2026-10-30&quot;],&quot;title&quot;:[0,&quot;IDE / SDK 更新 - 2026-10-30&quot;],&quot;category&quot;:[0,&quot;IDE 更新&quot;]}],[0,{&quot;slug&quot;:[0,&quot;releases/2026-10-29&quot;],&quot;title&quot;:[0,&quot;GitHub Releases 日报 - 2026-10-29&quot;],&quot;category&quot;:[0,&quot;开源追踪&quot;]}],[0,{&quot;slug&quot;:[0,&quot;ide-updates/2026-10-29&quot;],&quot;title&quot;:[0,&quot;IDE / SDK 更新 - 2026-10-29&quot;],&quot;category&quot;:[0,&quot;IDE 更新&quot;]}],[0,{&quot;slug&quot;:[0,&quot;releases/2026-10-28&quot;],&quot;title&quot;:[0,&quot;GitHub Releases 日报 - 2026-10-28&quot;],&quot;category&quot;:[0,&quot;开源追踪&quot;]}],[0,{&quot;slug&quot;:[0,&quot;ide-updates/2026-10-28&quot;],&quot;title&quot;:[0,&quot;IDE / SDK 更新 - 2026-10-28&quot;],&quot;category&quot;:[0,&quot;IDE 更新&quot;]}],[0,{&quot;slug&quot;:[0,&quot;releases/2026-10-27&quot;],&quot;title&quot;:[0,&quot;GitHub Releases 日报 - 2026-10-27&quot;],&quot;category&quot;:[0,&quot;开源追踪&quot;]}]]],&quot;data-astro-cid-ac66eqjo&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;SearchDialog&quot;,&quot;value&quot;:true}" await-children><button data-hk="s00000" class="search-toggle" type="button" aria-label="打开搜索" title="搜索 (⌘K)"><svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"></circle><path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></button><dialog data-hk="s00001" class="search-dialog" aria-label="站内搜索"><div class="search-dialog-card"><div class="search-input-row"><svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg><div id="pagefind-ui" class="search-pagefind-slot"></div><div class="search-controls"><kbd class="search-kbd">ESC</kbd><button class="search-dialog-close" type="button" aria-label="关闭搜索"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div></div><!--$--><div data-hk="s000020" id="search-suggestions" class="search-suggestions"><p class="search-suggestions-title">推荐阅读</p><ul class="search-suggestions-list"><li data-hk="s0000210"><a class="search-suggestion-item" href="/blog/ide-updates/2026-10-30"><span class="search-suggestion-title">IDE / SDK 更新 - 2026-10-30</span><span class="search-suggestion-meta">IDE 更新</span></a></li><li data-hk="s0000211"><a class="search-suggestion-item" href="/blog/releases/2026-10-29"><span class="search-suggestion-title">GitHub Releases 日报 - 2026-10-29</span><span class="search-suggestion-meta">开源追踪</span></a></li><li data-hk="s0000212"><a class="search-suggestion-item" href="/blog/ide-updates/2026-10-29"><span class="search-suggestion-title">IDE / SDK 更新 - 2026-10-29</span><span class="search-suggestion-meta">IDE 更新</span></a></li><li data-hk="s0000213"><a class="search-suggestion-item" href="/blog/releases/2026-10-28"><span class="search-suggestion-title">GitHub Releases 日报 - 2026-10-28</span><span class="search-suggestion-meta">开源追踪</span></a></li><li data-hk="s0000214"><a class="search-suggestion-item" href="/blog/ide-updates/2026-10-28"><span class="search-suggestion-title">IDE / SDK 更新 - 2026-10-28</span><span class="search-suggestion-meta">IDE 更新</span></a></li><li data-hk="s0000215"><a class="search-suggestion-item" href="/blog/releases/2026-10-27"><span class="search-suggestion-title">GitHub Releases 日报 - 2026-10-27</span><span class="search-suggestion-meta">开源追踪</span></a></li></ul></div><!--/--></div></dialog><!--astro:end--></astro-island> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>Custom Voices With Qwen3-TTS</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://lucumr.pocoo.org/" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag"> lucumr.pocoo.org </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年10月29日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" lang="zh-CN" data-astro-cid-veycvx62><p>With my kids I’m currently building a little <a href="https://github.com/mitsuhiko/dungeon-crawler" target="_blank" rel="noopener noreferrer">dungeron
+crawler</a> and we’re trying to
+<a href="https://mitsuhiko.github.io/dungeon-crawler/learn/" target="_blank" rel="noopener noreferrer">learn a bit about game
+development</a> along the way.
+However given that we live in the modern times of increasing capabilities we
+wanted to get a narrator and voice over.</p>
+<p>But we also wanted it to not sound like everyone’s standard AI voices so I
+looked into what options there are on the table.  After some investigation I
+narrowed down to using <a href="https://github.com/QwenLM/Qwen3-TTS" target="_blank" rel="noopener noreferrer">Qwen3-TTS</a> which
+uses voice embeddings for custom voices.</p>
+<p>With a bit of creativity you can also do more with those custom voices than
+appears initially.  In case this is of interest to you, this post just covers
+what we learned and with some examples.  You can probably point your agent to
+it and it can do something with it.</p>
+<h2>What Qwen Offers</h2>
+<p>Qwen3 is not the only TTS model in town, and it wans’t even my first choice.  We
+initially used <a href="https://huggingface.co/hexgrad/Kokoro-82M" target="_blank" rel="noopener noreferrer">Kokoro</a>.  However
+Qwen3 supports voice cloning and we wanted to have it feel a bit more unique.</p>
+<p>In practice it’s a bit tricker though. Qwen3 ships three kinds of models:</p>
+<ul>
+<li><code>1.7B-Base</code> (and 0.6B): clones a voice from a few seconds of reference audio</li>
+<li><code>1.7B-CustomVoice</code>: comes with nine built-in speakers and instructions</li>
+<li><code>1.7B-VoiceDesign</code>: invents a voice from a text description</li>
+</ul>
+<p>The base model clones either in context or from the speaker embedding alone but
+there is no documented way to clone a voice and direct it with instructions.
+That means unlike the custom voice and voice design models you cannot say “speak
+sad” or “whisper” with a cloned base model.</p>
+<p>At present the official options for a custom voice are fine-tuning Base on a
+single speaker or to make a clip with VoiceDesign and clone it with Base.  That
+is not all that bad, but it means instructions are gone.</p>
+<h2>Playing With It</h2>
+<p>For this blog post I took 28 seconds of me from my talk at <a href="https://www.youtube.com/watch?v=8RHYyRUxVrA" target="_blank" rel="noopener noreferrer">PyAI
+Conf</a>, cut between two pauses so
+that it starts and ends on a full sentence, and transcribed it with Whisper.
+The transcript is really only needed for baking but to compare against an
+already existing voice it’s useful to have it say the same thing as the original
+recording.</p>
+<p>Note that a conference talk recording is not ideal but it works anyways.  Which
+is also a good reminder that you really don’t need a particularly clean
+recording (or a very long one) to get a halfway convincing version of a person.
+Particularly when then presented to you on a low quality phone call, it won’t be
+very hard to trick your grandmother.</p>
+<p>The first thing you can do is to blend that recording with another voice.  For
+instance you can use VoiceDesign to make up a voice from a description.  For this blog
+post the designed voice was created like this, with Qwen’s own Python package
+<a href="https://pypi.org/project/qwen-tts/" target="_blank" rel="noopener noreferrer"><code>qwen-tts</code></a> (<code>pip install qwen-tts</code>, I used
+0.1.1), which the rest of the code in this post uses too:</p>
+<div><pre><span></span><span>import</span><span> </span><span>torch</span>
+<span>from</span><span> </span><span>qwen_tts</span><span> </span><span>import</span> <span>Qwen3TTSModel</span>
+
+<span>kw</span> <span>=</span> <span>dict</span><span>(</span><span>device_map</span><span>=</span><span>"mps"</span><span>,</span> <span>dtype</span><span>=</span><span>torch</span><span>.</span><span>bfloat16</span><span>,</span> <span>attn_implementation</span><span>=</span><span>"sdpa"</span><span>)</span>
+<span>design</span> <span>=</span> <span>Qwen3TTSModel</span><span>.</span><span>from_pretrained</span><span>(</span><span>"Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign"</span><span>,</span> <span>**</span><span>kw</span><span>)</span>
+<span>wavs</span><span>,</span> <span>sr</span> <span>=</span> <span>design</span><span>.</span><span>generate_voice_design</span><span>(</span>
+    <span>text</span><span>=</span><span>open</span><span>(</span><span>"voices/transcript.txt"</span><span>)</span><span>.</span><span>read</span><span>(),</span> <span>language</span><span>=</span><span>"English"</span><span>,</span>
+    <span>instruct</span><span>=</span><span>"A man in his forties with a warm, natural, medium-low voice, speaking "</span>
+             <span>"clearly and calmly at an easy conversational pace, like someone reading "</span>
+             <span>"aloud to a friend."</span><span>,</span>
+<span>)</span>
+</pre></div>
+<p>You can see how the two different voices behave, particularly when blended together:</p>
+<p><em><a href="https://lucumr.pocoo.org/2026/10/29/qwen3-custom-voices/" target="_blank" rel="noopener noreferrer">Interactive demo: see the post on the website.</a></em></p>
+
+<h2>Voice Embeddings</h2>
+<p>What Base takes from a recording when cloning from the embedding alone is a
+speaker embedding which is basically 2048 numbers out of a speaker encoder that
+was trained.  The same voice gets similar numbers and different voices get
+different ones.  Which btw, is also a convenient way to do speaker detection
+from recordings if you want to!  It’s not perfect, but it’s quite helpful for a
+single audio track recording to tell two speakers apart if you do some basic
+slicing and dicing (more on that below).</p>
+<p>Because it is just a vector, you can do arithmetic on it.  For instance a
+weighted average of two embeddings is a spaker that is somewhere between two
+voices:</p>
+<div><pre><span></span><span>base</span> <span>=</span> <span>Qwen3TTSModel</span><span>.</span><span>from_pretrained</span><span>(</span><span>"Qwen/Qwen3-TTS-12Hz-1.7B-Base"</span><span>,</span> <span>**</span><span>kw</span><span>)</span>
+
+<span>def</span><span> </span><span>fingerprint</span><span>(</span><span>path</span><span>):</span>
+    <span>prompt</span> <span>=</span> <span>base</span><span>.</span><span>create_voice_clone_prompt</span><span>(</span><span>ref_audio</span><span>=</span><span>path</span><span>,</span> <span>x_vector_only_mode</span><span>=</span><span>True</span><span>)</span>
+    <span>return</span> <span>prompt</span><span>[</span><span>0</span><span>]</span><span>.</span><span>ref_spk_embedding</span>
+
+<span>def</span><span> </span><span>blend</span><span>(</span><span>a</span><span>,</span> <span>b</span><span>,</span> <span>t</span><span>):</span>
+    <span>a</span><span>,</span> <span>b</span> <span>=</span> <span>a</span><span>.</span><span>float</span><span>(),</span> <span>b</span><span>.</span><span>float</span><span>()</span>
+    <span>mixed</span> <span>=</span> <span>(</span><span>1</span> <span>-</span> <span>t</span><span>)</span> <span>*</span> <span>a</span> <span>+</span> <span>t</span> <span>*</span> <span>b</span>
+    <span>return</span> <span>(</span><span>mixed</span> <span>/</span> <span>mixed</span><span>.</span><span>norm</span><span>()</span> <span>*</span> <span>((</span><span>1</span> <span>-</span> <span>t</span><span>)</span> <span>*</span> <span>a</span><span>.</span><span>norm</span><span>()</span> <span>+</span> <span>t</span> <span>*</span> <span>b</span><span>.</span><span>norm</span><span>()))</span><span>.</span><span>to</span><span>(</span><span>torch</span><span>.</span><span>bfloat16</span><span>)</span>
+
+<span>armin</span><span>,</span> <span>designed</span> <span>=</span> <span>fingerprint</span><span>(</span><span>"voices/armin.flac"</span><span>),</span> <span>fingerprint</span><span>(</span><span>"voices/designed.flac"</span><span>)</span>
+</pre></div>
+<p>Here is the same sentence in eleven blends:</p>
+<p><em><a href="https://lucumr.pocoo.org/2026/10/29/qwen3-custom-voices/" target="_blank" rel="noopener noreferrer">Interactive demo: see the post on the website.</a></em></p>
+<p>Note that it stops sounding like me quite quickly, but it retains some of my
+features.  And it for sure ends up with creating a unique voice regardless.
+I found some better successes when ensuing that the two voices have similar
+spectograms (eg: similar “recording setups”).  In this recording you can hear
+that one voice picked up by the lapel mic was a bit hollow compared to the
+designed voice.</p>
+<p>If you like a a voice that comes out, you can bake it back into a new recording
+that you can then use as reference:</p>
+<div><pre><span></span><span>import</span><span> </span><span>soundfile</span><span> </span><span>as</span><span> </span><span>sf</span>
+
+<span>mixed</span> <span>=</span> <span>blend</span><span>(</span><span>armin</span><span>,</span> <span>designed</span><span>,</span> <span>0.5</span><span>)</span>
+<span>audio</span><span>,</span> <span>rate</span> <span>=</span> <span>say</span><span>(</span><span>open</span><span>(</span><span>"voices/transcript.txt"</span><span>)</span><span>.</span><span>read</span><span>(),</span> <span>mixed</span><span>)</span>  <span># say() is shown further down</span>
+<span>sf</span><span>.</span><span>write</span><span>(</span><span>"voices/final.flac"</span><span>,</span> <span>audio</span><span>,</span> <span>rate</span><span>)</span>
+<span>final</span> <span>=</span> <span>fingerprint</span><span>(</span><span>"voices/final.flac"</span><span>)</span>
+</pre></div>
+<p>The baked voice does not come back exactly as the blend but it makes handling it
+easier if you want to.  It’s just one voice reference file.</p>
+<p>So on the question of using those embeddings for speaker recognition: how good
+does that work?  I took an episode of <a href="https://www.youtube.com/watch?v=qCpY4K9jtOg" target="_blank" rel="noopener noreferrer">State of Agentic
+Coding</a>, the podcast Ben and I
+record, cut it into 2-second windows one second apart and compared each with an
+embedding of me form the conference.</p>
+<p>Somewhat surprising, but maybe not too surprising using my conference recording
+clip as the reference this does not work at all with Qwen3.  If instead I take
+the 20 seconds where I introduce myself at the start of the episode as the
+reference, it gets 98% of the rest right. </p>
+<p>On the other hand using a model that was trained for speaker verification
+instead does manage to pick me up from the conference recording clip.  For
+instance <a href="https://huggingface.co/speechbrain/spkrec-ecapa-voxceleb" target="_blank" rel="noopener noreferrer">ECAPA</a>,
+finds me from the conference clip in 97% of the windows.</p>
+<p>Here are 20 minutes of that podcast, classified by speaker with the different
+approaches:</p>
+<p><em><a href="https://lucumr.pocoo.org/2026/10/29/qwen3-custom-voices/" target="_blank" rel="noopener noreferrer">Interactive demo: see the post on the website.</a></em></p>
+<h2>Instructed Cloned Voices</h2>
+<p>But the embeddings a very useful for the voice cloning!  But how to give them
+instructions?  Base and CustomVoice manipulate the speaker the same way: one
+vector inserted into the talker’s input sequence.  In CustomVoice that vector is
+a row of the embedding table.  In Base it is the x-vector from the speaker
+encoder, which only Base has.  The generation code takes either
+(<code>voice_clone_prompt</code> is a regular argument of <code>generate</code>), and the transformer
+weights of the two models are nearly identical.  So take the embedding with
+Base, then hand it to CustomVoice instead of one of its speakers:</p>
+<div><pre><span></span><span>cv</span> <span>=</span> <span>Qwen3TTSModel</span><span>.</span><span>from_pretrained</span><span>(</span><span>"Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice"</span><span>,</span> <span>**</span><span>kw</span><span>)</span>
+
+<span>def</span><span> </span><span>say</span><span>(</span><span>text</span><span>,</span> <span>xvec</span><span>,</span> <span>instruct</span><span>=</span><span>None</span><span>,</span> <span>language</span><span>=</span><span>"English"</span><span>):</span>
+    <span>ids</span> <span>=</span> <span>cv</span><span>.</span><span>_tokenize_texts</span><span>([</span><span>cv</span><span>.</span><span>_build_assistant_text</span><span>(</span><span>text</span><span>)])</span>
+    <span>told</span> <span>=</span> <span>[</span><span>cv</span><span>.</span><span>_tokenize_texts</span><span>([</span><span>cv</span><span>.</span><span>_build_instruct_text</span><span>(</span><span>instruct</span><span>)])[</span><span>0</span><span>]</span>
+            <span>if</span> <span>instruct</span> <span>else</span> <span>None</span><span>]</span>
+    <span>voice</span> <span>=</span> <span>{</span><span>"ref_code"</span><span>:</span> <span>[</span><span>None</span><span>],</span> <span>"ref_spk_embedding"</span><span>:</span> <span>[</span><span>xvec</span><span>],</span>
+             <span>"x_vector_only_mode"</span><span>:</span> <span>[</span><span>True</span><span>],</span> <span>"icl_mode"</span><span>:</span> <span>[</span><span>False</span><span>]}</span>
+    <span>codes</span><span>,</span> <span>_</span> <span>=</span> <span>cv</span><span>.</span><span>model</span><span>.</span><span>generate</span><span>(</span>
+        <span>input_ids</span><span>=</span><span>ids</span><span>,</span> <span>instruct_ids</span><span>=</span><span>told</span><span>,</span> <span>voice_clone_prompt</span><span>=</span><span>voice</span><span>,</span>
+        <span>languages</span><span>=</span><span>[</span><span>language</span><span>],</span> <span>non_streaming_mode</span><span>=</span><span>True</span><span>,</span>
+        <span>**</span><span>cv</span><span>.</span><span>_merge_generate_kwargs</span><span>(</span><span>temperature</span><span>=</span><span>0.7</span><span>,</span> <span>subtalker_temperature</span><span>=</span><span>0.7</span><span>),</span>
+    <span>)</span>
+    <span>wavs</span><span>,</span> <span>rate</span> <span>=</span> <span>cv</span><span>.</span><span>model</span><span>.</span><span>speech_tokenizer</span><span>.</span><span>decode</span><span>([{</span><span>"audio_codes"</span><span>:</span> <span>codes</span><span>[</span><span>0</span><span>]}])</span>
+    <span>return</span> <span>wavs</span><span>[</span><span>0</span><span>],</span> <span>rate</span>
+
+<span>wav</span><span>,</span> <span>rate</span> <span>=</span> <span>say</span><span>(</span><span>"I really thought this would work."</span><span>,</span> <span>armin</span><span>,</span>
+                <span>"Speak in a sad, sorrowful tone, voice low and heavy, on the verge of tears."</span><span>)</span>
+</pre></div>
+<p>Pick a speaker for the slot, a model and an instruction:</p>
+<p><em><a href="https://lucumr.pocoo.org/2026/10/29/qwen3-custom-voices/" target="_blank" rel="noopener noreferrer">Interactive demo: see the post on the website.</a></em></p>
+<p>Instructions work on cloned voices, but less reliably than on the built-in
+speakers, and it depends on the emotion, but honestly, it came out better than I
+anticipated.  Definitely good enough to have some true custom voices for a voice
+over that don’t necessarily sound like something, someone else has in their
+game.</p>
+<h2>Other Fun Math</h2>
+<p>If a voice is a point in a 2048-dimensional space and blending works we can maybe
+do some other funny math on it.  The obvious one is to try to see if some math can
+be used to manipulate gender.</p>
+<p>To find it I had VoiceDesign create 14 different voices for men and women each.
+When you then take the average woman minus the average man you can then move any
+voice along that direction:</p>
+<div><pre><span></span><span>women</span> <span>=</span> <span>torch</span><span>.</span><span>stack</span><span>([</span><span>fingerprint</span><span>(</span><span>f</span><span>"design/f</span><span>{</span><span>i</span><span>}</span><span>.wav"</span><span>)</span> <span>for</span> <span>i</span> <span>in</span> <span>range</span><span>(</span><span>14</span><span>)])</span><span>.</span><span>float</span><span>()</span>
+<span>men</span> <span>=</span> <span>torch</span><span>.</span><span>stack</span><span>([</span><span>fingerprint</span><span>(</span><span>f</span><span>"design/m</span><span>{</span><span>i</span><span>}</span><span>.wav"</span><span>)</span> <span>for</span> <span>i</span> <span>in</span> <span>range</span><span>(</span><span>14</span><span>)])</span><span>.</span><span>float</span><span>()</span>
+<span>middle</span> <span>=</span> <span>(</span><span>women</span><span>.</span><span>mean</span><span>(</span><span>0</span><span>)</span> <span>+</span> <span>men</span><span>.</span><span>mean</span><span>(</span><span>0</span><span>))</span> <span>/</span> <span>2</span>
+<span>axis</span> <span>=</span> <span>women</span><span>.</span><span>mean</span><span>(</span><span>0</span><span>)</span> <span>-</span> <span>men</span><span>.</span><span>mean</span><span>(</span><span>0</span><span>)</span>
+<span>axis</span> <span>=</span> <span>axis</span> <span>/</span> <span>axis</span><span>.</span><span>norm</span><span>()</span>
+
+<span>def</span><span> </span><span>move</span><span>(</span><span>xvec</span><span>,</span> <span>t</span><span>):</span>
+<span>    </span><span>"""Put the voice at position t along the gender axis, keep the rest."""</span>
+    <span>x</span> <span>=</span> <span>xvec</span><span>.</span><span>float</span><span>()</span>
+    <span>return</span> <span>(</span><span>x</span> <span>+</span> <span>(</span><span>t</span> <span>-</span> <span>(</span><span>x</span> <span>-</span> <span>middle</span><span>)</span> <span>@</span> <span>axis</span><span>)</span> <span>*</span> <span>axis</span><span>)</span><span>.</span><span>to</span><span>(</span><span>torch</span><span>.</span><span>bfloat16</span><span>)</span>
+</pre></div>
+<p>Here is the result for my clone:</p>
+<p><em><a href="https://lucumr.pocoo.org/2026/10/29/qwen3-custom-voices/" target="_blank" rel="noopener noreferrer">Interactive demo: see the post on the website.</a></em></p>
+<p>Anyways, that’s that.  If you want to play around with Qwen3 TTS I hope this was
+of some help, and maybe you got some ideas of what to do with the voice
+embeddings.  Use it for good, not evil.</p>
+</div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://lucumr.pocoo.org/2026/10/29/qwen3-custom-voices/" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button><script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
