@@ -1,0 +1,352 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.4.4"><!-- Core SEO --><meta name="description" content="Package signing and attestations are two ways of attaching evidence to a published artifact so that someone downloading it later can check where it came from. A signature binds the bytes to a key, eit"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/signing-and-attestations-across-package-registries-u6jjed/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/signing-and-attestations-across-package-registries-u6jjed/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/signing-and-attestations-across-package-registries-u6jjed/"><meta property="og:title" content="Signing and Attestations Across Package Registries"><meta property="og:description" content="Package signing and attestations are two ways of attaching evidence to a published artifact so that someone downloading it later can check where it came from. A signature binds the bytes to a key, eit"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="Package signing and attestations are two ways of attaching evidence to a published artifact so that someone downloading it later can check where it came from. A signature binds the bytes to a key, eit"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/signing-and-attestations-across-package-registries-u6jjed/"><meta property="twitter:title" content="Signing and Attestations Across Package Registries"><meta property="twitter:description" content="Package signing and attestations are two ways of attaching evidence to a published artifact so that someone downloading it later can check where it came from. A signature binds the bytes to a key, eit"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Signing and Attestations Across Package Registries</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Signing and Attestations Across Package Registries","item":"https://blog.yuyins.com/reading-list/signing-and-attestations-across-package-registries-u6jjed/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip:after{content:none!important}.chip--sm{padding:.25rem .625rem;font-size:.8125rem}.chip--md{padding:.375rem .875rem;font-size:.875rem}.chip--interactive{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}@media (hover:hover){.chip--interactive:not(.chip--active):not(.active):hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}}.chip--active,.chip.active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.sXc9KWNJ.css"><style>.article-content{max-width:none}.article-content:lang(en){letter-spacing:0}.article-content:lang(en) pre{letter-spacing:var(--ls-body)}.article-content code:not(pre *){background:color-mix(in srgb, var(--muted) 30%, transparent);color:var(--foreground);border:0;border-radius:.2em;padding:.05em .3em;font-size:.875em;display:inline}.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.article-content table{max-width:100%;display:block;overflow-x:auto}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent-hover)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent-hover);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link nav-link--active" aria-current="page" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/podcasts" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 播客 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(function(){let e=async e=>{await(await e())()};(self.Astro||(self.Astro={})).load=e,window.dispatchEvent(new Event(`astro:load`))})();</script><script>(function(){function e(t){"@babel/helpers - typeof";return e=typeof Symbol==`function`&&typeof Symbol.iterator==`symbol`?function(e){return typeof e}:function(e){return e&&typeof Symbol==`function`&&e.constructor===Symbol&&e!==Symbol.prototype?`symbol`:typeof e},e(t)}function t(t,n){if(e(t)!=`object`||!t)return t;var r=t[Symbol.toPrimitive];if(r!==void 0){var i=r.call(t,n||`default`);if(e(i)!=`object`)return i;throw TypeError(`@@toPrimitive must return a primitive value.`)}return(n===`string`?String:Number)(t)}function n(n){var r=t(n,`string`);return e(r)==`symbol`?r:r+``}function r(e,t,r){return(t=n(t))in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}let i=/* @__PURE__ */ new Set([`__proto__`,`constructor`,`prototype`]);{let e={0:e=>a(e),1:e=>n(e),2:e=>new RegExp(e),3:e=>new Date(e),4:e=>new Map(n(e)),5:e=>new Set(n(e)),6:e=>BigInt(e),7:e=>new URL(e),8:e=>new Uint8Array(e),9:e=>new Uint16Array(e),10:e=>new Uint32Array(e),11:e=>1/0*e},t=t=>{let[n,r]=t;return n in e?e[n](r):void 0},n=e=>e.map(t),a=e=>typeof e!=`object`||!e?e:Object.fromEntries(Object.entries(e).map(([e,n])=>[e,t(n)]));class o extends HTMLElement{constructor(...e){super(...e),r(this,`Component`,void 0),r(this,`hydrator`,void 0),r(this,`hydrate`,async()=>{var e;if(!this.hydrator||!this.isConnected)return;let t=(e=this.parentElement)==null?void 0:e.closest(`astro-island[ssr]`);if(t){t.addEventListener(`astro:hydrate`,this.hydrate,{once:!0});return}let n=this.querySelectorAll(`astro-slot`),r={},i=this.querySelectorAll(`template[data-astro-template]`);for(let e of i){let t=e.closest(this.tagName);t!=null&&t.isSameNode(this)&&(r[e.getAttribute(`data-astro-template`)||`default`]=e.innerHTML,e.remove())}for(let e of n){let t=e.closest(this.tagName);t!=null&&t.isSameNode(this)&&(r[e.getAttribute(`name`)||`default`]=e.innerHTML)}let o;try{o=this.hasAttribute(`props`)?a(JSON.parse(this.getAttribute(`props`))):{}}catch(e){let t=this.getAttribute(`component-url`)||`<unknown>`,n=this.getAttribute(`component-export`);throw n&&(t+=` (export ${n})`),console.error(`[hydrate] Error parsing props for component ${t}`,this.getAttribute(`props`),e),e}await this.hydrator(this)(this.Component,o,r,{client:this.getAttribute(`client`)}),this.removeAttribute(`ssr`),this.dispatchEvent(new CustomEvent(`astro:hydrate`))}),r(this,`unmount`,()=>{this.isConnected||this.dispatchEvent(new CustomEvent(`astro:unmount`))})}disconnectedCallback(){document.removeEventListener(`astro:after-swap`,this.unmount),document.addEventListener(`astro:after-swap`,this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute(`await-children`)||document.readyState===`interactive`||document.readyState===`complete`)this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener(`DOMContentLoaded`,e),t.disconnect(),this.childrenConnectedCallback()},t=new MutationObserver(()=>{var t;((t=this.lastChild)==null?void 0:t.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue===`astro:end`&&(this.lastChild.remove(),e())});t.observe(this,{childList:!0}),document.addEventListener(`DOMContentLoaded`,e)}}async childrenConnectedCallback(){let e=this.getAttribute(`before-hydration-url`);e&&await import(e),this.start()}getRetryImportUrl(e){let t=new URL(e,document.baseURI);return t.searchParams.set(`astro-retry`,Date.now().toString()),t.toString()}async importWithRetry(e){try{return await import(e)}catch(t){return await new Promise(e=>setTimeout(e,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let t=this.getAttribute(`component-url`),n=new CustomEvent(`astro:hydration-error`,{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:t}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${t}`,e)}async start(){let e=JSON.parse(this.getAttribute(`opts`)),t=this.getAttribute(`client`);if(Astro[t]===void 0)window.addEventListener(`astro:${t}`,()=>this.start(),{once:!0});else try{await Astro[t](async()=>{let e=this.getAttribute(`renderer-url`);try{let[t,{default:n}]=await Promise.all([this.importWithRetry(this.getAttribute(`component-url`)),e?this.importWithRetry(e):Promise.resolve({default:()=>()=>{}})]),r=this.getAttribute(`component-export`)||`default`;if(r.includes(`.`)){this.Component=t;for(let e of r.split(`.`)){if(i.has(e)||!this.Component||typeof this.Component!=`object`&&typeof this.Component!=`function`||!Object.hasOwn(this.Component,e))throw Error(`Invalid component export path: ${r}`);this.Component=this.Component[e]}}else{if(i.has(r))throw Error(`Invalid component export path: ${r}`);this.Component=t[r]}return this.hydrator=n,this.hydrate}catch(e){return this.handleHydrationError(e),()=>{}}},e,this)}catch(e){this.handleHydrationError(e)}}attributeChangedCallback(){this.hydrate()}}r(o,`observedAttributes`,[`props`]),customElements.get(`astro-island`)||customElements.define(`astro-island`,o)}})();</script><script>window._$HY||(e=>{let t=e=>e&&e.hasAttribute&&(e.hasAttribute("data-hk")?e:t(e.host&&e.host.nodeType?e.host:e.parentNode));["click", "input"].forEach((o=>document.addEventListener(o,(o=>{if(!e.events)return;let s=t(o.composedPath&&o.composedPath()[0]||o.target);s&&!e.completed.has(s)&&e.events.push([s,o])}))))})(_$HY={events:[],completed:new WeakSet,r:{},fe(){}});</script><!--xs--><astro-island uid="Z1qEHFR" data-solid-render-id="s0" component-url="/_astro/SearchDialog.1o6q21a7.js" component-export="default" renderer-url="/_astro/client.DDRnOt_e.js" props="{&quot;recommendations&quot;:[1,[[0,{&quot;slug&quot;:[0,&quot;ide-updates/2026-10-31&quot;],&quot;title&quot;:[0,&quot;IDE / SDK 更新 - 2026-10-31&quot;],&quot;category&quot;:[0,&quot;IDE 更新&quot;]}],[0,{&quot;slug&quot;:[0,&quot;releases/2026-10-30&quot;],&quot;title&quot;:[0,&quot;GitHub Releases 日报 - 2026-10-30&quot;],&quot;category&quot;:[0,&quot;开源追踪&quot;]}],[0,{&quot;slug&quot;:[0,&quot;ide-updates/2026-10-30&quot;],&quot;title&quot;:[0,&quot;IDE / SDK 更新 - 2026-10-30&quot;],&quot;category&quot;:[0,&quot;IDE 更新&quot;]}],[0,{&quot;slug&quot;:[0,&quot;releases/2026-10-29&quot;],&quot;title&quot;:[0,&quot;GitHub Releases 日报 - 2026-10-29&quot;],&quot;category&quot;:[0,&quot;开源追踪&quot;]}],[0,{&quot;slug&quot;:[0,&quot;ide-updates/2026-10-29&quot;],&quot;title&quot;:[0,&quot;IDE / SDK 更新 - 2026-10-29&quot;],&quot;category&quot;:[0,&quot;IDE 更新&quot;]}],[0,{&quot;slug&quot;:[0,&quot;releases/2026-10-28&quot;],&quot;title&quot;:[0,&quot;GitHub Releases 日报 - 2026-10-28&quot;],&quot;category&quot;:[0,&quot;开源追踪&quot;]}]]],&quot;data-astro-cid-ac66eqjo&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;SearchDialog&quot;,&quot;value&quot;:true}" await-children><button data-hk="s00000" class="search-toggle" type="button" aria-label="打开搜索" title="搜索 (⌘K)"><svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"></circle><path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></button><dialog data-hk="s00001" class="search-dialog" aria-label="站内搜索"><div class="search-dialog-card"><div class="search-input-row"><svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg><div id="pagefind-ui" class="search-pagefind-slot"></div><div class="search-controls"><kbd class="search-kbd">ESC</kbd><button class="search-dialog-close" type="button" aria-label="关闭搜索"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div></div><!--$--><div data-hk="s000020" id="search-suggestions" class="search-suggestions"><p class="search-suggestions-title">推荐阅读</p><ul class="search-suggestions-list"><li data-hk="s0000210"><a class="search-suggestion-item" href="/blog/ide-updates/2026-10-31"><span class="search-suggestion-title">IDE / SDK 更新 - 2026-10-31</span><span class="search-suggestion-meta">IDE 更新</span></a></li><li data-hk="s0000211"><a class="search-suggestion-item" href="/blog/releases/2026-10-30"><span class="search-suggestion-title">GitHub Releases 日报 - 2026-10-30</span><span class="search-suggestion-meta">开源追踪</span></a></li><li data-hk="s0000212"><a class="search-suggestion-item" href="/blog/ide-updates/2026-10-30"><span class="search-suggestion-title">IDE / SDK 更新 - 2026-10-30</span><span class="search-suggestion-meta">IDE 更新</span></a></li><li data-hk="s0000213"><a class="search-suggestion-item" href="/blog/releases/2026-10-29"><span class="search-suggestion-title">GitHub Releases 日报 - 2026-10-29</span><span class="search-suggestion-meta">开源追踪</span></a></li><li data-hk="s0000214"><a class="search-suggestion-item" href="/blog/ide-updates/2026-10-29"><span class="search-suggestion-title">IDE / SDK 更新 - 2026-10-29</span><span class="search-suggestion-meta">IDE 更新</span></a></li><li data-hk="s0000215"><a class="search-suggestion-item" href="/blog/releases/2026-10-28"><span class="search-suggestion-title">GitHub Releases 日报 - 2026-10-28</span><span class="search-suggestion-meta">开源追踪</span></a></li></ul></div><!--/--></div></dialog><!--astro:end--></astro-island> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>Signing and Attestations Across Package Registries</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://nesbitt.io/" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag"> nesbitt.io </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年10月30日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" lang="zh-CN" data-astro-cid-veycvx62><p>Package signing and attestations are two ways of attaching evidence to a published artifact so that someone downloading it later can check where it came from. A signature binds the bytes to a key, either the registry’s or the author’s. A provenance attestation is a signed statement about where an artifact came from, usually in-toto and signed through <a href="https://www.sigstore.dev/" target="_blank" rel="noopener noreferrer">Sigstore</a>. SLSA build provenance names the source repository, commit and build workflow, while a publish attestation such as PyPI’s records which trusted publisher uploaded the file.</p>
+
+<p>Trusted publishing, which several registries have added alongside attestations, replaces long-lived API tokens with short-lived OIDC credentials from CI. It makes provenance easy to produce because the registry receives a verified workflow identity with each upload. Some registries offer trusted publishing on its own. The workflow’s identity becomes the publishing credential, so a compromised workflow can publish a malicious release. <a href="https://nesbitt.io/2026/05/25/github-actions-security-in-python-packages.html" target="_blank" rel="noopener noreferrer">GitHub Actions security in Python packages</a> audits those workflows for PyPI.</p>
+
+<p>Linux distributions have signed packages for decades. Debian builds binaries from uploaded source on its own <a href="https://wiki.debian.org/buildd" target="_blank" rel="noopener noreferrer">buildd</a> machines and Fedora builds through <a href="https://docs.fedoraproject.org/en-US/package-maintainers/Using_the_Koji_Build_System/" target="_blank" rel="noopener noreferrer">Koji</a>, and the archive key signs the result, so a package apt or dnf accepts is one the distribution built, from source uploaded by one of a vetted group of packagers.</p>
+
+<p>Language registries accept uploads from anyone with an account, and the wheel, gem, crate or tarball was built wherever its author built it, on a laptop or a CI runner. A registry signature over those bytes shows they match what was uploaded, which protects against a tampered mirror. A release pushed with a stolen token gets the same signature as one from the project’s real workflow.</p>
+
+<p>Attestations record the build itself: when <a href="https://blog.pypi.org/posts/2024-12-11-ultralytics-attack-analysis/" target="_blank" rel="noopener noreferrer">Ultralytics</a> was compromised in December 2024, the first malicious releases came out of the project’s release workflow with valid attestations, and a later batch uploaded with a leaked API token carried none, which let investigators separate the token uploads from the workflow releases.</p>
+
+<p>The registries are the same set as the <a href="https://nesbitt.io/2026/08/18/two-factor-authentication-across-package-registries.html" target="_blank" rel="noopener noreferrer">2FA survey</a> in August, and for each one I looked at what it signs and where it stores the evidence, plus whether the client checks it by default. <a href="https://nesbitt.io/2026/05/24/signing-is-for-the-bad-days.html" target="_blank" rel="noopener noreferrer">Signing is for the bad days</a> explains the reasons for TUF and in-toto, and for Sigstore. Zach Steindler’s <a href="https://archive.fosdem.org/2026/schedule/event/BCFZP7-current-state-programming-language-attestations/" target="_blank" rel="noopener noreferrer">FOSDEM talk</a> (<a href="https://coffeehousecoders.org/blog/fosdem_2026.html" target="_blank" rel="noopener noreferrer">written summary</a>) covers npm, PyPI, RubyGems and Maven Central in more detail.</p>
+
+<p>In a <a href="https://github.com/in-toto/friends/pull/118" target="_blank" rel="noopener noreferrer">pull request to in-toto/friends</a>, merged in September 2026, Sivana Hamer at NC State catalogued where in-toto attestations are stored. The pull request adds a producer table covering package registries, Git repositories and releases, OCI image manifests and referrers, GitHub’s attestation API, Archivista and Rekor. For each one it records whether attestations are stored alongside the artifact, which format they use, and whether they can be private. Hamer co-authored <a href="https://arxiv.org/abs/2409.05014" target="_blank" rel="noopener noreferrer">a study of 1,523 SLSA-related GitHub issues</a>, whose authors identified complex implementation and unclear communication as the main obstacles to adopting SLSA, and <a href="https://doi.org/10.1145/3714464" target="_blank" rel="noopener noreferrer">Research Directions in Software Supply Chain Security</a> with Laurie Williams.</p>
+
+<h2>Sigstore</h2>
+
+<p>npm <a href="https://github.blog/security/supply-chain-security/introducing-npm-package-provenance/" target="_blank" rel="noopener noreferrer">launched provenance</a> in April 2023 as an opt-in <code>--provenance</code> flag for packages built on GitHub Actions or GitLab CI/CD cloud runners from a public repository whose URL matches the <code>repository</code> field in package.json. Since <a href="https://github.blog/changelog/2025-07-31-npm-trusted-publishing-with-oidc-is-generally-available/" target="_blank" rel="noopener noreferrer">trusted publishing went GA</a> in July 2025, provenance is generated by default when publishing that way. The packument lists it in <code>dist.attestations</code>, and the bundles are served from <code>/-/npm/v1/attestations/&lt;package&gt;@&lt;version&gt;</code>.</p>
+
+<p>Each version published with provenance has two bundles there: a SLSA v1 provenance statement signed with a Sigstore certificate, and an npm publish attestation signed with a registry key that Sigstore’s trust root includes. npm designed its publish predicate before in-toto had a release attestation type, and the later <a href="https://github.com/in-toto/attestation/blob/main/spec/predicates/release.md" target="_blank" rel="noopener noreferrer">in-toto release predicate</a> records the same claim in another format.</p>
+
+<p><a href="https://github.blog/changelog/2026-04-06-npm-trusted-publishing-now-supports-circleci/" target="_blank" rel="noopener noreferrer">CircleCI</a> was added as a trusted publisher in April 2026, with provenance still limited to GitHub Actions and GitLab publishes, and every provider requires cloud-hosted runners. After the <a href="https://workos.com/blog/npm-trusted-publishing-slugfest" target="_blank" rel="noopener noreferrer">SlugFest</a> report showed trust configurations were bound to a repository’s name instead of its ID, npm now <a href="https://github.blog/changelog/2026-10-02-unvalidated-npm-trusted-publishing-configurations-now-expire/" target="_blank" rel="noopener noreferrer">expires unvalidated configurations</a> after 48 hours and rejects <code>issue_comment</code> triggers.</p>
+
+<p>PyPI added <a href="https://docs.pypi.org/trusted-publishers/" target="_blank" rel="noopener noreferrer">trusted publishing</a> in April 2023, <a href="https://blog.pypi.org/posts/2023-05-23-removing-pgp/" target="_blank" rel="noopener noreferrer">stopped accepting PGP signatures</a> the following month, and saw <a href="https://peps.python.org/pep-0740/" target="_blank" rel="noopener noreferrer">PEP 740</a> attestations go <a href="https://blog.sigstore.dev/pypi-attestations-ga/" target="_blank" rel="noopener noreferrer">generally available</a> in November 2024. <code>pypa/gh-action-pypi-publish</code> generates attestations by default for projects using trusted publishing, using PyPI’s own <a href="https://docs.pypi.org/attestations/publish/v1/" target="_blank" rel="noopener noreferrer">publish predicate</a> in place of SLSA build provenance: the provenance object for pip 26.2.2’s wheel contains a single publish attestation from GitHub. PyPI accepts GitHub Actions, GitLab CI/CD, Google Cloud and ActiveState as publishers, with a beta for self-managed GitLab since November 2025.</p>
+
+<p>PyPI’s attestations are per file, served from the <a href="https://docs.pypi.org/api/integrity/" target="_blank" rel="noopener noreferrer">integrity API</a> at <code>/integrity/&lt;project&gt;/&lt;version&gt;/&lt;filename&gt;/provenance</code> and linked from each file in the Simple JSON API. They use PyPI’s own envelope format around the Sigstore material, and PEP 740 permits attestations to be added to a file after upload, so a collector has to re-fetch files it has already processed.</p>
+
+<p>RubyGems added <a href="https://guides.rubygems.org/trusted-publishing/" target="_blank" rel="noopener noreferrer">trusted publishing</a> for GitHub Actions in December 2023 and <a href="https://github.com/rubygems/rubygems.org/pull/4987" target="_blank" rel="noopener noreferrer">server support for Sigstore attestations</a> in November 2024. Attestations are uploaded with <code>gem push --attestation</code>, or through the <code>rubygems/release-gem</code> action, where the input is labelled experimental, and they are served as Sigstore bundles from <code>/api/v1/attestations/&lt;name&gt;-&lt;version&gt;.json</code>. <a href="https://github.com/ruby/rubygems/pull/9325" target="_blank" rel="noopener noreferrer">Automatic attestation in <code>gem push</code></a>, limited to GitHub Actions publishing to rubygems.org, was merged in April 2026 and ships in the RubyGems 4.1 line.</p>
+
+<p>RubyGems also has an older <a href="https://guides.rubygems.org/security/" target="_blank" rel="noopener noreferrer">X.509 signing scheme</a> through <code>gem cert</code>, which the guide describes as rarely used, and <code>gem install</code> checks those signatures when a trust policy is passed with <code>-P</code>.</p>
+
+<p><a href="https://jsr.io/docs/trust" target="_blank" rel="noopener noreferrer">JSR</a> has had OIDC publishing from GitHub Actions since its <a href="https://deno.com/blog/jsr_open_beta" target="_blank" rel="noopener noreferrer">open beta</a> in March 2024, and publishes from Actions get SLSA provenance recorded in Rekor automatically, with <code>--no-provenance</code> as the opt-out. <a href="https://central.sonatype.org/news/20250128_sigstore_signature_validation_via_portal/" target="_blank" rel="noopener noreferrer">Maven Central</a> has validated optional <code>.sigstore.json</code> files since January 2025, with an invalid one producing a warning, and Sonatype states that PGP remains the required signature.</p>
+
+<p>conda’s <a href="https://github.com/conda/ceps/pull/112" target="_blank" rel="noopener noreferrer">CEP 27</a>, accepted in July 2025, defines a publish predicate in a Sigstore bundle, and <a href="https://github.com/conda/ceps/pull/142" target="_blank" rel="noopener noreferrer">CEP 50</a>, accepted in September 2026, specifies serving attestations as <code>.sigs</code> sidecar files next to each package, listed through an <code>attestations_sha256</code> field in repodata. <a href="https://prefix.dev/blog/securing-the-conda-package-supply-chain-with-sigstore" target="_blank" rel="noopener noreferrer">prefix.dev</a> has generated CEP 27 attestations since August 2025 for packages uploaded through trusted publishing from GitHub Actions, GitLab CI/CD or Google Cloud.</p>
+
+<p>conda-forge’s own channel uses neither signing nor trusted publishing: builds upload to a staging channel with a per-feedstock token and are copied to <code>conda-forge</code> after an <a href="https://conda-forge.org/docs/maintainer/infrastructure/" target="_blank" rel="noopener noreferrer">output check</a>, and the September 2025 core meeting minutes report little progress on signing. The conda client <a href="https://github.com/conda/conda/blob/main/conda/gateways/connection/download.py" target="_blank" rel="noopener noreferrer">checks each download</a> against the SHA-256 and size in repodata and fails on a mismatch. <a href="https://github.com/conda/rattler/pull/2795" target="_blank" rel="noopener noreferrer">rattler</a> added opt-in Sigstore verification at install time in September 2026, and conda has <a href="https://github.com/conda/conda/issues/13965" target="_blank" rel="noopener noreferrer">open issues</a> requesting install-time verification.</p>
+
+<p>In each of these clients verification is a separate step from installing: npm ships <a href="https://docs.npmjs.com/verifying-registry-signatures" target="_blank" rel="noopener noreferrer"><code>npm audit signatures</code></a>, which checks registry signatures and provenance as its own command. For Python, open issues on <a href="https://github.com/pypa/pip/issues/13531" target="_blank" rel="noopener noreferrer">pip</a> (the <code>attestation-identities</code> field in PEP 751 lockfiles) and <a href="https://github.com/astral-sh/uv/issues/9122" target="_blank" rel="noopener noreferrer">uv</a> (PEP 740) track install-time checks, and PyPI’s documentation recommends the <a href="https://docs.pypi.org/attestations/consuming-attestations/" target="_blank" rel="noopener noreferrer"><code>pypi-attestations</code></a> CLI for manual checks.</p>
+
+<h2>Identity</h2>
+
+<p>Checking the signature on an attestation shows that it was signed with a key certified by Sigstore. Checking that the certificate belongs to the repository you expected is a second step, and both <code>gh</code> and <code>pypi-attestations</code> require the user to supply that repository: <a href="https://cli.github.com/manual/gh_attestation_verify" target="_blank" rel="noopener noreferrer"><code>gh attestation verify</code></a> takes <code>--owner</code> or <code>--repo</code> and <code>pypi-attestations verify pypi</code> takes <code>--repository</code> on every call, and each compares the value with the repository in the signing certificate. <a href="https://peps.python.org/pep-0751/" target="_blank" rel="noopener noreferrer">PEP 751</a> lockfiles can record the expected identity once per package in <code>attestation-identities</code>, which is the field the open pip issue asks installs to be checked against.</p>
+
+<h2>Keys</h2>
+
+<p>npm has signed every package with an ECDSA <a href="https://docs.npmjs.com/about-registry-signatures" target="_blank" rel="noopener noreferrer">registry key</a> since April 2023, when it deprecated its PGP signatures, with signatures in <code>dist.signatures</code> and public keys at <code>/-/npm/v1/keys</code>. <a href="https://learn.microsoft.com/en-us/nuget/reference/signed-packages-reference" target="_blank" rel="noopener noreferrer">NuGet.org</a> repository-signs every package and accepts optional author signatures from X.509 certificates issued by a CA in the Windows root store. The dotnet client <a href="https://learn.microsoft.com/en-us/dotnet/core/tools/nuget-signed-package-verification" target="_blank" rel="noopener noreferrer">checks those signatures during restore</a> by default: always on Windows, and on Linux since the .NET 8 SDK, with macOS left off. NuGet added <a href="https://devblogs.microsoft.com/dotnet/enhanced-security-is-here-with-the-new-trust-publishing-on-nuget-org/" target="_blank" rel="noopener noreferrer">trusted publishing</a> for GitHub Actions in September 2025, with GitLab supported through the <a href="https://learn.microsoft.com/en-us/nuget/nuget-org/trusted-publishing" target="_blank" rel="noopener noreferrer">token API</a>, and its artifact-level evidence is limited to signatures.</p>
+
+<p>Maven Central <a href="https://central.sonatype.org/publish/requirements/gpg/" target="_blank" rel="noopener noreferrer">requires</a> a PGP <code>.asc</code> signature on every published file, along with MD5 and SHA-1 checksums. Maven checks those signatures during dependency resolution when a plugin such as <a href="https://www.simplify4u.org/pgpverify-maven-plugin/" target="_blank" rel="noopener noreferrer">pgpverify-maven-plugin</a> is added. A PGP signature identifies the uploader’s key and carries no record of the source the file was built from, and Central has no trusted publishing to supply one.</p>
+
+<p><a href="https://github.com/clojars/clojars-web/wiki/Pushing" target="_blank" rel="noopener noreferrer">Clojars</a> accepts optional PGP <code>.asc</code> or SSH <code>.sig</code> files and requires that if any artifact in a deploy is signed, all of them are, but it skips checking the signatures against a key. Leiningen fails on a checksum mismatch by default and checks PGP signatures through <code>lein deps :verify</code>, while tools.deps warns on a mismatch and skips signature checks.</p>
+
+<p>The <a href="https://developer.hashicorp.com/terraform/registry/providers/publishing" target="_blank" rel="noopener noreferrer">Terraform Registry</a> requires providers to publish a GPG signature over a <code>SHA256SUMS</code> file, from a key uploaded to the registry, and <code>terraform init</code> checks it by default and reports whether the signing key belongs to HashiCorp, a HashiCorp partner, or a community publisher. Terraform modules are published unsigned from git tags through a webhook.</p>
+
+<p><a href="https://github.com/eclipse-openvsx/openvsx/issues/543" target="_blank" rel="noopener noreferrer">Open VSX</a> signs every extension with a registry key, and its version API returns the signature, a SHA-256 and the public key URL. <code>verify</code> commands were added to the <code>ovsx</code> CLI in September 2026. Checking those signatures at install is up to each editor build, and Arch’s Code - OSS package has <a href="https://github.com/eclipse-openvsx/openvsx/issues/1247" target="_blank" rel="noopener noreferrer">failed to verify them</a>. Open VSX shipped <a href="https://github.com/eclipse-openvsx/openvsx/pull/2000" target="_blank" rel="noopener noreferrer">trusted publishing</a> for GitHub Actions and GitLab CI in server v1.2.0 in September 2026, which sets a <code>publishedWithTrustedPublishing</code> flag on the version. v1.3.0, still pending deployment on open-vsx.org, <a href="https://github.com/eclipse-openvsx/openvsx/pull/2283" target="_blank" rel="noopener noreferrer">records the CI run</a> on each upload.</p>
+
+<p><a href="https://github.com/hexpm/specifications/blob/main/registry-v2.md" target="_blank" rel="noopener noreferrer">Hex</a> signs all registry resources with the repository’s RSA key, and the <code>hex_core</code> client verifies those signatures on every fetch. Hex added <a href="https://hex.pm/docs/workload-identity" target="_blank" rel="noopener noreferrer">Workload Identity</a>, its name for trusted publishing, in October 2026. A GitHub Actions job exchanges an OIDC token for a 15-minute key scoped to one package, and the verified claims are stored unsigned on the release and shown on the package page as a “Provenance” card. SLSA provenance and Sigstore are on the <a href="https://security.erlef.org/aegis/roadmap/hex-build-provenance" target="_blank" rel="noopener noreferrer">Erlang Ecosystem Foundation’s roadmap</a> as unfunded work.</p>
+
+<p>CPAN’s per-author <code>CHECKSUMS</code> files are PGP-signed and include SHA-256 hashes, and authors can sign distributions with Module::Signature. <a href="https://fastapi.metacpan.org/v1/pod/CPAN?content-type=text/plain" target="_blank" rel="noopener noreferrer">CPAN.pm</a> and <a href="https://fastapi.metacpan.org/v1/pod/App::cpanminus?content-type=text/plain" target="_blank" rel="noopener noreferrer">cpanm</a> both check signatures only when the user opts in.</p>
+
+<p>Swift’s package registry protocol has supported <a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0391-package-registry-publish.md" target="_blank" rel="noopener noreferrer">CMS signing</a> since Swift 5.9. SwiftPM sets <a href="https://github.com/swiftlang/swift-package-manager/blob/main/Documentation/PackageRegistry/PackageRegistryUsage.md" target="_blank" rel="noopener noreferrer">checksum pinning</a> to <code>strict</code> by default and <a href="https://github.com/swiftlang/swift-package-manager/blob/main/Documentation/PackageRegistry/PackageRegistryUsage.md#validating-signed-packages" target="_blank" rel="noopener noreferrer">validates signed archives</a> against its trust store. The <a href="https://swiftpackageindex.com/" target="_blank" rel="noopener noreferrer">Swift Package Index</a> lists git repository URLs, and SwiftPM fetches those packages by cloning, so registry signing covers only packages installed from a registry.</p>
+
+<p><a href="https://well-typed.com/blog/2015/07/hackage-security-alpha" target="_blank" rel="noopener noreferrer">Hackage</a> signs its index with TUF through hackage-security, and hashes in the signed index cover package tarballs. cabal-install <a href="https://github.com/haskell/cabal/blob/master/cabal-install/src/Distribution/Client/Config.hs" target="_blank" rel="noopener noreferrer">enables the check</a> by default for hackage.haskell.org.</p>
+
+<p><a href="https://github.com/repository-service-tuf" target="_blank" rel="noopener noreferrer">Repository Service for TUF</a> (RSTUF) is software a registry can deploy to sign and republish its index on a schedule. Zach Steindler’s FOSDEM talk noted that RSTUF’s output is not yet verified in a normal production install workflow.</p>
+
+<h2>Checksums</h2>
+
+<p>Go has had the <a href="https://go.dev/blog/module-mirror-launch" target="_blank" rel="noopener noreferrer">checksum database</a> at sum.golang.org on by default since Go 1.13 in 2019. It is a transparency log of module hashes, so every client gets the same bytes for a given version, and it can be bypassed per path with <code>GOPRIVATE</code> or <code>GONOSUMDB</code>. A Go module version is a git tag pushed to the source repository, so the checksum database is the only signed record.</p>
+
+<p>crates.io records a SHA-256 of each <code>.crate</code> in the <a href="https://doc.rust-lang.org/cargo/reference/registry-index.html" target="_blank" rel="noopener noreferrer">index</a> and Cargo rejects a download with a different hash, but the index itself is unsigned. A <a href="https://github.com/rust-lang/rfcs/pull/3403" target="_blank" rel="noopener noreferrer">Sigstore RFC</a> was closed and a <a href="https://github.com/rust-lang/rfcs/pull/3724" target="_blank" rel="noopener noreferrer">TUF RFC</a> has been open since October 2024. crates.io shipped <a href="https://blog.rust-lang.org/2025/07/11/crates-io-development-update-2025-07/" target="_blank" rel="noopener noreferrer">trusted publishing</a> for GitHub Actions in July 2025 and <a href="https://blog.rust-lang.org/2026/01/21/crates-io-development-update/" target="_blank" rel="noopener noreferrer">added GitLab</a> in January 2026, along with a per-crate setting to disable token publishing.</p>
+
+<p>Julia’s General registry stores a content-addressed <a href="https://github.com/JuliaLang/Pkg.jl/blob/master/docs/src/protocol.md" target="_blank" rel="noopener noreferrer">git tree hash</a> per version as its only integrity check. CRAN’s <code>PACKAGES</code> file lists an MD5 for each package, which <code>install.packages</code> ignores when downloading. R 4.6.0, released in April 2026, added optional package signing: a package can ship a <code>SHA256</code> file with a detached GnuPG signature, which <code>R CMD INSTALL</code> checks when present and requires when <code>_R_INSTALL_REQUIRE_SIGNED</code> is set, and otherwise uses the unsigned hash files inside the tarball.</p>
+
+<h2>Caches</h2>
+
+<p>Nix, Guix and Spack build packages from source on project infrastructure and sign the binary caches they serve, as Debian and Fedora do. Each client checks those signatures by default. On cache.nixos.org each <code>.narinfo</code> carries an Ed25519 signature over the store path, its hash and its references. Nix’s <a href="https://nix.dev/manual/nix/latest/command-ref/conf-file.html" target="_blank" rel="noopener noreferrer"><code>require-sigs</code></a> defaults to true, and the default <code>trusted-public-keys</code> includes the cache.nixos.org key.</p>
+
+<p>Guix rejects substitutes that are unsigned or signed by a key outside its ACL, and since 1.2.0 in 2020 <code>guix pull</code> authenticates every channel commit against the OpenPGP keys listed in the parent commit’s <code>.guix-authorizations</code> file, the same check <code>guix git authenticate</code> applies to any repository. Spack signs build cache manifests with GPG and verifies them on install by default, with <code>--no-check-signature</code> and <code>--unsigned</code> as opt-outs, though <code>spack buildcache keys --install --trust</code> installs and trusts every key the mirror serves. Nix has an open <a href="https://github.com/NixOS/nix/issues/7216" target="_blank" rel="noopener noreferrer">Sigstore issue</a> and a <a href="https://github.com/NixOS/nix/pull/11749" target="_blank" rel="noopener noreferrer">provenance tracking PR</a>, the only build provenance proposals across the three.</p>
+
+<h2>Retired</h2>
+
+<p>Anaconda’s TUF-based <a href="https://www.anaconda.com/blog/conda-signature-verification" target="_blank" rel="noopener noreferrer">conda-content-trust</a>, available since 2021, reached end of support in September 2026. Docker <a href="https://www.docker.com/blog/retiring-docker-content-trust/" target="_blank" rel="noopener noreferrer">announced the retirement</a> of Docker Content Trust in July 2025, and the Notary v1 server at notary.docker.io <a href="https://www.docker.com/blog/docker-content-trust-retirement-and-migration-guidance/" target="_blank" rel="noopener noreferrer">shuts down</a> on 8 December 2026, with cosign and Notation named as replacements for publishers. Docker Hardened Images are <a href="https://docs.docker.com/dhi/core-concepts/signatures/" target="_blank" rel="noopener noreferrer">signed with cosign</a> and carry provenance, SBOM and VEX attestations.</p>
+
+<h2>Unsigned</h2>
+
+<p><a href="https://dart.dev/tools/pub/automated-publishing" target="_blank" rel="noopener noreferrer">pub.dev</a> has accepted OIDC publishing from GitHub Actions and Google Cloud since January 2023 and its audit log records the CI run that published each version. packagist.org offers neither signing nor trusted publishing, and since July 2026 each stable version has been <a href="https://blog.packagist.com/immutable-versions-on-packagist/" target="_blank" rel="noopener noreferrer">fixed to a commit</a>, though GitHub generates the dist zips on request. A <a href="https://blog.packagist.com/strengthening-php-supply-chain-security-with-a-transparency-log-for-packagist-org/" target="_blank" rel="noopener noreferrer">transparency log</a> for security events is in progress. The <a href="https://blog.packagist.com/an-update-on-composer-packagist-supply-chain-security/" target="_blank" rel="noopener noreferrer">undated longer-term plan</a> is hosted artifacts with SLSA provenance and Sigstore attestations that Composer verifies. CocoaPods uses git for integrity, and trunk <a href="https://blog.cocoapods.org/CocoaPods-Specs-Repo/" target="_blank" rel="noopener noreferrer">stops accepting</a> new podspecs on 2 December 2026.</p>
+
+<h2>Forges</h2>
+
+<p>The forge is the identity provider that registries accept for trusted publishing, and for git-based registries like Homebrew it is also where attestations are stored. GitHub <a href="https://docs.github.com/en/actions/concepts/security/artifact-attestations" target="_blank" rel="noopener noreferrer">artifact attestations</a> went <a href="https://github.blog/changelog/2024-06-25-artifact-attestations-is-generally-available/" target="_blank" rel="noopener noreferrer">GA</a> in June 2024. Attestations for public repositories are signed through Sigstore’s public-good instance and logged in Rekor, while private repositories use GitHub’s own instance with no transparency log. A <a href="https://docs.github.com/en/rest/repos/attestations" target="_blank" rel="noopener noreferrer">REST API</a> lists attestations by subject digest with a <code>predicate_type</code> filter.</p>
+
+<p><a href="https://github.blog/changelog/2025-10-28-immutable-releases-are-now-generally-available/" target="_blank" rel="noopener noreferrer">Immutable releases</a>, GA since October 2025, add a release attestation with its own in-toto predicate, checked with <code>gh release verify</code>. Actions themselves are repositories referenced by tag or SHA, with no signature. Immutable Actions, which would have published actions as OCI packages with provenance, was <a href="https://github.com/github/roadmap/issues/592" target="_blank" rel="noopener noreferrer">removed from the roadmap</a> in December 2025. The <a href="https://github.blog/changelog/2026-10-14-github-actions-workflow-lockfiles-in-public-preview/" target="_blank" rel="noopener noreferrer">workflow lockfiles</a> that entered public preview in October 2026 pin direct and transitive actions to commits without integrity hashes.</p>
+
+<p>Homebrew has attached GitHub attestations to homebrew-core bottles <a href="https://blog.trailofbits.com/2024/05/14/a-peek-into-build-provenance-for-homebrew/" target="_blank" rel="noopener noreferrer">since May 2024</a>, and verifying them is opt-in with <code>HOMEBREW_VERIFY_ATTESTATIONS</code>, which shells out to <code>gh</code>. <a href="https://nesbitt.io/2026/04/07/who-built-this.html" target="_blank" rel="noopener noreferrer">Who Built This?</a> traces an attestation like these from a package back to its commit, and <a href="https://nesbitt.io/2026/02/24/reproducible-builds-in-language-package-managers.html" target="_blank" rel="noopener noreferrer">Reproducible Builds in Language Package Managers</a> covers checking the artifact by rebuilding it.</p>
+
+<p>GitLab’s <a href="https://docs.gitlab.com/ci/pipeline_security/slsa/level_3/" target="_blank" rel="noopener noreferrer">SLSA Level 3 provenance</a> was introduced as an experiment in GitLab 18.3 and is still marked experimental, available to public projects on GitLab.com Ultimate behind the <code>slsa_provenance_statement</code> feature flag. Attestations are listed per project and subject digest through the <a href="https://docs.gitlab.com/api/attestations/" target="_blank" rel="noopener noreferrer">attestations API</a> and checked with <code>glab attestation verify</code>. As an OIDC issuer, GitLab is accepted for trusted publishing by npm, PyPI, crates.io, NuGet, Open VSX and prefix.dev.</p>
+
+<p>Forgejo v15, released in April 2026 and run by Codeberg, added <a href="https://forgejo.org/2026-04-release-v15-0" target="_blank" rel="noopener noreferrer">OIDC ID tokens for Actions</a>, and registries have yet to accept it as a trusted publisher. PyPI has a <a href="https://discuss.python.org/t/new-oidc-providers-for-trusted-publishing/106334" target="_blank" rel="noopener noreferrer">discussion thread</a> and crates.io has named it as a possibility. Gitea <a href="https://github.com/go-gitea/gitea/pull/39052" target="_blank" rel="noopener noreferrer">merged the equivalent</a> in October 2026 for its unreleased 29.0 release. Bitbucket Pipelines issues OIDC tokens, and a <a href="https://jira.atlassian.com/browse/BCLOUD-23917" target="_blank" rel="noopener noreferrer">request</a> for npm trusted publishing from Pipelines is open on Atlassian’s Bitbucket Cloud tracker with the status Gathering Interest.</p>
+
+<p>Gitea, Forgejo, Bitbucket Cloud, Gerrit and Tangled have no dedicated attestation endpoint. <a href="https://docs.frem.sh/security/immutable-releases/" target="_blank" rel="noopener noreferrer">fremforge</a>, a Forgejo-based service, has a release attestation endpoint that returns DSSE envelopes and Sigstore bundles.</p>
+
+<h2>Summary</h2>
+
+<p>In the “signature checked by default” column, Go’s checksum log and Hackage’s TUF index sign the metadata that holds the hashes, so the go command and cabal-install authenticate the hashes as well as the downloads. Cargo, Julia’s Pkg and conda check downloads against hashes in metadata served over TLS without a signature. That catches corruption, but the hashes are only as trustworthy as the registry serving them.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>signatures</th>
+      <th>provenance attestations</th>
+      <th>trusted publishing</th>
+      <th>signature checked by default</th>
+      <th>attestation checked by default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>npm</td>
+      <td>registry ECDSA</td>
+      <td>SLSA + npm publish, Sigstore</td>
+      <td>GitHub, GitLab, CircleCI</td>
+      <td>no; <code>npm audit signatures</code></td>
+      <td>no; <code>npm audit signatures</code></td>
+    </tr>
+    <tr>
+      <td>PyPI</td>
+      <td>PGP removed 2023</td>
+      <td>PEP 740 publish</td>
+      <td>GitHub, GitLab, Google Cloud, ActiveState</td>
+      <td>n/a</td>
+      <td>no; <code>pypi-attestations</code></td>
+    </tr>
+    <tr>
+      <td>RubyGems</td>
+      <td>optional X.509</td>
+      <td>Sigstore</td>
+      <td>GitHub</td>
+      <td>opt-in (<code>-P</code>)</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <td>JSR</td>
+      <td>none</td>
+      <td>SLSA, Sigstore</td>
+      <td>GitHub</td>
+      <td>n/a</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <td>Maven Central</td>
+      <td>PGP required</td>
+      <td>optional <code>.sigstore.json</code></td>
+      <td>no</td>
+      <td>plugin</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <td>prefix.dev</td>
+      <td>none</td>
+      <td>Sigstore (CEP 27)</td>
+      <td>GitHub, GitLab, Google Cloud</td>
+      <td>n/a</td>
+      <td>opt-in (rattler)</td>
+    </tr>
+    <tr>
+      <td>conda-forge</td>
+      <td>none</td>
+      <td>none</td>
+      <td>no</td>
+      <td>n/a; repodata checksum</td>
+      <td>n/a</td>
+    </tr>
+    <tr>
+      <td>NuGet</td>
+      <td>repository + optional author</td>
+      <td>none</td>
+      <td>GitHub, GitLab</td>
+      <td>Windows, Linux</td>
+      <td>n/a</td>
+    </tr>
+    <tr>
+      <td>Clojars</td>
+      <td>optional PGP/SSH, not verified</td>
+      <td>none</td>
+      <td>no</td>
+      <td>opt-in (Leiningen); checksum</td>
+      <td>n/a</td>
+    </tr>
+    <tr>
+      <td>Terraform Registry</td>
+      <td>GPG required for providers</td>
+      <td>none</td>
+      <td>no</td>
+      <td>yes, providers</td>
+      <td>n/a</td>
+    </tr>
+    <tr>
+      <td>Open VSX</td>
+      <td>registry key</td>
+      <td>none</td>
+      <td>GitHub, GitLab</td>
+      <td>depends on editor</td>
+      <td>n/a</td>
+    </tr>
+    <tr>
+      <td>Hex.pm</td>
+      <td>registry RSA</td>
+      <td>planned</td>
+      <td>GitHub</td>
+      <td>yes</td>
+      <td>n/a</td>
+    </tr>
+    <tr>
+      <td>CPAN</td>
+      <td>PGP CHECKSUMS, optional author</td>
+      <td>none</td>
+      <td>no</td>
+      <td>opt-in</td>
+      <td>n/a</td>
+    </tr>
+    <tr>
+      <td>Swift registries</td>
+      <td>CMS</td>
+      <td>none</td>
+      <td>no</td>
+      <td>yes; checksum pinning</td>
+      <td>n/a</td>
+    </tr>
+    <tr>
+      <td>Hackage</td>
+      <td>TUF index</td>
+      <td>none</td>
+      <td>no</td>
+      <td>yes, TUF</td>
+      <td>n/a</td>
+    </tr>
+    <tr>
+      <td>Go</td>
+      <td>signed checksum log</td>
+      <td>none</td>
+      <td>n/a</td>
+      <td>yes, checksum DB</td>
+      <td>n/a</td>
+    </tr>
+    <tr>
+      <td>crates.io</td>
+      <td>none</td>
+      <td>none</td>
+      <td>GitHub, GitLab</td>
+      <td>n/a; index checksum</td>
+      <td>n/a</td>
+    </tr>
+    <tr>
+      <td>Julia General</td>
+      <td>none</td>
+      <td>none</td>
+      <td>n/a</td>
+      <td>n/a; tree hash</td>
+      <td>n/a</td>
+    </tr>
+    <tr>
+      <td>CRAN</td>
+      <td>optional GnuPG (R 4.6)</td>
+      <td>none</td>
+      <td>no</td>
+      <td>if present</td>
+      <td>n/a</td>
+    </tr>
+    <tr>
+      <td>nixpkgs</td>
+      <td>Ed25519 cache signatures</td>
+      <td>none</td>
+      <td>n/a</td>
+      <td>yes</td>
+      <td>n/a</td>
+    </tr>
+    <tr>
+      <td>Guix</td>
+      <td>substitutes + signed commits</td>
+      <td>none</td>
+      <td>n/a</td>
+      <td>yes</td>
+      <td>n/a</td>
+    </tr>
+    <tr>
+      <td>Spack</td>
+      <td>GPG build cache</td>
+      <td>none</td>
+      <td>n/a</td>
+      <td>yes</td>
+      <td>n/a</td>
+    </tr>
+    <tr>
+      <td>Docker Hub</td>
+      <td>DCT, retiring Dec 2026</td>
+      <td>Hardened Images only</td>
+      <td>no</td>
+      <td>no</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <td>pub.dev</td>
+      <td>none</td>
+      <td>none</td>
+      <td>GitHub, Google Cloud</td>
+      <td>n/a</td>
+      <td>n/a</td>
+    </tr>
+    <tr>
+      <td>Packagist</td>
+      <td>none</td>
+      <td>planned</td>
+      <td>planned</td>
+      <td>n/a</td>
+      <td>n/a</td>
+    </tr>
+    <tr>
+      <td>CocoaPods</td>
+      <td>none</td>
+      <td>none</td>
+      <td>no</td>
+      <td>n/a</td>
+      <td>n/a</td>
+    </tr>
+    <tr>
+      <td>GitHub Actions</td>
+      <td>none</td>
+      <td>immutable releases only</td>
+      <td>n/a</td>
+      <td>n/a</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <td>Homebrew</td>
+      <td>none</td>
+      <td>GitHub attestations</td>
+      <td>n/a</td>
+      <td>n/a</td>
+      <td>opt-in</td>
+    </tr>
+  </tbody>
+</table></div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="https://nesbitt.io/2026/10/30/signing-and-attestations-across-package-registries.html" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button><script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
