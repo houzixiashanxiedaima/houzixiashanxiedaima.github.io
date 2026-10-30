@@ -1,0 +1,476 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.4.4"><!-- Core SEO --><meta name="description" content="2026-10-30 GitHub Releases 日报：anomalyco/opencode、callstack/agent-device、satnaing/astro-paper 等21个项目更新 | 当连接支持图像模型的提供商时，默认启用实验性图像生成功能"><meta name="keywords" content="releases, daily, automation, opencode, agent-device, astro-paper, baoyu-design, ekko-studio"><meta name="author" content="Release Bot"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/blog/releases/2026-10-30/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/blog/releases/2026-10-30/"><!-- Open Graph / Facebook --><meta property="og:type" content="article"><meta property="og:url" content="https://blog.yuyins.com/blog/releases/2026-10-30/"><meta property="og:title" content="GitHub Releases 日报 - 2026-10-30"><meta property="og:description" content="2026-10-30 GitHub Releases 日报：anomalyco/opencode、callstack/agent-device、satnaing/astro-paper 等21个项目更新 | 当连接支持图像模型的提供商时，默认启用实验性图像生成功能"><meta property="og:image" content="https://blog.yuyins.com/images/covers/cover-2026-10-30.webp"><meta property="og:image:alt" content="2026-10-30 GitHub Releases 日报：anomalyco/opencode、callstack/agent-device、satnaing/astro-paper 等21个项目更新 | 当连接支持图像模型的提供商时，默认启用实验性图像生成功能"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><meta property="article:section" content="开源追踪"><meta property="article:published_time" content="2026-10-30T08:00:00.000Z"><meta property="article:tag" content="releases"><meta property="article:tag" content="daily"><meta property="article:tag" content="automation"><meta property="article:tag" content="opencode"><meta property="article:tag" content="agent-device"><meta property="article:tag" content="astro-paper"><meta property="article:tag" content="baoyu-design"><meta property="article:tag" content="ekko-studio"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/blog/releases/2026-10-30/"><meta property="twitter:title" content="GitHub Releases 日报 - 2026-10-30"><meta property="twitter:description" content="2026-10-30 GitHub Releases 日报：anomalyco/opencode、callstack/agent-device、satnaing/astro-paper 等21个项目更新 | 当连接支持图像模型的提供商时，默认启用实验性图像生成功能"><meta property="twitter:image" content="https://blog.yuyins.com/images/covers/cover-2026-10-30.webp"><title>GitHub Releases 日报 - 2026-10-30</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"GitHub Releases 日报 - 2026-10-30","description":"2026-10-30 GitHub Releases 日报：anomalyco/opencode、callstack/agent-device、satnaing/astro-paper 等21个项目更新 | 当连接支持图像模型的提供商时，默认启用实验性图像生成功能","image":"https://blog.yuyins.com/images/covers/cover-2026-10-30.webp","datePublished":"2026-10-30T08:00:00.000Z","dateModified":"2026-10-30T08:00:00.000Z","author":{"@type":"Person","name":"Release Bot"},"publisher":{"@type":"Organization","name":"雅俗共赏","logo":{"@type":"ImageObject","url":"https://blog.yuyins.com/favicon.svg"}}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"开源追踪","item":"https://blog.yuyins.com/category/开源追踪"},{"@type":"ListItem","position":3,"name":"GitHub Releases 日报 - 2026-10-30","item":"https://blog.yuyins.com/blog/releases/2026-10-30/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><link rel="stylesheet" href="/_astro/_..B0y3uL2u.css"><link rel="stylesheet" href="/_astro/Layout.sXc9KWNJ.css"><style>.tag[data-astro-cid-7t72llso]{overflow-wrap:anywhere;background:color-mix(in srgb, var(--muted) 30%, transparent);min-width:0;max-width:100%;color:var(--muted-foreground);border-radius:.375rem;align-items:center;gap:.25rem;padding:.125rem .5rem;font-size:.8125rem;line-height:1.5;text-decoration:none;display:inline-flex}.tag--interactive[data-astro-cid-7t72llso]{transition:background-color .2s,color .2s}.tag--interactive[data-astro-cid-7t72llso]:hover{background:color-mix(in srgb, var(--muted) 55%, transparent);color:var(--foreground)}.tag--active[data-astro-cid-7t72llso]{background:color-mix(in srgb, var(--accent) 14%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 78%, var(--foreground));font-weight:600}.tag[data-astro-cid-7t72llso]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.tags-list[data-astro-cid-cm3albtb]{flex-wrap:wrap;gap:.5rem;display:flex}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link nav-link--active" aria-current="page" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/podcasts" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 播客 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(function(){let e=async e=>{await(await e())()};(self.Astro||(self.Astro={})).load=e,window.dispatchEvent(new Event(`astro:load`))})();</script><script>(function(){function e(t){"@babel/helpers - typeof";return e=typeof Symbol==`function`&&typeof Symbol.iterator==`symbol`?function(e){return typeof e}:function(e){return e&&typeof Symbol==`function`&&e.constructor===Symbol&&e!==Symbol.prototype?`symbol`:typeof e},e(t)}function t(t,n){if(e(t)!=`object`||!t)return t;var r=t[Symbol.toPrimitive];if(r!==void 0){var i=r.call(t,n||`default`);if(e(i)!=`object`)return i;throw TypeError(`@@toPrimitive must return a primitive value.`)}return(n===`string`?String:Number)(t)}function n(n){var r=t(n,`string`);return e(r)==`symbol`?r:r+``}function r(e,t,r){return(t=n(t))in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}let i=/* @__PURE__ */ new Set([`__proto__`,`constructor`,`prototype`]);{let e={0:e=>a(e),1:e=>n(e),2:e=>new RegExp(e),3:e=>new Date(e),4:e=>new Map(n(e)),5:e=>new Set(n(e)),6:e=>BigInt(e),7:e=>new URL(e),8:e=>new Uint8Array(e),9:e=>new Uint16Array(e),10:e=>new Uint32Array(e),11:e=>1/0*e},t=t=>{let[n,r]=t;return n in e?e[n](r):void 0},n=e=>e.map(t),a=e=>typeof e!=`object`||!e?e:Object.fromEntries(Object.entries(e).map(([e,n])=>[e,t(n)]));class o extends HTMLElement{constructor(...e){super(...e),r(this,`Component`,void 0),r(this,`hydrator`,void 0),r(this,`hydrate`,async()=>{var e;if(!this.hydrator||!this.isConnected)return;let t=(e=this.parentElement)==null?void 0:e.closest(`astro-island[ssr]`);if(t){t.addEventListener(`astro:hydrate`,this.hydrate,{once:!0});return}let n=this.querySelectorAll(`astro-slot`),r={},i=this.querySelectorAll(`template[data-astro-template]`);for(let e of i){let t=e.closest(this.tagName);t!=null&&t.isSameNode(this)&&(r[e.getAttribute(`data-astro-template`)||`default`]=e.innerHTML,e.remove())}for(let e of n){let t=e.closest(this.tagName);t!=null&&t.isSameNode(this)&&(r[e.getAttribute(`name`)||`default`]=e.innerHTML)}let o;try{o=this.hasAttribute(`props`)?a(JSON.parse(this.getAttribute(`props`))):{}}catch(e){let t=this.getAttribute(`component-url`)||`<unknown>`,n=this.getAttribute(`component-export`);throw n&&(t+=` (export ${n})`),console.error(`[hydrate] Error parsing props for component ${t}`,this.getAttribute(`props`),e),e}await this.hydrator(this)(this.Component,o,r,{client:this.getAttribute(`client`)}),this.removeAttribute(`ssr`),this.dispatchEvent(new CustomEvent(`astro:hydrate`))}),r(this,`unmount`,()=>{this.isConnected||this.dispatchEvent(new CustomEvent(`astro:unmount`))})}disconnectedCallback(){document.removeEventListener(`astro:after-swap`,this.unmount),document.addEventListener(`astro:after-swap`,this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute(`await-children`)||document.readyState===`interactive`||document.readyState===`complete`)this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener(`DOMContentLoaded`,e),t.disconnect(),this.childrenConnectedCallback()},t=new MutationObserver(()=>{var t;((t=this.lastChild)==null?void 0:t.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue===`astro:end`&&(this.lastChild.remove(),e())});t.observe(this,{childList:!0}),document.addEventListener(`DOMContentLoaded`,e)}}async childrenConnectedCallback(){let e=this.getAttribute(`before-hydration-url`);e&&await import(e),this.start()}getRetryImportUrl(e){let t=new URL(e,document.baseURI);return t.searchParams.set(`astro-retry`,Date.now().toString()),t.toString()}async importWithRetry(e){try{return await import(e)}catch(t){return await new Promise(e=>setTimeout(e,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let t=this.getAttribute(`component-url`),n=new CustomEvent(`astro:hydration-error`,{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:t}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${t}`,e)}async start(){let e=JSON.parse(this.getAttribute(`opts`)),t=this.getAttribute(`client`);if(Astro[t]===void 0)window.addEventListener(`astro:${t}`,()=>this.start(),{once:!0});else try{await Astro[t](async()=>{let e=this.getAttribute(`renderer-url`);try{let[t,{default:n}]=await Promise.all([this.importWithRetry(this.getAttribute(`component-url`)),e?this.importWithRetry(e):Promise.resolve({default:()=>()=>{}})]),r=this.getAttribute(`component-export`)||`default`;if(r.includes(`.`)){this.Component=t;for(let e of r.split(`.`)){if(i.has(e)||!this.Component||typeof this.Component!=`object`&&typeof this.Component!=`function`||!Object.hasOwn(this.Component,e))throw Error(`Invalid component export path: ${r}`);this.Component=this.Component[e]}}else{if(i.has(r))throw Error(`Invalid component export path: ${r}`);this.Component=t[r]}return this.hydrator=n,this.hydrate}catch(e){return this.handleHydrationError(e),()=>{}}},e,this)}catch(e){this.handleHydrationError(e)}}attributeChangedCallback(){this.hydrate()}}r(o,`observedAttributes`,[`props`]),customElements.get(`astro-island`)||customElements.define(`astro-island`,o)}})();</script><script>window._$HY||(e=>{let t=e=>e&&e.hasAttribute&&(e.hasAttribute("data-hk")?e:t(e.host&&e.host.nodeType?e.host:e.parentNode));["click", "input"].forEach((o=>document.addEventListener(o,(o=>{if(!e.events)return;let s=t(o.composedPath&&o.composedPath()[0]||o.target);s&&!e.completed.has(s)&&e.events.push([s,o])}))))})(_$HY={events:[],completed:new WeakSet,r:{},fe(){}});</script><!--xs--><astro-island uid="2eMCIu" data-solid-render-id="s0" component-url="/_astro/SearchDialog.1o6q21a7.js" component-export="default" renderer-url="/_astro/client.DDRnOt_e.js" props="{&quot;recommendations&quot;:[1,[[0,{&quot;slug&quot;:[0,&quot;releases/2026-10-30&quot;],&quot;title&quot;:[0,&quot;GitHub Releases 日报 - 2026-10-30&quot;],&quot;category&quot;:[0,&quot;开源追踪&quot;]}],[0,{&quot;slug&quot;:[0,&quot;ide-updates/2026-10-30&quot;],&quot;title&quot;:[0,&quot;IDE / SDK 更新 - 2026-10-30&quot;],&quot;category&quot;:[0,&quot;IDE 更新&quot;]}],[0,{&quot;slug&quot;:[0,&quot;releases/2026-10-29&quot;],&quot;title&quot;:[0,&quot;GitHub Releases 日报 - 2026-10-29&quot;],&quot;category&quot;:[0,&quot;开源追踪&quot;]}],[0,{&quot;slug&quot;:[0,&quot;ide-updates/2026-10-29&quot;],&quot;title&quot;:[0,&quot;IDE / SDK 更新 - 2026-10-29&quot;],&quot;category&quot;:[0,&quot;IDE 更新&quot;]}],[0,{&quot;slug&quot;:[0,&quot;releases/2026-10-28&quot;],&quot;title&quot;:[0,&quot;GitHub Releases 日报 - 2026-10-28&quot;],&quot;category&quot;:[0,&quot;开源追踪&quot;]}],[0,{&quot;slug&quot;:[0,&quot;ide-updates/2026-10-28&quot;],&quot;title&quot;:[0,&quot;IDE / SDK 更新 - 2026-10-28&quot;],&quot;category&quot;:[0,&quot;IDE 更新&quot;]}]]],&quot;data-astro-cid-ac66eqjo&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;SearchDialog&quot;,&quot;value&quot;:true}" await-children><button data-hk="s00000" class="search-toggle" type="button" aria-label="打开搜索" title="搜索 (⌘K)"><svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"></circle><path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></button><dialog data-hk="s00001" class="search-dialog" aria-label="站内搜索"><div class="search-dialog-card"><div class="search-input-row"><svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg><div id="pagefind-ui" class="search-pagefind-slot"></div><div class="search-controls"><kbd class="search-kbd">ESC</kbd><button class="search-dialog-close" type="button" aria-label="关闭搜索"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div></div><!--$--><div data-hk="s000020" id="search-suggestions" class="search-suggestions"><p class="search-suggestions-title">推荐阅读</p><ul class="search-suggestions-list"><li data-hk="s0000210"><a class="search-suggestion-item" href="/blog/releases/2026-10-30"><span class="search-suggestion-title">GitHub Releases 日报 - 2026-10-30</span><span class="search-suggestion-meta">开源追踪</span></a></li><li data-hk="s0000211"><a class="search-suggestion-item" href="/blog/ide-updates/2026-10-30"><span class="search-suggestion-title">IDE / SDK 更新 - 2026-10-30</span><span class="search-suggestion-meta">IDE 更新</span></a></li><li data-hk="s0000212"><a class="search-suggestion-item" href="/blog/releases/2026-10-29"><span class="search-suggestion-title">GitHub Releases 日报 - 2026-10-29</span><span class="search-suggestion-meta">开源追踪</span></a></li><li data-hk="s0000213"><a class="search-suggestion-item" href="/blog/ide-updates/2026-10-29"><span class="search-suggestion-title">IDE / SDK 更新 - 2026-10-29</span><span class="search-suggestion-meta">IDE 更新</span></a></li><li data-hk="s0000214"><a class="search-suggestion-item" href="/blog/releases/2026-10-28"><span class="search-suggestion-title">GitHub Releases 日报 - 2026-10-28</span><span class="search-suggestion-meta">开源追踪</span></a></li><li data-hk="s0000215"><a class="search-suggestion-item" href="/blog/ide-updates/2026-10-28"><span class="search-suggestion-title">IDE / SDK 更新 - 2026-10-28</span><span class="search-suggestion-meta">IDE 更新</span></a></li></ul></div><!--/--></div></dialog><!--astro:end--></astro-island> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <script type="module" src="/_astro/CodeCopyButton.astro_astro_type_script_index_0_lang.C3I6XYwD.js"></script> <script type="module" src="/_astro/HeadingAnchor.astro_astro_type_script_index_0_lang.CacVAAhL.js"></script> <dialog id="image-lightbox" class="lightbox" aria-label="图片预览" data-astro-cid-ot6ntcxl> <button id="lightbox-close" class="lightbox-close" type="button" aria-label="关闭" data-astro-cid-ot6ntcxl> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-ot6ntcxl> <line x1="18" y1="6" x2="6" y2="18" data-astro-cid-ot6ntcxl></line> <line x1="6" y1="6" x2="18" y2="18" data-astro-cid-ot6ntcxl></line> </svg> </button> <img id="lightbox-image" class="lightbox-image" src="" alt="" data-astro-cid-ot6ntcxl> <p id="lightbox-error" class="lightbox-error" role="status" hidden data-astro-cid-ot6ntcxl>图片预览加载失败，请关闭后重试。</p> </dialog><script type="module" src="/_astro/ImageLightbox.astro_astro_type_script_index_0_lang.BAo0rMiG.js"></script> <div class="blog-post-container" data-astro-cid-tldeq5d5> <article class="blog-post blog-post--digest" data-pagefind-body data-astro-cid-tldeq5d5> <header class="article-header" data-astro-cid-tldeq5d5> <h1 data-astro-cid-tldeq5d5>GitHub Releases 日报 - 2026-10-30</h1> <div class="article-meta-row" data-astro-cid-tldeq5d5> <a href="/category/开源追踪" class="meta-category" data-astro-cid-tldeq5d5> 开源追踪 </a> <span class="meta-dot" data-astro-cid-tldeq5d5>•</span> <time datetime="2026-10-30T08:00:00.000Z" class="meta-item" data-astro-cid-tldeq5d5> 2026年10月30日 </time> <span class="meta-dot" data-astro-cid-tldeq5d5>•</span> <span class="meta-item" data-astro-cid-tldeq5d5>28 分钟阅读</span> </div> <p class="article-description" data-astro-cid-tldeq5d5>2026-10-30 GitHub Releases 日报：anomalyco/opencode、callstack/agent-device、satnaing/astro-paper 等21个项目更新 | 当连接支持图像模型的提供商时，默认启用实验性图像生成功能</p> <div class="article-tags-row" data-astro-cid-tldeq5d5> <div class="tags-list" data-astro-cid-cm3albtb> <a href="/blog/tag/releases" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#releases </a><a href="/blog/tag/daily" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#daily </a><a href="/blog/tag/automation" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#automation </a><a href="/blog/tag/opencode" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#opencode </a><a href="/blog/tag/agent-device" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#agent-device </a><a href="/blog/tag/astro-paper" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#astro-paper </a><a href="/blog/tag/baoyu-design" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#baoyu-design </a><a href="/blog/tag/ekko-studio" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#ekko-studio </a> </div> </div> </header> <!-- Content --> <div class="article-content app-prose" lang="zh-CN" data-astro-cid-tldeq5d5>  <h3 id="anomalycoopencode-v222---v223-qwenqwen38-27b"><a href="https://github.com/anomalyco/opencode/releases" rel="noopener noreferrer" target="_blank">anomalyco/opencode v2.2.2 - v2.2.3</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增内置 Claude Agent 提供商，支持通过 /connect 使用 Claude Code 登录与模型</li>
+<li>桌面端长会话性能优化，流式回复与长对话渲染开销大幅降低</li>
+<li>实验性调度中新增 Code Mode JavaScript 检查，支持静态授权工具调用、持久状态及自定义唤醒消息</li>
+<li>启用 experimental.media_blob 时新增存储图片引用的懒加载机制</li>
+<li>桌面端设置新增拼写检查开关及 Windows/Linux 系统语言词典选择</li>
+<li>新增 PageUp/PageDown 时间线翻页功能，不移动草稿光标或焦点</li>
+<li>通知设置下新增独立的问题通知与声音配置选项</li>
+<li>新会话控件新增独立的项目与工作树操作按钮</li>
+<li>关于页面新增一键复制版本号功能</li>
+<li>工作区设置中分组显示已添加的项目</li>
+<li>问答文本支持选中复制</li>
+<li>会话头部自适应窄时间线宽度</li>
+<li>统一 Effect 和 Promise 工具声明为 tool (…)，支持可选输出模式及纯声明工具</li>
+<li>Responses 路由新增 OpenRouter 调试、模型、插件、提供商及用户选项的类型化支持</li>
+<li>Promise 客户端新增 withMediaRefs、mediaHashFromUri 及 MediaRequestOptions 以支持实验性存储媒体引用</li>
+<li>进程守护程序新增持久终端重命名功能，支持能力发现及覆盖 shell 标题的用户自定义标题</li>
+<li>发布 opencode-pty 0.4.0（协议版本 7），npm 包名为 @opencode/pty@0.4.0</li>
+<li>当连接支持图像模型的提供商时，默认启用实验性图像生成功能</li>
+<li>在新会话界面点击当前 Git 分支可直接打开工作树选择器</li>
+<li>统一时间线引用、终端引用和浏览器注释的可选评论编辑器</li>
+<li>记录每个会话最新执行的开始时间</li>
+<li>恢复经典问题卡片为默认，并新增设置中的新问题 UI 选项</li>
+<li>侧边栏新增标签页菜单，并在标签溢出时保持关闭按钮可见</li>
+<li>将用户消息操作移至紧凑菜单中</li>
+<li>重新设计活动待办事项胶囊以清晰显示当前任务和并发工作</li>
+<li>为可搜索对话框和输入框胶囊添加一致样式</li>
+<li>为 client.experimental.schedule.create 添加 if 和 until 输入及结果字段</li>
+<li>暴露 SessionInfo.time.busy 用于获取最新执行开始时间</li>
+<li>为提示文件附件添加可选源元数据</li>
+<li>为输入框笔记添加可选标题和副标题字段及相对定位选项</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>TUI 插件要求 OpenTUI 0.8：@opencode/plugin 现需依赖 @opentui/core 和 @opentui/solid 0.8.0…</li>
+<li>OpenTUI 0.8 中 ScrollBox 的 wrapper、viewport、content 和 scrollbars 变为 facade 对象…</li>
+<li>托管策略变更：integration.use 仅控制集成账户，新增 mcp.use、skill.use 和 plugin.use 分别控制 MCP 服务器…</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复侧边栏标签页关闭及新建标签页点击无响应的回归问题</li>
+<li>修复 Web 应用 HTTP 环境下侧边栏 “打开文件” 功能失效问题</li>
+<li>修复移动端问题选项及提交控件不可达的问题</li>
+<li>修复连续拖放文件时未全部插入编辑器的问题</li>
+<li>修复 @ 和命令菜单在结果更新且指针静止时选中的稳定性问题</li>
+<li>修复 W 关闭侧边栏后焦点恢复异常的问题</li>
+<li>修复移动端会话抽屉在会话加载期间意外关闭的问题</li>
+<li>修复最大化窗口未在保存的显示器上恢复及共享会话窗口渲染器权限丢失的问题</li>
+<li>修复长会话中时间线增长、缩放滚动、高亮及 DOM 观察器性能问题</li>
+<li>修复未知发布日期模型不可见的问题</li>
+<li>修复通过变体或兼容性元数据暴露推理能力的模型检测错误</li>
+<li>修复删除会话后仍重试或重复报错的问题</li>
+<li>修复 macOS 应用图标并补充应用包所需的文件夹访问描述</li>
+<li>修复 Promise AI 客户端与 Effect API 匹配度不足及循环中接受类型化工具的问题</li>
+<li>修复 execute 处理器可能抛出异常的工具对 AI 客户端不可用的问题</li>
+<li>修复提供商返回未知中间状态时停止轮询排队媒体生成的问题</li>
+<li>修复 OpenAI Responses 请求中随 file_url 发送不兼容文件名的问题</li>
+<li>修复 Code Mode 文本编码中 null 值丢失的问题</li>
+<li>修复无效 Code Mode 调度检查导致创建失败或现有检查暂停执行的问题</li>
+<li>修复 PHP 代码块缺少 &#x3C;?php 开头标签时的语法高亮问题</li>
+<li>修复文件搜索路径中 # 字符处理不当的问题</li>
+<li>修复配置重载后默认光标样式丢失的问题</li>
+<li>修复无查询的选择对话框中搜索光标未对齐高亮行的问题</li>
+<li>修复嵌套工具进度替换父级执行调用行的问题</li>
+<li>修复 MCP 失败时权限原因和反馈丢失及 Code Mode 失败行为不一致的问题</li>
+<li>修复插件提供的模型变体丢失及动态提供商回退时机过早的问题</li>
+<li>修复会话删除时未移除其持久终端的问题</li>
+<li>整理嵌套 Extensions 菜单结构</li>
+<li>拒绝工作目录不再存在的持久化终端请求</li>
+<li>在分叉或导入会话时保留媒体文件</li>
+<li>将图像生成通知关联到正确的后台任务</li>
+<li>保留捕获的附件及其原始源路径</li>
+<li>防止中间截断的路径在极窄终端宽度下溢出</li>
+<li>改进 Go 使用限制消息，包含重置时间和账户页面链接</li>
+<li>正确类型化和显示 Go 及 ChatGPT 使用限制错误</li>
+<li>停止排队提示在内容增长时丢帧</li>
+<li>将排队引用和浏览器注释计为附件</li>
+<li>通过正常错误 UI 报告持久化输入框附件失败</li>
+<li>使 Markdown 片段链接滚动到引用的标题</li>
+<li>切换目录时保留各标签页的时间线状态</li>
+<li>按执行开始时间排序收件箱的工作架</li>
+<li>修复移除最后一个标签页时侧边栏启动器和自动关闭问题</li>
+<li>在审查更改时聚焦匹配的导航箭头</li>
+<li>仅在排队提示实际更改模型时保留待定模型标签</li>
+<li>为 Go 使用限制添加重置详情、账户链接和输入框托盘</li>
+<li>修正通过 Merman 子图连接的可见流程图边缘</li>
+</ul>
+<h3 id="callstackagent-device-v02135-qwenqwen38-27b"><a href="https://github.com/callstack/agent-device/releases/tag/v0.21.35" rel="noopener noreferrer" target="_blank">callstack/agent-device v0.21.35</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增 limrun 会话流量捕获功能，支持生成实时 HAR 文件并报告隧道故障</li>
+<li>优化 check-affected 性能，在 fail-open 计划中保持相关运行不在单元测试项目中执行</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 iOS 键盘返回键在无焦点元素时导致 runner 会话丢失的问题</li>
+<li>修复 depgraph 未披露部分影响和动态依赖项的问题</li>
+<li>修复测试中因租约丢失导致的上传耗尽 socket 缓冲区的问题</li>
+</ul>
+<h3 id="satnaingastro-paper-v700-qwenqwen38-27b"><a href="https://github.com/satnaing/astro-paper/releases/tag/v7.0.0" rel="noopener noreferrer" target="_blank">satnaing/astro-paper v7.0.0</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>升级至 Astro v7 (7.4.2)</li>
+</ul>
+<p><strong>安全修复</strong></p>
+<ul>
+<li>升级 satori 依赖以修复安全漏洞（从 0.26.0 升至 0.33.5）</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>要求 Node.js >= 22.23.4，需检查并更新本地及主机环境（如 Cloudflare Pages 设置 NODE_VERSION=24）</li>
+<li>默认启用 compressHTML: ‘jsx’，内联元素间的空白会被移除；自定义组件中若缺少空格需手动添加 {””}</li>
+<li>Astro 新编译器更严格，未闭合的 HTML 标签将导致构建失败</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复上一篇 / 下一篇帖子链接方向错误的问题</li>
+<li>修复 Markdown 表格列对齐不生效的问题</li>
+<li>修复 “跳转到内容” 按钮无法将焦点移至主内容的问题</li>
+<li>修复多篇帖子标题相同时出现重复 view-transition-name 的问题</li>
+<li>若干琐碎修复与依赖更新（@astrojs/rss、actions 等）</li>
+</ul>
+<h3 id="jimliubaoyu-design-v210---v230-qwenqwen38-27b"><a href="https://github.com/JimLiu/baoyu-design/releases" rel="noopener noreferrer" target="_blank">JimLiu/baoyu-design v2.1.0 - v2.3.0</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>归档 baoyu-design 技能，从 skills/ 移至 archive/baoyu-design/，skills CLI 不再安装该技能…</li>
+<li>新增元素或区域评论功能，支持本地保存、代理读取 / 回复 / 解决 / 重开线程及发送评论给代理</li>
+<li>新增 dataviz 图表设计技能，提供图表形式、颜色、标记、图例、无障碍与交互指导，并附带 JavaScript 和 Python 调色板验证器</li>
+<li>刷新全部四个产物编辑器至 2026-10-29 上游版本，包含设计画布主题标签页、只读代码同步设计系统及更新的字体和图标资源</li>
+<li>claude-slides 独立页面打开的幻灯片新增导出格式，PowerPoint 导出嵌入关联 Google Fonts 并在页面内解码 WOFF2</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>baoyu-design 技能被归档，skills CLI 不再自动安装，需手动处理或迁移至其他技能</li>
+<li>预构建并打包产物工具和编辑器，移除独立的 tools/artifact-skills/ 构建工具链…</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>claude-slides：移植 2026-10-29 编辑器剩余部分，包括 YouTube 以外的视频嵌入、Present 菜单、手机横屏提示和底部工具栏…</li>
+<li>claude-design-system：新增控件（2D 颜色选择器、分段控件、属性行、数字输入）；删除确认重新打开</li>
+<li>claude-dashboard：移植 2026-10-29 页面 UI 和消息，以及单写者页面上的手动编辑（Edit the page, Beta）功能</li>
+<li>Comments：修复从右到左页面上的 toast 位置和危险菜单项高亮问题</li>
+<li>文档：刷新 README 中的编辑器截图</li>
+<li>修复编辑器服务器端口被占用时挂起的问题，现改为报错退出</li>
+</ul>
+<h3 id="ekkolearnaiekko-studio-v080-qwenqwen38-27b"><a href="https://github.com/EKKOLearnAI/ekko-studio/releases/tag/v0.8.0" rel="noopener noreferrer" target="_blank">EKKOLearnAI/ekko-studio v0.8.0</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增个人助理 BOT，支持创建、命名、搜索、切换及批量删除，各 BOT 独立保存对话并共享账户记忆与 Agent 预设</li>
+<li>新增十款角色及循环选择器，支持鼠标、触摸和键盘操作，完善首次设置提示与草稿保留功能</li>
+<li>个人助理后台任务支持排队追加要求、继续原任务及查看实时工具调用，执行指令以可读文本展示</li>
+<li>个人助理支持串行与并行角色协作、结果交接及紧凑进度列表，失败后自动释放角色并支持恢复未完成分支</li>
+<li>个人助理定时计划支持唤醒助理或运行任务，每次触发隔离执行对话，支持删除计划并保留历史记录</li>
+<li>完善个人助理上下文压缩、账户记忆和停止控制，按用户要求记住任务返回结果并避免重复自我介绍</li>
+<li>JEV 改为 Studio 全局配置由超级管理员管理，新增可独立开启的个人助理记忆增强功能（默认关闭）</li>
+<li>个人助理接入完成、失败、审批和澄清通知，新增后台任务浮动提示，跨设备同步会话活动与未读状态</li>
+<li>用量统计单独标识个人助理 zhezhe 并显示对应 Agent 图标，后台任务仍按实际执行 Agent 统计</li>
+<li>个人助理后台并发默认提高至 6、最高 12，同一账户所有 BOT 共享额度，保留已保存的自定义限制</li>
+<li>个人助理主对话和任务对话新增工作区、终端与浏览器工具面板，支持文件预览、编辑及浏览器标注</li>
+<li>任务列表支持手动设为未完成、已完成或已关闭，关闭后可重开，默认按更新时间排序不再置顶旧任务</li>
+<li>任务卡步骤和说明遵循当前对话语言，任务计划 ID 与每轮授权上下文分离，改善过期上下文提示</li>
+<li>内置浏览器跟随 Studio 明暗主题，使用 Chromium 原生自动深色渲染改善固定浅色网页显示</li>
+<li>桌面远程模式登录后自动共享内置浏览器，断线后自动重连，同步授权失效状态并修复路由导航误撤销问题</li>
+<li>浏览器 Agent 新增文件上传下载、悬停、选项选择、等待文本、弹窗处理、跨域 iframe、双击右键拖拽等功能</li>
+<li>浏览器记住各设备和配置的下载目录，新增搜索、日期分组和安全清理下载历史功能</li>
+<li>设备可在当前窗口或独立窗口打开，重复打开复用已有窗口，隔离登录、浏览器和存储并协调多窗口更新</li>
+<li>Codex 在兼容接口中保留已发现 MCP 工具命名空间；Pi 的 Studio 会话读取工具改为常驻可用</li>
+<li>Claude 在启动和提示刷新后保留用户指令；DSH 改善非 DeepSeek 模型的工具续执行提示并支持可配置启动等待时间</li>
+<li>MiniMax 优先推荐 M3.1 Flash 和 M3，完善推理参数与历史兼容，聊天群聊和工作流默认选用最低可用推理等级</li>
+<li>MCU 可显式订阅现有 Webhook 事件，支持过滤和正文开关，沿用账户权限校验且未订阅设备不受影响</li>
+<li>统一 MCU 固件项目目录并补充 StackChan 实时语音与 Agent 控制规划文档，精简重复测试</li>
+<li>斜杠命令支持中文冒号、顿号及逗号作为参数分隔符，避免输入法标点导致命令被当作普通消息</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复个人助理与普通聊天切换时的会话隔离问题，删除最后一个普通会话后显示新建页，避免全盘或主目录工作区快照阻塞服务</li>
+<li>修复普通用户在群聊和工作流中无法选择可用 Agent 的问题，补充群聊路由异常诊断日志</li>
+<li>修复 Edge TTS WebSocket 握手失败问题，Hermes 运行时显示规范版本身份，避免将占位版本 0.0.0 当作实际版本</li>
+</ul>
+<h3 id="1panel-dev1panel-v242-qwenqwen38-27b"><a href="https://github.com/1Panel-dev/1Panel/releases/tag/v2.4.2" rel="noopener noreferrer" target="_blank">1Panel-dev/1Panel v2.4.2</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>安全修复</strong></p>
+<ul>
+<li>默认禁用 MPTCP，以缓解 Linux 内核远程代码执行漏洞（CVE-2026-98432）</li>
+</ul>
+<h3 id="rorkaiapp-store-connect-cli-600---610-qwenqwen38-27b"><a href="https://github.com/rorkai/App-Store-Connect-CLI/releases" rel="noopener noreferrer" target="_blank">rorkai/App-Store-Connect-CLI 6.0.0 - 6.1.0</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>定价模块支持按地区筛选 PPP 变更</li>
+<li>验证功能新增对首类 IAP 审核附件的校验</li>
+<li>新增 macOS 应用沙盒信息管理能力</li>
+<li>新增资产库安全图片上传进度显示</li>
+<li>新增 Web 应用创建时密码参数警告提示</li>
+<li>新增 App Review 常见拒绝措辞标记功能</li>
+<li>优化截图上传性能，支持并发 10 一次性上传完整集合</li>
+<li>新增通过 pull、plan、apply 管理应用分类功能</li>
+<li>新增通过 pull、plan、apply 管理年龄分级功能</li>
+<li>新增通过 pull、plan、apply 管理 App Review 信息功能</li>
+<li>新增导入 OpenSSL 加密签名仓库到签名同步功能</li>
+<li>新增 StoreKit 应用交易查询和账户令牌更新功能</li>
+<li>新增 StoreKit 消费报告和交易完成功能</li>
+<li>新增订阅续期扩展功能</li>
+<li>新增客户评论摘要游标功能</li>
+<li>新增购买力平价定价计划和申请功能</li>
+<li>新增应用和内购的购买力平价价格功能</li>
+<li>新增版本分阶段发布保护功能</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>弃用并移除 asc migrate metadata 别名</li>
+<li>移除 macOS IPA 发布功能</li>
+<li>移除 web apps create —password 标志</li>
+<li>移除 asc ads v5 功能</li>
+<li>使用 API envelope 进行版本视图（6.0）</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>Web 端区分协议警报与待处理协议</li>
+<li>Xcode 针对字面量 plist 捆绑版本发出警告</li>
+<li>修复截图上传失败在 plan JSON 中的报告问题</li>
+<li>修复容量失败后建议支持的标志问题</li>
+<li>修复深度检查未验证时保留隐私建议的问题</li>
+<li>修复本地化版本字符串解析问题</li>
+<li>修复缺失 App Info 本地化的解释问题</li>
+<li>修复截图接受 —version 版本 ID 的问题</li>
+<li>修复 app-clips 高级体验版本 JSON 保留问题</li>
+<li>修复 web IAP 提交 ID 从 V2 目录解析问题</li>
+<li>修复 web IAP 版本附加到审查草稿问题</li>
+<li>修复 reviews 重叠摘要页去重问题</li>
+<li>修复 signing 冲突源配置文件 UUID 拒绝问题</li>
+<li>修复 versions 分阶段发布轮询遵循 Retry-After 问题</li>
+<li>修复 screenshots 部分上传收据保留问题</li>
+<li>修复 screenshots plan 输出写入失败报告问题</li>
+</ul>
+<h3 id="mack-av2ray-agent-v3533-qwenqwen38-27b"><a href="https://github.com/mack-a/v2ray-agent/releases/tag/v3.5.33" rel="noopener noreferrer" target="_blank">mack-a/v2ray-agent v3.5.33</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>SOCKS5 支持多落地机和按入站 tag 分流</li>
+<li>SOCKS5 支持独立安装与事务化管理</li>
+</ul>
+<h3 id="tashfeenahmedfreellmapi-v01614-qwenqwen38-27b"><a href="https://github.com/tashfeenahmed/freellmapi/releases/tag/v0.16.14" rel="noopener noreferrer" target="_blank">tashfeenahmed/freellmapi v0.16.14</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增 JamAI Base 聊天与嵌入支持，包含独立的 PAT 和项目 ID 配置字段</li>
+<li>目录更新：新增 15 个端点并禁用 2 个路由（净增 13 个）</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>需更新应用以使用新的 JamAI 适配器</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 Intel macOS 版本发布问题</li>
+<li>通过在有签名的 Intel GitHub runner 上使用 TCP 上的 HTTPS，修复了 Apple CloudKit 连接失败问题</li>
+</ul>
+<h3 id="jdxmise-v20261024-qwenqwen38-27b"><a href="https://github.com/jdx/mise/releases/tag/v2026.10.24" rel="noopener noreferrer" target="_blank">jdx/mise v2026.10.24</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>实验性功能：支持通过 Docker 或 Podman 运行容器镜像作为守护进程，支持端口、就绪检查及日志查看</li>
+<li>新增 env._.path 的 position = “append” 选项，允许将目录追加到工具路径之后、继承 PATH 之前</li>
+<li>新增 extra_ca_certs 设置，支持为 TLS 检查代理指定额外的 CA 证书包</li>
+<li>新增 registry_index 选项，用于在锁定 pypi: 工具时优先搜索特定注册表</li>
+<li>dotfile 条目中 merge = “missing” 现支持 secret () 模板函数，仅提示缺失密钥</li>
+<li>Danger Swift 库更新为使用官方安装器，自动安装 libDanger 和 Swift 模块</li>
+<li>Homebrew 公式解析改用批量 formula.json 索引并缓存元数据，显著提升大型环境下的启动与状态检查速度</li>
+<li>daemon 预设命名端口（如 http_port）支持按 worktree 自动分配独立端口槽位</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>lockfile_mode = “merge” 已弃用，建议迁移至默认的 generate 模式，未来版本将移除该选项</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 mise upgrade 未更新多配置文件中同一工具所有锁条目的问题</li>
+<li>修复 http: 工具使用 file:// URL 且无校验和时无法安装和锁定的问题</li>
+<li>修复 git task include 加载失败时 mise install 错误退出而非警告的问题</li>
+<li>修复 mise lock 在未安装 Python 环境下无法正确锁定 pypi: 工具依赖图的问题</li>
+<li>修复 Homebrew tap 公式源构建因 MachO post_install 步骤失败的问题</li>
+<li>修复 Homebrew install_symlink 相对路径解析错误导致前缀不匹配的问题</li>
+<li>修复 Cask postflight 钩子无法访问 staged_path 二进制负载的问题</li>
+<li>修复远程文件任务作为子任务运行时因环境变量导致的 exit 127 错误</li>
+<li>修复 turbo.json 和 global.json 不支持注释导致警告或版本检测失败的问题</li>
+<li>修复 mise prune 误删来自 includes 文件或默认目录所需工具版本的问题</li>
+<li>修复 gem: 工具 latest 命令错误解析为 RubyGems 预发布版本的问题</li>
+<li>优化 shim 可执行文件缺失时的错误提示，明确显示版本及配置来源</li>
+<li>修复 mise upgrade/outdated 在版本查询失败时错误显示 “所有工具均为最新” 的问题</li>
+</ul>
+<h3 id="objective-seelulu-v455-qwenqwen38-27b"><a href="https://github.com/objective-see/LuLu/releases/tag/v4.5.5" rel="noopener noreferrer" target="_blank">objective-see/LuLu v4.5.5</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增赞助 LuLu 及 Objective-See Foundation 的选项</li>
+<li>改进生命周期日志记录，将扩展 / 应用激活、替换、启动和停止事件持久化到系统日志，便于诊断升级问题</li>
+<li>移除扩展中未使用的按进程 Spotlight 元数据查找，消除过滤热路径上的同步 IPC</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复升级后 “LuLu 无法与其系统扩展通信” 的问题：旧扩展在退出后残留，新扩展可能在没有 XPC 服务的情况下加载导致不可达（规则窗口空白、通信失败提示）…</li>
+<li>修复规则窗口在规则被修改时刷新可能导致崩溃的问题：规则现在在锁下归档，持有的流在锁外恢复</li>
+</ul>
+<h3 id="guobao2333deeplx-serverless-v400-qwenqwen38-27b"><a href="https://github.com/guobao2333/DeepLX-Serverless/releases/tag/v4.0.0" rel="noopener noreferrer" target="_blank">guobao2333/DeepLX-Serverless v4.0.0</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>重写代码并迁移至 Hono 框架，以便未来支持全平台</li>
+<li>初步适配 Node、Bun 和 Deno 运行时环境</li>
+<li>优化错误处理机制</li>
+<li>改进 CLI 用户体验</li>
+<li>优化服务端逻辑</li>
+<li>附件包含 Dockerfile 以方便部署</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>要求 Node.js 版本必须 >= 22</li>
+<li>移除了所有原有依赖项，需重新配置项目依赖</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复了大量已知 Bug（具体细节未列出）</li>
+</ul>
+<h3 id="hugohe3ppt-master-v680-qwenqwen38-27b"><a href="https://github.com/hugohe3/ppt-master/releases/tag/v6.8.0" rel="noopener noreferrer" target="_blank">hugohe3/ppt-master v6.8.0</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>OpenAI 图像后端默认模型升级为 gpt-image-2.5-sunburst，成本降低约 75%，速度提升一倍</li>
+<li>支持任意宽高比（含小数）的 AI 图像生成，自动适配并裁剪至目标形状</li>
+<li>优化速率限制处理，遵循 Retry-After 头并设置等待上限，防止长时间阻塞或崩溃</li>
+<li>原生 PPTX 编辑：图表数据变更时原地修补，保留渐变、图例、数据标签等样式细节</li>
+<li>原生 PPTX 编辑：重建图表时保留间隙宽度、轴标签排版及主题字体令牌</li>
+<li>动画时序严格遵循 PowerPoint 节拍语义，确保 after-previous 和 with-previous 行为一致</li>
+<li>PPTX 导入与模板创建：修复零尺寸几何体导致的硬失败，保留不可恢复的几何体并报告</li>
+<li>源转换改进：PowerPoint Office Math 保留为 LaTeX，DOCX 文本匹配 Word 显示效果，EPUB/ODT/RTF 恢复被跳过的文本</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>支持的 Python 版本上限调整为 3.14，Windows 指南新增 3.15 源码构建故障排查说明</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 —filename 包含点号时被截断导致文件静默覆盖的问题</li>
+<li>修复合并单元格表格编辑导致 —native-charts-and-tables 失败的问题</li>
+<li>修复重建幻灯片时新对象 SVG 堆叠顺序丢失及全画布矩形被误删的问题</li>
+<li>修复主题线条样式解析错误，正确应用宽度、端点、虚线及透明度</li>
+<li>修复 PowerPoint 隐藏内容泄漏到源 Markdown、美化清单或演讲者备注中的问题</li>
+<li>修复最终化及实时预览编辑器中元素 ID、名称、角色等属性丢失导致定位器失效的问题</li>
+<li>修复质量检查器中 XML 解码后超链接比较产生的误报问题</li>
+</ul>
+<h3 id="openclawopenclaw-v2026936-qwenqwen38-27b"><a href="https://github.com/openclaw/openclaw/releases/tag/v2026.9.36" rel="noopener noreferrer" target="_blank">openclaw/openclaw v2026.9.36</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增对更多模型的支持</li>
+<li>工作区限制扩展至 Gateway 构建的工具，确保媒体工具严格限制在工作区内</li>
+<li>Docker 发布镜像现在包含与源码 / 版本绑定的证据，架构构建更可靠</li>
+</ul>
+<p><strong>安全修复</strong></p>
+<ul>
+<li>修复未受信输入边界问题：限制畸形媒体元数据、邮件地址、TOML、URI 及超大集合的解析，防止无界计算或身份篡改</li>
+<li>修复 Microsoft Teams 白名单漏洞：无法解析的名称键条目不再开放给所有团队或群组，而是拒绝访问</li>
+<li>应用 eMudhra 证书信任补救措施</li>
+<li>将修补后的 MSAL 范围限定在受影响的 Teams 和 Azure Identity 消费者中</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复更新回滚失败导致安装包缺失的问题，保持 Doctor 恢复指导并停止重新复制私有排练数据库</li>
+<li>修复出站回复中表情符号等星外字符后的比较文本被错误剥离的问题</li>
+<li>修复 xAI 旧模型在不支持可配置推理努力时错误拒绝 ‘off’ 选项的问题</li>
+<li>修复 Node 上传在取消后仍显示 AbortError 的问题</li>
+<li>升级依赖项（ClawHub undici 固定版本、Vercel 工具链包、Vitest 系列）</li>
+<li>修复安装和 Doctor 相关逻辑：恢复被拒绝的回滚重命名后的根目录，保留清理不确定性，并将更新兼容性清单排除在发布包外</li>
+</ul>
+<h3 id="farion1231cc-switch-v4022-qwenqwen38-27b"><a href="https://github.com/farion1231/cc-switch/releases/tag/v4.0.22" rel="noopener noreferrer" target="_blank">farion1231/cc-switch v4.0.22</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增对 DeepSeek Harness 的支持，作为第 14 个管理应用，支持 Web 和 Desktop 配置同步…</li>
+<li>DeepSeek Harness 支持供应商同时添加，兼容 OpenAI Chat Completions…</li>
+<li>授权中心新增 DeepSeek 账号登录功能，显示余额与赠金，Web 和 Desktop 共用登录状态</li>
+<li>「应用」页支持通过 npm 安装、升级和卸载 @deepseek-ai/dsh，卸载时保留用户数据</li>
+<li>用量统计新增 Oh My Pi 支持，包含子代理用量及对话外的模型调用，首次导入含历史子代理会话</li>
+<li>「打开终端」对话框新增跳过权限确认选项及追加启动参数功能，Codex 卡片也支持打开终端</li>
+<li>WebDAV 同步设置新增「清除配置」按钮，可删除本机存储的地址、账号和密码并停止自动同步</li>
+<li>Skills 已安装项支持在文件管理器中打开目录及复制名称，发现页新增查看文档按钮</li>
+<li>GitHub Copilot 的 Claude 模型改走原生 Anthropic 接口，企业版长会话缓存命中率从约 35% 提升至约 95%</li>
+<li>优化 Skill 仓库管理，添加、启用、停用或删除仓库时仅重新读取该仓库，不再全量下载</li>
+<li>托盘和用量设置中现在也能看到绑定了账号的 Claude 官方卡额度信息</li>
+<li>Claude Desktop 路由服务支持通过 x-api-key 传递令牌，提升兼容性</li>
+<li>WSL 环境下若 Claude 配置目录位于 WSL 内，授权中心将明确提示暂不支持 Claude 账号登录</li>
+<li>MCP 和 Skills 列表悬停勾选框时不再重复弹出提示，帮助卡片改为右侧显示且支持滚动</li>
+<li>新增 OspreyAI 和讯飞星火 Astron Coding Plan 的 Claude Code 预设…</li>
+</ul>
+<p><strong>安全修复</strong></p>
+<ul>
+<li>Claude Desktop 令牌校验改为固定耗时比较，防止时序攻击（#7488、#7482）</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>数据库版本从 23 升级到 24，为 MCP 和 Skills 增加 DeepSeek Harness 开关；升级前自动备份，降级至旧版本将无法打开数据库</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 macOS 上连接 OAuth 远程 MCP 时切换 Claude 账号因钥匙串写入超限而失败的问题</li>
+<li>修复开启全局代理时在授权中心添加 Claude 账号报 403 错误的问题</li>
+<li>修复 Claude Desktop 新会话默认使用 Fable 且模型顺序随配置启用变化的问题，现默认 Sonnet</li>
+<li>修复 MiniMax 周额度用完后不显示额度及重置倒计时的问题</li>
+<li>修复未在使用中的供应商设置了自动查询间隔但余额不刷新的问题</li>
+<li>修复上游地址误填为路由自身地址导致请求无限转发及内存暴涨的问题</li>
+<li>修复 Claude Code 经路由连 Gemini 时工具调用报 400 错误（签名位置及缺失问题）</li>
+<li>修复 Claude Code 经路由转 OpenAI Responses 时 WebSearch 带屏蔽域名直接报 400 的问题</li>
+<li>修复 Codex 0.163 以上版本经路由连 xAI 时报 400 错误的问题</li>
+<li>修复 Codex config.toml 中存在数组表时第三方供应商地址被错误写入的问题</li>
+<li>修复 OpenCode V2 格式供应商检测连通性时报缺少 options.baseURL 的问题</li>
+<li>修复上游报错时请求日志存储整页 HTML 导致数据库膨胀的问题，现限制存储前 4096 字符</li>
+<li>修复 Windows 上使用 MyDockFinder 等第三方任务栏时点击托盘图标无反应的问题</li>
+<li>修复 Kimi Code 旧版本在「应用」页升级后版本号不变的问题</li>
+<li>修复「应用」页中程序文件存在但无法运行的应用显示状态错误的问题</li>
+<li>修复 Antigravity CLI 和 IDE 共存时旧会话用量不更新及会话打不开的问题</li>
+</ul>
+<h3 id="swiftlangswift-swift-642-release-本地降级"><a href="https://github.com/swiftlang/swift/releases/tag/swift-6.4.2-RELEASE" rel="noopener noreferrer" target="_blank">swiftlang/swift swift-6.4.2-RELEASE</a> <sup>本地降级</sup></h3>
+<p><em>本次更新暂无详细说明，请查看原始 Release Notes</em></p>
+<h3 id="devolutionsunigetui-v202633-qwenqwen38-27b"><a href="https://github.com/Devolutions/UniGetUI/releases/tag/v2026.3.3" rel="noopener noreferrer" target="_blank">Devolutions/UniGetUI v2026.3.3</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>软件目录现支持提供安装程序（Windows 的 .exe/.msi，macOS 的 .pkg/.dmg/.zip），可从共享或网络文件夹分发并像普通包一样管理</li>
+<li>新增扩展功能（设置中启用，默认关闭），首个扩展为 Git 仓库：自动保持本地克隆在默认分支最新，并显示 worktree 与分支</li>
+<li>可通过右键点击列表标题自定义软件包列表显示的列，更改即时生效</li>
+<li>软件包列表新增可选的 “发布日期” 列</li>
+<li>可在 “管理已忽略更新” 中对单个已忽略包执行一次更新，之后仍保持忽略状态</li>
+<li>Scoop 现支持安装指定版本</li>
+<li>软件更新的右键菜单新增 “发布说明” 项</li>
+<li>unigetui://package 链接现可直接打开对应包的详情页面</li>
+<li>可隐藏托盘图标同时让 UniGetUI 继续在后台运行</li>
+<li>新增选项：自动更新完成后退出 UniGetUI</li>
+<li>卸载软件包及批量忽略多个包的更新前均会弹出确认提示</li>
+<li>首次启动时未安装工具的软件包管理器将自动禁用，相关页面会提示无可用管理器而非误报全部已更新</li>
+<li>Cargo 不再依赖 cargo-binstall 或 cargo-update</li>
+<li>update-all 和 update-manager 命令现支持无头模式</li>
+<li>应用内对话框点击遮罩区域即可关闭</li>
+<li>工具栏按钮在无操作对象时自动禁用</li>
+<li>操作面板现单独统计失败操作数量</li>
+<li>筛选面板中的搜索设置合并为一个可折叠的 “搜索选项” 区块</li>
+<li>macOS 菜单栏图标颜色与菜单栏匹配，窗口按钮移入玻璃侧边栏</li>
+<li>改进标签页中 Tab 和 Shift+Tab 导航体验</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 Bun 使用自定义安装目录时软件包不显示的问题</li>
+<li>修复 Linux 上注销或关机被 UniGetUI 阻止的问题</li>
+<li>修复软件包详情操作按钮上较长的翻译文本被截断的问题</li>
+<li>修复 macOS 上通过 nvm 安装的 npm 无法找到的问题</li>
+<li>修复需要管理员权限的操作在无头模式下失败的问题</li>
+<li>修复 Store 和 MSIX 应用显示 ms-resource:AppStoreName 等占位名称的问题</li>
+<li>修复关闭按钮未延伸至窗口右边缘的问题</li>
+<li>修复页面副标题中软件包计数互换的问题</li>
+<li>修复版本号极大的软件包（如 Scoop nightly 构建）不显示更新的问题</li>
+<li>修复当 “安装前关闭的应用” 列表中某应用无法关闭时更新仍继续执行的问题</li>
+<li>修复 WinGet、PowerShell 和 Scoop 的多个更新相关 Bug</li>
+</ul>
+<p><strong>帮助我们改进</strong></p>
+<p>对今日摘要质量有建议？欢迎反馈！</p>
+<ul>
+<li><a href="https://github.com/houzixiashanxiedaima/AstroBlog/issues/new" rel="noopener noreferrer" target="_blank">反馈摘要质量</a></li>
+<li><a href="https://github.com/houzixiashanxiedaima/AstroBlog/issues/new" rel="noopener noreferrer" target="_blank">评价今日日报</a></li>
+</ul>
+<p>您的反馈将帮助我们优化 AI Prompt, 提升摘要准确性</p>  </div> <!-- Footer navigation --> <footer class="article-footer" data-astro-cid-tldeq5d5> <nav class="post-navigation" aria-label="Article navigation" data-astro-cid-tldeq5d5> <div class="nav-prev" data-astro-cid-tldeq5d5> <a href="/blog/ide-updates/2026-10-30" class="nav-link" data-astro-prefetch data-astro-cid-tldeq5d5> <span class="nav-label" data-astro-cid-tldeq5d5><span class="arrow-char" data-astro-cid-tldeq5d5>←</span> 上一篇</span> <span class="nav-title" data-astro-cid-tldeq5d5>IDE / SDK 更新 - 2026-10-30</span> </a> </div> <div class="nav-next" data-astro-cid-tldeq5d5>  </div> </nav> <div class="back-to-list" data-astro-cid-tldeq5d5> <a href="/" class="back-link" data-astro-prefetch data-astro-cid-tldeq5d5>← 返回文章列表</a> </div> </footer> </article> <!-- Table of Contents --> <aside class="toc-aside" data-astro-cid-tldeq5d5> <nav class="toc" aria-label="目录导航" data-astro-cid-p33bl5ka> <div class="toc-header-action" data-astro-cid-p33bl5ka> <a href="/" class="toc-action-link" data-astro-prefetch data-astro-cid-p33bl5ka> <span class="toc-action-icon" data-astro-cid-p33bl5ka>←</span> <span class="toc-action-text" data-astro-cid-p33bl5ka>返回列表</span> </a> </div> <ul class="toc-list" data-astro-cid-p33bl5ka> <li class="toc-item toc-item-3" data-slug="anomalycoopencode-v222---v223-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#anomalycoopencode-v222---v223-qwenqwen38-27b" class="toc-link" data-slug="anomalycoopencode-v222---v223-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>anomalyco/opencode v2.2.2 - v2.2.3 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="callstackagent-device-v02135-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#callstackagent-device-v02135-qwenqwen38-27b" class="toc-link" data-slug="callstackagent-device-v02135-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>callstack/agent-device v0.21.35 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="satnaingastro-paper-v700-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#satnaingastro-paper-v700-qwenqwen38-27b" class="toc-link" data-slug="satnaingastro-paper-v700-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>satnaing/astro-paper v7.0.0 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="jimliubaoyu-design-v210---v230-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#jimliubaoyu-design-v210---v230-qwenqwen38-27b" class="toc-link" data-slug="jimliubaoyu-design-v210---v230-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>JimLiu/baoyu-design v2.1.0 - v2.3.0 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="ekkolearnaiekko-studio-v080-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#ekkolearnaiekko-studio-v080-qwenqwen38-27b" class="toc-link" data-slug="ekkolearnaiekko-studio-v080-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>EKKOLearnAI/ekko-studio v0.8.0 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="1panel-dev1panel-v242-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#1panel-dev1panel-v242-qwenqwen38-27b" class="toc-link" data-slug="1panel-dev1panel-v242-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>1Panel-dev/1Panel v2.4.2 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="rorkaiapp-store-connect-cli-600---610-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#rorkaiapp-store-connect-cli-600---610-qwenqwen38-27b" class="toc-link" data-slug="rorkaiapp-store-connect-cli-600---610-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>rorkai/App-Store-Connect-CLI 6.0.0 - 6.1.0 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="mack-av2ray-agent-v3533-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#mack-av2ray-agent-v3533-qwenqwen38-27b" class="toc-link" data-slug="mack-av2ray-agent-v3533-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>mack-a/v2ray-agent v3.5.33 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="tashfeenahmedfreellmapi-v01614-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#tashfeenahmedfreellmapi-v01614-qwenqwen38-27b" class="toc-link" data-slug="tashfeenahmedfreellmapi-v01614-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>tashfeenahmed/freellmapi v0.16.14 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="jdxmise-v20261024-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#jdxmise-v20261024-qwenqwen38-27b" class="toc-link" data-slug="jdxmise-v20261024-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>jdx/mise v2026.10.24 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="objective-seelulu-v455-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#objective-seelulu-v455-qwenqwen38-27b" class="toc-link" data-slug="objective-seelulu-v455-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>objective-see/LuLu v4.5.5 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="guobao2333deeplx-serverless-v400-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#guobao2333deeplx-serverless-v400-qwenqwen38-27b" class="toc-link" data-slug="guobao2333deeplx-serverless-v400-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>guobao2333/DeepLX-Serverless v4.0.0 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="hugohe3ppt-master-v680-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#hugohe3ppt-master-v680-qwenqwen38-27b" class="toc-link" data-slug="hugohe3ppt-master-v680-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>hugohe3/ppt-master v6.8.0 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="openclawopenclaw-v2026936-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#openclawopenclaw-v2026936-qwenqwen38-27b" class="toc-link" data-slug="openclawopenclaw-v2026936-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>openclaw/openclaw v2026.9.36 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="farion1231cc-switch-v4022-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#farion1231cc-switch-v4022-qwenqwen38-27b" class="toc-link" data-slug="farion1231cc-switch-v4022-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>farion1231/cc-switch v4.0.22 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="swiftlangswift-swift-642-release-本地降级" data-astro-cid-p33bl5ka> <a href="#swiftlangswift-swift-642-release-本地降级" class="toc-link" data-slug="swiftlangswift-swift-642-release-本地降级" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>swiftlang/swift swift-6.4.2-RELEASE 本地降级</span> </a> </li><li class="toc-item toc-item-3" data-slug="devolutionsunigetui-v202633-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#devolutionsunigetui-v202633-qwenqwen38-27b" class="toc-link" data-slug="devolutionsunigetui-v202633-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>Devolutions/UniGetUI v2026.3.3 Qwen/Qwen3.8-27B</span> </a> </li> </ul> <div class="toc-footer-action" data-astro-cid-p33bl5ka> <button type="button" class="toc-action-link" id="toc-back-to-top" aria-label="返回顶部" data-astro-cid-p33bl5ka> <span class="toc-action-icon" data-astro-cid-p33bl5ka>↑</span> <span class="toc-action-text" data-astro-cid-p33bl5ka>返回顶部</span> </button> </div> </nav><script type="module" src="/_astro/TableOfContents.astro_astro_type_script_index_0_lang.Dm6V_AxN.js"></script> </aside> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button><script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
