@@ -53,7 +53,7 @@ while also maximizing the chance that you will get theirs.
 <p>
 Despite it being 2026, many mail servers still don't support IPv6:
 if you have a good ISP, it should be possible to get a public IPv4 address arranged.
-Otherwise, the only real option is to rent space in a datacenter, which will cost some money.
+Otherwise, the only real option is to rent from a datacenter, which will cost some money.
 </p><p>
 (Note, there's no requirement for the VPS to actually run the mail daemon:
 It's possible to have it forwarding traffic to a box in your house)
@@ -84,6 +84,24 @@ not a prohibitive amount, but you should think twice before getting yet-another 
   <li>An IP address with a PTR record</li>
   <li>A domain</li>
 </ul>
+<p></p>
+
+About IP reputation
+<p>
+  Since a server can be spun up in seconds with nothing but a (possibly stolen) credit card number, spammers love VPS providers.
+  Most hosting provider will put a stop to it once people complain, but by that point, the bad actor could have sent millions of messages, ruining the reputation of the rented IP address.
+</p>
+<p>
+  It's not uncommon for a provider to have some (or all) of its customer address pool blacklisted by big-tech email providers.
+  Blacklists are often published, so this is something you can easly check.
+  If only some address are soiled, it's often possible to delete and re-create the server until you get a clean one.
+  Otherwise, you'll have to find a different provider. 
+</p>
+<p>
+  Often, the best choices are the ones that block outgoing port 25 by default.
+  Having to request access or satisfy account age thresholds is annoying, but this will help avoid problems with big-tech.
+</p>
+
 <p>
 The domain is unavoidable here, because you'll need to make a few DNS records to prove the moral character of your packets.
 Specifically, you'll need SPF and DKIM.
@@ -203,12 +221,29 @@ a crypto miner needs to download the blockchain state, a stealer needs to upload
 that the connected user owns the envelope from address,
 it does not check the "From" inside the email which is all the recipient will see unless they dig into the headers. 
 </p><p>
-The two different addresses are technically intended behavoir and do have their uses...
-but can get you in a bit of trouble on multi-user setups:
-I recomend setting up a mail-filter to ensure the two addresses are consistant.
+Having two different addresses is intended behavoir.
+For example, an email recieved from a mailing list will often look like this:
+</p>
+<pre>
+HELO somecorp
+MAIL FROM: mailinglist@somecorp
+RCPT TO: me@me
+DATA
+From: fancytitle@somecorp
+To: mailinglist@somecorp
+
+Hello, world.
+
+.
+</pre>
+<p>
+The envelope data provides instructions on how to deliver the message,
+while the headers inside the email retain what was originally sumbitted by the sender.
+This allows other features to work correctly:
+it would be goofy if replies were re-broadcast to the the list instead of going back to the original sender.
 </p><p>
-This is not a concern for single-user servers:
-those should allow any "from" address because having multiple email addresses is very useful. 
+... but letting users do this at-will can get you in a bit of trouble:
+I recomend setting up a mail filter to ensure the two addresses are consistant before accepting a message. 
 
 </p>
 
