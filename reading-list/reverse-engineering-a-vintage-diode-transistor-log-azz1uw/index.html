@@ -1,0 +1,265 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.4.7"><!-- Core SEO --><meta name="description" content="Going through a collection of old parts, CuriousMarc encountered some ICs that he couldn't
+identify.
+He opened up one of these ICs, and I studied it under the microscope.
+After some reverse engineerin"><meta name="keywords"><meta name="author" content="Yuyi"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/reading-list/reverse-engineering-a-vintage-diode-transistor-log-azz1uw/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/reading-list/reverse-engineering-a-vintage-diode-transistor-log-azz1uw/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.yuyins.com/reading-list/reverse-engineering-a-vintage-diode-transistor-log-azz1uw/"><meta property="og:title" content="Reverse engineering a vintage diode-transistor logic chip"><meta property="og:description" content="Going through a collection of old parts, CuriousMarc encountered some ICs that he couldn't
+identify.
+He opened up one of these ICs, and I studied it under the microscope.
+After some reverse engineerin"><meta property="og:image" content="https://blog.yuyins.com/og-image.png"><meta property="og:image:alt" content="Going through a collection of old parts, CuriousMarc encountered some ICs that he couldn't
+identify.
+He opened up one of these ICs, and I studied it under the microscope.
+After some reverse engineerin"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/reading-list/reverse-engineering-a-vintage-diode-transistor-log-azz1uw/"><meta property="twitter:title" content="Reverse engineering a vintage diode-transistor logic chip"><meta property="twitter:description" content="Going through a collection of old parts, CuriousMarc encountered some ICs that he couldn't
+identify.
+He opened up one of these ICs, and I studied it under the microscope.
+After some reverse engineerin"><meta property="twitter:image" content="https://blog.yuyins.com/og-image.png"><title>Reverse engineering a vintage diode-transistor logic chip</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"雅俗共赏","description":"记录技术、阅读与开源更新的中文博客。","url":"https://blog.yuyins.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"订阅读物","item":"https://blog.yuyins.com/reading-list"},{"@type":"ListItem","position":3,"name":"Reverse engineering a vintage diode-transistor logic chip","item":"https://blog.yuyins.com/reading-list/reverse-engineering-a-vintage-diode-transistor-log-azz1uw/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><style>.chip{background:var(--muted);color:var(--foreground);white-space:nowrap;border:1px solid #0000;border-radius:9999px;align-items:center;gap:.45rem;font-weight:500;line-height:1.4;text-decoration:none;display:inline-flex}.chip:after{content:none!important}.chip--sm{padding:.25rem .625rem;font-size:.8125rem}.chip--md{padding:.375rem .875rem;font-size:.875rem}.chip--interactive{cursor:pointer;transition:background-color .2s,color .2s,opacity .2s}@media (hover:hover){.chip--interactive:not(.chip--active):not(.active):hover{background-color:color-mix(in srgb, var(--accent) 10%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 68%, var(--foreground))}}.chip--active,.chip.active{background-color:color-mix(in srgb, var(--accent) 18%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 82%, var(--foreground));box-shadow:none;border-color:#0000;font-weight:600}.chip--dashed{border-style:dashed;border-color:color-mix(in srgb, var(--accent) 22%, var(--border));background:color-mix(in srgb, var(--background) 70%, var(--muted))}.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style><link rel="stylesheet" href="/_astro/Layout.BFpcHBqq.css"><style>.article-content{max-width:none}.article-content:lang(en){letter-spacing:0}.article-content:lang(en) pre{letter-spacing:var(--ls-body)}.article-content code:not(pre *){background:color-mix(in srgb, var(--muted) 30%, transparent);color:var(--foreground);border:0;border-radius:.2em;padding:.05em .3em;font-size:.875em;display:inline}.article-content p{margin-bottom:1.25rem}.article-content ul,.article-content ol{margin-bottom:1.25rem;padding-left:1.5rem}.article-content li{margin-bottom:.5rem}.article-content table{max-width:100%;display:block;overflow-x:auto}.blog-post{width:100%;min-width:0;max-width:42rem;margin:0 auto}.back-link{color:var(--muted-foreground);font-size:.8125rem;text-decoration:none;transition:color .2s}.back-link:hover{color:var(--accent-hover)}.blog-post-container[data-astro-cid-veycvx62]{width:100%;margin:0 auto;padding:2rem 0;animation:.3s ease-out fadeIn}.article-header[data-astro-cid-veycvx62]{border-bottom:1px solid var(--border);margin-bottom:2rem;padding-bottom:1rem}.article-header[data-astro-cid-veycvx62] h1[data-astro-cid-veycvx62]{color:var(--foreground);word-break:break-word;margin-bottom:1rem;font-size:2rem;font-weight:700;line-height:1.3}.reading-meta[data-astro-cid-veycvx62]{color:var(--muted-foreground);align-items:center;gap:.5rem;font-size:.875rem;display:flex}.separator[data-astro-cid-veycvx62]{color:var(--border)}.article-content[data-astro-cid-veycvx62]{color:var(--foreground);margin-bottom:3rem;font-size:1.0625rem;line-height:1.8}.article-content[data-astro-cid-veycvx62] h2{margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600}.article-content[data-astro-cid-veycvx62] h3{margin-top:1.5rem;margin-bottom:.75rem;font-size:1.25rem;font-weight:600}.article-content[data-astro-cid-veycvx62] a{color:var(--accent-hover);text-underline-offset:2px;text-decoration:underline}.article-content[data-astro-cid-veycvx62] img{border-radius:.5rem;max-width:100%;height:auto;margin:1.5rem 0}.article-content[data-astro-cid-veycvx62] blockquote{border-left:4px solid var(--border);margin:1.5rem 0;padding-left:1rem}.article-content[data-astro-cid-veycvx62] pre{background:var(--muted);border-radius:.5rem;margin:1.5rem 0;padding:1rem;overflow-x:auto}.article-footer[data-astro-cid-veycvx62]{border-top:1px solid var(--border);flex-direction:column;align-items:center;gap:1.5rem;padding-top:2rem;display:flex}.action-row[data-astro-cid-veycvx62]{justify-content:center;display:flex}.read-original-btn[data-astro-cid-veycvx62]{background-color:var(--foreground);color:var(--background);border-radius:.5rem;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex}.read-original-btn[data-astro-cid-veycvx62]:hover{opacity:.9}.back-to-list[data-astro-cid-veycvx62]{text-align:center}.back-link--top[data-astro-cid-veycvx62]{margin-bottom:1rem;display:inline-block}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link nav-link--active" aria-current="page" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/podcasts" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 播客 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(function(){let e=async e=>{await(await e())()};(self.Astro||(self.Astro={})).load=e,window.dispatchEvent(new Event(`astro:load`))})();</script><script>(function(){function e(t){"@babel/helpers - typeof";return e=typeof Symbol==`function`&&typeof Symbol.iterator==`symbol`?function(e){return typeof e}:function(e){return e&&typeof Symbol==`function`&&e.constructor===Symbol&&e!==Symbol.prototype?`symbol`:typeof e},e(t)}function t(t,n){if(e(t)!=`object`||!t)return t;var r=t[Symbol.toPrimitive];if(r!==void 0){var i=r.call(t,n||`default`);if(e(i)!=`object`)return i;throw TypeError(`@@toPrimitive must return a primitive value.`)}return(n===`string`?String:Number)(t)}function n(n){var r=t(n,`string`);return e(r)==`symbol`?r:r+``}function r(e,t,r){return(t=n(t))in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}let i=/* @__PURE__ */ new Set([`__proto__`,`constructor`,`prototype`]);{let e={0:e=>a(e),1:e=>n(e),2:e=>new RegExp(e),3:e=>new Date(e),4:e=>new Map(n(e)),5:e=>new Set(n(e)),6:e=>BigInt(e),7:e=>new URL(e),8:e=>new Uint8Array(e),9:e=>new Uint16Array(e),10:e=>new Uint32Array(e),11:e=>1/0*e},t=t=>{let[n,r]=t;return n in e?e[n](r):void 0},n=e=>e.map(t),a=e=>typeof e!=`object`||!e?e:Object.fromEntries(Object.entries(e).map(([e,n])=>[e,t(n)]));class o extends HTMLElement{constructor(...e){super(...e),r(this,`Component`,void 0),r(this,`hydrator`,void 0),r(this,`hydrate`,async()=>{var e;if(!this.hydrator||!this.isConnected)return;let t=(e=this.parentElement)==null?void 0:e.closest(`astro-island[ssr]`);if(t){t.addEventListener(`astro:hydrate`,this.hydrate,{once:!0});return}let n=this.querySelectorAll(`astro-slot`),r={},i=this.querySelectorAll(`template[data-astro-template]`);for(let e of i){let t=e.closest(this.tagName);t!=null&&t.isSameNode(this)&&(r[e.getAttribute(`data-astro-template`)||`default`]=e.innerHTML,e.remove())}for(let e of n){let t=e.closest(this.tagName);t!=null&&t.isSameNode(this)&&(r[e.getAttribute(`name`)||`default`]=e.innerHTML)}let o;try{o=this.hasAttribute(`props`)?a(JSON.parse(this.getAttribute(`props`))):{}}catch(e){let t=this.getAttribute(`component-url`)||`<unknown>`,n=this.getAttribute(`component-export`);throw n&&(t+=` (export ${n})`),console.error(`[hydrate] Error parsing props for component ${t}`,this.getAttribute(`props`),e),e}await this.hydrator(this)(this.Component,o,r,{client:this.getAttribute(`client`)}),this.removeAttribute(`ssr`),this.dispatchEvent(new CustomEvent(`astro:hydrate`))}),r(this,`unmount`,()=>{this.isConnected||this.dispatchEvent(new CustomEvent(`astro:unmount`))})}disconnectedCallback(){document.removeEventListener(`astro:after-swap`,this.unmount),document.addEventListener(`astro:after-swap`,this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute(`await-children`)||document.readyState===`interactive`||document.readyState===`complete`)this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener(`DOMContentLoaded`,e),t.disconnect(),this.childrenConnectedCallback()},t=new MutationObserver(()=>{var t;((t=this.lastChild)==null?void 0:t.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue===`astro:end`&&(this.lastChild.remove(),e())});t.observe(this,{childList:!0}),document.addEventListener(`DOMContentLoaded`,e)}}async childrenConnectedCallback(){let e=this.getAttribute(`before-hydration-url`);e&&await import(e),this.start()}getRetryImportUrl(e){let t=new URL(e,document.baseURI);return t.searchParams.set(`astro-retry`,Date.now().toString()),t.toString()}async importWithRetry(e){try{return await import(e)}catch(t){return await new Promise(e=>setTimeout(e,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let t=this.getAttribute(`component-url`),n=new CustomEvent(`astro:hydration-error`,{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:t}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${t}`,e)}async start(){let e=JSON.parse(this.getAttribute(`opts`)),t=this.getAttribute(`client`);if(Astro[t]===void 0)window.addEventListener(`astro:${t}`,()=>this.start(),{once:!0});else try{await Astro[t](async()=>{let e=this.getAttribute(`renderer-url`);try{let[t,{default:n}]=await Promise.all([this.importWithRetry(this.getAttribute(`component-url`)),e?this.importWithRetry(e):Promise.resolve({default:()=>()=>{}})]),r=this.getAttribute(`component-export`)||`default`;if(r.includes(`.`)){this.Component=t;for(let e of r.split(`.`)){if(i.has(e)||!this.Component||typeof this.Component!=`object`&&typeof this.Component!=`function`||!Object.hasOwn(this.Component,e))throw Error(`Invalid component export path: ${r}`);this.Component=this.Component[e]}}else{if(i.has(r))throw Error(`Invalid component export path: ${r}`);this.Component=t[r]}return this.hydrator=n,this.hydrate}catch(e){return this.handleHydrationError(e),()=>{}}},e,this)}catch(e){this.handleHydrationError(e)}}attributeChangedCallback(){this.hydrate()}}r(o,`observedAttributes`,[`props`]),customElements.get(`astro-island`)||customElements.define(`astro-island`,o)}})();</script><script>window._$HY||(e=>{let t=e=>e&&e.hasAttribute&&(e.hasAttribute("data-hk")?e:t(e.host&&e.host.nodeType?e.host:e.parentNode));["click", "input"].forEach((o=>document.addEventListener(o,(o=>{if(!e.events)return;let s=t(o.composedPath&&o.composedPath()[0]||o.target);s&&!e.completed.has(s)&&e.events.push([s,o])}))))})(_$HY={events:[],completed:new WeakSet,r:{},fe(){}});</script><!--xs--><astro-island uid="25442l" data-solid-render-id="s0" component-url="/_astro/SearchDialog.DyAk1TpM.js" component-export="default" renderer-url="/_astro/client.DeI1gVHm.js" props="{&quot;recommendations&quot;:[1,[[0,{&quot;slug&quot;:[0,&quot;releases/2026-11-08&quot;],&quot;title&quot;:[0,&quot;GitHub Releases 日报 - 2026-11-08&quot;],&quot;category&quot;:[0,&quot;开源追踪&quot;]}],[0,{&quot;slug&quot;:[0,&quot;releases/2026-11-07&quot;],&quot;title&quot;:[0,&quot;GitHub Releases 日报 - 2026-11-07&quot;],&quot;category&quot;:[0,&quot;开源追踪&quot;]}],[0,{&quot;slug&quot;:[0,&quot;ide-updates/2026-11-07&quot;],&quot;title&quot;:[0,&quot;IDE / SDK 更新 - 2026-11-07&quot;],&quot;category&quot;:[0,&quot;IDE 更新&quot;]}],[0,{&quot;slug&quot;:[0,&quot;releases/2026-11-06&quot;],&quot;title&quot;:[0,&quot;GitHub Releases 日报 - 2026-11-06&quot;],&quot;category&quot;:[0,&quot;开源追踪&quot;]}],[0,{&quot;slug&quot;:[0,&quot;ide-updates/2026-11-06&quot;],&quot;title&quot;:[0,&quot;IDE / SDK 更新 - 2026-11-06&quot;],&quot;category&quot;:[0,&quot;IDE 更新&quot;]}],[0,{&quot;slug&quot;:[0,&quot;releases/2026-11-05&quot;],&quot;title&quot;:[0,&quot;GitHub Releases 日报 - 2026-11-05&quot;],&quot;category&quot;:[0,&quot;开源追踪&quot;]}]]],&quot;data-astro-cid-ac66eqjo&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;SearchDialog&quot;,&quot;value&quot;:true}" await-children><button data-hk="s00000" class="search-toggle" type="button" aria-label="打开搜索" title="搜索 (⌘K)"><svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"></circle><path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></button><dialog data-hk="s00001" class="search-dialog" aria-label="站内搜索"><div class="search-dialog-card"><div class="search-input-row"><svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg><div id="pagefind-ui" class="search-pagefind-slot"></div><div class="search-controls"><kbd class="search-kbd">ESC</kbd><button class="search-dialog-close" type="button" aria-label="关闭搜索"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div></div><!--$--><div data-hk="s000020" id="search-suggestions" class="search-suggestions"><p class="search-suggestions-title">推荐阅读</p><ul class="search-suggestions-list"><li data-hk="s0000210"><a class="search-suggestion-item" href="/blog/releases/2026-11-08"><span class="search-suggestion-title">GitHub Releases 日报 - 2026-11-08</span><span class="search-suggestion-meta">开源追踪</span></a></li><li data-hk="s0000211"><a class="search-suggestion-item" href="/blog/releases/2026-11-07"><span class="search-suggestion-title">GitHub Releases 日报 - 2026-11-07</span><span class="search-suggestion-meta">开源追踪</span></a></li><li data-hk="s0000212"><a class="search-suggestion-item" href="/blog/ide-updates/2026-11-07"><span class="search-suggestion-title">IDE / SDK 更新 - 2026-11-07</span><span class="search-suggestion-meta">IDE 更新</span></a></li><li data-hk="s0000213"><a class="search-suggestion-item" href="/blog/releases/2026-11-06"><span class="search-suggestion-title">GitHub Releases 日报 - 2026-11-06</span><span class="search-suggestion-meta">开源追踪</span></a></li><li data-hk="s0000214"><a class="search-suggestion-item" href="/blog/ide-updates/2026-11-06"><span class="search-suggestion-title">IDE / SDK 更新 - 2026-11-06</span><span class="search-suggestion-meta">IDE 更新</span></a></li><li data-hk="s0000215"><a class="search-suggestion-item" href="/blog/releases/2026-11-05"><span class="search-suggestion-title">GitHub Releases 日报 - 2026-11-05</span><span class="search-suggestion-meta">开源追踪</span></a></li></ul></div><!--/--></div></dialog><!--astro:end--></astro-island> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <div class="blog-post-container" data-astro-cid-veycvx62> <article class="blog-post" data-pagefind-body data-astro-cid-veycvx62> <a href="/reading-list" class="back-link back-link--top" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> <header class="article-header" data-astro-cid-veycvx62> <h1 data-astro-cid-veycvx62>Reverse engineering a vintage diode-transistor logic chip</h1> <div class="reading-meta" data-astro-cid-veycvx62> <a href="https://righto.com/" target="_blank" rel="noopener noreferrer" data-astro-cid-veycvx62="true" class="chip chip--sm chip--interactive source-tag"> righto.com </a> <span class="separator" data-astro-cid-veycvx62>·</span> <time data-astro-cid-veycvx62>2026年11月9日</time> </div> </header> <!-- 使用清洗后的安全 HTML 内容 --> <div class="article-content app-prose" lang="zh-CN" data-astro-cid-veycvx62><p>Going through a collection of old parts, CuriousMarc encountered some ICs that he couldn't
+identify.
+He opened up one of these ICs, and I studied it under the microscope.
+After some reverse engineering, I determined that it was a logic chip that implemented four NAND gates
+using old-fashioned diode-transistor logic (DTL).<span><a href="http://www.righto.com/2026/11/signetics-st680a-dtl-nand.html#fn:tubetime" target="_blank" rel="noopener noreferrer">1</a></span>
+The chip turned out to be the ST680A, a member of the Signetics 600 series of chips from 1965.
+In this article, I discuss the circuitry in this chip and how diode-transistor logic works.</p>
+<p><a href="https://static.righto.com/images/st680a/die.jpg" target="_blank" rel="noopener noreferrer"><img alt="The die of the ST680A under the microscope." height="405" title="The die of the ST680A under the microscope." width="500" src="https://static.righto.com/images/st680a/die-w500.jpg" /></a></p><div>The die of the ST680A under the microscope.</div><p></p>
+<p>Integrated circuits can be packaged in many ways. One of the most popular is the
+plastic DIP (Dual In-line Package), a black rectangle of epoxy with two rows of metal
+pins.
+This type of package was
+<a href="https://archive.org/details/signetics-corporation-condensed-catalog-spring-1969/page/n6/mode/1up" target="_blank" rel="noopener noreferrer">invented</a> by Signetics: "Introduced in late 1965, the 600 series was the first integrated circuit family to be offered in a solid, plastic, dual in-line package (DIP)."
+Earlier integrated circuits were packaged in round metal cans or in small flat-packs.
+In 1965, engineers at Fairchild invented the DIP, which had two
+rows of pins on 0.1" spacing.
+Unlike the surface-mounted flat-pack, the DIP had pins that were inserted into holes, making
+manual or automated assembly quick and easy.
+Because the pins of a DIP were on a regular grid, rather than the circular pattern of a metal
+can, circuit board design and manufacturing were also easier
+(<a href="https://www.computerhistory.org/siliconengine/package-is-the-first-to-accommodate-system-design-considerations/" target="_blank" rel="noopener noreferrer">details</a>).
+The first DIP chips had ceramic packages.
+The plastic DIP, introduced by Signetics, was much cheaper and became very popular.</p>
+<p><a href="https://static.righto.com/images/st680a/signetics-ad.jpg" target="_blank" rel="noopener noreferrer"><img alt="An advertisement for the Signetics 600 series. From Electronics, March 21, 1966." height="316" title="An advertisement for the Signetics 600 series. From Electronics, March 21, 1966." width="700" src="https://static.righto.com/images/st680a/signetics-ad-w700.jpg" /></a></p><div>An advertisement for the Signetics 600 series. From <a href="https://www.worldradiohistory.com/Archive-Electronics/60s/66/Electronics-1966-03-21%20(Original).pdf#page=50" target="_blank" rel="noopener noreferrer"><i>Electronics</i></a>, March 21, 1966.</div><p></p>
+<p>The plastic DIP is less popular with me, however, because it is harder to open.
+With a ceramic package, I can simply tap it with a chisel and pop it open, but
+that doesn't work with epoxy packages.
+An epoxy package can be dissolved with nitric or sulfuric acid, but I try to avoid dangerous acids.
+Instead, CuriousMarc used <a href="https://www.youtube.com/watch?v=ZQeHHYJYWXo" target="_blank" rel="noopener noreferrer">Antoine's hot air</a>
+decapping method.
+Unfortunately, the hot air technique doesn't always work. In this case, tiny bits of epoxy
+were stuck to the die, obscuring the circuitry.
+I used a few drops of boiling sulfuric acid to clean the die.
+(I'm okay with sulfuric
+acid in tiny quantities.)</p>
+<p><a href="https://static.righto.com/images/st680a/die-package.jpg" target="_blank" rel="noopener noreferrer"><img alt="The die on its metal frame." height="379" title="The die on its metal frame." width="500" src="https://static.righto.com/images/st680a/die-package-w500.jpg" /></a></p><div>The die on its metal frame.</div><p></p>
+<p>The photo above shows the silicon die
+on its metal frame, the lead frame.
+The golden blobs are where
+the bond wires were attached to the die.
+You can see the doped silicon regions that form diodes and bipolar NPN transistors,
+as well as 16 resistors in the center, forming serpentine paths.</p>
+<p>Most chips have a passivation layer—a thin layer of silicon dioxide—over the chip.
+Inconveniently, this old chip didn't have a passivation layer, so the acid also stripped off
+the metal layer. (A few remnants are visible in the upper left.)
+Without the metal layer, I had to guess at how the components were connected to
+form logic gates.
+The die has very faint color differences where the silicon was protected by the metal,
+so that helped.
+Eventually, I came up with the diagram below, showing how the metal
+layer was probably configured.
+This wiring reveals that the chip implements four DTL NAND gates, which I'll describe
+in more detail below.
+One puzzle was that the chip has two unused diodes, indicated with question marks below.</p>
+<p><a href="https://static.righto.com/images/st680a/quad-nand.jpg" target="_blank" rel="noopener noreferrer"><img alt="The metal layer for a quad NAND chip. I desaturated the image to make the labels clearer." height="478" title="The metal layer for a quad NAND chip. I desaturated the image to make the labels clearer." width="500" src="https://static.righto.com/images/st680a/quad-nand-w500.jpg" /></a></p><div>The metal layer for a quad NAND chip. I desaturated the image to make the labels clearer.</div><p></p>
+<h2>Transistors, diodes, and resistors</h2>
+<p>In this section, I'll explain how the patterns in the image correspond to components
+of the circuit.
+The silicon die is doped with various impurities to form regions with different
+electrical characteristics.
+These regions appear red or green under the microscope due to thin-film effects.
+As a result, 
+the chip's transistors, diodes, and resistors are visible.</p>
+<p>The chip is made from bipolar NPN transistors, which have a completely different
+construction from the MOS transistors in modern ICs.
+In an NPN transistor, the current from the collector to the emitter is controlled
+by the current through the base.
+The collector is a large region of N-type silicon, silicon that is doped with
+atoms such as phosphorus or arsenic. 
+Since these elements have one more valence electron than silicon, they give the
+silicon more negative charge carriers, so it is called N for negative.
+The N-type silicon happens to appear reddish.</p>
+<p>On top of the collector, the base is a thin region of P-type silicon, which appears green.
+This silicon has been doped with atoms such as boron or gallium, which have 
+one fewer valence electron than silicon. The missing electrons form "holes", which
+act as positive charge carriers.
+Finally, the emitter is N-type silicon, on top of the base layer.
+These layers work together through semiconductor magic, amplifying the base current.</p>
+<p><a href="https://static.righto.com/images/st680a/transistors.jpg" target="_blank" rel="noopener noreferrer"><img alt="Two NPN transistors on the chip. The second transistor is a larger output transistor." height="187" title="Two NPN transistors on the chip. The second transistor is a larger output transistor." width="400" src="https://static.righto.com/images/st680a/transistors-w400.jpg" /></a></p><div>Two NPN transistors on the chip. The second transistor is a larger output transistor.</div><p></p>
+<p>The chip's output transistors are slightly larger so they can sink more current.
+In the transistor on the right above, note that the collector contact wraps around three sides of
+the transistor. 
+The emitter is also larger, with an L-shaped contact.
+According to the datasheet, each output transistor can sink 2.5 mA of current.</p>
+<p>The chip uses many diodes since it is diode-transistor logic. 
+The structure of a diode is similar to a transistor, but without the emitter.
+In a diode, current flows from the cathode (P-type silicon) to the anode (N-type).</p>
+<p><a href="https://static.righto.com/images/st680a/components.jpg" target="_blank" rel="noopener noreferrer"><img alt="A diode and a resistor on the chip." height="147" title="A diode and a resistor on the chip." width="300" src="https://static.righto.com/images/st680a/components-w300.jpg" /></a></p><div>A diode and a resistor on the chip.</div><p></p>
+<p>The chip uses 16 resistors, located in the middle of the die.
+A resistor is constructed from a long, thin region of doped silicon.
+Since silicon has moderately high resistance, a long strip of silicon acts
+as a resistor.
+Most of the resistors have a serpentine layout to fit a long resistor into a smaller area.
+These resistors consist of P-type silicon (green) in a "tub" of N-type silicon (red).
+The tub is connected to the positive voltage supply; since current doesn't flow from
+N-type silicon to P-type silicon, this isolates the resistors from each other.</p>
+<h2>Operation of a DTL gate</h2>
+<p>Logic gates can be created in many ways.
+The earliest integrated circuits (such as the ones in the Apollo Guidance Computer)
+used Resistor-Transistor Logic (RTL), where logic gates were constructed from resistors
+and transistors.</p>
+<p>In March 1962, Signetics announced the first family of commercial Diode-Transistor Logic
+(DTL) integrated circuits (<a href="https://www.computerhistory.org/siliconengine/standard-logic-ic-families-introduced/" target="_blank" rel="noopener noreferrer">details</a>).
+By using diodes on the inputs instead of resistors, DTL provided better performance than
+RTL. 
+However, DTL soon became overshadowed by TTL (Transistor-Transistor Logic), which
+was faster and used less power. (If you built digital circuits a few decades ago, you're
+probably familiar with the popular 7400 series of TTL chips.)</p>
+<p>The diagram below shows how the DTL NAND gate works.
+If both inputs are high, the current from the first resistor flows through the
+base of the first transistor, turning it on.
+The transistor amplifies this current, passing a much larger current from the
+transistor's collector to the transistor's emitter.
+This current goes through the base of the second transistor, which turns on the
+second transistor.
+The second transistor passes an even larger current from the output pin to ground,
+pulling the output pin low.</p>
+<p><a href="https://static.righto.com/images/st680a/schematic1.jpg" target="_blank" rel="noopener noreferrer"><img alt="The DTL NAND gate with both inputs high. The schematic is from the datasheet.
+This circuit is considerably more complicated than the DTL gate on Wikipedia." height="241" title="The DTL NAND gate with both inputs high. The schematic is from the datasheet.
+This circuit is considerably more complicated than the DTL gate on Wikipedia." width="450" src="https://static.righto.com/images/st680a/schematic1-w450.jpg" /></a></p><div>The DTL NAND gate with both inputs high. The schematic is from the datasheet.
+This circuit is considerably more complicated than the DTL gate on <a href="https://en.wikipedia.org/wiki/Diode%E2%80%93transistor_logic" target="_blank" rel="noopener noreferrer">Wikipedia</a>.</div><p></p>
+<p>But if one of the input pins is pulled low, the current from the resistor goes through
+the diode instead of the transistor.
+The first transistor turns off, and without a base current, the second transistor turns off.
+The third resistor pulls the output high.
+Thus, the output is low only if both inputs are high: a NAND gate.</p>
+<p><a href="https://static.righto.com/images/st680a/schematic2.jpg" target="_blank" rel="noopener noreferrer"><img alt="The DTL NAND gate with an input low." height="244" title="The DTL NAND gate with an input low." width="450" src="https://static.righto.com/images/st680a/schematic2-w450.jpg" /></a></p><div>The DTL NAND gate with an input low.</div><p></p>
+<p>I'll point out a few features of this circuit.
+The diodes on the inputs ensure that one input doesn't affect the other input.
+The diode in the middle raises the voltage on the first transistor's emitter, so it
+requires more voltage to turn on, reducing the sensitivity to noise.
+The output uses a resistor to pull the output high; more advanced circuits use another
+transistor.
+When the output is low, the third resistor is still "trying" to pull the output high,
+which is wasting power.
+Moreover, the resistor limits the output current, so the high output is fairly weak.
+In some DTL families, you can get gates with different values for the output resistor,
+so you can select the tradeoff between wasting power and having an output that is too weak.</p>
+<p>If you've used TTL integrated circuits from the 1970s, you know that chips usually have power
+and ground on diagonal pins: ground on pin 7 and power on pin 14.
+(Putting power and ground diagonally opposite both helps die layout and circuit board layout.)
+Much to my surprise, I found that the Signetics chips predate this standard and have
+ground on pin 1 and power on pin 8: still diagonal, but the wrong diagonal!
+The diagram below shows how the four NAND gates are wired in the chip.</p>
+<p><a href="https://static.righto.com/images/st680a/680a.jpg" target="_blank" rel="noopener noreferrer"><img alt="Pinout of the 680A quad NAND gate. From the databook." height="234" title="Pinout of the 680A quad NAND gate. From the databook." width="250" src="https://static.righto.com/images/st680a/680a-w250.jpg" /></a></p><div>Pinout of the 680A quad NAND gate. From the <a href="https://archive.org/details/bitsavers_signeticsdcsUtilogicII600DTLTTL_3436170/page/20/mode/2up%22" target="_blank" rel="noopener noreferrer">databook</a>.</div><p></p>
+<h2>Three chips from one die</h2>
+<p>When I examined the die under the microscope, I figured out the circuit, but I was puzzled
+by two extra diodes, as if two NAND gates had a third input that wasn't used.
+The explanation is that Signetics used the same silicon layout for at least three different
+chips, applying a different metal layer for different functionality.
+This saved money since it's much cheaper to produce a single optical mask for the metal layer
+than a complete set of new masks.
+Signetics sold semi-custom ICs to customers, using an approach called variFEBS (Variable
+Functional Electronics Blocks). This approach used a custom metal layer on top of
+fixed silicon, providing custom circuits without the cost of a full mask set.
+These circuits didn't sell well, but Signetics used the same approach for standard ICs.</p>
+<p><a href="https://static.righto.com/images/st680a/pinouts.jpg" target="_blank" rel="noopener noreferrer"><img alt="Pinout of the 670A triple NAND gate and the 616A quad NAND gate. All three chips have some similarities, such as using pins 2 and 14 as outputs. From the databook." height="242" title="Pinout of the 670A triple NAND gate and the 616A quad NAND gate. All three chips have some similarities, such as using pins 2 and 14 as outputs. From the databook." width="500" src="https://static.righto.com/images/st680a/pinouts-w500.jpg" /></a></p><div>Pinout of the 670A triple NAND gate and the 616A quad NAND gate. All three chips have some similarities, such as using pins 2 and 14 as outputs. From the <a href="https://archive.org/details/bitsavers_signeticsdcsUtilogicII600DTLTTL_3436170/page/20/mode/2up%22" target="_blank" rel="noopener noreferrer">databook</a>.</div><p></p>
+<p>One IC with the same silicon as the quad NAND gate is the 670A chip, which
+has three NAND gates, each with three inputs (above left).
+The diagram below shows how the silicon can be wired to provide this functionality.</p>
+<p><a href="https://static.righto.com/images/st680a/triple-nand.jpg" target="_blank" rel="noopener noreferrer"><img alt="The hypothesized metal layer for the 670A triple-NAND gate." height="373" title="The hypothesized metal layer for the 670A triple-NAND gate." width="400" src="https://static.righto.com/images/st680a/triple-nand-w400.jpg" /></a></p><div>The hypothesized metal layer for the 670A triple-NAND gate.</div><p></p>
+<p>The layout for the triple chip above is a bit tricky because the top gate has inputs on
+both sides of the power (Vcc) pin.
+This creates a layout problem because the power and ground metal runs vertically to the
+resistors, blocking metal wiring from one side to the other.
+The solution is a "crossunder", a region of silicon that allows a signal to pass under
+the metal layer, connecting the inputs on the left to the rest of the circuitry on the right.
+This crossunder is visible near the top of the chip.</p>
+<p>Another chip with the same layout is the 616A dual NAND gate, with five inputs on each gate.
+Since this chip has 10 inputs in total (compared to 8 on the quad gate), this chip
+uses the two "extra" diodes that I spotted.
+If that isn't enough inputs, each NAND gate has an expansion input; by connecting external
+diodes to the expansion input, the gate can be made as large as desired.</p>
+<p><a href="https://static.righto.com/images/st680a/dual-nand.jpg" target="_blank" rel="noopener noreferrer"><img alt="The hypothesized metal layer for the 616A dual-NAND chip." height="364" title="The hypothesized metal layer for the 616A dual-NAND chip." width="400" src="https://static.righto.com/images/st680a/dual-nand-w400.jpg" /></a></p><div>The hypothesized metal layer for the 616A dual-NAND chip.</div><p></p>
+<h2>Some history</h2>
+<p>The history of Signetics is closely tied to Fairchild.
+The story of Fairchild's founding is well known: in 1957, eight
+engineers—the Traitorous Eight—left Shockley Semiconductor and created
+Fairchild Semiconductor.
+Hundreds of companies (the "Fairchildren") were started by engineers who left
+Fairchild.
+Signetics was one of those companies, formed in 1961 and <a href="https://oac.cdlib.org/findaid/ark:/13030/kt9m3nf315/" target="_blank" rel="noopener noreferrer">said</a>
+to be the first company to exclusively design and manufacture integrated circuits.<span><a href="http://www.righto.com/2026/11/signetics-st680a-dtl-nand.html#fn:signetics" target="_blank" rel="noopener noreferrer">2</a></span>
+Signetics announced its first product in 1962, a NAND gate that cost $125 (over $1000 in
+current dollars).<span><a href="http://www.righto.com/2026/11/signetics-st680a-dtl-nand.html#fn:lojek" target="_blank" rel="noopener noreferrer">3</a></span> Not surprisingly, sales were weak.</p>
+<p>Signetics soon ran short of money, so in 1962, Corning Glass invested $1.7 million for 51%
+ownership of Signetics.
+Corning Glass may seem like a strange investor, but Corning was more of a high-tech
+company than you'd expect, making components such as resistors and <a href="https://www.righto.com/2026/06/space-shuttle-io-processor-boards.html#:~:text=were%20manufactured%20by-,Corning%20Glass%20Works,-%2C%20as%20indicated%20by" target="_blank" rel="noopener noreferrer">glass capacitors</a>, and later creating fiber optics.
+Moreover, in the early 1960s, integrated circuits were the hot area (much like AI now),
+and everyone wanted to get involved. </p>
+<p>In 1963, the Department of Defense pushed for contractors to use integrated circuits
+in new products.
+Riding this wave, Signetics became the leading producer of integrated circuits.<span><a href="http://www.righto.com/2026/11/signetics-st680a-dtl-nand.html#fn:making" target="_blank" rel="noopener noreferrer">4</a></span>
+However, Fairchild soon introduced a series of DTL chips that competed with Signetics. The
+Fairchild 930 series was faster than the Signetics chips and less than half the price,
+so Fairchild took much of the market from Signetics and dominated the IC market.</p>
+<p>Signetics also produced analog integrated circuits.
+Signetics is probably best known for creating the <a href="https://www.righto.com/2016/02/555-timer-teardown-inside-worlds-most.html" target="_blank" rel="noopener noreferrer">555 timer chip</a> in 1970, said to be
+the world's most popular IC, with billions sold.<span><a href="http://www.righto.com/2026/11/signetics-st680a-dtl-nand.html#fn:camenzind" target="_blank" rel="noopener noreferrer">5</a></span>
+Signetics was acquired by Philips in 1975, and then Philips Semiconductors was spun
+off as NXP (Next exPerience) in 2006. NXP is currently the #10 semiconductor manufacturer
+worldwide, so the heritage of Signetics lives on.</p>
+<p>For more, follow me on
+Bluesky (<a href="https://bsky.app/profile/righto.com" target="_blank" rel="noopener noreferrer">@righto.com</a>),
+Mastodon (<a href="https://oldbytes.space/@kenshirriff" target="_blank" rel="noopener noreferrer">@kenshirriff@oldbytes.space</a>),
+or <a href="http://www.righto.com/feeds/posts/default" target="_blank" rel="noopener noreferrer">RSS</a>.
+Thanks to CuriousMarc for providing the IC and thanks to TubeTime for finding the databook.
+AI statement: Despite the presence of the em dash, no AI was used in the writing of this article (<a href="https://www.righto.com/p/index.html#ai" target="_blank" rel="noopener noreferrer">details</a>).</p>
+<h2>Notes and references</h2>
+<div>
+<ol>
+<li>
+<p>After I had reverse-engineered the chip,
+TubeTime found datasheets for it,
+making my reverse engineering unnecessary.
+(See the <a href="https://archive.org/details/signetics-corporation-condensed-catalog-spring-1969/page/n5/mode/2up" target="_blank" rel="noopener noreferrer">Signetics Condensed Catalog 1969</a>,
+<a href="https://archive.org/details/bitsavers_signeticsdcsUtilogicII600DTLTTL_3436170/page/20/mode/2up" target="_blank" rel="noopener noreferrer">Utilogic II Databook 1971</a>, and <a href="https://archive.org/details/bitsavers_signeticsdcsUtilogic2_4702034/page/n23/mode/2up" target="_blank" rel="noopener noreferrer">Utilogic 2 Databook 1972</a>.)
+We must have been unlucky with our original web searches since we didn't find anything.
+But this way you get to see what's inside the chip :-)</p>
+<p><a href="https://static.righto.com/images/st680a/signetics-package.jpg" target="_blank" rel="noopener noreferrer"><img alt="The Signetics ST680A IC in its package. The large circular depression marks pin 1. From the date code, this chip is from 1971." height="114" title="The Signetics ST680A IC in its package. The large circular depression marks pin 1. From the date code, this chip is from 1971." width="250" src="https://static.righto.com/images/st680a/signetics-package-w250.jpg" /></a></p><div>The Signetics ST680A IC in its package. The large circular depression marks pin 1. From the date code, this chip is from 1971.</div><p></p>
+<p> <a href="http://www.righto.com/2026/11/signetics-st680a-dtl-nand.html#fnref:tubetime" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+<li>
+<p>For more Signetics history, see <a href="https://www.computerhistory.org/collections/catalog/102770828/" target="_blank" rel="noopener noreferrer">Signetics Founding History</a>, written by Lionel Kattner, a co-founder of Signetics.
+He states that the company name was inspired by the words "signals" and "networks", as well
+as the high-tech suffix "-netics". <a href="http://www.righto.com/2026/11/signetics-st680a-dtl-nand.html#fnref:signetics" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+<li>
+<p>See <a href="https://link.amazon/B0hQihwp3" target="_blank" rel="noopener noreferrer">History of Semiconductor Engineering</a>, page 156. <a href="http://www.righto.com/2026/11/signetics-st680a-dtl-nand.html#fnref:lojek" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+<li>
+<p>The book <a href="https://archive.org/details/makingsiliconval00chri/page/212/mode/2up" target="_blank" rel="noopener noreferrer">Making Silicon Valley</a> describes the history of Signetics.
+It has a negative view of the Corning investment, saying that Signetics executives
+"Van Poppelen and Kattner dissented on the grounds that Corning was not a good fit for an integrated circuit company. In their view, Corning was a staid Eastern firm, ignorant about semiconductors and antithetic to the ways and culture of the electronics industry on the West Coast. Their view later proved to be correct." <a href="http://www.righto.com/2026/11/signetics-st680a-dtl-nand.html#fnref:making" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+<li>
+<p>The 555 timer was created by analog IC wizard Hans Camenzind.
+If you're interested in analog circuits, you should read his book <a href="http://www.designinganalogchips.com/" target="_blank" rel="noopener noreferrer">Designing Analog Chips</a>, which you can download for free. <a href="http://www.righto.com/2026/11/signetics-st680a-dtl-nand.html#fnref:camenzind" target="_blank" rel="noopener noreferrer">↩</a></p>
+</li>
+</ol>
+</div>
+</div> <footer class="article-footer" data-astro-cid-veycvx62> <div class="action-row" data-astro-cid-veycvx62> <a href="http://www.righto.com/2026/11/signetics-st680a-dtl-nand.html" target="_blank" rel="noopener noreferrer" class="read-original-btn" data-astro-cid-veycvx62>
+阅读原文
+</a> </div> <div class="back-to-list" data-astro-cid-veycvx62> <a href="/reading-list" class="back-link" data-astro-prefetch data-astro-cid-veycvx62>← 返回订阅列表</a> </div> </footer> </article> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button><script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
