@@ -90,7 +90,7 @@
 <h3 id="jdxmise-v20261110-qwenqwen38-27b"><a href="https://github.com/jdx/mise/releases/tag/v2026.11.10" rel="noopener noreferrer" target="_blank">jdx/mise v2026.11.10</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
 <p><strong>新内容</strong></p>
 <ul>
-<li>新增 mise lock —check 离线模式，用于 CI 中校验锁文件与配置一致性</li>
+<li>新增 <code>mise lock --check</code> 离线模式，用于 CI 中校验锁文件与配置一致性</li>
 <li>新增 enable_backends 允许列表，限制可解析或安装工具的后端范围</li>
 <li>支持为 packslip 和 github 工具单独指定 musl 或 glibc 构建版本</li>
 <li>新增 filter_bins 选项，仅将指定可执行文件加入 PATH，避免覆盖系统命令</li>
@@ -101,7 +101,7 @@
 <li>Bootstrap 服务支持 state = “unchanged”，仅管理开机自启而不主动启动或停止服务</li>
 <li>[bootstrap.files] 和 [bootstrap.directories] 现接受 permissions 作为 mode 的同义键</li>
 <li>注册表新增 cargo-nextest 工具</li>
-<li>mise lock —dry-run 现在报告实际变更，包括新增、版本变化、平台新增、字段修改和移除</li>
+<li><code>mise lock --dry-run</code> 现在报告实际变更，包括新增、版本变化、平台新增、字段修改和移除</li>
 <li>当所有写入锁文件的配置均设置 locked = true 时，安装路径不再自动更新该锁文件</li>
 <li>插件的系统依赖现在优先使用 Linux 发行版包管理器（apk、apt、dnf 等）而非内置 Homebrew</li>
 </ul>
@@ -142,14 +142,14 @@
 <p><strong>新内容</strong></p>
 <ul>
 <li>Windows 登录锁现在会显示持有进程的名称、PID 和镜像，并提供 taskkill /PID/F 命令以便结束该进程</li>
-<li>GPT 通道（ultrabrain、deep-high、deep-low、unspecified-low）…</li>
+<li>相关 GPT 通道、计划评审和两套 Obsessive 配置优先使用 GPT-6.2 Astra 和 Sol，同档回退到 GPT-6 Astra 和 GPT-6.1 Sol。</li>
 <li>OmO 升级至 senpi 2026.11.18，支持 GPT-6.2 Astra 和 Sol 目录项及 gpt-6.2 提示预设</li>
 <li>TUI 中的线程工具行现在显示为状态行格式，包含调用行和结果行，替代了之前的 JSON 转储</li>
 <li>新增 omo account store enable 命令，允许在 Mac 登录密钥链保持锁定时将登录信息存储在 OmO 自己的密钥链中</li>
 </ul>
 <p><strong>Breaking Changes</strong></p>
 <ul>
-<li>移除 chat-binding 工具（thread_bind、thread_unbind、thread_rebind、thread_bindings）…</li>
+<li>移除 <code>thread_bind</code>、<code>thread_unbind</code>、<code>thread_rebind</code> 和 <code>thread_bindings</code>。继续调用会收到普通的未知工具错误。</li>
 </ul>
 <p><strong>问题修复</strong></p>
 <ul>
