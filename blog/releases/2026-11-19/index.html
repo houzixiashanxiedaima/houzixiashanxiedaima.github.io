@@ -1,0 +1,691 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-ju4pidww> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v7.4.12"><!-- Core SEO --><meta name="description" content="2026-11-19 GitHub Releases 日报：yetone/alma-releases、ellite/Wallos、zed-industries/zed 等40个项目更新 | 修复 Go 轮次中逐字流式传输长回复时可能停滞的问题，服务器现在能更高效地处理分块文本"><meta name="keywords" content="releases, daily, automation, alma-releases, Wallos, zed, MoviePilot, dsh-context"><meta name="author" content="Release Bot"><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow"><!-- Canonical URL --><link rel="canonical" href="https://blog.yuyins.com/blog/releases/2026-11-19/"><!-- Content Security Policy --><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: fonts.gstatic.com;"><!-- Theme & Mobile --><meta name="theme-color" content="#f5f0e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="雅俗共赏"><!-- Language & Regional --><meta http-equiv="Content-Language" content="zh-CN"><link rel="alternate" hreflang="zh-CN" href="https://blog.yuyins.com/blog/releases/2026-11-19/"><!-- Open Graph / Facebook --><meta property="og:type" content="article"><meta property="og:url" content="https://blog.yuyins.com/blog/releases/2026-11-19/"><meta property="og:title" content="GitHub Releases 日报 - 2026-11-19"><meta property="og:description" content="2026-11-19 GitHub Releases 日报：yetone/alma-releases、ellite/Wallos、zed-industries/zed 等40个项目更新 | 修复 Go 轮次中逐字流式传输长回复时可能停滞的问题，服务器现在能更高效地处理分块文本"><meta property="og:image" content="https://blog.yuyins.com/images/covers/cover-2026-11-19.webp"><meta property="og:image:alt" content="2026-11-19 GitHub Releases 日报：yetone/alma-releases、ellite/Wallos、zed-industries/zed 等40个项目更新 | 修复 Go 轮次中逐字流式传输长回复时可能停滞的问题，服务器现在能更高效地处理分块文本"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="雅俗共赏"><meta property="article:section" content="开源追踪"><meta property="article:published_time" content="2026-11-19T08:00:00.000Z"><meta property="article:tag" content="releases"><meta property="article:tag" content="daily"><meta property="article:tag" content="automation"><meta property="article:tag" content="alma-releases"><meta property="article:tag" content="Wallos"><meta property="article:tag" content="zed"><meta property="article:tag" content="MoviePilot"><meta property="article:tag" content="dsh-context"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.yuyins.com/blog/releases/2026-11-19/"><meta property="twitter:title" content="GitHub Releases 日报 - 2026-11-19"><meta property="twitter:description" content="2026-11-19 GitHub Releases 日报：yetone/alma-releases、ellite/Wallos、zed-industries/zed 等40个项目更新 | 修复 Go 轮次中逐字流式传输长回复时可能停滞的问题，服务器现在能更高效地处理分块文本"><meta property="twitter:image" content="https://blog.yuyins.com/images/covers/cover-2026-11-19.webp"><title>GitHub Releases 日报 - 2026-11-19</title><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"GitHub Releases 日报 - 2026-11-19","description":"2026-11-19 GitHub Releases 日报：yetone/alma-releases、ellite/Wallos、zed-industries/zed 等40个项目更新 | 修复 Go 轮次中逐字流式传输长回复时可能停滞的问题，服务器现在能更高效地处理分块文本","image":"https://blog.yuyins.com/images/covers/cover-2026-11-19.webp","datePublished":"2026-11-19T08:00:00.000Z","dateModified":"2026-11-19T08:00:00.000Z","author":{"@type":"Person","name":"Release Bot"},"publisher":{"@type":"Organization","name":"雅俗共赏","logo":{"@type":"ImageObject","url":"https://blog.yuyins.com/favicon.svg"}}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.yuyins.com/"},{"@type":"ListItem","position":2,"name":"开源追踪","item":"https://blog.yuyins.com/category/开源追踪"},{"@type":"ListItem","position":3,"name":"GitHub Releases 日报 - 2026-11-19","item":"https://blog.yuyins.com/blog/releases/2026-11-19/"}]}]}</script><!-- 初始化配色方案 --><script>
+			document.documentElement.setAttribute('data-color', 'stone-amber');
+		</script><link rel="stylesheet" href="/_astro/_..B0y3uL2u.css"><link rel="stylesheet" href="/_astro/Layout.C3I_wHai.css"><style>.tag[data-astro-cid-7t72llso]{overflow-wrap:anywhere;background:color-mix(in srgb, var(--muted) 30%, transparent);min-width:0;max-width:100%;color:var(--muted-foreground);border-radius:.375rem;align-items:center;gap:.25rem;padding:.125rem .5rem;font-size:.8125rem;line-height:1.5;text-decoration:none;display:inline-flex}.tag--interactive[data-astro-cid-7t72llso]{transition:background-color .2s,color .2s}.tag--interactive[data-astro-cid-7t72llso]:hover{background:color-mix(in srgb, var(--muted) 55%, transparent);color:var(--foreground)}.tag--active[data-astro-cid-7t72llso]{background:color-mix(in srgb, var(--accent) 14%, var(--background-subtle,var(--background)));color:color-mix(in srgb, var(--accent-hover) 78%, var(--foreground));font-weight:600}.tag[data-astro-cid-7t72llso]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.tags-list[data-astro-cid-cm3albtb]{flex-wrap:wrap;gap:.5rem;display:flex}
+</style></head> <body data-astro-cid-ju4pidww> <a id="skip-to-content" href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-background" data-astro-cid-ju4pidww>Skip to content</a> <header class="header" data-astro-cid-nen7h5rs> <nav class="header-nav" aria-label="Main navigation" data-astro-cid-nen7h5rs> <a href="/" class="header-logo" data-astro-cid-nen7h5rs> 雅俗共赏 </a> <div class="header-links" data-astro-cid-nen7h5rs> <ul class="nav-list" data-astro-cid-nen7h5rs> <li data-astro-cid-nen7h5rs> <a href="/" class="nav-link nav-link--active" aria-current="page" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 文章 </a> </li><li data-astro-cid-nen7h5rs> <a href="/category" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 分类 </a> </li><li data-astro-cid-nen7h5rs> <a href="/reading-list" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 订阅 </a> </li><li data-astro-cid-nen7h5rs> <a href="/podcasts" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 播客 </a> </li><li data-astro-cid-nen7h5rs> <a href="/about" class="nav-link" data-astro-prefetch="true" data-astro-cid-nen7h5rs> 关于 </a> </li> </ul> <div class="header-actions" data-astro-cid-nen7h5rs> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(function(){let e=async e=>{await(await e())()};(self.Astro||(self.Astro={})).load=e,window.dispatchEvent(new Event(`astro:load`))})();</script><script>(function(){function e(t){"@babel/helpers - typeof";return e=typeof Symbol==`function`&&typeof Symbol.iterator==`symbol`?function(e){return typeof e}:function(e){return e&&typeof Symbol==`function`&&e.constructor===Symbol&&e!==Symbol.prototype?`symbol`:typeof e},e(t)}function t(t,n){if(e(t)!=`object`||!t)return t;var r=t[Symbol.toPrimitive];if(r!==void 0){var i=r.call(t,n||`default`);if(e(i)!=`object`)return i;throw TypeError(`@@toPrimitive must return a primitive value.`)}return(n===`string`?String:Number)(t)}function n(n){var r=t(n,`string`);return e(r)==`symbol`?r:r+``}function r(e,t,r){return(t=n(t))in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}let i=/* @__PURE__ */ new Set([`__proto__`,`constructor`,`prototype`]);{let e={0:e=>a(e),1:e=>n(e),2:e=>new RegExp(e),3:e=>new Date(e),4:e=>new Map(n(e)),5:e=>new Set(n(e)),6:e=>BigInt(e),7:e=>new URL(e),8:e=>new Uint8Array(e),9:e=>new Uint16Array(e),10:e=>new Uint32Array(e),11:e=>1/0*e},t=t=>{let[n,r]=t;return n in e?e[n](r):void 0},n=e=>e.map(t),a=e=>typeof e!=`object`||!e?e:Object.fromEntries(Object.entries(e).map(([e,n])=>[e,t(n)]));class o extends HTMLElement{constructor(...e){super(...e),r(this,`Component`,void 0),r(this,`hydrator`,void 0),r(this,`hydrate`,async()=>{var e;if(!this.hydrator||!this.isConnected)return;let t=(e=this.parentElement)==null?void 0:e.closest(`astro-island[ssr]`);if(t){t.addEventListener(`astro:hydrate`,this.hydrate,{once:!0});return}let n=this.querySelectorAll(`astro-slot`),r={},i=this.querySelectorAll(`template[data-astro-template]`);for(let e of i){let t=e.closest(this.tagName);t!=null&&t.isSameNode(this)&&(r[e.getAttribute(`data-astro-template`)||`default`]=e.innerHTML,e.remove())}for(let e of n){let t=e.closest(this.tagName);t!=null&&t.isSameNode(this)&&(r[e.getAttribute(`name`)||`default`]=e.innerHTML)}let o;try{o=this.hasAttribute(`props`)?a(JSON.parse(this.getAttribute(`props`))):{}}catch(e){let t=this.getAttribute(`component-url`)||`<unknown>`,n=this.getAttribute(`component-export`);throw n&&(t+=` (export ${n})`),console.error(`[hydrate] Error parsing props for component ${t}`,this.getAttribute(`props`),e),e}await this.hydrator(this)(this.Component,o,r,{client:this.getAttribute(`client`)}),this.removeAttribute(`ssr`),this.dispatchEvent(new CustomEvent(`astro:hydrate`))}),r(this,`unmount`,()=>{this.isConnected||this.dispatchEvent(new CustomEvent(`astro:unmount`))})}disconnectedCallback(){document.removeEventListener(`astro:after-swap`,this.unmount),document.addEventListener(`astro:after-swap`,this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute(`await-children`)||document.readyState===`interactive`||document.readyState===`complete`)this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener(`DOMContentLoaded`,e),t.disconnect(),this.childrenConnectedCallback()},t=new MutationObserver(()=>{var t;((t=this.lastChild)==null?void 0:t.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue===`astro:end`&&(this.lastChild.remove(),e())});t.observe(this,{childList:!0}),document.addEventListener(`DOMContentLoaded`,e)}}async childrenConnectedCallback(){let e=this.getAttribute(`before-hydration-url`);e&&await import(e),this.start()}getRetryImportUrl(e){let t=new URL(e,document.baseURI);return t.searchParams.set(`astro-retry`,Date.now().toString()),t.toString()}async importWithRetry(e){try{return await import(e)}catch(t){return await new Promise(e=>setTimeout(e,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let t=this.getAttribute(`component-url`),n=new CustomEvent(`astro:hydration-error`,{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:t}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${t}`,e)}async start(){let e=JSON.parse(this.getAttribute(`opts`)),t=this.getAttribute(`client`);if(Astro[t]===void 0)window.addEventListener(`astro:${t}`,()=>this.start(),{once:!0});else try{await Astro[t](async()=>{let e=this.getAttribute(`renderer-url`);try{let[t,{default:n}]=await Promise.all([this.importWithRetry(this.getAttribute(`component-url`)),e?this.importWithRetry(e):Promise.resolve({default:()=>()=>{}})]),r=this.getAttribute(`component-export`)||`default`;if(r.includes(`.`)){this.Component=t;for(let e of r.split(`.`)){if(i.has(e)||!this.Component||typeof this.Component!=`object`&&typeof this.Component!=`function`||!Object.hasOwn(this.Component,e))throw Error(`Invalid component export path: ${r}`);this.Component=this.Component[e]}}else{if(i.has(r))throw Error(`Invalid component export path: ${r}`);this.Component=t[r]}return this.hydrator=n,this.hydrate}catch(e){return this.handleHydrationError(e),()=>{}}},e,this)}catch(e){this.handleHydrationError(e)}}attributeChangedCallback(){this.hydrate()}}r(o,`observedAttributes`,[`props`]),customElements.get(`astro-island`)||customElements.define(`astro-island`,o)}})();</script><script>window._$HY||(e=>{let t=e=>e&&e.hasAttribute&&(e.hasAttribute("data-hk")?e:t(e.host&&e.host.nodeType?e.host:e.parentNode));["click", "input"].forEach((o=>document.addEventListener(o,(o=>{if(!e.events)return;let s=t(o.composedPath&&o.composedPath()[0]||o.target);s&&!e.completed.has(s)&&e.events.push([s,o])}))))})(_$HY={events:[],completed:new WeakSet,r:{},fe(){}});</script><!--xs--><astro-island uid="Z1voT2q" data-solid-render-id="s0" component-url="/_astro/SearchDialog.C83QVv_U.js" component-export="default" renderer-url="/_astro/client.B96QTgTN.js" props="{&quot;recommendations&quot;:[1,[[0,{&quot;slug&quot;:[0,&quot;releases/2026-11-19&quot;],&quot;title&quot;:[0,&quot;GitHub Releases 日报 - 2026-11-19&quot;],&quot;category&quot;:[0,&quot;开源追踪&quot;]}],[0,{&quot;slug&quot;:[0,&quot;ide-updates/2026-11-19&quot;],&quot;title&quot;:[0,&quot;IDE / SDK 更新 - 2026-11-19&quot;],&quot;category&quot;:[0,&quot;IDE 更新&quot;]}],[0,{&quot;slug&quot;:[0,&quot;releases/2026-11-18&quot;],&quot;title&quot;:[0,&quot;GitHub Releases 日报 - 2026-11-18&quot;],&quot;category&quot;:[0,&quot;开源追踪&quot;]}],[0,{&quot;slug&quot;:[0,&quot;ide-updates/2026-11-18&quot;],&quot;title&quot;:[0,&quot;IDE / SDK 更新 - 2026-11-18&quot;],&quot;category&quot;:[0,&quot;IDE 更新&quot;]}],[0,{&quot;slug&quot;:[0,&quot;releases/2026-11-17&quot;],&quot;title&quot;:[0,&quot;GitHub Releases 日报 - 2026-11-17&quot;],&quot;category&quot;:[0,&quot;开源追踪&quot;]}],[0,{&quot;slug&quot;:[0,&quot;ide-updates/2026-11-17&quot;],&quot;title&quot;:[0,&quot;IDE / SDK 更新 - 2026-11-17&quot;],&quot;category&quot;:[0,&quot;IDE 更新&quot;]}]]],&quot;data-astro-cid-ac66eqjo&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;SearchDialog&quot;,&quot;value&quot;:true}" await-children><button data-hk="s00000" class="search-toggle" type="button" aria-label="打开搜索" title="搜索 (⌘K)"><svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"></circle><path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></button><dialog data-hk="s00001" class="search-dialog" aria-label="站内搜索"><div class="search-dialog-card"><div class="search-input-row"><svg class="search-bar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg><div id="pagefind-ui" class="search-pagefind-slot"></div><div class="search-controls"><kbd class="search-kbd">ESC</kbd><button class="search-dialog-close" type="button" aria-label="关闭搜索"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div></div><!--$--><div data-hk="s000020" id="search-suggestions" class="search-suggestions"><p class="search-suggestions-title">推荐阅读</p><ul class="search-suggestions-list"><li data-hk="s0000210"><a class="search-suggestion-item" href="/blog/releases/2026-11-19"><span class="search-suggestion-title">GitHub Releases 日报 - 2026-11-19</span><span class="search-suggestion-meta">开源追踪</span></a></li><li data-hk="s0000211"><a class="search-suggestion-item" href="/blog/ide-updates/2026-11-19"><span class="search-suggestion-title">IDE / SDK 更新 - 2026-11-19</span><span class="search-suggestion-meta">IDE 更新</span></a></li><li data-hk="s0000212"><a class="search-suggestion-item" href="/blog/releases/2026-11-18"><span class="search-suggestion-title">GitHub Releases 日报 - 2026-11-18</span><span class="search-suggestion-meta">开源追踪</span></a></li><li data-hk="s0000213"><a class="search-suggestion-item" href="/blog/ide-updates/2026-11-18"><span class="search-suggestion-title">IDE / SDK 更新 - 2026-11-18</span><span class="search-suggestion-meta">IDE 更新</span></a></li><li data-hk="s0000214"><a class="search-suggestion-item" href="/blog/releases/2026-11-17"><span class="search-suggestion-title">GitHub Releases 日报 - 2026-11-17</span><span class="search-suggestion-meta">开源追踪</span></a></li><li data-hk="s0000215"><a class="search-suggestion-item" href="/blog/ide-updates/2026-11-17"><span class="search-suggestion-title">IDE / SDK 更新 - 2026-11-17</span><span class="search-suggestion-meta">IDE 更新</span></a></li></ul></div><!--/--></div></dialog><!--astro:end--></astro-island> <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> </div> </div> </nav> </header> <main id="main-content" class="main-content main-content--wide" data-astro-cid-ju4pidww>  <script type="module" src="/_astro/CodeCopyButton.astro_astro_type_script_index_0_lang.C3I6XYwD.js"></script> <script type="module" src="/_astro/HeadingAnchor.astro_astro_type_script_index_0_lang.CacVAAhL.js"></script> <dialog id="image-lightbox" class="lightbox" aria-label="图片预览" data-astro-cid-ot6ntcxl> <button id="lightbox-close" class="lightbox-close" type="button" aria-label="关闭" data-astro-cid-ot6ntcxl> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-ot6ntcxl> <line x1="18" y1="6" x2="6" y2="18" data-astro-cid-ot6ntcxl></line> <line x1="6" y1="6" x2="18" y2="18" data-astro-cid-ot6ntcxl></line> </svg> </button> <img id="lightbox-image" class="lightbox-image" src="" alt="" data-astro-cid-ot6ntcxl> <p id="lightbox-error" class="lightbox-error" role="status" hidden data-astro-cid-ot6ntcxl>图片预览加载失败，请关闭后重试。</p> </dialog><script type="module" src="/_astro/ImageLightbox.astro_astro_type_script_index_0_lang.BAo0rMiG.js"></script> <div class="blog-post-container" data-astro-cid-tldeq5d5> <article class="blog-post blog-post--digest" data-pagefind-body data-astro-cid-tldeq5d5> <header class="article-header" data-astro-cid-tldeq5d5> <h1 data-astro-cid-tldeq5d5>GitHub Releases 日报 - 2026-11-19</h1> <div class="article-meta-row" data-astro-cid-tldeq5d5> <a href="/category/开源追踪" class="meta-category" data-astro-cid-tldeq5d5> 开源追踪 </a> <span class="meta-dot" data-astro-cid-tldeq5d5>•</span> <time datetime="2026-11-19T08:00:00.000Z" class="meta-item" data-astro-cid-tldeq5d5> 2026年11月19日 </time> <span class="meta-dot" data-astro-cid-tldeq5d5>•</span> <span class="meta-item" data-astro-cid-tldeq5d5>38 分钟阅读</span> </div> <p class="article-description" data-astro-cid-tldeq5d5>2026-11-19 GitHub Releases 日报：yetone/alma-releases、ellite/Wallos、zed-industries/zed 等40个项目更新 | 修复 Go 轮次中逐字流式传输长回复时可能停滞的问题，服务器现在能更高效地处理分块文本</p> <div class="article-tags-row" data-astro-cid-tldeq5d5> <div class="tags-list" data-astro-cid-cm3albtb> <a href="/blog/tag/releases" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#releases </a><a href="/blog/tag/daily" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#daily </a><a href="/blog/tag/automation" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#automation </a><a href="/blog/tag/alma-releases" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#alma-releases </a><a href="/blog/tag/Wallos" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#Wallos </a><a href="/blog/tag/zed" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#zed </a><a href="/blog/tag/MoviePilot" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#MoviePilot </a><a href="/blog/tag/dsh-context" data-astro-prefetch="true" data-astro-cid-cm3albtb="true" data-astro-cid-7t72llso="true" class="tag tag--interactive"> 
+#dsh-context </a> </div> </div> </header> <!-- Content --> <div class="article-content app-prose" lang="zh-CN" data-astro-cid-tldeq5d5>  <h3 id="yetonealma-releases-v04796---v04866-qwenqwen38-27b"><a href="https://github.com/yetone/alma-releases/releases" rel="noopener noreferrer" target="_blank">yetone/alma-releases v0.4.796 - v0.4.866</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增 alma herdr run 命令，支持在终端面板输入并执行命令，可通过 <code>--wait</code> 参数显示执行后的屏幕</li>
+<li>新增 alma herdr keys 命令，支持向终端面板发送 Ctrl+C、Enter 或 Escape 等控制键</li>
+<li>新增 alma herdr read 命令，用于显示当前屏幕内容，支持通过 <code>--lines</code> 参数查看历史记录</li>
+<li>上述新命令均通过 /api/herdr/rpc 接口实现，因此在启用 <code>--computer</code> 模式下也可使用</li>
+<li>现在可以与拥有 shell 但没有 agent 的终端面板进行交互，此前这类面板无法接收任何命令</li>
+<li>截图处理改为分批执行并加入暂停，优化资源占用</li>
+<li>截图缩放时保持原始宽高比，避免拉伸变形</li>
+<li>新增基于 Go 的文本和语音消息处理流程，并保留回退至 Node.js 处理的选项</li>
+<li>Telegram 媒体和消息下载现由 Go 服务处理，支持私聊、定向聊天和群聊中的图片、视频、文档、文本及聊天记录</li>
+<li>语音转录仍使用 Node 服务</li>
+<li>可通过设置 ALMA_NODE_TG_MEDIA=1 或 ALMA_NODE_TG_GROUPMEDIA=1 保留之前的基于 Node 的媒体处理方式</li>
+<li>在设置 → 个人代理下新增 Persona 与记忆设置</li>
+<li>新增主对话界面，并列出过往对话（Lifesign）</li>
+<li>浏览器导航与阅读操作（后退、前进、刷新、关闭、读取及 DOM 读取）现直接在原生应用中运行</li>
+<li>浏览器评估功能现直接在原生应用中运行，返回格式化结果和错误信息</li>
+<li>应用内浏览器的打开链接、点击和输入操作现直接在原生应用中运行</li>
+<li>对话开始时的压缩处理现直接在原生应用中运行，包括紧急回退和归档摘要</li>
+<li>任务执行现在原生运行在 Go 中，直接处理任务状态、结果、crew 活动和工具日志，以提升性能和可靠性</li>
+<li>无显著变更</li>
+<li>工具审批处理现由 Go 服务器管理，包括待审批卡片、超时、始终允许授权、跳过以及通过 HTTP/WebSocket 和 relay 的交接</li>
+<li>Node 客户端现在通过保持打开的 POST 请求来请求工具审批，停止请求会取消等待中的 Bash 审批卡片</li>
+<li>图片上传失败时保留在编辑器中，支持原地重试，避免文件丢失</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复标题生成逻辑，改为渐进式处理并保存，防止打开 Alma 时超时及重启后重复请求</li>
+<li>优化通知标题优先级，后台命名任务排队等待而非直接超时</li>
+<li>修复粘贴图片显示问题：现在以缩略图（最大 360×280）形式展示，避免大型 Retina 截图占满聊天栏；点击图片仍可全屏查看</li>
+<li>优化无 agent 面板的错误提示：发送失败时建议改用 run 命令</li>
+<li>修复 macOS 上活动轮换器重新编码旧截图时的高内存占用问题</li>
+<li>修复资源查看器中长列表在左侧栏的对齐及溢出对话框问题</li>
+<li>修复 Go 轮次中逐字流式传输长回复时可能停滞的问题，服务器现在能更高效地处理分块文本</li>
+<li>修复中文、日文和韩文查询的网页搜索问题，当搜索引擎返回无关页面时回退至 360 搜索，避免机器人检测页面</li>
+<li>修复中文、日文或韩文标题链接（百分号编码）无法正确滚动到对应标题的问题</li>
+</ul>
+<h3 id="ellitewallos-v5112-qwenqwen38-27b"><a href="https://github.com/ellite/Wallos/releases/tag/v5.11.2" rel="noopener noreferrer" target="_blank">ellite/Wallos v5.11.2</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>安全修复</strong></p>
+<ul>
+<li>修复订阅频率验证及支付循环无限执行问题</li>
+</ul>
+<h3 id="zed-industrieszed-v1291---v1292-qwenqwen38-27b"><a href="https://github.com/zed-industries/zed/releases" rel="noopener noreferrer" target="_blank">zed-industries/zed v1.29.1 - v1.29.2</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增 Linux 官方 Snap 软件包</li>
+<li>新增 Git 面板分支模式，可列出自基准分支以来所有变更文件</li>
+<li>新增书签选择器，支持浏览、搜索和预览当前工作区的所有书签</li>
+<li>新增 git.date_format 及多个 date_style 设置，用于自定义 Git 日期显示格式</li>
+<li>新增 Claude Fable 5.2 支持（Anthropic BYOK 用户），以及组织有权限时的 Claude Mythos 5.2 支持</li>
+<li>新增 agent.auto_generate_thread_titles 设置，可关闭 Zed Agent 线程的自动标题生成</li>
+<li>改进 AI 响应复制按钮，短暂显示对勾以确认复制成功</li>
+<li>改进 ACP 代理配置选项排序，使首个选项紧邻发送按钮</li>
+<li>新增 git.commit_view.expand_description 和 expand_files 设置，控制提交视图初始展开状态</li>
+<li>改进从 Git blame 打开提交时滚动至被标记文件而非 diff 顶部</li>
+<li>优化大型仓库中大量文件同时变更时的 Git 状态刷新性能</li>
+<li>改进 git: rename branch 命令，修剪新分支名并将空格替换为连字符，并在重命名模态框中预览结果</li>
+<li>改进 Git 面板仓库选择器，区分共享相同目录名的仓库</li>
+<li>改进 dev: open key context view，添加水平滚动以避免长上下文谓词被截断</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复通过 Open 对话框打开文件时替换当前项目的问题</li>
+<li>修复在远程项目中切换分支时重新传输完整 Git 历史导致终端停滞的问题</li>
+<li>修复 Helix 模式忽略 vim.use_system_clipboard 设置的问题</li>
+<li>修复文件查找器在按绝对路径搜索时不显示项目外文件的问题</li>
+<li>修复代理线程底部复制按钮可能复制较早轮次响应的问题</li>
+<li>修复在不支持只读切换的标签页上显示只读切换图标和操作的问题</li>
+<li>修复移动带有拆分 diff 的项目到新窗口时崩溃的问题</li>
+<li>修复提交模态框底部的空白条问题</li>
+<li>修复动画 WebP 文件在图像查看器中仅显示第一帧的问题</li>
+<li>修复 Markdown 预览中粗体文本使用错误主题颜色的问题</li>
+<li>修复 macOS 上使用 JetBrains 键位时 cmd-o 打开文件对话框而非项目符号搜索的问题</li>
+<li>修复 Linux 上组合标记渲染到基础字形右侧的问题</li>
+<li>修复提交消息在提交视图中丢失换行符的问题</li>
+<li>修复 JetBrains 键位中 cmd-k/ctrl-k 未聚焦提交消息的问题</li>
+<li>修复窄 Git 面板中条目图标与 diff 统计重叠的问题</li>
+<li>修复扩展片段在每次扩展重新加载时被重复添加的问题</li>
+<li>修复 LM Studio 和 llama.cpp 模型发现请求在 disable_ai 为 true 时仍在启动时发送的问题</li>
+<li>修复终端链接到项目外绝对路径在远程 OS 与本地不同时无法打开的问题</li>
+<li>修复 Markdown 预览在文件以空行或 HTML 注释开头时底部被截断的问题</li>
+<li>修复 Threads Sidebar 未显示等待指示器的问题</li>
+<li>修复 zed CLI 拒绝同一主机上多个 ssh:// 路径的问题</li>
+<li>修复 Vim :s 和 :% s 命令未识别 + 和 {n} 重复运算符的问题</li>
+<li>修复 Vim :s 无 g 标志时在首行后替换错误匹配项的问题</li>
+<li>修复 which-key 在多键绑定待处理时关闭提交编辑器和选择器的问题</li>
+<li>修复排除指向项目内部的符号链接时 worktree 索引损坏的问题</li>
+<li>修复 <code>zed --add</code> <code>--diff</code> 将工作目录作为项目文件夹添加到焦点窗口的问题</li>
+<li>修复 <code>zed --add</code> 在多个打开项目同等匹配或未匹配时选择错误窗口或项目的问题</li>
+<li>修复 Windows 上 Zed.exe path:line 在 Zed 已运行时被忽略的问题</li>
+<li>修复 zed://file 和 file:// 链接带驱动器字母时在 Windows 上打开空窗口的问题</li>
+</ul>
+<h3 id="jxxghpmoviepilot-v328-qwenqwen38-27b"><a href="https://github.com/jxxghp/MoviePilot/releases/tag/v3.2.8" rel="noopener noreferrer" target="_blank">jxxghp/MoviePilot v3.2.8</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>媒体服务器：为库搜索提供剧集元数据</li>
+<li>抓取功能：保留受支持的 SVG 艺术作品</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>CLI：在本地 API 代理中保留公共主机地址</li>
+<li>API：声明剧集元数据分页契约</li>
+<li>订阅：不再将媒体库查询失败视为缺少剧集，并在 HTTP 和服务器间保留媒体查询失败状态</li>
+<li>IMDb：将剧集 ID 解析到其父系列</li>
+<li>传输：恢复远端已移动未改名的整理任务</li>
+<li>配置：允许 GitHub 头像图片域名</li>
+<li>插件：从无效的市场镜像回退</li>
+<li>站点：分离连接性与用户认证，拒绝空的规范化站点凭据</li>
+<li>国际化：翻译站点认证诊断信息</li>
+<li>Agent：工具拒绝提示改指向「用户管理 -> 渠道授权」</li>
+<li>修复 hddolby hr 标志映射至 hit_and_run 的问题</li>
+<li>同步主机架构基线与 hddolby 导入的测试</li>
+<li>恢复订阅生命周期文档</li>
+<li>排序剧集元数据导入与认证测试导入</li>
+</ul>
+<h3 id="bowenliang123dsh-context-v0860-qwenqwen38-27b"><a href="https://github.com/bowenliang123/dsh-context/releases/tag/v0.86.0" rel="noopener noreferrer" target="_blank">bowenliang123/dsh-context v0.86.0</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增会话洞察物化与回填功能，支持历史会话的洞察计算</li>
+<li>实现跨概览、头部和快照的统一规范物化，并持久化到有限分片缓存中</li>
+<li>在折叠药丸中实时流式显示回填进度，包含精确的 n/total 覆盖计数和多语言标签</li>
+<li>新增按工作区分组的项目分布卡片，支持范围筛选和点击过滤，首行重新平衡为 KPI / 使用图表 / 热力图</li>
+<li>项目行现在解释其 token 总数（×sessions・tokens），点击可过滤会话列表</li>
+<li>Agent Network 卡片新增仅运行过滤器，右上角提供 All/Running 选择器，保留活动节点及其祖先链</li>
+<li>新增内存和缓存 I/O 基准测试比较，用于物化管道</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复回填将主机拒绝（损坏）的会话日志报告为永久投影失败的问题，现计为不可读并在工具提示中显示会话 ID / 原因</li>
+<li>修复工具归因错误，现在标记注册该工具的插件而非最后一个 ctx.tools 读取者</li>
+<li>修复概览在洞察刷新时保持已绘制布局的问题，包括每部分负载保持、错误范围数据丢弃以及日期范围窗口和会话卡片高度稳定</li>
+</ul>
+<h3 id="kepanodefuddle-0197-qwenqwen38-27b"><a href="https://github.com/kepano/defuddle/releases/tag/0.19.7" rel="noopener noreferrer" target="_blank">kepano/defuddle 0.19.7</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>保留以井号开头的标题</li>
+<li>保留 PsycNet 全文部分及 Sphinx 交叉引用链接</li>
+<li>保留含 data-date 的文章容器、空:hidden 元素等特定结构</li>
+<li>面包屑导航仅匹配同主机及完整路径段</li>
+<li>MathML：移除内部元素，保留空后代及标题中的数学 / 脚注引用</li>
+<li>脚注：保留 LaTeXML 脚注主体，合并重复注释为单一定义</li>
+<li>代码：保留无 pre 包裹的换行及代码块内的作者 / 分享 / 计数标记</li>
+<li>Markdown：修复嵌套列表缩进，保留冒号结尾段落后的嵌套列表</li>
+<li>法语：保留？! : ; 前的空格</li>
+<li>图片：使用 srcset 中最大的候选项</li>
+<li>性能：大幅提速 WebKit 浏览器长页面选择器移除，大代码块处理从 10.7s 降至 0.6s</li>
+<li>构建：在浏览器包中保留提取器类名，使 extractorType 正确报告 github</li>
+<li>Hacker News：修复评论作者显示为 [deleted] 及帖子作者为空的问题</li>
+<li>Substack：从新的 preloads-json 脚本读取数据，移除自定义域名的语音播放器</li>
+<li>Bilibili：不发送 API 拒绝的 User-Agent，不缓存失败的转录</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复：不再因单个 “Comment” 标签截断文章，或移除带 “Comments” 标题的短文章</li>
+<li>测试：使 npm test 在 Windows 上正常工作</li>
+</ul>
+<h3 id="callstackagent-device-v02140-qwenqwen38-27b"><a href="https://github.com/callstack/agent-device/releases/tag/v0.21.40" rel="noopener noreferrer" target="_blank">callstack/agent-device v0.21.40</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增无障碍审计功能，检测小目标、缺失名称及被遮挡控件，并移除系统栏等噪音</li>
+<li>选择器支持 is checked 和 checked= 断言 Android/iOS 快照中的选中状态（含 iOS mixed）</li>
+<li>录制脚本优化：唯一 ID 步骤仅写入 id=”…”，回放通过请求自身捕获验证目标</li>
+<li>iOS 键盘命令更可靠：keyboard enter 发送单次 Return，keyboard dismiss 不再误触 Return</li>
+<li>Android 原始快照节点新增 clickable、focusable、long-clickable 和 scrollable 属性</li>
+<li>Revyl 设置现可控制设备外观、位置和方向，且空闲会话保持存活</li>
+<li>从 URL 安装源时，下载和解包在单一截止时间下运行，停滞传输报告类型化超时</li>
+<li>TV 截图按页面捕获比例绘制覆盖层引用</li>
+<li>CI 性能优化：Numeric Ranges 任务从 5.6 分钟降至约 1 分钟，Android 冒烟测试并行构建</li>
+<li>文档更新：记录信任边界、安全审查范围及启动路径门控；新增无障碍审查帮助主题</li>
+</ul>
+<p><strong>安全修复</strong></p>
+<ul>
+<li><code>--save-script</code> 拒绝其他本地用户可操控的目标路径，防止未授权访问</li>
+<li>录制辅助工具改用私有缓存，不受信任的缓存在停止录制时报告 swift_cache_untrusted</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>录制辅助工具编译后的 Swift 文件现位于每用户私有缓存，旧共享临时缓存被忽略，可用 AGENT_DEVICE_SWIFT_CACHE_DIR 覆盖</li>
+<li>移动录制 Swift 辅助工具至 packages/host-swift</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 iOS 模拟器删除后命令等待 20 秒的问题，现立即返回 DEVICE_NOT_FOUND</li>
+<li>修复全屏应用快照视口读取错误，现从根快照读取</li>
+<li>修复物理 iPhone 上 logs start 未报告应用重启的问题</li>
+<li>修复 settings permission all 未覆盖所有隐私服务的问题</li>
+<li>修复 Apple runner 填充输入框时仅填充点击实际到达的输入框</li>
+<li>修复 daemon 中显式选择器解析问题，现从会话解析绑定设备</li>
+<li>修复 Android 启动就绪状态传播和请求取消处理</li>
+<li>修复远程批量录制通过单一请求回执传递的问题</li>
+<li>修复部分帧未发出的 refs 读取被拒绝的问题</li>
+<li>修复录制中未知参考尺寸的标记被省略的问题</li>
+<li>修复录制内嵌覆盖层源重新生成的问题</li>
+<li>修复 test-app 中登录取消和重复点击的处理</li>
+<li>修复 snapshot 中 Apple runner 负载使用生产者折叠策略重新验证的问题</li>
+<li>修复 replay 中通过请求自身捕获验证录制目标的问题</li>
+<li>修复 android-e2e 中像素断言前等待 Home/Recents 表面变化的问题</li>
+<li>修复 Android 方向读取在结算预算耗尽后停止接受的问题</li>
+<li>修复 provision-kit 中源安装传输截止时间的执行问题</li>
+<li>修复 record 中仅在用户控制的 ground 上运行缓存 Swift 辅助工具的问题</li>
+<li>修复 save-script 目标最终条目授权在单一位置执行的问题</li>
+<li>修复 daemon 中源安装请求截止时间的执行问题</li>
+</ul>
+<h3 id="cherryhqcherry-studio-v223-qwenqwen38-27b"><a href="https://github.com/CherryHQ/cherry-studio/releases/tag/v2.2.3" rel="noopener noreferrer" target="_blank">CherryHQ/cherry-studio v2.2.3</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>会话分组与排序功能独立，支持按更新时间、创建日期、名称或手动顺序排序</li>
+<li>Agent 支持导入 DeepSeek v3 导出文件，保留历史、分支及附件等数据</li>
+<li>Agent 回复后提供下一步提示建议，按 Tab 接受或 Esc 忽略</li>
+<li>Agent 创建时支持上传图像头像</li>
+<li>Agent 自动命令审批现解析 Bash 和 PowerShell，执行前询问风险命令</li>
+<li>浏览器侧边栏支持多标签页保留，统一样式并支持右键菜单</li>
+<li>PPTD 幻灯片预览支持页面导航、缩放、缩略图及源视图</li>
+<li>文件路径和 Markdown 链接支持跳转至指定行号并高亮显示</li>
+<li>新增外观设置：发送消息时自动滚动至最新消息（默认开启）</li>
+<li>长交付文件列表默认显示前三个，支持展开或折叠其余部分</li>
+<li>支持 Ctrl + 鼠标滚轮缩放界面，Ctrl+0 重置缩放级别</li>
+<li>知识库 URL 来源支持批量添加多个链接，并单独报告无效项</li>
+<li>生成图片显示模型及尺寸，保存为原始格式而非强制转为 PNG</li>
+<li>Linux 平台新增全局输入开关，允许 Agent 控制共享鼠标和键盘</li>
+<li>新增 GPT-6.2 Astra/Sol、Gemini 4 Carbon/Hydrogen 等模型支持</li>
+<li>DeepSeek 官方成本估算现采用工作日峰谷费率</li>
+<li>已启用的提供商在模型服务列表中优先显示</li>
+<li>市场精选技能支持按类别筛选，并提供搜索和横向导航</li>
+<li>向 Agent 对话粘贴文件夹时添加文件夹引用而非失败的文件附件</li>
+<li>Obsidian 导出时为每条助手消息标注产生该消息的模型</li>
+<li>数字快捷键（1–9）在设置中新增显式的 Off 预设选项</li>
+<li>语音识别模型新增 Off 选项，可禁用本地听写而不删除语言设置</li>
+<li>Qwen Code 1.0 可从其 GitHub Release 安装</li>
+<li>新增捷克语 (cs-CZ) 语言支持</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>Agent 自动命令审批逻辑变更，依赖现有提示的用户需审查权限模式</li>
+<li>DeepSeek 成本估算逻辑变更，依赖仅峰值估算的用户需审查本地成本估算</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复嵌套可滚动内容（如代码预览）独立滚动的问题</li>
+<li>修复从归档恢复的会话打开时消息为空的问题</li>
+<li>中断的流式响应现报告为连接错误并保留部分输出以便重试</li>
+<li>多模型折叠标签页重新显示所有模型名称，支持切换回紧凑模式</li>
+<li>改进超出模型上下文窗口的聊天请求恢复可靠性</li>
+<li>修复 Notes 编辑器中 LaTeX 公式渲染失效的问题</li>
+<li>修复浏览器侧面板调整大小条无法沿全高度拖动的问题</li>
+<li>修复 Agent 会话中工具调用前后的助手文本不可见的问题</li>
+<li>Pi Durable 模式下 Stop 保持会话打开，重开后继续中断的回复</li>
+<li>Agent 回合运行期间发送的消息现被确认并按序处理</li>
+<li>后台任务结束时清除待处理审批，避免回复卡在 Pending 状态</li>
+<li>模型选择范围限定于每个会话，修改一个会话不再影响其他会话</li>
+<li>Claude Code 对话在工具重试或压缩后可分叉或编辑</li>
+<li>Accept Edits 模式下 Claude Code 在执行升级 Bash 命令前询问</li>
+<li>修复外部应用列表未包含所有注册文件夹应用的问题</li>
+<li>修复 Windows 区域上传丢失架构参数的问题</li>
+<li>修复 Windows COS 上传依赖隔离问题</li>
+<li>修复技能导出 Cherry 专用内置项到～/.agents/skills 的问题</li>
+<li>修复 Windows 签名重复 SHA-256 签名的性能问题</li>
+<li>优化发布流水线，重叠草稿上传和版本打包</li>
+<li>优化发布工具，缓存并重叠外部工具下载</li>
+<li>精简打包中的重复 SQLite 和 Tesseract 二进制文件</li>
+<li>对齐文件树和列表滚动条与窗格边缘</li>
+<li>修复门户化输入组控件焦点丢失的问题</li>
+<li>修复 Agent 头像文件输入挂载过晚导致选择未生效的问题</li>
+<li>修复 cherry-cloud 提供商未按订阅状态排序的问题</li>
+<li>减少快照投影中的副本数量并限制 structuredClone 使用</li>
+<li>修复 Pi Durable Windows 子进程流测试夹具问题</li>
+<li>限制 Claude Code 会话归档恢复时的内存使用</li>
+<li>修复定时任务存储的运行结果在无会话时不可读的问题</li>
+<li>恢复诊断报告附件功能</li>
+</ul>
+<h3 id="tencentcloudtencentdb-agent-memory-v204-qwenqwen38-27b"><a href="https://github.com/TencentCloud/TencentDB-Agent-Memory/releases/tag/v2.0.4" rel="noopener noreferrer" target="_blank">TencentCloud/TencentDB-Agent-Memory v2.0.4</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增技能压缩包批量导入，支持多包并行处理且互不影响</li>
+<li>自定义记忆提示词支持替换内置段落，默认仍为追加模式</li>
+<li>优化记忆整理稳定性：分批执行、断点续传及单文件 256KB 限制</li>
+<li>调整上游请求超时策略：数据间隔默认 30 分钟，响应头 10 分钟</li>
+<li>在线会话记录改为按模型调用粒度存储，新增 agent 等字段</li>
+<li>增强排障日志：补充 L0-L3 处理阶段耗时及鉴权失败细分</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>会话记录字段变更：messages 改 request，output 改 response</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复模型未调用写入工具时人格正文误写入问题</li>
+<li>修复客户端无会话标识时重复初始化导致会话丢失</li>
+<li>修复 CodeBuddy 选中无 Agent 团队时连续弹窗报错</li>
+<li>修复 Agent 与 Task 列表未按权限过滤导致私有项泄露</li>
+<li>修复代码图谱构建失败后持续查询及 Wiki 导入无限轮询</li>
+<li>修复用户消息含未闭合分隔线导致代理卡死问题</li>
+<li>修复浏览器无法保存语言偏好时面板不可用问题</li>
+<li>修复鉴权服务超时被误报为密钥无效的问题</li>
+<li>修复 Python SDK 拒绝设置非有限数值超时的异常</li>
+</ul>
+<h3 id="tashfeenahmedfreellmapi-v01636-qwenqwen38-27b"><a href="https://github.com/tashfeenahmed/freellmapi/releases/tag/v0.16.36" rel="noopener noreferrer" target="_blank">tashfeenahmed/freellmapi v0.16.36</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增 OVH 翻译和摘要专用端点</li>
+<li>使用 GET /v1/text/models 查看可用专家模型</li>
+<li>使用 POST /v1/text/translate 执行文本翻译</li>
+<li>使用 POST /v1/text/summarize 执行文本摘要</li>
+<li>新路由独立于通用聊天和自动故障转移机制</li>
+<li>现有 Premium 和 30 天免费目录计划保持不变</li>
+</ul>
+<h3 id="nexu-ioopen-design-open-design-v0272-qwenqwen38-27b"><a href="https://github.com/nexu-io/open-design/releases/tag/open-design-v0.27.2" rel="noopener noreferrer" target="_blank">nexu-io/open-design open-design-v0.27.2</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>优化配额面板显示，在重置时间较远时仍精确展示剩余分钟数</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 macOS 应用在显示器变更或唤醒后窗口渲染比例失真的问题</li>
+<li>改进 macOS 应用更新流程，确保生成失败后可恢复且不会阻塞下次启动</li>
+<li>统一项目卡片菜单中团队空间迁移失败的错误提示样式</li>
+</ul>
+<h3 id="groupultratelegram-search-v180-qwenqwen38-27b"><a href="https://github.com/groupultra/telegram-search/releases/tag/v1.8.0" rel="noopener noreferrer" target="_blank">groupultra/telegram-search v1.8.0</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>服务端支持通过 OAuth 授权远程客户端并提供 MCP 服务</li>
+<li>服务端改用 Telegram MTProto 登录替代 OIDC</li>
+<li>Web 端新增 OAuth 登录、同意及设备审批页面</li>
+<li>Web 端支持使用 Telegram 登录连接服务器</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>核心模块：在实时聊天记录中省略缺失的用户名</li>
+<li>Docker：将 CLI 远程 API 原样转发至服务器</li>
+<li>服务端：仅广播自注册客户端可请求的作用域</li>
+<li>服务端与客户端：WebSocket 客户端仅通过 Eventa UI 契约访问核心</li>
+<li>Web 端：要求先登录才能批准设备代码</li>
+</ul>
+<h3 id="chen08209flclash-v094-qwenqwen35-27b"><a href="https://github.com/chen08209/FlClash/releases/tag/v0.9.4" rel="noopener noreferrer" target="_blank">chen08209/FlClash v0.9.4</a> <sup>Qwen/Qwen3.5-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>仪表盘新增状态按钮，聚合核心、更新和资源状态及进度</li>
+<li>规则支持自定义出口名称；配置文件脚本与规则协同运行</li>
+<li>桌面端新增 PAC 模式系统代理；Windows 安装默认绕过；KDE Plasma GTK 应用遵循代理</li>
+<li>DNS 覆盖支持 respect-rules、hosts 和缓存算法；macOS 通过 tun.dns-mode 原生系统 DNS</li>
+<li>手机端日志可打开并选择复制</li>
+<li>Geo 资源默认自动更新</li>
+<li>Windows 和 Intel Mac 启用 Impeller；Apple Silicon 下载不再包含 Intel 代码</li>
+<li>核心升级至 mihomo v1.19.34，编辑器支持新键补全</li>
+<li>连接排序移至后台线程；代理和组图标优化内存占用</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>核心启动失败或丢失时显示原因；混合端口为 0 时自动替换；无配置时仍可开启混合端口</li>
+<li>配置处理规则默认匹配；选中的覆盖键写入 set（含空值）</li>
+<li>Android 网络变更后 WireGuard、Hysteria2 和 TUIC 自动重连；VPN 前打开的核心套接字受保护</li>
+<li>仪表盘服务和出口 IP 检查在代理启停或网络变更时不再失败</li>
+<li>HTTPUpgrade 分享链接不再错误导入为 WebSocket</li>
+<li>应用图标在已知时始终显示并保持位置</li>
+<li>macOS 托盘窗口保留在当前 Space；窗口使用目标显示器缩放</li>
+<li>AppImage 移除捆绑 libstdc++；deb 卸载更干净；Windows 安装程序仅停止自身进程</li>
+<li>页面从顶部打开并定位到选定配置；弹窗作为页面打开；编辑器显示加载动画并扩展弹窗</li>
+<li>成功和警告颜色更柔和；远程图标保持尺寸</li>
+</ul>
+<h3 id="svnaxisobsidian-baseline-412-qwenqwen35-27b"><a href="https://github.com/svnaxis/obsidian-baseline/releases/tag/4.1.2" rel="noopener noreferrer" target="_blank">svnaxis/obsidian-baseline 4.1.2</a> <sup>Qwen/Qwen3.5-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>暂无具体更新内容</li>
+</ul>
+<h3 id="code-yeongyuoh-my-openagent-v5178---v5179-qwenqwen38-27b"><a href="https://github.com/code-yeongyu/oh-my-openagent/releases" rel="noopener noreferrer" target="_blank">code-yeongyu/oh-my-openagent v5.1.78 - v5.1.79</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增只读扩展请求 omo.modelRouting.resolve，可查询各分类与任务代理实际运行的模型</li>
+<li>测试脚本新增 no-module-mock 机制，防止在测试中 mock 模块</li>
+<li>daemon 启动等待改为基于子进程 CPU 进度而非墙钟时间，提升稳定性</li>
+<li>GPT-6.2 模型下 Hephaestus 角色不再追加，系统提示词从 9,211 降至 4,300 tokens</li>
+<li>线程工具共享端点枚举与连接，减少重复读取并提升跨设备操作性能</li>
+<li>thread_list 行显示状态（running/idle/inactive/archived）及模型信息，支持按状态过滤</li>
+<li>omo remote 命令支持通过设备名称、ID 或唯一前缀解析目标设备</li>
+<li>新增 thread_archive 工具，支持在任意设备上归档或取消归档线程</li>
+<li>Thread SDK 新增 create、interrupt、close、rename 和 set_model 方法</li>
+<li>内存同步支持单设备禁用（<code>omo sync disable</code>），离线期间变更数量可通过状态查询</li>
+<li>恢复短语输入仅在控制终端显示，禁止在 Agent 环境或 CI 中使用</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>thread_close 不再默认丢弃未读消息：忙碌线程被拒时需 force: true；所有关闭结果携带 dropped_deliveries 字段</li>
+<li>omo remote close 新增 <code>--force</code> 参数以强制关闭并报告被丢弃的消息</li>
+<li>setThinkingLevel 移除未使用的 scope 参数，仅修改指定会话级别（无行为变化）</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 /remote close 遵循 thread_close 关闭契约：拒绝时列出未读消息并提供 <code>--force</code> 选项</li>
+<li>修复线程工具对已停泊在其他设备的会话不再报错，正确返回 route_unlisted</li>
+<li>修复冷唤醒单元文件在 umask 077 下权限错误（现显式设为 0644）</li>
+<li>修复旧版本遗留的 0600 权限文件在安装或刷新时自动修复为 0644</li>
+<li>修复 CI 中 smoke 测试等待 tarball 提交的问题，并优化无效等待参数的快速失败</li>
+<li>lint-ratchet 现在使用 <code>oxlint --no-ignore</code>，防止 ignorePatterns 隐藏文件</li>
+<li>若干琐碎修复（注释位置、死代码移除、测试清理逻辑等）</li>
+<li>修复 <code>omo remote send</code> 超时挂起问题，现返回 JSON 超时值而非无限等待</li>
+<li>修复跨设备 thread_create 重开已关闭线程时因路径错误导致的 EISDIR 失败</li>
+<li>修复非运行状态下 thread_send 等待 60 秒才返回 unsupported 的问题</li>
+<li>修复跨设备线程操作超出 eval 工具调用时间预算的问题，现共享 50 秒预算</li>
+<li>修复 thread_create 可能错误连接到非主引擎端点的问题</li>
+<li>修复设备服务重启期间 thread_send 误报 not_found 的问题，现返回可重试的 host_unavailable</li>
+<li>修复 Windows 上内存同步与写入并发启动时的锁竞争超时问题</li>
+<li>修复内存同步根变更检查在信任 PIN 损坏时误报未变更的问题</li>
+<li>修复 RPC 套接字输入未被正确计为线程工具类型输入的问题</li>
+<li>修复扩展网关存储模式版本被错误报告为主网关模式的问题</li>
+<li>修复别名冲突时 thread_create 在第三台设备上错误打开会话文件副本的问题</li>
+<li>修复远程唤醒引擎最低版本检查对预发布版本处理不当的问题</li>
+<li>修复 lint-ratchet 规则中压缩 bundle 输出被错误计入 omo-testing 的问题</li>
+</ul>
+<h3 id="jarvis2ftelegram-files-041-qwenqwen38-27b"><a href="https://github.com/jarvis2f/telegram-files/releases/tag/0.4.1" rel="noopener noreferrer" target="_blank">jarvis2f/telegram-files 0.4.1</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增文件列表支持 Shift + 点击进行范围选择</li>
+</ul>
+<p><strong>安全修复</strong></p>
+<ul>
+<li>修复 AI 整理传输可能逃逸出指定目标目录的安全问题，传输路径现被限制在目标目录内</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复自动化对话框在 SWR 重新验证时丢失正在进行的规则编辑的问题</li>
+<li>升级至 Java 25 LTS 和 Alpine 3.24</li>
+</ul>
+<h3 id="hugohe3ppt-master-v6100-qwenqwen38-27b"><a href="https://github.com/hugohe3/ppt-master/releases/tag/v6.10.0" rel="noopener noreferrer" target="_blank">hugohe3/ppt-master v6.10.0</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>个人模板库默认移至 Git 忽略的本地目录，避免仓库更新冲突</li>
+<li>OpenAI 图像生成后端默认模型更新为 gpt-image-2.6-sunburst</li>
+<li>火山引擎新增 Seedream 5.0 支持，默认使用 Ark 网关并保留 LAS 配置</li>
+<li>update_repo.py 自动迁移未暂存的自定义模板至本地目录，确保克隆更新顺畅</li>
+<li>文档更新：添加 PPT Master 标志，推荐 Kimi K3.1 和 Gemini 作为驱动模型</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 Office Math 在往返幻灯片中的命名空间绑定冲突问题</li>
+<li>修复 tabler-outline 图标中填充子元素与描边几何混合时的样式解析错误</li>
+<li>修复演讲者备注中以 # 开头的行被误识别为页面标题的问题</li>
+<li>修复 HTML 页面 iso-8859-1/latin1 编码解码错误，改用 windows-1252 C1 映射</li>
+<li>图像输出路径测试改为在临时目录运行，不再触及 /out 目录</li>
+</ul>
+<h3 id="makecindycindy-v01141-qwenqwen38-27b"><a href="https://github.com/makecindy/cindy/releases/tag/v0.1.141" rel="noopener noreferrer" target="_blank">makecindy/cindy v0.1.141</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>项目管理焕新：新建、修改设置和授权目录共用一套表单，支持从 Git 仓库链接直接创建项目并自动识别图标</li>
+<li>新增任务收件箱：桌面和手机集中展示跟进与协办任务，支持按项目查看、稍后处理及一键归档</li>
+<li>自动化运行优化：运行记录集中收进「自动化」分组，支持按单个 PR 触发，授权失效或续跑失败会保留恢复结果</li>
+<li>多智能体协作增强：Lead 拥有独立 Worker 运行时工具，支持更换已停止 Worker 的模型，空闲回收不再中断后台工作</li>
+<li>插件安装升级：支持从 GitHub Releases 安装和升级插件，市场安装显示进度与失败原因，共享任务支持暂停、恢复和重试</li>
+<li>飞书体验优化：官方提问改为一题一张卡，答完自动收成回执，必答题未答会直接点名，群聊话题回复可在侧栏定位</li>
+<li>多设备连接更稳：手机加入 Agent-Net 会话层，弱网下远程连接更稳定，远程新建任务超时不再留下空任务</li>
+<li>模型与用量更新：新任务默认使用 GPT-6.2 Sol，辅助模型 Token 计入用量，兑换礼品卡后可用模型立即刷新</li>
+<li>桌面组件改进：Mac 小组件由电脑端直接更新，Windows 托盘新增额度与任务悬浮卡片，输入框快捷键体验优化</li>
+<li>手机端体验优化：Duo 竖屏任务页标题不再遮挡按钮，发送消息后输入框自动收起，相册视频播放保存更稳定</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复异常结束的 Worker 无法自动续接的问题，错误与清理失败会保留并重试</li>
+<li>修复相对路径图片和超大图片在飞书中无法正常发送的问题</li>
+<li>修复云端伙伴名册与接管提示不可靠的问题</li>
+<li>修复远程桌面和邮件卡在弱网环境下无法正常使用的问题</li>
+<li>修复大数字顿号行被误当成列表的输入解析问题</li>
+<li>修复等待电脑连接时手机端发送与卡片操作异常的问题</li>
+</ul>
+<h3 id="firebasefirebase-tools-v15370-qwenqwen35-27b"><a href="https://github.com/firebase/firebase-tools/releases/tag/v15.37.0" rel="noopener noreferrer" target="_blank">firebase/firebase-tools v15.37.0</a> <sup>Qwen/Qwen3.5-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增对 Node.js 26 运行时（预览版）的 Cloud Functions 支持</li>
+<li>为 Crashlytics MCP get_report 工具添加可选 filterExpression 参数</li>
+<li>升级 Pub/Sub 模拟器至版本 0.8.38</li>
+<li>升级 Firebase SQL Connect 本地工具包至 v3.4.28</li>
+<li>修复 SQL Connect 中单条查询使用服务器值键表达式返回 null 时未触发实时更新的问题</li>
+<li>在生成的 JS 和 Admin Node SDK 中声明并导出嵌套关系内的枚举</li>
+</ul>
+<p><strong>安全修复</strong></p>
+<ul>
+<li>更新 @modelcontextprotocol/sdk、undici 和 proxy-addr 以解决严重和高危安全漏洞</li>
+<li>限制 Cloud Functions 模拟器 /backends 端点的跨域访问，仅允许活动 Emulator UI 来源</li>
+<li>将 Crashlytics heapdumps 服务代理角色权限限定于专用存储桶，启用统一桶级访问并强制防止公开访问</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 <code>firebase deploy --dry-run</code> 意外创建缺失 Firestore 数据库的问题</li>
+<li>修复第二代函数首次部署失败后后续部署无法设置调用者的问题</li>
+<li>修复 crashlytics:heapdumps 命令接受非目标项目的 <code>--app</code> ID 的问题</li>
+<li>修复 crashlytics:heapdumps:enable 在非交互环境中绕过确认提示的问题</li>
+<li>修复 crashlytics:heapdumps:enable 重用位置不同的存储桶时未警告的问题</li>
+<li>修复 crashlytics:heapdumps:status <code>--json</code> 输出遗漏 heapDumpCollectionEnabled 字段的问题</li>
+<li>移除 crashlytics:heapdumps:enable <code>--help</code> 中的重复默认位置文本</li>
+<li>显示 bucket 创建失败时的 Cloud Storage API 错误详情</li>
+<li>修复 crashlytics:heapdumps:enable 打印无效 Firebase Console URL 的问题</li>
+<li>修复向无 Cloud Scheduler 区域部署第二代定时函数导致残留的问题</li>
+</ul>
+<h3 id="homebrewbrew-7015-qwenqwen38-27b"><a href="https://github.com/Homebrew/brew/releases/tag/7.0.15" rel="noopener noreferrer" target="_blank">Homebrew/brew 7.0.15</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增从 API 获取 bottle 清单的功能</li>
+<li>在 Ruby 中验证 Sigstore bundles，无需依赖 vendored gems</li>
+<li>扩展 portable tests 和 Linux cask 覆盖范围</li>
+<li>formula_installer：允许 postinstall 写入 prefix libexec</li>
+<li>bump：为 crates.io 添加发布冷却机制</li>
+<li>unpack_strategy/dmg：在 macOS 27.2 上使用 diskutil image attach</li>
+<li>autoremove：保留别名下的必需 kegs</li>
+<li>解释磁盘镜像文件系统挂载失败的原因</li>
+<li>避免对非 PyPI autobumps 进行 Python 查找</li>
+<li>在不使用 Pathname#find 的情况下计算磁盘占用</li>
+<li>GithubLatest、GithubReleses：使用 GraphQL API 进行基础检查</li>
+<li>清理后清除缓存的 Caskroom group</li>
+<li>列出命令时不构建所有 parser</li>
+<li>通过加载更少的 formulae 加速 brew uses</li>
+<li>从 API 数据构建描述缓存</li>
+<li>降低 RuboCop block length 至 100</li>
+<li>降低 RuboCop ABC size 至 195</li>
+<li>添加 Homebrew/SingleUseMethod cop</li>
+<li>内联 commands 中的单次使用方法</li>
+<li>内联 cops 和 utils 中的单次使用方法</li>
+<li>将 casks 纳入 tap autobump workflow</li>
+<li>formula_pin：支持 pin 别名或旧名称下的 kegs</li>
+<li>在非 macOS 上跳过 GitHub keychain 查找</li>
+<li>清理损坏的 libexec 符号链接</li>
+<li>内联核心类中的单次使用方法</li>
+<li>升级 portable-ruby 至 4.0.9_1</li>
+<li>在 Apple silicon Tahoe 上推荐 CLT 26.6</li>
+<li>简化 Homebrew/SingleUseMethod cop</li>
+<li>install、reinstall、upgrade：显示相同的计划详情</li>
+<li>在 brew create 中加载 cask cache</li>
+<li>cleanup 期间保持 prefix libexec 可选</li>
+<li>patch：除非 verbose 否则隐藏 patch 输出</li>
+<li>升级 portable-ruby 至 4.0.10</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>cmd/fetch：修复 <code>--all-platforms</code> 标志与平台特定 casks 的问题</li>
+</ul>
+<h3 id="google-geminigemini-cli-v0690-qwenqwen35-27b"><a href="https://github.com/google-gemini/gemini-cli/releases/tag/v0.69.0" rel="noopener noreferrer" target="_blank">google-gemini/gemini-cli v0.69.0</a> <sup>Qwen/Qwen3.5-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增 /stats heatmap 子命令，展示每日 Token 使用情况</li>
+<li>支持独立的 theme.json 配置文件以自定义主题</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复模板占位符替换时丢失字面量 $ 字符的问题</li>
+<li>防止 <strong>GCLI_EXPAND_TARGET</strong> 环境变量冲突</li>
+<li>修复 ACP 工具调用更新中 AnsiOutput 序列化问题</li>
+<li>修复 Windows PowerShell 变量替换误报及策略处理</li>
+<li>保留 @file 引用中的首尾空白字符</li>
+<li>防止仅包含 thoughtSignature 的轮次并保留多模态工具响应</li>
+<li>等待管道 stdin EOF 完成，避免销毁 process.stdin</li>
+<li>在退出编辑器选择时保留待确认的工具操作</li>
+<li>规范化无头 CLI 格式中的错误负载</li>
+<li>修复 tildeifyPath 中路径分隔符边界检查</li>
+<li>验证模型名称并支持 /model 命令的直接参数</li>
+<li>处理文件监听器错误并允许 macOS 宽松沙箱中的 FSEvents</li>
+<li>限制多部分工具输出大小并淘汰旧的多模态 inlineData</li>
+<li>消除 VSCode 扩展中的桶导入包膨胀和冗余 setContext 调用</li>
+<li>处理流中间重试以防止文本拼接</li>
+<li>防止网络故障导致的多分钟静默加载挂起</li>
+<li>防止恢复时终端模型轮次超时及主线程 JSONL 冻结</li>
+<li>防止多小时的配额重试并通知 ACP 客户端重试尝试</li>
+<li>关闭 macOS PTY 生成时泄露的孤儿 /dev/ptmx 主 FD</li>
+<li>允许在所有认证模式下覆盖 60 秒 API 头部超时</li>
+<li>使用 isSubpath 检查主题文件的家庭目录</li>
+<li>在进入 macOS Seatbelt 沙箱前解析文件夹信任</li>
+<li>终止子进程、记录取消的工具并保留信号退出码</li>
+<li>防止 shell 模式下的递归交互式 gemini 会话</li>
+<li>当 publish 失败时立即拒绝 MessageBus.request ()</li>
+<li>确保 read-many-files 仅内联显式请求的二进制资产</li>
+<li>识别 TortoiseGitPlink 为 PuTTY 系列 SSH 客户端</li>
+<li>防止 PDF inlineData 和遥测缓冲区内存驻留</li>
+</ul>
+<h3 id="stirling-toolsstirling-pdf-v340-qwenqwen38-27b"><a href="https://github.com/Stirling-Tools/Stirling-PDF/releases/tag/v3.4.0" rel="noopener noreferrer" target="_blank">Stirling-Tools/Stirling-PDF v3.4.0</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>PDF 文本编辑器支持在查看器内直接编辑，并优化字体匹配与 OCR 文档识别</li>
+<li>新增 PDF 无障碍检查工具，支持 PDF/UA-1 和 PDF/UA-2 标准及报告生成</li>
+<li>企业版新增 SCIM 2.0 用户配置功能及 OneDrive 专业版支持</li>
+<li>管理员可禁用用户对已签名 PDF 的编辑，并新增签名检测界面</li>
+<li>新增自托管服务器首次运行设置向导，简化新用户上手流程</li>
+<li>重新组织页面功能新增奇偶合并选项，比较工具恢复像素对比模式</li>
+<li>元数据更新支持保留未修改字段（keepOmitted=true），文件侧边栏新增清除最近记录按钮</li>
+<li>桌面端优化大临时文件夹启动速度，Windows 下保持打开文件锁定防止 DMS 检入</li>
+<li>文本编辑器嵌入字体子集化以减小保存文件大小，支持从 customFiles/static/fonts/ 加载自定义字体</li>
+<li>升级多项依赖（包括 fastapi、pydantic-settings、springdoc-openapi 等）</li>
+</ul>
+<p><strong>安全修复</strong></p>
+<ul>
+<li>修复存储作业文件流式处理问题，避免加载到堆内存导致的安全隐患</li>
+<li>限制日志中工具输出大小及 veraPDF 检查的 XMP 尺寸，提升安全性</li>
+</ul>
+<p><strong>Breaking Changes</strong></p>
+<ul>
+<li>移除 PostScript 矢量转换端点（/convert/vector/pdf 和 /convert/pdf/vector），需迁移至其他转换方式</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复旋转和裁剪页面上页码位置错误的问题</li>
+<li>修复 Safari 上传文件时发送不完整的问题</li>
+<li>修复 MCP convert 工具缺失转换操作及 AI 引擎错误未显示为 MCP 工具错误的问题</li>
+<li>修复桌面端 UI 因拖放文件卡住的问题</li>
+<li>修复 SaaS 首次请求用户配置导致的重复键错误</li>
+<li>若干琐碎修复（PWA 名称尊重配置的 appName、桌面端更新管理关闭时版本可见性、颜色对比度失败等）</li>
+</ul>
+<h3 id="egoistkero-v2136-qwenqwen38-27b"><a href="https://github.com/egoist/kero/releases/tag/v2.1.36" rel="noopener noreferrer" target="_blank">egoist/kero v2.1.36</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增 new-session-directory 配置，支持在指定文件夹启动新会话</li>
+<li>支持从 Files 标签页拖拽文件或文件夹到面板以输入路径</li>
+<li>支持双击侧边栏空白处快速启动会话</li>
+<li>支持从 Finder 或 Explorer 复制文件到 Files 标签页</li>
+<li>新增 font-zoom 配置，可关闭字体缩放功能</li>
+<li>新增 CodeBuddy Code 作为编码代理</li>
+<li>Dock 徽章现在会统计已完成的会话数量，并支持 dock-badge 模式</li>
+<li>支持复制 Files 行中的路径并发送到当前面板的代理中</li>
+<li>新增 PiG 作为编码代理</li>
+<li>优化会话输出帧读取，合并至单一缓冲区而非逐个读取</li>
+<li>支持在请求时生成 release 构建的堆内存配置文件</li>
+<li>优化控制消息读取，单次遍历且无额外拷贝</li>
+<li>在安装前提示旧版 glibc 主机缺失的功能</li>
+<li>优化会话帧写入，使用可回收的缓冲区</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 zsh 提示符在窗口调整大小时残留副本的问题</li>
+</ul>
+<h3 id="google-antigravityantigravity-cli-1512-qwenqwen38-27b"><a href="https://github.com/google-antigravity/antigravity-cli/releases/tag/1.5.12" rel="noopener noreferrer" target="_blank">google-antigravity/antigravity-cli 1.5.12</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>远程控制浏览器视图新增分屏功能，支持并排显示多个对话（手机端不可用）</li>
+<li>使用 GEMINI_API_KEY 连接时，/model 和 <code>--model</code> 新增 Gemini 4 Neon 模型选项</li>
+<li>全屏渲染模式新增滚动位置指示器，显示当前阅读位置下方的内容量</li>
+<li>优化代理响应中的 Markdown 标题样式，移除未渲染的标记符号</li>
+<li>优化大型工件文件夹的 /fork 性能，避免复制文件而是指向原路径</li>
+<li>优化远程控制浏览器视图加载旧消息时的反馈与重试机制</li>
+<li>优化 Auto 模式对沙箱外命令的审查速度，减少超时与不必要的审批请求</li>
+<li>升级依赖（无具体版本信息）</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复短暂连接问题导致代理回合报错的问题，现自动重试此类请求</li>
+<li>修复使用 GEMINI_API_KEY 时错误提供远程控制、语音听写等不可用功能的问题</li>
+<li>修复使用 API Key 且开启 AI 积分设置时状态栏错误显示 “AI: Out of credits” 的问题</li>
+<li>修复全屏模式下鼠标复制长提示词时出现意外换行的问题</li>
+<li>修复中日韩文本旁加粗文本在标点处显示 ** 标记的问题</li>
+<li>修复包含从 Markdown 导出粘贴的 @ 提及的对话导致远程控制视图崩溃的问题</li>
+<li>修复远程控制视图中发送按钮禁用时按 Enter 仍会发送消息的问题</li>
+</ul>
+<h3 id="nicobailonpi-subagents-v0891-qwenqwen38-27b"><a href="https://github.com/nicobailon/pi-subagents/releases/tag/v0.89.1" rel="noopener noreferrer" target="_blank">nicobailon/pi-subagents v0.89.1</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复子代理在工具列表受限时，与 pi-web-access 等扩展共存时首次请求前停止的问题</li>
+<li>修复后台子代理状态文件不可读时，被错误标记为失败并移除的问题</li>
+<li>修复在 Herdr 或 Rex 面板中停止子代理时，当前回合未实际停止的问题</li>
+<li>修复从 Herdr Core 终端发起 machine: “local” 请求时，错误提示不清晰的问题</li>
+</ul>
+<h3 id="immich-appimmich-v342-qwenqwen38-27b"><a href="https://github.com/immich-app/immich/releases/tag/v3.4.2" rel="noopener noreferrer" target="_blank">immich-app/immich v3.4.2</a> <sup>Qwen/Qwen3.8-27B</sup></h3>
+<p><strong>新内容</strong></p>
+<ul>
+<li>新增 FUTO Backups 版本</li>
+</ul>
+<p><strong>问题修复</strong></p>
+<ul>
+<li>修复 Web 端未知相机品牌时组合框键重复的问题</li>
+<li>修复 Web 端未启用自动播放时隐藏幻灯片播放 / 暂停按钮</li>
+<li>修复文件名对齐详情面板显示问题</li>
+<li>修复 Web 端外部样式哈希以符合 CSP 策略</li>
+<li>修复完整性报告下载功能</li>
+<li>修复 Prometheus 导出器监听问题</li>
+<li>移除 vaapi 上的 range=pc 参数</li>
+</ul>
+<p><strong>帮助我们改进</strong></p>
+<p>对今日摘要质量有建议？欢迎反馈！</p>
+<ul>
+<li><a href="https://github.com/houzixiashanxiedaima/AstroBlog/issues/new" rel="noopener noreferrer" target="_blank">反馈摘要质量</a></li>
+<li><a href="https://github.com/houzixiashanxiedaima/AstroBlog/issues/new" rel="noopener noreferrer" target="_blank">评价今日日报</a></li>
+</ul>
+<p>您的反馈将帮助我们优化 AI Prompt, 提升摘要准确性</p>  </div> <!-- Footer navigation --> <footer class="article-footer" data-astro-cid-tldeq5d5> <nav class="post-navigation" aria-label="Article navigation" data-astro-cid-tldeq5d5> <div class="nav-prev" data-astro-cid-tldeq5d5> <a href="/blog/ide-updates/2026-11-19" class="nav-link" data-astro-prefetch data-astro-cid-tldeq5d5> <span class="nav-label" data-astro-cid-tldeq5d5><span class="arrow-char" data-astro-cid-tldeq5d5>←</span> 上一篇</span> <span class="nav-title" data-astro-cid-tldeq5d5>IDE / SDK 更新 - 2026-11-19</span> </a> </div> <div class="nav-next" data-astro-cid-tldeq5d5>  </div> </nav> <div class="back-to-list" data-astro-cid-tldeq5d5> <a href="/" class="back-link" data-astro-prefetch data-astro-cid-tldeq5d5>← 返回文章列表</a> </div> </footer> </article> <!-- Table of Contents --> <aside class="toc-aside" data-astro-cid-tldeq5d5> <nav class="toc" aria-label="目录导航" data-astro-cid-p33bl5ka> <div class="toc-header-action" data-astro-cid-p33bl5ka> <a href="/" class="toc-action-link" data-astro-prefetch data-astro-cid-p33bl5ka> <span class="toc-action-icon" data-astro-cid-p33bl5ka>←</span> <span class="toc-action-text" data-astro-cid-p33bl5ka>返回列表</span> </a> </div> <ul class="toc-list" data-astro-cid-p33bl5ka> <li class="toc-item toc-item-3" data-slug="yetonealma-releases-v04796---v04866-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#yetonealma-releases-v04796---v04866-qwenqwen38-27b" class="toc-link" data-slug="yetonealma-releases-v04796---v04866-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>yetone/alma-releases v0.4.796 - v0.4.866 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="ellitewallos-v5112-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#ellitewallos-v5112-qwenqwen38-27b" class="toc-link" data-slug="ellitewallos-v5112-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>ellite/Wallos v5.11.2 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="zed-industrieszed-v1291---v1292-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#zed-industrieszed-v1291---v1292-qwenqwen38-27b" class="toc-link" data-slug="zed-industrieszed-v1291---v1292-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>zed-industries/zed v1.29.1 - v1.29.2 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="jxxghpmoviepilot-v328-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#jxxghpmoviepilot-v328-qwenqwen38-27b" class="toc-link" data-slug="jxxghpmoviepilot-v328-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>jxxghp/MoviePilot v3.2.8 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="bowenliang123dsh-context-v0860-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#bowenliang123dsh-context-v0860-qwenqwen38-27b" class="toc-link" data-slug="bowenliang123dsh-context-v0860-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>bowenliang123/dsh-context v0.86.0 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="kepanodefuddle-0197-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#kepanodefuddle-0197-qwenqwen38-27b" class="toc-link" data-slug="kepanodefuddle-0197-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>kepano/defuddle 0.19.7 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="callstackagent-device-v02140-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#callstackagent-device-v02140-qwenqwen38-27b" class="toc-link" data-slug="callstackagent-device-v02140-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>callstack/agent-device v0.21.40 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="cherryhqcherry-studio-v223-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#cherryhqcherry-studio-v223-qwenqwen38-27b" class="toc-link" data-slug="cherryhqcherry-studio-v223-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>CherryHQ/cherry-studio v2.2.3 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="tencentcloudtencentdb-agent-memory-v204-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#tencentcloudtencentdb-agent-memory-v204-qwenqwen38-27b" class="toc-link" data-slug="tencentcloudtencentdb-agent-memory-v204-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>TencentCloud/TencentDB-Agent-Memory v2.0.4 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="tashfeenahmedfreellmapi-v01636-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#tashfeenahmedfreellmapi-v01636-qwenqwen38-27b" class="toc-link" data-slug="tashfeenahmedfreellmapi-v01636-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>tashfeenahmed/freellmapi v0.16.36 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="nexu-ioopen-design-open-design-v0272-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#nexu-ioopen-design-open-design-v0272-qwenqwen38-27b" class="toc-link" data-slug="nexu-ioopen-design-open-design-v0272-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>nexu-io/open-design open-design-v0.27.2 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="groupultratelegram-search-v180-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#groupultratelegram-search-v180-qwenqwen38-27b" class="toc-link" data-slug="groupultratelegram-search-v180-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>groupultra/telegram-search v1.8.0 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="chen08209flclash-v094-qwenqwen35-27b" data-astro-cid-p33bl5ka> <a href="#chen08209flclash-v094-qwenqwen35-27b" class="toc-link" data-slug="chen08209flclash-v094-qwenqwen35-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>chen08209/FlClash v0.9.4 Qwen/Qwen3.5-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="svnaxisobsidian-baseline-412-qwenqwen35-27b" data-astro-cid-p33bl5ka> <a href="#svnaxisobsidian-baseline-412-qwenqwen35-27b" class="toc-link" data-slug="svnaxisobsidian-baseline-412-qwenqwen35-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>svnaxis/obsidian-baseline 4.1.2 Qwen/Qwen3.5-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="code-yeongyuoh-my-openagent-v5178---v5179-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#code-yeongyuoh-my-openagent-v5178---v5179-qwenqwen38-27b" class="toc-link" data-slug="code-yeongyuoh-my-openagent-v5178---v5179-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>code-yeongyu/oh-my-openagent v5.1.78 - v5.1.79 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="jarvis2ftelegram-files-041-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#jarvis2ftelegram-files-041-qwenqwen38-27b" class="toc-link" data-slug="jarvis2ftelegram-files-041-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>jarvis2f/telegram-files 0.4.1 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="hugohe3ppt-master-v6100-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#hugohe3ppt-master-v6100-qwenqwen38-27b" class="toc-link" data-slug="hugohe3ppt-master-v6100-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>hugohe3/ppt-master v6.10.0 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="makecindycindy-v01141-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#makecindycindy-v01141-qwenqwen38-27b" class="toc-link" data-slug="makecindycindy-v01141-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>makecindy/cindy v0.1.141 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="firebasefirebase-tools-v15370-qwenqwen35-27b" data-astro-cid-p33bl5ka> <a href="#firebasefirebase-tools-v15370-qwenqwen35-27b" class="toc-link" data-slug="firebasefirebase-tools-v15370-qwenqwen35-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>firebase/firebase-tools v15.37.0 Qwen/Qwen3.5-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="homebrewbrew-7015-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#homebrewbrew-7015-qwenqwen38-27b" class="toc-link" data-slug="homebrewbrew-7015-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>Homebrew/brew 7.0.15 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="google-geminigemini-cli-v0690-qwenqwen35-27b" data-astro-cid-p33bl5ka> <a href="#google-geminigemini-cli-v0690-qwenqwen35-27b" class="toc-link" data-slug="google-geminigemini-cli-v0690-qwenqwen35-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>google-gemini/gemini-cli v0.69.0 Qwen/Qwen3.5-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="stirling-toolsstirling-pdf-v340-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#stirling-toolsstirling-pdf-v340-qwenqwen38-27b" class="toc-link" data-slug="stirling-toolsstirling-pdf-v340-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>Stirling-Tools/Stirling-PDF v3.4.0 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="egoistkero-v2136-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#egoistkero-v2136-qwenqwen38-27b" class="toc-link" data-slug="egoistkero-v2136-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>egoist/kero v2.1.36 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="google-antigravityantigravity-cli-1512-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#google-antigravityantigravity-cli-1512-qwenqwen38-27b" class="toc-link" data-slug="google-antigravityantigravity-cli-1512-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>google-antigravity/antigravity-cli 1.5.12 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="nicobailonpi-subagents-v0891-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#nicobailonpi-subagents-v0891-qwenqwen38-27b" class="toc-link" data-slug="nicobailonpi-subagents-v0891-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>nicobailon/pi-subagents v0.89.1 Qwen/Qwen3.8-27B</span> </a> </li><li class="toc-item toc-item-3" data-slug="immich-appimmich-v342-qwenqwen38-27b" data-astro-cid-p33bl5ka> <a href="#immich-appimmich-v342-qwenqwen38-27b" class="toc-link" data-slug="immich-appimmich-v342-qwenqwen38-27b" data-astro-cid-p33bl5ka> <span class="toc-progress-bar" data-astro-cid-p33bl5ka></span> <span class="toc-text" data-astro-cid-p33bl5ka>immich-app/immich v3.4.2 Qwen/Qwen3.8-27B</span> </a> </li> </ul> <div class="toc-footer-action" data-astro-cid-p33bl5ka> <button type="button" class="toc-action-link" id="toc-back-to-top" aria-label="返回顶部" data-astro-cid-p33bl5ka> <span class="toc-action-icon" data-astro-cid-p33bl5ka>↑</span> <span class="toc-action-text" data-astro-cid-p33bl5ka>返回顶部</span> </button> </div> </nav><script type="module" src="/_astro/TableOfContents.astro_astro_type_script_index_0_lang.Dm6V_AxN.js"></script> </aside> </div>  </main> <footer class="site-footer" aria-label="Site footer" data-astro-cid-jo6i4kqk> <div class="footer-content" data-astro-cid-jo6i4kqk> <p class="footer-text footer-text--strong" data-astro-cid-jo6i4kqk>
+&copy; 2026 雅俗共赏 </p> <p class="footer-text" data-astro-cid-jo6i4kqk>记录技术、阅读与开源更新</p> <p class="footer-text footer-text--secondary" data-astro-cid-jo6i4kqk>
+Built with  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="footer-link" data-astro-cid-jo6i4kqk>
+Astro
+</a> </p> </div> </footer> <button id="back-to-top" class="back-to-top" type="button" aria-label="回到顶部" hidden data-astro-cid-vy5be4ad> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad> <path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path> </svg> </button><script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.BauWKPlN.js"></script> </body> </html>
